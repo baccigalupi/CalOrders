@@ -1,0 +1,16 @@
+*.class
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# build files
+**/build/
+**/dist/
+
+#private netbeans config
+**/private/private.xml
