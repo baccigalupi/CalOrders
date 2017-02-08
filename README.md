@@ -1,1 +1,128 @@
-# CalOrders
+#California Department of Technology - OnCore Consulting ADPQ Vendor Pool Refresh Prototype - 
+###[Prototype URL](Prototype URL)
+
+##Technical Approach _(2)_
+Oncore’s principle focus during development of CalOrders is summarized best by Jeff Sutherland.
+ 
+“[Value] people over processes; products that actually work over documenting what that product is supposed to do; collaborating with customers over negotiating with them; and responding to change over following a plan.” (Scrum: The Art of Doing Twice the Work in Half the Time)
+
+Oncore focused on delivering what the end user needed. This was done with a combination of user research, rapid prototyping, and constant interaction with end users through interviews and focus groups. These tight cycles between ideas and testing allowed us to respond quickly to change. Focusing on solutions not features and adhering to the [U.S. Digital Services](https://playbook.cio.gov/) Playbook promoted user satisfaction and adoption through continuous interaction/feedback. We [followed](https://github.com/OncoreLLC/CalOrders/wiki/Addressing-U.S.-Digital-Services-Playbook-Plays) all of the applicable Playbook plays.  
+
+##PRODUCT NAME Development Team
+Team Lead-Oncore selected Mike Tsay as the Team Leader/Project Manager, who had authority over and was responsible and accountable for the quality of the prototype submitted _(2a)_.
+
+**We selected a multidisciplinary and collaborative team that fulfilled the following 8 labor categories _(2b)_:**  
+
+Role | Team Member  
+--- | ---  
+Product Manager	| [Michael Tsay](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Team-Bios)
+Agile Coach/Technical Architect | [Royce Owens, CSM](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Team-Bios)  
+Technical Architect/DevOps Engineer | [Kyle Poland](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Team-Bios) 
+Interaction Designer/User Researcher/Usability Tester | [Mike Earl, CSM](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Team-Bios)
+Front End Web Developer | [Kevin Babcock](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Team-Bios)
+Front End Web Developer | [Ryan Sinor](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Team-Bios)  
+Backend Web Developer | [Janice Wiley](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Team-Bios)  
+DevOps Engineer | [Suganya Ravikumar](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Team-Bios)  
+Business Analyst | [Cory Hula](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Team-Bios) 
+System Tester | [Naga Neelam](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Team-Bios)
+
+##User Centric Design - Understanding what people need  
+Oncore utilized Human-Centered-Design (HCD) techniques to formulate the product backlog. Below summarizes how we incorporated the “Analyze, Design/Implement, Test and Refine” HDC practices in the development of PRODUCT NAME. _(2d)_
+
+###[User Centric Design Detail View](https://github.com/OncoreLLC/CalOrders/wiki/Tempus-User-Centric-Design)  
+
+Plan | Analyze| Design | Implement | Test & Measure  
+--- | --- | --- | --- | ----
+[Kickoff Meeting](https://github.com/OncoreLLC/CalOrders/wiki/Hold-Kick-Off-Meeting) | Research Domain    | Wireframes     | Style Guide    | [Usability Test](https://github.com/OncoreLLC/CalOrders/wiki/UsabilityTesting)
+[Statement of Work](https://github.com/OncoreLLC/CalOrders/wiki/Write-a-Statement-of-Work)   | [Interviews](https://github.com/OncoreLLC/CalOrders/wiki/Learn-About-Your-Users) | [Card Sorting](https://github.com/OncoreLLC/CalOrders/wiki/Perform-Card-Sorting) | Story Boarding | Refine Application            
+[Create Schedule](https://github.com/OncoreLLC/CalOrders/wiki/Develop-a-Plan)   | [Personas](https://github.com/OncoreLLC/CalOrders/wiki/Develop-Personas)           | Scenarios      |                | Retest
+
+
+**Analyze**  
+* Conducted one on one user interviews and focus groups with Oncore staff not involved in the ADPQ Vendor Pool effort. _(2c)_  
+* Gathered background research on the purpose of the prototype to help understand what the user needs.  
+* Brainstormed ideas to capture breadth of the project; recorded all ideas and revised them to a concise list.  
+* Developed Personas  
+* Set measurable goals  
+* Performed Task Analysis, by interviewing the user base about what they would like to accomplish on the website  
+
+**Design/Implement**  
+* Combined the research performed, information from user interviews, and brainstorming sessions into a set of principles users would want _(2c)_  
+ * Easy to use  
+ * Simple  
+ * Secure and private 
+* Come up with more for RFI specific stuff  
+* Design artifacts, initial design, and concepts from sessions with the end users captured into [PivotalTracker](https://www.pivotaltracker.com/n/projects/1931593) to represent the build details needed to build a Minimum Viable Product (MVP)   
+* Created stories: [Pivotal](Pivotal)  
+* Team brainstormed and “whiteboarded” initial designs, conducted open feedback sessions with not involved staff. _(2c)_  
+* Used parallel design to create two high level application flows in [parallel](https://github.com/OncoreLLC/TempusArtifacts/wiki/Parallel-Whiteboard-Design) on the white board _(2d)_  
+* Developed low-fi [wireframes](https://github.com/OncoreLLC/TempusArtifacts/tree/master/CalOrders/PageMockups) using Pencil to mockup prototype  
+* Updated stories based on the results of the open feedback sessions _(2j)_  
+* Utilized [Design Style Guide](http://www.oracle.com/webfolder/technetwork/jet/jetCookbook.html) (DSG) provided by Oracle JET (JET) to aide in UI uniformity _(2h)_  
+* Developed a prototype that presents a modern responsive design; used by mobile, tablet, and desktop devices _(2k)_  
+* Jet as a UI component library is [ADA and WCAG compliant.](https://docs.oracle.com/middleware/jet112/jet/developer/GUID-9E3452C1-2A85-4700-83B1-B266F348C7E5.htm#JETDG257)  In addition to the framework support, an exit criteria for each page [story](Link to stories) includes 508 and WCAG testing was included.  This was done by developers using the [Wave](http://wave.webaim.org/) browser plugin locally and [NVDA])(https://www.nvaccess.org/) the open source screen reader. _(2g)_  
+
+**Test and Refine**  
+* [Conducted Usability Tests](https://github.com/OncoreLLC/CalOrders/wiki/Initial-Wireframe-Usability-Test) to assess the overall design _(2i)_  
+* Reworked the wireframes to include the user’s feedback, which can be found [here](https://github.com/OncoreLLC/TempusArtifacts/wiki/Initial-Wireframe-Usability-Test)  
+* Conducted end user testing sessions  
+* Iteratively integrated changes and suggestions, where feedback informed subsequent work or versions of the prototype _(2j)_  
+* Updated wireframes formed the basis for further development of the final product  
+* With each sprint, we conducted user [interviews](https://github.com/OncoreLLC/CalOrders/tree/master/TempusDesignArtifacts/UserInterviews) to validate the application usability and behavior was in line with the user’s goals and expectations _(2j)_  
+
+##Agile Prototype Development   
+
+###Process     
+Using [Agile](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Methodolgy), provided Oncore an iterative approach, where feedback informed subsequent work or versions of the prototype_(2j)_.  
+The Development team met in sprint planning kick off meeting selecting Stories that would be in the first sprint. As work neared completion for each sprint, developers would work with the product owner to review the state of the Story in preparation for Sprint Review. Completed stories were exercised by the end users at the completion of the Sprint Review.  
+  
+Delivering a rapid working product maintained the momentum from the User Centered Design Sessions, allowing us to show the und user the system we were building. Combined with sprint cycles we were able to add new stories; existing stories in the backlog and icebox were continually evolving and reprioritized with continued meetings outside of the development cycle. These meeting took place between the product owner, business analysts and end users. Focusing on keeping things simple and evolving fostered the environment of rapid delivery and allowed for face to face interactions with the end users on how the system was evolving.  More importanly, it allowed for failure, and with the quick adjustments yieled a system that worked for the end users.
+
+Artifacts from our Agile process, such as the Sprint Planning, Sprint Retrospective and Daily Scrum Sessions are contained [here](https://github.com/OncoreLLC/CalOrders/blob/master/link).  
+  
+###Architecture & [DevOps](https://github.com/OncoreLLC/CalOrders/wiki/Environments)  
+  The team's DevOps methodology.  
+
+###Modern Open-Source Technologies _(2l)_  
+Technology | Requirement  
+--- | ---  
+Linux	| Operating System used for both the development workstation and the deployment environment 
+NetBeans | Development IDE  
+Oracle JET | Open Source JavaScript UI Component Library  
+Node JS | Frontend Javscript Engine  
+GlassFish | JEE Engine  
+MySQL | Database  
+Jenkins | Continuous Integration  
+JUnit | automated unit testing  
+Selenium | automated regression testing  
+Knockout Js | Front-end Javascript library  
+Require Js | Front-end Javascript library  
+jQuery | Front-end Javascript library  
+Swagger | Automated Documentation of RESTful services   
+NVDA | Screen Reader
+WAVE | ADA Browser testing plugin
+
+
+###Deployment Environment  
+  Azure Cloud _(2m)_  
+    [Architecture doc](Architecture doc)  
+
+###Automated Unit Test _(2n)_  
+  Junit4  
+  Selenium  
+
+###Continuous Monitoring and Integration  
+  Configured Jenkins within a Docker container on an Azure cloud environment _(2s)_.   
+
+  As we completed functioning code, we were able to continually show the end users how we were building checkin activity on GitHub generated builds through Jenkins resulting in automated testing and automatic Docker deployments to the Azure cloud. _(2m, 2p)_  
+
+###Build and Deploy
+  Jenkins  
+  Docker  
+
+###Configuration Management  
+  GitHub _(2e, 2q)_  
+    [PRODUCT NAME GitHub](PRODUCT NAME GitHub)  
+  
+###Setup and Deployment Documentation _(2t)_  
+  [Deployment Documentation](Deployment Documentation)
