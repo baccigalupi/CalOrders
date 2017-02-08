@@ -1,0 +1,147 @@
+# Example YAML to get you started quickly.
+# Be aware that YAML has indentation based scoping.
+# Code completion support is available so start typing for available options.
+swagger: '2.0'
+
+# This is your document metadata
+info:
+  version: 1.0.0
+  title: Tempus API
+  description: The Tempus REST API specification
+  termsOfService: https://github.com/OncoreLLC/TempusRESTAPI/blob/master/LICENSE
+  contact:
+    name: Tempus Team
+    email: tempus@oncorellc.com
+    url: https://github.com/OncoreLLC/TempusArtifacts/blob/master/README.md
+  license:
+    name: OnCore Private License
+    url: https://github.com/OncoreLLC/TempusRESTAPI/blob/master/LICENSE
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+
+# Describe your paths here
+paths:
+ 
+  /TempusImages/webresources/com.oncore.tempus.services.images.images/findImageByKey/{key}:
+    # This is a HTTP operation
+    get:
+      # Describe this verb here. Note: you can use markdown
+      description: |
+        Gets an Image by UUID.
+        
+      # This is array of GET operation parameters:
+      parameters:
+        # An example parameter that is in query and is required
+        -
+          name: key
+          in: path
+          description: unique image uuid
+          required: true
+          type: string
+          format: string
+          
+      # Expected responses for this operation:
+      responses:
+        200:
+          description: An image
+          schema:
+            type: array
+            items:
+              required:
+                - imageData
+              properties:
+                imgUid:
+                  type: integer
+                imgKey:
+                  type: string
+                imgName:
+                  type: string
+                imgSize:
+                  type: integer
+                imgOrigin:
+                  type: string
+                imgImage:
+                  type: array
+                createUserId:
+                  type: string
+                createTs:
+                  type: string
+                updateUserId:
+                  type: string
+                updateTs:
+                  type: string
+                imgTypeCode:
+                  type: string
+                imgTypeCodeShortDescription:
+                  type: string
+                imgTypeCodeLongDescription:
+                  type: string
+  /TempusImages/webresources/com.oncore.tempus.services.images.images/findImageByKeyAndCompanyIdAndOrEmployeeId/{key}/{cmpUid}/{empUid}:
+    # This is a HTTP operation
+    get:
+      # Describe this verb here. Note: you can use markdown
+      description: |
+        Gets an Image by UUID, company id, and employee id if the employee id is supplied.
+        
+      # This is array of GET operation parameters:
+      parameters:
+        # An example parameter that is in query and is required
+        - name: key
+          in: path
+          description: unique image uuid
+          required: true
+          type: string
+          format: string
+        - name: cmpUid
+          in: path
+          description: unique company id
+          required: true
+          type: integer
+        - name: empUid
+          in: path
+          description: unique employee id
+          required: false
+          type: integer
+      # Expected responses for this operation:
+      responses:
+        200:
+          description: An image
+          schema:
+            type: array
+            items:
+              required:
+                - imageData
+              properties:
+                imgUid:
+                  type: integer
+                imgKey:
+                  type: string
+                imgName:
+                  type: string
+                imgSize:
+                  type: integer
+                imgOrigin:
+                  type: string
+                imgImage:
+                  type: array
+                createUserId:
+                  type: string
+                createTs:
+                  type: string
+                updateUserId:
+                  type: string
+                updateTs:
+                  type: string
+                imgTypeCode:
+                  type: string
+                imgTypeCodeShortDescription:
+                  type: string
+                imgTypeCodeLongDescription:
+                  type: string                
+               
+               
+                  

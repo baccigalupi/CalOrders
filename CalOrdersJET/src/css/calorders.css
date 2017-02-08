@@ -1,0 +1,80 @@
+/*
+ * The MIT License
+ *
+ * Copyright 2017 OnCore Consulting LLC, All Rights Reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+.tempusButton {
+	-moz-box-shadow: 0px 10px 14px -7px #6b0e0e;
+	-webkit-box-shadow: 0px 10px 14px -7px #6b0e0e;
+	box-shadow: 0px 10px 14px -7px #6b0e0e;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #a01010), color-stop(1, #a81a1a));
+	background:-moz-linear-gradient(top, #a01010 5%, #a81a1a 100%);
+	background:-webkit-linear-gradient(top, #a01010 5%, #a81a1a 100%);
+	background:-o-linear-gradient(top, #a01010 5%, #a81a1a 100%);
+	background:-ms-linear-gradient(top, #a01010 5%, #a81a1a 100%);
+	background:linear-gradient(to bottom, #a01010 5%, #a81a1a 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#A01010', endColorstr='#A81A1A',GradientType=0);
+	background-color:#a01010;
+	-moz-border-radius:8px;
+	-webkit-border-radius:8px;
+	border-radius:8px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:20px;
+	font-weight:bold;
+	padding:13px 32px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #6b0e0e;
+}
+.tempusButton:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #a81a1a), color-stop(1, #a01010));
+	background:-moz-linear-gradient(top, #a81a1a 5%, #a01010 100%);
+	background:-webkit-linear-gradient(top, #a81a1a 5%, #a01010 100%);
+	background:-o-linear-gradient(top, #a81a1a 5%, #a01010 100%);
+	background:-ms-linear-gradient(top, #a81a1a 5%, #a01010 100%);
+	background:linear-gradient(to bottom, #a81a1a 5%, #a01010 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#a81a1a', endColorstr='#A01010',GradientType=0);
+	background-color:#a81a1a;
+}
+.tempusButton:active {
+	position:relative;
+	top:1px;
+}
+
+.uploadImage {
+    display: block;
+    margin: auto;
+    background-image: url("images/upload.png");
+    background-repeat: no-repeat;
+    
+}
+
+.clearImage {
+    display: block;
+    margin: auto;
+    background-image: url("images/clear.png");
+    background-repeat: no-repeat;
+    
+}
+
+

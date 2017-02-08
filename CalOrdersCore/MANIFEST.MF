@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Name: TempusCore
+Specification-Title: Java Utility Classes
+Specification-Version: 20161230001
+Specification-Vendor: OnCore Consulting LLC
+Implementation-Title: TempusCore
+Implementation-Version: 20161230001
+Implementation-Vendor: OnCore Consulting LLC

@@ -1,0 +1,44 @@
+/*
+    Document   : override
+    Created on : <date>
+    Author     : <author>
+    Description:
+        This is where any of your application specific styles should be included
+*/
+
+/*.demo-oracle-icon.demo-oracle-icon:before{content:url("images/oncorelogo3.gif")}*/
+
+.oj-web-applayout-header-title {
+    font-size: 1.643rem;
+    font-weight: bold;
+    color: #4d4d4d;
+    line-height: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.oj-flex-item {
+    -webkit-flex: auto;
+    flex: auto;
+    box-sizing: border-box;
+    border: none;
+}
+
+
+
+
+
+/* custom stuff */
+.company_title{
+    margin-left: 1em;
+    color: #720A26;
+}
+
+
+.company_logo{
+    background: url("images/oncorelogo.png");
+    background-repeat: no-repeat;
+    background-size: 20% 150%;
+    padding: 1em;
+    margin: 1em;
+}

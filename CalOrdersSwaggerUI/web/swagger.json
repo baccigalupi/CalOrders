@@ -1,0 +1,41 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Find Image By UUID"
+    },
+    "paths": {
+        "/TempusImages/webresources/com.oncore.tempus.services.images.images/findImageByKey/{key}": {
+            "get": {
+                "description": "Gets an Image by UUID.\n",
+                "parameters": [
+                    {
+                        "name": "key",
+                        "in": "path",
+                        "description": "unique image uuid",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "title": "ImageData",
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string"
+                                },
+                                "single": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
