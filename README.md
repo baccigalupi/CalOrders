@@ -34,9 +34,9 @@ Oncore utilized Human-Centered-Design (HCD) techniques to formulate the product 
 Plan | Analyze| Design | Implement | Test & Measure  
 --- | --- | --- | --- | ----
 [Kickoff Meeting](https://github.com/OncoreLLC/CalOrders/wiki/Hold-Kick-Off-Meeting) | Research Domain    | Wireframes     | Style Guide    | [Usability Test](https://github.com/OncoreLLC/CalOrders/wiki/UsabilityTesting)
-[Statement of Work](https://github.com/OncoreLLC/CalOrders/wiki/Write-a-Statement-of-Work)   | [Interviews](https://github.com/OncoreLLC/CalOrders/wiki/Learn-About-Your-Users) | [Card Sorting](https://github.com/OncoreLLC/CalOrders/wiki/Perform-Card-Sorting) | Story Boarding | Refine Application            
+[Statement of Work](https://github.com/OncoreLLC/CalOrders/wiki/Write-a-Statement-of-Work)   | [Focus Groups](https://github.com/OncoreLLC/CalOrders/wiki/CalOrders-Focus-Groups)| [Card Sorting](https://github.com/OncoreLLC/CalOrders/wiki/Perform-Card-Sorting) | Story Boarding | Refine Application            
 [Create Schedule](https://github.com/OncoreLLC/CalOrders/wiki/Develop-a-Plan)   | [Personas](https://github.com/OncoreLLC/CalOrders/wiki/Develop-Personas)           | Scenarios      |                | Retest
- |[Focus Groups](https://github.com/OncoreLLC/CalOrders/wiki/CalOrders-Focus-Groups)| | |
+ |[Interviews]| | |
 
 
 **Analyze**  
