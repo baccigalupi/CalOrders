@@ -28,7 +28,7 @@ Business Analyst | [Cory Hula](https://github.com/OncoreLLC/CalOrders/wiki/Agile
 ##User Centric Design - Understanding what people need  
 Oncore utilized User-Centered-Design (UCD) techniques to formulate the product backlog. Below summarizes how we incorporated the “Analyze, Design/Implement, Test and Refine” UCD practices in the development of CalOrders. _(2d)_  
 
-We worked Naga and Cindy from the Department of General Services, and Department of Technolgy respectively.  We focused on understanding the business functions that they did most frequently, and also listened to them describe how they did their work in their existing systems.  Walking through a day in life scenarios of both the end users and the administrators provided us the detail the team needed to build and prioritize the features for the new system.  
+We worked Naga and Cindy from the Department of General Services, and Department of Technolgy respectively.  Both are seasoned adminstrators of the procurement process.  We focused on understanding the business functions that they did most frequently, and also listened to them describe how they did their work in their existing systems.  Walking through a day in life scenarios of both the end users and the administrators provided us the detail the team needed to build and prioritize the features for the new system allowed us to all agree on the outcome, and define our roadmap to get to deliver.
 
 //tentative wording, we can pull it later
 We used the following components of UCD to capture what users wanted.  Combined with the UCD methodolgy, our Agile Delivery allowed Naga and Cindy to also see what the development team was producing.  We took a similar approach that we learned from a brigade session with Code For America, where we worked with the Department to allow Cindy and Naga to execute their daily tasks concurrently in the old system and CalOrders.  Although CalOrders is not live, it allowed for real life testing of the application, and allowed for feedback and affermation that we were delivering what they really asked for.   
@@ -39,7 +39,7 @@ We used the following components of UCD to capture what users wanted.  Combined 
 Plan | Analyze| Design | Implement | Test & Measure  
 --- | --- | --- | --- | ----
 [Kickoff Meeting](https://github.com/OncoreLLC/CalOrders/wiki/Hold-Kick-Off-Meeting) | Research Domain    | [Story Boarding](https://github.com/OncoreLLC/CalOrders/wiki/StoryBoards)     | Style Guide    | [Usability Test](https://github.com/OncoreLLC/CalOrders/wiki/UsabilityTesting)
-[Statement of Work](https://github.com/OncoreLLC/CalOrders/wiki/Write-a-Statement-of-Work)   | [Focus Groups](https://github.com/OncoreLLC/CalOrders/wiki/CalOrders-Focus-Groups)| [Card Sorting](https://github.com/OncoreLLC/CalOrders/wiki/Perform-Card-Sorting) | Rapid Prototyping (wire frames) | Refine Application            
+[Statement of Work](https://github.com/OncoreLLC/CalOrders/wiki/Write-a-Statement-of-Work)   | [Focus Groups](https://github.com/OncoreLLC/CalOrders/wiki/CalOrders-Focus-Groups)| [Card Sorting](https://github.com/OncoreLLC/CalOrders/wiki/Perform-Card-Sorting) | [Rapid Prototyping (wire frames)](https://github.com/OncoreLLC/CalOrders/wiki/WireFrames) | Refine Application            
 [Create Schedule](https://github.com/OncoreLLC/CalOrders/wiki/Develop-a-Plan)   | [Personas](https://github.com/OncoreLLC/CalOrders/wiki/Develop-Personas)           | Scenarios      |                | Retest
  |[Interviews]| | |
 

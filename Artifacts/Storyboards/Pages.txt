@@ -1,0 +1,12 @@
+PAGE NAME                   IMAGES                            OWNER
+Login                       IMG_0902.png                      Royce
+Welcome                     IMG_0903.png,IMG_0904.png         Royce
+Product List                IMG_0905.png                      Kevin
+Product Compare             IMG_0906.png                      Kevin
+Product Detail                                                Ryan
+Shopping Cart               IMG_0907.png, IMG_0908.png        Royce
+Order Confirmation          IMG_0909.png                      Won
+Order History               IMG_0910.png                      Won
+Order Detail                IMG_0909.png                      Won
+Admin Dashboard             IMG_0911.png
+Add Product                                                   Ryan
