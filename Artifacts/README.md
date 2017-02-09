@@ -99,10 +99,10 @@ Our [Agile](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Methodolgy) proces
 
 ###Practices
 [User Stories]() |
-[Estimation]() |
-[Prioritization]() |
+[Estimation](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Story-Estimation) |
+[Prioritization](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Story-Prioritization) |
 [Sprint planning](https://github.com/OncoreLLC/CalOrders/wiki/Sprint-Planning) | [Standups](https://github.com/OncoreLLC/CalOrders/wiki/Standups)| [Sprints](https://github.com/OncoreLLC/CalOrders/wiki/Sprints) | [Retrospectives](https://github.com/OncoreLLC/CalOrders/wiki/Retrospectives) 
---- | --- | --- | ---  
+--- | --- | --- | --- | --- | --- | 
 
 
 
