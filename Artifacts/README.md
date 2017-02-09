@@ -15,7 +15,7 @@ Team Lead-Oncore selected Mike Tsay as the Team Leader/Project Manager, who had 
 
 Role | Team Member  
 --- | ---  
-Product Manager	| [Michael Tsay](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Team-Bios)
+Product Manager	| [Mike Tsay](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Team-Bios)
 Agile Coach/Technical Architect | [Royce Owens, CSM](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Team-Bios)  
 Technical Architect/DevOps Engineer | [Kyle Poland](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Team-Bios) 
 Interaction Designer/User Researcher/Usability Tester | [Mike Earl, CSM](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Team-Bios)
@@ -41,7 +41,7 @@ Plan | Analyze| Design | Implement | Test & Measure
 [Kickoff Meeting](https://github.com/OncoreLLC/CalOrders/wiki/Hold-Kick-Off-Meeting) | [Research Domain](https://github.com/OncoreLLC/CalOrders/wiki/Domain-Research)    | [Story Boarding](https://github.com/OncoreLLC/CalOrders/wiki/Story-Boards)     | Style Guide    | [Usability Test](https://github.com/OncoreLLC/CalOrders/wiki/Usability-Testing)
 [Statement of Work](https://github.com/OncoreLLC/CalOrders/wiki/Write-a-Statement-of-Work)   | [Focus Groups](https://github.com/OncoreLLC/CalOrders/wiki/CalOrders-Focus-Groups)| [Card Sorting](https://github.com/OncoreLLC/CalOrders/wiki/Perform-Card-Sorting) | [Rapid Prototyping (wire frames)](https://github.com/OncoreLLC/CalOrders/wiki/Wire-Frames) | Refine Application            
 [Create Schedule](https://github.com/OncoreLLC/CalOrders/wiki/Develop-a-Plan)   | [Personas](https://github.com/OncoreLLC/CalOrders/wiki/Develop-Personas)           | Scenarios      |                | Retest
- |[Interviews]((https://github.com/OncoreLLC/CalOrders/wiki/Interviews))| | |
+ |[Interviews](https://github.com/OncoreLLC/CalOrders/wiki/Interviews)| | |
 
 
 **Analyze**  
