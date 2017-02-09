@@ -38,7 +38,7 @@ We used the following components of UCD to capture what users wanted.  Combined 
 
 Plan | Analyze| Design | Implement | Test & Measure  
 --- | --- | --- | --- | ----
-[Kickoff Meeting](https://github.com/OncoreLLC/CalOrders/wiki/Hold-Kick-Off-Meeting) | Research Domain    | Story Boarding     | Style Guide    | [Usability Test](https://github.com/OncoreLLC/CalOrders/wiki/UsabilityTesting)
+[Kickoff Meeting](https://github.com/OncoreLLC/CalOrders/wiki/Hold-Kick-Off-Meeting) | Research Domain    | [Story Boarding](https://github.com/OncoreLLC/CalOrders/wiki/StoryBoards)     | Style Guide    | [Usability Test](https://github.com/OncoreLLC/CalOrders/wiki/UsabilityTesting)
 [Statement of Work](https://github.com/OncoreLLC/CalOrders/wiki/Write-a-Statement-of-Work)   | [Focus Groups](https://github.com/OncoreLLC/CalOrders/wiki/CalOrders-Focus-Groups)| [Card Sorting](https://github.com/OncoreLLC/CalOrders/wiki/Perform-Card-Sorting) | Rapid Prototyping (wire frames) | Refine Application            
 [Create Schedule](https://github.com/OncoreLLC/CalOrders/wiki/Develop-a-Plan)   | [Personas](https://github.com/OncoreLLC/CalOrders/wiki/Develop-Personas)           | Scenarios      |                | Retest
  |[Interviews]| | |
