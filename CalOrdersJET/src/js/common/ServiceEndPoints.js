@@ -51,73 +51,18 @@ ServiceEndPoints.prototype = {
     getEndPoint: function (key)
     {
         // ====== CM TOUCH POINT =================
-        var tempusUsersHost = "http://localhost:8080";
-        var tempusImagesHost = "http://localhost:8080";
-        var tempusTimesheetsHost = "http://localhost:8080";
-        var tempusExpensesHost = "http://localhost:8080";
-        var tempusProjectsHost = "http://localhost:8080";
-        var tempusReportsHost = "http://localhost:8080";
+        var calOrdersHost = "http://localhost:8080";
         // =======================================
 
 
-        if (key === "findAllTimeSheetsForEmployeeId")
+        if (key === "findNavBarPrivilegesByEmployeeId")
         {
-            return tempusTimesheetsHost + "/TempusTimesheets/webresources/com.oncore.tempus.services.timesheets.timesheets/findAllTimeSheetsForEmployeeId";
-        } else if (key === "findEmployeeByUserIdAndPassword")
-        {
-            return tempusUsersHost + "/TempusUsers/webresources/com.oncore.tempus.services.users.employees/findEmployeeByUserIdAndPassword";
-        } else if (key === "findAllPrivilegesByEmployeeId")
-        {
-            return tempusUsersHost + "/TempusUsers/webresources/com.oncore.tempus.services.users.employees/findAllPrivilegesByEmployeeId";
-        } else if (key === "findNavBarPrivilegesByEmployeeId")
-        {
-            return tempusUsersHost + "/TempusUsers/webresources/com.oncore.tempus.services.users.employees/findNavBarPrivilegesByEmployeeId";
+            return calOrdersHost + "/CalOrdersServices/webresources/com.oncore.calorders.services.users/findNavBarPrivilegesByUserId";
         } else if (key === "findNavMenuPrivilegesByEmployeeId")
         {
-            return tempusUsersHost + "/TempusUsers/webresources/com.oncore.tempus.services.users.employees/findNavMenuPrivilegesByEmployeeId";
-        } else if (key === "createCompany")
-        {
-            return tempusUsersHost + "/TempusUsers/webresources/com.oncore.tempus.services.users.company/createCompany";
-        } else if (key === "findCompany")
-        {
-            return tempusUsersHost + "/TempusUsers/webresources/com.oncore.tempus.services.users.company";
-        } else if (key === "updateCompanyProfile")
-        {
-            return tempusUsersHost + "/TempusUsers/webresources/com.oncore.tempus.services.users.company/updateCompanyProfile";
-        } else if (key === "findCompanyProfile")
-        {
-            return tempusUsersHost + "/TempusUsers/webresources/com.oncore.tempus.services.users.company/findCompanyProfile";
-        } else if (key === "updateCompanyProfile")
-        {
-            return tempusUsersHost + "/TempusUsers/webresources/com.oncore.tempus.services.users.company/updateCompanyProfile";
-        } else if (key === "createEmployee")
-        {
-            return tempusUsersHost + "/TempusUsers/webresources/com.oncore.tempus.services.users.employees/createEmployee";
-        } else if (key === "doesUserIdExist")
-        {
-            return tempusUsersHost + "/TempusUsers/webresources/com.oncore.tempus.services.users.employees/doesUserIdExist";
-        } else if (key === "findAllStates")
-        {
-            return tempusUsersHost + "/TempusUsers/webresources/com.oncore.tempus.services.users.adrstatecd";
-        } else if (key === "fetchImage")
-        {
-            return tempusImagesHost + "/TempusImages/webresources/com.oncore.tempus.services.images.images/findImageByKey";
-        } else if (key === "createImage")
-        {
-            return tempusImagesHost + "/TempusImages/webresources/com.oncore.tempus.services.images.images/createImage";
-        } else if (key === "findAllProjectTypes")
-        {
-            return tempusProjectsHost + "/TempusProjects/webresources/com.oncore.tempus.services.projects.prttypecd";
-        } else if (key === "createProject")
-        {
-            return tempusProjectsHost + "/TempusProjects/webresources/com.oncore.tempus.services.projects.projects/createProject";
-        } else if (key === "findAllGroupTypes")
-        {
-            return tempusUsersHost + "/TempusUsers/webresources/com.oncore.tempus.services.users.grptypecd";
-        } else if (key === "findAllActiveEmployees")
-        {
-            return tempusUsersHost + "/TempusUsers/webresources/com.oncore.tempus.services.users.employees/findAllActiveEmployees";
-        } else
+            return calOrdersHost + "/CalOrdersServices/webresources/com.oncore.calorders.services.users/findNavMenuPrivilegesByUserId";
+        }
+        else
         {
             return "UNDEFINED";
         }
