@@ -1,0 +1,11 @@
+{
+   "products" : [ {
+      "productId" : 100,
+      "description" : "Laptop Computer AC100, i7-6700, 16 GB DDR",
+      "price" : "1200.00"
+   }, {
+      "productId" : 200,
+      "description" : "Laptop Computer AC650, i3-6400, 8 GB DDR",
+      "price" : "900.00"
+   }]
+}

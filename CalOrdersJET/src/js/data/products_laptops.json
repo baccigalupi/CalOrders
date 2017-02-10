@@ -1,0 +1,23 @@
+{
+   "products" : [ {
+      "productId" : 100,
+      "description" : "Laptop Computer AC100, i7-6700, 16 GB DDR",
+      "price" : "1200.00"
+   }, {
+      "productId" : 200,
+      "description" : "Laptop Computer AC650, i3-6400, 8 GB DDR",
+      "price" : "900.00"
+   }, {
+      "productId" : 300,
+      "description" : "Laptop Computer AS400, i5-6400, 8 GB DDR",
+      "price" : "700.00"
+   }, {
+      "productId" : 400,
+      "description" : "Laptop Gaming AC650, i3-6400, 8 GB DDR",
+      "price" : "800.00"
+   }, {
+      "productId" : 500,
+      "description" : "Laptop Super Computer AC650, i3-6400, 16 GB DDR",
+      "price" : "1900.00"
+   }]
+}

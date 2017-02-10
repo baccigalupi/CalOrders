@@ -1,0 +1,31 @@
+{
+   "products" : [ {
+      "productId" : 1000,
+      "description" : "Desktop Computer AC100, i7-6700, 16 GB DDR",
+      "price" : "200.00"
+   }, {
+      "productId" : 2000,
+      "description" : "Desktop Computer AC650, i3-6400, 8 GB DDR",
+      "price" : "1900.00"
+   }, {
+      "productId" : 3000,
+      "description" : "Desktop Computer AS400, i5-6400, 8 GB DDR",
+      "price" : "100.00"
+   }, {
+      "productId" : 4000,
+      "description" : "Desktop Gaming AC650, i3-6400, 8 GB DDR",
+      "price" : "856.00"
+   }, {
+      "productId" : 5000,
+      "description" : "Desktop Super Computer AC650, i3-6400, 16 GB DDR",
+      "price" : "1900.00"
+   }, {
+      "productId" : 6000,
+      "description" : "Desktop Super Computer AC650, i3-6400, 16 GB DDR",
+      "price" : "4550.00"
+   }, {
+      "productId" : 7000,
+      "description" : "Desktop Super Computer AC650, i3-6400, 16 GB DDR",
+      "price" : "1780.00"
+   }]
+}
