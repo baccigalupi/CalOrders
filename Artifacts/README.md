@@ -22,8 +22,9 @@ Interaction Designer/User Researcher/Usability Tester | [Mike Earl, CSM](https:/
 Front End Web Developer | [Kevin Babcock](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Team-Bios)
 Front End Web Developer | [Ryan Sinor](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Team-Bios)  
 Backend Web Developer | [Janice Wiley](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Team-Bios)  
+Backend Web Developer | [Won Lee](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Team-Bios)  
 DevOps Engineer | [Suganya Ravikumar](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Team-Bios)  
-Business Analyst | [Cory Hula](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Team-Bios) 
+
 
 ##User Centric Design - Understanding what people need  
 Oncore utilized User-Centered-Design (UCD) techniques to formulate the product backlog.  All team members were part of the initial meetins with the users, this was natural hook to our Agile methodolgy and gave everyoe owns the problem.   Below summarizes how we incorporated the “Analyze, Design/Implement, Test and Refine” UCD practices in the development of CalOrders. _(2d)_  
