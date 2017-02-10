@@ -35,23 +35,13 @@ We worked Naga and Cindy from the Department of General Services, and Department
 We used the following components of UCD to capture what users wanted.  Combined with the UCD methodolgy, our Agile Delivery allowed Naga and Cindy to also see what the development team was producing.  We took a similar approach that we learned from a brigade session with Code For America, where we worked with the Department to allow Cindy and Naga to execute their daily tasks concurrently in the old system and CalOrders.  Although CalOrders is not live, it allowed for real life testing of the application, and allowed for feedback and affermation that we were delivering what they really asked for.   
 //end tentative
 
-###[User Centric Design Detail View](https://github.com/OncoreLLC/CalOrders/wiki/CalOrders-User-Centric-Design)  
-
-Plan | Analyze| Design | Implement | Test & Measure  
---- | --- | --- | --- | ----
-[Kickoff Meeting](https://github.com/OncoreLLC/CalOrders/wiki/Hold-Kick-Off-Meeting) | [Research Domain](https://github.com/OncoreLLC/CalOrders/wiki/Domain-Research)    | [Story Boarding](https://github.com/OncoreLLC/CalOrders/wiki/Story-Boards)     | [Style Guide](http://www.oracle.com/webfolder/technetwork/jet/jetCookbook.html)    | [Usability Test](https://github.com/OncoreLLC/CalOrders/wiki/Usability-Testing)
-[Statement of Work](https://github.com/OncoreLLC/CalOrders/wiki/Write-a-Statement-of-Work)   | [Focus Groups](https://github.com/OncoreLLC/CalOrders/wiki/CalOrders-Focus-Groups)| [Scenarios](https://github.com/OncoreLLC/CalOrders/wiki/Scenarios)| [Rapid Prototyping (wire frames)](https://github.com/OncoreLLC/CalOrders/wiki/Wire-Frames) | Refine Application            
-[Create Schedule](https://github.com/OncoreLLC/CalOrders/wiki/Develop-a-Plan)   | [Personas](https://github.com/OncoreLLC/CalOrders/wiki/Develop-Personas)           |       |                | Retest
- |[Interviews](https://github.com/OncoreLLC/CalOrders/wiki/Interviews)| | |
-
-
 **Analyze**  
-* Conducted one on one user interviews and focus groups with Oncore staff not involved in the ADPQ Vendor Pool effort. _(2c)_  
-* Gathered background research on the purpose of the prototype to help understand what the user needs.  
-* Brainstormed ideas to capture breadth of the project; recorded all ideas and revised them to a concise list.  
-* Developed Personas  
-* Set measurable goals  
-* Performed Task Analysis, by interviewing the user base about what they would like to accomplish on the website  
+* Conducted one on one user [interviews](https://github.com/OncoreLLC/CalOrders/wiki/Interviews) and [focus groups](https://github.com/OncoreLLC/CalOrders/wiki/CalOrders-Focus-Groups) with Oncore staff not involved in the ADPQ Vendor Pool effort. _(2c)_  
+* Gathered [domain background research](https://github.com/OncoreLLC/CalOrders/wiki/Domain-Research) on the purpose of the prototype to help understand what the user needs.  
+* [Brainstormed](https://github.com/OncoreLLC/CalOrders/wiki/Hold-Kick-Off-Meeting) ideas to capture breadth of the project; recorded all ideas and revised them to a concise list.  
+* [Developed Personas](https://github.com/OncoreLLC/CalOrders/wiki/Develop-Persona)  
+* [Set measurable goals](https://github.com/OncoreLLC/CalOrders/wiki/Develop-a-Plan)  
+* Performed Task Analysis, by interviewing the user base about what they would like to accomplish on the website  (Maybe remove??)
 
 **Design/Implement**  
 * Combined the research performed, information from user interviews, and brainstorming sessions into a set of principles users would want _(2c)_  
@@ -62,25 +52,35 @@ Plan | Analyze| Design | Implement | Test & Measure
 * Come up with more for RFI specific stuff  
 * Design artifacts, initial design, and concepts from sessions with the end users captured into [PivotalTracker](https://www.pivotaltracker.com/n/projects/1968721) to represent the build details needed to build a Minimum Viable Product (MVP)   
 * Created stories: [Pivotal](Pivotal)  
-* Team brainstormed and “whiteboarded” initial designs, conducted open feedback sessions with not involved staff. _(2c)_  
-* Used parallel design to create two high level application flows in [parallel](https://github.com/OncoreLLC/TempusArtifacts/wiki/Parallel-Whiteboard-Design) on the white board _(2d)_  
-* Developed low-fi [wireframes](https://github.com/OncoreLLC/TempusArtifacts/tree/master/CalOrders/PageMockups) using Pencil to mockup prototype  
-* Updated stories based on the results of the open feedback sessions _(2j)_  
+* Team brainstormed and [whiteboarded](https://github.com/OncoreLLC/CalOrders/wiki/Story-Boards) initial designs, conducted open feedback sessions with not involved staff. _(2c)_    
+* Developed low-fi [wireframes](https://github.com/OncoreLLC/CalOrders/wiki/Wire-Frames) using [Pencil](http://pencil.evolus.vn/) to mockup prototype  
+* High level stories based on the results of the open feedback sessions _(2j)_  
 * Utilized [Design Style Guide](http://www.oracle.com/webfolder/technetwork/jet/jetCookbook.html) (DSG) provided by Oracle JET (JET) to aide in UI uniformity _(2h)_  
 * Developed a prototype that presents a modern responsive design; used by mobile, tablet, and desktop devices _(2k)_  
 * Jet as a UI component library is [ADA and WCAG compliant.](https://docs.oracle.com/middleware/jet112/jet/developer/GUID-9E3452C1-2A85-4700-83B1-B266F348C7E5.htm#JETDG257)  In addition to the framework support, an exit criteria for each page [story](Link to stories) includes 508 and WCAG testing was included.  This was done by developers using the [Wave](http://wave.webaim.org/) browser plugin locally and [NVDA])(https://www.nvaccess.org/) the open source screen reader. _(2g)_  
 
 **Test and Refine**  
-* [Conducted Usability Tests](https://github.com/OncoreLLC/CalOrders/wiki/Initial-Wireframe-Usability-Test) to assess the overall design _(2i)_  
-* Reworked the wireframes to include the user’s feedback, which can be found [here](https://github.com/OncoreLLC/TempusArtifacts/wiki/Initial-Wireframe-Usability-Test)  
+* [Conducted Usability Tests](https://github.com/OncoreLLC/CalOrders/wiki/Usability-Testing) to assess the overall design _(2i)_  
 * Conducted end user testing sessions  
 * Iteratively integrated changes and suggestions, where feedback informed subsequent work or versions of the prototype _(2j)_  
 * Updated wireframes formed the basis for further development of the final product  
-* With each sprint, we conducted user [interviews](https://github.com/OncoreLLC/CalOrders/tree/master/TempusDesignArtifacts/UserInterviews) to validate the application usability and behavior was in line with the user’s goals and expectations _(2j)_  
+* Continued Usability testing at the end of Sprint 1 to include additional [feedback] (https://github.com/OncoreLLC/CalOrders/wiki/Usability-Testing)  _(2j)_
+## Through the continuous usability testing, we were able to track the needs of the user, and adjusted as they saw the product evolve from sprint to sprint.
+
+
+###[User Centric Design Detail View](https://github.com/OncoreLLC/CalOrders/wiki/CalOrders-User-Centric-Design)  
+
+Plan | Analyze| Design | Implement | Test & Measure  
+--- | --- | --- | --- | ----
+[Kickoff Meeting](https://github.com/OncoreLLC/CalOrders/wiki/Hold-Kick-Off-Meeting) | [Research Domain](https://github.com/OncoreLLC/CalOrders/wiki/Domain-Research)    | [Story Boarding](https://github.com/OncoreLLC/CalOrders/wiki/Story-Boards)     | [Style Guide](http://www.oracle.com/webfolder/technetwork/jet/jetCookbook.html)    | [Usability Test](https://github.com/OncoreLLC/CalOrders/wiki/Usability-Testing)
+[Statement of Work](https://github.com/OncoreLLC/CalOrders/wiki/Write-a-Statement-of-Work)   | [Focus Groups](https://github.com/OncoreLLC/CalOrders/wiki/CalOrders-Focus-Groups)| [Scenarios](https://github.com/OncoreLLC/CalOrders/wiki/Scenarios)| [Rapid Prototyping (wire frames)](https://github.com/OncoreLLC/CalOrders/wiki/Wire-Frames) | Refine Application            
+[Create Schedule](https://github.com/OncoreLLC/CalOrders/wiki/Develop-a-Plan)   | [Personas](https://github.com/OncoreLLC/CalOrders/wiki/Develop-Personas)           |       |                | Retest
+ |[Interviews](https://github.com/OncoreLLC/CalOrders/wiki/Interviews)| | |
+
 
 ##Agile Prototype Development   
 
-Using [Agile](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Methodolgy), provided Oncore an iterative approach, where feedback informed subsequent work or versions of the prototype_(2j)_.   
+Following [Agile](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Methodolgy), provided the team an iterative approach, where feedback informed subsequent work or versions of the prototype_(2j)_.   
 
 
 ###Principles
