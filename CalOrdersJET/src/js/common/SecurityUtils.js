@@ -94,6 +94,9 @@ var SecurityUtils = new function ()
             koTableBar().add({name: 'Products', id: 'productSearch',
                 iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-library-icon-24'}, {idAttribute: 'id'});
 
+            koTableBar().add({name: 'Cart', id: 'cart',
+                iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-library-icon-24'}, {idAttribute: 'id'});
+
         }
         if (this.isAuthenticated() === true) {
             var serviceEndPoints = new ServiceEndPoints();
