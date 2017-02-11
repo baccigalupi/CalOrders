@@ -24,8 +24,6 @@ import javax.ws.rs.core.MediaType;
  *
  * @author oncore
  */
-@Stateless
-@Path("com.oncore.calorders.rest.party")
 public class PartyFacadeREST extends AbstractFacade<Party> {
 
     @PersistenceContext(unitName = "CalOrdersRestPU")

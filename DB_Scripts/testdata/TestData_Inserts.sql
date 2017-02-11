@@ -269,6 +269,101 @@ INSERT INTO `calordersdb`.`GROUP_PRIVILEGE_ASSOC`(`GRP_UID_FK`,`PRV_UID_FK`,`CRE
 	VALUES ((SELECT GRP_UID FROM calordersdb.GROUPS WHERE GRP_TYPE_CD = 'AAD'),(SELECT PRV_UID FROM calordersdb.PRIVILEGE where PRV_PAGE_ID = 'services' AND PRV_COMPONENT_ID = 'NAVMENU' AND GRP_UID_FK IN (SELECT GRP_UID FROM calordersdb.GROUPS WHERE GRP_TYPE_CD = 'AAD')), 'system', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP);
   
 
+-- VENDORS
+INSERT INTO `calordersdb`.`VENDOR`(`VND_NAME`, `VND_DESC`, `VND_MANAGER`, `VND_ACTIVE_IND`,`CREATE_USER_ID`,`CREATE_TS`,`UPDATE_USER_ID`,`UPDATE_TS`)
+	VALUES ('The Tech Group', 'The Tech Group provides our customers with leading edge hardware and software','Bobby James',1,'system', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP);
+INSERT INTO `calordersdb`.`VENDOR`(`VND_NAME`, `VND_DESC`, `VND_MANAGER`, `VND_ACTIVE_IND`,`CREATE_USER_ID`,`CREATE_TS`,`UPDATE_USER_ID`,`UPDATE_TS`)
+	VALUES ('Hardware 4 U', 'Hardware 4 U gives you hardware for less','Joe Jasper',1,'system', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP);
+INSERT INTO `calordersdb`.`VENDOR`(`VND_NAME`, `VND_DESC`, `VND_MANAGER`, `VND_ACTIVE_IND`,`CREATE_USER_ID`,`CREATE_TS`,`UPDATE_USER_ID`,`UPDATE_TS`)
+	VALUES ('IT Solutions', 'Our company provides a variety of hardware, software, and related services','Sally Lopez',1,'system', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP);
+
+
+
+-- Products
+INSERT INTO `calordersdb`.`PRODUCT`(
+  `VND_UID_FK`,
+  `PRD_SKU`,`PRD_NAME`,`PRD_CATEGORY_CD`, 
+  `PRD_SHORT_DESC`,   
+  `PRD_LONG_DESC`,   
+  `PRD_PRICE`, `PRD_ACTIVE_IND`,`PRD_CNTR_LN_ITM`,`PRD_OEM_PART_NUM`,   
+  `PRD_OEM_NAME`,`PRD_CNTR_UNIT_PRICE`,`PRD_CNTR_DISCOUNT`,`PRD_UNIT_CD`, `PRD_IMG_TYPE_CD`,  
+  `CREATE_USER_ID`,`CREATE_TS`,`UPDATE_USER_ID`,`UPDATE_TS`) 
+  VALUES (
+  (SELECT VND_UID FROM calordersdb.VENDOR where VND_NAME='The Tech Group'),
+  '210-AFXK','Standard-Dell Optiplex 3040 SFF','DESK',
+  'Standard-Dell Optiplex 3040 SFF Core i5-6500, 3.20GHz, 4GB 1DIMM 1600MHz DDR3L',
+  'Standard-Dell Optiplex 3040 SFF Core i5-6500, 3.20GHz, 4GB 1DIMM 1600MHz DDR3L, Windows 7 Pro (32/64 bit), integrated Intel HD Graphics, DVD+/- RW, 500GB SATA 7200rpm, USB Optical Wheel Mouse, USB Keyboard, 3-Year Next Business Day On-Site Warranty',
+  1013.71,1,'100d','210-AFXK',
+  'DELL',446.03,56,'EACH', 'PNG',
+  'system',CURRENT_TIMESTAMP,'system',CURRENT_TIMESTAMP);
+INSERT INTO `calordersdb`.`PRODUCT`(`VND_UID_FK`,`PRD_SKU`,`PRD_NAME`,`PRD_CATEGORY_CD`,
+   `PRD_SHORT_DESC`,
+   `PRD_LONG_DESC`,
+   `PRD_PRICE`, `PRD_ACTIVE_IND`,`PRD_CNTR_LN_ITM`,`PRD_OEM_PART_NUM`,
+   `PRD_OEM_NAME`,`PRD_CNTR_UNIT_PRICE`,`PRD_CNTR_DISCOUNT`,`PRD_UNIT_CD`, `PRD_IMG_TYPE_CD`,
+   `CREATE_USER_ID`,`CREATE_TS`,`UPDATE_USER_ID`,`UPDATE_TS`) 
+   VALUES(
+   (SELECT VND_UID FROM calordersdb.VENDOR where VND_NAME='The Tech Group'),
+   '210-AFXL','Standard-Dell Optiplex 3040 MT','DESK',
+   'Standard-Dell Optiplex 3040 MT Core i5-6500, 3.20GHz, 4GB 1DIMM 1600MHz DDR3L',
+   'Standard-Dell Optiplex 3040 MT Core i5-6500, 3.20GHz, 4GB 1DIMM 1600MHz DDR3L, Windows 7 Pro (32/64 bit), integrated Intel HD Graphics 530, DVD+/- RW, 500GB SATA 7200rpm, USB Optical Wheel Mouse, USB Keyboard, 3-Year Next Business Day On-Site Warranty',
+   1013.71,1,'102d','210-AFXL',
+   'DELL',446.03,56,'EACH', 'PNG',
+   'system',CURRENT_TIMESTAMP,'system',CURRENT_TIMESTAMP);
+INSERT INTO `calordersdb`.`PRODUCT`(`VND_UID_FK`,`PRD_SKU`,`PRD_NAME`,`PRD_CATEGORY_CD`,
+   `PRD_SHORT_DESC`,
+   `PRD_LONG_DESC`,
+   `PRD_PRICE`, `PRD_ACTIVE_IND`,`PRD_CNTR_LN_ITM`,`PRD_OEM_PART_NUM`,
+   `PRD_OEM_NAME`,`PRD_CNTR_UNIT_PRICE`,`PRD_CNTR_DISCOUNT`,`PRD_UNIT_CD`, `PRD_IMG_TYPE_CD`,
+   `CREATE_USER_ID`,`CREATE_TS`,`UPDATE_USER_ID`,`UPDATE_TS`) 
+   VALUES(
+   (SELECT VND_UID FROM calordersdb.VENDOR where VND_NAME='The Tech Group'),
+   '210-AFXJ','Standard-Dell Optiplex 3040 Micro','DESK',
+   'Standard-Dell Optiplex 3040 Micro Core i5-6500T, 2.5GHz, 4GB 1DIMM 1600MHz DDR3L',
+   'Standard-Dell Optiplex 3040 Micro Core i5-6500T, 2.5GHz, 4GB 1DIMM 1600MHz DDR3L, Windows 7 Pro (32/64 bit), integrated Intel HD Graphics 530, 500GB SATA 7200rpm, USB Optical Wheel Mouse, USB Keyboard, 3-Year Next Business Day On-Site Warranty',
+   930.43,1,'106a','210-AFXJ',
+   'DELL',409.39,56,'EACH', 'PNG',
+   'system',CURRENT_TIMESTAMP,'system',CURRENT_TIMESTAMP);
+INSERT INTO `calordersdb`.`PRODUCT`(`VND_UID_FK`,`PRD_SKU`,`PRD_NAME`,`PRD_CATEGORY_CD`,
+   `PRD_SHORT_DESC`,
+   `PRD_LONG_DESC`,
+   `PRD_PRICE`, `PRD_ACTIVE_IND`,`PRD_CNTR_LN_ITM`,`PRD_OEM_PART_NUM`,
+   `PRD_OEM_NAME`,`PRD_CNTR_UNIT_PRICE`,`PRD_CNTR_DISCOUNT`,`PRD_UNIT_CD`, `PRD_IMG_TYPE_CD`,
+   `CREATE_USER_ID`,`CREATE_TS`,`UPDATE_USER_ID`,`UPDATE_TS`) 
+   VALUES(
+   (SELECT VND_UID FROM calordersdb.VENDOR where VND_NAME='The Tech Group'),
+   '370-ACLY','Precision 15 3000 Series (3510)','LAPT',
+   'Quad Core 2.30GHz, 3.20GHz Turbo, 6MB 35W, w/Intel HD Graphics 530',
+   'Quad Core 2.30GHz, 3.20GHz Turbo, 6MB 35W, w/Intel HD Graphics 530, 8GB (2x4GB) 2133MHz DDR4 Non-ECC',
+   1030.00,1,'1002c','370-ACLY','DELL',988.40,32,'EACH', 'PNG',
+   'system',CURRENT_TIMESTAMP,'system',CURRENT_TIMESTAMP);
+INSERT INTO `calordersdb`.`PRODUCT`(`VND_UID_FK`,`PRD_SKU`,`PRD_NAME`,`PRD_CATEGORY_CD`,
+   `PRD_SHORT_DESC`,
+   `PRD_LONG_DESC`,
+   `PRD_PRICE`, `PRD_ACTIVE_IND`,`PRD_CNTR_LN_ITM`,`PRD_OEM_PART_NUM`,
+   `PRD_OEM_NAME`,`PRD_CNTR_UNIT_PRICE`,`PRD_CNTR_DISCOUNT`,`PRD_UNIT_CD`, `PRD_IMG_TYPE_CD`,
+   `CREATE_USER_ID`,`CREATE_TS`,`UPDATE_USER_ID`,`UPDATE_TS`) 
+   VALUES(
+   (SELECT VND_UID FROM calordersdb.VENDOR where VND_NAME='The Tech Group'),
+   '490-BCYL','Microsoft Word 2000',
+   'OFFC','Microsoft Word 2000 Professional Edition',
+   'Microsoft Word 2000 Professional Edition',
+   110.00,1,'1003c','490-BCYL','DELL',
+   74.80,32,'EACH', 'PNG',
+   'system',CURRENT_TIMESTAMP,'system',CURRENT_TIMESTAMP);
+INSERT INTO `calordersdb`.`PRD_REL_SERVICE`(`PRS_NAME`,`PRS_DESC`, `PRS_PRICE`, `PRS_ACTIVE_IND`,
+	`CREATE_USER_ID`,`CREATE_TS`,`UPDATE_USER_ID`,`UPDATE_TS`) 
+	VALUES('4 Year Basic Hardware Service with 4 Year NBD on-site',
+    '4 Year Basic Hardware Service with 4 Year NBD on-site',
+    388.00,1,
+    'system',CURRENT_TIMESTAMP,'system',CURRENT_TIMESTAMP);
+INSERT INTO `calordersdb`.`PRD_REL_SERVICE`(`PRS_NAME`,`PRS_DESC`, `PRS_PRICE`, `PRS_ACTIVE_IND`,
+	`CREATE_USER_ID`,`CREATE_TS`,`UPDATE_USER_ID`,`UPDATE_TS`) 
+	VALUES('5 Year Basic Hardware Service with NBD on-site',
+    '5 Year Basic Hardware Service with NBD on-site',
+    458.00,1,
+    'system',CURRENT_TIMESTAMP,'system',CURRENT_TIMESTAMP);
+
 
 	
 	

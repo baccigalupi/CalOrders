@@ -57,10 +57,10 @@ ServiceEndPoints.prototype = {
 
         if (key === "findNavBarPrivilegesByEmployeeId")
         {
-            return calOrdersHost + "/CalOrdersServices/webresources/com.oncore.calorders.services.users/findNavBarPrivilegesByUserId";
+            return calOrdersHost + "/CalOrdersServices/webresources/com.oncore.calorders.services.party/findNavBarPrivilegesByUserId";
         } else if (key === "findNavMenuPrivilegesByEmployeeId")
         {
-            return calOrdersHost + "/CalOrdersServices/webresources/com.oncore.calorders.services.users/findNavMenuPrivilegesByUserId";
+            return calOrdersHost + "/CalOrdersServices/webresources/com.oncore.calorders.services.party/findNavMenuPrivilegesByUserId";
         }
         else
         {
