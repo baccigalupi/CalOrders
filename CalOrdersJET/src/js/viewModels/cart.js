@@ -32,7 +32,8 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
             function CartViewModel() {
                 var self = this;
 
-
+                self.router = oj.Router.rootInstance;
+                
                 // Below are a subset of the ViewModel methods invoked by the ojModule binding
                 // Please reference the ojModule jsDoc for additionaly available methods.
 
@@ -193,6 +194,19 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                 self.getChat = function (emp) {
                     return "#";
                 };
+                
+                self.getItemTotalPrice = function () {
+                    
+                    return "$1000.00";
+                };
+
+                self.getShippingPrice = function () {
+                    return "$25.00";
+                };
+
+                self.getTotalPrice = function () {
+                    return "$1000.00";
+                };
 
                 self.getOrg = function (org, event) {
                     alert('This will take you to the employee page and highlight the team infotile');
@@ -233,6 +247,11 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                 self.placeOrderClick = function (trackerObj)
                 {
                     return true;
+                };
+                
+                self.continueShoppingClick = function(data, event)
+                {
+                       return self.router.go("productSearch");
                 };
 
                 self.onEnter = function (data, event) {
