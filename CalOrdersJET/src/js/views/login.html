@@ -1,0 +1,135 @@
+<!--
+ * The MIT License
+ *
+ * Copyright 2017 OnCore Consulting LLC, 2017
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ * -->
+<div id="loginWrapperDiv" class="oj-hybrid-padding">
+
+    <div class="oj-form">
+
+        <div class="oj-panel oj-flex">
+
+            <div id="loginPicturePanel" class="oj-panel oj-flex-item">
+                <img id="loginPicture" alt="loginPicture" src="../css/images/186915307.jpg" height="300" width="400"/>
+            </div>
+
+ 
+
+
+            <div id="loginInnerWrapperDiv" class="oj-panel oj-flex-item">
+
+
+
+                <h2>Login</h2>
+
+
+
+                <!-- global error messages -->
+
+                <div class="oj-flex-item oj-messaging-inline-container" id="loginError" aria-live="polite" hidden>
+                    <div class="oj-padding-vertical"></div>
+                    <div class="oj-message oj-message-error">
+                        <div class="oj-component-icon oj-message-status-icon oj-message-error-icon" title="Error" role="img"></div>
+                        <div class="oj-message-content">
+                            <div class="oj-message-summary">Error</div>
+                            <div class="oj-message-detail">
+                                <span>The login information entered doesn't match any known accounts. Please try again.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end global error message -->
+
+
+                <div class="oj-padding-vertical"></div>
+
+                <!--<p>Do you need to <a href="#">register</a> for a new account?</p>-->
+                
+                 <div id="registerPanel" class="oj-flex-item" aria-label="Register" tabindex="0" role="link" data-bind="click: function(){history.pushState(null, '', 'registrationCompany.html'); oj.Router.sync();}, event:{click:onClickLoadRegistration}">
+                     <!--<span>Do you need to <a href="#">register</a> for a new account?</span>-->
+                     <span>To access the system as an user, enter 'rickybobby'.</span>
+                     <div class="oj-padding-vertical"></div>
+                     <span>To access the system as an administrator, enter 'joeadmin'.</span>
+                </div>
+
+                <div class="oj-padding-vertical"></div>
+                <div class="oj-flex-item">
+
+
+
+                    <label for="userName">User Name:</label>
+                    <input id="userName" type="text" autocomplete="off" 
+                           minlength="8"
+                           maxlength="30"
+                           name="userName" 
+                           data-bind="ojComponent: {
+                              component: 'ojInputText', 
+                              required: true,
+                              value: username,
+                              invalidComponentTracker: tracker,
+                              validators: [{
+                              type: 'regExp',        
+                              options: {
+                              pattern: '[a-zA-Z0-9]{8,}', 
+                              hint: 'Enter at least 8 letters or numbers.',
+                              messageSummary: 'Value \'{value}\' Invalid',
+                              messageDetail: 'You must enter at least 8 letters or numbers.'}}]}"/>
+
+
+                </div>
+
+                
+
+                <div class="oj-padding-vertical"></div>
+
+
+                <div class="oj-padding-vertical"></div>
+
+
+
+                <!-- buttons -->
+                <div class="oj-flex">    
+
+                    <button id= "cancel"
+                            data-bind="click: cancelClick, ojComponent: { component: 'ojButton', label: 'Cancel' }">
+                    </button>
+                    
+                    <div class="oj-padding-horizontal"></div>
+
+                    <button id= "continue"
+                              data-bind="click: continueClick, ojComponent: { component: 'ojButton', label: 'Continue', disabled: isLoginDisabled()}">
+                    </button> 
+                </div>
+                <!-- end buttons -->
+
+
+            </div>
+
+
+
+
+
+        </div>
+
+
+    </div>
+
+</div>

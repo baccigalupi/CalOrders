@@ -87,18 +87,18 @@ public class PartyFacadeRESTExtension extends PartyFacadeREST {
 
             Logger.debug(LOG, "Hey testing logging, the findPartyByUserIdAndPassword is being called!");
 
-            party = getEntityManager().createQuery("SELECT p FROM Party p WHERE p.ptyUserId = :userId and p.ptyPassword = :password", Party.class).setParameter("ptyUserId", userId).setParameter("ptyPassword", DEFAULT_PASSWORD).getSingleResult();
+            party = getEntityManager().createQuery("SELECT p FROM Party p WHERE p.ptyUserId = :userId and p.ptyPassword = :password", Party.class).setParameter("userId", userId).setParameter("password", DEFAULT_PASSWORD).getSingleResult();
 
             if (party != null) {
                 partyData = new PartyData();
 
-                partyData.setEmpFirstNm(party.getPtyFirstNm());
-                partyData.setEmpHireDt(party.getPtyHireDt());
-                partyData.setEmpId(party.getPtyId());
-                partyData.setEmpLastNm(party.getPtyLastNm());
-                partyData.setEmpMidNm(party.getPtyMidNm());
-                partyData.setEmpTitle(party.getPtyTitle());
-                partyData.setEmpUid(party.getPtyUid());
+                partyData.setPtyFirstNm(party.getPtyFirstNm());
+                partyData.setPtyHireDt(party.getPtyHireDt());
+                partyData.setPtyId(party.getPtyId());
+                partyData.setPtyLastNm(party.getPtyLastNm());
+                partyData.setPtyMidNm(party.getPtyMidNm());
+                partyData.setPtyTitle(party.getPtyTitle());
+                partyData.setPtyUid(party.getPtyUid());
 
                 for (GroupPartyAssoc assoc : party.getGroupPartyAssocCollection()) {
                     partyData.setDepName(assoc.getGrpUidFk().getDepUidFk().getDepName());
@@ -300,7 +300,7 @@ public class PartyFacadeRESTExtension extends PartyFacadeREST {
 
             Logger.debug(LOG, "Hey testing logging, the findNavBarPrivilegesByPartyId is being called!");
 
-            privilegeses = getEntityManager().createQuery("SELECT p FROM Privileges p join p.groupPrivilegesAssocCollection gp join gp.grpUidFk g join g.groupPartyAssocCollection ge join ge.ptyUidFk p WHERE p.ptyUid = :partyId and p.prvComponentId = 'NAVBAR'", Privilege.class).setParameter("partyId", partyId).getResultList();
+            privilegeses = getEntityManager().createQuery("SELECT p FROM Privilege p join p.groupPrivilegeAssocCollection gp join gp.grpUidFk g join g.groupPartyAssocCollection ge join ge.ptyUidFk e WHERE e.ptyUid = :partyId and p.prvComponentId = 'NAVBAR'", Privilege.class).setParameter("partyId", partyId).getResultList();
 
             if (privilegeses != null && privilegeses.size() > 0) {
                 privilegeDatas = new ArrayList<PrivilegeData>();
@@ -354,10 +354,10 @@ public class PartyFacadeRESTExtension extends PartyFacadeREST {
         PrivilegeData privilegeData = null;
 
         try {
-
+ 
             Logger.debug(LOG, "Hey testing logging, the findNavMenuPrivilegesByPartyId is being called!");
 
-            privilegeses = getEntityManager().createQuery("SELECT p FROM Privilege p join p.groupPrivilegeAssocCollection gp join gp.grpUidFk g join g.groupPartyAssocCollection ge join ge.ptyUidFk p WHERE p.ptyUid = :partyId and p.prvComponentId = 'NAVMENU'", Privilege.class).setParameter("partyId", partyId).getResultList();
+            privilegeses = getEntityManager().createQuery("SELECT p FROM Privilege p join p.groupPrivilegeAssocCollection gp join gp.grpUidFk g join g.groupPartyAssocCollection ge join ge.ptyUidFk e WHERE e.ptyUid = :partyId and p.prvComponentId = 'NAVMENU'", Privilege.class).setParameter("partyId", partyId).getResultList();
 
             if (privilegeses != null && privilegeses.size() > 0) {
                 privilegeDatas = new ArrayList<PrivilegeData>();

@@ -55,15 +55,18 @@ ServiceEndPoints.prototype = {
         // =======================================
 
 
-        if (key === "findNavBarPrivilegesByEmployeeId")
+        if (key === "findNavBarPrivilegesByPartyId")
         {
             return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.party/findNavBarPrivilegesByPartyId";
-        } else if (key === "findNavMenuPrivilegesByEmployeeId")
+        } else if (key === "findNavMenuPrivilegesByPartyId")
         {
             return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.party/findNavMenuPrivilegesByPartyId";
         } else if (key === "findAllPrivilegesByPartyId")
         {
-            return tempusUsersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.party/findAllPrivilegesByPartyId";
+            return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.party/findAllPrivilegesByPartyId";
+        } else if (key === "findPartyByUserIdAndPassword")
+        {
+            return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.party/findPartyByUserIdAndPassword";
         } else
         {
             return "UNDEFINED";
