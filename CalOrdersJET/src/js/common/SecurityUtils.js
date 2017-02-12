@@ -91,16 +91,21 @@ var SecurityUtils = new function ()
             koTableBar().add({name: 'Welcome', id: 'welcome',
                 iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-home-icon-24'}, {idAttribute: 'id'});
             
-            koTableBar().add({name: 'Products', id: 'productSearch',
-                iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-library-icon-24'}, {idAttribute: 'id'});
-
-            koTableBar().add({name: 'Cart', id: 'cart',
-                iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-library-icon-24'}, {idAttribute: 'id'});
+            koTableBar().add({name: 'About', id: 'about',
+                iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-home-icon-24'}, {idAttribute: 'id'});
+            
+//            koTableBar().add({name: 'Products', id: 'productSearch',
+//                iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-library-icon-24'}, {idAttribute: 'id'});
+//
+//            koTableBar().add({name: 'Cart', id: 'cart',
+//                iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-library-icon-24'}, {idAttribute: 'id'});
 
         }
+        
         if (this.isAuthenticated() === true) {
             var serviceEndPoints = new ServiceEndPoints();
-            var serviceURL = serviceEndPoints.getEndPoint('findNavBarPrivilegesByUserId') + "/" + sessionStorage.userUid;
+            var serviceURL = serviceEndPoints.getEndPoint('findNavBarPrivilegesByPartyId') + "/" + sessionStorage.partyUid;
+ 
 
             var PrivilegeModel = oj.Model.extend({
                 urlRoot: serviceURL,
@@ -141,7 +146,7 @@ var SecurityUtils = new function ()
                 iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-info-icon-24'});
         }
         if (this.isAuthenticated() === true) {
-            var serviceURL = this.serviceEndPoints.getEndPoint('findNavMenuPrivilegesByUserId') + "/" + sessionStorage.userUid;
+            var serviceURL = this.serviceEndPoints.getEndPoint('findNavMenuPrivilegesByPartyId') + "/" + sessionStorage.partyUid;
 
             var PrivilegeModel = oj.Model.extend({
                 urlRoot: serviceURL,
@@ -176,7 +181,7 @@ var SecurityUtils = new function ()
     };
 
     this.getPrivileges = function () {
-        var serviceURL = SecurityUtils.serviceEndPoints.getEndPoint('findAllPrivilegesByUserId') + "/" + sessionStorage.userUid;
+        var serviceURL = SecurityUtils.serviceEndPoints.getEndPoint('findAllPrivilegesByPartyId') + "/" + sessionStorage.partyUid;
 
         var PrivilegeModel = oj.Model.extend({
             urlRoot: serviceURL,
@@ -202,7 +207,7 @@ var SecurityUtils = new function ()
             sessionStorage.userFullName = "";
             sessionStorage.firstName = "";
             sessionStorage.lastName = "";
-            sessionStorage.userUid = "";
+            sessionStorage.partyUid = "";
             sessionStorage.groups = [];
             sessionStorage.authenticated = false;
         }
@@ -214,7 +219,7 @@ var SecurityUtils = new function ()
             sessionStorage.userFullName = "";
             sessionStorage.firstName = "";
             sessionStorage.lastName = "";
-            sessionStorage.userUid = "";
+            sessionStorage.partyUid = "";
             sessionStorage.groups = [];
             sessionStorage.authenticated = false;
         }

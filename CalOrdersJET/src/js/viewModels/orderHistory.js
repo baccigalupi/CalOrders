@@ -22,18 +22,16 @@
  * THE SOFTWARE.
  */
 /*
- * Your about ViewModel code goes here
+ * Your customer ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojpagingcontrol', 'ojs/ojpagingcontrol-model'],
-        function (oj, ko, data) {
+define(['ojs/ojcore', 'knockout', 'jquery'],
+        function (oj, ko, $) {
 
-            function ProductDetailViewModel() {
+            function OrdersViewModel() {
                 var self = this;
+
+
                 self.router = oj.Router.rootInstance;
-                
-                // Get product id from the search page
-                self.productId = ko.observable(self.router.retrieve());
-                
                 
                 
                 // Below are a subset of the ViewModel methods invoked by the ojModule binding
@@ -51,7 +49,10 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                  * the promise is resolved
                  */
                 self.handleActivated = function (info) {
-                    // Implement if needed
+                    if (sessionStorage.authenticated === "false")
+                    {
+                        return self.router.go('welcome');
+                    }
                 };
 
                 /**
@@ -98,6 +99,6 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
              * each time the view is displayed.  Return an instance of the ViewModel if
              * only one instance of the ViewModel is needed.
              */
-            return ProductDetailViewModel;
+            return new OrdersViewModel();
         }
 );

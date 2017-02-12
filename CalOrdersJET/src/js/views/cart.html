@@ -1,76 +1,111 @@
 <!--
-  The OnCore Consulting LLC License
- 
-  Copyright 2016 OnCore Consulting LLC, All Rights Reserved.
- 
-  Permission IS NOT GRANTED to any person obtaining a copy
-  of this software and associated documentation files (the "Software"), to deal
-  in the Software without restriction, including without limitation the rights
-  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-  copies of the Software, and to permit persons to whom the Software is
-  furnished to do so, unless the following conditions are met:
- 
-  Written permission is obtained from  
-  OnCore Consulting LLC and the above copyright 
-  notice and this permission notice shall be included in
-  all copies or substantial portions of the Software.
- 
-  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-  THE SOFTWARE.
--->
+ * The MIT License
+ *
+ * Copyright 2017 OnCore Consulting LLC, 2017
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ * -->
 <div id="cartWrapperDiv" class="oj-hybrid-padding">
 
     <!-- Page Title -->
-    <div id="pageTitleContainer" class="oj-flex-item oj-sm-2">
-        <h1 style="margin-bottom:0">Cart</h1>
+    <div id="pageTitleContainer" class="oj-flex-item oj-sm-6">
+        <h1 style="margin-bottom:0">CalOrders Cart</h1>
     </div>
 
     <!-- Page Content -->
     <div class="oj-panel oj-flex oj-sm-flex-wrap-nowrap">
         <div id="cartWrapperDiv" class="oj-panel oj-flex-item oj-sm-flex-wrap-nowrap">
 
-                    <!-- this is the listLayout template. It uses the ojListView component to do the layout and the pagination. -->
-                         <ul id="listview"
-                            data-bind="ojComponent: {component: 'ojListView',
+            <!-- this is the listLayout template. It uses the ojListView component to do the layout and the pagination. -->
+            <ul id="listview"
+                data-bind="ojComponent: {component: 'ojListView',
             data: listViewDataSource,
             item: {template: 'peoplelist_template'},
-            selectionMode: 'single',
-            currentItem: '205',
-            selection: ['205'],
+            selectionMode: 'none',
+            selection: [],
             optionChange: changeHandler,
             rootAttributes: {style: 'width:100%;height:100vh;overflow:auto; margin-top: 5px'},
             scrollPolicy: 'loadMoreOnScroll',
             scrollPolicyOptions: {fetchSize: 10}}">
-                        </ul>
- 
-                        <!-- this is the content that is loaded by the ojListView component above -->
-                        <script id="peoplelist_template" type="text/html">
-                            <li class="oj-flex-item oj-sm-12" data-bind="click: $parent.loadPersonPage">
-                                <div>
-                                    <div class="oj-flex oj-flex-items-pad">
-                                        <div class="oj-flex-item oj-lg-4 oj-md-4">
-                                            <img alt="employee image" class="demo-circular demo-employee-photo" style="float:left;" data-bind="attr: {src: $parent.getPhoto($data['empId'])}"/>
-                                            <h2 class="demo-employee-name" data-bind="text: $data['description']"></h2>
-                                            <div class="demo-employee-title" data-bind="text: $data['price']"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            </script>
+            </ul>
+
+            <!-- this is the content that is loaded by the ojListView component above -->
+            <script id="peoplelist_template" type="text/html">
+                <li class="oj-flex-item oj-sm-12" data-bind="click: $parent.loadPersonPage">
+                    <div class="oj-flex">
+                        <div class="oj-flex-item">
+                            <div class="oj-flex oj-sm-6">
+                                <img alt="employee image" style="float:left;" 
+                                     data-bind="attr: {src: $parent.getPhoto($data['empId'])}"/>
+                            </div>
+                            <div class="oj-flex oj-sm-6">
+
+                                <h4 data-bind="text: $data['description']"></h4>
+                            </div>
+                        </div>
+                        <div class="oj-flex-item oj-sm-3">
+                            <h4>1</h4>
+                        </div>
+                        <div class="oj-flex-item oj-sm-3">
+                            <h4>Price: $<span data-bind="text: $data['price']"/></h4>
                         </div>
                     </div>
-                        <div class="oj-padding-vertical"></div>
-    <div class="oj-flex oj-md-float-end">
-
-                        <div class="oj-flex-item">
-                    <button id= "placeOrder" 
-                            data-bind="click: placeOrderClick, ojComponent: { component: 'ojButton', label: 'Order' }">
-                    </button> 
-                </div>
+            </div>
+            </li>
+            </script>
+        </div>
     </div>
-                </div>
+    <div class="oj-padding-vertical"></div>
+
+    <div class="oj-flex oj-sm-12 oj-sm-justify-content-flex-end">
+        <div class="oj-flex-item oj-sm-2">
+            <div class="oj-sm-text-align-end">
+                Total:<br/>
+                Shipping:<br/>
+                Total Price:<br/>
+            </div>
+        </div>
+
+        <div class="oj-flex-item oj-sm-2">
+            <div class="oj-sm-text-align-end">
+                <div data-bind="text: getItemTotalPrice()"></div>
+                <div data-bind="text: getShippingPrice()"></div>
+                <div data-bind="text: getTotalPrice()"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="oj-padding-vertical"></div>
+
+<div class="oj-flex oj-sm-12 oj-sm-justify-content-flex-end">
+
+    <div class="oj-flex-item oj-sm-1 oj-sm-text-align-end">
+        <button id= "continueShopping" 
+                data-bind="click: continueShoppingClick, ojComponent: { component: 'ojButton', label: 'Continue Shopping' }">
+        </button> 
+    </div>
+    <div class="oj-padding-horizontal"></div>
+    <div class="oj-flex-item oj-sm-1 oj-sm-text-align-end">
+        <button id= "placeOrder" 
+                data-bind="click: placeOrderClick, ojComponent: { component: 'ojButton', label: 'Order' }">
+        </button> 
+    </div>
+</div>
+</div>

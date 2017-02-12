@@ -1,18 +1,16 @@
 /* 
- * The OnCore Consulting LLC License
+ * The MIT License
  *
- * Copyright 2016 OnCore Consulting LLC, All Rights Reserved.
+ * Copyright 2017 OnCore Consulting LLC, 2017
  *
- * Permission IS NOT GRANTED to any person obtaining a copy
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, unless the following conditions are met:
+ * furnished to do so, subject to the following conditions:
  *
- * Written permission is obtained from  
- * OnCore Consulting LLC and the above copyright 
- * notice and this permission notice shall be included in
+ * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -32,7 +30,8 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
             function CartViewModel() {
                 var self = this;
 
-
+                self.router = oj.Router.rootInstance;
+                
                 // Below are a subset of the ViewModel methods invoked by the ojModule binding
                 // Please reference the ojModule jsDoc for additionaly available methods.
 
@@ -193,6 +192,19 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                 self.getChat = function (emp) {
                     return "#";
                 };
+                
+                self.getItemTotalPrice = function () {
+                    
+                    return "$1000.00";
+                };
+
+                self.getShippingPrice = function () {
+                    return "$25.00";
+                };
+
+                self.getTotalPrice = function () {
+                    return "$1000.00";
+                };
 
                 self.getOrg = function (org, event) {
                     alert('This will take you to the employee page and highlight the team infotile');
@@ -233,6 +245,11 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                 self.placeOrderClick = function (trackerObj)
                 {
                     return true;
+                };
+                
+                self.continueShoppingClick = function(data, event)
+                {
+                       return self.router.go("productSearch");
                 };
 
                 self.onEnter = function (data, event) {
