@@ -1,10 +1,7 @@
-package com.oncore.calorders.rest.data;
-
-import com.oncore.calorders.core.data.BaseData;
 /*
  * The MIT License
  *
- * Copyright 2017 oncore.
+ * Copyright 2017 OnCore Consulting LLC, 2017
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,6 +21,9 @@ import com.oncore.calorders.core.data.BaseData;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+package com.oncore.calorders.rest.data;
+
+import com.oncore.calorders.core.data.BaseData;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;

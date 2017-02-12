@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2017 oncore.
+ * Copyright 2017 OnCore Consulting LLC, 2017
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -38,23 +38,23 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class PartyData extends BaseData {
 
-    private Integer empUid;
+    private Integer ptyUid;
 
-    private String empUserId;
+    private String ptyUserId;
 
-    private String empPassword;
+    private String ptyPassword;
 
-    private String empFirstNm;
+    private String ptyFirstNm;
 
-    private String empMidNm;
+    private String ptyMidNm;
 
-    private String empLastNm;
+    private String ptyLastNm;
 
-    private String empTitle;
+    private String ptyTitle;
 
-    private Date empHireDt;
+    private Date ptyHireDt;
 
-    private String empId;
+    private String ptyId;
 
     private Integer depUid;
 
@@ -63,129 +63,129 @@ public class PartyData extends BaseData {
     private List<GroupData> groupList = new ArrayList<>(1);
 
     /**
-     * @return the empUid
+     * @return the ptyUid
      */
-    public Integer getEmpUid() {
-        return empUid;
+    public Integer getPtyUid() {
+        return ptyUid;
     }
 
     /**
-     * @param empUid the empUid to set
+     * @param ptyUid the ptyUid to set
      */
-    public void setEmpUid(Integer empUid) {
-        this.empUid = empUid;
+    public void setPtyUid(Integer ptyUid) {
+        this.ptyUid = ptyUid;
     }
 
     /**
-     * @return the empUserId
+     * @return the ptyUserId
      */
-    public String getEmpUserId() {
-        return empUserId;
+    public String getPtyUserId() {
+        return ptyUserId;
     }
 
     /**
-     * @param empUserId the empUserId to set
+     * @param ptyUserId the ptyUserId to set
      */
-    public void setEmpUserId(String empUserId) {
-        this.empUserId = empUserId;
+    public void setPtyUserId(String ptyUserId) {
+        this.ptyUserId = ptyUserId;
     }
 
     /**
-     * @return the empPassword
+     * @return the ptyPassword
      */
-    public String getEmpPassword() {
-        return empPassword;
+    public String getPtyPassword() {
+        return ptyPassword;
     }
 
     /**
-     * @param empPassword the empPassword to set
+     * @param ptyPassword the ptyPassword to set
      */
-    public void setEmpPassword(String empPassword) {
-        this.empPassword = empPassword;
+    public void setPtyPassword(String ptyPassword) {
+        this.ptyPassword = ptyPassword;
     }
 
     /**
-     * @return the empFirstNm
+     * @return the ptyFirstNm
      */
-    public String getEmpFirstNm() {
-        return empFirstNm;
+    public String getPtyFirstNm() {
+        return ptyFirstNm;
     }
 
     /**
-     * @param empFirstNm the empFirstNm to set
+     * @param ptyFirstNm the ptyFirstNm to set
      */
-    public void setEmpFirstNm(String empFirstNm) {
-        this.empFirstNm = empFirstNm;
+    public void setPtyFirstNm(String ptyFirstNm) {
+        this.ptyFirstNm = ptyFirstNm;
     }
 
     /**
-     * @return the empMidNm
+     * @return the ptyMidNm
      */
-    public String getEmpMidNm() {
-        return empMidNm;
+    public String getPtyMidNm() {
+        return ptyMidNm;
     }
 
     /**
-     * @param empMidNm the empMidNm to set
+     * @param ptyMidNm the ptyMidNm to set
      */
-    public void setEmpMidNm(String empMidNm) {
-        this.empMidNm = empMidNm;
+    public void setPtyMidNm(String ptyMidNm) {
+        this.ptyMidNm = ptyMidNm;
     }
 
     /**
-     * @return the empLastNm
+     * @return the ptyLastNm
      */
-    public String getEmpLastNm() {
-        return empLastNm;
+    public String getPtyLastNm() {
+        return ptyLastNm;
     }
 
     /**
-     * @param empLastNm the empLastNm to set
+     * @param ptyLastNm the ptyLastNm to set
      */
-    public void setEmpLastNm(String empLastNm) {
-        this.empLastNm = empLastNm;
+    public void setPtyLastNm(String ptyLastNm) {
+        this.ptyLastNm = ptyLastNm;
     }
 
     /**
-     * @return the empTitle
+     * @return the ptyTitle
      */
-    public String getEmpTitle() {
-        return empTitle;
+    public String getPtyTitle() {
+        return ptyTitle;
     }
 
     /**
-     * @param empTitle the empTitle to set
+     * @param ptyTitle the ptyTitle to set
      */
-    public void setEmpTitle(String empTitle) {
-        this.empTitle = empTitle;
+    public void setPtyTitle(String ptyTitle) {
+        this.ptyTitle = ptyTitle;
     }
 
     /**
-     * @return the empHireDt
+     * @return the ptyHireDt
      */
-    public Date getEmpHireDt() {
-        return empHireDt;
+    public Date getPtyHireDt() {
+        return ptyHireDt;
     }
 
     /**
-     * @param empHireDt the empHireDt to set
+     * @param ptyHireDt the ptyHireDt to set
      */
-    public void setEmpHireDt(Date empHireDt) {
-        this.empHireDt = empHireDt;
+    public void setPtyHireDt(Date ptyHireDt) {
+        this.ptyHireDt = ptyHireDt;
     }
 
     /**
-     * @return the empId
+     * @return the ptyId
      */
-    public String getEmpId() {
-        return empId;
+    public String getPtyId() {
+        return ptyId;
     }
 
     /**
-     * @param empId the empId to set
+     * @param ptyId the ptyId to set
      */
-    public void setEmpId(String empId) {
-        this.empId = empId;
+    public void setPtyId(String ptyId) {
+        this.ptyId = ptyId;
     }
 
     /**
@@ -229,5 +229,6 @@ public class PartyData extends BaseData {
     public void setGroupList(List<GroupData> groupList) {
         this.groupList = groupList;
     }
+ 
 
 }
