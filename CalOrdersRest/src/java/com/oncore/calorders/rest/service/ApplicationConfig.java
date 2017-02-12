@@ -51,6 +51,7 @@ public class ApplicationConfig extends Application {
         resources.add(com.oncore.calorders.rest.service.RelatedServiceFacadeREST.class);
         resources.add(com.oncore.calorders.rest.service.VendorFacadeREST.class);
         resources.add(com.oncore.calorders.rest.service.extension.PartyFacadeRESTExtension.class);
+        resources.add(com.oncore.calorders.rest.service.extension.ProductFacadeRESTExtension.class);
     }
     
 }
