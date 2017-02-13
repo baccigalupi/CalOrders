@@ -1,18 +1,16 @@
 /* 
- * The OnCore Consulting LLC License
+ * The MIT License
  *
- * Copyright 2016 OnCore Consulting LLC, All Rights Reserved.
+ * Copyright 2017 OnCore Consulting LLC, 2017
  *
- * Permission IS NOT GRANTED to any person obtaining a copy
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, unless the following conditions are met:
+ * furnished to do so, subject to the following conditions:
  *
- * Written permission is obtained from  
- * OnCore Consulting LLC and the above copyright 
- * notice and this permission notice shall be included in
+ * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -32,6 +30,17 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
             function ProductSearchViewModel() {
                 var self = this;
 
+                var serviceEndPoints = new ServiceEndPoints();
+
+                self.router = oj.Router.rootInstance;
+                self.findProductsByProductTypeService = serviceEndPoints.getEndPoint("findActiveProductsByProductType");
+                self.selectedProductMenuItem = ko.observable('desktops');
+                self.productLayoutType = ko.observable('productCardLayout');
+                self.allProduct = ko.observableArray([]);
+                self.ready = ko.observable(false);
+                self.nameSearch = ko.observable('');
+                self.addedProductPhoto = ko.observable();
+                self.addedProductName = ko.observable();
 
                 // Below are a subset of the ViewModel methods invoked by the ojModule binding
                 // Please reference the ojModule jsDoc for additionaly available methods.
@@ -92,89 +101,87 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                 self.itemOnly = function (context) {
                     return context['leaf'];
                 };
-                
-                self.searchProductsFromMenu = function (context) {
-                    console.log("searchProductsFromMenu " + context['id']);
+
+                self.parseProduct = function (response) {
+                    self.allProduct.push(response);
                 };
-                
+
                 self.searchProducts = function (productType) {
-                    var filename = 'js/data/products_desktops.json';
+                    console.log("Search products by " + productType);
                     
-                    console.log("Search " + productType + " products");
+                    // Remove previous search results
+                    self.allProduct([]);
 
-                    if ( productType === 'laptops') {
-                        filename = 'js/data/products_laptops.json'
-                    }
+                    var ProductModel = oj.Model.extend({
+                        urlRoot: self.findProductsByProductTypeService + "/" + productType,
+                        parse: self.parseProduct,
+                        idAttribute: 'prdUid'
+                    });
+                    var product = new ProductModel();
 
-
-                    data.fetchData(filename).then(function (people) {
-                        self.allPeople(people.products);
-                    }).fail(function (error) {
-                        console.log('Error in getting People data: ' + error.message);
+                    var ProductCollection = oj.Collection.extend({
+                        url: self.findProductsByProductTypeService + "/" + productType,
+                        model: product,
+                        comparator: 'prdUid'
                     });
 
-//                self.parsePeople = function (response) {
-//                    return response['products'];
-//                };
+                    self.collection = new ProductCollection();
 
-                    self.model = oj.Model.extend({
-                        idAttribute: 'productId'
-                    });
-
-                    self.collection = new oj.Collection(null, {
-                        url: filename,
-                        model: self.model
+                    self.collection.fetch({
+                        success: function (myModel, response, options) {
+                            console.log("Search success");
+                            return false;
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.log("Search failed" + errorThrown);
+                            return false;
+                        }
                     });
                 };
-                
-                self.selectedItem = ko.observable('home');
 
-                self.peopleLayoutType = ko.observable('peopleCardLayout');
+                self.filteredAllProduct = ko.computed(function () {
+                    
+                    var productFilter = new Array();
 
-                self.allPeople = ko.observableArray([]);
-                self.ready = ko.observable(false);
-
-                // Perform default search
-                console.log("About to perform default search");
-                self.searchProducts('desktops');
-
-                self.nameSearch = ko.observable('');
-
-                self.filteredAllPeople = ko.computed(function () {
-                    var peopleFilter = new Array();
-
-                    if (self.allPeople().length !== 0) {
+                    if (self.allProduct().length !== 0) {
                         if (self.nameSearch().length === 0)
                         {
-                            peopleFilter = self.allPeople();
+                            productFilter = self.allProduct();
                         } else {
-                            ko.utils.arrayFilter(self.allPeople(),
+                            ko.utils.arrayFilter(self.allProduct(),
                                     function (r) {
                                         var token = self.nameSearch().toLowerCase();
-                                        if (r.firstName.toLowerCase().indexOf(token) === 0 || r.lastName.toLowerCase().indexOf(token) === 0) {
-                                            peopleFilter.push(r);
+
+                                        r.prdName.toLowerCase().indexOf(token)
+
+                                        if (r.prdName.toLowerCase().indexOf(token) >= 0) {
+                                            productFilter.push(r);
                                         }
                                     });
                         }
                     }
 
                     self.ready(true);
-                    return peopleFilter;
+                    return productFilter;
                 });
 
                 self.listViewDataSource = ko.computed(function () {
-                    return new oj.ArrayTableDataSource(self.filteredAllPeople(), {idAttribute: 'productId'});
+                    return new oj.ArrayTableDataSource(self.filteredAllProduct(), {idAttribute: 'prdUid'});
                 });
 
                 self.cardViewDataSource = ko.computed(function () {
                     return new oj.PagingTableDataSource(self.listViewDataSource());
                 });
 
+                // Perform default product search
+                self.searchProducts('DESK');
+
+
                 self.getPhoto = function (productId) {
                     console.log("Image for product " + productId);
                     var src = 'css/images/desktop.png';
-                    
-                    if ( productId < 1000)
+
+                    if (productId < 1000)
                     {
                         src = 'css/images/laptop.png';
                     }
@@ -182,46 +189,19 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                     return src;
                 };
 
-                self.getEmail = function (emp) {
-                    return "mailto:" + emp.email + '@example.net';
-                };
-
-                self.getFacetime = function (emp) {
-                    return "#";
-                };
-
-                self.getChat = function (emp) {
-                    return "#";
-                };
-
-                self.getOrg = function (org, event) {
-                    alert('This will take you to the employee page and highlight the team infotile');
-                };
-
-                self.getTenure = function (emp) {
-                    var now = new Date().getFullYear();
-                    var hired = new Date(emp.hireDate).getFullYear();
-                    var diff = now - hired;
-                    return diff;
-                };
-
                 self.cardLayoutHandler = function () {
-                    self.peopleLayoutType('peopleCardLayout');
+                    self.productLayoutType('productCardLayout');
                 };
 
                 self.listLayoutHandler = function () {
-                    self.peopleLayoutType('peopleListLayout');
+                    self.productLayoutType('productListLayout');
                 };
 
-                self.loadPersonPage = function (emp) {
-                    if (emp.empId) {
-                        // Temporary code until go('person/' + emp.empId); is checked in 1.1.2
-                        history.pushState(null, '', 'index.html?root=person&emp=' + emp.empId);
-                        oj.Router.sync();
-                    } else {
-                        // Default id for person is 100 so no need to specify.
-                        oj.Router.rootInstance.go('person');
-                    }
+                self.navigateToProductDetail = function (product) {
+                    console.log("navigating to product detail for " + product.prdUid);
+                    // Store product id parameter
+                    self.router.store(product.prdUid);
+                    return self.router.go("productDetail");
                 };
 
                 self.onEnter = function (data, event) {
@@ -232,22 +212,25 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                     }
                     return true;
                 };
-
-                self.changeHandler = function (page, event) {
-                    if (event.option === 'selection') {
-                        if (event.value[0]) {
-                            var emp = {};
-                            emp.empId = event.value[0];
-                            self.loadPersonPage(emp);
-                        }
-                    }
-                };
-
+                
                 self.addToCart = function (product) {
+                    // TODO: Add product to cart
                     console.log("Add product id " + product.productId + " to cart");
+                    self.addedProductPhoto(self.getPhoto(product.productId));
+                    self.addedProductName(product.prdName);
+
+                    $("#addToCartConfirmationDialog").ojDialog("open");
                 };
 
+                self.navigateToProductSearch = function () {
+                    console.log("continue shopping");
+                    $("#addToCartConfirmationDialog").ojDialog("close");
+                    return self.router.go("productSearch");
+                };
 
+                self.navigateToCart = function () {
+                    return self.router.go("cart");
+                };
             }
 
             /*

@@ -22,17 +22,18 @@
  * THE SOFTWARE.
  */
 /*
- * Your about ViewModel code goes here
+ * Your customer ViewModel code goes here
  */
 define(['ojs/ojcore', 'knockout', 'jquery'],
         function (oj, ko, $) {
 
-            function WelcomeViewModel() {
+            function OrdersViewModel() {
                 var self = this;
 
-                self.applicationVersion = ko.observable("1.0");
-                self.userLogin = ko.observable();
 
+                self.router = oj.Router.rootInstance;
+                
+                
                 // Below are a subset of the ViewModel methods invoked by the ojModule binding
                 // Please reference the ojModule jsDoc for additionaly available methods.
 
@@ -48,20 +49,9 @@ define(['ojs/ojcore', 'knockout', 'jquery'],
                  * the promise is resolved
                  */
                 self.handleActivated = function (info) {
-                    // Implement if needed
-                    // initialize session storage
-
-
-                    if (sessionStorage.authenticated === "true")
+                    if (sessionStorage.authenticated === "false")
                     {
-                        return self.router.go('dashboard');
-                    } else {
-                        sessionStorage.userFullName = "";
-                        sessionStorage.firstName = "";
-                        sessionStorage.lastName = "";
-                        sessionStorage.userUid = "";
-                        sessionStorage.groups = [];
-                        sessionStorage.authenticated = false;
+                        return self.router.go('welcome');
                     }
                 };
 
@@ -102,21 +92,6 @@ define(['ojs/ojcore', 'knockout', 'jquery'],
                 self.handleDetached = function (info) {
                     // Implement if needed
                 };
-
-                self.router = oj.Router.rootInstance;
-
-                self.onClickLoadLogin = function (data, event) {
-                    console.log("login button clicked");
-                    return self.router.go('login');
-                };
-
-                self.onClickLoadRegistration = function (data, event) {
-                    console.log("registration button clicked");
-                    // Clear out old session data
-                    sessionStorage.registration = "";
-                    
-                    return self.router.go('registration');
-                };
             }
 
             /*
@@ -124,6 +99,6 @@ define(['ojs/ojcore', 'knockout', 'jquery'],
              * each time the view is displayed.  Return an instance of the ViewModel if
              * only one instance of the ViewModel is needed.
              */
-            return new WelcomeViewModel();
+            return new OrdersViewModel();
         }
 );

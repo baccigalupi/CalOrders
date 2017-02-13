@@ -24,15 +24,18 @@
 /*
  * Your about ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery'],
-        function (oj, ko, $) {
+define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojpagingcontrol', 'ojs/ojpagingcontrol-model'],
+        function (oj, ko, data) {
 
-            function WelcomeViewModel() {
+            function ProductDetailViewModel() {
                 var self = this;
-
-                self.applicationVersion = ko.observable("1.0");
-                self.userLogin = ko.observable();
-
+                self.router = oj.Router.rootInstance;
+                
+                // Get product id from the search page
+                self.productId = ko.observable(self.router.retrieve());
+                
+                
+                
                 // Below are a subset of the ViewModel methods invoked by the ojModule binding
                 // Please reference the ojModule jsDoc for additionaly available methods.
 
@@ -49,20 +52,6 @@ define(['ojs/ojcore', 'knockout', 'jquery'],
                  */
                 self.handleActivated = function (info) {
                     // Implement if needed
-                    // initialize session storage
-
-
-                    if (sessionStorage.authenticated === "true")
-                    {
-                        return self.router.go('dashboard');
-                    } else {
-                        sessionStorage.userFullName = "";
-                        sessionStorage.firstName = "";
-                        sessionStorage.lastName = "";
-                        sessionStorage.userUid = "";
-                        sessionStorage.groups = [];
-                        sessionStorage.authenticated = false;
-                    }
                 };
 
                 /**
@@ -102,21 +91,6 @@ define(['ojs/ojcore', 'knockout', 'jquery'],
                 self.handleDetached = function (info) {
                     // Implement if needed
                 };
-
-                self.router = oj.Router.rootInstance;
-
-                self.onClickLoadLogin = function (data, event) {
-                    console.log("login button clicked");
-                    return self.router.go('login');
-                };
-
-                self.onClickLoadRegistration = function (data, event) {
-                    console.log("registration button clicked");
-                    // Clear out old session data
-                    sessionStorage.registration = "";
-                    
-                    return self.router.go('registration');
-                };
             }
 
             /*
@@ -124,6 +98,6 @@ define(['ojs/ojcore', 'knockout', 'jquery'],
              * each time the view is displayed.  Return an instance of the ViewModel if
              * only one instance of the ViewModel is needed.
              */
-            return new WelcomeViewModel();
+            return ProductDetailViewModel;
         }
 );

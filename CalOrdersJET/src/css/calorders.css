@@ -77,4 +77,21 @@
     
 }
 
+.dialogButtonLeft {
+    float: left;
+    padding-left: 15px;
+    padding-bottom: 10px;
+}
+
+.dialogButtonRight {
+    float: right;
+    padding-right: 15px;
+    padding-bottom: 10px;
+}
+
+.confirmation-product-name {
+    font-style:  italic;
+    font-weight: bold;
+}
+
 

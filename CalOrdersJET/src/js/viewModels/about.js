@@ -27,11 +27,11 @@
 define(['ojs/ojcore', 'knockout', 'jquery'],
         function (oj, ko, $) {
 
-            function WelcomeViewModel() {
+            function AboutViewModel() {
                 var self = this;
 
                 self.applicationVersion = ko.observable("1.0");
-                self.userLogin = ko.observable();
+  
 
                 // Below are a subset of the ViewModel methods invoked by the ojModule binding
                 // Please reference the ojModule jsDoc for additionaly available methods.
@@ -49,20 +49,6 @@ define(['ojs/ojcore', 'knockout', 'jquery'],
                  */
                 self.handleActivated = function (info) {
                     // Implement if needed
-                    // initialize session storage
-
-
-                    if (sessionStorage.authenticated === "true")
-                    {
-                        return self.router.go('dashboard');
-                    } else {
-                        sessionStorage.userFullName = "";
-                        sessionStorage.firstName = "";
-                        sessionStorage.lastName = "";
-                        sessionStorage.userUid = "";
-                        sessionStorage.groups = [];
-                        sessionStorage.authenticated = false;
-                    }
                 };
 
                 /**
@@ -103,27 +89,20 @@ define(['ojs/ojcore', 'knockout', 'jquery'],
                     // Implement if needed
                 };
 
-                self.router = oj.Router.rootInstance;
 
-                self.onClickLoadLogin = function (data, event) {
-                    console.log("login button clicked");
-                    return self.router.go('login');
-                };
+ 
 
-                self.onClickLoadRegistration = function (data, event) {
-                    console.log("registration button clicked");
-                    // Clear out old session data
-                    sessionStorage.registration = "";
-                    
-                    return self.router.go('registration');
-                };
             }
+
+ 
 
             /*
              * Returns a constructor for the ViewModel so that the ViewModel is constrcuted
              * each time the view is displayed.  Return an instance of the ViewModel if
              * only one instance of the ViewModel is needed.
              */
-            return new WelcomeViewModel();
+            return new AboutViewModel();
         }
+
+
 );
