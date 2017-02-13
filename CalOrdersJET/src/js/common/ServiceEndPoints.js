@@ -73,7 +73,16 @@ ServiceEndPoints.prototype = {
         } else if (key === "createOrder")
         {
             return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.order1/create"; 
-        } else
+        } else if (key === "findAllVendors")
+        {
+            return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.vendor"; 
+        }else if (key === "findAllCategories")
+        {
+            return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.prdcategorycd"; 
+        }else if (key === "findAllRelatedServices")
+        {
+            return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.prdrelservice"; 
+        }else
         {
             return "UNDEFINED";
         }
