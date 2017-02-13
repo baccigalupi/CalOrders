@@ -108,7 +108,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
 
                 self.searchProducts = function (productType) {
                     console.log("Search products by " + productType);
-                    
+
                     // Remove previous search results
                     self.allProduct([]);
 
@@ -140,7 +140,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                 };
 
                 self.filteredAllProduct = ko.computed(function () {
-                    
+
                     var productFilter = new Array();
 
                     if (self.allProduct().length !== 0) {
@@ -151,8 +151,6 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                             ko.utils.arrayFilter(self.allProduct(),
                                     function (r) {
                                         var token = self.nameSearch().toLowerCase();
-
-                                        r.prdName.toLowerCase().indexOf(token)
 
                                         if (r.prdName.toLowerCase().indexOf(token) >= 0) {
                                             productFilter.push(r);
@@ -176,17 +174,36 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                 // Perform default product search
                 self.searchProducts('DESK');
 
+                self.getPhoto = function (product) {
+                    var file = product.prdImgImage;
+                    var imageSize = product.prdImgImage.length;
+                    var imageType = product.prdCategoryCd.longDesc;
 
-                self.getPhoto = function (productId) {
-                    console.log("Image for product " + productId);
-                    var src = 'css/images/desktop.png';
+                    var reader = new FileReader();
 
-                    if (productId < 1000)
-                    {
-                        src = 'css/images/laptop.png';
+                    var data = window.atob(file);
+                    var arr = new Uint8Array(data.length);
+                    for (var i = 0; i < data.length; i++) {
+                        arr[i] = data.charCodeAt(i);
                     }
 
-                    return src;
+                    var blob = new Blob([arr.buffer], {size: imageSize, type: imageType});
+
+                    reader.addEventListener("load", function (event) {
+                        var preview = document.getElementById('productImage' + product.prdUid);
+                        preview.src = reader.result;
+                    }, false);
+
+                    if (blob) {
+
+                        try {
+                            reader.readAsDataURL(blob);
+                            
+                        } catch (err)
+                        {
+                            console.log(err);
+                        }
+                    } 
                 };
 
                 self.cardLayoutHandler = function () {
@@ -212,12 +229,13 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                     }
                     return true;
                 };
-                
+
                 self.addToCart = function (product) {
                     // TODO: Add product to cart
-                    console.log("Add product id " + product.productId + " to cart");
-                    self.addedProductPhoto(self.getPhoto(product.productId));
+                    console.log("Add product id " + product.prdUid + " to cart");
+                    
                     self.addedProductName(product.prdName);
+                    self.addedProductPhoto($("#productImage" + product.prdUid).attr("src"));
 
                     $("#addToCartConfirmationDialog").ojDialog("open");
                 };
@@ -233,11 +251,11 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                 };
             }
 
-            /*
-             * Returns a constructor for the ViewModel so that the ViewModel is constrcuted
-             * each time the view is displayed.  Return an instance of the ViewModel if
-             * only one instance of the ViewModel is needed.
-             */
-            return new ProductSearchViewModel();
-        }
+    /*
+     * Returns a constructor for the ViewModel so that the ViewModel is constrcuted
+     * each time the view is displayed.  Return an instance of the ViewModel if
+     * only one instance of the ViewModel is needed.
+     */
+    return new ProductSearchViewModel();
+}
 );
