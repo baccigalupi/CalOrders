@@ -1,0 +1,150 @@
+<!--
+  The OnCore Consulting LLC License
+ 
+  Copyright 2016 OnCore Consulting LLC, All Rights Reserved.
+ 
+  Permission IS NOT GRANTED to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, unless the following conditions are met:
+ 
+  Written permission is obtained from  
+  OnCore Consulting LLC and the above copyright 
+  notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+ 
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+  THE SOFTWARE.
+ -->
+<div class="oj-hybrid-padding">
+    <h3>Tempus Dashboard</h3>
+    <div id="dashboardContainer" class="oj-panel oj-flex">
+
+
+        <!-- LEFT UPPER QUADRAANT -->
+        <div id="innerLeftContainer" class="oj-panel oj-flex-item">
+
+            <h3>My Profile</h3>
+
+            <div id="profilePicturePanel" class="oj-panel oj-flex-item">
+                <img alt="employeePicture" src="../css/images/rickybobby.jpg" height="130" width="95"/>
+            </div>
+
+            <div id="profileDataPanel" class="oj-panel oj-flex-item">
+                <!--                    <table>
+                                        <tr>
+                                            <td><span><label for="nameTxt" class="oj-label">Name:</label></span></td>
+                                            <td><input id="nameTxt" value="Royce Owens" readonly="true" class="oj-inputtext" style="border: none;"/></td>
+                                        </tr>
+                                    </table>-->
+
+
+
+                <table id="profileTable" summary="Employee Profile" aria-label="Employee Profile Table"
+                       data-bind="ojComponent: {component: 'ojTable', 
+                                data: datasource, 
+                                columnsDefault: {sortable: 'none'}, 
+                                columns: [{headerText: 'Property', 
+                                           field: 'Key'},
+                                          {headerText: 'Value', 
+                                           field: 'Value'}]}">
+                </table>
+            </div>
+
+
+        </div>
+
+
+
+        <!-- UPPER RIGHT QUADRANT -->
+        <div id="innerRightContainer" class="oj-panel oj-flex-item">
+
+            <h3>My Time</h3>
+            <div id='chart-container'>
+                <div id="lineChart" data-bind="ojComponent: {
+        component: 'ojChart', 
+        type: 'line',
+        series: timeSeriesValue, 
+        groups: timeGroupsValue, 
+        animationOnDisplay: 'auto',
+        animationOnDataChange: 'auto',
+        orientation: orientationValue,
+        hoverBehavior: 'dim'
+        }"
+                     style="max-width:500px;width:100%;height:350px;">
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+    <div id="dashboardLowerContainer" class="oj-panel oj-flex">
+
+
+        <!-- LEFT BOTTOM QUADRAANT -->
+        <div id="innerLeftBottomContainer" class="oj-panel oj-flex-item">
+
+            <h3>My Expenses</h3>
+
+            <div id='innerLeftBottomchart-container'>
+                <div id="expensesChart" data-bind="ojComponent: {
+        component: 'ojChart', 
+        type: 'line',
+        series: expenseSeriesValue, 
+        groups: expenseGroupsValue, 
+        animationOnDisplay: 'auto',
+        animationOnDataChange: 'auto',
+        orientation: orientationValue,
+        hoverBehavior: 'dim'
+        }"
+                     style="max-width:500px;width:100%;height:350px;">
+                </div>
+     
+            </div>
+
+
+
+        </div>
+
+
+
+        <!-- LOWER RIGHT QUADRANT -->
+        <div id="innerBottomRightContainer" class="oj-panel oj-flex-item">
+
+            <h3>My PTO</h3>
+
+            <div id='innerRightBottomchart-container'>
+                <div id="ptoChart" data-bind="ojComponent: {
+        component: 'ojChart', 
+        type: 'line',
+        series: ptoSeriesValue, 
+        groups: ptoGroupsValue, 
+        animationOnDisplay: 'auto',
+        animationOnDataChange: 'auto',
+        orientation: orientationValue,
+        hoverBehavior: 'dim'
+        }"
+                     style="max-width:500px;width:100%;height:350px;">
+                </div>
+                
+            </div>
+
+        </div>
+
+    </div>
+</div>
