@@ -27,11 +27,11 @@
 define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojpagingcontrol', 'ojs/ojpagingcontrol-model'],
         function (oj, ko, data) {
 
-            function CartViewModel() {
+            function OrderConfirmationViewModel() {
                 var self = this;
 
                 self.router = oj.Router.rootInstance;
-
+                
                 // Below are a subset of the ViewModel methods invoked by the ojModule binding
                 // Please reference the ojModule jsDoc for additionaly available methods.
 
@@ -91,17 +91,15 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                 self.itemOnly = function (context) {
                     return context['leaf'];
                 };
-
-                self.searchProductsFromMenu = function (context) {
-                    console.log("searchProductsFromMenu " + context['id']);
-                };
-
+                
+              
+                
                 self.searchProducts = function (productType) {
                     var filename = 'js/data/products_desktops.json';
-
+                    
                     console.log("Search " + productType + " products");
 
-                    if (productType === 'laptops') {
+                    if ( productType === 'laptops') {
                         filename = 'js/data/products_laptops.json'
                     }
 
@@ -125,7 +123,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                         model: self.model
                     });
                 };
-
+                
                 self.selectedItem = ko.observable('home');
 
                 self.peopleLayoutType = ko.observable('peopleCardLayout');
@@ -172,8 +170,8 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                 self.getPhoto = function (productId) {
                     console.log("Image for product " + productId);
                     var src = 'css/images/desktop.png';
-
-                    if (productId < 1000)
+                    
+                    if ( productId < 1000)
                     {
                         src = 'css/images/laptop.png';
                     }
@@ -192,9 +190,9 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                 self.getChat = function (emp) {
                     return "#";
                 };
-
+                
                 self.getItemTotalPrice = function () {
-
+                    
                     return "$1000.00";
                 };
 
@@ -209,6 +207,20 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                 self.getOrg = function (org, event) {
                     alert('This will take you to the employee page and highlight the team infotile');
                 };
+                
+                self.getAddressLine1 = function(){
+                    return "101 St";
+                };
+                
+                self.getAddressLine2 = function(){
+                    return "Suite 100";
+                };
+                
+                self.getCityStateZip = function(){
+                    return "Folsom, CA 95630";
+                };
+                
+                self
 
                 self.getTenure = function (emp) {
                     var now = new Date().getFullYear();
@@ -235,7 +247,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                         oj.Router.rootInstance.go('person');
                     }
                 };
-
+                
                 /*
                  * Places the Order.
                  * 
@@ -244,43 +256,12 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                  */
                 self.placeOrderClick = function (trackerObj)
                 {
-                    // TODO: Replace with cart items from session
-                    var order = {createUserId: "Create1", updateUserId: "Update1",
-                        orderStatusCd: "SUBT",
-                        partyUid: 1,
-                        products: [{prdUid: 6, quantity: 3}, {prdUid: 10, quantity: 1}],
-                        services: [{prsUid: 1, quantity: 5}, {prsUid: 2, quantity: 6}]};
-
-                    // build our REST URL
-                    var serviceEndPoints = new ServiceEndPoints();
-                    var serviceURL = serviceEndPoints.getEndPoint('createOrder');
-
-
-                    var OrderService = oj.Model.extend({
-                        urlRoot: serviceURL
-                    });
-
-                    var orderService = new OrderService();
-
-
-                    // execute REST createOrder operation
-                    orderService.save(
-                            order,
-                            {
-                                success: function (myModel, response, options) {
-                                    return self.router.go('orderConfirmation');
-                                },
-                                error: function (jqXHR, textStatus, errorThrown) {
-
-                                    console.log("Unable to create the order: " + errorThrown);
-                                }
-                            });
-
+                    return true;
                 };
-
-                self.continueShoppingClick = function (data, event)
+                
+                self.continueShoppingClick = function(data, event)
                 {
-                    return self.router.go("productSearch");
+                       return self.router.go("productSearch");
                 };
 
                 self.onEnter = function (data, event) {
@@ -314,6 +295,6 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
              * each time the view is displayed.  Return an instance of the ViewModel if
              * only one instance of the ViewModel is needed.
              */
-            return new CartViewModel();
+            return new OrderConfirmationViewModel();
         }
 );

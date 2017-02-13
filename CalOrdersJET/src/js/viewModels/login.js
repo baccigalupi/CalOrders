@@ -43,7 +43,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'ojs/ojarray
 
                 self.username = ko.observable();
                 self.password = ko.observable('PASSWORD');
-              
+
                 self.doShowErrorMessage = ko.observable(false);
                 self.router = oj.Router.rootInstance;
                 self.isSuccess = false;
@@ -54,7 +54,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'ojs/ojarray
 
 
 
- 
+
 
 
 
@@ -138,7 +138,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'ojs/ojarray
 
 
 
- 
+
 
                 self.onClickLoadRegistration = function (data, event) {
 
@@ -209,6 +209,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'ojs/ojarray
                             sessionStorage.partyUid = party.attributes.ptyUid;
                             sessionStorage.vendorUid = party.attributes.vndUid;
                             sessionStorage.vendorName = party.attributes.vndName;
+                            sessionStorage.cartProducts = [];
 
                             var temp = null;
 
@@ -237,8 +238,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'ojs/ojarray
                                 group.grpUid = temp.grpUid;
                                 group.grpTypeCd = temp.grpTypeCd;
                                 group.grpTypeCdDescription = temp.grpTypeCdDescription;
-                                
-                                if('EMP' === group.grpTypeCd)
+
+                                if ('EMP' === group.grpTypeCd)
                                 {
                                     isUser = true;
                                 }
@@ -267,11 +268,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'ojs/ojarray
                             SecurityUtils.getNavBarItems(navBarDataSource);
                             SecurityUtils.getNavMenuItems(navMenuDataSource);
 
-                            if(isUser)
+                            if (isUser)
                             {
                                 return self.router.go('productSearch');
-                            }
-                            else
+                            } else
                             {
                                 return self.router.go('dashboard');
                             }
@@ -303,11 +303,20 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'ojs/ojarray
                  */
                 self.showComponentValidationErrors = function (trackerObj)
                 {
-                    trackerObj.showMessages();
-                    if (trackerObj.focusOnFirstInvalid())
-                        return false;
+                    var result = true;
+                    try {
+                        trackerObj.showMessages();
+                        if (trackerObj.focusOnFirstInvalid())
+                        {
+                            result = false;
+                        }
 
-                    return true;
+                    } catch (err)
+                    {
+                        result = false;
+                    }
+
+                    return result;
                 };
 
                 /**
