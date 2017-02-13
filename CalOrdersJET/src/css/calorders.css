@@ -94,4 +94,18 @@
     font-weight: bold;
 }
 
+.confirmation_bold{
+    font-weight: bold;
+}
+
+.confirmation_bold_label{
+    float: left; 
+    margin-right: 0.6em; 
+    font-weight: bold;
+}
+
+.confirmation_float_right{
+    float: right;
+}
+
 
