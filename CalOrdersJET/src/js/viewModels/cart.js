@@ -244,7 +244,45 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                  */
                 self.placeOrderClick = function (trackerObj)
                 {
-                    return true;
+                    // TODO: Replace with cart items from session
+                    var order = {createUserId: "Create1", updateUserId: "Update1", 
+                            orderStatusCd: "SUBT",
+                            partyUid: 1,
+                       products: [{prdUid: 6, quantity: 3}, {prdUid: 10, quantity: 1}],
+                       services: [{prsUid: 1, quantity: 5}, {prsUid: 2, quantity: 6}]};
+                       
+                    // build our REST URL
+                    var serviceEndPoints = new ServiceEndPoints();
+                    var serviceURL = serviceEndPoints.getEndPoint('createOrder');
+
+
+                    var OrderService = oj.Model.extend({
+                        urlRoot: serviceURL
+                    });
+
+                    var orderService = new OrderService();
+
+
+                    // execute REST createOrder operation
+                    orderService.save(
+                           order,
+                            {
+                                success: function (myModel, response, options) {
+                                    
+                                    // TODO: Go to confirmation page
+//                                    return self.router.go("orderConfirmation");
+
+                                    console.log("Order created successfully!!");
+
+                                    return false;
+
+                                },
+                                error: function (jqXHR, textStatus, errorThrown) {
+
+                                    console.log("Unable to create the order: " + errorThrown);
+                                }
+                            });
+
                 };
                 
                 self.continueShoppingClick = function(data, event)
