@@ -55,6 +55,7 @@ define(['ojs/ojcore', 'knockout', 'common/SecurityUtils', 'ojs/ojknockout-model'
                     'orderConfirmation': {label: 'Order Confirmation'},
                     'orderHistory': {label: 'Order History'},
                     'orderDetail': {label: 'Order Detail'},
+                    'orderConfirmation': {label: 'Order Confirmation'},
                     'about': {label: 'About'}
                 });
                 oj.Router.defaults['urlAdapter'] = new oj.Router.urlParamAdapter();
