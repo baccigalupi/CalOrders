@@ -70,6 +70,9 @@ ServiceEndPoints.prototype = {
         } else if (key === "findActiveProductsByProductType")
         {
             return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.product/findActiveProductsByProductType";
+        } else if (key === "createOrder")
+        {
+            return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.order1/create"; 
         } else
         {
             return "UNDEFINED";
