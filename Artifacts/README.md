@@ -28,8 +28,7 @@ DevOps Engineer | [Suganya Ravikumar](https://github.com/OncoreLLC/CalOrders/wik
 ##User Centric Design - Understanding what people need  
 ![Agile and UCD Processes](https://github.com/OncoreLLC/CalOrders/blob/master/Artifacts/images/agile/UCD%20and%20Agile%20Process%20Flow.jpg)
 
-
-###[User Centric Design Detail View](https://github.com/OncoreLLC/CalOrders/wiki/Develop-a-Plan)  
+![User Centric Design Detail View](https://github.com/OncoreLLC/CalOrders/wiki/Develop-a-Plan)  
 
 Plan | Analyze| Design | Implement | Test & Measure  
 --- | --- | --- | --- | ----
