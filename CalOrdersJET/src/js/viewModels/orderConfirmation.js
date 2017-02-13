@@ -27,7 +27,7 @@
 define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojpagingcontrol', 'ojs/ojpagingcontrol-model'],
         function (oj, ko, data) {
 
-            function CartViewModel() {
+            function OrderConfirmationViewModel() {
                 var self = this;
 
                 self.router = oj.Router.rootInstance;
@@ -92,9 +92,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                     return context['leaf'];
                 };
                 
-                self.searchProductsFromMenu = function (context) {
-                    console.log("searchProductsFromMenu " + context['id']);
-                };
+              
                 
                 self.searchProducts = function (productType) {
                     var filename = 'js/data/products_desktops.json';
@@ -209,6 +207,20 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                 self.getOrg = function (org, event) {
                     alert('This will take you to the employee page and highlight the team infotile');
                 };
+                
+                self.getAddressLine1 = function(){
+                    return "101 St";
+                };
+                
+                self.getAddressLine2 = function(){
+                    return "Suite 100";
+                };
+                
+                self.getCityStateZip = function(){
+                    return "Folsom, CA 95630";
+                };
+                
+                self
 
                 self.getTenure = function (emp) {
                     var now = new Date().getFullYear();
@@ -244,7 +256,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                  */
                 self.placeOrderClick = function (trackerObj)
                 {
-                    return self.router.go('orderConfirmation');
+                    return true;
                 };
                 
                 self.continueShoppingClick = function(data, event)
@@ -283,6 +295,6 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
              * each time the view is displayed.  Return an instance of the ViewModel if
              * only one instance of the ViewModel is needed.
              */
-            return new CartViewModel();
+            return new OrderConfirmationViewModel();
         }
 );
