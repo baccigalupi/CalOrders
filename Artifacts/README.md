@@ -69,7 +69,7 @@ We used the following components of UCD to capture what users wanted.  Combined 
 ## Through the continuous usability testing, we were able to track the needs of the user, and adjusted as they saw the product evolve from sprint to sprint.
 
 
-###[User Centric Design Detail View](https://github.com/OncoreLLC/CalOrders/wiki/CalOrders-User-Centric-Design)  
+###[User Centric Design Detail View](https://github.com/OncoreLLC/CalOrders/wiki/Develop-a-Plan)  
 
 Plan | Analyze| Design | Implement | Test & Measure  
 --- | --- | --- | --- | ----
