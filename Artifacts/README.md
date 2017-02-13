@@ -25,9 +25,9 @@ Backend Web Developer | [Janice Wiley](https://github.com/OncoreLLC/CalOrders/wi
 Backend Web Developer | [Won Lee](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Team-Bios)  
 DevOps Engineer | [Suganya Ravikumar](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Team-Bios)  
 
+##User Centric Design - Understanding what people need  
 ![Agile and UCD Processes](https://github.com/OncoreLLC/CalOrders/blob/master/Artifacts/images/agile/UCD%20and%20Agile%20Process%20Flow.jpg)
 
-##User Centric Design - Understanding what people need  
 Oncore utilized User-Centered-Design (UCD) techniques to formulate the product backlog.  All team members were part of the initial meetins with the users, this was natural hook to our Agile methodolgy and gave everyoe owns the problem.   Below summarizes how we incorporated the “Analyze, Design/Implement, Test and Refine” UCD practices in the development of CalOrders. _(2d)_  
 
 We worked Naga and Cindy from the Department of General Services, and Department of Technolgy respectively.  Both are seasoned adminstrators of the procurement process.  We focused on understanding the business functions that they did most frequently, and also listened to them describe how they did their work in their existing systems.  Walking through a day in life scenarios of both the end users and the administrators provided us the detail the team needed to build and prioritize the features for the new system allowed us to all agree on the outcome, and define our roadmap to get to deliver.
