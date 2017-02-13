@@ -28,11 +28,11 @@
         <h2 style="margin-bottom:0">Products</h2>
     </div>
 
-    <!-- Page Content -->
-    <div class="oj-panel oj-flex oj-sm-flex-wrap-nowrap">
+    <!-- Page Content oj-md-flex-wrap-nowrap -->
+    <div class="oj-panel oj-flex">
 
         <!-- Product Left Hand Navigation Panel -->
-        <div id="productSearchNavigationPanel" class="oj-panel oj-sm-2 oj-flex-item" style="min-width: 150px">
+        <div id="productSearchNavigationPanel" class="oj-panel oj-sm-2 oj-flex-item oj-sm-only-hide" style="min-width: 150px">
             <div id="navlistcontainer" style="max-width:300px" >
                 <div data-bind="ojComponent:{
                         component: 'ojNavigationList',
@@ -43,19 +43,19 @@
                         <li id="hardware" >
                             <a href="#" >Hardware</a>
                             <ul >
-                                <li id="desktops">
+                                <li id="DESK">
                                     <a href="#" data-bind="click: function() {searchProducts('DESK')}">Desktops</a>
                                 </li>
-                                <li id="laptops">
+                                <li id="LAPT">
                                     <a href="#" data-bind="click: function() {searchProducts('LAPT')}">Laptops</a>
                                 </li>
-                                <li id="monitors">
+                                <li id="MONT">
                                     <a href="#" data-bind="click: function() {searchProducts('MONT')}" >Monitors</a>
                                 </li>
-                                <li id="printers">
+                                <li id="PRNT">
                                     <a href="#" data-bind="click: function() {searchProducts('PRNT')}" >Printers</a>
                                 </li>
-                                <li id="projectors">
+                                <li id="PERI">
                                     <a href="#" data-bind="click: function() {searchProducts('PERI')}" >Peripherals</a>
                                 </li>
                             </ul>
@@ -63,16 +63,16 @@
                         <li id="software">
                             <a href="#" >Software</a>
                             <ul >
-                                <li id="operatingSystems">
+                                <li id="OPSY">
                                     <a href="#" data-bind="click: function() {searchProducts('OPSY')}" >OS</a>
                                 </li>
-                                <li id="office">
-                                    <a href="#" data-bind="click: function() {searchProducts('OFFC')}" > Office</a>
+                                <li id="OFFC">
+                                    <a href="#" data-bind="click: function() {searchProducts('OFFC')}" >Office</a>
                                 </li>
-                                <li id="antivirus">
-                                    <a href="#" data-bind="click: function() {searchProducts('SECC')}" > Security</a>
+                                <li id="SECC">
+                                    <a href="#" data-bind="click: function() {searchProducts('SECC')}" >Security</a>
                                 </li>
-                                <li id="utilities">
+                                <li id="UTIL">
                                     <a href="#" data-bind="click: function() {searchProducts('UTIL')}" >Utilities</a>
                                 </li>
                             </ul>
@@ -83,28 +83,70 @@
         </div>
 
         <!-- Product Search Results Panel -->
-        <div id="productSearchWrapperDiv" class="oj-panel oj-flex-item oj-sm-flex-wrap-nowrap">
+        <div id="productSearchWrapperDiv" class="oj-panel oj-flex-item">
             <div class="justifyCenter">
                 <div class="oj-flex oj-flex-items-pad">
                     <div class="oj-flex-item oj-sm-12" style="padding-bottom: 10px">
-                        <div class="oj-flex oj-flex-items-pad oj-sm-align-items-flex-end">
+
+
+
+                        <div class="oj-flex oj-flex-items oj-sm-align-items-flex-end oj-md-hide ">
+                            <label for="productSelect">Product Category: </label>
+                        </div>
+                        <div class="oj-flex oj-flex-items oj-sm-align-items-flex-end oj-md-hide ">
+                            <select id="productSelect" data-bind="ojComponent: {component: 'ojSelect',
+                                    optionChange: productSelectChange,
+                                                  option: selectedProductMenuItem,
+                                                  rootAttributes: {style:'max-width:20em'}}">
+                                <optgroup label="Hardware">
+                                    <option value="DESK" selected="selected">Desktops</option>
+                                    <option value="LAPT" >Laptops</option>
+                                    <option value="MONT" >Monitors</option>
+                                    <option value="PRNT" >Printers</option>
+                                    <option value="PERI" >Peripherals</option>
+                                </optgroup>
+                                <optgroup label="Software">
+                                    <option value="OPSY">OS</option>
+                                    <option value="OFFC">Office</option>
+                                    <option value="SECC">Security</option>
+                                    <option value="UTIL">Utilities</option>
+                                </optgroup>
+                                <optgroup label="Mountain Time Zone">
+                                    <option value="AZ">Arizona</option>
+                                    <option value="CO">Colorado</option>
+                                    <option value="ID">Idaho</option>
+                                    <option value="MT">Montana</option>
+                                    <option value="NE">Nebraska</option>
+                                    <option value="NM">New Mexico</option>
+                                    <option value="ND">North Dakota</option>
+                                    <option value="UT">Utah</option>
+                                    <option value="WY">Wyoming</option>
+                                </optgroup>
+                            </select>
+                        </div>
+
+
+
+
+
+                        <div class="oj-flex oj-flex-items oj-sm-align-items-flex-end">
 
                             <!-- Product search field -->
-                            <div class="oj-flex-item oj-sm-8  oj-flex oj-md-justify-content-center">
-                                <div class="oj-flex-item" style="max-width: 400px; white-space: nowrap">
+                            <div class="oj-flex-item oj-sm-8  oj-flex">
+                                <div class="oj-flex-item" style="max-width: 400px; white-space: nowrap;  float: left">
                                     <input aria-label="search box" placeholder="search" data-bind="value: nameSearch, valueUpdate: 'afterkeydown', ojComponent: {component: 'ojInputText', rootAttributes:{'style':'max-width:100%;'}}"/>
                                     <div id="searchIcon" class="demo-icon-sprite demo-icon-search demo-search-position"></div>
                                 </div>
                             </div>
 
                             <!-- Product Search Result type -->
-                            <div class="oj-flex-item oj-sm-2">
+                            <div class="oj-flex-item oj-sm-4">
                                 <div id="layoutSet" class="oj-buttonset-width-auto" aria-label="Choose layout type."  style="float: right" data-bind="ojComponent: {component: 'ojButtonset', checked: productLayoutType}">
                                     <label for="cardLayout"></label>
                                     <input id="cardLayout" type="radio" name="layoutGroup" value="productCardLayout"
                                            data-bind="click: cardLayoutHandler,  ojComponent: {
                                                 component:'ojButton',
-                                                display: 'all',
+                                                display: large() ? 'all' : 'icons',
                                                 icons: {start:'demo-grid-icon-16 demo-icon-font'},
                                                 label: 'Card'
                                                 }"/>
@@ -112,7 +154,7 @@
                                     <input id="listLayout" type="radio" name="layoutGroup" value="productListLayout"
                                            data-bind="click: listLayoutHandler,  ojComponent: {
                                                 component:'ojButton',
-                                                display: 'all',
+                                                display: large() ? 'all' : 'icons',
                                                 icons: {start:'demo-icon-font demo-list-icon-16'},
                                                 label: 'List'
                                                 }"/>
@@ -144,7 +186,7 @@
                 <div class="oj-flex-item">
                     <img alt="product image"  data-bind="attr: {src: addedProductPhoto}" height="100" width="100"/>
                 </div>
-                
+
                 <div class="oj-flex-item oj-sm-justify-content-center">
                     <span data-bind="text: 'Product '"></span>
                     <span class="confirmation-product-name" data-bind="text: addedProductName"></span>
