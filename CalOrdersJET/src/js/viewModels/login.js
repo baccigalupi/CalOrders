@@ -209,6 +209,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'ojs/ojarray
                             sessionStorage.partyUid = party.attributes.ptyUid;
                             sessionStorage.vendorUid = party.attributes.vndUid;
                             sessionStorage.vendorName = party.attributes.vndName;
+                            sessionStorage.cartProducts = [];
 
                             var temp = null;
 

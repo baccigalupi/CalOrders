@@ -240,12 +240,41 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                 };
 
                 self.addToCart = function (product) {
-                    // TODO: Add product to cart
-                    console.log("Add product id " + product.prdUid + " to cart");
+                    var cartProducts;
 
+                    // Get cart - if no cart yet then initialize
+                    if (sessionStorage.cartProducts !== undefined && sessionStorage.cartProducts !== "")
+                    {
+                        cartProducts = JSON.parse(sessionStorage.cartProducts);
+
+                    } else
+                    {
+                        cartProducts = [];
+                    }
+
+                    // If the product already exists in the cart, then just change the quantity
+                    var result = $.grep(cartProducts, function (item) {
+                        return item.prdUid === product.prdUid;
+                    });
+                    var cartProduct;
+
+                    if (result.length === 1)
+                    {
+                        cartProduct = result[0];
+                        cartProduct.quantity += 1;
+                    } else
+                    {
+                        cartProduct = product;
+                        cartProduct.quantity = 1;
+                        cartProducts.push(cartProduct);
+                    }
+
+                    // Save cart back into session
+                    sessionStorage.cartProducts = JSON.stringify(cartProducts);
+
+                    // Show confirmation message                    
                     self.addedProductName(product.prdName);
                     self.addedProductPhoto($("#productImage" + product.prdUid).attr("src"));
-
                     $("#addToCartConfirmationDialog").ojDialog("open");
                 };
 
