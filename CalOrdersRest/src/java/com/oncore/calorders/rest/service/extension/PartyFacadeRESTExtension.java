@@ -243,7 +243,7 @@ public class PartyFacadeRESTExtension extends PartyFacadeREST {
 
             Logger.debug(LOG, "Hey testing logging, the findAllPrivilegesByPartyId is being called!");
 
-            privilegeses = getEntityManager().createQuery("SELECT p FROM Privilege p join p.groupPrivilegeAssocCollection gp join gp.grpUidFk g join g.groupPartyAssocCollection ge join ge.ptyUidFk e WHERE e.pryUid = :partyId", Privilege.class).setParameter("partyId", partyId).getResultList();
+            privilegeses = getEntityManager().createQuery("SELECT p FROM Privilege p join p.groupPrivilegeAssocCollection gp join gp.grpUidFk g join g.groupPartyAssocCollection ge join ge.ptyUidFk e WHERE e.pryUid = :partyId ORDER BY p.prvOrder ASC", Privilege.class).setParameter("partyId", partyId).getResultList();
 
             if (privilegeses != null && privilegeses.size() > 0) {
                 privilegeDatas = new ArrayList<PrivilegeData>();
@@ -266,6 +266,7 @@ public class PartyFacadeRESTExtension extends PartyFacadeREST {
                     privilegeData.setComponentIdentifier(privs.getPrvComponentId());
                     privilegeData.setPageIdentifier(privs.getPrvPageId());
                     privilegeData.setPageDescription(privs.getPrvMisc());
+                    privilegeData.setPageOrder(privs.getPrvOrder());
                     if (!privilegeDatas.contains(privilegeData)) {
                         privilegeDatas.add(privilegeData);
                     }
@@ -300,7 +301,7 @@ public class PartyFacadeRESTExtension extends PartyFacadeREST {
 
             Logger.debug(LOG, "Hey testing logging, the findNavBarPrivilegesByPartyId is being called!");
 
-            privilegeses = getEntityManager().createQuery("SELECT p FROM Privilege p join p.groupPrivilegeAssocCollection gp join gp.grpUidFk g join g.groupPartyAssocCollection ge join ge.ptyUidFk e WHERE e.ptyUid = :partyId and p.prvComponentId = 'NAVBAR'", Privilege.class).setParameter("partyId", partyId).getResultList();
+            privilegeses = getEntityManager().createQuery("SELECT p FROM Privilege p join p.groupPrivilegeAssocCollection gp join gp.grpUidFk g join g.groupPartyAssocCollection ge join ge.ptyUidFk e WHERE e.ptyUid = :partyId and p.prvComponentId = 'NAVBAR'  ORDER BY p.prvOrder ASC", Privilege.class).setParameter("partyId", partyId).getResultList();
 
             if (privilegeses != null && privilegeses.size() > 0) {
                 privilegeDatas = new ArrayList<PrivilegeData>();
@@ -323,6 +324,7 @@ public class PartyFacadeRESTExtension extends PartyFacadeREST {
                     privilegeData.setComponentIdentifier(privs.getPrvComponentId());
                     privilegeData.setPageIdentifier(privs.getPrvPageId());
                     privilegeData.setPageDescription(privs.getPrvMisc());
+                    privilegeData.setPageOrder(privs.getPrvOrder());
                     if (!privilegeDatas.contains(privilegeData)) {
                         privilegeDatas.add(privilegeData);
                     }
@@ -357,7 +359,7 @@ public class PartyFacadeRESTExtension extends PartyFacadeREST {
  
             Logger.debug(LOG, "Hey testing logging, the findNavMenuPrivilegesByPartyId is being called!");
 
-            privilegeses = getEntityManager().createQuery("SELECT p FROM Privilege p join p.groupPrivilegeAssocCollection gp join gp.grpUidFk g join g.groupPartyAssocCollection ge join ge.ptyUidFk e WHERE e.ptyUid = :partyId and p.prvComponentId = 'NAVMENU'", Privilege.class).setParameter("partyId", partyId).getResultList();
+            privilegeses = getEntityManager().createQuery("SELECT p FROM Privilege p join p.groupPrivilegeAssocCollection gp join gp.grpUidFk g join g.groupPartyAssocCollection ge join ge.ptyUidFk e WHERE e.ptyUid = :partyId and p.prvComponentId = 'NAVMENU'  ORDER BY p.prvOrder ASC", Privilege.class).setParameter("partyId", partyId).getResultList();
 
             if (privilegeses != null && privilegeses.size() > 0) {
                 privilegeDatas = new ArrayList<PrivilegeData>();
@@ -380,6 +382,7 @@ public class PartyFacadeRESTExtension extends PartyFacadeREST {
                     privilegeData.setComponentIdentifier(privs.getPrvComponentId());
                     privilegeData.setPageIdentifier(privs.getPrvPageId());
                     privilegeData.setPageDescription(privs.getPrvMisc());
+                    privilegeData.setPageOrder(privs.getPrvOrder());
                     if (!privilegeDatas.contains(privilegeData)) {
                         privilegeDatas.add(privilegeData);
                     }
