@@ -67,6 +67,9 @@ ServiceEndPoints.prototype = {
         } else if (key === "findPartyByUserIdAndPassword")
         {
             return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.party/findPartyByUserIdAndPassword";
+        } else if (key === "createOrder")
+        {
+            return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.order1/create"; 
         } else
         {
             return "UNDEFINED";
