@@ -199,7 +199,7 @@
                 </div>
                 <div class="oj-flex-item">
                     <h3 aria-label="product description" data-bind="text: $data['prdName']" tabindex="0"></h3>
-                    <div data-bind="text: $data['prdPrice']"></div>
+                    <div data-bind="text: '$' + $data['prdPrice']"></div>
                 </div>
             </div>
 
@@ -240,7 +240,7 @@
                         <button id= "addToCart" data-bind="click: $parent.addToCart, ojComponent: { component: 'ojButton', label: 'Add to Cart'}"></button>
                     </div>
                     <div class="oj-flex-item oj-sm-only-hide oj-md-4 oj-md-float-end">
-                        <div class="demo-employee-tenure" data-bind="text: $data['prdPrice']"></div>
+                        <div class="demo-employee-tenure" data-bind="text: '$' + $data['prdPrice']"></div>
                     </div>
                 </div>
             </div>
