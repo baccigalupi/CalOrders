@@ -30,9 +30,9 @@
 
     <!-- Page Content -->
     <div class="oj-panel oj-flex oj-sm-flex-wrap-nowrap">
-        
+
         <!-- Product Left Hand Navigation Panel -->
-        <div id="productSearchNavigationPanel" class="oj-panel oj-sm-2 oj-flex-item">
+        <div id="productSearchNavigationPanel" class="oj-panel oj-sm-2 oj-flex-item" style="min-width: 150px">
             <div id="navlistcontainer" style="max-width:300px" >
                 <div data-bind="ojComponent:{
                         component: 'ojNavigationList',
@@ -44,19 +44,19 @@
                             <a href="#" >Hardware</a>
                             <ul >
                                 <li id="desktops">
-                                    <a href="#" data-bind="click: function() {searchProducts('desktops')}">Desktops</a>
+                                    <a href="#" data-bind="click: function() {searchProducts('DESK')}">Desktops</a>
                                 </li>
                                 <li id="laptops">
-                                    <a href="#" data-bind="click: function() {searchProducts('laptops')}">Laptops</a>
+                                    <a href="#" data-bind="click: function() {searchProducts('LAPT')}">Laptops</a>
                                 </li>
                                 <li id="monitors">
-                                    <a href="#" data-bind="click: function() {searchProducts('monitors')}" >Monitors</a>
+                                    <a href="#" data-bind="click: function() {searchProducts('MONT')}" >Monitors</a>
                                 </li>
                                 <li id="printers">
-                                    <a href="#" data-bind="click: function() {searchProducts('printers')}" >Printers</a>
+                                    <a href="#" data-bind="click: function() {searchProducts('PRNT')}" >Printers</a>
                                 </li>
                                 <li id="projectors">
-                                    <a href="#" data-bind="click: function() {searchProducts('projectors')}" >Projectors</a>
+                                    <a href="#" data-bind="click: function() {searchProducts('PERI')}" >Peripherals</a>
                                 </li>
                             </ul>
                         </li>
@@ -64,16 +64,16 @@
                             <a href="#" >Software</a>
                             <ul >
                                 <li id="operatingSystems">
-                                    <a href="#" data-bind="click: function() {searchProducts('os')}" >OS</a>
+                                    <a href="#" data-bind="click: function() {searchProducts('OPSY')}" >OS</a>
                                 </li>
                                 <li id="office">
-                                    <a href="#" data-bind="click: function() {searchProducts('office')}" > Office</a>
+                                    <a href="#" data-bind="click: function() {searchProducts('OFFC')}" > Office</a>
                                 </li>
                                 <li id="antivirus">
-                                    <a href="#" data-bind="click: function() {searchProducts('antivirus')}" > Antivirus</a>
+                                    <a href="#" data-bind="click: function() {searchProducts('SECC')}" > Security</a>
                                 </li>
                                 <li id="utilities">
-                                    <a href="#" data-bind="click: function() {searchProducts('utilities')}" >Utilities</a>
+                                    <a href="#" data-bind="click: function() {searchProducts('UTIL')}" >Utilities</a>
                                 </li>
                             </ul>
                         </li>
@@ -135,7 +135,7 @@
 
 <!-- start add cart dialog box -->
 <div id="addToCartConfirmationDialogWrapper">
-    <div style="display:none" id="addToCartConfirmationDialog" title="Product Added Successfully" 
+    <div style="display:none" id="addToCartConfirmationDialog" title="Add to Cart" 
          data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide'}">
 
         <div class="oj-dialog-body">
@@ -146,8 +146,9 @@
                 </div>
 
                 <div class="oj-flex-item oj-sm-justify-content-center">
-                    Added to cart
-
+                    <span data-bind="text: 'Product '"></span>
+                    <span class="confirmation-product-name" data-bind="text: addedProductName"></span>
+                    <span data-bind="text: ' has been added to your cart'"></span>
                 </div>
             </div>
         </div>
@@ -181,7 +182,7 @@
         </ul>
     </div>
     <div class="oj-flex oj-flex-items-pad">
-        <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', mode: 'loadMore', data: cardViewDataSource, pageSize: 12}">
+        <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: cardViewDataSource, pageSize: 2}">
         </div>
     </div>
 </script>
@@ -194,11 +195,11 @@
             <div data-bind="click: $parent.navigateToProductDetail">
 
                 <div class="oj-flex-item oj-sm-4">
-                    <img alt="product image"  data-bind="attr: {src: $parent.getPhoto($data['productId'])}" height="100" width="100"/>
+                    <img alt="product image"  data-bind="attr: {src: $parent.getPhoto($data['prdUid'])}" height="100" width="100"/>
                 </div>
                 <div class="oj-flex-item">
-                    <h3 aria-label="product description" data-bind="text: $data['description']" tabindex="0"></h3>
-                    <div data-bind="text: $data['price']"></div>
+                    <h3 aria-label="product description" data-bind="text: $data['prdName']" tabindex="0"></h3>
+                    <div data-bind="text: '$' + $data['prdPrice']"></div>
                 </div>
             </div>
 
@@ -214,35 +215,32 @@
 <!-- Product List view -->
 <script id="productListLayout" type="text/html">
     <ul id="listview"
-        data-bind="ojComponent: {
-                                component: 'ojListView',
-                                data: listViewDataSource,
-                                item: {template: 'productlist_template'},
-                                selectionMode: 'single',
-                                currentItem: '205',
-                                selection: ['205'],
-                                optionChange: changeHandler,
-                                rootAttributes: {style: 'width:100%;height:100vh;overflow:auto; margin-top: 5px'},
-                                scrollPolicy: 'loadMoreOnScroll',
-                                scrollPolicyOptions: {fetchSize: 10}}">
+        data-bind="ojComponent: {component: 'ojListView',
+                data: cardViewDataSource,
+                rootAttributes: {'style': 'width:100%'},
+            item: {template: 'productlist_template'}}">
     </ul>
+    <div class="oj-flex oj-flex-items-pad">
+        <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: cardViewDataSource, pageSize: 2}">
+        </div>
+    </div>
 </script>
 
 <!-- Product List view (row format) -->
 <script id="productlist_template" type="text/html">
-    <li class="oj-flex-item oj-sm-12" data-bind="click: $parent.navigateToProductDetail">
+    <li class="oj-flex-item oj-sm-12">
         <div>
             <div class="oj-flex oj-flex-items-pad">
-                <div class="oj-flex-item oj-lg-4 oj-md-4">
-                    <img alt="product image" class="demo-circular demo-employee-photo" style="float:left;" height="100" width="100" data-bind="attr: {src: $parent.getPhoto($data['productId'])}"/>
-                    <h2 class="demo-employee-name" data-bind="text: $data['description']"></h2>
+                <div class="oj-flex-item oj-lg-4 oj-md-4" data-bind="click: $parent.navigateToProductDetail">
+                    <img alt="product image" class="demo-circular demo-employee-photo" style="float:left;" height="100" width="100" data-bind="attr: {src: $parent.getPhoto($data['prdUid'])}"/>
+                    <h2 class="demo-employee-name" data-bind="text: $data['prdName']"></h2>
                 </div>
                 <div class="oj-flex-item oj-lg-5 oj-md-4">
                     <div class="oj-flex-item oj-sm-only-hide oj-md-4 oj-md-float-end">
                         <button id= "addToCart" data-bind="click: $parent.addToCart, ojComponent: { component: 'ojButton', label: 'Add to Cart'}"></button>
                     </div>
                     <div class="oj-flex-item oj-sm-only-hide oj-md-4 oj-md-float-end">
-                        <div class="demo-employee-tenure" data-bind="text: $data['price']"></div>
+                        <div class="demo-employee-tenure" data-bind="text: '$' + $data['prdPrice']"></div>
                     </div>
                 </div>
             </div>

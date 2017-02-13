@@ -42,8 +42,6 @@ import javax.ws.rs.core.MediaType;
  *
  * @author oncore
  */
-@Stateless
-@Path("com.oncore.calorders.rest.product")
 public class ProductFacadeREST extends AbstractFacade<Product> {
 
     @PersistenceContext(unitName = "CalOrdersRestPU")

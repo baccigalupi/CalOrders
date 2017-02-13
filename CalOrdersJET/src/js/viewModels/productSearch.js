@@ -29,15 +29,19 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
 
             function ProductSearchViewModel() {
                 var self = this;
+
+                var serviceEndPoints = new ServiceEndPoints();
+
                 self.router = oj.Router.rootInstance;
-                
+                self.findProductsByProductTypeService = serviceEndPoints.getEndPoint("findActiveProductsByProductType");
                 self.selectedProductMenuItem = ko.observable('desktops');
                 self.productLayoutType = ko.observable('productCardLayout');
                 self.allProduct = ko.observableArray([]);
                 self.ready = ko.observable(false);
                 self.nameSearch = ko.observable('');
                 self.addedProductPhoto = ko.observable();
-                
+                self.addedProductName = ko.observable();
+
                 // Below are a subset of the ViewModel methods invoked by the ojModule binding
                 // Please reference the ojModule jsDoc for additionaly available methods.
 
@@ -98,36 +102,45 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                     return context['leaf'];
                 };
 
+                self.parseProduct = function (response) {
+                    self.allProduct.push(response);
+                };
+
                 self.searchProducts = function (productType) {
-                    // TODO: Make REST call
-                    var filename = 'js/data/products_desktops.json';
+                    console.log("Search products by " + productType);
                     
-                    console.log("Search " + productType + " products");
+                    // Remove previous search results
+                    self.allProduct([]);
 
-                    if ( productType === 'laptops') {
-                        filename = 'js/data/products_laptops.json'
-                    }
+                    var ProductModel = oj.Model.extend({
+                        urlRoot: self.findProductsByProductTypeService + "/" + productType,
+                        parse: self.parseProduct,
+                        idAttribute: 'prdUid'
+                    });
+                    var product = new ProductModel();
 
-                    data.fetchData(filename).then(function (product) {
-                        self.allProduct(product.products);
-                    }).fail(function (error) {
-                        console.log('Error in getting Product data: ' + error.message);
+                    var ProductCollection = oj.Collection.extend({
+                        url: self.findProductsByProductTypeService + "/" + productType,
+                        model: product,
+                        comparator: 'prdUid'
                     });
 
-                    self.model = oj.Model.extend({
-                        idAttribute: 'productId'
-                    });
+                    self.collection = new ProductCollection();
 
-                    self.collection = new oj.Collection(null, {
-                        url: filename,
-                        model: self.model
+                    self.collection.fetch({
+                        success: function (myModel, response, options) {
+                            console.log("Search success");
+                            return false;
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.log("Search failed" + errorThrown);
+                            return false;
+                        }
                     });
                 };
-                
-                // Perform default product search
-                self.searchProducts('desktops');
 
                 self.filteredAllProduct = ko.computed(function () {
+                    
                     var productFilter = new Array();
 
                     if (self.allProduct().length !== 0) {
@@ -138,12 +151,10 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                             ko.utils.arrayFilter(self.allProduct(),
                                     function (r) {
                                         var token = self.nameSearch().toLowerCase();
-                                        
-                                        console.log("token:" + token + " desc: " + r.description.toLowerCase() + "index: " + r.description.toLowerCase().indexOf(token));
-                                        
-                                        r.description.toLowerCase().indexOf(token)
-                                        
-                                        if (r.description.toLowerCase().indexOf(token) >= 0) {
+
+                                        r.prdName.toLowerCase().indexOf(token)
+
+                                        if (r.prdName.toLowerCase().indexOf(token) >= 0) {
                                             productFilter.push(r);
                                         }
                                     });
@@ -155,25 +166,29 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                 });
 
                 self.listViewDataSource = ko.computed(function () {
-                    return new oj.ArrayTableDataSource(self.filteredAllProduct(), {idAttribute: 'productId'});
+                    return new oj.ArrayTableDataSource(self.filteredAllProduct(), {idAttribute: 'prdUid'});
                 });
 
                 self.cardViewDataSource = ko.computed(function () {
                     return new oj.PagingTableDataSource(self.listViewDataSource());
                 });
 
+                // Perform default product search
+                self.searchProducts('DESK');
+
+
                 self.getPhoto = function (productId) {
                     console.log("Image for product " + productId);
                     var src = 'css/images/desktop.png';
-                    
-                    if ( productId < 1000)
+
+                    if (productId < 1000)
                     {
                         src = 'css/images/laptop.png';
                     }
 
                     return src;
                 };
-                
+
                 self.cardLayoutHandler = function () {
                     self.productLayoutType('productCardLayout');
                 };
@@ -183,19 +198,10 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                 };
 
                 self.navigateToProductDetail = function (product) {
-                    console.log("navigating to product detail for " + product.productId);
+                    console.log("navigating to product detail for " + product.prdUid);
                     // Store product id parameter
-                    self.router.store(product.productId);
+                    self.router.store(product.prdUid);
                     return self.router.go("productDetail");
-//                    
-//                    if (emp.empId) {
-//                        // Temporary code until go('person/' + emp.empId); is checked in 1.1.2
-//                        history.pushState(null, '', 'index.html?root=person&emp=' + emp.empId);
-//                        oj.Router.sync();
-//                    } else {
-//                        // Default id for person is 100 so no need to specify.
-//                        oj.Router.rootInstance.go('person');
-//                    }
                 };
 
                 self.onEnter = function (data, event) {
@@ -206,22 +212,13 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                     }
                     return true;
                 };
-
-                self.changeHandler = function (page, event) {
-                    if (event.option === 'selection') {
-                        if (event.value[0]) {
-                            var emp = {};
-                            emp.empId = event.value[0];
-                            self.loadPersonPage(emp);
-                        }
-                    }
-                };
-
+                
                 self.addToCart = function (product) {
                     // TODO: Add product to cart
                     console.log("Add product id " + product.productId + " to cart");
                     self.addedProductPhoto(self.getPhoto(product.productId));
-                    
+                    self.addedProductName(product.prdName);
+
                     $("#addToCartConfirmationDialog").ojDialog("open");
                 };
 
@@ -234,7 +231,6 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                 self.navigateToCart = function () {
                     return self.router.go("cart");
                 };
-
             }
 
             /*
