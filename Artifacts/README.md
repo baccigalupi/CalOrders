@@ -45,7 +45,7 @@ Plan | Analyze| Design | Implement | Test & Measure
 
 ##Agile Prototype Development   
 
-Following [Oncore's Agile methodology](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Methodolgy), provided the team an iterative approach, where feedback informed subsequent work or versions of the prototype_(2j)_.   
+[Oncore's Agile methodology](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Methodolgy) provided the team an iterative approach, where feedback informed subsequent work or versions of the prototype_(2j)_.   
 
 ###Principles
 
