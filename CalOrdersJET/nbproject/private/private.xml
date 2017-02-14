@@ -8,5 +8,23 @@
             <file>file:/home/oncore/workspaces/CalOrders/CalOrdersJET/src/css/calorders.css</file>
             <file>file:/home/oncore/workspaces/CalOrders/CalOrdersJET/src/js/views/productSearch.html</file>
         </group>
+        <group>
+            <file>file:/home/oncore/workspaces/CalOrders/CalOrdersJET/src/js/common/SecurityUtils.js</file>
+            <file>file:/home/oncore/workspaces/CalOrders/CalOrdersJET/src/js/appController.js</file>
+            <file>file:/home/oncore/workspaces/CalOrders/CalOrdersJET/src/js/views/cart.html</file>
+            <file>file:/home/oncore/workspaces/CalOrders/CalOrdersJET/src/js/views/login.html</file>
+            <file>file:/home/oncore/workspaces/CalOrders/CalOrdersJET/src/js/viewModels/welcome.js</file>
+            <file>file:/home/oncore/workspaces/CalOrders/CalOrdersJET/src/index.html</file>
+            <file>file:/home/oncore/workspaces/CalOrders/CalOrdersJET/src/css/calorders.css</file>
+            <file>file:/home/oncore/workspaces/CalOrders/CalOrdersJET/src/js/data/products_desktops.json</file>
+            <file>file:/home/oncore/workspaces/CalOrders/CalOrdersJET/src/js/viewModels/cart.js</file>
+            <file>file:/home/oncore/workspaces/CalOrders/CalOrdersJET/src/js/viewModels/login.js</file>
+            <file>file:/home/oncore/workspaces/CalOrders/CalOrdersJET/src/css/demo-alta-site-min.css</file>
+            <file>file:/home/oncore/workspaces/CalOrders/CalOrdersJET/src/js/views/welcome.html</file>
+            <file>file:/home/oncore/workspaces/CalOrders/CalOrdersJET/src/js/common/ServiceEndPoints.js</file>
+            <file>file:/home/oncore/workspaces/CalOrders/CalOrdersJET/src/js/viewModels/orderConfirmation.js</file>
+            <file>file:/home/oncore/workspaces/CalOrders/CalOrdersJET/src/js/data/products_laptops.json</file>
+            <file>file:/home/oncore/workspaces/CalOrders/CalOrdersJET/src/js/views/orderConfirmation.html</file>
+        </group>
     </open-files>
 </project-private>
