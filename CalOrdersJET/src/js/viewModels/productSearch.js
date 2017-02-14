@@ -34,13 +34,22 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
 
                 self.router = oj.Router.rootInstance;
                 self.findProductsByProductTypeService = serviceEndPoints.getEndPoint("findActiveProductsByProductType");
-                self.selectedProductMenuItem = ko.observable('desktops');
+                self.selectedProductMenuItem = ko.observable('DESK');
                 self.productLayoutType = ko.observable('productCardLayout');
                 self.allProduct = ko.observableArray([]);
                 self.ready = ko.observable(false);
                 self.nameSearch = ko.observable('');
                 self.addedProductPhoto = ko.observable();
                 self.addedProductName = ko.observable();
+
+                var lgQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.LG_UP);
+                var mdQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.MD_UP);
+                var smQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.SM_UP);
+                var smOnlyQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.SM_ONLY);
+                self.large = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(lgQuery);
+                self.medium = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(mdQuery);
+                self.small = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(smQuery);
+                self.smallOnly = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(smOnlyQuery);
 
                 // Below are a subset of the ViewModel methods invoked by the ojModule binding
                 // Please reference the ojModule jsDoc for additionaly available methods.
@@ -198,12 +207,12 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
 
                         try {
                             reader.readAsDataURL(blob);
-                            
+
                         } catch (err)
                         {
                             console.log(err);
                         }
-                    } 
+                    }
                 };
 
                 self.cardLayoutHandler = function () {
@@ -231,12 +240,41 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                 };
 
                 self.addToCart = function (product) {
-                    // TODO: Add product to cart
-                    console.log("Add product id " + product.prdUid + " to cart");
-                    
+                    var cartProducts;
+
+                    // Get cart - if no cart yet then initialize
+                    if (sessionStorage.cartProducts !== undefined && sessionStorage.cartProducts !== "")
+                    {
+                        cartProducts = JSON.parse(sessionStorage.cartProducts);
+
+                    } else
+                    {
+                        cartProducts = [];
+                    }
+
+                    // If the product already exists in the cart, then just change the quantity
+                    var result = $.grep(cartProducts, function (item) {
+                        return item.prdUid === product.prdUid;
+                    });
+                    var cartProduct;
+
+                    if (result.length === 1)
+                    {
+                        cartProduct = result[0];
+                        cartProduct.quantity += 1;
+                    } else
+                    {
+                        cartProduct = product;
+                        cartProduct.quantity = 1;
+                        cartProducts.push(cartProduct);
+                    }
+
+                    // Save cart back into session
+                    sessionStorage.cartProducts = JSON.stringify(cartProducts);
+
+                    // Show confirmation message                    
                     self.addedProductName(product.prdName);
                     self.addedProductPhoto($("#productImage" + product.prdUid).attr("src"));
-
                     $("#addToCartConfirmationDialog").ojDialog("open");
                 };
 
@@ -249,13 +287,22 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                 self.navigateToCart = function () {
                     return self.router.go("cart");
                 };
+
+                self.productSelectChange = function (event, data)
+                {
+                    if (data.value !== "")
+                    {
+                        console.log("productSelectChange: " + data.value);
+                        self.searchProducts(data.value);
+                    }
+                };
             }
 
-    /*
-     * Returns a constructor for the ViewModel so that the ViewModel is constrcuted
-     * each time the view is displayed.  Return an instance of the ViewModel if
-     * only one instance of the ViewModel is needed.
-     */
-    return new ProductSearchViewModel();
-}
+            /*
+             * Returns a constructor for the ViewModel so that the ViewModel is constrcuted
+             * each time the view is displayed.  Return an instance of the ViewModel if
+             * only one instance of the ViewModel is needed.
+             */
+            return ProductSearchViewModel;
+        }
 );

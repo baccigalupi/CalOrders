@@ -29,8 +29,8 @@
     </div>
 
     <!-- Page Content -->
-    <div class="oj-panel oj-flex oj-sm-flex-wrap-nowrap">
-        <div id="cartWrapperDiv" class="oj-panel oj-flex-item oj-sm-flex-wrap-nowrap">
+    <div class="oj-flex oj-sm-flex-wrap-nowrap">
+        <div id="cartWrapperDiv" class="oj-flex-item oj-sm-flex-wrap-nowrap">
 
             <!-- this is the listLayout template. It uses the ojListView component to do the layout and the pagination. -->
             <ul id="listview"
@@ -50,19 +50,19 @@
                 <li class="oj-flex-item oj-sm-12" data-bind="click: $parent.loadPersonPage">
                     <div class="oj-flex">
                         <div class="oj-flex-item">
-                            <div class="oj-flex oj-sm-6">
+                            <div class="oj-flex oj-sm-12 oj-lg-4">
                                 <img alt="employee image" style="float:left;" 
                                      data-bind="attr: {src: $parent.getPhoto($data['empId'])}"/>
                             </div>
-                            <div class="oj-flex oj-sm-6">
+                            <div class="oj-flex oj-sm-12 oj-lg-4">
 
                                 <h4 data-bind="text: $data['description']"></h4>
                             </div>
                         </div>
-                        <div class="oj-flex-item oj-sm-3">
+                        <div class="oj-flex-item oj-sm-12 oj-lg-2">
                             <h4>1</h4>
                         </div>
-                        <div class="oj-flex-item oj-sm-3">
+                        <div class="oj-flex-item oj-sm-12 oj-lg-2">
                             <h4>Price: $<span data-bind="text: $data['price']"/></h4>
                         </div>
                     </div>
@@ -74,7 +74,7 @@
     <div class="oj-padding-vertical"></div>
 
     <div class="oj-flex oj-sm-12 oj-sm-justify-content-flex-end">
-        <div class="oj-flex-item oj-sm-2">
+        <div class="oj-flex-item oj-sm-5 oj-lg-2">
             <div class="oj-sm-text-align-end">
                 Total:<br/>
                 Shipping:<br/>
@@ -82,7 +82,7 @@
             </div>
         </div>
 
-        <div class="oj-flex-item oj-sm-2">
+        <div class="oj-flex-item oj-sm-5 oj-lg-2">
             <div class="oj-sm-text-align-end">
                 <div data-bind="text: getItemTotalPrice()"></div>
                 <div data-bind="text: getShippingPrice()"></div>
@@ -96,16 +96,16 @@
 
 <div class="oj-flex oj-sm-12 oj-sm-justify-content-flex-end">
 
-    <div class="oj-flex-item oj-sm-1 oj-sm-text-align-end">
+    <div class="oj-flex-item oj-sm-5 oj-lg-1 oj-sm-text-align-end">
         <button id= "continueShopping" 
                 data-bind="click: continueShoppingClick, ojComponent: { component: 'ojButton', label: 'Continue Shopping' }">
         </button> 
     </div>
     <div class="oj-padding-horizontal"></div>
-    <div class="oj-flex-item oj-sm-1 oj-sm-text-align-end">
+    <div class="oj-flex-item oj-sm-4 oj-lg-1 oj-sm-text-align-end">
         <button id= "placeOrder" 
                 data-bind="click: placeOrderClick, ojComponent: { component: 'ojButton', label: 'Order' }">
         </button> 
     </div>
 </div>
-</div>
+

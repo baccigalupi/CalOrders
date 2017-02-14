@@ -31,7 +31,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                 var self = this;
 
                 self.router = oj.Router.rootInstance;
-                
+
                 // Below are a subset of the ViewModel methods invoked by the ojModule binding
                 // Please reference the ojModule jsDoc for additionaly available methods.
 
@@ -91,17 +91,17 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                 self.itemOnly = function (context) {
                     return context['leaf'];
                 };
-                
+
                 self.searchProductsFromMenu = function (context) {
                     console.log("searchProductsFromMenu " + context['id']);
                 };
-                
+
                 self.searchProducts = function (productType) {
                     var filename = 'js/data/products_desktops.json';
-                    
+
                     console.log("Search " + productType + " products");
 
-                    if ( productType === 'laptops') {
+                    if (productType === 'laptops') {
                         filename = 'js/data/products_laptops.json'
                     }
 
@@ -125,7 +125,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                         model: self.model
                     });
                 };
-                
+
                 self.selectedItem = ko.observable('home');
 
                 self.peopleLayoutType = ko.observable('peopleCardLayout');
@@ -172,8 +172,8 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                 self.getPhoto = function (productId) {
                     console.log("Image for product " + productId);
                     var src = 'css/images/desktop.png';
-                    
-                    if ( productId < 1000)
+
+                    if (productId < 1000)
                     {
                         src = 'css/images/laptop.png';
                     }
@@ -192,9 +192,9 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                 self.getChat = function (emp) {
                     return "#";
                 };
-                
+
                 self.getItemTotalPrice = function () {
-                    
+
                     return "$1000.00";
                 };
 
@@ -235,7 +235,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                         oj.Router.rootInstance.go('person');
                     }
                 };
-                
+
                 /*
                  * Places the Order.
                  * 
@@ -244,12 +244,43 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                  */
                 self.placeOrderClick = function (trackerObj)
                 {
-                    return self.router.go('orderConfirmation');
+                    // TODO: Replace with cart items from session
+                    var order = {createUserId: "Create1", updateUserId: "Update1",
+                        orderStatusCd: "SUBT",
+                        partyUid: 1,
+                        products: [{prdUid: 6, quantity: 3}, {prdUid: 10, quantity: 1}],
+                        services: [{prsUid: 1, quantity: 5}, {prsUid: 2, quantity: 6}]};
+
+                    // build our REST URL
+                    var serviceEndPoints = new ServiceEndPoints();
+                    var serviceURL = serviceEndPoints.getEndPoint('createOrder');
+
+
+                    var OrderService = oj.Model.extend({
+                        urlRoot: serviceURL
+                    });
+
+                    var orderService = new OrderService();
+
+
+                    // execute REST createOrder operation
+                    orderService.save(
+                            order,
+                            {
+                                success: function (myModel, response, options) {
+                                    return self.router.go('orderConfirmation');
+                                },
+                                error: function (jqXHR, textStatus, errorThrown) {
+
+                                    console.log("Unable to create the order: " + errorThrown);
+                                }
+                            });
+
                 };
-                
-                self.continueShoppingClick = function(data, event)
+
+                self.continueShoppingClick = function (data, event)
                 {
-                       return self.router.go("productSearch");
+                    return self.router.go("productSearch");
                 };
 
                 self.onEnter = function (data, event) {
