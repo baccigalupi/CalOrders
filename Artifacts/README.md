@@ -26,7 +26,7 @@ Backend Web Developer | [Won Lee](https://github.com/OncoreLLC/CalOrders/wiki/Ag
 DevOps Engineer | [Suganya Ravikumar](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Team-Bios)  
 
 ##User Centric Design - Understanding what people need  
-The first step of a User-Centered-Design (UCD) process is to formulate a plan.  We developed a (statement of work)[https://github.com/OncoreLLC/CalOrders/wiki/Statement-of-Work] to document the project objectives, requirements, user community, constraints, schedule, and deliverables.
+The first step of a User-Centered-Design (UCD) process is to formulate a plan.  We developed a [statement of work](https://github.com/OncoreLLC/CalOrders/wiki/Statement-of-Work) to identify the project objectives, requirements, user community, constraints, schedule, and deliverables.
 
 The plan that was developed combines our UCD and Agile process into a streamline process that is included in the following image.
 
