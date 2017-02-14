@@ -40,8 +40,8 @@ Plan | Analyze| Design | Implement | Test & Measure
 --- | --- | --- | --- | ----
 [Kickoff Meeting](https://github.com/OncoreLLC/CalOrders/wiki/Hold-Kick-Off-Meeting) | [Research Domain](https://github.com/OncoreLLC/CalOrders/wiki/Domain-Research)    | [Story Boarding](https://github.com/OncoreLLC/CalOrders/wiki/Story-Boards)     | [Style Guide](http://www.oracle.com/webfolder/technetwork/jet/jetCookbook.html)    |[Usability Test](https://github.com/OncoreLLC/CalOrders/wiki/Usability-Testing)
 [Statement of Work](https://github.com/OncoreLLC/CalOrders/wiki/Statement-of-Work)   |[Focus Groups](https://github.com/OncoreLLC/CalOrders/wiki/CalOrders-Focus-Groups)|[Scenarios](https://github.com/OncoreLLC/CalOrders/wiki/Scenarios)|[Rapid Prototyping (wire frames)](https://github.com/OncoreLLC/CalOrders/wiki/Wire-Frames) | Refine Application            
-[Develop a Plan](https://github.com/OncoreLLC/CalOrders/wiki/Develop-a-Plan)   | [Personas](https://github.com/OncoreLLC/CalOrders/wiki/Develop-Personas)|[Click First Testing](https://github.com/OncoreLLC/CalOrders/wiki/Click-First-Testing)       |                | Retest|||
-[Interviews](https://github.com/OncoreLLC/CalOrders/wiki/Interviews) ||
+[Develop a Plan](https://github.com/OncoreLLC/CalOrders/wiki/Develop-a-Plan)   | [Personas](https://github.com/OncoreLLC/CalOrders/wiki/Develop-Personas)|[Click First Testing](https://github.com/OncoreLLC/CalOrders/wiki/Click-First-Testing)       |                | Retest|
+|[Interviews](https://github.com/OncoreLLC/CalOrders/wiki/Interviews) ||
 
 
 [User Centric Design Detail View](https://github.com/OncoreLLC/CalOrders/wiki/Develop-a-Plan)  
