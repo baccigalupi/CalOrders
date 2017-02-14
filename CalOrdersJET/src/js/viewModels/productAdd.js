@@ -39,10 +39,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'reference/ReferenceData'],
                 //self.serviceURL = serviceEndPoints.getEndPoint('createEmployee');
                 //self.employeeServiceURL = serviceEndPoints.getEndPoint('doesUserIdExist');
 
+                self.productNameServiceURL = serviceEndPoints.getEndPoint('doesProductNameExist');
+
                 self.router = oj.Router.rootInstance;
                 self.tracker = ko.observable();
-
-                //self.groupTypes = ko.observableArray(ReferenceData.getGroupTypes());
 
                 self.productName = ko.observable();
                 self.productNameMessage = ko.observable();
@@ -78,7 +78,20 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'reference/ReferenceData'],
                 self.handleActivated = function (info) {
                     // Implement if needed
                     // initialize session storage
-
+                    self.productName = ko.observable();
+                    self.productNameMessage = ko.observable();
+                    self.productCategory = ko.observable();
+                    self.categories = ko.observableArray(ReferenceData.getCategories());
+                    self.productCategoryMessages = ko.observableArray([]);
+                    self.vendor = ko.observable();
+                    self.vendors = ko.observableArray(ReferenceData.getVendors());
+                    self.vendorMessages = ko.observableArray([]);
+                    self.productPrice = ko.observable();
+                    self.productDescription = ko.observable();
+                    self.productFullDesc = ko.observable();
+                    self.relatedServices = ko.observableArray([]);
+                    self.avaliableRelatedServices = ko.observableArray(ReferenceData.getRelatedServices());
+                    self.productImage = ko.observable();
                 };
 
                 /**
@@ -134,7 +147,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'reference/ReferenceData'],
                     } else if (event.currentTarget.id === 'cancel')
                     {
                         // Do nothing and go back to search page
-                       return self.router.go('productSearch');
+                        return self.router.go('productSearch');
                     }
                 };
 
@@ -144,7 +157,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'reference/ReferenceData'],
 
                         parseProduct = function (response)
                         {
-                            if (response != undefined)
+                            if (response != undefined && response.length > 0)
                             {
                                 var errorMsg = new oj.Message("That product name is already taken.", "", oj.Message.SEVERITY_TYPE.ERROR);
                                 self.productNameMessage([errorMsg]);
@@ -153,9 +166,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'reference/ReferenceData'],
                         };
 
                         var ProductService = oj.Model.extend({
-                            urlRoot: self.productServiceURL + "/" + value,
+                            urlRoot: self.productNameServiceURL + "/" + value,
                             parse: parseProduct,
-                            idAttribute: 'empUid'});
+                            idAttribute: 'prdUid'});
 
                         var productService = new ProductService();
                         productService.fetch();
@@ -174,13 +187,20 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'reference/ReferenceData'],
                 {
                     trackerObj.showMessages();
 
-                    if (trackerObj.focusOnFirstInvalid())
+                    if (!self.isValidDropDowns()
+                            || trackerObj.focusOnFirstInvalid())
                         return false;
 
                     return true;
                 };
 
+                self.isValidDropDowns = function ()
+                {
+                    var validProductCategory = self.isValideProductCategory();
+                    var validVendor = self.isValidVendor();
 
+                    return validProductCategory && validVendor;
+                };
 
                 self.validateProductCategory = {validate: function (value)
                     {
@@ -202,6 +222,26 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'reference/ReferenceData'],
                         return validProductCategory;
                     }};
 
+                self.isValideProductCategory = function ()
+                {
+                    var validProductCategory = true;
+
+                    // Hack for states dropdown and can't figure out how
+                    // required error message is thrown by itself
+                    if (typeof self.productCategory() === "undefined"
+                            || self.productCategory() === "")
+                    {
+                        this.productCategoryMessages([
+                            new oj.Message(
+                                    "Value is required.",
+                                    "You must select a value.",
+                                    oj.Message.SEVERITY_TYPE.ERROR)]);
+                        validProductCategory = false;
+
+                    }
+                    return validProductCategory;
+                };
+
                 self.validateVendor = {validate: function (value)
                     {
                         var validVendor = true;
@@ -221,6 +261,29 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'reference/ReferenceData'],
                         }
                         return validVendor;
                     }};
+
+
+
+
+                self.isValidVendor = function ()
+                {
+                    var validVendor = true;
+
+                    // Hack for states dropdown and can't figure out how
+                    // required error message is thrown by itself
+                    if (typeof self.vendor() === "undefined"
+                            || self.vendor() === "")
+                    {
+                        this.vendorMessages([
+                            new oj.Message(
+                                    "Value is required.",
+                                    "You must select a value.",
+                                    oj.Message.SEVERITY_TYPE.ERROR)]);
+                        validVendor = false;
+
+                    }
+                    return validVendor;
+                };
 
                 self.router = oj.Router.rootInstance;
 
