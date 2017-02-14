@@ -28,6 +28,7 @@ import com.oncore.calorders.core.exceptions.DataAccessException;
 import com.oncore.calorders.core.utils.FormatHelper;
 import static com.oncore.calorders.core.utils.FormatHelper.LOG;
 import com.oncore.calorders.core.utils.Logger;
+import com.oncore.calorders.rest.Address;
 import com.oncore.calorders.rest.GroupPartyAssoc;
 import com.oncore.calorders.rest.GroupPrivilegeAssoc;
 import com.oncore.calorders.rest.Party;
@@ -35,21 +36,18 @@ import com.oncore.calorders.rest.Privilege;
 import com.oncore.calorders.rest.data.GroupData;
 import com.oncore.calorders.rest.data.PartyData;
 import com.oncore.calorders.rest.data.PrivilegeData;
-import com.oncore.calorders.rest.service.AdrCountryCdFacadeREST;
-import com.oncore.calorders.rest.service.AdrStateCdFacadeREST;
-import com.oncore.calorders.rest.service.EmcTypeCdFacadeREST;
-import com.oncore.calorders.rest.service.GrpTypeCdFacadeREST;
 import com.oncore.calorders.rest.service.PartyFacadeREST;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  *
@@ -103,6 +101,19 @@ public class PartyFacadeRESTExtension extends PartyFacadeREST {
                 for (GroupPartyAssoc assoc : party.getGroupPartyAssocCollection()) {
                     partyData.setDepName(assoc.getGrpUidFk().getDepUidFk().getDepName());
                     partyData.setDepUid(assoc.getGrpUidFk().getDepUidFk().getDepUid());
+                    
+                    if(CollectionUtils.isNotEmpty(assoc.getGrpUidFk().getDepUidFk().getAddressCollection()))
+                    {
+                        Address address = assoc.getGrpUidFk().getDepUidFk().getAddressCollection().iterator().next();
+                        
+                        partyData.setDepAddressLine1(address.getAdrLine1());
+                        partyData.setDepAddressLine2(address.getAdrLine2());
+                        partyData.setDepCity(address.getAdrCity());
+                        partyData.setDepState(address.getAdrStateCd().getCode());
+                        partyData.setDepZip5(address.getAdrZip5());
+                        partyData.setDepZip4(address.getAdrZip4());
+      
+                    }
 
                     groupData = new GroupData();
                     groupData.setGrpUid(assoc.getGrpUidFk().getGrpUid());

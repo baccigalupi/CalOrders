@@ -207,8 +207,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'ojs/ojarray
                             sessionStorage.firstName = party.attributes.ptyFirstNm;
                             sessionStorage.lastName = party.attributes.ptyLastNm;
                             sessionStorage.partyUid = party.attributes.ptyUid;
-                            sessionStorage.vendorUid = party.attributes.vndUid;
-                            sessionStorage.vendorName = party.attributes.vndName;
+                            sessionStorage.departmentUid = party.attributes.depUid;
+                            sessionStorage.departmentName = party.attributes.depName;
+                            sessionStorage.departmentAddressLine1 = party.attributes.depAddressLine1;
+                            sessionStorage.departmentAddressLine2 = party.attributes.depAddressLine2;
+                            sessionStorage.departmentCityStateZip = party.attributes.calculatedCityStateZip;
+                            
 
                             var temp = null;
 
