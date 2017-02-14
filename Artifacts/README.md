@@ -30,7 +30,7 @@ The first step of a User-Centered-Design (UCD) process is to formulate a plan.  
 
 Our plan combines our UCD and Agile processes into a cohesive and flexible workflow.
 
-![Agile and UCD Processes](https://github.com/OncoreLLC/CalOrders/blob/master/Artifacts/images/agile/UCD%20and%20Agile%20Process%20Flow.jpg)
+![UCD Overview](https://github.com/OncoreLLC/CalOrders/blob/master/Artifacts/Usability/ucd%20overview.jpg)
 
 The team utilized User-Centered-Design (UCD) and Agile development techniques to formulate the product backlog.  All team members participated in the initial meetings with the users which was a natural hook into our Agile methodolgy and gave everyone the opportunity to understand the scope of the project and understand how each of them would contribute to the project's success.  
 
@@ -38,17 +38,14 @@ The table below summarizes how we incorporated the UCD practices in the developm
 
 Plan | Analyze| Design | Implement | Test & Measure  
 --- | --- | --- | --- | ----
-[Kickoff Meeting](https://github.com/OncoreLLC/CalOrders/wiki/Hold-Kick-Off-Meeting) | [Research Domain](https://github.com/OncoreLLC/CalOrders/wiki/Domain-Research)    | [Story Boarding](https://github.com/OncoreLLC/CalOrders/wiki/Story-Boards)     | [Style Guide](http://www.oracle.com/webfolder/technetwork/jet/jetCookbook.html)    | [Usability Test](https://github.com/OncoreLLC/CalOrders/wiki/Usability-Testing)
-[Statement of Work](https://github.com/OncoreLLC/CalOrders/wiki/Statement-of-Work)   | [Focus Groups](https://github.com/OncoreLLC/CalOrders/wiki/CalOrders-Focus-Groups)| [Scenarios](https://github.com/OncoreLLC/CalOrders/wiki/Scenarios)| [Rapid Prototyping (wire frames)](https://github.com/OncoreLLC/CalOrders/wiki/Wire-Frames) | Refine Application            
-[Develop a Plan](https://github.com/OncoreLLC/CalOrders/wiki/Develop-a-Plan)   | [Personas](https://github.com/OncoreLLC/CalOrders/wiki/Develop-Personas)           |       |                | Retest
- |[Interviews](https://github.com/OncoreLLC/CalOrders/wiki/Interviews)| | |
-
-[User Centric Design Detail View](https://github.com/OncoreLLC/CalOrders/wiki/Develop-a-Plan)  
+[Kickoff Meeting](https://github.com/OncoreLLC/CalOrders/wiki/Hold-Kick-Off-Meeting) | [Research Domain](https://github.com/OncoreLLC/CalOrders/wiki/Domain-Research)    |[Scenarios](https://github.com/OncoreLLC/CalOrders/wiki/Scenarios) | [Style Guide](http://www.oracle.com/webfolder/technetwork/jet/jetCookbook.html)    |[Usability Test](https://github.com/OncoreLLC/CalOrders/wiki/Usability-Testing)
+[Statement of Work](https://github.com/OncoreLLC/CalOrders/wiki/Statement-of-Work)   |[Focus Groups](https://github.com/OncoreLLC/CalOrders/wiki/CalOrders-Focus-Groups)|[Story Boarding](https://github.com/OncoreLLC/CalOrders/wiki/Story-Boards)     |[Wireframe Walkthrough](https://github.com/OncoreLLC/CalOrders/wiki/Wireframe-Walkthrough) | Refine Application            
+[Develop a Plan](https://github.com/OncoreLLC/CalOrders/wiki/Develop-a-Plan)   | [Personas](https://github.com/OncoreLLC/CalOrders/wiki/Develop-Personas)||                       | Retest
+||[Interviews](https://github.com/OncoreLLC/CalOrders/wiki/Interviews) ||
 
 ##Agile Prototype Development   
 
-Following [Agile](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Methodolgy), provided the team an iterative approach, where feedback informed subsequent work or versions of the prototype_(2j)_.   
-
+[Oncore's Agile methodology](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Methodolgy) provided the team an iterative approach, where feedback informed subsequent work or versions of the prototype_(2j)_.   
 
 ###Principles
 
@@ -63,20 +60,16 @@ There are many different specific project development methodologies within agile
 
 ###Process   
 
-Our [Agile](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Methodolgy) process allowed us to rapidly deliver a working product to maintain the momentum from the User Centered Design Sessions, allowing us to show the und user the system we were building. Combined with sprint cycles we were able to add new stories; existing stories in the backlog and icebox were continually evolving and reprioritized with continued meetings outside of the development cycle. These meeting took place between the product owner, business analysts and end users. Focusing on keeping things simple and evolving fostered the environment of rapid delivery and allowed for face to face interactions with the end users on how the system was evolving.  More importanly, it allowed for failure, and with the quick adjustments yieled a system that worked for the end users.
+Our [Agile](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Methodolgy) process allowed us to rapidly deliver a working product to maintain the momentum from the User Centered Design Sessions, allowing us to show the end user the system we were building. Combined with sprint cycles we were able to add new stories; existing stories in the backlog and icebox were continually evolving and reprioritized with continued meetings outside of the development cycle. These meeting took place between the product owner, business analysts and end users. Focusing on keeping things simple and evolving fostered the environment of rapid delivery and allowed for face to face interactions with the end users on how the system was evolving.  More importanly, it allowed for failure, and with the quick adjustments yieled a system that worked for the end users.
 
 ###Practices
+The table below provides links to additional artifacts and other important information about each agile practice that was utilized for this project.<br>
 [User Stories]() |
 [Estimation](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Story-Estimation) |
 [Prioritization](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Story-Prioritization) |
 [Sprint planning](https://github.com/OncoreLLC/CalOrders/wiki/Sprint-Planning) | [Standups](https://github.com/OncoreLLC/CalOrders/wiki/Standups)| [Sprints](https://github.com/OncoreLLC/CalOrders/wiki/Sprints) | [Retrospectives](https://github.com/OncoreLLC/CalOrders/wiki/Retrospectives) 
---- | --- | --- | --- | --- | --- | 
 
 
-
-
-Artifacts from our Agile process, such as the Sprint Planning, Sprint Retrospective and Daily Scrum Sessions are contained [here](https://github.com/OncoreLLC/CalOrders/blob/master/link).  
-  
 ###Architecture & [DevOps](https://github.com/OncoreLLC/CalOrders/wiki/Environments)  
   The team's DevOps methodology.  
 

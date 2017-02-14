@@ -98,7 +98,7 @@ public class OrdStatusCd implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date updateTs;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ordStatusCd")
-    private Collection<Order1> order1Collection;
+    private Collection<OrderHistory> orderHistoryCollection;
 
     public OrdStatusCd() {
     }
@@ -174,12 +174,12 @@ public class OrdStatusCd implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Order1> getOrder1Collection() {
-        return order1Collection;
+    public Collection<OrderHistory> getOrderHistoryCollection() {
+        return orderHistoryCollection;
     }
 
-    public void setOrder1Collection(Collection<Order1> order1Collection) {
-        this.order1Collection = order1Collection;
+    public void setOrderHistoryCollection(Collection<OrderHistory> orderHistoryCollection) {
+        this.orderHistoryCollection = orderHistoryCollection;
     }
 
     @Override
