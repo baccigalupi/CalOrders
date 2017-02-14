@@ -29,13 +29,13 @@ import com.oncore.calorders.core.utils.FormatHelper;
 import static com.oncore.calorders.core.utils.FormatHelper.LOG;
 import com.oncore.calorders.core.utils.Logger;
 import com.oncore.calorders.rest.OrdStatusCd;
-import com.oncore.calorders.rest.Order1;
+import com.oncore.calorders.rest.OrderHistory;
 import com.oncore.calorders.rest.OrderProductAssoc;
 import com.oncore.calorders.rest.Party;
 import com.oncore.calorders.rest.PrdRelService;
 import com.oncore.calorders.rest.Product;
 import com.oncore.calorders.rest.service.OrdStatusCdFacadeREST;
-import com.oncore.calorders.rest.service.Order1FacadeREST;
+import com.oncore.calorders.rest.service.OrderHistoryFacadeREST;
 import com.oncore.calorders.rest.service.OrderProductAssocFacadeREST;
 import com.oncore.calorders.rest.service.PrdRelServiceFacadeREST;
 import com.oncore.calorders.rest.service.ProductFacadeREST;
@@ -60,8 +60,8 @@ import javax.ws.rs.core.MediaType;
  * @author oncore
  */
 @Stateless
-@Path("com.oncore.calorders.rest.order1")
-public class Order1FacadeRESTExtension extends Order1FacadeREST {
+@Path("com.oncore.calorders.rest.orderHistory")
+public class OrderHistoryFacadeRESTExtension extends OrderHistoryFacadeREST {
 
     @EJB
     OrdStatusCdFacadeREST ordStatusCdFacadeREST;
@@ -78,7 +78,7 @@ public class Order1FacadeRESTExtension extends Order1FacadeREST {
     @EJB
     PrdRelServiceFacadeREST prdRelServiceFacadeREST;
 
-    public Order1FacadeRESTExtension() {
+    public OrderHistoryFacadeRESTExtension() {
         super();
     }
 
@@ -91,7 +91,6 @@ public class Order1FacadeRESTExtension extends Order1FacadeREST {
     @POST
     @Path("createOrder")
     @Consumes({MediaType.APPLICATION_JSON})
-    @Produces({MediaType.APPLICATION_JSON})
     public void createOrder(String orderjson) throws DataAccessException {
 
         try {
@@ -99,7 +98,7 @@ public class Order1FacadeRESTExtension extends Order1FacadeREST {
             JsonObject orderObject = reader.readObject();
             reader.close();
 
-            Order1 order = new Order1();
+            OrderHistory order = new OrderHistory();
 
             order.setUpdateTs(new Date());
             order.setUpdateUserId(orderObject.getString("updateUserId", null));

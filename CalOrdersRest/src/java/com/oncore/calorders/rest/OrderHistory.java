@@ -53,16 +53,16 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Cacheable(false)
-@Table(name = "ORDER")
+@Table(name = "ORDER_HISTORY")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Order1.findAll", query = "SELECT o FROM Order1 o")
-    , @NamedQuery(name = "Order1.findByOrdUid", query = "SELECT o FROM Order1 o WHERE o.ordUid = :ordUid")
-    , @NamedQuery(name = "Order1.findByCreateUserId", query = "SELECT o FROM Order1 o WHERE o.createUserId = :createUserId")
-    , @NamedQuery(name = "Order1.findByCreateTs", query = "SELECT o FROM Order1 o WHERE o.createTs = :createTs")
-    , @NamedQuery(name = "Order1.findByUpdateUserId", query = "SELECT o FROM Order1 o WHERE o.updateUserId = :updateUserId")
-    , @NamedQuery(name = "Order1.findByUpdateTs", query = "SELECT o FROM Order1 o WHERE o.updateTs = :updateTs")})
-public class Order1 implements Serializable {
+    @NamedQuery(name = "OrderHistory.findAll", query = "SELECT o FROM OrderHistory o")
+    , @NamedQuery(name = "OrderHistory.findByOrdUid", query = "SELECT o FROM OrderHistory o WHERE o.ordUid = :ordUid")
+    , @NamedQuery(name = "OrderHistory.findByCreateUserId", query = "SELECT o FROM OrderHistory o WHERE o.createUserId = :createUserId")
+    , @NamedQuery(name = "OrderHistory.findByCreateTs", query = "SELECT o FROM OrderHistory o WHERE o.createTs = :createTs")
+    , @NamedQuery(name = "OrderHistory.findByUpdateUserId", query = "SELECT o FROM OrderHistory o WHERE o.updateUserId = :updateUserId")
+    , @NamedQuery(name = "OrderHistory.findByUpdateTs", query = "SELECT o FROM OrderHistory o WHERE o.updateTs = :updateTs")})
+public class OrderHistory implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -99,14 +99,14 @@ public class Order1 implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ordUidFk")
     private Collection<OrderProductAssoc> orderProductAssocCollection;
 
-    public Order1() {
+    public OrderHistory() {
     }
 
-    public Order1(Integer ordUid) {
+    public OrderHistory(Integer ordUid) {
         this.ordUid = ordUid;
     }
 
-    public Order1(Integer ordUid, String createUserId, Date createTs, String updateUserId, Date updateTs) {
+    public OrderHistory(Integer ordUid, String createUserId, Date createTs, String updateUserId, Date updateTs) {
         this.ordUid = ordUid;
         this.createUserId = createUserId;
         this.createTs = createTs;
@@ -189,10 +189,10 @@ public class Order1 implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Order1)) {
+        if (!(object instanceof OrderHistory)) {
             return false;
         }
-        Order1 other = (Order1) object;
+        OrderHistory other = (OrderHistory) object;
         if ((this.ordUid == null && other.ordUid != null) || (this.ordUid != null && !this.ordUid.equals(other.ordUid))) {
             return false;
         }
@@ -201,7 +201,7 @@ public class Order1 implements Serializable {
 
     @Override
     public String toString() {
-        return "com.oncore.calorders.rest.Order1[ ordUid=" + ordUid + " ]";
+        return "com.oncore.calorders.rest.OrderHistory[ ordUid=" + ordUid + " ]";
     }
     
 }
