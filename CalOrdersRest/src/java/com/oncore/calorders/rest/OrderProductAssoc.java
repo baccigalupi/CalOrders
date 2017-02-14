@@ -96,7 +96,7 @@ public class OrderProductAssoc implements Serializable {
     private Date updateTs;
     @JoinColumn(name = "ORD_UID_FK", referencedColumnName = "ORD_UID")
     @ManyToOne(optional = false)
-    private Order1 ordUidFk;
+    private OrderHistory ordUidFk;
     @JoinColumn(name = "PRS_UID_FK", referencedColumnName = "PRS_UID")
     @ManyToOne(optional = false)
     private PrdRelService prsUidFk;
@@ -175,11 +175,11 @@ public class OrderProductAssoc implements Serializable {
         this.updateTs = updateTs;
     }
 
-    public Order1 getOrdUidFk() {
+    public OrderHistory getOrdUidFk() {
         return ordUidFk;
     }
 
-    public void setOrdUidFk(Order1 ordUidFk) {
+    public void setOrdUidFk(OrderHistory ordUidFk) {
         this.ordUidFk = ordUidFk;
     }
 

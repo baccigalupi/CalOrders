@@ -27,6 +27,22 @@
     <div id="pageTitleContainer" class="oj-flex-item oj-sm-6">
         <h1 style="margin-bottom:0">CalOrders Cart</h1>
     </div>
+    
+    <!-- Action buttons (Continue Shopping and Order)-->
+    <!-- Only added to the top of the page for small screens -->
+    <div class="oj-flex oj-md-hide oj-sm-justify-content-flex-end">
+
+        <div class="oj-flex"> 
+            <button id= "continueShopping" 
+                    data-bind="click: continueShoppingClick, ojComponent: { component: 'ojButton', label: 'Continue Shopping' }">
+            </button> 
+            <div class="oj-padding-horizontal"></div>
+            <button id= "placeOrder" 
+                    data-bind="click: placeOrderClick, ojComponent: { component: 'ojButton', label: 'Order' }">
+            </button> 
+        </div>
+    </div>
+
 
     <!-- Page Content -->
     <div class="oj-flex oj-sm-flex-wrap-nowrap">
@@ -40,14 +56,14 @@
             selectionMode: 'none',
             selection: [],
             optionChange: changeHandler,
-            rootAttributes: {style: 'width:100%;height:100vh;overflow:auto; margin-top: 5px'},
+            rootAttributes: {style: 'width:100%;height:100%;overflow:auto; margin-top: 5px'},
             scrollPolicy: 'loadMoreOnScroll',
             scrollPolicyOptions: {fetchSize: 10}}">
             </ul>
 
             <!-- this is the content that is loaded by the ojListView component above -->
             <script id="peoplelist_template" type="text/html">
-                <li class="oj-flex-item oj-sm-12" data-bind="click: $parent.loadPersonPage">
+                <li class="oj-flex-item oj-sm-12">
                     <div class="oj-flex">
                         <div class="oj-flex-item">
                             <div class="oj-flex oj-sm-12 oj-lg-4">
@@ -79,15 +95,13 @@
     <div class="oj-md-odd-cols-4">
         <div class="oj-flex">
             <div>
-
                <div>
-
                     <div class="oj-padding-vertical"></div>
                     <div class="oj-sm-justify-content confirmation_bold">Order Totals:</div>
                     <div class="oj-padding-vertical"></div>
-                    <div class="oj-sm-justify-content"><div><div class="confirmation_bold_label">Total:</div> <div class="confirmation_float_right" data-bind="text: getItemTotalPrice()"></div></div></div>
-                    <div class="oj-sm-justify-content"><div><div class="confirmation_bold_label">Shipping:</div> <div class="confirmation_float_right" data-bind="text: getShippingPrice()"></div></div></div>
-                    <div class="oj-sm-justify-content"><div><div class="confirmation_bold_label">Total Price:</div> <div class="confirmation_float_right" data-bind="text: getTotalPrice()"></div></div></div>
+                    <div class="oj-sm-justify-content"><div><div class="confirmation_bold_label">Total:</div> <div class="confirmation_float_right" data-bind="text: itemTotalPrice"></div></div></div>
+                    <div class="oj-sm-justify-content"><div><div class="confirmation_bold_label">Shipping:</div> <div class="confirmation_float_right" data-bind="text: shippingPrice"></div></div></div>
+                    <div class="oj-sm-justify-content"><div><div class="confirmation_bold_label">Total Price:</div> <div class="confirmation_float_right" data-bind="text: totalPrice"></div></div></div>
                 </div>
             </div>
         </div>
@@ -95,6 +109,7 @@
 
     <div class="oj-padding-vertical"></div>
 
+    <!-- Action buttons (Continue Shopping and Order) -->
     <div class="oj-flex oj-sm-justify-content-flex-end">
 
         <div class="oj-flex"> 
