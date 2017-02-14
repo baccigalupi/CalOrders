@@ -41,15 +41,23 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                 self.nameSearch = ko.observable('');
                 self.addedProductPhoto = ko.observable();
                 self.addedProductName = ko.observable();
+                self.productCategoryBreadcrumbs = ko.observable();
+                self.productCategories = [
+                    {code: "DESK", description: "Desktops", parent: "Hardware"},
+                    {code: "LAPT", description: "Laptops", parent: "Hardware"},
+                    {code: "MONT", description: "Monitors", parent: "Hardware"},
+                    {code: "PRNT", description: "Printers", parent: "Hardware"},
+                    {code: "PERI", description: "Peripherals", parent: "Hardware"},
 
+                    {code: "OPSY", description: "OS", parent: "Software"},
+                    {code: "OFFC", description: "Office", parent: "Software"},
+                    {code: "SECC", description: "Security", parent: "Software"},
+                    {code: "UTIL", description: "Utilities", parent: "Software"}
+                ];
+                
                 var lgQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.LG_UP);
-                var mdQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.MD_UP);
-                var smQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.SM_UP);
-                var smOnlyQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.SM_ONLY);
                 self.large = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(lgQuery);
-                self.medium = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(mdQuery);
-                self.small = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(smQuery);
-                self.smallOnly = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(smOnlyQuery);
+               
 
                 // Below are a subset of the ViewModel methods invoked by the ojModule binding
                 // Please reference the ojModule jsDoc for additionaly available methods.
@@ -147,6 +155,20 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                         }
                     });
                 };
+
+
+
+                self.productCategoryBreadcrumbs = ko.computed(function () {
+
+                    var result = $.grep(self.productCategories, function(item) {return item.code === self.selectedProductMenuItem();});
+                    var category;
+                    if ( result.length === 1)
+                    {
+                        category = result[0];
+                    }
+                    
+                    return category.parent + ' > ' + category.description;
+                });
 
                 self.filteredAllProduct = ko.computed(function () {
 
