@@ -25,9 +25,9 @@ package com.oncore.calorders.rest.service.extension;
 
 import com.oncore.calorders.rest.Product;
 import com.oncore.calorders.rest.service.ProductFacadeREST;
-import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -41,6 +41,14 @@ import javax.ws.rs.core.MediaType;
 @Stateless
 @Path("com.oncore.calorders.rest.product")
 public class ProductFacadeRESTExtension extends ProductFacadeREST {
+
+    public ProductFacadeRESTExtension() {
+
+    }
+
+    public ProductFacadeRESTExtension(EntityManager em) {
+        super(em);
+    }
 
     @GET
     @Path("findActiveProductsByProductType/{productTypeCode}")
@@ -59,7 +67,7 @@ public class ProductFacadeRESTExtension extends ProductFacadeREST {
 
         return results;
     }
-    
+
     /**
      * Determines if a user id exists
      *
