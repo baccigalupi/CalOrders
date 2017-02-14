@@ -88,14 +88,6 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                     // Implement if needed
                 };
 
-                self.itemOnly = function (context) {
-                    return context['leaf'];
-                };
-
-                self.searchProductsFromMenu = function (context) {
-                    console.log("searchProductsFromMenu " + context['id']);
-                };
-
                 self.searchProducts = function (productType) {
                     var filename = 'js/data/products_desktops.json';
 
@@ -132,99 +124,76 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
 
                 self.allPeople = ko.observableArray([]);
                 self.ready = ko.observable(false);
+                
+                var sessionCart = JSON.parse(
+                        sessionStorage.cartProducts);
+                
+                self.itemTotalPrice = 0.00;
+                
+                for (i=0;i<sessionCart.length;i++)
+                {
+                    self.itemTotalPrice += sessionCart[i].prdPrice;
+                }
+                
+                self.shippingPrice = 25.00;
 
-                // Perform default search
-                console.log("About to perform default search");
-                self.searchProducts('desktops');
+                self.cart = ko.observableArray(sessionCart);
+                
+              
+                self.listViewDataSource = ko.computed(function () {
+                    return new oj.ArrayTableDataSource(self.cart(), {idAttribute: 'prdUid'});
+                });
 
-                self.nameSearch = ko.observable('');
+                self.getPhoto = function (product) {
+                    var file = product.prdImgImage;
+                    var imageSize = product.prdImgImage.length;
+                    var imageType = product.prdCategoryCd.longDesc;
 
-                self.filteredAllPeople = ko.computed(function () {
-                    var peopleFilter = new Array();
+                    var reader = new FileReader();
 
-                    if (self.allPeople().length !== 0) {
-                        if (self.nameSearch().length === 0)
+                    var data = window.atob(file);
+                    var arr = new Uint8Array(data.length);
+                    for (var i = 0; i < data.length; i++) {
+                        arr[i] = data.charCodeAt(i);
+                    }
+
+                    var blob = new Blob([arr.buffer], {size: imageSize, type: imageType});
+
+                    reader.addEventListener("load", function (event) {
+                        var preview = document.getElementById('productImage' + product.prdUid);
+                        preview.src = reader.result;
+                    }, false);
+
+                    if (blob) {
+
+                        try {
+                            reader.readAsDataURL(blob);
+
+                        } catch (err)
                         {
-                            peopleFilter = self.allPeople();
-                        } else {
-                            ko.utils.arrayFilter(self.allPeople(),
-                                    function (r) {
-                                        var token = self.nameSearch().toLowerCase();
-                                        if (r.firstName.toLowerCase().indexOf(token) === 0 || r.lastName.toLowerCase().indexOf(token) === 0) {
-                                            peopleFilter.push(r);
-                                        }
-                                    });
+                            console.log(err);
                         }
                     }
-
-                    self.ready(true);
-                    return peopleFilter;
-                });
-
-                self.listViewDataSource = ko.computed(function () {
-                    return new oj.ArrayTableDataSource(self.filteredAllPeople(), {idAttribute: 'productId'});
-                });
-
-                self.cardViewDataSource = ko.computed(function () {
-                    return new oj.PagingTableDataSource(self.listViewDataSource());
-                });
-
-                self.getPhoto = function (productId) {
-                    console.log("Image for product " + productId);
-                    var src = 'css/images/desktop.png';
-
-                    if (productId < 1000)
-                    {
-                        src = 'css/images/laptop.png';
-                    }
-
-                    return src;
-                };
-
-                self.getEmail = function (emp) {
-                    return "mailto:" + emp.email + '@example.net';
-                };
-
-                self.getFacetime = function (emp) {
-                    return "#";
-                };
-
-                self.getChat = function (emp) {
-                    return "#";
                 };
 
                 self.getItemTotalPrice = function () {
 
-                    return "$1000.00";
+                    return "$" + self.itemTotalPrice;
                 };
 
                 self.getShippingPrice = function () {
-                    return "$25.00";
+                    return "$" + self.shippingPrice.toFixed(2);
                 };
 
                 self.getTotalPrice = function () {
-                    return "$1000.00";
-                };
-
-                self.getOrg = function (org, event) {
-                    alert('This will take you to the employee page and highlight the team infotile');
-                };
-
-                self.getTenure = function (emp) {
-                    var now = new Date().getFullYear();
-                    var hired = new Date(emp.hireDate).getFullYear();
-                    var diff = now - hired;
-                    return diff;
-                };
-
-                self.cardLayoutHandler = function () {
-                    self.peopleLayoutType('peopleCardLayout');
+                    var totalPrice = self.shippingPrice+self.itemTotalPrice;
+                    return "$" + totalPrice.toFixed(2);
                 };
 
                 self.listLayoutHandler = function () {
                     self.peopleLayoutType('peopleListLayout');
                 };
-
+                
                 self.loadPersonPage = function (emp) {
                     if (emp.empId) {
                         // Temporary code until go('person/' + emp.empId); is checked in 1.1.2
@@ -235,6 +204,8 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                         oj.Router.rootInstance.go('person');
                     }
                 };
+
+
 
                 /*
                  * Places the Order.
@@ -268,7 +239,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                             order,
                             {
                                 success: function (myModel, response, options) {
-                                    return self.router.go('orderConfirmation');
+                                    return self.router.go("orderConfirmation");
                                 },
                                 error: function (jqXHR, textStatus, errorThrown) {
 
@@ -301,11 +272,6 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                         }
                     }
                 };
-
-                self.addToCart = function (product) {
-                    console.log("Add product id " + product.productId + " to cart");
-                };
-
 
             }
 
