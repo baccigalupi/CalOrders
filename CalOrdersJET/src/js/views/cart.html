@@ -27,6 +27,22 @@
     <div id="pageTitleContainer" class="oj-flex-item oj-sm-6">
         <h1 style="margin-bottom:0">CalOrders Cart</h1>
     </div>
+    
+    <!-- Action buttons (Continue Shopping and Order)-->
+    <!-- Only added to the top of the page for small screens -->
+    <div class="oj-flex oj-md-hide oj-sm-justify-content-flex-end">
+
+        <div class="oj-flex"> 
+            <button id= "continueShopping" 
+                    data-bind="click: continueShoppingClick, ojComponent: { component: 'ojButton', label: 'Continue Shopping' }">
+            </button> 
+            <div class="oj-padding-horizontal"></div>
+            <button id= "placeOrder" 
+                    data-bind="click: placeOrderClick, ojComponent: { component: 'ojButton', label: 'Order' }">
+            </button> 
+        </div>
+    </div>
+
 
     <!-- Page Content -->
     <div class="oj-flex oj-sm-flex-wrap-nowrap">
@@ -93,7 +109,7 @@
 
     <div class="oj-padding-vertical"></div>
 
-    <!-- Action buttons (Continue Shopping and Order -->
+    <!-- Action buttons (Continue Shopping and Order) -->
     <div class="oj-flex oj-sm-justify-content-flex-end">
 
         <div class="oj-flex"> 
