@@ -30,7 +30,7 @@ The first step of a User-Centered-Design (UCD) process is to formulate a plan.  
 
 Our plan combines our UCD and Agile processes into a cohesive and flexible workflow.
 
-![Agile and UCD Processes](https://github.com/OncoreLLC/CalOrders/blob/master/Artifacts/images/agile/UCD%20and%20Agile%20Process%20Flow.jpg)
+![UCD Overview](https://github.com/OncoreLLC/CalOrders/blob/master/Artifacts/Usability/ucd%20overview.jpg)
 
 The team utilized User-Centered-Design (UCD) and Agile development techniques to formulate the product backlog.  All team members participated in the initial meetings with the users which was a natural hook into our Agile methodolgy and gave everyone the opportunity to understand the scope of the project and understand how each of them would contribute to the project's success.  
 
