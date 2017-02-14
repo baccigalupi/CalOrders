@@ -8,7 +8,7 @@ Oncore’s principle focus during development of CalOrders is summarized best by
 
 Oncore focused on delivering what the end user needed. This was done with a combination of user research, rapid prototyping, and constant interaction with end users through interviews and focus groups. These tight cycles between ideas and testing allowed us to respond quickly to change. Focusing on solutions not features and adhering to the [U.S. Digital Services](https://playbook.cio.gov/) Playbook promoted user satisfaction and adoption through continuous interaction/feedback. We [followed](https://github.com/OncoreLLC/CalOrders/wiki/Addressing-U.S.-Digital-Services-Playbook-Plays) all of the applicable Playbook plays.  
 
-##PRODUCT NAME Development Team
+##CalOrder Development Team
 Team Lead-Oncore selected Mike Tsay as the Team Leader/Project Manager, who had authority over and was responsible and accountable for the quality of the prototype submitted _(2a)_.
 
 **We selected a multidisciplinary and collaborative team that fulfilled the following 8 labor categories _(2b)_:**  
