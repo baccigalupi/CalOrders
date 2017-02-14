@@ -28,7 +28,7 @@ DevOps Engineer | [Suganya Ravikumar](https://github.com/OncoreLLC/CalOrders/wik
 ##User Centric Design - Understanding what people need  
 The first step of a User-Centered-Design (UCD) process is to formulate a plan.  We developed a [statement of work](https://github.com/OncoreLLC/CalOrders/wiki/Statement-of-Work) to identify the project objectives, requirements, user community, constraints, schedule, and deliverables.
 
-The plan that was developed combines our UCD and Agile process into a streamline process that is included in the following image.
+Our plan combines our UCD and Agile processes into a cohesive and flexible workflow.
 
 ![Agile and UCD Processes](https://github.com/OncoreLLC/CalOrders/blob/master/Artifacts/images/agile/UCD%20and%20Agile%20Process%20Flow.jpg)
 
@@ -36,11 +36,6 @@ The team utilized User-Centered-Design (UCD) and Agile development techniques to
 
 Below summarizes how we incorporated the “Analyze, Design/Implement, Test and Refine” UCD practices in the development of CalOrders. _(2d)_  
 
-//tentative wording, we can pull it later
-We used the following components of UCD to capture what users wanted.  Combined with the UCD methodolgy, our Agile Delivery allowed Naga and Cindy to also see what the development team was producing.  We took a similar approach that we learned from a brigade session with Code For America, where we worked with the Department to allow Cindy and Naga to execute their daily tasks concurrently in the old system and CalOrders.  Although CalOrders is not live, it allowed for real life testing of the application, and allowed for feedback and affermation that we were delivering what they really asked for.   
-//end tentative
-
-[User Centric Design Detail View](https://github.com/OncoreLLC/CalOrders/wiki/Develop-a-Plan)  
 
 Plan | Analyze| Design | Implement | Test & Measure  
 --- | --- | --- | --- | ----
@@ -49,10 +44,7 @@ Plan | Analyze| Design | Implement | Test & Measure
 [Create Schedule](https://github.com/OncoreLLC/CalOrders/wiki/Develop-a-Plan)   | [Personas](https://github.com/OncoreLLC/CalOrders/wiki/Develop-Personas)           |       |                | Retest
  |[Interviews](https://github.com/OncoreLLC/CalOrders/wiki/Interviews)| | |
 
------move
-We worked Naga and Cindy from the Department of General Services, and Department of Technolgy respectively.  Both are seasoned adminstrators of the procurement process.  We focused on understanding the business functions that they did most frequently, and also listened to them describe how they did their work in their existing systems.  Walking through a day in life scenarios of both the end users and the administrators provided us the detail the team needed to build and prioritize the features for the new system allowed us to all agree on the outcome, and define our roadmap to get to deliver.
-------
-
+[User Centric Design Detail View](https://github.com/OncoreLLC/CalOrders/wiki/Develop-a-Plan)  
 
 ##Agile Prototype Development   
 
