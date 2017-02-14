@@ -6,7 +6,7 @@ MAINTAINER kpoland kyle.poland@oncorellc.com
 #    apt-get install -qqy less --no-install-recommends && \
 #    apt-get install -qqy vim --no-install-recommends && \
 #    apt-get install -qqy mysql-client --no-install-recommends
-RUN echo "set -o vi" >> /root/.bashrc
+#RUN echo "set -o vi" >> /root/.bashrc
 RUN echo "US/Pacific-New" > /etc/timezone && dpkg-reconfigure --frontend noninteractive tzdata
 
 # one lib and one module into glassfish in the container
