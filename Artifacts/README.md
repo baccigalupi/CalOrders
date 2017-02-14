@@ -34,7 +34,7 @@ Our plan combines our UCD and Agile processes into a cohesive and flexible workf
 
 The team utilized User-Centered-Design (UCD) and Agile development techniques to formulate the product backlog.  All team members participated in the initial meetings with the users which was a natural hook into our Agile methodolgy and gave everyone the opportunity to understand the scope of the project and understand how each of them would contribute to the project's success.  
 
-Below summarizes how we incorporated the “Analyze, Design/Implement, Test and Refine” UCD practices in the development of CalOrders. _(2d)_  
+Below summarizes how we incorporated the “Analyze, Design/Implement, Test and Refine” UCD practices in the development of CalOrders.  Each section is a link that includes more detail on the subject. _(2d)_  
 
 
 Plan | Analyze| Design | Implement | Test & Measure  
