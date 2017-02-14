@@ -58,7 +58,13 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                 ];
 
                 var lgQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.LG_UP);
+                var mdQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.MD_UP);
+                var smQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.SM_UP);
+                var smOnlyQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.SM_ONLY);
                 self.large = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(lgQuery);
+                self.medium = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(mdQuery);
+                self.small = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(smQuery);
+                self.smallOnly = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(smOnlyQuery);
 
 
                 // Below are a subset of the ViewModel methods invoked by the ojModule binding
@@ -256,8 +262,8 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
 
                 self.productSelectChange = function (event, data)
                 {
-                    // Only call if not large screen
-                    if (!self.large() && data.value !== "")
+                    // Only call if small screen
+                    if (self.smallOnly() && data.value !== "")
                     {
                         self.searchProducts(data.value);
                     }
