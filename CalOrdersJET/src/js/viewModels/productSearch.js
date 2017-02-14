@@ -24,7 +24,7 @@
 /*
  * Your about ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojpagingcontrol', 'ojs/ojpagingcontrol-model'],
+define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojpagingcontrol', 'ojs/ojpagingcontrol-model', 'utils/ProductHelper'],
         function (oj, ko, data) {
 
             function ProductSearchViewModel() {
@@ -41,15 +41,25 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                 self.nameSearch = ko.observable('');
                 self.addedProductPhoto = ko.observable();
                 self.addedProductName = ko.observable();
+                self.productCategoryBreadcrumbs = ko.observable();
+                self.errorMessage = ko.observable();
+
+                self.productCategories = [
+                    {code: "DESK", description: "Desktops", parent: "Hardware"},
+                    {code: "LAPT", description: "Laptops", parent: "Hardware"},
+                    {code: "MONT", description: "Monitors", parent: "Hardware"},
+                    {code: "PRNT", description: "Printers", parent: "Hardware"},
+                    {code: "PERI", description: "Peripherals", parent: "Hardware"},
+
+                    {code: "OPSY", description: "OS", parent: "Software"},
+                    {code: "OFFC", description: "Office", parent: "Software"},
+                    {code: "SECC", description: "Security", parent: "Software"},
+                    {code: "UTIL", description: "Utilities", parent: "Software"}
+                ];
 
                 var lgQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.LG_UP);
-                var mdQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.MD_UP);
-                var smQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.SM_UP);
-                var smOnlyQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.SM_ONLY);
                 self.large = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(lgQuery);
-                self.medium = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(mdQuery);
-                self.small = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(smQuery);
-                self.smallOnly = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(smOnlyQuery);
+
 
                 // Below are a subset of the ViewModel methods invoked by the ojModule binding
                 // Please reference the ojModule jsDoc for additionaly available methods.
@@ -67,44 +77,8 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                  */
                 self.handleActivated = function (info) {
                     // Implement if needed
-                };
-
-                /**
-                 * Optional ViewModel method invoked after the View is inserted into the
-                 * document DOM.  The application can put logic that requires the DOM being
-                 * attached here.
-                 * @param {Object} info - An object with the following key-value pairs:
-                 * @param {Node} info.element - DOM element or where the binding is attached. This may be a 'virtual' element (comment node).
-                 * @param {Function} info.valueAccessor - The binding's value accessor.
-                 * @param {boolean} info.fromCache - A boolean indicating whether the module was retrieved from cache.
-                 */
-                self.handleAttached = function (info) {
-                    // Implement if needed
-                };
-
-
-                /**
-                 * Optional ViewModel method invoked after the bindings are applied on this View. 
-                 * If the current View is retrieved from cache, the bindings will not be re-applied
-                 * and this callback will not be invoked.
-                 * @param {Object} info - An object with the following key-value pairs:
-                 * @param {Node} info.element - DOM element or where the binding is attached. This may be a 'virtual' element (comment node).
-                 * @param {Function} info.valueAccessor - The binding's value accessor.
-                 */
-                self.handleBindingsApplied = function (info) {
-                    // Implement if needed
-                };
-
-                /*
-                 * Optional ViewModel method invoked after the View is removed from the
-                 * document DOM.
-                 * @param {Object} info - An object with the following key-value pairs:
-                 * @param {Node} info.element - DOM element or where the binding is attached. This may be a 'virtual' element (comment node).
-                 * @param {Function} info.valueAccessor - The binding's value accessor.
-                 * @param {Array} info.cachedNodes - An Array containing cached nodes for the View if the cache is enabled.
-                 */
-                self.handleDetached = function (info) {
-                    // Implement if needed
+                    console.log("product search = handleActivated");
+                    self.searchProducts('DESK');
                 };
 
                 self.itemOnly = function (context) {
@@ -112,10 +86,17 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                 };
 
                 self.parseProduct = function (response) {
+                    response.compareProduct = ko.observable();
+
                     self.allProduct.push(response);
                 };
 
                 self.searchProducts = function (productType) {
+                    if (document.getElementById('pageErrorContainer') !== null)
+                    {
+                        document.getElementById('pageErrorContainer').hidden = true;
+                    }
+
                     console.log("Search products by " + productType);
 
                     // Remove previous search results
@@ -147,6 +128,20 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                         }
                     });
                 };
+
+                self.productCategoryBreadcrumbs = ko.computed(function () {
+
+                    var result = $.grep(self.productCategories, function (item) {
+                        return item.code === self.selectedProductMenuItem();
+                    });
+                    var category;
+                    if (result.length === 1)
+                    {
+                        category = result[0];
+                    }
+
+                    return category.parent + ' > ' + category.description;
+                });
 
                 self.filteredAllProduct = ko.computed(function () {
 
@@ -180,39 +175,14 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                     return new oj.PagingTableDataSource(self.listViewDataSource());
                 });
 
-                // Perform default product search
-                self.searchProducts('DESK');
-
+                /**
+                 * Get the photo for the product
+                 * 
+                 * @param {type} product
+                 * @returns {undefined}
+                 */
                 self.getPhoto = function (product) {
-                    var file = product.prdImgImage;
-                    var imageSize = product.prdImgImage.length;
-                    var imageType = product.prdCategoryCd.longDesc;
-
-                    var reader = new FileReader();
-
-                    var data = window.atob(file);
-                    var arr = new Uint8Array(data.length);
-                    for (var i = 0; i < data.length; i++) {
-                        arr[i] = data.charCodeAt(i);
-                    }
-
-                    var blob = new Blob([arr.buffer], {size: imageSize, type: imageType});
-
-                    reader.addEventListener("load", function (event) {
-                        var preview = document.getElementById('productImage' + product.prdUid);
-                        preview.src = reader.result;
-                    }, false);
-
-                    if (blob) {
-
-                        try {
-                            reader.readAsDataURL(blob);
-
-                        } catch (err)
-                        {
-                            console.log(err);
-                        }
-                    }
+                    ProductHelper.getPhoto(product);
                 };
 
                 self.cardLayoutHandler = function () {
@@ -223,54 +193,14 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                     self.productLayoutType('productListLayout');
                 };
 
-                self.navigateToProductDetail = function (product) {
-                    console.log("navigating to product detail for " + product.prdUid);
-                    // Store product id parameter
-                    self.router.store(product.prdUid);
-                    return self.router.go("productDetail");
-                };
-
-                self.onEnter = function (data, event) {
-                    if (event.keyCode === 13) {
-                        var emp = {};
-                        emp.empId = data.empId;
-                        self.loadPersonPage(emp);
-                    }
-                    return true;
-                };
-
+                /**
+                 * Add product to the cart
+                 * 
+                 * @param {type} product
+                 * @returns {undefined}
+                 */
                 self.addToCart = function (product) {
-                    var cartProducts;
-
-                    // Get cart - if no cart yet then initialize
-                    if (sessionStorage.cartProducts !== undefined && sessionStorage.cartProducts !== "")
-                    {
-                        cartProducts = JSON.parse(sessionStorage.cartProducts);
-
-                    } else
-                    {
-                        cartProducts = [];
-                    }
-
-                    // If the product already exists in the cart, then just change the quantity
-                    var result = $.grep(cartProducts, function (item) {
-                        return item.prdUid === product.prdUid;
-                    });
-                    var cartProduct;
-
-                    if (result.length === 1)
-                    {
-                        cartProduct = result[0];
-                        cartProduct.quantity += 1;
-                    } else
-                    {
-                        cartProduct = product;
-                        cartProduct.quantity = 1;
-                        cartProducts.push(cartProduct);
-                    }
-
-                    // Save cart back into session
-                    sessionStorage.cartProducts = JSON.stringify(cartProducts);
+                   ProductHelper.addProductToCart(product);
 
                     // Show confirmation message                    
                     self.addedProductName(product.prdName);
@@ -288,11 +218,47 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                     return self.router.go("cart");
                 };
 
+                self.navigateToProductDetail = function (product) {
+                    console.log("navigating to product detail for " + product.prdUid);
+                    // Store product id parameter
+                    self.router.store(product.prdUid);
+                    return self.router.go("productDetail");
+                };
+
+                self.navigateToCompareProducts = function ()
+                {
+                    document.getElementById('pageErrorContainer').hidden = true;
+
+                    var productsToCompare = [];
+                    var val;
+
+                    for (val in self.filteredAllProduct())
+                    {
+                        if (self.filteredAllProduct()[val].compareProduct())
+                        {
+                            productsToCompare.push(self.filteredAllProduct()[val]);
+                        }
+                    }
+
+                    if (productsToCompare.length === 2)
+                    {
+                        sessionStorage.productsToCompare = JSON.stringify(productsToCompare);
+                        sessionStorage.productsToCompareBreadcrumbs = self.productCategoryBreadcrumbs();
+                        
+                        return self.router.go("productCompare");
+                    } else
+                    {
+                        self.errorMessage("Please select two products to compare");
+                        document.getElementById('pageErrorContainer').hidden = false;
+                        return false;
+                    }
+                };
+
                 self.productSelectChange = function (event, data)
                 {
-                    if (data.value !== "")
+                    // Only call if not large screen
+                    if (!self.large() && data.value !== "")
                     {
-                        console.log("productSelectChange: " + data.value);
                         self.searchProducts(data.value);
                     }
                 };
@@ -303,6 +269,6 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
              * each time the view is displayed.  Return an instance of the ViewModel if
              * only one instance of the ViewModel is needed.
              */
-            return ProductSearchViewModel;
+            return new ProductSearchViewModel();
         }
 );
