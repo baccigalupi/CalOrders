@@ -30,8 +30,18 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
             function OrderConfirmationViewModel() {
                 var self = this;
 
+                self.addressLine1 = ko.observable();
+                self.addressLine2 = ko.observable();
+                self.cityStateZip = ko.observable();
+                self.itemTotalPrice = ko.observable();
+                self.totalPrice = ko.observable();
+                self.shippingPrice = ko.observable();
+
+
+
+
                 self.router = oj.Router.rootInstance;
-                
+
                 // Below are a subset of the ViewModel methods invoked by the ojModule binding
                 // Please reference the ojModule jsDoc for additionaly available methods.
 
@@ -47,7 +57,21 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                  * the promise is resolved
                  */
                 self.handleActivated = function (info) {
-                    // Implement if needed
+
+
+                    self.addressLine1('100 Test St');
+                    self.addressLine2('Suite 100');
+                    self.cityStateZip('Folsom, CA 95630');
+                    self.itemTotalPrice('$3923.00');
+                    self.totalPrice('$939.99');
+                    self.shippingPrice('$34.93');
+
+
+                    if (sessionStorage.authenticated === "false")
+                    {
+                        return self.router.go('welcome');
+                    }
+
                 };
 
                 /**
@@ -91,28 +115,23 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                 self.itemOnly = function (context) {
                     return context['leaf'];
                 };
-                
-              
-                
+
+
+
                 self.searchProducts = function (productType) {
                     var filename = 'js/data/products_desktops.json';
-                    
+
                     console.log("Search " + productType + " products");
 
-                    if ( productType === 'laptops') {
+                    if (productType === 'laptops') {
                         filename = 'js/data/products_laptops.json'
                     }
-
 
                     data.fetchData(filename).then(function (people) {
                         self.allPeople(people.products);
                     }).fail(function (error) {
                         console.log('Error in getting People data: ' + error.message);
                     });
-
-//                self.parsePeople = function (response) {
-//                    return response['products'];
-//                };
 
                     self.model = oj.Model.extend({
                         idAttribute: 'productId'
@@ -123,7 +142,21 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                         model: self.model
                     });
                 };
-                
+
+
+                self.getPhoto = function (productId) {
+                    console.log("Image for product " + productId);
+                    var src = 'css/images/desktop.png';
+
+                    if (productId < 1000)
+                    {
+                        src = 'css/images/laptop.png';
+                    }
+
+                    return src;
+                };
+
+
                 self.selectedItem = ko.observable('home');
 
                 self.peopleLayoutType = ko.observable('peopleCardLayout');
@@ -167,67 +200,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                     return new oj.PagingTableDataSource(self.listViewDataSource());
                 });
 
-                self.getPhoto = function (productId) {
-                    console.log("Image for product " + productId);
-                    var src = 'css/images/desktop.png';
-                    
-                    if ( productId < 1000)
-                    {
-                        src = 'css/images/laptop.png';
-                    }
 
-                    return src;
-                };
-
-                self.getEmail = function (emp) {
-                    return "mailto:" + emp.email + '@example.net';
-                };
-
-                self.getFacetime = function (emp) {
-                    return "#";
-                };
-
-                self.getChat = function (emp) {
-                    return "#";
-                };
-                
-                self.getItemTotalPrice = function () {
-                    
-                    return "$1000.00";
-                };
-
-                self.getShippingPrice = function () {
-                    return "$25.00";
-                };
-
-                self.getTotalPrice = function () {
-                    return "$1000.00";
-                };
-
-                self.getOrg = function (org, event) {
-                    alert('This will take you to the employee page and highlight the team infotile');
-                };
-                
-                self.getAddressLine1 = function(){
-                    return "101 St";
-                };
-                
-                self.getAddressLine2 = function(){
-                    return "Suite 100";
-                };
-                
-                self.getCityStateZip = function(){
-                    return "Folsom, CA 95630";
-                };
-                
-                self
-
-                self.getTenure = function (emp) {
-                    var now = new Date().getFullYear();
-                    var hired = new Date(emp.hireDate).getFullYear();
-                    var diff = now - hired;
-                    return diff;
-                };
 
                 self.cardLayoutHandler = function () {
                     self.peopleLayoutType('peopleCardLayout');
@@ -247,7 +220,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                         oj.Router.rootInstance.go('person');
                     }
                 };
-                
+
                 /*
                  * Places the Order.
                  * 
@@ -258,10 +231,10 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                 {
                     return true;
                 };
-                
-                self.continueShoppingClick = function(data, event)
+
+                self.continueShoppingClick = function (data, event)
                 {
-                       return self.router.go("productSearch");
+                    return self.router.go("productSearch");
                 };
 
                 self.onEnter = function (data, event) {

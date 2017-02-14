@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * The PartyData object wraps the common properties of an Employee.
@@ -37,6 +38,34 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement
 public class PartyData extends BaseData {
+
+    /**
+     * @return the depZip5
+     */
+    public String getDepZip5() {
+        return depZip5;
+    }
+
+    /**
+     * @param depZip5 the depZip5 to set
+     */
+    public void setDepZip5(String depZip5) {
+        this.depZip5 = depZip5;
+    }
+
+    /**
+     * @return the depZip4
+     */
+    public String getDepZip4() {
+        return depZip4;
+    }
+
+    /**
+     * @param depZip4 the depZip4 to set
+     */
+    public void setDepZip4(String depZip4) {
+        this.depZip4 = depZip4;
+    }
 
     private Integer ptyUid;
 
@@ -60,8 +89,79 @@ public class PartyData extends BaseData {
 
     private String depName;
 
+    private String depAddressLine1;
+
+    private String depAddressLine2;
+
+    private String depCity;
+
+    private String depState;
+
+    private String depZip5;
+    
+    private String depZip4;
+
+    private String calculatedCityStateZip;
+
     private List<GroupData> groupList = new ArrayList<>(1);
 
+    /**
+     * @return the depAddressLine1
+     */
+    public String getDepAddressLine1() {
+        return depAddressLine1;
+    }
+
+    /**
+     * @param depAddressLine1 the depAddressLine1 to set
+     */
+    public void setDepAddressLine1(String depAddressLine1) {
+        this.depAddressLine1 = depAddressLine1;
+    }
+
+    /**
+     * @return the depAddressLine2
+     */
+    public String getDepAddressLine2() {
+        return depAddressLine2;
+    }
+
+    /**
+     * @param depAddressLine2 the depAddressLine2 to set
+     */
+    public void setDepAddressLine2(String depAddressLine2) {
+        this.depAddressLine2 = depAddressLine2;
+    }
+
+    /**
+     * @return the depCity
+     */
+    public String getDepCity() {
+        return depCity;
+    }
+
+    /**
+     * @param depCity the depCity to set
+     */
+    public void setDepCity(String depCity) {
+        this.depCity = depCity;
+    }
+
+    /**
+     * @return the depState
+     */
+    public String getDepState() {
+        return depState;
+    }
+
+    /**
+     * @param depState the depState to set
+     */
+    public void setDepState(String depState) {
+        this.depState = depState;
+    }
+
+    
     /**
      * @return the ptyUid
      */
@@ -229,6 +329,34 @@ public class PartyData extends BaseData {
     public void setGroupList(List<GroupData> groupList) {
         this.groupList = groupList;
     }
- 
+
+    public String getCalculatedCityStateZip() {
+        this.calculatedCityStateZip = StringUtils.EMPTY;
+
+        if (StringUtils.isNotBlank(this.depCity)) {
+            this.calculatedCityStateZip += this.depCity;
+        }
+
+        if (StringUtils.isNotBlank(this.depState)) {
+            this.calculatedCityStateZip += "," + this.depState;
+        }
+
+        if (StringUtils.isNotBlank(this.depZip5)) {
+            this.calculatedCityStateZip += " " + this.depZip5;
+            
+            if(StringUtils.isNotBlank(this.depZip4))
+            {
+                this.calculatedCityStateZip += "-" + this.depZip4;
+            }
+        }
+
+        return this.calculatedCityStateZip;
+    }
+    
+    
+    public void setCalculatedCityStateZip(String calculatedCityStateZip)
+    {
+        this.calculatedCityStateZip = calculatedCityStateZip;
+    }
 
 }
