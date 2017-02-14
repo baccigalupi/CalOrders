@@ -114,7 +114,7 @@ public class Order1FacadeRESTExtension extends Order1FacadeREST {
                 order.setOrdStatusCd(ordStatusCd);
             }
 
-            Party party = this.partyFacadeRESTExtension.find(orderObject.getString("partyUid", null));
+            Party party = this.partyFacadeRESTExtension.find(orderObject.getInt("partyUid"));
 
             if (party == null) {
                 throw new DataAccessException(ErrorCode.DATAACCESSERROR.toString());
@@ -140,7 +140,7 @@ public class Order1FacadeRESTExtension extends Order1FacadeREST {
                 orderProductAssoc.setUpdateUserId(orderObject.getString("updateUserId", null));
                 orderProductAssoc.setCreateTs(new Date());
                 orderProductAssoc.setCreateUserId(orderObject.getString("createUserId", null));
-                orderProductAssoc.setOpaQuantity(orderObject.getInt("quantity"));
+                orderProductAssoc.setOpaQuantity(productObject.getInt("quantity"));
                 orderProductAssoc.setOpaPrice(product.getPrdPrice().multiply(BigDecimal.valueOf(orderProductAssoc.getOpaQuantity())));
 
                 this.orderProductAssocFacadeREST.create(orderProductAssoc);
@@ -162,7 +162,7 @@ public class Order1FacadeRESTExtension extends Order1FacadeREST {
                 orderProductAssoc.setUpdateUserId(orderObject.getString("updateUserId", null));
                 orderProductAssoc.setCreateTs(new Date());
                 orderProductAssoc.setCreateUserId(orderObject.getString("createUserId", null));
-                orderProductAssoc.setOpaQuantity(orderObject.getInt("quantity"));
+                orderProductAssoc.setOpaQuantity(serviceObject.getInt("quantity"));
                 orderProductAssoc.setOpaPrice(service.getPrsPrice().multiply(BigDecimal.valueOf(orderProductAssoc.getOpaQuantity())));
 
                 this.orderProductAssocFacadeREST.create(orderProductAssoc);

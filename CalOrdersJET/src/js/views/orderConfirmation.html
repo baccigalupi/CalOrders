@@ -1,0 +1,118 @@
+<!--
+ * The MIT License
+ *
+ * Copyright 2017 OnCore Consulting LLC, 2017
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ * -->
+<div id="cartWrapperDiv" class="oj-hybrid-padding">
+
+    <!-- Page Title -->
+    <div id="pageTitleContainer" class="oj-flex-item oj-sm-6">
+        <h1 style="margin-bottom:0">Order Confirmation</h1>
+    </div>
+
+    <!-- Page Content -->
+    <div class="oj-panel oj-flex oj-sm-flex-wrap-nowrap">
+        <div id="cartWrapperDiv" class="oj-panel oj-flex-item oj-sm-flex-wrap-nowrap">
+
+            <!-- this is the listLayout template. It uses the ojListView component to do the layout and the pagination. -->
+            <ul id="listview"
+                data-bind="ojComponent: {component: 'ojListView',
+            data: listViewDataSource,
+            item: {template: 'peoplelist_template'},
+            selectionMode: 'none',
+            selection: [],
+            optionChange: changeHandler,
+            rootAttributes: {style: 'width:100%;height:100%;overflow:auto; margin-top: 5px'},
+            scrollPolicy: 'loadMoreOnScroll',
+            scrollPolicyOptions: {fetchSize: 10}}">
+            </ul>
+
+            <!-- this is the content that is loaded by the ojListView component above -->
+            <script id="peoplelist_template" type="text/html">
+                <li class="oj-flex-item oj-sm-12" data-bind="click: $parent.loadPersonPage">
+                    <div class="oj-flex">
+                        <div class="oj-flex-item">
+                            <div class="oj-flex oj-sm-6">
+                                <img alt="employee image" style="float:left;" 
+                                     data-bind="attr: {src: $parent.getPhoto($data['empId'])}"/>
+                            </div>
+                            <div class="oj-flex oj-sm-6">
+
+                                <h4 data-bind="text: $data['description']"></h4>
+                            </div>
+                        </div>
+                        <div class="oj-flex-item oj-sm-3">
+                            <h4>1</h4>
+                        </div>
+                        <div class="oj-flex-item oj-sm-3">
+                            <h4>Price: $<span data-bind="text: $data['price']"/></h4>
+                        </div>
+                    </div>
+            </div>
+            </li>
+            </script>
+        </div>
+    </div>
+    <div class="oj-padding-vertical"></div>
+
+ 
+    <!-- CONFIRMATION SUMMARY -->
+    <div class="oj-md-odd-cols-4">
+        <div class="oj-flex">
+            <div>
+
+                <div class="oj-sm-justify-content confirmation_bold">Shipping Address:</div>
+                <div class="oj-padding-vertical"></div>
+                <div class="oj-sm-justify-content"><div data-bind="text: addressLine1"></div></div>
+                <div class="oj-sm-justify-content"><div data-bind="text: addressLine2"></div></div>
+                <div class="oj-sm-justify-content"><div data-bind="text: cityStateZip"></div></div>
+
+
+                <div>
+
+                    <div class="oj-padding-vertical"></div>
+                    <div class="oj-sm-justify-content confirmation_bold">Order Totals:</div>
+                    <div class="oj-padding-vertical"></div>
+                    <div class="oj-sm-justify-content"><div><div class="confirmation_bold_label">Total:</div> <div class="confirmation_float_right" data-bind="text: itemTotalPrice"></div></div></div>
+                    <div class="oj-sm-justify-content"><div><div class="confirmation_bold_label">Shipping:</div> <div class="confirmation_float_right" data-bind="text: shippingPrice"></div></div></div>
+                    <div class="oj-sm-justify-content"><div><div class="confirmation_bold_label">Total Price:</div> <div class="confirmation_float_right" data-bind="text: totalPrice"></div></div></div>
+                </div>
+            </div>
+        </div>
+   <!-- END CONFIRMATION SUMMARY -->
+
+ 
+
+    </div>
+
+    <div class="oj-padding-vertical"></div>
+  
+    <div class="oj-flex oj-sm-justify-content-flex-end">
+
+        <div class="oj-flex">    
+
+            <button id= "continueShopping" 
+                    data-bind="click: continueShoppingClick, ojComponent: { component: 'ojButton', label: 'Continue Shopping' }">
+            </button> 
+        </div>
+     
+    </div>
+ 

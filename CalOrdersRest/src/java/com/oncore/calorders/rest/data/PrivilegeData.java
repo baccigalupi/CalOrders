@@ -23,8 +23,6 @@
  */
 package com.oncore.calorders.rest.data;
 
-
- 
 import com.oncore.calorders.core.data.BaseData;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -39,6 +37,7 @@ public class PrivilegeData extends BaseData {
     private String pageIdentifier;
     private String pageDescription;
     private String componentIdentifier;
+    private Integer pageOrder;
     private Boolean canRead = Boolean.FALSE;
     private Boolean canWrite = Boolean.FALSE;
 
@@ -124,6 +123,20 @@ public class PrivilegeData extends BaseData {
      */
     public void setCanWrite(Boolean canWrite) {
         this.canWrite = canWrite;
+    }
+
+    /**
+     * @return the pageOrder
+     */
+    public Integer getPageOrder() {
+        return pageOrder;
+    }
+
+    /**
+     * @param pageOrder the pageOrder to set
+     */
+    public void setPageOrder(Integer pageOrder) {
+        this.pageOrder = pageOrder;
     }
 
 }

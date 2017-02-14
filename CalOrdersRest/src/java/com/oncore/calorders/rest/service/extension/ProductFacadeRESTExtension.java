@@ -25,9 +25,9 @@ package com.oncore.calorders.rest.service.extension;
 
 import com.oncore.calorders.rest.Product;
 import com.oncore.calorders.rest.service.ProductFacadeREST;
-import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -41,6 +41,14 @@ import javax.ws.rs.core.MediaType;
 @Stateless
 @Path("com.oncore.calorders.rest.product")
 public class ProductFacadeRESTExtension extends ProductFacadeREST {
+
+    public ProductFacadeRESTExtension() {
+
+    }
+
+    public ProductFacadeRESTExtension(EntityManager em) {
+        super(em);
+    }
 
     @GET
     @Path("findActiveProductsByProductType/{productTypeCode}")
@@ -58,5 +66,29 @@ public class ProductFacadeRESTExtension extends ProductFacadeREST {
                 .getResultList();
 
         return results;
+    }
+
+    /**
+     * Determines if a user id exists
+     *
+     * @param userId a valid userid
+     * @return an true if the user id is already used.
+     */
+    @GET
+    @Path("doesProductNameExist/{productName}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public List<Product> doesProductNameExist(@PathParam("productName") String productName) {
+
+        List<Product> products = null;
+
+        try {
+            products = getEntityManager().createNamedQuery("Product.findByPrdName",
+                    Product.class).setParameter("prdName", productName).getResultList();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            products = null;
+        }
+
+        return products;
     }
 }

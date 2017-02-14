@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<!--
+The OnCore Consulting LLC License
+
+Copyright 2016 OnCore Consulting LLC, All Rights Reserved.
+
+Permission IS NOT GRANTED to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, unless the following conditions are met:
+
+Written permission is obtained from  
+OnCore Consulting LLC and the above copyright 
+notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+-->
+<div id="productAddWrapper" class="oj-hybrid-padding">
+
+    <div class="oj-form">
+
+
+        <!-- success dialog box -->
+        <div id="dialogWrapper">
+            <div style="display:none" id="modalDialog1" title="Success" 
+                 data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide'}">
+                <div class="oj-dialog-body">
+                    The employee was successfully created.
+                </div>
+                <div class="oj-dialog-footer">
+                    <button id= "close"
+                            data-bind="click: closeClickEvent, ojComponent: { component: 'ojButton', label: 'OK'}">
+                    </button> 
+                </div>
+            </div>
+        </div>
+        <!-- end success dialog box -->
+
+        <div class="oj-panel oj-sm-12 oj-flex">
+
+
+            <h2>Add Product</h2>
+            <div id="productAddContent" class="oj-panel oj-flex-item">
+                <!-- global error messages -->
+                <div class="oj-messaging-inline-container" id="pageError" aria-live="polite" hidden>
+                    <div class="oj-message oj-message-error">
+                        <span class="oj-component-icon oj-message-status-icon oj-message-error-icon" title="Error" role="img"></span>
+                        <span class="oj-message-content">
+                            <div class="oj-message-summary">System Error</div>
+                            <div class="oj-message-detail">
+                                <span id="pageErrorDetail">ERROR</span>
+                            </div>
+
+                        </span>
+                    </div>
+
+                </div>
+                <!-- end global error message -->
+
+                <div class="oj-padding-vertical"></div>
+
+                <div class="oj-padding-vertical"></div>
+
+                <div class='oj-form-layout'>
+                    <!--                    <div class="oj-form oj-md-odd-cols-12 oj-md-odd-cols-4 
+                                             oj-form-cols-labels-inline oj-form-cols" >-->
+                    <!-- Product Name -->
+                    <div class="oj-flex">  
+                        <div class="oj-flex-item">
+                            <label for="productName">Product Name:</label>
+                            <input id="productName"  type="text" required maxlength="45"
+                                   data-bind="ojComponent: {
+                                                component: 'ojInputText', 
+                                                value:productName, required: true,
+                                                validators: [{type: 'regExp', options: {
+                                                    pattern: '[:\\-!@#$%^&*\\w\\s]{1,45}',
+                                                    hint: 'Enter a product name that is less than 45 alphanumeric characters (including the following characters :-!@#$%^&*)',
+                                                    messageDetail: 'The product name must be less than 45 alphanumeric characters (including the following characters :-!@#$%^&*)'} },
+                                                    validateProductName],
+                                                        messagesCustom: productNameMessage,
+                                                   invalidComponentTracker: tracker}">
+                        </div>
+                    </div>
+
+                    <!-- Product Category -->
+                    <div class="oj-flex">
+                        <div class="oj-flex-item">
+                            <label for="productCategory">Product Category:</label>
+                            <select id="productCategory" title="Select a category from the list"
+                                    data-bind="ojComponent: {
+                                    component: 'ojSelect', value: productCategory, required: true,
+                                    options: categories,
+                                    validators: [validateProductCategory],
+                                    invalidComponentTracker: tracker,
+                                    messagesCustom: productCategoryMessages}">
+                            </select>                                
+                        </div>
+                    </div>
+
+                    <!-- Vendor -->
+                    <div class="oj-flex">
+                        <div class="oj-flex-item">
+                            <label for="vendor">Vendor:</label>
+                            <select id="vendor" title="Select a vendor from the list" 
+                                    data-bind="ojComponent: {
+                                component: 'ojSelect', value: vendor, required: true,
+                                    options: vendors,
+                                    validators: [validateVendor],
+                                    invalidComponentTracker: tracker,
+                                    messagesCustom: vendorMessages}">
+                            </select>                                
+                        </div>
+                    </div>
+
+                    <!-- Product Price -->
+                    <div class="oj-flex"> 
+                        <div class="oj-flex-item">
+                            <label for="productPrice">Product Price:</label>
+                            <input id="productPrice" type="text"  required maxlength="9"
+                                   data-bind="ojComponent: {
+                                    component: 'ojInputText', 
+                                    value: productPrice, 
+                                    required: true,  
+                                    validators: [{type: 'regExp', options: {
+                                                 pattern: '[0-9]+(\.[0-9][0-9]?)?',
+                                                 hint: 'Enter a price that is number',
+                                                 messageDetail: 'The price must be number'} }],
+                                    invalidComponentTracker: tracker}">
+                        </div>
+                    </div>
+
+                    <!-- Product Description -->
+                    <div class="oj-flex"> 
+                        <div class="oj-flex-item">
+                            <label for="productDescription">Product Description:</label>
+                            <textarea id="productDescription" type="text"  required  style="min-height: 10em"
+                                      data-bind="ojComponent: {
+                                    component: 'ojTextArea', rootAttributes: {
+                                            style:'max-width:75%; resize: both;'},
+                                    value: productDescription, 
+                                    required: true,  
+                                    validators: [{type: 'regExp', options: {
+                                                 pattern: '[:\\-!@#$%^&*\\w\\s]{1,250}',
+                                                 hint: 'Enter a breif product description that is less than 250 alphanumeric characters (including the following characters :-!@#$%^&*)',
+                                                 messageDetail: 'The breif product description must be less than 250 alphanumeric characters (including the following characters :-!@#$%^&*)'} }],
+                                    invalidComponentTracker: tracker}">
+                            </textarea>
+                        </div>
+                    </div>
+
+
+                    <!-- Full Product Description -->
+                    <div class="oj-flex"> 
+                        <div class="oj-flex-item">
+                            <label for="productFullDesc">Full Product Description:</label>
+                            <textarea id="productFullDesc" type="text"  required style="min-height: 15em"
+                                      data-bind="ojComponent: {
+                                    component: 'ojTextArea', rootAttributes: {
+                                            style:'max-width:75%'},
+                                    value: productFullDesc, 
+                                    required: true,  
+                                    validators: [{type: 'regExp', options: {
+                                                 pattern: '[:\\-!@#$%^&*\\w\\s]{1,2048}',
+                                                 hint: 'Enter a full product description that is less than 2048 alphanumeric characters (including the following characters :-!@#$%^&*)',
+                                                 messageDetail: 'The full product description must be less than 2048 alphanumeric characters (including the following characters :-!@#$%^&*)'} }],
+                                    invalidComponentTracker: tracker}"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Related Services -->
+                    <div class="oj-flex">
+                        <div class="oj-flex-item">
+                            <label for="relatedServices">Avaliable Related Services:</label>
+                            <select id="relatedServices" title="Select related services from the list"
+                                    data-bind="ojComponent: {
+                                component: 'ojSelect', value: relatedServices, required: false, multiple: true,
+                                    options: avaliableRelatedServices,
+                                    invalidComponentTracker: tracker}">
+                            </select>                                
+                        </div>
+                    </div>
+
+
+                    <div class="oj-padding-vertical"></div>
+
+                    <div class="oj-flex">   
+                        <button id= "cancel"
+                                data-bind="click: buttonClick, ojComponent: { component: 'ojButton', label: 'Cancel' }">
+                        </button>
+
+                        <div class="oj-padding-horizontal"></div>
+
+                        <button id= "save"
+                                data-bind="click: buttonClick, ojComponent: { component: 'ojButton', label: 'Save' }">
+                        </button> 
+                    </div>
+
+                    <!--                    </div>-->
+                </div>
+            </div>
+
+        </div>
+    </div>

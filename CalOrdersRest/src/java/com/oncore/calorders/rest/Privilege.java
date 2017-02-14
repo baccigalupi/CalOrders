@@ -27,6 +27,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.Cacheable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -51,6 +52,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author oncore
  */
 @Entity
+@Cacheable(false)
 @Table(name = "PRIVILEGE")
 @XmlRootElement
 @NamedQueries({
@@ -67,7 +69,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Privilege.findByUpdateTs", query = "SELECT p FROM Privilege p WHERE p.updateTs = :updateTs")})
 public class Privilege implements Serializable {
 
-    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -92,6 +93,12 @@ public class Privilege implements Serializable {
     @Size(max = 45)
     @Column(name = "PRV_MISC")
     private String prvMisc;
+
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "PRV_ORDER")
+    private Integer prvOrder;
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 32)
@@ -233,6 +240,20 @@ public class Privilege implements Serializable {
         this.groupPrivilegeAssocCollection = groupPrivilegeAssocCollection;
     }
 
+    /**
+     * @return the prvOrder
+     */
+    public Integer getPrvOrder() {
+        return prvOrder;
+    }
+
+    /**
+     * @param prvOrder the prvOrder to set
+     */
+    public void setPrvOrder(Integer prvOrder) {
+        this.prvOrder = prvOrder;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -257,5 +278,7 @@ public class Privilege implements Serializable {
     public String toString() {
         return "com.oncore.calorders.rest.Privilege[ prvUid=" + prvUid + " ]";
     }
-    
+
+    private static final long serialVersionUID = 1L;
+
 }
