@@ -59,4 +59,28 @@ public class ProductFacadeRESTExtension extends ProductFacadeREST {
 
         return results;
     }
+    
+    /**
+     * Determines if a user id exists
+     *
+     * @param userId a valid userid
+     * @return an true if the user id is already used.
+     */
+    @GET
+    @Path("doesProductNameExist/{productName}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public List<Product> doesProductNameExist(@PathParam("productName") String productName) {
+
+        List<Product> products = null;
+
+        try {
+            products = getEntityManager().createNamedQuery("Product.findByPrdName",
+                    Product.class).setParameter("prdName", productName).getResultList();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            products = null;
+        }
+
+        return products;
+    }
 }
