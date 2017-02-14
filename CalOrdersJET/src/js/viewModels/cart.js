@@ -94,6 +94,11 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                         self.itemTotalPrice("$0.00");
                         self.shippingPrice("$0.00");
                         self.totalPrice("$0.00");
+                        self.cart = ko.observableArray([]);
+
+                        self.listViewDataSource = ko.computed(function () {
+                            return new oj.ArrayTableDataSource(self.cart(), {idAttribute: 'id'});
+                        });
                     }
                     sessionStorage.itemTotalPrice = self.itemTotalPrice();
                     sessionStorage.shippingPrice = self.shippingPrice();
@@ -178,37 +183,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                  */
                 self.placeOrderClick = function (trackerObj)
                 {
-                    // TODO: Replace with cart items from session
-                    var order = {createUserId: "Create1", updateUserId: "Update1",
-                        orderStatusCd: "SUBT",
-                        partyUid: 1,
-                        products: [{prdUid: 6, quantity: 3}, {prdUid: 10, quantity: 1}],
-                        services: [{prsUid: 1, quantity: 5}, {prsUid: 2, quantity: 6}]};
-
-                    // build our REST URL
-                    var serviceEndPoints = new ServiceEndPoints();
-                    var serviceURL = serviceEndPoints.getEndPoint('createOrder');
-
-
-                    var OrderService = oj.Model.extend({
-                        urlRoot: serviceURL
-                    });
-
-                    var orderService = new OrderService();
-
-
-                    // execute REST createOrder operation
-                    orderService.save(
-                            order,
-                            {
-                                success: function (myModel, response, options) {
-                                    return self.router.go("orderConfirmation");
-                                },
-                                error: function (jqXHR, textStatus, errorThrown) {
-
-                                    console.log("Unable to create the order: " + errorThrown);
-                                }
-                            });
+                   return self.router.go("orderConfirmation");
 
                 };
 
