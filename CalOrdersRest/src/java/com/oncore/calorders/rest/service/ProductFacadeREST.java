@@ -51,6 +51,11 @@ public class ProductFacadeREST extends AbstractFacade<Product> {
         super(Product.class);
     }
 
+    public ProductFacadeREST(EntityManager entityManager) {
+        super(Product.class);
+        this.em = entityManager;
+    }
+
     @POST
     @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -103,5 +108,5 @@ public class ProductFacadeREST extends AbstractFacade<Product> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
 }
