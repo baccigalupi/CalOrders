@@ -7,7 +7,7 @@ MAINTAINER kpoland kyle.poland@oncorellc.com
 #    apt-get install -qqy vim --no-install-recommends && \
 #    apt-get install -qqy mysql-client --no-install-recommends
 #RUN echo "set -o vi" >> /root/.bashrc
-RUN echo "US/Pacific-New" > /etc/timezone && dpkg-reconfigure --frontend noninteractive tzdata
+#RUN echo "US/Pacific-New" > /etc/timezone && dpkg-reconfigure --frontend noninteractive tzdata
 
 # one lib and one module into glassfish in the container
 # TODO this was needed in glassfish, assume it is necessary in payara41
@@ -24,12 +24,12 @@ ENV databaseuser someuser
 ENV databasepassword somepassword
 
 # entrypoint start script that starts glassfish, installs the EAR, stops glassfish, then starts glassfish
-COPY docker/start_payara.sh /
+COPY docker/start_payara.sh /opt/payara41/deployments/
 # make sure it has unix line endings and is executable
-RUN /bin/sed -i -e 's/\r$//' /start_payara.sh && /bin/chmod +x /start_payara.sh
+RUN /bin/sed -i -e 's/\r$//' /opt/payara41/deployments/start_payara.sh && /bin/chmod +x /opt/payara41/deployments/start_payara.sh
 
 # copy built WARs into the container
-COPY CalOrdersRest/dist/CalOrdersRest.war /
+COPY CalOrdersRest/dist/CalOrdersRest.war /opt/payara41/deployments/
 
 RUN /bin/mkdir /home/oncore && /bin/ln -s /opt/payara41/ /home/oncore/payara41
 
