@@ -1,0 +1,139 @@
+<!--
+ * The MIT License
+ *
+ * Copyright 2017 OnCore Consulting LLC, 2017
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ * -->
+<div id="productCompareWrapperDiv" class="oj-hybrid-padding">
+
+    <!-- Page Title -->
+    <div id="pageTitleContainer" class="oj-flex-item oj-sm-6">
+        <h2 style="margin-bottom:0">Product Compare</h2>
+    </div>
+
+    <div class="oj-padding-vertical"></div>
+
+    <!-- Bread crumbs -->
+    <div id="productSearchBreadcrumbs" class="oj-sm-only-hide">
+        <span data-bind="text: productsToCompareBreadcrumbs"></span>
+        <div class="oj-padding-vertical"></div>
+    </div>
+
+    <!-- Page Content -->
+    <div id="productCompareWrapperDiv" class="oj-panel oj-flex-item">
+        <div class="justifyCenter">
+
+            <!-- Product Compare Results -->
+            <div id="productlistview" >
+                <div class="oj-flex oj-flex-items-pad oj-sm-flex-direction-column" data-bind="template: 'productCardLayout'"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- start add cart dialog box -->
+<div id="addToCartConfirmationDialogWrapper">
+    <div style="display:none" id="addToCartConfirmationDialog" title="Successfully Added to Cart" 
+         data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide'}">
+
+        <div class="oj-dialog-body">
+
+            <div class="oj-flex">
+                <div class="oj-flex-item">
+                    <img alt="product image"  data-bind="attr: {src: addedProductPhoto}" height="100" width="100"/>
+                </div>
+
+                <div class="oj-flex-item oj-sm-justify-content-center">
+                    <span data-bind="text: 'Product '"></span>
+                    <span class="confirmation-product-name" data-bind="text: addedProductName"></span>
+                    <span data-bind="text: ' has been added to your cart'"></span>
+                </div>
+            </div>
+        </div>
+        <div class="oj-dialog-footer">
+            <div class="dialogButtonLeft">
+                <button id= "continueShopping"
+                        data-bind="click: navigateToProductSearch, ojComponent: { component: 'ojButton', label: 'Continue Shopping'}">
+                </button> 
+            </div>
+
+            <div class="dialogButtonRight">
+                <button id= "cart"
+                        data-bind="click: navigateToCart, ojComponent: { component: 'ojButton', label: 'View Cart'}">
+                </button> 
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- end add cart dialog box-->
+
+
+<!-- Product Card View -->
+<script id="productCardLayout" type="text/html">
+    <div class="oj-flex oj-flex-items-pad">
+        <ul id="listviewcard"
+            class="oj-flex oj-listview-card-layout"
+            data-bind="ojComponent: {component: 'ojListView',
+                data: cardViewDataSource,
+                rootAttributes: {'style': 'width:100%'},
+            item: {template: 'productcard_template'}}">
+        </ul>
+    </div>
+    <div class="oj-flex oj-flex-items-pad">
+        <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', mode: 'loadMore', data: cardViewDataSource, pageSize: 2}">
+        </div>
+    </div>
+</script>
+
+<!-- Product Card view (card format)  -->
+<script id="productcard_template" type="text/html">
+    <li class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-4 oj-xl-3" style="margin:0;border-style:none">
+        <div class="oj-panel oj-panel-alt1" style="margin: 5px 0px 10px 0px;">
+
+            <div data-bind="click: $parent.navigateToProductDetail">
+
+                <div class="oj-flex-item oj-sm-4">
+                    <img alt="product image" data-bind="attr: {
+                        id: 'productImage' + $data['prdUid'], 
+                        src: $parent.getPhoto($data), 
+                        height: $parent.large() ? '300' : '150',
+                        width: $parent.large() ? '300' : '150'}"/>
+                </div>
+                <div class="oj-flex-item">
+                    <h3 aria-label="product description" data-bind="text: $data['prdName']" tabindex="0"></h3>
+                    <div data-bind="text: '$' + $data['prdPrice']"></div>
+                </div>
+            </div>
+
+            <div class="oj-padding-vertical"></div>
+
+            <div class="oj-flex-item">
+                <div data-bind="text: $data['prdLongDesc']"></div>
+            </div>
+
+            <div class="oj-padding-vertical"></div>
+
+            <div class="oj-flex-item">
+                <button id= "addToCart" data-bind="click: $parent.addToCart, ojComponent: { component: 'ojButton', label: 'Add to Cart'}"></button> 
+            </div>
+        </div>
+    </li>
+</script>
