@@ -45,7 +45,7 @@ Plan | Analyze| Design | Implement | Test & Measure
 
 ##Agile Prototype Development   
 
-Following [Agile](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Methodolgy), provided the team an iterative approach, where feedback informed subsequent work or versions of the prototype_(2j)_.   
+Following [Oncore's Agile methodology](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Methodolgy), provided the team an iterative approach, where feedback informed subsequent work or versions of the prototype_(2j)_.   
 
 ###Principles
 
@@ -60,10 +60,10 @@ There are many different specific project development methodologies within agile
 
 ###Process   
 
-Our [Agile](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Methodolgy) process allowed us to rapidly deliver a working product to maintain the momentum from the User Centered Design Sessions, allowing us to show the und user the system we were building. Combined with sprint cycles we were able to add new stories; existing stories in the backlog and icebox were continually evolving and reprioritized with continued meetings outside of the development cycle. These meeting took place between the product owner, business analysts and end users. Focusing on keeping things simple and evolving fostered the environment of rapid delivery and allowed for face to face interactions with the end users on how the system was evolving.  More importanly, it allowed for failure, and with the quick adjustments yieled a system that worked for the end users.
+Our [Agile](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Methodolgy) process allowed us to rapidly deliver a working product to maintain the momentum from the User Centered Design Sessions, allowing us to show the end user the system we were building. Combined with sprint cycles we were able to add new stories; existing stories in the backlog and icebox were continually evolving and reprioritized with continued meetings outside of the development cycle. These meeting took place between the product owner, business analysts and end users. Focusing on keeping things simple and evolving fostered the environment of rapid delivery and allowed for face to face interactions with the end users on how the system was evolving.  More importanly, it allowed for failure, and with the quick adjustments yieled a system that worked for the end users.
 
 ###Practices
-The table below provides links to other pages containing additional artifacts and other important information about each subject.
+The table below provides links to additional artifacts and other important information about each agile practice.
 [User Stories]() |
 [Estimation](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Story-Estimation) |
 [Prioritization](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Story-Prioritization) |
