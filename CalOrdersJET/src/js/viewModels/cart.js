@@ -32,6 +32,10 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
 
                 self.router = oj.Router.rootInstance;
 
+                self.itemTotalPrice = ko.observable();
+                self.shippingPrice = ko.observable();
+                self.totalPrice = ko.observable();
+
                 // Below are a subset of the ViewModel methods invoked by the ojModule binding
                 // Please reference the ojModule jsDoc for additionaly available methods.
 
@@ -47,7 +51,53 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                  * the promise is resolved
                  */
                 self.handleActivated = function (info) {
-                    // Implement if needed
+
+                    if (sessionStorage.authenticated === "false")
+                    {
+                        return self.router.go('welcome');
+                    }
+                    if (sessionStorage.cartProducts !== "")
+                    {
+                        var sessionCart = JSON.parse(sessionStorage.cartProducts);
+
+                        var tempItemTotalPrice = 0.0;
+                        var tempShippingPrice = 25.00;
+                        var tempTotalPrice = 0.00;
+
+
+
+                        for (i = 0; i < sessionCart.length; i++)
+                        {
+                            tempItemTotalPrice += sessionCart[i].prdPrice;
+                        }
+
+                        self.itemTotalPrice("$" + tempItemTotalPrice.toFixed(2));
+
+
+                        self.shippingPrice("$" + tempShippingPrice.toFixed(2));
+
+                        tempTotalPrice = tempShippingPrice + tempItemTotalPrice;
+
+                        self.totalPrice("$" + tempTotalPrice.toFixed(2));
+
+                        sessionStorage.itemTotalPrice = self.itemTotalPrice();
+                        sessionStorage.shippingPrice = self.shippingPrice();
+                        sessionStorage.totalPrice = self.totalPrice();
+
+                        self.cart = ko.observableArray(sessionCart);
+
+                        self.listViewDataSource = ko.computed(function () {
+                            return new oj.ArrayTableDataSource(self.cart(), {idAttribute: 'prdUid'});
+                        });
+                    } else
+                    {
+                        self.itemTotalPrice("$0.00");
+                        self.shippingPrice("$0.00");
+                        self.totalPrice("$0.00");
+                    }
+                    sessionStorage.itemTotalPrice = self.itemTotalPrice();
+                    sessionStorage.shippingPrice = self.shippingPrice();
+                    sessionStorage.totalPrice = self.totalPrice();
                 };
 
                 /**
@@ -88,63 +138,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                     // Implement if needed
                 };
 
-                self.searchProducts = function (productType) {
-                    var filename = 'js/data/products_desktops.json';
-
-                    console.log("Search " + productType + " products");
-
-                    if (productType === 'laptops') {
-                        filename = 'js/data/products_laptops.json'
-                    }
-
-
-                    data.fetchData(filename).then(function (people) {
-                        self.allPeople(people.products);
-                    }).fail(function (error) {
-                        console.log('Error in getting People data: ' + error.message);
-                    });
-
-//                self.parsePeople = function (response) {
-//                    return response['products'];
-//                };
-
-                    self.model = oj.Model.extend({
-                        idAttribute: 'productId'
-                    });
-
-                    self.collection = new oj.Collection(null, {
-                        url: filename,
-                        model: self.model
-                    });
-                };
-
-                self.selectedItem = ko.observable('home');
-
-                self.peopleLayoutType = ko.observable('peopleCardLayout');
-
-                self.allPeople = ko.observableArray([]);
-                self.ready = ko.observable(false);
-                
-                var sessionCart = JSON.parse(
-                        sessionStorage.cartProducts);
-                
-                self.itemTotalPrice = 0.00;
-                
-                for (i=0;i<sessionCart.length;i++)
-                {
-                    self.itemTotalPrice += sessionCart[i].prdPrice;
-                }
-                
-                self.shippingPrice = 25.00;
-
-                self.cart = ko.observableArray(sessionCart);
-                
-              
-                self.listViewDataSource = ko.computed(function () {
-                    return new oj.ArrayTableDataSource(self.cart(), {idAttribute: 'prdUid'});
-                });
-
-                self.getPhoto = function (product) {
+                 self.getPhoto = function (product) {
                     var file = product.prdImgImage;
                     var imageSize = product.prdImgImage.length;
                     var imageType = product.prdCategoryCd.longDesc;
@@ -175,37 +169,6 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                         }
                     }
                 };
-
-                self.getItemTotalPrice = function () {
-
-                    return "$" + self.itemTotalPrice;
-                };
-
-                self.getShippingPrice = function () {
-                    return "$" + self.shippingPrice.toFixed(2);
-                };
-
-                self.getTotalPrice = function () {
-                    var totalPrice = self.shippingPrice+self.itemTotalPrice;
-                    return "$" + totalPrice.toFixed(2);
-                };
-
-                self.listLayoutHandler = function () {
-                    self.peopleLayoutType('peopleListLayout');
-                };
-                
-                self.loadPersonPage = function (emp) {
-                    if (emp.empId) {
-                        // Temporary code until go('person/' + emp.empId); is checked in 1.1.2
-                        history.pushState(null, '', 'index.html?root=person&emp=' + emp.empId);
-                        oj.Router.sync();
-                    } else {
-                        // Default id for person is 100 so no need to specify.
-                        oj.Router.rootInstance.go('person');
-                    }
-                };
-
-
 
                 /*
                  * Places the Order.
@@ -254,22 +217,18 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                     return self.router.go("productSearch");
                 };
 
+// TODO: Do we want Enter key to do anything by default on Cart page?
                 self.onEnter = function (data, event) {
                     if (event.keyCode === 13) {
-                        var emp = {};
-                        emp.empId = data.empId;
-                        self.loadPersonPage(emp);
+
                     }
                     return true;
                 };
 
+// TODO: Do we want to do anything when clicking on an item from the Cart?
                 self.changeHandler = function (page, event) {
-                    if (event.option === 'selection') {
-                        if (event.value[0]) {
-                            var emp = {};
-                            emp.empId = event.value[0];
-                            self.loadPersonPage(emp);
-                        }
+                    if (event.option === 'currentItem') {
+
                     }
                 };
 
