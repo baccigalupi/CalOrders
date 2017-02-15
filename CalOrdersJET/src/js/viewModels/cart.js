@@ -104,6 +104,11 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                         self.itemTotalPrice("$0.00");
                         self.shippingPrice("$0.00");
                         self.totalPrice("$0.00");
+                        self.cart = ko.observableArray([]);
+
+                        self.listViewDataSource = ko.computed(function () {
+                            return new oj.ArrayTableDataSource(self.cart(), {idAttribute: 'id'});
+                        });
                     }
                     sessionStorage.itemTotalPrice = self.itemTotalPrice();
                     sessionStorage.shippingPrice = self.shippingPrice();

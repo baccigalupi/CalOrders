@@ -37,8 +37,18 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                 self.totalPrice = ko.observable();
                 self.shippingPrice = ko.observable();
                 self.cart = ko.observableArray();
-
-
+                self.listViewDataSource = null;
+                self.cardViewDataSource = null;
+                self.productLayoutType = ko.observable('productCardLayout');
+                
+                var lgQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.LG_UP);
+                var mdQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.MD_UP);
+                var smQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.SM_UP);
+                var smOnlyQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.SM_ONLY);
+                self.large = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(lgQuery);
+                self.medium = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(mdQuery);
+                self.small = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(smQuery);
+                self.smallOnly = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(smOnlyQuery);
 
                 self.router = oj.Router.rootInstance;
 
@@ -62,10 +72,9 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                     self.addressLine1(sessionStorage.departmentAddressLine1);
                     self.addressLine2(sessionStorage.departmentAddressLine2);
                     self.cityStateZip(sessionStorage.departmentCityStateZip);
-                    self.itemTotalPrice('$3923.00');
-                    self.totalPrice('$939.99');
-                    self.shippingPrice('$34.93');
-
+                    self.itemTotalPrice(sessionStorage.itemTotalPrice);
+                    self.totalPrice(sessionStorage.totalPrice);
+                    self.shippingPrice(sessionStorage.shippingPrice);
 
 
 
@@ -84,7 +93,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                         return new oj.PagingTableDataSource(self.listViewDataSource());
                     });
 
-
+                    sessionStorage.cartProducts = [];
 
                     if (sessionStorage.authenticated === "false")
                     {
@@ -151,48 +160,45 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                 };
 
 
-
-
-
                 self.getPhoto = function (product) {
 
-                    if (product.prodImgImage === undefined)
-                    {
-                        var preview = document.getElementById('productImage' + product.prdUid);
-                        preview.src = "css/images/unknown_product.jpg";
-                    }
+//                    if (product.prodImgImage === undefined)
+//                    {
+//                        var preview = document.getElementById('productImage' + product.prdUid);
+//                        preview.src = "css/images/unknown_product.jpg";
+//                    }
 
 //                    else
 //                    {
-//                        var file = product.prdImgImage;
-//                        var imageSize = product.prdImgImage.length;
-//                        var imageType = product.prdCategoryCd.longDesc;
-//
-//                        var reader = new FileReader();
-//
-//                        var data = window.atob(file);
-//                        var arr = new Uint8Array(data.length);
-//                        for (var i = 0; i < data.length; i++) {
-//                            arr[i] = data.charCodeAt(i);
-//                        }
-//
-//                        var blob = new Blob([arr.buffer], {size: imageSize, type: imageType});
-//
-//                        reader.addEventListener("load", function (event) {
-//                            var preview = document.getElementById('productImage' + product.prdUid);
-//                            preview.src = reader.result;
-//                        }, false);
-//
-//                        if (blob) {
-//
-//                            try {
-//                                reader.readAsDataURL(blob);
-//
-//                            } catch (err)
-//                            {
-//                                console.log(err);
-//                            }
-//                        }
+                        var file = product.prdImgImage;
+                        var imageSize = product.prdImgImage.length;
+                        var imageType = product.prdCategoryCd.longDesc;
+
+                        var reader = new FileReader();
+
+                        var data = window.atob(file);
+                        var arr = new Uint8Array(data.length);
+                        for (var i = 0; i < data.length; i++) {
+                            arr[i] = data.charCodeAt(i);
+                        }
+
+                        var blob = new Blob([arr.buffer], {size: imageSize, type: imageType});
+
+                        reader.addEventListener("load", function (event) {
+                            var preview = document.getElementById('productImage' + product.prdUid);
+                            preview.src = reader.result;
+                        }, false);
+
+                        if (blob) {
+
+                            try {
+                                reader.readAsDataURL(blob);
+
+                            } catch (err)
+                            {
+                                console.log(err);
+                            }
+                        }
 //                }
                 };
 
