@@ -9,7 +9,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 
-public class EndUserProductSearchTest {
+public class EndUserCompareContinueShoppingTest {
   private WebDriver driver;
   private String baseUrl;
   private boolean acceptNextAlert = true;
@@ -24,15 +24,17 @@ public class EndUserProductSearchTest {
   }
 
   @Test
-  public void testEndUserProductSearch() throws Exception {
+  public void testEndUserCompareContinueShopping() throws Exception {
     driver.get("http://localhost:8000/");
     driver.findElement(By.id("login")).click();
     driver.findElement(By.id("userName")).clear();
     driver.findElement(By.id("userName")).sendKeys("rickybobby");
     driver.findElement(By.id("continue")).click();
-    driver.findElement(By.xpath("//li[@id='OFFC']/a/span")).click();
-    driver.findElement(By.id("addToCart")).click();
-    driver.findElement(By.id("cart")).click();
+    driver.findElement(By.cssSelector("span.oj-choice-row > #compareProduct")).click();
+    driver.findElement(By.cssSelector("#ui-id-29 > div.oj-panel.oj-panel-alt1 > div.oj-flex-item > #compareProduct > div.oj-checkboxset-wrapper > span.oj-choice-row > #compareProduct")).click();
+    driver.findElement(By.id("compareProductsButton")).click();
+    driver.findElement(By.cssSelector("#ui-id-38 > div.oj-panel.oj-panel-alt1 > div.oj-flex-item > #addToCart")).click();
+    driver.findElement(By.id("continueShopping")).click();
   }
 
   @After
