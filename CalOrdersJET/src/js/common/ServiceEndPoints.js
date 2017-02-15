@@ -72,7 +72,7 @@ ServiceEndPoints.prototype = {
             return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.product/findActiveProductsByProductType";
         } else if (key === "createOrder")
         {
-            return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.order1/createOrder"; 
+            return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.orderHistory/createOrder"; 
         } else if (key === "findAllVendors")
         {
             return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.vendor"; 
@@ -85,6 +85,9 @@ ServiceEndPoints.prototype = {
         }else if (key === "doesProductNameExist")
         {
             return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.product/doesProductNameExist"; 
+        }else if (key === "createProduct")
+        {
+            return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.product/createProduct"; 
         }else
         {
             return "UNDEFINED";

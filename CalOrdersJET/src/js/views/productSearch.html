@@ -28,7 +28,21 @@
         <h2 style="margin-bottom:0">Products</h2>
     </div>
 
-    <!-- Page Content oj-md-flex-wrap-nowrap -->
+    <!-- global error messages -->
+    <div class="oj-flex-item oj-messaging-inline-container" id="pageErrorContainer" aria-live="polite" hidden>
+        <div class="oj-padding-vertical"></div>
+        <div class="oj-message oj-message-error">
+            <div class="oj-component-icon oj-message-status-icon oj-message-error-icon" title="Error" role="img"></div>
+            <div class="oj-message-content">
+                <div class="oj-message-summary">Error</div>
+                <div class="oj-message-detail">
+                    <span data-bind="text: errorMessage"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end global error message -->
+
     <div class="oj-panel oj-flex">
 
         <!-- Product Left Hand Navigation Panel -->
@@ -87,9 +101,6 @@
             <div class="justifyCenter">
                 <div class="oj-flex oj-flex-items-pad">
                     <div class="oj-flex-item oj-sm-12" style="padding-bottom: 10px">
-
-
-
                         <div class="oj-flex oj-flex-items oj-sm-align-items-flex-end oj-md-hide ">
                             <label for="productSelect">Product Category: </label>
                         </div>
@@ -114,9 +125,11 @@
                             </select>
                         </div>
 
-
-
-
+                        <!-- Breadcrumbs -->
+                        <div id="productSearchBreadcrumbs" class="oj-sm-only-hide">
+                            <span data-bind="text: productCategoryBreadcrumbs"></span>
+                            <div class="oj-padding-vertical"></div>
+                        </div>
 
                         <div class="oj-flex oj-flex-items oj-sm-align-items-flex-end">
 
@@ -129,7 +142,7 @@
                             </div>
 
                             <!-- Product Search Result type -->
-                            <div class="oj-flex-item oj-sm-4">
+                            <div class="oj-flex-item oj-sm-only-hide  oj-padding-horizontal">
                                 <div id="layoutSet" class="oj-buttonset-width-auto" aria-label="Choose layout type."  style="float: right" data-bind="ojComponent: {component: 'ojButtonset', checked: productLayoutType}">
                                     <label for="cardLayout"></label>
                                     <input id="cardLayout" type="radio" name="layoutGroup" value="productCardLayout"
@@ -149,6 +162,11 @@
                                                 }"/>
                                 </div>
                             </div>
+
+                            <!-- Compare products button -->
+                            <div class="oj-flex-item">                              
+                                <button id= "compareProductsButton" data-bind="click: navigateToCompareProducts, ojComponent: { component: 'ojButton', label: 'Compare'}"></button>                             
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -166,7 +184,7 @@
 
 <!-- start add cart dialog box -->
 <div id="addToCartConfirmationDialogWrapper">
-    <div style="display:none" id="addToCartConfirmationDialog" title="Add to Cart" 
+    <div style="display:none" id="addToCartConfirmationDialog" title="Successfully Added to Cart" 
          data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide'}">
 
         <div class="oj-dialog-body">
@@ -192,7 +210,7 @@
 
             <div class="dialogButtonRight">
                 <button id= "cart"
-                        data-bind="click: navigateToCart, ojComponent: { component: 'ojButton', label: 'Cart'}">
+                        data-bind="click: navigateToCart, ojComponent: { component: 'ojButton', label: 'View Cart'}">
                 </button> 
             </div>
 
@@ -213,14 +231,14 @@
         </ul>
     </div>
     <div class="oj-flex oj-flex-items-pad">
-        <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: cardViewDataSource, pageSize: 2}">
+        <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: cardViewDataSource, pageSize: 2, pageOptions: {layout: [ medium() ? 'auto' : 'nav']}}">
         </div>
     </div>
 </script>
 
 <!-- Product Card view (card format)  -->
 <script id="productcard_template" type="text/html">
-    <li class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-4 oj-xl-3" data-bind="event:{keypress:$parent.onEnter}" style="margin:0;border-style:none">
+    <li class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-4 oj-xl-3" style="margin:0;border-style:none">
         <div class="oj-panel oj-panel-alt1" style="margin: 5px 0px 10px 0px;">
 
             <div data-bind="click: $parent.navigateToProductDetail">
@@ -239,6 +257,19 @@
             <div class="oj-flex-item">
                 <button id= "addToCart" data-bind="click: $parent.addToCart, ojComponent: { component: 'ojButton', label: 'Add to Cart'}"></button> 
             </div>
+
+            <div class="oj-flex-item">
+                <div id="compareProduct" aria-labelledby="compare product"
+                     data-bind=
+                     "ojComponent: {
+                        component: 'ojCheckboxset', 
+                        value: compareProduct}" >
+                    <span class="oj-choice-row">
+                        <input id="compareProduct" type="checkbox" value="true">
+                        <label for="true">Compare</label>
+                    </span>
+                </div>
+            </div>
         </div>
     </li>
 </script>
@@ -252,7 +283,7 @@
             item: {template: 'productlist_template'}}">
     </ul>
     <div class="oj-flex oj-flex-items-pad">
-        <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: cardViewDataSource, pageSize: 2}">
+        <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: cardViewDataSource, pageSize: 2, pageOptions: {layout: [medium() ? 'auto' : 'nav']}}">
         </div>
     </div>
 </script>
@@ -266,14 +297,26 @@
                     <img alt="product image" class="demo-circular demo-employee-photo" style="float:left;" height="100" width="100" data-bind="attr: {id: 'productImage' + $data['prdUid'], src: $parent.getPhoto($data)}"/>
                     <h2 class="demo-employee-name" data-bind="text: $data['prdName']"></h2>
                 </div>
-                <div class="oj-flex-item oj-lg-5 oj-md-4">
-                    <div class="oj-flex-item oj-sm-only-hide oj-md-4 oj-md-float-end">
-                        <button id= "addToCart" data-bind="click: $parent.addToCart, ojComponent: { component: 'ojButton', label: 'Add to Cart'}"></button>
-                    </div>
-                    <div class="oj-flex-item oj-sm-only-hide oj-md-4 oj-md-float-end">
-                        <div class="demo-employee-tenure" data-bind="text: '$' + $data['prdPrice']"></div>
+
+                <div class="oj-flex-item oj-md-4">
+                    <div class="demo-employee-tenure" data-bind="text: '$' + $data['prdPrice']"></div>
+                </div>
+
+                <div class="oj-flex-item oj-md-4 oj-sm-float-end">
+                    <button id= "addToCart" data-bind="click: $parent.addToCart, ojComponent: { component: 'ojButton', label: 'Add to Cart'}"></button>
+                    
+                     <div id="compareProduct" aria-labelledby="compare product"
+                         data-bind=
+                         "ojComponent: {
+                        component: 'ojCheckboxset', 
+                        value: compareProduct}" >
+                        <span class="oj-choice-row">
+                            <input id="compareProduct" type="checkbox" value="true">
+                            <label for="true">Compare</label>
+                        </span>
                     </div>
                 </div>
+
             </div>
         </div>
     </li>
