@@ -170,35 +170,35 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
 
 //                    else
 //                    {
-//                        var file = product.prdImgImage;
-//                        var imageSize = product.prdImgImage.length;
-//                        var imageType = product.prdCategoryCd.longDesc;
-//
-//                        var reader = new FileReader();
-//
-//                        var data = window.atob(file);
-//                        var arr = new Uint8Array(data.length);
-//                        for (var i = 0; i < data.length; i++) {
-//                            arr[i] = data.charCodeAt(i);
-//                        }
-//
-//                        var blob = new Blob([arr.buffer], {size: imageSize, type: imageType});
-//
-//                        reader.addEventListener("load", function (event) {
-//                            var preview = document.getElementById('productImage' + product.prdUid);
-//                            preview.src = reader.result;
-//                        }, false);
-//
-//                        if (blob) {
-//
-//                            try {
-//                                reader.readAsDataURL(blob);
-//
-//                            } catch (err)
-//                            {
-//                                console.log(err);
-//                            }
-//                        }
+                        var file = product.prdImgImage;
+                        var imageSize = product.prdImgImage.length;
+                        var imageType = product.prdCategoryCd.longDesc;
+
+                        var reader = new FileReader();
+
+                        var data = window.atob(file);
+                        var arr = new Uint8Array(data.length);
+                        for (var i = 0; i < data.length; i++) {
+                            arr[i] = data.charCodeAt(i);
+                        }
+
+                        var blob = new Blob([arr.buffer], {size: imageSize, type: imageType});
+
+                        reader.addEventListener("load", function (event) {
+                            var preview = document.getElementById('productImage' + product.prdUid);
+                            preview.src = reader.result;
+                        }, false);
+
+                        if (blob) {
+
+                            try {
+                                reader.readAsDataURL(blob);
+
+                            } catch (err)
+                            {
+                                console.log(err);
+                            }
+                        }
 //                }
                 };
 
