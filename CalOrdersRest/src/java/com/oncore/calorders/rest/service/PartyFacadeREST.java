@@ -25,7 +25,6 @@ package com.oncore.calorders.rest.service;
 
 import com.oncore.calorders.rest.Party;
 import java.util.List;
-import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
@@ -49,6 +48,11 @@ public class PartyFacadeREST extends AbstractFacade<Party> {
 
     public PartyFacadeREST() {
         super(Party.class);
+    }
+
+    public PartyFacadeREST(EntityManager entityManager) {
+        super(Party.class);
+        this.em = entityManager;
     }
 
     @POST
@@ -103,5 +107,5 @@ public class PartyFacadeREST extends AbstractFacade<Party> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
 }
