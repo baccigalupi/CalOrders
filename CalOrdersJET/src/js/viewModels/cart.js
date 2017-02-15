@@ -35,6 +35,16 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                 self.itemTotalPrice = ko.observable();
                 self.shippingPrice = ko.observable();
                 self.totalPrice = ko.observable();
+                self.cart = ko.observableArray([]);
+
+                var lgQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.LG_UP);
+                var mdQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.MD_UP);
+                var smQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.SM_UP);
+                var smOnlyQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.SM_ONLY);
+                self.large = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(lgQuery);
+                self.medium = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(mdQuery);
+                self.small = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(smQuery);
+                self.smallOnly = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(smOnlyQuery);
 
                 // Below are a subset of the ViewModel methods invoked by the ojModule binding
                 // Please reference the ojModule jsDoc for additionaly available methods.
@@ -84,7 +94,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                         sessionStorage.shippingPrice = self.shippingPrice();
                         sessionStorage.totalPrice = self.totalPrice();
 
-                        self.cart = ko.observableArray(sessionCart);
+                        self.cart(sessionCart);
 
                         self.listViewDataSource = ko.computed(function () {
                             return new oj.ArrayTableDataSource(self.cart(), {idAttribute: 'prdUid'});
@@ -138,7 +148,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                     // Implement if needed
                 };
 
-                 self.getPhoto = function (product) {
+                self.getPhoto = function (product) {
                     var file = product.prdImgImage;
                     var imageSize = product.prdImgImage.length;
                     var imageType = product.prdCategoryCd.longDesc;
@@ -178,37 +188,45 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                  */
                 self.placeOrderClick = function (trackerObj)
                 {
-                    // TODO: Replace with cart items from session
-                    var order = {createUserId: "Create1", updateUserId: "Update1",
-                        orderStatusCd: "SUBT",
-                        partyUid: 1,
-                        products: [{prdUid: 6, quantity: 3}, {prdUid: 10, quantity: 1}],
-                        services: [{prsUid: 1, quantity: 5}, {prsUid: 2, quantity: 6}]};
+                    if (sessionStorage.partyUid !== "" && sessionStorage.cartProducts !== ""
+                            && sessionStorage.authenticated !== "false")
+                    {
+                        var partyUid = sessionStorage.partyUid;
 
-                    // build our REST URL
-                    var serviceEndPoints = new ServiceEndPoints();
-                    var serviceURL = serviceEndPoints.getEndPoint('createOrder');
+                        var sessionCart = JSON.parse(sessionStorage.cartProducts);
 
 
-                    var OrderService = oj.Model.extend({
-                        urlRoot: serviceURL
-                    });
+                        var order = {createUserId: partyUid, updateUserId: partyUid,
+                            orderStatusCd: "SUBT",
+                            partyUid: partyUid,
+                            products: sessionCart};
 
-                    var orderService = new OrderService();
+
+                        // build our REST URL
+                        var serviceEndPoints = new ServiceEndPoints();
+                        var serviceURL = serviceEndPoints.getEndPoint('createOrder');
 
 
-                    // execute REST createOrder operation
-                    orderService.save(
-                            order,
-                            {
-                                success: function (myModel, response, options) {
-                                    return self.router.go("orderConfirmation");
-                                },
-                                error: function (jqXHR, textStatus, errorThrown) {
+                        var OrderService = oj.Model.extend({
+                            urlRoot: serviceURL
+                        });
 
-                                    console.log("Unable to create the order: " + errorThrown);
-                                }
-                            });
+                        var orderService = new OrderService();
+
+
+                        // execute REST createOrder operation
+                        orderService.save(
+                                order,
+                                {
+                                    success: function (myModel, response, options) {
+                                        return self.router.go("orderConfirmation");
+                                    },
+                                    error: function (jqXHR, textStatus, errorThrown) {
+
+                                        console.log("Unable to create the order: " + errorThrown);
+                                    }
+                                });
+                    }
 
                 };
 
