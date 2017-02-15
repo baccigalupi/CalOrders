@@ -57,7 +57,7 @@
 
             <div class="oj-flex">
                 <div class="oj-flex-item">
-                    <img alt="product image"  data-bind="attr: {src: addedProductPhoto}" height="100" width="100"/>
+                    <img alt="product"  data-bind="attr: {src: addedProductPhoto}" height="100" width="100"/>
                 </div>
 
                 <div class="oj-flex-item oj-sm-justify-content-center">
@@ -111,7 +111,7 @@
             <div data-bind="click: $parent.navigateToProductDetail">
 
                 <div class="oj-flex-item oj-sm-4">
-                    <img alt="product image" data-bind="attr: {
+                    <img alt="product" data-bind="attr: {
                         id: 'productImage' + $data['prdUid'], 
                         src: $parent.getPhoto($data), 
                         height: $parent.large() ? '300' : '150',
