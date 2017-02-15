@@ -80,7 +80,7 @@ Linux	| Operating System used for both the development workstation and the deplo
 NetBeans | Development IDE  
 Oracle JET | Open Source JavaScript UI Component Library  
 Node JS | Frontend Javscript Engine  
-GlassFish | JEE Engine  
+Payara | JEE Application Server  
 MySQL | Database  
 Jenkins | Continuous Integration  
 JUnit | automated unit testing  
