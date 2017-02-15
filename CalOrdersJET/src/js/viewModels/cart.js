@@ -82,7 +82,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
 
                         for (i = 0; i < sessionCart.length; i++)
                         {
-                            tempItemTotalPrice += sessionCart[i].prdPrice;
+                            tempItemTotalPrice += ( sessionCart[i].prdPrice * sessionCart[i].quantity );
                         }
 
                         self.itemTotalPrice("$" + tempItemTotalPrice.toFixed(2));
