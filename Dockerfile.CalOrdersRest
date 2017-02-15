@@ -31,7 +31,7 @@ RUN /bin/chmod +x /opt/payara41/customize_domainXML.pl
 
 # copy built WAR into the container
 COPY CalOrdersRest/dist/CalOrdersRest.war /opt/payara41/glassfish/domains/payaradomain/autodeploy/
-RUN /bin/chown payara:payara /opt/payara41/glassfish/domains/payaradomain/autodeploy/CalOrdersRest.war
+RUN /bin/chown -R payara:payara /opt/payara41/glassfish/domains/payaradomain/autodeploy/CalOrdersRest.war
 
 # TODO what is this for?
 #RUN /bin/mkdir /home/oncore && /bin/ln -s /opt/payara41/ /home/oncore/payara41
