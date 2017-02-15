@@ -36,9 +36,19 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                 self.itemTotalPrice = ko.observable();
                 self.totalPrice = ko.observable();
                 self.shippingPrice = ko.observable();
-
-
-
+                self.cart = ko.observableArray();
+                self.listViewDataSource = null;
+                self.cardViewDataSource = null;
+                self.productLayoutType = ko.observable('productCardLayout');
+                
+                var lgQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.LG_UP);
+                var mdQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.MD_UP);
+                var smQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.SM_UP);
+                var smOnlyQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.SM_ONLY);
+                self.large = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(lgQuery);
+                self.medium = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(mdQuery);
+                self.small = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(smQuery);
+                self.smallOnly = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(smOnlyQuery);
 
                 self.router = oj.Router.rootInstance;
 
@@ -59,13 +69,31 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                 self.handleActivated = function (info) {
 
 
-                    self.addressLine1('100 Test St');
-                    self.addressLine2('Suite 100');
-                    self.cityStateZip('Folsom, CA 95630');
-                    self.itemTotalPrice('$3923.00');
-                    self.totalPrice('$939.99');
-                    self.shippingPrice('$34.93');
+                    self.addressLine1(sessionStorage.departmentAddressLine1);
+                    self.addressLine2(sessionStorage.departmentAddressLine2);
+                    self.cityStateZip(sessionStorage.departmentCityStateZip);
+                    self.itemTotalPrice(sessionStorage.itemTotalPrice);
+                    self.totalPrice(sessionStorage.totalPrice);
+                    self.shippingPrice(sessionStorage.shippingPrice);
 
+
+
+                    var sessionCart = JSON.parse(
+                            sessionStorage.cartProducts);
+
+
+                    self.cart(sessionCart);
+
+
+                    self.listViewDataSource = ko.computed(function () {
+                        return new oj.ArrayTableDataSource(self.cart(), {idAttribute: 'prdUid'});
+                    });
+
+                    self.cardViewDataSource = ko.computed(function () {
+                        return new oj.PagingTableDataSource(self.listViewDataSource());
+                    });
+
+                    sessionStorage.cartProducts = [];
 
                     if (sessionStorage.authenticated === "false")
                     {
@@ -112,139 +140,14 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                     // Implement if needed
                 };
 
-                self.itemOnly = function (context) {
-                    return context['leaf'];
-                };
 
 
-
-                self.searchProducts = function (productType) {
-                    var filename = 'js/data/products_desktops.json';
-
-                    console.log("Search " + productType + " products");
-
-                    if (productType === 'laptops') {
-                        filename = 'js/data/products_laptops.json'
-                    }
-
-                    data.fetchData(filename).then(function (people) {
-                        self.allPeople(people.products);
-                    }).fail(function (error) {
-                        console.log('Error in getting People data: ' + error.message);
-                    });
-
-                    self.model = oj.Model.extend({
-                        idAttribute: 'productId'
-                    });
-
-                    self.collection = new oj.Collection(null, {
-                        url: filename,
-                        model: self.model
-                    });
-                };
-
-
-                self.getPhoto = function (productId) {
-                    console.log("Image for product " + productId);
-                    var src = 'css/images/desktop.png';
-
-                    if (productId < 1000)
-                    {
-                        src = 'css/images/laptop.png';
-                    }
-
-                    return src;
-                };
-
-
-                self.selectedItem = ko.observable('home');
-
-                self.peopleLayoutType = ko.observable('peopleCardLayout');
-
-                self.allPeople = ko.observableArray([]);
-                self.ready = ko.observable(false);
-
-                // Perform default search
-                console.log("About to perform default search");
-                self.searchProducts('desktops');
-
-                self.nameSearch = ko.observable('');
-
-                self.filteredAllPeople = ko.computed(function () {
-                    var peopleFilter = new Array();
-
-                    if (self.allPeople().length !== 0) {
-                        if (self.nameSearch().length === 0)
-                        {
-                            peopleFilter = self.allPeople();
-                        } else {
-                            ko.utils.arrayFilter(self.allPeople(),
-                                    function (r) {
-                                        var token = self.nameSearch().toLowerCase();
-                                        if (r.firstName.toLowerCase().indexOf(token) === 0 || r.lastName.toLowerCase().indexOf(token) === 0) {
-                                            peopleFilter.push(r);
-                                        }
-                                    });
-                        }
-                    }
-
-                    self.ready(true);
-                    return peopleFilter;
-                });
-
-                self.listViewDataSource = ko.computed(function () {
-                    return new oj.ArrayTableDataSource(self.filteredAllPeople(), {idAttribute: 'productId'});
-                });
-
-                self.cardViewDataSource = ko.computed(function () {
-                    return new oj.PagingTableDataSource(self.listViewDataSource());
-                });
-
-
-
-                self.cardLayoutHandler = function () {
-                    self.peopleLayoutType('peopleCardLayout');
-                };
-
-                self.listLayoutHandler = function () {
-                    self.peopleLayoutType('peopleListLayout');
-                };
-
-                self.loadPersonPage = function (emp) {
-                    if (emp.empId) {
-                        // Temporary code until go('person/' + emp.empId); is checked in 1.1.2
-                        history.pushState(null, '', 'index.html?root=person&emp=' + emp.empId);
-                        oj.Router.sync();
-                    } else {
-                        // Default id for person is 100 so no need to specify.
-                        oj.Router.rootInstance.go('person');
-                    }
-                };
-
-                /*
-                 * Places the Order.
-                 * 
-                 * @param {type} trackerObj
-                 * @returns {Boolean}
-                 */
-                self.placeOrderClick = function (trackerObj)
-                {
-                    return true;
-                };
 
                 self.continueShoppingClick = function (data, event)
                 {
                     return self.router.go("productSearch");
                 };
 
-                self.onEnter = function (data, event) {
-                    if (event.keyCode === 13) {
-                        var emp = {};
-                        emp.empId = data.empId;
-                        self.loadPersonPage(emp);
-                    }
-                    return true;
-                };
 
                 self.changeHandler = function (page, event) {
                     if (event.option === 'selection') {
@@ -256,9 +159,49 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                     }
                 };
 
-                self.addToCart = function (product) {
-                    console.log("Add product id " + product.productId + " to cart");
+
+                self.getPhoto = function (product) {
+
+//                    if (product.prodImgImage === undefined)
+//                    {
+//                        var preview = document.getElementById('productImage' + product.prdUid);
+//                        preview.src = "css/images/unknown_product.jpg";
+//                    }
+
+//                    else
+//                    {
+                        var file = product.prdImgImage;
+                        var imageSize = product.prdImgImage.length;
+                        var imageType = product.prdCategoryCd.longDesc;
+
+                        var reader = new FileReader();
+
+                        var data = window.atob(file);
+                        var arr = new Uint8Array(data.length);
+                        for (var i = 0; i < data.length; i++) {
+                            arr[i] = data.charCodeAt(i);
+                        }
+
+                        var blob = new Blob([arr.buffer], {size: imageSize, type: imageType});
+
+                        reader.addEventListener("load", function (event) {
+                            var preview = document.getElementById('productImage' + product.prdUid);
+                            preview.src = reader.result;
+                        }, false);
+
+                        if (blob) {
+
+                            try {
+                                reader.readAsDataURL(blob);
+
+                            } catch (err)
+                            {
+                                console.log(err);
+                            }
+                        }
+//                }
                 };
+
 
 
             }

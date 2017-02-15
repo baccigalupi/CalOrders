@@ -150,7 +150,7 @@ public class Party implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ptyUidFk")
     private Collection<GroupPartyAssoc> groupPartyAssocCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ptyUidFk")
-    private Collection<Order1> order1Collection;
+    private Collection<OrderHistory> orderHistoryCollection;
     @OneToMany(mappedBy = "ptyUidFk")
     private Collection<Address> addressCollection;
 
@@ -323,12 +323,12 @@ public class Party implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Order1> getOrder1Collection() {
-        return order1Collection;
+    public Collection<OrderHistory> getOrderHistoryCollection() {
+        return orderHistoryCollection;
     }
 
-    public void setOrder1Collection(Collection<Order1> order1Collection) {
-        this.order1Collection = order1Collection;
+    public void setOrderHistoryCollection(Collection<OrderHistory> orderHistoryCollection) {
+        this.orderHistoryCollection = orderHistoryCollection;
     }
 
     @XmlTransient
