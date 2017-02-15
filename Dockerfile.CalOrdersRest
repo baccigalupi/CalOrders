@@ -31,12 +31,13 @@ RUN /bin/chmod +x /opt/payara41/customize_domainXML.pl
 
 # copy built WAR into the container
 COPY CalOrdersRest/dist/CalOrdersRest.war /opt/payara41/glassfish/domains/payaradomain/autodeploy/
+RUN /bin/mkdir /opt/payara41/glassfish/domains/payaradomain/autodeploy/bundles
 RUN /bin/chown -R payara:payara /opt/payara41/glassfish/domains/payaradomain/autodeploy
 
 # TODO what is this for?
 #RUN /bin/mkdir /home/oncore && /bin/ln -s /opt/payara41/ /home/oncore/payara41
 
-# TODO do without the start script
-#CMD ["/opt/payara41/deployments/start_payara.sh"]
-
 USER payara
+
+CMD ["/opt/payara41/customize_domainXML.pl /opt/payara41/glassfish/domains/payaradomain/config/domain.xml;bin/asadmin start-domain -v payaradomain"]
+
