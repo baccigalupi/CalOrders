@@ -30,12 +30,18 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
             function CartViewModel() {
                 var self = this;
 
+                var serviceEndPoints = new ServiceEndPoints();
+                self.createOrderServiceURL = serviceEndPoints.getEndPoint('createOrder');
+
                 self.router = oj.Router.rootInstance;
 
                 self.itemTotalPrice = ko.observable();
                 self.shippingPrice = ko.observable();
                 self.totalPrice = ko.observable();
-                self.cart = ko.observableArray([]);
+                self.cart = ko.observableArray();
+                self.listViewDataSource = null;
+                self.cardViewDataSource = null;
+                self.productLayoutType = ko.observable('productCardLayout');
 
                 var lgQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.LG_UP);
                 var mdQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.MD_UP);
@@ -74,16 +80,12 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                         var tempShippingPrice = 25.00;
                         var tempTotalPrice = 0.00;
 
-
-
                         for (i = 0; i < sessionCart.length; i++)
                         {
                             tempItemTotalPrice += sessionCart[i].prdPrice;
                         }
 
                         self.itemTotalPrice("$" + tempItemTotalPrice.toFixed(2));
-
-
                         self.shippingPrice("$" + tempShippingPrice.toFixed(2));
 
                         tempTotalPrice = tempShippingPrice + tempItemTotalPrice;
@@ -99,20 +101,29 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                         self.listViewDataSource = ko.computed(function () {
                             return new oj.ArrayTableDataSource(self.cart(), {idAttribute: 'prdUid'});
                         });
+
+                        self.cardViewDataSource = ko.computed(function () {
+                            return new oj.PagingTableDataSource(self.listViewDataSource());
+                        });
+
                     } else
                     {
                         self.itemTotalPrice("$0.00");
                         self.shippingPrice("$0.00");
                         self.totalPrice("$0.00");
+                        sessionStorage.itemTotalPrice = self.itemTotalPrice();
+                        sessionStorage.shippingPrice = self.shippingPrice();
+                        sessionStorage.totalPrice = self.totalPrice();
                         self.cart = ko.observableArray([]);
 
                         self.listViewDataSource = ko.computed(function () {
-                            return new oj.ArrayTableDataSource(self.cart(), {idAttribute: 'id'});
+                            return new oj.ArrayTableDataSource(self.cart(), {idAttribute: 'prdUid'});
+                        });
+
+                        self.cardViewDataSource = ko.computed(function () {
+                            return new oj.PagingTableDataSource(self.listViewDataSource());
                         });
                     }
-                    sessionStorage.itemTotalPrice = self.itemTotalPrice();
-                    sessionStorage.shippingPrice = self.shippingPrice();
-                    sessionStorage.totalPrice = self.totalPrice();
                 };
 
                 /**
@@ -153,36 +164,22 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                     // Implement if needed
                 };
 
+                /**
+                 * Get the photo for the product.
+                 * 
+                 * @param {type} product
+                 * @returns {undefined}
+                 */
                 self.getPhoto = function (product) {
-                    var file = product.prdImgImage;
-                    var imageSize = product.prdImgImage.length;
-                    var imageType = product.prdCategoryCd.longDesc;
+                    return ProductHelper.getPhoto(product);
+                };
 
-                    var reader = new FileReader();
+                self.cardLayoutHandler = function () {
+                    self.productLayoutType('productCardLayout');
+                };
 
-                    var data = window.atob(file);
-                    var arr = new Uint8Array(data.length);
-                    for (var i = 0; i < data.length; i++) {
-                        arr[i] = data.charCodeAt(i);
-                    }
-
-                    var blob = new Blob([arr.buffer], {size: imageSize, type: imageType});
-
-                    reader.addEventListener("load", function (event) {
-                        var preview = document.getElementById('productImage' + product.prdUid);
-                        preview.src = reader.result;
-                    }, false);
-
-                    if (blob) {
-
-                        try {
-                            reader.readAsDataURL(blob);
-
-                        } catch (err)
-                        {
-                            console.log(err);
-                        }
-                    }
+                self.listLayoutHandler = function () {
+                    self.productLayoutType('productListLayout');
                 };
 
                 /*
@@ -207,13 +204,9 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                             products: sessionCart};
 
 
-                        // build our REST URL
-                        var serviceEndPoints = new ServiceEndPoints();
-                        var serviceURL = serviceEndPoints.getEndPoint('createOrder');
-
-
+                        // call our REST service
                         var OrderService = oj.Model.extend({
-                            urlRoot: serviceURL
+                            urlRoot: self.createOrderServiceURL
                         });
 
                         var orderService = new OrderService();

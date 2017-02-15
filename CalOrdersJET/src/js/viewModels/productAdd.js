@@ -126,14 +126,13 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'reference/ReferenceData'],
                         {
                             return;
                         }
-                        
+
                         // Perform app level validation
                         if (!this.run)
-                            
-                        var ProductService = oj.Model.extend({
-                            urlRoot: self.serviceURL,
-                            idAttribute: 'prdUid'
-                        });
+                            var ProductService = oj.Model.extend({
+                                urlRoot: self.serviceURL,
+                                idAttribute: 'prdUid'
+                            });
                         var productService = new ProductService();
                         productService.save(
                                 {
@@ -298,6 +297,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'reference/ReferenceData'],
                     return self.router.go('productSearch');
                 }
                 ;
+
+               
             }
 
 

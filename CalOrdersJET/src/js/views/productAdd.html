@@ -82,9 +82,9 @@ THE SOFTWARE.
                                                 component: 'ojInputText', 
                                                 value:productName, required: true,
                                                 validators: [{type: 'regExp', options: {
-                                                    pattern: '[:\\-!@#$%^&*\\w\\s]{1,45}',
-                                                    hint: 'Enter a product name that is less than 45 alphanumeric characters (including the following characters :-!@#$%^&*)',
-                                                    messageDetail: 'The product name must be less than 45 alphanumeric characters (including the following characters :-!@#$%^&*)'} },
+                                                    pattern: '[:\\-!@#$%^&*,?.;:()\'\&quot\\w\\s]{1,45}',
+                                                    hint: 'Enter a product name that is less than 45 alphanumeric characters (including the following characters :-!@#$%^&*();?\'\&quot',
+                                                    messageDetail: 'The product name must be less than 45 alphanumeric characters (including the following characters :-!@#$%^&*();?\'\&quot'} },
                                                     validateProductName],
                                                         messagesCustom: productNameMessage,
                                                    invalidComponentTracker: tracker}">
@@ -142,36 +142,34 @@ THE SOFTWARE.
                     <div class="oj-flex"> 
                         <div class="oj-flex-item">
                             <label for="productDescription">Product Description:</label>
-                            <textarea id="productDescription" type="text"  required  style="min-height: 10em"
+                            <textarea id="productDescription" type="text"  required  style="min-height: 5em; resize: both;"
                                       data-bind="ojComponent: {
                                     component: 'ojTextArea', rootAttributes: {
-                                            style:'max-width:75%; resize: both;'},
+                                            style:'max-width:75%'},
                                     value: productDescription, 
                                     required: true,  
                                     validators: [{type: 'regExp', options: {
-                                                 pattern: '[:\\-!@#$%^&*,?.;:\\w\\s]{1,250}',
-                                                 hint: 'Enter a breif product description that is less than 250 alphanumeric characters (including the following characters :-!@#$%^&*)',
-                                                 messageDetail: 'The breif product description must be less than 250 alphanumeric characters (including the following characters :-!@#$%^&*)'} }],
-                                    invalidComponentTracker: tracker}">
-                            </textarea>
+                                                 pattern: '[:\\-!@#$%^&*,?.;:()\'\&quot\\w\\s]{1,128}',
+                                                 hint: 'Enter a breif product description that is less than 128 alphanumeric characters (including the following characters :-!@#$%^&*();?\'\&quot',
+                                                 messageDetail: 'The breif product description must be less than 128 alphanumeric characters (including the following characters :-!@#$%^&*();?\'\&quot'} }],
+                                    invalidComponentTracker: tracker}"></textarea>
                         </div>
                     </div>
-
 
                     <!-- Full Product Description -->
                     <div class="oj-flex"> 
                         <div class="oj-flex-item">
                             <label for="productFullDesc">Full Product Description:</label>
-                            <textarea id="productFullDesc" type="text"  required style="min-height: 15em"
+                            <textarea id="productFullDesc" type="text"  required style="min-height: 15em;resize: both;"
                                       data-bind="ojComponent: {
                                     component: 'ojTextArea', rootAttributes: {
-                                            style:'max-width:75%'},
+                                            style:'max-width:75% '},
                                     value: productFullDesc, 
                                     required: true,  
                                     validators: [{type: 'regExp', options: {
-                                                 pattern: '[:\\-!@#$%^&*,?.;:\\w\\s]{1,2048}',
-                                                 hint: 'Enter a full product description that is less than 2048 alphanumeric characters (including the following characters :-!@#$%^&*)',
-                                                 messageDetail: 'The full product description must be less than 2048 alphanumeric characters (including the following characters :-!@#$%^&*)'} }],
+                                                 pattern: '[:\\-!@#$%^&*,?.;:()\'\&quot\\w\\s]{1,2048}',
+                                                 hint: 'Enter a full product description that is less than 2048 alphanumeric characters (including the following characters :-!@#$%^&*();?\'\&quot',
+                                                 messageDetail: 'The full product description must be less than 2048 alphanumeric characters (including the following characters :-!@#$%^&*();?\'\&quot'} }],
                                     invalidComponentTracker: tracker}"></textarea>
                         </div>
                     </div>
