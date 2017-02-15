@@ -97,6 +97,7 @@ public class PartyFacadeRESTExtension extends PartyFacadeREST {
                 partyData.setPtyMidNm(party.getPtyMidNm());
                 partyData.setPtyTitle(party.getPtyTitle());
                 partyData.setPtyUid(party.getPtyUid());
+                partyData.setPtyUserId(party.getPtyUserId());
 
                 for (GroupPartyAssoc assoc : party.getGroupPartyAssocCollection()) {
                     partyData.setDepName(assoc.getGrpUidFk().getDepUidFk().getDepName());
