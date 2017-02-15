@@ -5,29 +5,30 @@ USER root
 RUN apt-get -qq update && \
     apt-get install -qqy less --no-install-recommends && \
     apt-get install -qqy vim --no-install-recommends
-#    apt-get install -qqy mysql-client --no-install-recommends
 RUN echo "set -o vi" >> /root/.bashrc
 RUN echo "US/Pacific-New" > /etc/timezone && dpkg-reconfigure --frontend noninteractive tzdata
 USER payara
+
+# placeholder ENV variables for database connections to override at runtime
+ENV databasename somedatabasename
+ENV databaseuser somedatabaseuser
+ENV databasepassword somedatabasepassword
+ENV databasehostname somedatabasehostname
+ENV databaseport somedatabaseport
 
 # mysql jar into payara for the connection to the database 
 COPY libs/mysql/mysql-connector-java-5.1.38-bin.jar /opt/payara41/glassfish/lib/
 
 # log4j.properties into the payara domain
-COPY docker/log4j.properties /opt/payara41/glassfish/domains/domain1/lib/classes/
+COPY docker/log4j.properties /opt/payara41/glassfish/domains/payaradomain/lib/classes/
 
-# placeholder ENV variables for database connections to override at runtime
-ENV databasename somedatabase
-ENV databaseuser someuser
-ENV databasepassword somepassword
+# copy domain.xml into the container
+COPY docker/domain.xml /opt/payara41/glassfish/domains/payaradomain/config/
+# script to customize domain.xml based on env variables into the container
+COPY docker/customize_domainXML.pl /opt/payara41/
 
-# entrypoint start script that starts glassfish, installs the EAR, stops glassfish, then starts glassfish
-# TODO see if we can do without the start script
-#COPY docker/start_payara.sh /opt/payara41/deployments/
-#RUN /bin/sed -i -e 's/\r$//' /opt/payara41/deployments/start_payara.sh && /bin/chmod +x /opt/payara41/deployments/start_payara.sh
-
-# copy built WARs into the container
-COPY CalOrdersRest/dist/CalOrdersRest.war /opt/payara41/glassfish/domains/domain1/autodeploy
+# copy built WAR into the container
+COPY CalOrdersRest/dist/CalOrdersRest.war /opt/payara41/glassfish/domains/payaradomain/autodeploy
 
 # TODO what is this for?
 #RUN /bin/mkdir /home/oncore && /bin/ln -s /opt/payara41/ /home/oncore/payara41
