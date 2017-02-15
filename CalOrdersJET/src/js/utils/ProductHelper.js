@@ -32,32 +32,41 @@ var ProductHelper = new function ()
     this.getPhoto = function (product)
     {
         var file = product.prdImgImage;
-        var imageSize = product.prdImgImage.length;
-        var imageType = product.prdCategoryCd.longDesc;
 
-        var reader = new FileReader();
+        if (file === undefined || file === null || file.length === 0)
+        {
+            var src = 'css/images/unknown_product.jpg';
+            return src;
+        } 
+        else
+        {
+            var imageSize = product.prdImgImage.length;
+            var imageType = product.prdCategoryCd.longDesc;
 
-        var data = window.atob(file);
-        var arr = new Uint8Array(data.length);
-        for (var i = 0; i < data.length; i++) {
-            arr[i] = data.charCodeAt(i);
-        }
+            var reader = new FileReader();
 
-        var blob = new Blob([arr.buffer], {size: imageSize, type: imageType});
+            var data = window.atob(file);
+            var arr = new Uint8Array(data.length);
+            for (var i = 0; i < data.length; i++) {
+                arr[i] = data.charCodeAt(i);
+            }
 
-        reader.addEventListener("load", function (event) {
-            var preview = document.getElementById('productImage' + product.prdUid);
-            preview.src = reader.result;
-        }, false);
+            var blob = new Blob([arr.buffer], {size: imageSize, type: imageType});
 
-        if (blob) {
+            reader.addEventListener("load", function (event) {
+                var preview = document.getElementById('productImage' + product.prdUid);
+                preview.src = reader.result;
+            }, false);
 
-            try {
-                reader.readAsDataURL(blob);
+            if (blob) {
 
-            } catch (err)
-            {
-                console.log(err);
+                try {
+                    reader.readAsDataURL(blob);
+
+                } catch (err)
+                {
+                    console.log(err);
+                }
             }
         }
     };

@@ -47,7 +47,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                  * @returns {undefined}
                  */
                 self.getPhoto = function (product) {
-                    ProductHelper.getPhoto(product);
+                    return ProductHelper.getPhoto(product);
                 };
 
                 /**
