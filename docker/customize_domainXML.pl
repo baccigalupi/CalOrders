@@ -1,16 +1,16 @@
 #!/usr/bin/perl -w
 use strict;
-use File::Copy qw(copy);
+use File::Copy qw(move);
 
-my $domainFile="/opt/payara41/glassfish/domains/payaradomain/config/domain.xml";
+my $domainFile=$ARGV[0];
 
-my $databaseName = $ENV{databasename};
-my $databaseUser = $ENV{databaseuser};
-my $databasePassword = $ENV{databasepassword};
-my $databaseHostname = $ENV{databasehostname};
-my $databasePort = $ENV{databaseport};
+my $databaseName=$ENV{databasename};
+my $databaseUser=$ENV{databaseuser};
+my $databasePassword=$ENV{databasepassword};
+my $databaseHostname=$ENV{databasehostname};
+my $databasePort=$ENV{databaseport};
 
-copy "$domainFile", "${domainFile}.bak";
+move "$domainFile", "${domainFile}.bak";
 open INPUT, "<${domainFile}.bak";
 open OUTPUT, ">$domainFile";
 

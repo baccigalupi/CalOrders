@@ -1,5 +1,5 @@
 FROM payara/server-full
-MAINTAINER kpoland kyle.poland@oncorellc.com
+LABEL maintainer "kyle.poland@oncorellc.com"
 
 USER root
 RUN apt-get -qq update && \
@@ -7,7 +7,6 @@ RUN apt-get -qq update && \
     apt-get install -qqy vim --no-install-recommends
 RUN echo "set -o vi" >> /root/.bashrc
 RUN echo "US/Pacific-New" > /etc/timezone && dpkg-reconfigure --frontend noninteractive tzdata
-USER payara
 
 # placeholder ENV variables for database connections to override at runtime
 ENV databasename somedatabasename
@@ -24,14 +23,20 @@ COPY docker/log4j.properties /opt/payara41/glassfish/domains/payaradomain/lib/cl
 
 # copy domain.xml into the container
 COPY docker/domain.xml /opt/payara41/glassfish/domains/payaradomain/config/
+RUN /bin/chown payara:payara /opt/payara41/glassfish/domains/payaradomain/config/domain.xml
 # script to customize domain.xml based on env variables into the container
 COPY docker/customize_domainXML.pl /opt/payara41/
+RUN /bin/chown payara:payara /opt/payara41/customize_domainXML.pl
+RUN /bin/chmod +x /opt/payara41/customize_domainXML.pl
 
 # copy built WAR into the container
 COPY CalOrdersRest/dist/CalOrdersRest.war /opt/payara41/glassfish/domains/payaradomain/autodeploy
+RUN /bin/chown payara:payara /opt/payara41/glassfish/domains/payaradomain/autodeploy/CalOrdersRest.war
 
 # TODO what is this for?
 #RUN /bin/mkdir /home/oncore && /bin/ln -s /opt/payara41/ /home/oncore/payara41
 
 # TODO do without the start script
 #CMD ["/opt/payara41/deployments/start_payara.sh"]
+
+USER payara
