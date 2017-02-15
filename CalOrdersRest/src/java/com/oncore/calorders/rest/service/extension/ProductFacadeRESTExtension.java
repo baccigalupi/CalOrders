@@ -23,16 +23,41 @@
  */
 package com.oncore.calorders.rest.service.extension;
 
+import com.oncore.calorders.rest.PrdImgTypeCd;
 import com.oncore.calorders.rest.Product;
+import com.oncore.calorders.rest.RelatedService;
 import com.oncore.calorders.rest.service.ProductFacadeREST;
+import com.oncore.calorders.rest.data.ProductCategoryData;
+import com.oncore.calorders.rest.data.ProductData;
+import com.oncore.calorders.rest.data.VendorData;
+import com.oncore.calorders.rest.data.RelatedServiceData;
+import com.oncore.calorders.rest.service.PrdCategoryCdFacadeREST;
+import com.oncore.calorders.rest.service.PrdImgTypeCdFacadeREST;
+import com.oncore.calorders.rest.service.PrdRelServiceFacadeREST;
+import com.oncore.calorders.rest.service.PrdUnitCdFacadeREST;
+import com.oncore.calorders.rest.service.RelatedServiceFacadeREST;
+import com.oncore.calorders.rest.service.VendorFacadeREST;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Date;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonReader;
 import javax.persistence.EntityManager;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.DateUtils;
 
 /**
  *
@@ -41,6 +66,24 @@ import javax.ws.rs.core.MediaType;
 @Stateless
 @Path("com.oncore.calorders.rest.product")
 public class ProductFacadeRESTExtension extends ProductFacadeREST {
+
+    @EJB
+    private PrdCategoryCdFacadeREST categoryCdFacadeREST;
+
+    @EJB
+    private VendorFacadeREST vendorFacadeREST;
+
+    @EJB
+    private PrdRelServiceFacadeREST prdRelServiceFacadeREST;
+
+    @EJB
+    private PrdUnitCdFacadeREST prdUnitCdFacadeREST;
+
+    @EJB
+    private PrdImgTypeCdFacadeREST prdImgTypeCdFacadeREST;
+
+    @EJB
+    private RelatedServiceFacadeREST relatedServiceFacadeREST;
 
     public ProductFacadeRESTExtension() {
 
@@ -90,5 +133,70 @@ public class ProductFacadeRESTExtension extends ProductFacadeREST {
         }
 
         return products;
+    }
+
+    /**
+     * Creates the employee
+     *
+     * @param productData text containing product information in JSON.
+     */
+    @POST
+    @Path("createProduct")
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public void createProduct(ProductData productData) {
+
+        System.out.println("Product: " + productData);
+
+        // Create Product
+        Product product = new Product();
+        product.setCreateTs(new Date());
+        product.setCreateUserId(productData.getPartyUserId());
+        product.setPrdActiveInd(1);
+        product.setPrdCategoryCd(this.categoryCdFacadeREST.find(productData.getProductCategory()));
+        product.setPrdCntrDiscount(null);
+        product.setPrdCntrLnItm(null);
+        product.setPrdCntrUnitPrice(null);
+        product.setPrdImgImage(null);
+        product.setPrdImgKey(null);
+        product.setPrdImgName(null);
+        product.setPrdImgOrigin(null);
+        product.setPrdImgSize(null);
+        product.setPrdImgTypeCd(this.prdImgTypeCdFacadeREST.find("JPEG"));
+        product.setPrdLongDesc(productData.getProductFullDesc());
+        product.setPrdName(productData.getProductName());
+        product.setPrdOemName(null);
+        product.setPrdOemPartNum(null);
+        product.setPrdPrice(productData.getProductPrice());
+        product.setPrdShortDesc(productData.getProductDescription());
+        product.setPrdSku("Test");
+        product.setPrdUnitCd(this.prdUnitCdFacadeREST.find("EACH"));
+        product.setUpdateTs(new Date());
+        product.setUpdateUserId(productData.getPartyUserId());
+        product.setVndUidFk(this.vendorFacadeREST.find(productData.getVendor()));
+
+        Collection<RelatedService> relatedServiceCollection;
+        relatedServiceCollection = this.mapPrdRelServicesToRelatedServices(productData.getPartyUserId(), product, productData.getRelatedServices());
+
+        product.setRelatedServiceCollection(relatedServiceCollection);
+        super.create(product);
+    }
+
+    private Collection<RelatedService> mapPrdRelServicesToRelatedServices(String userId, Product product, List<Integer> relatedServiceDatas) {
+        Collection<RelatedService> relatedServices = null;
+        if (relatedServiceDatas != null && relatedServiceDatas.size() > 0) {
+            relatedServices = new ArrayList<RelatedService>();
+
+            for (Integer data : relatedServiceDatas) {
+                RelatedService relatedService = new RelatedService();
+                relatedService.setCreateTs(new Date());
+                relatedService.setCreateUserId(userId);
+                relatedService.setPrdUidFk(product);
+                relatedService.setPrsUidFk(this.prdRelServiceFacadeREST.find(data));
+                relatedService.setUpdateTs(new Date());
+                relatedService.setUpdateUserId(userId);
+                relatedServices.add(relatedService);
+            }
+        }
+        return relatedServices;
     }
 }

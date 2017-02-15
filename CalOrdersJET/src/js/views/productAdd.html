@@ -34,7 +34,7 @@ THE SOFTWARE.
             <div style="display:none" id="modalDialog1" title="Success" 
                  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide'}">
                 <div class="oj-dialog-body">
-                    The employee was successfully created.
+                    The product was successfully created.
                 </div>
                 <div class="oj-dialog-footer">
                     <button id= "close"
@@ -149,7 +149,7 @@ THE SOFTWARE.
                                     value: productDescription, 
                                     required: true,  
                                     validators: [{type: 'regExp', options: {
-                                                 pattern: '[:\\-!@#$%^&*\\w\\s]{1,250}',
+                                                 pattern: '[:\\-!@#$%^&*,?.;:\\w\\s]{1,250}',
                                                  hint: 'Enter a breif product description that is less than 250 alphanumeric characters (including the following characters :-!@#$%^&*)',
                                                  messageDetail: 'The breif product description must be less than 250 alphanumeric characters (including the following characters :-!@#$%^&*)'} }],
                                     invalidComponentTracker: tracker}">
@@ -169,7 +169,7 @@ THE SOFTWARE.
                                     value: productFullDesc, 
                                     required: true,  
                                     validators: [{type: 'regExp', options: {
-                                                 pattern: '[:\\-!@#$%^&*\\w\\s]{1,2048}',
+                                                 pattern: '[:\\-!@#$%^&*,?.;:\\w\\s]{1,2048}',
                                                  hint: 'Enter a full product description that is less than 2048 alphanumeric characters (including the following characters :-!@#$%^&*)',
                                                  messageDetail: 'The full product description must be less than 2048 alphanumeric characters (including the following characters :-!@#$%^&*)'} }],
                                     invalidComponentTracker: tracker}"></textarea>

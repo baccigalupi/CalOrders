@@ -31,19 +31,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'reference/ReferenceData'],
 
             function ProductAddViewModel() {
                 var self = this;
-
                 self.applicationVersion = ko.observable("1.0");
-
                 var serviceEndPoints = new ServiceEndPoints();
-
-                //self.serviceURL = serviceEndPoints.getEndPoint('createEmployee');
-                //self.employeeServiceURL = serviceEndPoints.getEndPoint('doesUserIdExist');
-
+                self.serviceURL = serviceEndPoints.getEndPoint('createProduct');
                 self.productNameServiceURL = serviceEndPoints.getEndPoint('doesProductNameExist');
-
                 self.router = oj.Router.rootInstance;
                 self.tracker = ko.observable();
-
                 self.productName = ko.observable();
                 self.productNameMessage = ko.observable();
                 self.productCategory = ko.observable();
@@ -58,9 +51,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'reference/ReferenceData'],
                 self.relatedServices = ko.observableArray([]);
                 self.avaliableRelatedServices = ko.observableArray(ReferenceData.getRelatedServices());
                 self.productImage = ko.observable();
-
-
-
                 // Below are a subset of the ViewModel methods invoked by the ojModule binding
                 // Please reference the ojModule jsDoc for additionaly available methods.
 
@@ -93,7 +83,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'reference/ReferenceData'],
                     self.avaliableRelatedServices = ko.observableArray(ReferenceData.getRelatedServices());
                     self.productImage = ko.observable();
                 };
-
                 /**
                  * Optional ViewModel method invoked after the View is inserted into the
                  * document DOM.  The application can put logic that requires the DOM being
@@ -106,8 +95,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'reference/ReferenceData'],
                 self.handleAttached = function (info) {
                     // Implement if needed
                 };
-
-
                 /**
                  * Optional ViewModel method invoked after the bindings are applied on this View. 
                  * If the current View is retrieved from cache, the bindings will not be re-applied
@@ -119,7 +106,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'reference/ReferenceData'],
                 self.handleBindingsApplied = function (info) {
                     // Implement if needed
                 };
-
                 /*
                  * Optional ViewModel method invoked after the View is removed from the
                  * document DOM.
@@ -131,26 +117,54 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'reference/ReferenceData'],
                 self.handleDetached = function (info) {
                     // Implement if needed
                 };
-
                 self.buttonClick = function (data, event) {
                     if (event.currentTarget.id === 'save')
                     {
                         var trackerObj = ko.utils.unwrapObservable(self.tracker);
-
                         // Perform form level validation
                         if (!this.showComponentValidationErrors(trackerObj))
                         {
                             return;
                         }
-                        return true;
-
+                        
+                        // Perform app level validation
+                        if (!this.run)
+                            
+                        var ProductService = oj.Model.extend({
+                            urlRoot: self.serviceURL,
+                            idAttribute: 'prdUid'
+                        });
+                        var productService = new ProductService();
+                        productService.save(
+                                {
+                                    //Product Info
+                                    "productName": self.productName(),
+                                    "productCategory": self.productCategory(),
+                                    "vendor": self.vendor(),
+                                    "productPrice": self.productPrice(),
+                                    "productDescription": self.productDescription(),
+                                    "productFullDesc": self.productFullDesc(),
+                                    "relatedServices": self.relatedServices(),
+                                    "partyUserId": sessionStorage.userName
+                                },
+                                {
+                                    success: function (myModel, response, options) {
+                                        self.showSuccessMessage();
+                                        return false;
+                                    },
+                                    error: function (jqXHR, textStatus, errorThrown) {
+                                        document.getElementById('pageError').hidden = false;
+                                        document.getElementById('pageErrorDetail').innerHTML = "There was an error creating the product";
+                                        return false;
+                                    }
+                                });
                     } else if (event.currentTarget.id === 'cancel')
                     {
                         // Do nothing and go back to search page
                         return self.router.go('productSearch');
                     }
-                };
-
+                }
+                ;
                 self.validateProductName = {
                     validate: function (value)
                     {
@@ -164,19 +178,15 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'reference/ReferenceData'],
                                 return false;
                             }
                         };
-
                         var ProductService = oj.Model.extend({
                             urlRoot: self.productNameServiceURL + "/" + value,
                             parse: parseProduct,
                             idAttribute: 'prdUid'});
-
                         var productService = new ProductService();
                         productService.fetch();
-
                         return true;
                     }
                 };
-
                 /*
                  * Perform form level validation
                  * 
@@ -186,26 +196,20 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'reference/ReferenceData'],
                 self.showComponentValidationErrors = function (trackerObj)
                 {
                     trackerObj.showMessages();
-
                     if (!self.isValidDropDowns()
                             || trackerObj.focusOnFirstInvalid())
                         return false;
-
                     return true;
                 };
-
                 self.isValidDropDowns = function ()
                 {
                     var validProductCategory = self.isValideProductCategory();
                     var validVendor = self.isValidVendor();
-
                     return validProductCategory && validVendor;
                 };
-
                 self.validateProductCategory = {validate: function (value)
                     {
                         var validProductCategory = true;
-
                         // Hack for states dropdown and can't figure out how
                         // required error message is thrown by itself
                         if (typeof value === "undefined"
@@ -217,15 +221,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'reference/ReferenceData'],
                                         "You must select a value.",
                                         oj.Message.SEVERITY_TYPE.ERROR)]);
                             validProductCategory = false;
-
                         }
                         return validProductCategory;
                     }};
-
                 self.isValideProductCategory = function ()
                 {
                     var validProductCategory = true;
-
                     // Hack for states dropdown and can't figure out how
                     // required error message is thrown by itself
                     if (typeof self.productCategory() === "undefined"
@@ -237,15 +238,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'reference/ReferenceData'],
                                     "You must select a value.",
                                     oj.Message.SEVERITY_TYPE.ERROR)]);
                         validProductCategory = false;
-
                     }
                     return validProductCategory;
                 };
-
                 self.validateVendor = {validate: function (value)
                     {
                         var validVendor = true;
-
                         // Hack for states dropdown and can't figure out how
                         // required error message is thrown by itself
                         if (typeof value === "undefined"
@@ -257,18 +255,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'reference/ReferenceData'],
                                         "You must select a value.",
                                         oj.Message.SEVERITY_TYPE.ERROR)]);
                             validVendor = false;
-
                         }
                         return validVendor;
                     }};
-
-
-
-
                 self.isValidVendor = function ()
                 {
                     var validVendor = true;
-
                     // Hack for states dropdown and can't figure out how
                     // required error message is thrown by itself
                     if (typeof self.vendor() === "undefined"
@@ -280,14 +272,19 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'reference/ReferenceData'],
                                     "You must select a value.",
                                     oj.Message.SEVERITY_TYPE.ERROR)]);
                         validVendor = false;
-
                     }
                     return validVendor;
                 };
-
                 self.router = oj.Router.rootInstance;
-
-
+                /**
+                 * The showSuccessMessage method displays the success dialog.
+                 * 
+                 * @returns {undefined}
+                 */
+                self.showSuccessMessage = function ()
+                {
+                    $("#modalDialog1").ojDialog("open");
+                };
                 /**
                  * The closeClickEvent method handles the click event
                  * generated from the close button.
@@ -298,10 +295,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'reference/ReferenceData'],
                  */
                 self.closeClickEvent = function (data, event) {
                     $("#modalDialog1").ojDialog("close");
-
                     return self.router.go('productSearch');
-                };
-
+                }
+                ;
             }
 
 

@@ -268,7 +268,13 @@ var SecurityUtils = new function ()
             sessionStorage.firstName = "";
             sessionStorage.lastName = "";
             sessionStorage.partyUid = "";
+            sessionStorage.departmentAddressLine1 = "";
+            sessionStorage.departmentUid = "";
+            sessionStorage.departmentName = "";
+            sessionStorage.departmentAddressLine2 = "";
+            sessionStorage.departmentCityStateZip = "";
             sessionStorage.groups = [];
+            sessionStorage.cartProducts = [];
             sessionStorage.authenticated = false;
         }
     };
@@ -286,6 +292,7 @@ var SecurityUtils = new function ()
             sessionStorage.departmentAddressLine2 = "";
             sessionStorage.departmentCityStateZip = "";
             sessionStorage.groups = [];
+            sessionStorage.cartProducts = [];
             sessionStorage.authenticated = false;
         }
     };
