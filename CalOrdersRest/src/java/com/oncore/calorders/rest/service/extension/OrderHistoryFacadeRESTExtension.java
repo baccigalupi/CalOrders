@@ -70,13 +70,7 @@ public class OrderHistoryFacadeRESTExtension extends OrderHistoryFacadeREST {
     PartyFacadeRESTExtension partyFacadeRESTExtension;
 
     @EJB
-    ProductFacadeREST productFacadeREST;
-
-    @EJB
-    OrderProductAssocFacadeREST orderProductAssocFacadeREST;
-
-    @EJB
-    PrdRelServiceFacadeREST prdRelServiceFacadeREST;
+    ProductFacadeRESTExtension productFacadeRESTExtension;
 
     public OrderHistoryFacadeRESTExtension() {
         super();
@@ -113,15 +107,13 @@ public class OrderHistoryFacadeRESTExtension extends OrderHistoryFacadeREST {
                 order.setOrdStatusCd(ordStatusCd);
             }
 
-            Party party = this.partyFacadeRESTExtension.find(orderObject.getInt("partyUid"));
+            Party party = this.partyFacadeRESTExtension.find(Integer.valueOf(orderObject.getString("partyUid")));
 
             if (party == null) {
                 throw new DataAccessException(ErrorCode.DATAACCESSERROR.toString());
             } else {
                 order.setPtyUidFk(party);
             }
-
-            super.create(order);
 
             order.setOrderProductAssocCollection(new ArrayList<OrderProductAssoc>());
 
@@ -131,44 +123,42 @@ public class OrderHistoryFacadeRESTExtension extends OrderHistoryFacadeREST {
                 JsonObject productObject = productList.getJsonObject(i);
                 OrderProductAssoc orderProductAssoc = new OrderProductAssoc();
 
-                Product product = this.productFacadeREST.find(productObject.getInt("prdUid"));
+                Product product = this.productFacadeRESTExtension.find(productObject.getInt("prdUid"));
 
                 orderProductAssoc.setPrdUidFk(product);
                 orderProductAssoc.setOrdUidFk(order);
                 orderProductAssoc.setUpdateTs(new Date());
-                orderProductAssoc.setUpdateUserId(orderObject.getString("updateUserId", null));
+                orderProductAssoc.setUpdateUserId(productObject.getString("updateUserId", null));
                 orderProductAssoc.setCreateTs(new Date());
-                orderProductAssoc.setCreateUserId(orderObject.getString("createUserId", null));
+                orderProductAssoc.setCreateUserId(productObject.getString("createUserId", null));
                 orderProductAssoc.setOpaQuantity(productObject.getInt("quantity"));
-                orderProductAssoc.setOpaPrice(product.getPrdPrice().multiply(BigDecimal.valueOf(orderProductAssoc.getOpaQuantity())));
-
-                this.orderProductAssocFacadeREST.create(orderProductAssoc);
+                orderProductAssoc.setOpaPrice(product.getPrdPrice().multiply(BigDecimal.valueOf(productObject.getInt("quantity"))));
 
                 order.getOrderProductAssocCollection().add(orderProductAssoc);
             }
 
-            JsonArray serviceList = orderObject.getJsonArray("services");
-
-            for (int i = 0; i < serviceList.size(); i++) {
-                JsonObject serviceObject = serviceList.getJsonObject(i);
-                OrderProductAssoc orderProductAssoc = new OrderProductAssoc();
-
-                PrdRelService service = this.prdRelServiceFacadeREST.find(serviceObject.getInt("prsUid"));
-
-                orderProductAssoc.setPrsUidFk(service);
-                orderProductAssoc.setOrdUidFk(order);
-                orderProductAssoc.setUpdateTs(new Date());
-                orderProductAssoc.setUpdateUserId(orderObject.getString("updateUserId", null));
-                orderProductAssoc.setCreateTs(new Date());
-                orderProductAssoc.setCreateUserId(orderObject.getString("createUserId", null));
-                orderProductAssoc.setOpaQuantity(serviceObject.getInt("quantity"));
-                orderProductAssoc.setOpaPrice(service.getPrsPrice().multiply(BigDecimal.valueOf(orderProductAssoc.getOpaQuantity())));
-
-                this.orderProductAssocFacadeREST.create(orderProductAssoc);
-
-                order.getOrderProductAssocCollection().add(orderProductAssoc);
-            }
-
+            // TODO: Sprint 2 will add related services
+//            JsonArray serviceList = orderObject.getJsonArray("services");
+//
+//            for (int i = 0; i < serviceList.size(); i++) {
+//                JsonObject serviceObject = serviceList.getJsonObject(i);
+//                OrderProductAssoc orderProductAssoc = new OrderProductAssoc();
+//
+//                PrdRelService service = this.prdRelServiceFacadeREST.find(serviceObject.getInt("prsUid"));
+//
+//                orderProductAssoc.setPrsUidFk(service);
+//                orderProductAssoc.setOrdUidFk(order);
+//                orderProductAssoc.setUpdateTs(new Date());
+//                orderProductAssoc.setUpdateUserId(orderObject.getString("updateUserId", null));
+//                orderProductAssoc.setCreateTs(new Date());
+//                orderProductAssoc.setCreateUserId(orderObject.getString("createUserId", null));
+//                orderProductAssoc.setOpaQuantity(serviceObject.getInt("quantity"));
+//                orderProductAssoc.setOpaPrice(service.getPrsPrice().multiply(BigDecimal.valueOf(orderProductAssoc.getOpaQuantity())));
+//
+//                order.getOrderProductAssocCollection().add(orderProductAssoc);
+//            }
+            
+                        super.create(order);
         } catch (Exception ex) {
             Logger.error(LOG, FormatHelper.getStackTrace(ex));
             throw new DataAccessException(ex, ErrorCode.DATAACCESSERROR);
