@@ -35,7 +35,7 @@ var ProductHelper = new function ()
 
         if (file === undefined || file === null || file.length === 0)
         {
-            var src = 'css/images/unknown_product.jpg';
+            var src = '../../css/images/unknown_product.jpg';
             return src;
         } 
         else
