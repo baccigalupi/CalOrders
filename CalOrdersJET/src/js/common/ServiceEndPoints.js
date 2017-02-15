@@ -85,6 +85,9 @@ ServiceEndPoints.prototype = {
         }else if (key === "doesProductNameExist")
         {
             return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.product/doesProductNameExist"; 
+        }else if (key === "createProduct")
+        {
+            return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.product/createProduct"; 
         }else
         {
             return "UNDEFINED";
