@@ -24,11 +24,12 @@ public class EndUserProductSearchTest {
 
 	@Test
 	public void testEndUserProductSearch() throws Exception {
-		selenium.open("/");
+		selenium.open("http://localhost:8000/");
 		selenium.click("id=login");
 		selenium.type("id=userName", "rickybobby");
+		selenium.focus("id=continue");
 		selenium.click("id=continue");
-		selenium.click("link=page2");
+		selenium.click("//div[@id='paging']/div[3]/div/div[2]/div/div/a/span[2]");
 	}
 
 	@After
