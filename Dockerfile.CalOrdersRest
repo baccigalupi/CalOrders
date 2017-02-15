@@ -26,18 +26,21 @@ COPY docker/domain.xml /opt/payara41/glassfish/domains/payaradomain/config/
 RUN /bin/chown payara:payara /opt/payara41/glassfish/domains/payaradomain/config/domain.xml
 # script to customize domain.xml based on env variables into the container
 COPY docker/customize_domainXML.pl /opt/payara41/
-RUN /bin/chown payara:payara /opt/payara41/customize_domainXML.pl
-RUN /bin/chmod +x /opt/payara41/customize_domainXML.pl
+RUN /bin/chown payara:payara /opt/payara41/customize_domainXML.pl && \
+    /bin/chmod +x /opt/payara41/customize_domainXML.pl
+
+# copy start script into the container
+COPY docker/start_payara.sh /opt/payara41/
+RUN /bin/chown payara:payara /opt/payara41/start_payara.sh && \
+    /bin/chmod +x /opt/payara41/start_payara.sh
 
 # copy built WAR into the container
-COPY CalOrdersRest/dist/CalOrdersRest.war /opt/payara41/glassfish/domains/payaradomain/autodeploy/
-RUN /bin/mkdir /opt/payara41/glassfish/domains/payaradomain/autodeploy/bundles
-RUN /bin/chown -R payara:payara /opt/payara41/glassfish/domains/payaradomain/autodeploy
+COPY CalOrdersRest/dist/CalOrdersRest.war /
+RUN /bin/chown payara:payara /CalOrdersRest.war
 
 # TODO what is this for?
 #RUN /bin/mkdir /home/oncore && /bin/ln -s /opt/payara41/ /home/oncore/payara41
 
 USER payara
 
-CMD ["/opt/payara41/customize_domainXML.pl /opt/payara41/glassfish/domains/payaradomain/config/domain.xml;bin/asadmin start-domain -v payaradomain"]
-
+CMD ["/opt/payara41/start_payara.sh"]
