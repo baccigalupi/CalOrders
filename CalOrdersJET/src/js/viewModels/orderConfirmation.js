@@ -21,9 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-/*
- * Your about ViewModel code goes here
- */
 define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojpagingcontrol', 'ojs/ojpagingcontrol-model'],
         function (oj, ko, data) {
 
@@ -37,6 +34,8 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                 self.totalPrice = ko.observable();
                 self.shippingPrice = ko.observable();
                 self.cart = ko.observableArray();
+                self.errorMessage = ko.observable();
+                self.doShowErrorMessage = false;
                 self.listViewDataSource = null;
                 self.cardViewDataSource = null;
                 self.productLayoutType = ko.observable('productCardLayout');
@@ -69,35 +68,41 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                 self.handleActivated = function (info) {
 
 
-                    self.addressLine1(sessionStorage.departmentAddressLine1);
-                    self.addressLine2(sessionStorage.departmentAddressLine2);
-                    self.cityStateZip(sessionStorage.departmentCityStateZip);
-                    self.itemTotalPrice(sessionStorage.itemTotalPrice);
-                    self.totalPrice(sessionStorage.totalPrice);
-                    self.shippingPrice(sessionStorage.shippingPrice);
+                    try {
+                        self.doShowErrorMessage = false;
+                        
+                        self.addressLine1(sessionStorage.departmentAddressLine1);
+                        self.addressLine2(sessionStorage.departmentAddressLine2);
+                        self.cityStateZip(sessionStorage.departmentCityStateZip);
+                        self.itemTotalPrice(sessionStorage.itemTotalPrice);
+                        self.totalPrice(sessionStorage.totalPrice);
+                        self.shippingPrice(sessionStorage.shippingPrice);
+ 
+                        var sessionCart = JSON.parse(
+                                sessionStorage.cartProducts);
 
 
-
-                    var sessionCart = JSON.parse(
-                            sessionStorage.cartProducts);
+                        self.cart(sessionCart);
 
 
-                    self.cart(sessionCart);
+                        self.listViewDataSource = ko.computed(function () {
+                            return new oj.ArrayTableDataSource(self.cart(), {idAttribute: 'prdUid'});
+                        });
 
+                        self.cardViewDataSource = ko.computed(function () {
+                            return new oj.PagingTableDataSource(self.listViewDataSource());
+                        });
 
-                    self.listViewDataSource = ko.computed(function () {
-                        return new oj.ArrayTableDataSource(self.cart(), {idAttribute: 'prdUid'});
-                    });
+                        sessionStorage.cartProducts = [];
 
-                    self.cardViewDataSource = ko.computed(function () {
-                        return new oj.PagingTableDataSource(self.listViewDataSource());
-                    });
+                        if (sessionStorage.authenticated === "false")
+                        {
+                            return self.router.go('welcome');
+                        }
 
-                    sessionStorage.cartProducts = [];
-
-                    if (sessionStorage.authenticated === "false")
+                    } catch (err)
                     {
-                        return self.router.go('welcome');
+                       self.doShowErrorMessage = true;
                     }
 
                 };
@@ -112,7 +117,12 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                  * @param {boolean} info.fromCache - A boolean indicating whether the module was retrieved from cache.
                  */
                 self.handleAttached = function (info) {
-                    // Implement if needed
+                    
+                    if(self.doShowErrorMessage)
+                    {
+                      document.getElementById('errorMessage').hidden = false;
+                      self.errorMessage('Oops we can not get your cart right now, please try refreshing the screen.')   
+                    }
                 };
 
 
@@ -162,10 +172,10 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
 
                 self.getPhoto = function (product) {
 
-                    ProductHelper.getPhoto(product); 
+                    ProductHelper.getPhoto(product);
 
                 };
-     
+
             }
 
             /*

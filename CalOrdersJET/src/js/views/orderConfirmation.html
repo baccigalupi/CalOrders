@@ -26,10 +26,34 @@
     <!-- Page Title -->
     <div id="pageTitleContainer" class="oj-flex-item oj-sm-6">
         <h1 style="margin-bottom:0">Order Confirmation</h1>
+         
+
     </div>
+    
+    
+        <!-- global error messages -->
+        <div class="oj-flex-item oj-messaging-inline-container" id="errorMessage" aria-live="polite" hidden>
+            <div class="oj-padding-vertical"></div>
+            <div class="oj-message oj-message-error">
+                <div class="oj-component-icon oj-message-status-icon oj-message-error-icon" title="Error" role="img"></div>
+                <div class="oj-message-content">
+                    <div class="oj-message-summary">Error</div>
+                    <div class="oj-message-detail">
+                        <span data-bind="text: errorMessage"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end global error message -->
+
+        
+        
 
     <!-- Page Content -->
     <div class="oj-panel oj-flex oj-sm-flex-wrap-nowrap">
+
+       
+
         <div id="cartWrapperDiv" class="oj-panel oj-flex-item oj-sm-flex-wrap-nowrap">
 
             <div id="productlistview" >
@@ -49,7 +73,7 @@
                     </ul>
                 </div>
                 <div class="oj-flex oj-flex-items-pad">
-                    <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: cardViewDataSource, pageSize: 2}">
+                    <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: cardViewDataSource, pageSize: 10}">
                     </div>
                 </div>
                 </script>

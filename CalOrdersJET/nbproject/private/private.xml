@@ -10,6 +10,7 @@
         </group>
         <group>
             <file>file:/home/oncore/workspaces/CalOrders/CalOrdersJET/src/js/viewModels/productSearch.js</file>
+            <file>file:/home/oncore/workspaces/CalOrders/CalOrdersJET/src/js/utils/ProductHelper.js</file>
             <file>file:/home/oncore/workspaces/CalOrders/CalOrdersJET/src/js/viewModels/orderConfirmation.js</file>
             <file>file:/home/oncore/workspaces/CalOrders/CalOrdersJET/src/js/views/cart.html</file>
             <file>file:/home/oncore/workspaces/CalOrders/CalOrdersJET/src/js/viewModels/cart.js</file>
