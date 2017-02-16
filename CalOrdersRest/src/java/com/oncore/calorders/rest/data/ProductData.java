@@ -44,6 +44,13 @@ public class ProductData extends BaseData {
     private String productFullDesc;
     private List<Integer> relatedServices;
     private String partyUserId;
+    private String productSKU;
+    private String productOEMPartNumber;
+    private String productOEMName;
+    private BigDecimal productContractUnitPrice;
+    private Integer productContractDiscount;
+    private String productUnitCode;
+    private String productContractLineItem;
 
     public String getProductName() {
         return productName;
@@ -107,6 +114,62 @@ public class ProductData extends BaseData {
 
     public void setPartyUserId(String partyUserId) {
         this.partyUserId = partyUserId;
+    }
+
+    public String getProductSKU() {
+        return productSKU;
+    }
+
+    public void setProductSKU(String productSKU) {
+        this.productSKU = productSKU;
+    }
+
+    public String getProductOEMPartNumber() {
+        return productOEMPartNumber;
+    }
+
+    public void setProductOEMPartNumber(String productOEMPartNumber) {
+        this.productOEMPartNumber = productOEMPartNumber;
+    }
+
+    public String getProductOEMName() {
+        return productOEMName;
+    }
+
+    public void setProductOEMName(String productOEMName) {
+        this.productOEMName = productOEMName;
+    }
+
+    public BigDecimal getProductContractUnitPrice() {
+        return productContractUnitPrice;
+    }
+
+    public void setProductContractUnitPrice(BigDecimal productContractUnitPrice) {
+        this.productContractUnitPrice = productContractUnitPrice;
+    }
+
+    public Integer getProductContractDiscount() {
+        return productContractDiscount;
+    }
+
+    public void setProductContractDiscount(Integer productContractDiscount) {
+        this.productContractDiscount = productContractDiscount;
+    }
+
+    public String getProductUnitCode() {
+        return productUnitCode;
+    }
+
+    public void setProductUnitCode(String productUnitCode) {
+        this.productUnitCode = productUnitCode;
+    }
+
+    public String getProductContractLineItem() {
+        return productContractLineItem;
+    }
+
+    public void setProductContractLineItem(String productContractLineItem) {
+        this.productContractLineItem = productContractLineItem;
     }
 
 }
