@@ -24,18 +24,78 @@
 /*
  * Your about ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojpagingcontrol', 'ojs/ojpagingcontrol-model'],
+define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojpagingcontrol', 'ojs/ojpagingcontrol-model', 'utils/ProductHelper'],
         function (oj, ko, data) {
 
             function ProductDetailViewModel() {
                 var self = this;
+                var serviceEndPoints = new ServiceEndPoints();
+
                 self.router = oj.Router.rootInstance;
+                self.findProdutService = serviceEndPoints.getEndPoint("findProductById");
+                self.product = ko.observable();
+                self.prdUid = ko.observable();
+                self.addedProductPhoto = ko.observable();
+                self.addedProductName = ko.observable();
+                self.productsToCompareBreadcrumbs = ko.observable();
+
+                var lgQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.LG_UP);
+                var mdQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.MD_UP);
+                var smQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.SM_UP);
+                var smOnlyQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.SM_ONLY);
+                self.large = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(lgQuery);
+                self.medium = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(mdQuery);
+                self.small = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(smQuery);
+                self.smallOnly = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(smOnlyQuery);
                 
-                // Get product id from the search page
-                self.productId = ko.observable(self.router.retrieve());
-                
-                
-                
+                /**
+                 * Parse product from Rest service
+                 * @param {type} response
+                 * @returns {undefined}
+                 */
+                self.parseProduct = function (response)
+                {
+                    response.quantity = ko.observable(1);
+                    response.prdLongDescLines = ko.observableArray(response.prdLongDesc.split("\n"));
+                    
+                    self.product(response);
+                };
+
+                self.getPhoto = function ()
+                {
+                    return ProductHelper.getPhoto(self.product());
+                };
+
+                self.getPrdUid = function ()
+                {
+                    return self.product().prdUid;
+                };
+
+                /**
+                 * Add product to the cart
+                 * 
+                 * @param {type} product
+                 * @returns {undefined}
+                 */
+                self.addToCart = function () {
+                    ProductHelper.addProductToCart(self.product());
+
+                    // Show confirmation message                    
+                    self.addedProductName(self.product().prdName);
+                    self.addedProductPhoto($("#productImage" + self.product().prdUid).attr("src"));
+                    $("#addToCartConfirmationDialog").ojDialog("open");
+                };
+
+                self.navigateToProductSearch = function () {
+                    console.log("continue shopping");
+                    $("#addToCartConfirmationDialog").ojDialog("close");
+                    return self.router.go("productSearch");
+                };
+
+                self.navigateToCart = function () {
+                    return self.router.go("cart");
+                };
+
                 // Below are a subset of the ViewModel methods invoked by the ojModule binding
                 // Please reference the ojModule jsDoc for additionaly available methods.
 
@@ -51,45 +111,21 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                  * the promise is resolved
                  */
                 self.handleActivated = function (info) {
-                    // Implement if needed
-                };
+                    self.productsToCompareBreadcrumbs(sessionStorage.productsToCompareBreadcrumbs);
+                    
+                    // Get product id from the search page
+                    self.prdUid(self.router.retrieve());
 
-                /**
-                 * Optional ViewModel method invoked after the View is inserted into the
-                 * document DOM.  The application can put logic that requires the DOM being
-                 * attached here.
-                 * @param {Object} info - An object with the following key-value pairs:
-                 * @param {Node} info.element - DOM element or where the binding is attached. This may be a 'virtual' element (comment node).
-                 * @param {Function} info.valueAccessor - The binding's value accessor.
-                 * @param {boolean} info.fromCache - A boolean indicating whether the module was retrieved from cache.
-                 */
-                self.handleAttached = function (info) {
-                    // Implement if needed
-                };
+                    var ProductModel = oj.Model.extend({
+                        urlRoot: self.findProdutService + "/" + self.prdUid(),
+                        parse: self.parseProduct,
+                        attributeId: 'prdUid'
+                    });
+
+                    var pm = new ProductModel();
+                    pm.fetch();
 
 
-                /**
-                 * Optional ViewModel method invoked after the bindings are applied on this View. 
-                 * If the current View is retrieved from cache, the bindings will not be re-applied
-                 * and this callback will not be invoked.
-                 * @param {Object} info - An object with the following key-value pairs:
-                 * @param {Node} info.element - DOM element or where the binding is attached. This may be a 'virtual' element (comment node).
-                 * @param {Function} info.valueAccessor - The binding's value accessor.
-                 */
-                self.handleBindingsApplied = function (info) {
-                    // Implement if needed
-                };
-
-                /*
-                 * Optional ViewModel method invoked after the View is removed from the
-                 * document DOM.
-                 * @param {Object} info - An object with the following key-value pairs:
-                 * @param {Node} info.element - DOM element or where the binding is attached. This may be a 'virtual' element (comment node).
-                 * @param {Function} info.valueAccessor - The binding's value accessor.
-                 * @param {Array} info.cachedNodes - An Array containing cached nodes for the View if the cache is enabled.
-                 */
-                self.handleDetached = function (info) {
-                    // Implement if needed
                 };
             }
 
@@ -98,6 +134,6 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
              * each time the view is displayed.  Return an instance of the ViewModel if
              * only one instance of the ViewModel is needed.
              */
-            return ProductDetailViewModel;
+            return new ProductDetailViewModel();
         }
 );

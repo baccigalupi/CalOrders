@@ -31,15 +31,16 @@ var ProductHelper = new function ()
      */
     this.getPhoto = function (product)
     {
-        var file = product.prdImgImage;
-
-        if (file === undefined || file === null || file.length === 0)
+        if (product === undefined || product === null || product.prdImgImage === null 
+                || product.prdImgImage === undefined || product.prdImgImage.length === 0)
         {
             var src = '../../css/images/unknown_product.jpg';
             return src;
         } 
         else
         {
+            var file = product.prdImgImage;
+                    
             var imageSize = product.prdImgImage.length;
             var imageType = product.prdCategoryCd.longDesc;
 
@@ -55,7 +56,11 @@ var ProductHelper = new function ()
 
             reader.addEventListener("load", function (event) {
                 var preview = document.getElementById('productImage' + product.prdUid);
-                preview.src = reader.result;
+                
+                if ( preview !== null)
+                {
+                    preview.src = reader.result;
+                }
             }, false);
 
             if (blob) {
@@ -94,11 +99,11 @@ var ProductHelper = new function ()
         if (result.length === 1)
         {
             cartProduct = result[0];
-            cartProduct.quantity += 1;
+            cartProduct.quantity += product.quantity();
         } else
         {
             cartProduct = product;
-            cartProduct.quantity = 1;
+            cartProduct.quantity = product.quantity();
             cartProducts.push(cartProduct);
         }
 

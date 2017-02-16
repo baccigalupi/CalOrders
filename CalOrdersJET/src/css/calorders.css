@@ -108,4 +108,24 @@
     float: right;
 }
 
+.product-detail-label {
+    font-weight: bold;
+}
+
+.product-detail-value {
+    padding-left: 25px; 
+    padding-top: 10px
+}
+
+.product-detail-name {
+    font-weight: bold;
+}
+
+.product-detail-price {
+    color: red;
+    font-size:20px;
+}
+
+
+
 

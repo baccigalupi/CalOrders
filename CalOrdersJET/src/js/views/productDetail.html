@@ -25,12 +25,100 @@
 
     <!-- Page Title -->
     <div id="pageTitleContainer" class="oj-flex-item oj-sm-6">
-        <h1 style="margin-bottom:0">Product Detail</h1>
+        <h2 style="margin-bottom:0">Product Detail</h2>
+    </div>
+
+    <div class="oj-padding-vertical"></div>
+
+    <!-- Bread crumbs -->
+    <div id="productSearchBreadcrumbs" class="oj-sm-only-hide">
+        <span data-bind="text: productsToCompareBreadcrumbs"></span>
+        <div class="oj-padding-vertical"></div>
     </div>
 
     <!-- Page Content -->
-    <div class="oj-panel oj-flex oj-sm-flex-wrap-nowrap">
 
-        <span id="productId" data-bind="text: 'TODO: Put content here.  You are viewing product Id: ' + productId()"></span>
+    <div class="oj-panel oj-flex-item">
+
+        <div class="oj-flex">
+            <!-- Image -->
+            <div class="oj-flex-item">
+                <img alt="product" data-bind="attr: {
+                        id: 'productImage' + prdUid(), 
+                        src: getPhoto(), 
+                        height: medium() ? '400' : '200',
+                        width: medium() ? '400' : '200'}"/>
+            </div>
+
+            <div class="oj-flex-item oj-sm-6">
+                <h3 class="product-detail-name" aria-label="product name" data-bind="text: product().prdName" tabindex="0"></h3>
+
+                <div class="oj-padding-vertical"></div>
+
+                <div class="product-detail-label">Price:</div>
+                <div class="product-detail-price" data-bind="text: '$' + product().prdPrice"></div>
+
+                <div class="oj-padding-vertical"></div>
+
+                <div class="oj-flex">
+                    <input id="quantity" aria-label="quantity"
+                           data-bind="ojComponent: {
+                         component: 'ojInputNumber', 
+                         max:10000,
+                         min:1, 
+                         step:1, 
+                         value:product().quantity,
+                         rootAttributes: {style:'max-width:40px; padding-right:20px'}}"/>
+
+                    <button id= "addToCart" data-bind="click: addToCart, ojComponent: { component: 'ojButton', label: 'Add to Cart'}"></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="oj-panel oj-flex-item ">
+            <div class="product-detail-label">Product Description:</div>
+
+            <div class="product-detail-value" data-bind="foreach: product().prdLongDescLines">
+                <p data-bind="text: $data"></p>
+            </div>
+
+        </div>
     </div>
 </div>
+
+<!-- start add cart dialog box -->
+<div id="addToCartConfirmationDialogWrapper">
+    <div style="display:none" id="addToCartConfirmationDialog" title="Successfully Added to Cart" 
+         data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide'}">
+
+        <div class="oj-dialog-body">
+
+            <div class="oj-flex">
+                <div class="oj-flex-item">
+                    <img alt="product"  data-bind="attr: {src: addedProductPhoto}" height="100" width="100"/>
+                </div>
+
+                <div class="oj-flex-item oj-sm-justify-content-center">
+                    <span data-bind="text: 'Product '"></span>
+                    <span class="confirmation-product-name" data-bind="text: addedProductName"></span>
+                    <span data-bind="text: ' has been added to your cart'"></span>
+                </div>
+            </div>
+        </div>
+        <div class="oj-dialog-footer">
+            <div class="dialogButtonLeft">
+                <button id= "continueShopping"
+                        data-bind="click: navigateToProductSearch, ojComponent: { component: 'ojButton', label: 'Continue Shopping'}">
+                </button> 
+            </div>
+
+            <div class="dialogButtonRight">
+                <button id= "cart"
+                        data-bind="click: navigateToCart, ojComponent: { component: 'ojButton', label: 'View Cart'}">
+                </button> 
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- end add cart dialog box-->
