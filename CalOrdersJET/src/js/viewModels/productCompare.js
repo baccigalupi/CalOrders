@@ -24,7 +24,7 @@
 /*
  * Your about ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout', 'promise',
+define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils','ojs/ojrouter', 'ojs/ojknockout', 'promise',
     'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojpagingcontrol', 'ojs/ojpagingcontrol-model', 'utils/ProductHelper'],
         function (oj, ko, data) {
 
@@ -97,6 +97,9 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                  * the promise is resolved
                  */
                 self.handleActivated = function (info) {
+                    if(!SecurityUtils.isAuthenticated()){
+                        return self.router.go('welcome');
+                    }
                     // Implement if needed
                     self.productsToCompareBreadcrumbs(sessionStorage.productsToCompareBreadcrumbs);
                     self.productsToCompare(JSON.parse(sessionStorage.productsToCompare));

@@ -24,7 +24,7 @@
 /*
  * Your customer ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery'],
+define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils'],
         function (oj, ko, $) {
 
             function OrdersViewModel() {
@@ -32,8 +32,8 @@ define(['ojs/ojcore', 'knockout', 'jquery'],
 
 
                 self.router = oj.Router.rootInstance;
-                
-                
+
+
                 // Below are a subset of the ViewModel methods invoked by the ojModule binding
                 // Please reference the ojModule jsDoc for additionaly available methods.
 
@@ -49,10 +49,10 @@ define(['ojs/ojcore', 'knockout', 'jquery'],
                  * the promise is resolved
                  */
                 self.handleActivated = function (info) {
-                    if (sessionStorage.authenticated === "false")
-                    {
+                    if (!SecurityUtils.isAuthenticated()) {
                         return self.router.go('welcome');
                     }
+
                 };
 
                 /**

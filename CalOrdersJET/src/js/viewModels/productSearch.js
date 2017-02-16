@@ -24,7 +24,7 @@
 /*
  * Your about ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojpagingcontrol', 'ojs/ojpagingcontrol-model', 'utils/ProductHelper'],
+define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojrouter', 'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojpagingcontrol', 'ojs/ojpagingcontrol-model', 'utils/ProductHelper'],
         function (oj, ko, data) {
 
             function ProductSearchViewModel() {
@@ -82,6 +82,9 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                  * the promise is resolved
                  */
                 self.handleActivated = function (info) {
+                    if(!SecurityUtils.isAuthenticated()){
+                        return self.router.go('welcome');
+                    }
                     // Implement if needed
                     console.log("product search = handleActivated");
                     self.selectedProductMenuItem('DESK');
@@ -95,7 +98,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                 self.parseProduct = function (response) {
                     response.compareProduct = ko.observable();
                     response.quantity = ko.observable(1);
-                    
+
                     self.allProduct.push(response);
                 };
 
@@ -208,7 +211,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                  * @returns {undefined}
                  */
                 self.addToCart = function (product) {
-                   ProductHelper.addProductToCart(product);
+                    ProductHelper.addProductToCart(product);
 
                     // Show confirmation message                    
                     self.addedProductName(product.prdName);
@@ -252,7 +255,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                     {
                         sessionStorage.productsToCompare = JSON.stringify(productsToCompare);
                         sessionStorage.productsToCompareBreadcrumbs = self.productCategoryBreadcrumbs();
-                        
+
                         return self.router.go("productCompare");
                     } else
                     {

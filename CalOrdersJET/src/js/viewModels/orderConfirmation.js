@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojpagingcontrol', 'ojs/ojpagingcontrol-model'],
+define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojrouter', 'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojpagingcontrol', 'ojs/ojpagingcontrol-model'],
         function (oj, ko, data) {
 
             function OrderConfirmationViewModel() {
@@ -66,18 +66,20 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                  * the promise is resolved
                  */
                 self.handleActivated = function (info) {
-
+                    if (!SecurityUtils.isAuthenticated()) {
+                        return self.router.go('welcome');
+                    }
 
                     try {
                         self.doShowErrorMessage = false;
-                        
+
                         self.addressLine1(sessionStorage.departmentAddressLine1);
                         self.addressLine2(sessionStorage.departmentAddressLine2);
                         self.cityStateZip(sessionStorage.departmentCityStateZip);
                         self.itemTotalPrice(sessionStorage.itemTotalPrice);
                         self.totalPrice(sessionStorage.totalPrice);
                         self.shippingPrice(sessionStorage.shippingPrice);
- 
+
                         var sessionCart = JSON.parse(
                                 sessionStorage.cartProducts);
 
@@ -102,7 +104,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
 
                     } catch (err)
                     {
-                       self.doShowErrorMessage = true;
+                        self.doShowErrorMessage = true;
                     }
 
                 };
@@ -117,11 +119,11 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                  * @param {boolean} info.fromCache - A boolean indicating whether the module was retrieved from cache.
                  */
                 self.handleAttached = function (info) {
-                    
-                    if(self.doShowErrorMessage)
+
+                    if (self.doShowErrorMessage)
                     {
-                      document.getElementById('errorMessage').hidden = false;
-                      self.errorMessage('Oops we can not get your cart right now, please try refreshing the screen.')   
+                        document.getElementById('errorMessage').hidden = false;
+                        self.errorMessage('Oops we can not get your cart right now, please try refreshing the screen.')
                     }
                 };
 

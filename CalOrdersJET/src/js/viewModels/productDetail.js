@@ -24,7 +24,7 @@
 /*
  * Your about ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojpagingcontrol', 'ojs/ojpagingcontrol-model', 'utils/ProductHelper'],
+define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojrouter', 'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojpagingcontrol', 'ojs/ojpagingcontrol-model', 'utils/ProductHelper'],
         function (oj, ko, data) {
 
             function ProductDetailViewModel() {
@@ -47,7 +47,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                 self.medium = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(mdQuery);
                 self.small = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(smQuery);
                 self.smallOnly = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(smOnlyQuery);
-                
+
                 /**
                  * Parse product from Rest service
                  * @param {type} response
@@ -57,7 +57,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                 {
                     response.quantity = ko.observable(1);
                     response.prdLongDescLines = ko.observableArray(response.prdLongDesc.split("\n"));
-                    
+
                     self.product(response);
                 };
 
@@ -111,8 +111,11 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                  * the promise is resolved
                  */
                 self.handleActivated = function (info) {
+                    if (!SecurityUtils.isAuthenticated()) {
+                        return self.router.go('welcome');
+                    }
                     self.productsToCompareBreadcrumbs(sessionStorage.productsToCompareBreadcrumbs);
-                    
+
                     // Get product id from the search page
                     self.prdUid(self.router.retrieve());
 
