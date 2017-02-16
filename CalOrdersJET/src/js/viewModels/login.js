@@ -137,23 +137,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'ojs/ojarray
 
 
 
-
-
-
-                self.onClickLoadRegistration = function (data, event) {
-
-                    // Clear out old session data
-                    sessionStorage.registration = "";
-
-                    self.router.go('registrationCompany');
-
-                    return true;
-                };
-
-
-
-
-
                 self.continueClick = function (data, event) {
 
 

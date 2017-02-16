@@ -82,9 +82,6 @@ public class ProductFacadeRESTExtension extends ProductFacadeREST {
     @EJB
     private PrdImgTypeCdFacadeREST prdImgTypeCdFacadeREST;
 
-    @EJB
-    private RelatedServiceFacadeREST relatedServiceFacadeREST;
-
     public ProductFacadeRESTExtension() {
 
     }
@@ -153,9 +150,9 @@ public class ProductFacadeRESTExtension extends ProductFacadeREST {
         product.setCreateUserId(productData.getPartyUserId());
         product.setPrdActiveInd(1);
         product.setPrdCategoryCd(this.categoryCdFacadeREST.find(productData.getProductCategory()));
-        product.setPrdCntrDiscount(null);
-        product.setPrdCntrLnItm(null);
-        product.setPrdCntrUnitPrice(null);
+        product.setPrdCntrDiscount(productData.getProductContractDiscount());
+        product.setPrdCntrLnItm(productData.getProductContractLineItem());
+        product.setPrdCntrUnitPrice(productData.getProductContractUnitPrice());
         product.setPrdImgImage(null);
         product.setPrdImgKey(null);
         product.setPrdImgName(null);
@@ -164,12 +161,12 @@ public class ProductFacadeRESTExtension extends ProductFacadeREST {
         product.setPrdImgTypeCd(this.prdImgTypeCdFacadeREST.find("JPEG"));
         product.setPrdLongDesc(productData.getProductFullDesc());
         product.setPrdName(productData.getProductName());
-        product.setPrdOemName(null);
-        product.setPrdOemPartNum(null);
+        product.setPrdOemName(productData.getProductOEMName());
+        product.setPrdOemPartNum(productData.getProductOEMPartNumber());
         product.setPrdPrice(productData.getProductPrice());
         product.setPrdShortDesc(productData.getProductDescription());
-        product.setPrdSku("Test");
-        product.setPrdUnitCd(this.prdUnitCdFacadeREST.find("EACH"));
+        product.setPrdSku(productData.getProductSKU());
+        product.setPrdUnitCd(this.prdUnitCdFacadeREST.find(productData.getProductUnitCode()));
         product.setUpdateTs(new Date());
         product.setUpdateUserId(productData.getPartyUserId());
         product.setVndUidFk(this.vendorFacadeREST.find(productData.getVendor()));

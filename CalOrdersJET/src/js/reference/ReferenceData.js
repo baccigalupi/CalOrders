@@ -26,10 +26,11 @@
 
 var ReferenceData = new function ()
 {
-   
+
     this.vendors = null;
     this.categories = null;
-    this.relatedServices =null;
+    this.relatedServices = null;
+    this.unitCodes = null;
 
     /**
      * Fetch the vendors for display in a vendors  drop down list
@@ -41,7 +42,7 @@ var ReferenceData = new function ()
         if (this.vendors === null)
         {
             this.vendors = [{label: "", value: ""}];
- 
+
             var vendorsURL = new ServiceEndPoints().getEndPoint("findAllVendors");
 
             var parseVendors = function (response)
@@ -63,7 +64,7 @@ var ReferenceData = new function ()
 
         return this.vendors;
     };
-    
+
     /**
      * Fetch the categories for display in a categories  drop down list
      * 
@@ -74,7 +75,7 @@ var ReferenceData = new function ()
         if (this.categories === null)
         {
             this.categories = [{label: "", value: ""}];
- 
+
             var categoryURL = new ServiceEndPoints().getEndPoint("findAllCategories");
 
             var parseCategories = function (response)
@@ -96,7 +97,7 @@ var ReferenceData = new function ()
 
         return this.categories;
     };
-    
+
     /**
      * Fetch the related services for display in a related services  drop down list
      * 
@@ -107,7 +108,7 @@ var ReferenceData = new function ()
         if (this.relatedServices === null)
         {
             this.relatedServices = [{label: "", value: ""}];
- 
+
             var relatedServiceURL = new ServiceEndPoints().getEndPoint("findAllRelatedServices");
 
             var parseRelatedServices = function (response)
@@ -128,6 +129,39 @@ var ReferenceData = new function ()
         }
 
         return this.relatedServices;
+    };
+
+    /**
+     * Fetch the unit codes for display in a unit code drop down list
+     * 
+     * @returns {Arrays}
+     */
+    this.getProductUnitCodes = function ()
+    {
+        if (this.unitCodes === null)
+        {
+            this.unitCodes = [{label: "", value: ""}];
+
+            var unitCodeURL = new ServiceEndPoints().getEndPoint("findAllUnitCodes");
+
+            var parseUnitCodes = function (response)
+            {
+                ReferenceData.unitCodes.push({label: response.shortDesc, value: response.code});
+            };
+
+            var UnitCode = oj.Model.extend({
+                urlRoot: unitCodeURL,
+                parse: parseUnitCodes,
+                id: "code"});
+            var UnitCodes = oj.Collection.extend({
+                url: unitCodeURL,
+                model: new UnitCode()});
+            var unitCodesCollection = new UnitCodes();
+
+            unitCodesCollection.fetch({});
+        }
+
+        return this.unitCodes;
     };
 };
 
