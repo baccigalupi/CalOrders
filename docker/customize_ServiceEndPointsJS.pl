@@ -13,7 +13,7 @@ open OUTPUT, ">$serviceEndPointsFile";
 while (<INPUT>)
 {
     # use # as the substitution delimeter so as not to confuse the / characters
-    s#var calOrdersHost = "http://localhost:8080"#var calOrdersHost = "$restServicesURL"#g;
+    s#http://localhost:8080#$restServicesURL#g;
     print OUTPUT $_;
 }
 
