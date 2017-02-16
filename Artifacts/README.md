@@ -67,7 +67,8 @@ The table below provides links to additional artifacts and other important infor
 [User Stories]() |
 [Estimation](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Story-Estimation) |
 [Prioritization](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Story-Prioritization) |
-[Sprint planning](https://github.com/OncoreLLC/CalOrders/wiki/Sprint-Planning) | [Standups](https://github.com/OncoreLLC/CalOrders/wiki/Standups)| [Sprints](https://github.com/OncoreLLC/CalOrders/wiki/Sprints) |
+[Sprint planning](https://github.com/OncoreLLC/CalOrders/wiki/Sprint-Planning) | 
+[Sprints](https://github.com/OncoreLLC/CalOrders/wiki/Sprints) |
 [Sprint Reviews](https://github.com/OncoreLLC/CalOrders/wiki/Sprint-Reviews)
 [Retrospectives](https://github.com/OncoreLLC/CalOrders/wiki/Retrospectives) |
 [Daily Standups](https://github.com/OncoreLLC/CalOrders/wiki/Sprint-Daily-Stand-ups)
