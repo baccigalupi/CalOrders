@@ -413,10 +413,10 @@
         <jvm-options>-DANTLR_USE_DIRECT_CLASS_LOADING=true</jvm-options>
         <jvm-options>-Dcom.sun.enterprise.config.config_environment_factory_class=com.sun.enterprise.config.serverbeans.AppserverConfigEnvironmentFactory</jvm-options>
         <jvm-options>-XX:NewRatio=2</jvm-options>
-        <!-- TODO dropped Xmx from 2g to 512m -->
-        <jvm-options>-Xmx512m</jvm-options>
-        <!-- TODO commented out Xms -->
-        <!-- <jvm-options>-Xms2g</jvm-options> -->
+        <!-- TODO dropped Xmx from 2g to 1g -->
+        <jvm-options>-Xmx1g</jvm-options>
+        <!-- TODO reduced Xms to 512 -->
+        <jvm-options>-Xms512m</jvm-options>
         <jvm-options>-Djdk.tls.rejectClientInitiatedRenegotiation=true</jvm-options>
         <jvm-options>-Dorg.jboss.weld.serialization.beanIdentifierIndexOptimization=false</jvm-options>
         <jvm-options>-Dorg.glassfish.grizzly.DEFAULT_MEMORY_MANAGER=org.glassfish.grizzly.memory.HeapMemoryManager</jvm-options>
