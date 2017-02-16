@@ -83,8 +83,8 @@ Node JS | Frontend Javscript Engine
 Payara | JEE Application Server  
 MySQL | Database  
 Jenkins | Continuous Integration  
-JUnit | automated unit testing  
-Selenium | automated regression testing  
+JUnit | [automated unit testi cases are here in the repository]  (https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersRest/test/com/oncore/calorders/rest/service/extension)
+Selenium | [automated regression test cases are here in the repository](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersSelenium/test/test/oncore/calorders/selenium)  
 Knockout Js | Front-end Javascript library  
 Require Js | Front-end Javascript library  
 jQuery | Front-end Javascript library  
