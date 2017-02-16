@@ -68,7 +68,7 @@ The list below provides links to additional artifacts and other important inform
 * [Sprint planning](https://github.com/OncoreLLC/CalOrders/wiki/Sprint-Planning) 
 * [Sprints](https://github.com/OncoreLLC/CalOrders/wiki/Sprints)
 * [Sprint Reviews](https://github.com/OncoreLLC/CalOrders/wiki/Sprint-Reviews)
-* [Retrospectives](https://github.com/OncoreLLC/CalOrders/wiki/Retrospectives) 
+* [Retrospectives](https://github.com/OncoreLLC/CalOrders/wiki/Sprint-Retrospectives) 
 * [Daily Standups](https://github.com/OncoreLLC/CalOrders/wiki/Sprint-Daily-Stand-ups)
 
 ###Architecture & [DevOps](https://github.com/OncoreLLC/CalOrders/wiki/Environments)  
