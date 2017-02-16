@@ -64,15 +64,14 @@ Our [Agile](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Methodolgy) proces
 
 ###Practices
 The table below provides links to additional artifacts and other important information about each agile practice that was utilized for this project.<br>
-[User Stories]() |
-[User Story Estimation](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Story-Estimation) |
-[User Story Prioritization](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Story-Prioritization) |
-[Sprint planning](https://github.com/OncoreLLC/CalOrders/wiki/Sprint-Planning) | 
-[Sprints](https://github.com/OncoreLLC/CalOrders/wiki/Sprints) |
-[Sprint Reviews](https://github.com/OncoreLLC/CalOrders/wiki/Sprint-Reviews) |
-[Retrospectives](https://github.com/OncoreLLC/CalOrders/wiki/Retrospectives) |
-[Daily Standups](https://github.com/OncoreLLC/CalOrders/wiki/Sprint-Daily-Stand-ups)
-
+* [User Stories (Pivotal Tracker)](https://www.pivotaltracker.com/n/projects/1968721) 
+* [User Story Estimation](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Story-Estimation) 
+* [User Story Prioritization](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Story-Prioritization) 
+* [Sprint planning](https://github.com/OncoreLLC/CalOrders/wiki/Sprint-Planning) 
+* [Sprints](https://github.com/OncoreLLC/CalOrders/wiki/Sprints)
+* [Sprint Reviews](https://github.com/OncoreLLC/CalOrders/wiki/Sprint-Reviews)
+* [Retrospectives](https://github.com/OncoreLLC/CalOrders/wiki/Retrospectives) 
+* [Daily Standups](https://github.com/OncoreLLC/CalOrders/wiki/Sprint-Daily-Stand-ups)
 
 ###Architecture & [DevOps](https://github.com/OncoreLLC/CalOrders/wiki/Environments)  
   The team's DevOps methodology.  
