@@ -51,6 +51,15 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'reference/ReferenceData'],
                 self.relatedServices = ko.observableArray([]);
                 self.avaliableRelatedServices = ko.observableArray(ReferenceData.getRelatedServices());
                 self.productImage = ko.observable();
+                self.productSKU = ko.observable();
+                self.productOEMPartNumber = ko.observable();
+                self.productOEMName = ko.observable();
+                self.productContractDiscount = ko.observable();
+                self.productUnitCode = ko.observable();
+                self.productUnitCodes = ko.observableArray(ReferenceData.getProductUnitCodes());
+                self.productUnitCodeMessages = ko.observableArray([]);
+                self.productContractLineItem = ko.observable();
+                self.productContractUnitPrice = ko.observable();
                 // Below are a subset of the ViewModel methods invoked by the ojModule binding
                 // Please reference the ojModule jsDoc for additionaly available methods.
 
@@ -82,6 +91,16 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'reference/ReferenceData'],
                     self.relatedServices = ko.observableArray([]);
                     self.avaliableRelatedServices = ko.observableArray(ReferenceData.getRelatedServices());
                     self.productImage = ko.observable();
+                    self.productSKU = ko.observable();
+                    self.productOEMPartNumber = ko.observable();
+                    self.productOEMName = ko.observable();
+                    self.productContractUnitPrice = ko.observable();
+                    self.productUnitCode = ko.observable();
+                    self.productUnitCodes = ko.observableArray(ReferenceData.getProductUnitCodes());
+                    self.productUnitCodeMessages = ko.observableArray([]);
+                    self.productContractLineItem = ko.observable();
+                    self.productContractDiscount = ko.observable();
+                    self.productContractUnitPrice = ko.observable();
                 };
                 /**
                  * Optional ViewModel method invoked after the View is inserted into the
@@ -137,14 +156,23 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'reference/ReferenceData'],
                         productService.save(
                                 {
                                     //Product Info
+                                    "productSKU": self.productSKU(),
+                                    "productOEMPartNumber": self.productOEMPartNumber(),
+                                    "productOEMName": self.productOEMName(),
+                                    "productContractUnitPrice": self.productContractUnitPrice(),
+                                    "productContractDiscount": self.productContractDiscount(),
+                                    "productUnitCode": self.productUnitCode(),
+                                    "productContractLineItem": self.productContractLineItem(),
                                     "productName": self.productName(),
                                     "productCategory": self.productCategory(),
                                     "vendor": self.vendor(),
                                     "productPrice": self.productPrice(),
                                     "productDescription": self.productDescription(),
                                     "productFullDesc": self.productFullDesc(),
-                                    "relatedServices": self.relatedServices(),
+                                    "relatedServices": self.relatedServices(),                            
                                     "partyUserId": sessionStorage.userName
+                                    
+                                    
                                 },
                                 {
                                     success: function (myModel, response, options) {
@@ -204,7 +232,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'reference/ReferenceData'],
                 {
                     var validProductCategory = self.isValideProductCategory();
                     var validVendor = self.isValidVendor();
-                    return validProductCategory && validVendor;
+                    var validProductUnitCode = self.isValidProductUnitCode();
+                    return validProductCategory && validVendor && validProductUnitCode;
                 };
                 self.validateProductCategory = {validate: function (value)
                     {
@@ -274,6 +303,41 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'reference/ReferenceData'],
                     }
                     return validVendor;
                 };
+                self.validateProductUnitCode = {validate: function (value)
+                    {
+                        var validProductUnitCode = true;
+                        // Hack for states dropdown and can't figure out how
+                        // required error message is thrown by itself
+                        if (typeof value === "undefined"
+                                || value === "")
+                        {
+                            this.productUnitCodeMessages([
+                                new oj.Message(
+                                        "Value is required.",
+                                        "You must select a value.",
+                                        oj.Message.SEVERITY_TYPE.ERROR)]);
+                            validProductUnitCode = false;
+                        }
+                        return validProductUnitCode;
+                    }};
+                
+                self.isValidProductUnitCode = function ()
+                {
+                    var validProductUnitCode = true;
+                    // Hack for states dropdown and can't figure out how
+                    // required error message is thrown by itself
+                    if (typeof self.productCategory() === "undefined"
+                            || self.productCategory() === "")
+                    {
+                        this.productUnitCodeMessages([
+                            new oj.Message(
+                                    "Value is required.",
+                                    "You must select a value.",
+                                    oj.Message.SEVERITY_TYPE.ERROR)]);
+                        validProductUnitCode = false;
+                    }
+                    return validProductUnitCode;
+                };
                 self.router = oj.Router.rootInstance;
                 /**
                  * The showSuccessMessage method displays the success dialog.
@@ -295,10 +359,18 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'reference/ReferenceData'],
                 self.closeClickEvent = function (data, event) {
                     $("#modalDialog1").ojDialog("close");
                     return self.router.go('productSearch');
-                }
-                ;
-
-               
+                };
+                
+                self.computeContractPrice = function (data, event) {        
+                    var percent = $("#productContractDiscount").val();
+                    var price = $("#productPrice").val();
+                     var discount = ((percent / 100) * price).toFixed(2);
+                        if (discount == NaN || discount==undefined || discount ===0) {
+                            self.productContractUnitPrice(undefined);
+                        } else {
+                              self.productContractUnitPrice(discount);
+                        }
+                };
             }
 
 

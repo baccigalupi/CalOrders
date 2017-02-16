@@ -88,6 +88,10 @@ ServiceEndPoints.prototype = {
         }else if (key === "createProduct")
         {
             return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.product/createProduct"; 
+        }
+        else if (key === "findAllUnitCodes")
+        {
+            return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.prdunitcd"; 
         }else
         {
             return "UNDEFINED";

@@ -91,6 +91,74 @@ THE SOFTWARE.
                         </div>
                     </div>
 
+                    <!-- Product OEM Name -->
+                    <div class="oj-flex">  
+                        <div class="oj-flex-item">
+                            <label for="productOEMName">Product OEM Name:</label>
+                            <input id="productOEMName"  type="text" required maxlength="45"
+                                   data-bind="ojComponent: {
+                                                component: 'ojInputText', 
+                                                value:productOEMName, required: true,
+                                                validators: [{type: 'regExp', options: {
+                                                    pattern: '[:\\-!@#$%^&*,?.;:()\'\&quot\\w\\s]{1,45}',
+                                                    hint: 'Enter a product OEM name that is less than 45 alphanumeric characters (including the following characters :-!@#$%^&*();?\'\&quot',
+                                                    messageDetail: 'The product OEM name must be less than 45 alphanumeric characters (including the following characters :-!@#$%^&*();?\'\&quot'} }
+                                                    ],
+                                                   invalidComponentTracker: tracker}">
+                        </div>
+                    </div>
+
+                    <!-- Product OEM Part Number -->
+                    <div class="oj-flex">  
+                        <div class="oj-flex-item">
+                            <label for="productOEMPartNumber">Product OEM Part Number:</label>
+                            <input id="productOEMPartNumber"  type="text" required maxlength="45"
+                                   data-bind="ojComponent: {
+                                                component: 'ojInputText', 
+                                                value:productOEMPartNumber, required: true,
+                                                validators: [{type: 'regExp', options: {
+                                                    pattern: '[:\\-!@#$%^&*,?.;:()\'\&quot\\w\\s]{1,45}',
+                                                    hint: 'Enter a product OEM part number that is less than 45 alphanumeric characters (including the following characters :-!@#$%^&*();?\'\&quot',
+                                                    messageDetail: 'The product OEM part number must be less than 45 alphanumeric characters (including the following characters :-!@#$%^&*();?\'\&quot'} }
+                                                    ],
+                                                   invalidComponentTracker: tracker}">
+                        </div>
+                    </div>
+
+                    <!-- Product SKU -->
+                    <div class="oj-flex">  
+                        <div class="oj-flex-item">
+                            <label for="productSKU">Product SKU:</label>
+                            <input id="productSKU"  type="text" required maxlength="45"
+                                   data-bind="ojComponent: {
+                                                component: 'ojInputText', 
+                                                value:productSKU, required: true,
+                                                validators: [{type: 'regExp', options: {
+                                                    pattern: '[:\\-!@#$%^&*,?.;:()\'\&quot\\w\\s]{1,45}',
+                                                    hint: 'Enter a product SKU that is less than 45 alphanumeric characters (including the following characters :-!@#$%^&*();?\'\&quot',
+                                                    messageDetail: 'The product SKU must be less than 45 alphanumeric characters (including the following characters :-!@#$%^&*();?\'\&quot'} }
+                                                    ],
+                                                   invalidComponentTracker: tracker}">
+                        </div>
+                    </div>
+
+                    <!-- Product Contract Line Item -->
+                    <div class="oj-flex">  
+                        <div class="oj-flex-item">
+                            <label for="productContractLineItem">Product Contract Line Item:</label>
+                            <input id="productContractLineItem"  type="text" maxlength="45"
+                                   data-bind="ojComponent: {
+                                                component: 'ojInputText', 
+                                                value:productContractLineItem, 
+                                                validators: [{type: 'regExp', options: {
+                                                    pattern: '[:\\-!@#$%^&*,?.;:()\'\&quot\\w\\s]{1,45}',
+                                                    hint: 'Enter a product contract line item that is less than 45 alphanumeric characters (including the following characters :-!@#$%^&*();?\'\&quot',
+                                                    messageDetail: 'The product contract line item must be less than 45 alphanumeric characters (including the following characters :-!@#$%^&*();?\'\&quot'} }
+                                                    ],
+                                                   invalidComponentTracker: tracker}">
+                        </div>
+                    </div>
+
                     <!-- Product Category -->
                     <div class="oj-flex">
                         <div class="oj-flex-item">
@@ -121,23 +189,63 @@ THE SOFTWARE.
                         </div>
                     </div>
 
+                    <!-- Product Unit Code -->
+                    <div class="oj-flex">
+                        <div class="oj-flex-item">
+                            <label for="productUnitCode">Product Unit Code:</label>
+                            <select id="productUnitCode" title="Select a unit code from the list"
+                                    data-bind="ojComponent: {
+                                    component: 'ojSelect', value: productUnitCode, required: true,
+                                    options: productUnitCodes,
+                                    validators: [validateProductUnitCode],
+                                    invalidComponentTracker: tracker,
+                                    messagesCustom: productUnitCodeMessages}">
+                            </select>                                
+                        </div>
+                    </div>
+
                     <!-- Product Price -->
                     <div class="oj-flex"> 
                         <div class="oj-flex-item">
                             <label for="productPrice">Product Price:</label>
                             <input id="productPrice" type="text"  required maxlength="9"
-                                   data-bind="ojComponent: {
+                                   data-bind="event: { change: computeContractPrice} , ojComponent: {
                                     component: 'ojInputText', 
                                     value: productPrice, 
                                     required: true,  
                                     validators: [{type: 'regExp', options: {
                                                  pattern: '[0-9]+(\.[0-9][0-9]?)?',
-                                                 hint: 'Enter a price that is number',
-                                                 messageDetail: 'The price must be number'} }],
+                                                 hint: 'Enter a price that is a currency value',
+                                                 messageDetail: 'The price must be a currency value'} }],
                                     invalidComponentTracker: tracker}">
                         </div>
                     </div>
 
+                    <!-- Product Contract Discount -->
+                    <div class="oj-flex"> 
+                        <div class="oj-flex-item">
+                            <label for="productContractDiscount">Product Contract Discount:</label>
+                            <input id="productContractDiscount" type="text"  maxlength="9"
+                                   data-bind="event: { change: computeContractPrice} ,ojComponent: {
+                                    component: 'ojInputText', 
+                                    value: productContractDiscount, 
+                                    required: true,  
+                                    validators: [{type: 'regExp', options: {
+                                                 pattern: '[0-9]{1,2}',
+                                                 hint: 'Enter a percentage discount that is number',
+                                                 messageDetail: 'The percentage discount must be 2 digit number'} }],
+                                    invalidComponentTracker: tracker}">
+                        </div>
+                    </div>
+
+                    <!-- Product Contract Unit Price -->
+                    <div class="oj-flex"> 
+                        <div class="oj-flex-item">
+                            <label for="productContractUnitPrice">Product Contract Unit Price:</label>
+                            $<span id="productContractUnitPrice" data-bind="text:productContractUnitPrice"></span>
+                        </div>
+                    </div>
+                    <br>
                     <!-- Product Description -->
                     <div class="oj-flex"> 
                         <div class="oj-flex-item">
@@ -202,7 +310,6 @@ THE SOFTWARE.
                         </button> 
                     </div>
 
-                    <!--                    </div>-->
                 </div>
             </div>
 
