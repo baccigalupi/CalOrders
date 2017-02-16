@@ -93,7 +93,8 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
 
                 self.parseProduct = function (response) {
                     response.compareProduct = ko.observable();
-
+                    response.quantity = ko.observable(1);
+                    
                     self.allProduct.push(response);
                 };
 

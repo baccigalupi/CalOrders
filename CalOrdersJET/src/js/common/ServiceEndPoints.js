@@ -72,23 +72,26 @@ ServiceEndPoints.prototype = {
             return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.product/findActiveProductsByProductType";
         } else if (key === "createOrder")
         {
-            return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.orderHistory/createOrder"; 
+            return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.orderHistory/createOrder";
         } else if (key === "findAllVendors")
         {
-            return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.vendor"; 
-        }else if (key === "findAllCategories")
+            return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.vendor";
+        } else if (key === "findAllCategories")
         {
-            return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.prdcategorycd"; 
-        }else if (key === "findAllRelatedServices")
+            return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.prdcategorycd";
+        } else if (key === "findAllRelatedServices")
         {
-            return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.prdrelservice"; 
-        }else if (key === "doesProductNameExist")
+            return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.prdrelservice";
+        } else if (key === "doesProductNameExist")
         {
-            return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.product/doesProductNameExist"; 
-        }else if (key === "createProduct")
+            return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.product/doesProductNameExist";
+        } else if (key === "createProduct")
         {
-            return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.product/createProduct"; 
-        }else
+            return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.product/createProduct";
+        } else if (key === "findProductById")
+        {
+            return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.product";
+        } else
         {
             return "UNDEFINED";
         }
