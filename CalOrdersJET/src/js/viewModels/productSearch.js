@@ -84,6 +84,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'ojs/ojrouter', 'ojs/ojknockout',
                 self.handleActivated = function (info) {
                     // Implement if needed
                     console.log("product search = handleActivated");
+                    self.selectedProductMenuItem('DESK');
                     self.searchProducts('DESK');
                 };
 
