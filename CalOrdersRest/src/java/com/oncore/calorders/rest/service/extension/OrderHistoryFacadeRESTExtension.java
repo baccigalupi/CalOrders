@@ -32,13 +32,9 @@ import com.oncore.calorders.rest.OrdStatusCd;
 import com.oncore.calorders.rest.OrderHistory;
 import com.oncore.calorders.rest.OrderProductAssoc;
 import com.oncore.calorders.rest.Party;
-import com.oncore.calorders.rest.PrdRelService;
 import com.oncore.calorders.rest.Product;
 import com.oncore.calorders.rest.service.OrdStatusCdFacadeREST;
 import com.oncore.calorders.rest.service.OrderHistoryFacadeREST;
-import com.oncore.calorders.rest.service.OrderProductAssocFacadeREST;
-import com.oncore.calorders.rest.service.PrdRelServiceFacadeREST;
-import com.oncore.calorders.rest.service.ProductFacadeREST;
 import java.io.StringReader;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -52,7 +48,6 @@ import javax.json.JsonReader;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 /**
@@ -78,9 +73,9 @@ public class OrderHistoryFacadeRESTExtension extends OrderHistoryFacadeREST {
 
     /**
      * Creates an order, containing the ordered products and related services.
-     * 
+     *
      * @param orderjson The order, represented as a JSON string
-     * @throws DataAccessException 
+     * @throws DataAccessException
      */
     @POST
     @Path("createOrder")
@@ -157,8 +152,7 @@ public class OrderHistoryFacadeRESTExtension extends OrderHistoryFacadeREST {
 //
 //                order.getOrderProductAssocCollection().add(orderProductAssoc);
 //            }
-            
-                        super.create(order);
+            super.create(order);
         } catch (Exception ex) {
             Logger.error(LOG, FormatHelper.getStackTrace(ex));
             throw new DataAccessException(ex, ErrorCode.DATAACCESSERROR);
