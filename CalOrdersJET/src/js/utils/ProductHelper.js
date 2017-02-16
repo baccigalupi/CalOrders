@@ -42,7 +42,7 @@ var ProductHelper = new function ()
             var file = product.prdImgImage;
                     
             var imageSize = product.prdImgImage.length;
-            var imageType = product.prdCategoryCd.longDesc;
+            var imageType = product.prdImgTypeCd.longDesc;
 
             var reader = new FileReader();
 
