@@ -23,31 +23,21 @@
  */
 package com.oncore.calorders.rest.service.extension;
 
-import com.oncore.calorders.rest.PrdImgTypeCd;
 import com.oncore.calorders.rest.Product;
 import com.oncore.calorders.rest.RelatedService;
 import com.oncore.calorders.rest.service.ProductFacadeREST;
-import com.oncore.calorders.rest.data.ProductCategoryData;
 import com.oncore.calorders.rest.data.ProductData;
-import com.oncore.calorders.rest.data.VendorData;
-import com.oncore.calorders.rest.data.RelatedServiceData;
 import com.oncore.calorders.rest.service.PrdCategoryCdFacadeREST;
 import com.oncore.calorders.rest.service.PrdImgTypeCdFacadeREST;
 import com.oncore.calorders.rest.service.PrdRelServiceFacadeREST;
 import com.oncore.calorders.rest.service.PrdUnitCdFacadeREST;
-import com.oncore.calorders.rest.service.RelatedServiceFacadeREST;
 import com.oncore.calorders.rest.service.VendorFacadeREST;
-import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.json.Json;
-import javax.json.JsonObject;
-import javax.json.JsonReader;
 import javax.persistence.EntityManager;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -56,8 +46,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.time.DateUtils;
 
 /**
  *
@@ -82,10 +70,18 @@ public class ProductFacadeRESTExtension extends ProductFacadeREST {
     @EJB
     private PrdImgTypeCdFacadeREST prdImgTypeCdFacadeREST;
 
+    /**
+     * Constructor
+     */
     public ProductFacadeRESTExtension() {
 
     }
 
+    /**
+     * Constructor
+     *
+     * @param em
+     */
     public ProductFacadeRESTExtension(EntityManager em) {
         super(em);
     }
@@ -178,6 +174,14 @@ public class ProductFacadeRESTExtension extends ProductFacadeREST {
         super.create(product);
     }
 
+    /**
+     *
+     *
+     * @param userId
+     * @param product
+     * @param relatedServiceDatas
+     * @return
+     */
     private Collection<RelatedService> mapPrdRelServicesToRelatedServices(String userId, Product product, List<Integer> relatedServiceDatas) {
         Collection<RelatedService> relatedServices = null;
         if (relatedServiceDatas != null && relatedServiceDatas.size() > 0) {

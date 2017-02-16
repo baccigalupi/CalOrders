@@ -24,22 +24,28 @@
 package com.oncore.calorders.rest.service.extension;
 
 import com.oncore.calorders.rest.Product;
+import com.oncore.calorders.rest.service.PrdCategoryCdFacadeREST;
+import com.oncore.calorders.rest.service.PrdImgTypeCdFacadeREST;
+import com.oncore.calorders.rest.service.PrdRelServiceFacadeREST;
+import com.oncore.calorders.rest.service.PrdUnitCdFacadeREST;
+import com.oncore.calorders.rest.service.ProductFacadeREST;
+import com.oncore.calorders.rest.service.VendorFacadeREST;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Assert;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 /**
  *
@@ -93,7 +99,6 @@ public class ProductFacadeRESTExtensionTest {
         Assert.assertEquals("33333", expectedProductsList.get(2).getPrdSku());
         Assert.assertEquals(0, expectedProductsList.get(2).getPrdActiveInd());
 
-        //need more assertions
         verify(mockedEm, times(1)).createQuery("SELECT p FROM Product p "
                 + "        JOIN p.prdCategoryCd c"
                 + "        WHERE c.code = :categoryCode "
@@ -127,23 +132,50 @@ public class ProductFacadeRESTExtensionTest {
         Assert.assertEquals("11111", expectedProductsList.get(0).getPrdSku());
         Assert.assertEquals(1, expectedProductsList.get(0).getPrdActiveInd());
 
-        //need more assertions
         verify(mockedEm, times(1)).createNamedQuery("Product.findByPrdName", Product.class);
     }
 
-    @BeforeClass
-    public static void setUpClass() {
-    }
+    /**
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testCreateProduct() {
 
-    @AfterClass
-    public static void tearDownClass() {
-    }
+        Product product = new Product();
+        product.setPrdUid(3333);
+        product.setPrdActiveInd(1);
+        product.setPrdName("Laptop");
+        product.setPrdSku("LT1234");
 
-    @Before
-    public void setUp() {
-    }
+        ProductFacadeRESTExtension instance = spy(new ProductFacadeRESTExtension());
 
-    @After
-    public void tearDown() {
+        ArgumentCaptor<Product> productCaptor = ArgumentCaptor.forClass(Product.class);
+
+        doNothing().when((ProductFacadeREST) instance).create(product);
+
+        PrdCategoryCdFacadeREST categoryCdFacadeRESTMocked = mock(PrdCategoryCdFacadeREST.class);
+        when(categoryCdFacadeRESTMocked.find("HDW")).thenReturn(null);
+
+        VendorFacadeREST vendorFacadeRESTMocked = mock(VendorFacadeREST.class);
+        when(vendorFacadeRESTMocked.find(555)).thenReturn(null);
+
+        PrdRelServiceFacadeREST prdRelServiceFacadeRESTMocked = mock(PrdRelServiceFacadeREST.class);
+        when(prdRelServiceFacadeRESTMocked.find(777)).thenReturn(null);
+
+        PrdUnitCdFacadeREST prdUnitCdFacadeRESTMocked = mock(PrdUnitCdFacadeREST.class);
+        when(prdUnitCdFacadeRESTMocked.find("DEF")).thenReturn(null);
+
+        PrdImgTypeCdFacadeREST prdImgTypeCdFacadeRESTMocked = mock(PrdImgTypeCdFacadeREST.class);
+        when(prdImgTypeCdFacadeRESTMocked.find("GIF")).thenReturn(null);
+
+        instance.create(product);
+
+        verify(instance).create(productCaptor.capture());
+
+        Product actual = productCaptor.getValue();
+        Assert.assertEquals(3333, actual.getPrdUid().intValue());
+        Assert.assertEquals("Laptop", actual.getPrdName());
+        Assert.assertEquals("LT1234", actual.getPrdSku());
     }
 }

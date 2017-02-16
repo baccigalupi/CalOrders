@@ -39,11 +39,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Assert;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
@@ -101,7 +97,6 @@ public class PartyFacadeRESTExtensionTest {
         Assert.assertFalse(expectedParty.getGroupList().get(0).getPrivilegesList().get(0).getCanRead());
         Assert.assertTrue(expectedParty.getGroupList().get(0).getPrivilegesList().get(0).getCanWrite());
 
-        //need more assertions
         verify(mockedEm, times(1)).createQuery("SELECT p FROM Party p WHERE p.ptyUserId = :userId and p.ptyPassword = :password", Party.class);
     }
 
@@ -138,7 +133,6 @@ public class PartyFacadeRESTExtensionTest {
         Assert.assertTrue(expectedGroupData.get(0).getPrivilegesList().get(1).getCanRead());
         Assert.assertFalse(expectedGroupData.get(0).getPrivilegesList().get(1).getCanWrite());
 
-        //need more assertions
         verify(mockedEm, times(1)).createNamedQuery("Party.findByPtyUid", Party.class);
     }
 
@@ -174,7 +168,6 @@ public class PartyFacadeRESTExtensionTest {
         Assert.assertTrue(expectedPrivilegeData.get(1).getCanRead());
         Assert.assertFalse(expectedPrivilegeData.get(1).getCanWrite());
 
-        //need more assertions
         verify(mockedEm, times(1)).createQuery("SELECT p FROM Privilege p join p.groupPrivilegeAssocCollection gp join gp.grpUidFk g join g.groupPartyAssocCollection ge join ge.ptyUidFk e WHERE e.pryUid = :partyId ORDER BY p.prvOrder ASC", Privilege.class);
     }
 
@@ -210,7 +203,6 @@ public class PartyFacadeRESTExtensionTest {
         Assert.assertTrue(expectedPrivilegeData.get(3).getCanRead());
         Assert.assertTrue(expectedPrivilegeData.get(3).getCanWrite());
 
-        //need more assertions
         verify(mockedEm, times(1)).createQuery("SELECT p FROM Privilege p join p.groupPrivilegeAssocCollection gp join gp.grpUidFk g join g.groupPartyAssocCollection ge join ge.ptyUidFk e WHERE e.ptyUid = :partyId and p.prvComponentId = 'NAVBAR'  ORDER BY p.prvOrder ASC", Privilege.class);
     }
 
@@ -241,7 +233,6 @@ public class PartyFacadeRESTExtensionTest {
         Assert.assertFalse(expectedPrivilegeData.get(4).getCanRead());
         Assert.assertTrue(expectedPrivilegeData.get(4).getCanWrite());
 
-        //need more assertions
         verify(mockedEm, times(1)).createQuery("SELECT p FROM Privilege p join p.groupPrivilegeAssocCollection gp join gp.grpUidFk g join g.groupPartyAssocCollection ge join ge.ptyUidFk e WHERE e.ptyUid = :partyId and p.prvComponentId = 'NAVMENU'  ORDER BY p.prvOrder ASC", Privilege.class);
     }
 
@@ -351,21 +342,5 @@ public class PartyFacadeRESTExtensionTest {
         privileges.add(privilege5);
 
         return privileges;
-    }
-
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-    }
-
-    @Before
-    public void setUp() {
-    }
-
-    @After
-    public void tearDown() {
     }
 }
