@@ -63,7 +63,7 @@ There are many different specific project development methodologies within agile
 Our [Agile](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Methodolgy) process allowed us to rapidly deliver a working product to maintain the momentum from the User Centered Design Sessions, allowing us to show the end user the system we were building. Combined with sprint cycles we were able to add new stories; existing stories in the backlog and icebox were continually evolving and reprioritized with continued meetings outside of the development cycle. These meeting took place between the product owner, business analysts and end users. Focusing on keeping things simple and evolving fostered the environment of rapid delivery and allowed for face to face interactions with the end users on how the system was evolving.  More importanly, it allowed for failure, and with the quick adjustments yieled a system that worked for the end users.
 
 ###Practices
-The table below provides links to additional artifacts and other important information about each agile practice that was utilized for this project.<br>
+The list below provides links to additional artifacts and other important information about each agile practice that was utilized for this project.<br>
 * [User Stories (Pivotal Tracker)](https://www.pivotaltracker.com/n/projects/1968721) 
 * [User Story Estimation](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Story-Estimation) 
 * [User Story Prioritization](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Story-Prioritization) 
