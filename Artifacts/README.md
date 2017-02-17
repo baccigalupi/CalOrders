@@ -11,20 +11,20 @@ Oncore focused on delivering what the end user needed. This was done with a comb
 ##Project Requirements
 Reqirements | Reference(s)
 --- | ---
-a. Assigned one (1) leader and gave that person authority and responsibility and held that person accountable for the quality of the prototype submitted; | [Michael Tsay](https://github.com/OncoreLLC/CalOrders/tree/master/Artifacts#calorder-development-team)
-b. Assembled a multidisciplinary and collaborative team that includes, at a minimum, five (5)of the labor categories as identified in Attachment B: PQVP DS-AD Labor Category Descriptions; | [The team](https://github.com/OncoreLLC/CalOrders/tree/master/Artifacts#calorder-development-team)
-c. Understood what people needed, by including people in the prototype development and design process; | [Focus Group](https://github.com/OncoreLLC/CalOrders/wiki/Focus-Group)<br> [Interview](https://github.com/OncoreLLC/CalOrders/wiki/Interviews)<br> [Sprint Review/Product Demo](https://github.com/OncoreLLC/CalOrders/wiki/Sprint-Reviews)
-d. Used at least a minimum of three (3) “user-centric design” techniques and/or tools; | [Focus Group](https://github.com/OncoreLLC/CalOrders/wiki/Focus-Group)<br> [Interview](https://github.com/OncoreLLC/CalOrders/wiki/Interviews)<br> [Personas](https://github.com/OncoreLLC/CalOrders/wiki/Develop-Personas)<br> [Usability Testing](https://github.com/OncoreLLC/CalOrders/wiki/Usability-Testing)<br>[Wireframes](https://github.com/OncoreLLC/CalOrders/wiki/Wire-Frames)<br>[Wireframe Walkthrough](https://github.com/OncoreLLC/CalOrders/wiki/Wireframe-Walkthrough)<br>[Scenarios](https://github.com/OncoreLLC/CalOrders/wiki/Scenarios)
-e. Used GitHub to document code commits; | [Github Contributions](https://github.com/OncoreLLC/CalOrders/graphs/contributors)
-f. Used Swagger to document the RESTful API, and provided a link to the Swagger API; |
+a. Assigned one (1) leader and gave that person authority and responsibility and held that person accountable for the quality of the prototype submitted | [Michael Tsay](https://github.com/OncoreLLC/CalOrders/tree/master/Artifacts#calorder-development-team)
+b. Assembled a multidisciplinary and collaborative team that includes, at a minimum, five (5)of the labor categories as identified in Attachment B: PQVP DS-AD Labor Category Descriptions | [The team](https://github.com/OncoreLLC/CalOrders/tree/master/Artifacts#calorder-development-team)
+c. Understood what people needed, by including people in the prototype development and design process | [Focus Group](https://github.com/OncoreLLC/CalOrders/wiki/Focus-Group)<br> [Interview](https://github.com/OncoreLLC/CalOrders/wiki/Interviews)<br> [Sprint Review/Product Demo](https://github.com/OncoreLLC/CalOrders/wiki/Sprint-Reviews)
+d. Used at least a minimum of three (3) “user-centric design” techniques and/or tools | [Focus Group](https://github.com/OncoreLLC/CalOrders/wiki/Focus-Group)<br> [Interview](https://github.com/OncoreLLC/CalOrders/wiki/Interviews)<br> [Personas](https://github.com/OncoreLLC/CalOrders/wiki/Develop-Personas)<br> [Usability Testing](https://github.com/OncoreLLC/CalOrders/wiki/Usability-Testing)<br>[Wireframes](https://github.com/OncoreLLC/CalOrders/wiki/Wire-Frames)<br>[Wireframe Walkthrough](https://github.com/OncoreLLC/CalOrders/wiki/Wireframe-Walkthrough)<br>[Scenarios](https://github.com/OncoreLLC/CalOrders/wiki/Scenarios)
+e. Used GitHub to document code commits | [Github Contributions](https://github.com/OncoreLLC/CalOrders/graphs/contributors)
+f. Used Swagger to document the RESTful API, and provided a link to the Swagger API |
 g. Complied with Section 508 of the Americans with Disabilities Act and WCAG 2.0; |[ADA and WCAG compliance](https://github.com/OncoreLLC/CalOrders/wiki/ADA-and-WCAG-Compliance) 
-h. Created or used a design style guide and/or a pattern library; | [Style Guide](http://www.oracle.com/webfolder/technetwork/jet/jetCookbook.html)
-i. Performed usability tests with people; | [Usability Testing](https://github.com/OncoreLLC/CalOrders/wiki/Usability-Testing)
+h. Created or used a design style guide and/or a pattern library | [Style Guide](http://www.oracle.com/webfolder/technetwork/jet/jetCookbook.html)
+i. Performed usability tests with people | [Usability Testing](https://github.com/OncoreLLC/CalOrders/wiki/Usability-Testing)
 j. Used an iterative approach, where feedback informed subsequent work or versions of the prototype; | [Agile Methodolog](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Methodolgy)
 k. Created a prototype that works on multiple devices, and presents a responsive design; |[TODO link to mobile version][TODO link to desktop version]
-l. Used at least five (5) modern and open-source technologies, regardless of architectural layer (frontend, backend, etc.); |
-m. Deployed the prototype on an Infrastructure as a Service (IaaS) or Platform as Service(PaaS) provider, and indicated which provider they used; |
-n. Developed automated unit tests for their code;  |
+l. Used at least five (5) modern and open-source technologies, regardless of architectural layer (frontend, backend, etc.) | [Technologies](https://github.com/OncoreLLC/CalOrders/blob/master/Artifacts/README.md#modern-open-source-technologies-2l)
+m. Deployed the prototype on an Infrastructure as a Service (IaaS) or Platform as Service(PaaS) provider, and indicated which provider they used | [TODO link to page]
+n. Developed automated unit tests for their code |
 
 ##CalOrder Development Team
 Oncore selected Mike Tsay as the Team Leader/Project Manager, who had authority over and was responsible and accountable for the quality of the prototype submitted _(2a)_.
