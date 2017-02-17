@@ -15,7 +15,7 @@ a. Assigned one (1) leader and gave that person authority and responsibility and
 b. Assembled a multidisciplinary and collaborative team that includes, at a minimum, five (5)of the labor categories as identified in Attachment B: PQVP DS-AD Labor Category Descriptions; |
 c. Understood what people needed1, by including people in the prototype development and design process; |
 d. Used at least a minimum of three (3) “user-centric design” techniques and/or tools; |
-e. Used GitHub to document code commits; }
+e. Used GitHub to document code commits; |
 f. Used Swagger to document the RESTful API, and provided a link to the Swagger API; |
 g. Complied with Section 508 of the Americans with Disabilities Act and WCAG 2.0; |
 h. Created or used a design style guide and/or a pattern library; |
