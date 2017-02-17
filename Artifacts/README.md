@@ -20,7 +20,7 @@ d. Used at least a minimum of three (3) “user-centric design” techniques and
 e. Used GitHub to document code commits | [Github Contributions](https://github.com/OncoreLLC/CalOrders/graphs/contributors)
 f. Used Swagger to document the RESTful API, and provided a link to the Swagger API | [RESTful API Documentation](https://github.com/OncoreLLC/CalOrders/wiki/RESTful-API-Documentation)
 g. Complied with Section 508 of the Americans with Disabilities Act and WCAG 2.0 |[ADA and WCAG compliance](https://github.com/OncoreLLC/CalOrders/wiki/ADA-and-WCAG-Compliance) 
-h. Created or used a design style guide and/or a pattern library | [Style Guide](http://www.oracle.com/webfolder/technetwork/jet/jetCookbook.html)
+h. Created or used a design style guide and/or a pattern library | [Style Guide](https://github.com/OncoreLLC/CalOrders/wiki/Style-Guide)
 i. Performed usability tests with people | [Usability Testing](https://github.com/OncoreLLC/CalOrders/wiki/Usability-Testing)
 j. Used an iterative approach, where feedback informed subsequent work or versions of the prototype; | [Agile Methodolog](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Methodolgy)
 k. Created a prototype that works on multiple devices, and presents a responsive design |[Responsive Application Design](https://github.com/OncoreLLC/CalOrders/wiki/Responsive-Application-Design)
