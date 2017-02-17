@@ -24,9 +24,9 @@ h. Created or used a design style guide and/or a pattern library | [Style Guide]
 i. Performed usability tests with people | [Usability Testing](https://github.com/OncoreLLC/CalOrders/wiki/Usability-Testing)
 j. Used an iterative approach, where feedback informed subsequent work or versions of the prototype; | [Agile Methodolog](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Methodolgy)
 k. Created a prototype that works on multiple devices, and presents a responsive design; |[TODO link to mobile version][TODO link to desktop version]
-l. Used at least five (5) modern and open-source technologies, regardless of architectural layer (frontend, backend, etc.) | [Technologies](#modern-open-source-technologies-2l)
+l. Used at least five (5) modern and open-source technologies, regardless of architectural layer (frontend, backend, etc.) | [Technologies](https://github.com/OncoreLLC/CalOrders/wiki/Modern-and-Open-Source-Technologies)
 m. Deployed the prototype on an Infrastructure as a Service (IaaS) or Platform as Service(PaaS) provider, and indicated which provider they used | [TODO link to page]
-n. Developed automated unit tests for their code | [JUnit](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersRest/test/com/oncore/calorders/rest/service/extension)<br>[Selenium](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersSelenium/test/test/oncore/calorders/selenium) |
+n. Developed automated unit tests for their code |[AutomatedTesting](https://github.com/OncoreLLC/CalOrders/wiki/Automated-Testing) 
 o. Setup or used a continuous integration system to automate the running of tests and continuously deployed their code to their IaaS or PaaS provider | [Build and Deployment](https://github.com/OncoreLLC/CalOrders/wiki/Build-and-Deploy)
 p. Setup or used configuration management | [Configuration Management](https://github.com/OncoreLLC/CalOrders/wiki/Configuration-Management)
 q. Setup or used continuous monitoring | [Continuous Monitoring](https://github.com/OncoreLLC/CalOrders/wiki/Continuous-Monitoring)
@@ -100,21 +100,4 @@ The list below provides links to additional artifacts and other important inform
 ###Architecture & [DevOps](https://github.com/OncoreLLC/CalOrders/wiki/Environments)  
   The team's DevOps methodology.  
 
-###Modern Open-Source Technologies _(2l)_  
-Technology | Requirement  
---- | ---  
-Linux	| Operating System used for both the development workstation and the deployment environment 
-NetBeans | Development IDE  
-Oracle JET | Open Source JavaScript UI Component Library  
-Node JS | Frontend Javscript Engine  
-Payara | JEE Application Server  
-MySQL | Database  
-Jenkins | Continuous Integration  
-JUnit | [automated unit test cases are here in the repository]  (https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersRest/test/com/oncore/calorders/rest/service/extension)
-Selenium | [automated regression test cases are here in the repository](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersSelenium/test/test/oncore/calorders/selenium)  
-Knockout Js | Front-end Javascript library  
-Require Js | Front-end Javascript library  
-jQuery | Front-end Javascript library  
-Swagger | Automated Documentation of RESTful services   
-NVDA | Screen Reader
-WAVE | ADA Browser testing plugin
+
