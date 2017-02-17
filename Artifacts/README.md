@@ -27,11 +27,11 @@ k. Created a prototype that works on multiple devices, and presents a responsive
 l. Used at least five (5) modern and open-source technologies, regardless of architectural layer (frontend, backend, etc.) | [Technologies](#modern-open-source-technologies-2l)
 m. Deployed the prototype on an Infrastructure as a Service (IaaS) or Platform as Service(PaaS) provider, and indicated which provider they used | [TODO link to page]
 n. Developed automated unit tests for their code | [JUnit](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersRest/test/com/oncore/calorders/rest/service/extension)<br>[Selenium](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersSelenium/test/test/oncore/calorders/selenium) |
-9. Setup or used a continuous integration system to automate the running of tests and continuously deployed their code to their IaaS or PaaS provider |
-p. Setup or used configuration management |
+o. Setup or used a continuous integration system to automate the running of tests and continuously deployed their code to their IaaS or PaaS provider |
+p. Setup or used configuration management | [Configuration Management](https://github.com/OncoreLLC/CalOrders/wiki/Configuration-Management)
 q. Setup or used continuous monitoring |
 r. Deployed their software in an open source container, such as Docker (i.e., utilized operating-system-level virtualization) |
-s. Provided sufficient documentation to install and run their prototype on another machine and |
+s. Provided sufficient documentation to install and run their prototype on another machine and | [Setup and Deployment](https://github.com/OncoreLLC/CalOrders/wiki/Setup-and-Deployment-Documentation)
 t. Prototype and underlying platforms used to create and run the prototype are openly licensed and free of charge |
 
 ##CalOrder Development Team
@@ -124,9 +124,6 @@ WAVE | ADA Browser testing plugin
   Azure Cloud _(2m)_  
     [Architecture doc](Architecture doc)  
 
-###Automated Unit Test _(2n)_  
-  Junit4  
-  Selenium  
 
 ###Continuous Monitoring and Integration  
   Configured Jenkins within a Docker container on an Azure cloud environment _(2s)_.   
@@ -137,9 +134,4 @@ WAVE | ADA Browser testing plugin
   Jenkins  
   Docker  
 
-###Configuration Management  
-  GitHub _(2e, 2q)_  
-    [PRODUCT NAME GitHub](PRODUCT NAME GitHub)  
-  
-###Setup and Deployment Documentation _(2t)_  
-  [Deployment Documentation](Deployment Documentation)
+ 
