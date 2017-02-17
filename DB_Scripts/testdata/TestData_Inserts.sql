@@ -376,6 +376,36 @@ INSERT INTO `calordersdb`.`PRODUCT`(`VND_UID_FK`,`PRD_SKU`,`PRD_NAME`,`PRD_CATEG
    'DELL',100.00,56,'EACH',
    'system',CURRENT_TIMESTAMP,'system',CURRENT_TIMESTAMP);
    
+INSERT INTO `calordersdb`.`PRODUCT`(`VND_UID_FK`,`PRD_SKU`,`PRD_NAME`,`PRD_CATEGORY_CD`,
+   `PRD_SHORT_DESC`,
+   `PRD_LONG_DESC`,
+   `PRD_PRICE`, `PRD_ACTIVE_IND`,`PRD_CNTR_LN_ITM`,`PRD_OEM_PART_NUM`,
+   `PRD_OEM_NAME`,`PRD_CNTR_UNIT_PRICE`,`PRD_CNTR_DISCOUNT`,`PRD_UNIT_CD`, 
+   `CREATE_USER_ID`,`CREATE_TS`,`UPDATE_USER_ID`,`UPDATE_TS`) 
+   VALUES(
+   (SELECT VND_UID FROM calordersdb.VENDOR where VND_NAME='The Tech Group'),
+   '210-SERV','Standard Dell 3 Year Product Warranty','SERR',
+   'Standard Dell 3 Year Product Warranty',
+   'Standard Dell 3 Year Product Warranty',
+   100.00,1,'106SV','210-AFXJ-SV',
+   'DELL',100.00,56,'EACH',
+   'system',CURRENT_TIMESTAMP,'system',CURRENT_TIMESTAMP);
+   
+   INSERT INTO `calordersdb`.`PRODUCT`(`VND_UID_FK`,`PRD_SKU`,`PRD_NAME`,`PRD_CATEGORY_CD`,
+   `PRD_SHORT_DESC`,
+   `PRD_LONG_DESC`,
+   `PRD_PRICE`, `PRD_ACTIVE_IND`,`PRD_CNTR_LN_ITM`,`PRD_OEM_PART_NUM`,
+   `PRD_OEM_NAME`,`PRD_CNTR_UNIT_PRICE`,`PRD_CNTR_DISCOUNT`,`PRD_UNIT_CD`, 
+   `CREATE_USER_ID`,`CREATE_TS`,`UPDATE_USER_ID`,`UPDATE_TS`) 
+   VALUES(
+   (SELECT VND_UID FROM calordersdb.VENDOR where VND_NAME='The Tech Group'),
+   '211-SERV','Standard Dell 5 Year Product Warranty','SERR',
+   'Standard Dell 5 Year Product Warranty',
+   'Standard Dell 5 Year Product Warranty',
+   100.00,1,'106SV','210-AFXJ-SV',
+   'DELL',100.00,56,'EACH',
+   'system',CURRENT_TIMESTAMP,'system',CURRENT_TIMESTAMP);
+   
    
 INSERT INTO `calordersdb`.`PRODUCT`(`VND_UID_FK`,`PRD_SKU`,`PRD_NAME`,`PRD_CATEGORY_CD`,
    `PRD_SHORT_DESC`,
