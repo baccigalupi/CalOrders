@@ -26,11 +26,11 @@ j. Used an iterative approach, where feedback informed subsequent work or versio
 k. Created a prototype that works on multiple devices, and presents a responsive design; |[TODO link to mobile version][TODO link to desktop version]
 l. Used at least five (5) modern and open-source technologies, regardless of architectural layer (frontend, backend, etc.) | [Technologies](https://github.com/OncoreLLC/CalOrders/wiki/Modern-and-Open-Source-Technologies)
 m. Deployed the prototype on an Infrastructure as a Service (IaaS) or Platform as Service(PaaS) provider, and indicated which provider they used | [TODO link to page]
-n. Developed automated unit tests for their code |[AutomatedTesting](https://github.com/OncoreLLC/CalOrders/wiki/Automated-Testing) 
+n. Developed automated unit tests for their code |[Automated Testing](https://github.com/OncoreLLC/CalOrders/wiki/Automated-Testing) 
 o. Setup or used a continuous integration system to automate the running of tests and continuously deployed their code to their IaaS or PaaS provider | [Build and Deployment](https://github.com/OncoreLLC/CalOrders/wiki/Build-and-Deploy)
 p. Setup or used configuration management | [Configuration Management](https://github.com/OncoreLLC/CalOrders/wiki/Configuration-Management)
 q. Setup or used continuous monitoring | [Continuous Monitoring](https://github.com/OncoreLLC/CalOrders/wiki/Continuous-Monitoring)
-r. Deployed their software in an open source container, such as Docker (i.e., utilized operating-system-level virtualization) |
+r. Deployed their software in an open source container, such as Docker (i.e., utilized operating-system-level virtualization) | [Application Container Deploymente](https://github.com/OncoreLLC/CalOrders/wiki/Application-Container-Deployment)
 s. Provided sufficient documentation to install and run their prototype on another machine and | [Setup and Deployment](https://github.com/OncoreLLC/CalOrders/wiki/Setup-and-Deployment)
 t. Prototype and underlying platforms used to create and run the prototype are openly licensed and free of charge |
 
