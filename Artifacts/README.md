@@ -23,7 +23,7 @@ g. Complied with Section 508 of the Americans with Disabilities Act and WCAG 2.0
 h. Created or used a design style guide and/or a pattern library | [Style Guide](http://www.oracle.com/webfolder/technetwork/jet/jetCookbook.html)
 i. Performed usability tests with people | [Usability Testing](https://github.com/OncoreLLC/CalOrders/wiki/Usability-Testing)
 j. Used an iterative approach, where feedback informed subsequent work or versions of the prototype; | [Agile Methodolog](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Methodolgy)
-k. Created a prototype that works on multiple devices, and presents a responsive design; |[TODO link to mobile version][TODO link to desktop version]
+k. Created a prototype that works on multiple devices, and presents a responsive design |[Responsive Application Design](https://github.com/OncoreLLC/CalOrders/wiki/Responsive-Application-Design)
 l. Used at least five (5) modern and open-source technologies, regardless of architectural layer (frontend, backend, etc.) | [Technologies](https://github.com/OncoreLLC/CalOrders/wiki/Modern-and-Open-Source-Technologies)
 m. Deployed the prototype on an Infrastructure as a Service (IaaS) or Platform as Service(PaaS) provider, and indicated which provider they used | [TODO link to page]
 n. Developed automated unit tests for their code |[Automated Testing](https://github.com/OncoreLLC/CalOrders/wiki/Automated-Testing) 
