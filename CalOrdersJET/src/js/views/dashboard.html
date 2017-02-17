@@ -22,40 +22,57 @@
  * THE SOFTWARE.
  * -->
 <div class="oj-hybrid-padding">
-    <h3>Tempus Dashboard</h3>
+    <h3>CalOrders Dashboard</h3>
     <div id="dashboardContainer" class="oj-panel oj-flex">
 
 
         <!-- LEFT UPPER QUADRAANT -->
         <div id="innerLeftContainer" class="oj-panel oj-flex-item">
-
-            <h3>My Profile</h3>
-
-            <div id="profilePicturePanel" class="oj-panel oj-flex-item">
-                <img alt="employeePicture" src="../css/images/rickybobby.jpg" height="130" width="95"/>
-            </div>
-
-            <div id="profileDataPanel" class="oj-panel oj-flex-item">
-                <!--                    <table>
-                                        <tr>
-                                            <td><span><label for="nameTxt" class="oj-label">Name:</label></span></td>
-                                            <td><input id="nameTxt" value="Royce Owens" readonly="true" class="oj-inputtext" style="border: none;"/></td>
-                                        </tr>
-                                    </table>-->
-
-
-
-                <table id="profileTable" summary="Employee Profile" aria-label="Employee Profile Table"
-                       data-bind="ojComponent: {component: 'ojTable', 
-                                data: datasource, 
-                                columnsDefault: {sortable: 'none'}, 
-                                columns: [{headerText: 'Property', 
-                                           field: 'Key'},
-                                          {headerText: 'Value', 
-                                           field: 'Value'}]}">
-                </table>
-            </div>
-
+ 
+    
+    <h3>Received Orders By Quarter</h3>
+    <div id="barChart" data-bind="ojComponent: {
+            component: 'ojChart', 
+            type: 'bar', 
+            series: barSeriesValue, 
+            groups: barGroupsValue, 
+            animationOnDisplay: 'auto',
+            animationOnDataChange: 'auto',
+            orientation: orientationValue,
+            styleDefaults: {dataLabelPosition: 'auto'},
+            stack: stackValue,
+            stackLabel: 'on',
+            yAxis: {tickLabel: {rendered: 'off'}}
+        }"
+         style="max-width:500px;width:100%;height:350px;margin-top:20px;">
+    </div>
+    <div id="myToolbar" aria-label="Chart Display Options Toolbar" aria-controls="barChart"
+       data-bind="ojComponent: {component:'ojToolbar'}"
+       style="max-width:500px;width:100%;">
+        <!-- vertical/horizontal toggle button -->
+        <div id="radioButtonset" data-bind="ojComponent: {component: 'ojButtonset', focusManagement:'none', checked: orientationValue, chroming: 'half'}" 
+             aria-controls="barChart" aria-label="Choose an orientation.">
+            <!-- ko foreach: orientationOptions -->
+              <label data-bind="attr: {for: id}"></label>
+              <input type="radio" name="orientation"
+                   data-bind="value: value, attr: {id: id},
+                   ojComponent: {component: 'ojButton', label: label, 
+                                     icons: {start: icon}, display: 'icons'}"/>
+            <!-- /ko -->
+        </div>
+        <span role="separator" aria-orientation="vertical" class="oj-toolbar-separator"></span>
+        <!-- unstacked/stacked toggle button -->
+        <div id="radioButtonset2" data-bind="ojComponent: {component: 'ojButtonset', focusManagement:'none', checked: stackValue, chroming: 'half', optionChange: stackLValueChange}" 
+             aria-controls="barChart" aria-label="Choose a stack setting.">
+            <!-- ko foreach: stackOptions -->
+              <label data-bind="attr: {for: id}"></label>
+              <input type="radio" name="stack"
+                   data-bind="value: value, attr: {id: id},
+                   ojComponent: {component: 'ojButton', label: label, 
+                                     icons: {start: icon}, display: 'icons'}"/>
+            <!-- /ko -->
+        </div>
+    </div>
 
         </div>
 
@@ -64,19 +81,31 @@
         <!-- UPPER RIGHT QUADRANT -->
         <div id="innerRightContainer" class="oj-panel oj-flex-item">
 
-            <h3>My Time</h3>
-            <div id='chart-container'>
-                <div id="lineChart" data-bind="ojComponent: {
-        component: 'ojChart', 
-        type: 'line',
-        series: timeSeriesValue, 
-        groups: timeGroupsValue, 
-        animationOnDisplay: 'auto',
-        animationOnDataChange: 'auto',
-        orientation: orientationValue,
-        hoverBehavior: 'dim'
+            <h3>Order Status</h3>
+            <div id='activeOrdersPanel'>
+
+                <div id="pieChart" data-bind="ojComponent: {
+                component: 'ojChart', 
+                type: 'pie', 
+                series: pieSeriesValue,
+                animationOnDisplay: 'auto',
+                animationOnDataChange: 'auto',
+                styleDefaults: {
+                threeDEffect: ko.toJS(threeDValue), 
+                dataLabelPosition: 'auto'
+            }
         }"
                      style="max-width:500px;width:100%;height:350px;">
+                </div>
+                <!-- 2d/3d toggle button -->
+                <div id="radioButtonset2" class="oj-buttonset-width-auto" aria-label="Choose only one setting." aria-controls="pieChart"
+                     data-bind="ojComponent: {component: 'ojButtonset', checked: threeDValue, optionChange: threeDValueChange}">
+                    <!-- ko foreach: threeDOptions -->
+                    <label data-bind="attr: {for: id}"></label>                               
+                    <input type="radio" name="threeD"
+                           data-bind="value: value, attr: {id: id},
+                   ojComponent: {component: 'ojButton', label: label}"/>
+                    <!-- /ko -->
                 </div>
 
             </div>
@@ -91,13 +120,13 @@
 
 
 
-    <div id="dashboardLowerContainer" class="oj-panel oj-flex">
+<!--    <div id="dashboardLowerContainer" class="oj-panel oj-flex">
 
 
-        <!-- LEFT BOTTOM QUADRAANT -->
+         LEFT BOTTOM QUADRAANT 
         <div id="innerLeftBottomContainer" class="oj-panel oj-flex-item">
 
-            <h3>My Expenses</h3>
+            <h3>Total Sold by Month</h3>
 
             <div id='innerLeftBottomchart-container'>
                 <div id="expensesChart" data-bind="ojComponent: {
@@ -112,7 +141,7 @@
         }"
                      style="max-width:500px;width:100%;height:350px;">
                 </div>
-     
+
             </div>
 
 
@@ -121,10 +150,10 @@
 
 
 
-        <!-- LOWER RIGHT QUADRANT -->
+         LOWER RIGHT QUADRANT 
         <div id="innerBottomRightContainer" class="oj-panel oj-flex-item">
 
-            <h3>My PTO</h3>
+            <h3>Orders by Agency</h3>
 
             <div id='innerRightBottomchart-container'>
                 <div id="ptoChart" data-bind="ojComponent: {
@@ -139,10 +168,30 @@
         }"
                      style="max-width:500px;width:100%;height:350px;">
                 </div>
-                
+
             </div>
 
         </div>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
 
-    </div>
+    </div>-->
+    
+    
+    
+    
+    
+    
+    
+    
 </div>
