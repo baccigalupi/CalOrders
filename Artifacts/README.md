@@ -27,7 +27,7 @@ k. Created a prototype that works on multiple devices, and presents a responsive
 l. Used at least five (5) modern and open-source technologies, regardless of architectural layer (frontend, backend, etc.) | [Technologies](#modern-open-source-technologies-2l)
 m. Deployed the prototype on an Infrastructure as a Service (IaaS) or Platform as Service(PaaS) provider, and indicated which provider they used | [TODO link to page]
 n. Developed automated unit tests for their code | [JUnit](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersRest/test/com/oncore/calorders/rest/service/extension)<br>[Selenium](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersSelenium/test/test/oncore/calorders/selenium) |
-o. Setup or used a continuous integration system to automate the running of tests and continuously deployed their code to their IaaS or PaaS provider |
+o. Setup or used a continuous integration system to automate the running of tests and continuously deployed their code to their IaaS or PaaS provider | [Build and Deployment](https://github.com/OncoreLLC/CalOrders/wiki/Build-and-Deploy)
 p. Setup or used configuration management | [Configuration Management](https://github.com/OncoreLLC/CalOrders/wiki/Configuration-Management)
 q. Setup or used continuous monitoring |
 r. Deployed their software in an open source container, such as Docker (i.e., utilized operating-system-level virtualization) |
