@@ -46,11 +46,11 @@ node {
     
     // calorders-mysql container is already running at this IP:port with the given username/password
     stage('Build Test Database') {
-        sh "mysql -uroot -pPassw0rd -h 172.17.0.4 -P 3306 < DB_Scripts/CalOrders_DDL.sql"
-        sh "mysql -uroot -pPassw0rd -h 172.17.0.4 -P 3306 < DB_Scripts/referencedata/Reference_Data_Inserts.sql"
+        sh "mysql -uroot -pPassw0rd -h 172.17.0.4 -P 3306 --database calordersdb < DB_Scripts/CalOrders_DDL.sql"
+        sh "mysql -uroot -pPassw0rd -h 172.17.0.4 -P 3306 --database calordersdb < DB_Scripts/referencedata/Reference_Data_Inserts.sql"
     }
     stage('Load Test Data') {
-        sh "mysql -uroot -pPassw0rd -h 172.17.0.4 -P 3306 < DB_Scripts/testdata/TestData_Inserts.sql"
+        sh "mysql -uroot -pPassw0rd -h 172.17.0.4 -P 3306 --database calordersdb < DB_Scripts/testdata/TestData_Inserts.sql"
     }
     
     stage('Start REST Services Tier Container') {
