@@ -97,6 +97,29 @@ public class ProductFacadeRESTExtension extends ProductFacadeREST {
 
         return results;
     }
+    
+    @GET
+    @Path("findActiveProductsByProductTypeAndVendor/{productTypeCode}/{vendorUid}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Product> findActiveProductsByProductTypeAndVendor(
+            @PathParam("productTypeCode") String productTypeCode,
+            @PathParam("vendorUid") Integer vendorUid ) {
+        System.out.println("Running findActiveProductsByProductTypeAndVendor by " + productTypeCode +
+                " and " + vendorUid);
+
+        List<Product> results = super.getEntityManager()
+                .createQuery("SELECT p FROM Product p "
+                        + "        JOIN p.prdCategoryCd c"
+                        +" JOIN p.vndUidFk v"
+                        + "        WHERE c.code = :categoryCode "
+                        + " AND v.vndUid = :vendorUid "
+                        + "        AND p.prdActiveInd = 1", Product.class)
+                .setParameter("categoryCode", productTypeCode)
+                .setParameter("vendorUid", vendorUid)
+                .getResultList();
+
+        return results;
+    }
 
     /**
      * Determines if a user id exists
