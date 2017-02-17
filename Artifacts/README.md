@@ -31,7 +31,7 @@ o. Setup or used a continuous integration system to automate the running of test
 p. Setup or used configuration management | [Configuration Management](https://github.com/OncoreLLC/CalOrders/wiki/Configuration-Management)
 q. Setup or used continuous monitoring |
 r. Deployed their software in an open source container, such as Docker (i.e., utilized operating-system-level virtualization) |
-s. Provided sufficient documentation to install and run their prototype on another machine and | [Setup and Deployment](https://github.com/OncoreLLC/CalOrders/wiki/Setup-and-Deployment-Documentation)
+s. Provided sufficient documentation to install and run their prototype on another machine and | [Setup and Deployment](https://github.com/OncoreLLC/CalOrders/wiki/Setup-and-Deployment)
 t. Prototype and underlying platforms used to create and run the prototype are openly licensed and free of charge |
 
 ##CalOrder Development Team
