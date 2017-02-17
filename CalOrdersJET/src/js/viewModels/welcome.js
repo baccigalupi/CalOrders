@@ -24,7 +24,7 @@
 /*
  * Your about ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery'],
+define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils'],
         function (oj, ko, $) {
 
             function WelcomeViewModel() {
@@ -52,17 +52,8 @@ define(['ojs/ojcore', 'knockout', 'jquery'],
                     // initialize session storage
 
 
-                    if (sessionStorage.authenticated === "true")
-                    {
-                        return self.router.go('dashboard');
-                    } else {
-                        sessionStorage.userFullName = "";
-                        sessionStorage.firstName = "";
-                        sessionStorage.lastName = "";
-                        sessionStorage.userUid = "";
-                        sessionStorage.groups = [];
-                        sessionStorage.authenticated = false;
-                    }
+                    SecurityUtils.clearSessionStorage();
+
                 };
 
                 /**
@@ -114,7 +105,7 @@ define(['ojs/ojcore', 'knockout', 'jquery'],
                     console.log("registration button clicked");
                     // Clear out old session data
                     sessionStorage.registration = "";
-                    
+
                     return self.router.go('registration');
                 };
             }

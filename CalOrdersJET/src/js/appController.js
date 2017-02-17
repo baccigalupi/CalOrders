@@ -105,7 +105,7 @@ define(['ojs/ojcore', 'knockout', 'common/SecurityUtils', 'ojs/ojknockout-model'
 
                 self.aboutClick = function (data, event) {
 
-                    return self.router.go('about');
+//                    return self.router.go('about');
                 };
 
                 // Footer

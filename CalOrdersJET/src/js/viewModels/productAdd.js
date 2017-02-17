@@ -26,7 +26,7 @@
 /*
  * Your about ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'reference/ReferenceData'],
+define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/ReferenceData'],
         function (oj, ko, $) {
 
             function ProductAddViewModel() {
@@ -75,6 +75,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'reference/ReferenceData'],
                  * the promise is resolved
                  */
                 self.handleActivated = function (info) {
+                    if (!SecurityUtils.isAuthenticated()) {
+                        return self.router.go('welcome');
+                    }
                     // Implement if needed
                     // initialize session storage
                     self.productName = ko.observable();
@@ -169,10 +172,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'reference/ReferenceData'],
                                     "productPrice": self.productPrice(),
                                     "productDescription": self.productDescription(),
                                     "productFullDesc": self.productFullDesc(),
-                                    "relatedServices": self.relatedServices(),                            
+                                    "relatedServices": self.relatedServices(),
                                     "partyUserId": sessionStorage.userName
-                                    
-                                    
+
+
                                 },
                                 {
                                     success: function (myModel, response, options) {
@@ -320,7 +323,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'reference/ReferenceData'],
                         }
                         return validProductUnitCode;
                     }};
-                
+
                 self.isValidProductUnitCode = function ()
                 {
                     var validProductUnitCode = true;
@@ -360,16 +363,16 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'reference/ReferenceData'],
                     $("#modalDialog1").ojDialog("close");
                     return self.router.go('productSearch');
                 };
-                
-                self.computeContractPrice = function (data, event) {        
+
+                self.computeContractPrice = function (data, event) {
                     var percent = $("#productContractDiscount").val();
                     var price = $("#productPrice").val();
-                     var discount = ((percent / 100) * price).toFixed(2);
-                        if (discount == NaN || discount==undefined || discount ===0) {
-                            self.productContractUnitPrice(undefined);
-                        } else {
-                              self.productContractUnitPrice(discount);
-                        }
+                    var discount = ((percent / 100) * price).toFixed(2);
+                    if (discount == NaN || discount == undefined || discount === 0) {
+                        self.productContractUnitPrice(undefined);
+                    } else {
+                        self.productContractUnitPrice(discount);
+                    }
                 };
             }
 

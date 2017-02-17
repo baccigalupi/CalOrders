@@ -30,8 +30,6 @@ The first step of a User-Centered-Design (UCD) process is to formulate a plan.  
 
 Our plan combines our UCD and Agile processes into a cohesive and flexible workflow.
 
-![UCD Overview](https://github.com/OncoreLLC/CalOrders/blob/master/Artifacts/Usability/ucd%20overview.jpg)
-
 The team utilized User-Centered-Design (UCD) and Agile development techniques to formulate the product backlog.  All team members participated in the initial meetings with the users which was a natural hook into our Agile methodolgy and gave everyone the opportunity to understand the scope of the project and understand how each of them would contribute to the project's success.  
 
 The table below summarizes how we incorporated the UCD practices in the development of CalOrders.  Each section includes a link to another page that provides detail on the subject. _(2d)_  
@@ -63,16 +61,15 @@ There are many different specific project development methodologies within agile
 Our [Agile](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Methodolgy) process allowed us to rapidly deliver a working product to maintain the momentum from the User Centered Design Sessions, allowing us to show the end user the system we were building. Combined with sprint cycles we were able to add new stories; existing stories in the backlog and icebox were continually evolving and reprioritized with continued meetings outside of the development cycle. These meeting took place between the product owner, business analysts and end users. Focusing on keeping things simple and evolving fostered the environment of rapid delivery and allowed for face to face interactions with the end users on how the system was evolving.  More importanly, it allowed for failure, and with the quick adjustments yieled a system that worked for the end users.
 
 ###Practices
-The table below provides links to additional artifacts and other important information about each agile practice that was utilized for this project.<br>
-[User Stories]() |
-[User Story Estimation](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Story-Estimation) |
-[User Story Prioritization](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Story-Prioritization) |
-[Sprint planning](https://github.com/OncoreLLC/CalOrders/wiki/Sprint-Planning) | 
-[Sprints](https://github.com/OncoreLLC/CalOrders/wiki/Sprints) |
-[Sprint Reviews](https://github.com/OncoreLLC/CalOrders/wiki/Sprint-Reviews) |
-[Retrospectives](https://github.com/OncoreLLC/CalOrders/wiki/Retrospectives) |
-[Daily Standups](https://github.com/OncoreLLC/CalOrders/wiki/Sprint-Daily-Stand-ups)
-
+The list below provides links to additional artifacts and other important information about each agile practice that was utilized for this project.<br>
+* [User Stories (Pivotal Tracker)](https://www.pivotaltracker.com/n/projects/1968721) 
+* [User Story Estimation](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Story-Estimation) 
+* [User Story Prioritization](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Story-Prioritization) 
+* [Sprint planning](https://github.com/OncoreLLC/CalOrders/wiki/Sprint-Planning) 
+* [Sprints](https://github.com/OncoreLLC/CalOrders/wiki/Sprints)
+* [Sprint Reviews](https://github.com/OncoreLLC/CalOrders/wiki/Sprint-Reviews)
+* [Retrospectives](https://github.com/OncoreLLC/CalOrders/wiki/Sprint-Retrospectives) 
+* [Daily Standups](https://github.com/OncoreLLC/CalOrders/wiki/Sprint-Daily-Stand-ups)
 
 ###Architecture & [DevOps](https://github.com/OncoreLLC/CalOrders/wiki/Environments)  
   The team's DevOps methodology.  

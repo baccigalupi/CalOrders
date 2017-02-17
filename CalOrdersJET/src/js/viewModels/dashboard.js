@@ -24,7 +24,7 @@
 /*
  * Your dashboard ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery'],
+define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils'],
         function (oj, ko, $) {
 
             function DashboardViewModel() {
@@ -108,10 +108,10 @@ define(['ojs/ojcore', 'knockout', 'jquery'],
                  * the promise is resolved
                  */
                 self.handleActivated = function (info) {
-                    if (sessionStorage.authenticated === "false")
-                    {
+                    if (!SecurityUtils.isAuthenticated()) {
                         return self.router.go('welcome');
                     }
+
                 };
 
                 /**
@@ -165,4 +165,4 @@ define(['ojs/ojcore', 'knockout', 'jquery'],
 
 
 
- 
+

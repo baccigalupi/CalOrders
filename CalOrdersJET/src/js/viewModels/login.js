@@ -77,12 +77,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'ojs/ojarray
                     console.log("login self.handleActivated called!");
                     self.username = ko.observable();
                     self.doShowErrorMessage = ko.observable(false);
-
-
-                    if (sessionStorage.authenticated === "true")
-                    {
-                        return self.router.go('dashboard');
-                    }
+                    SecurityUtils.clearSessionStorage();
                 };
                 /**
                  * Optional ViewModel method invoked after the View is inserted into the
