@@ -24,15 +24,12 @@
 package com.oncore.calorders.rest.service.extension;
 
 import com.oncore.calorders.rest.Product;
-import com.oncore.calorders.rest.RelatedService;
 import com.oncore.calorders.rest.service.ProductFacadeREST;
 import com.oncore.calorders.rest.data.ProductData;
 import com.oncore.calorders.rest.service.PrdCategoryCdFacadeREST;
 import com.oncore.calorders.rest.service.PrdImgTypeCdFacadeREST;
-import com.oncore.calorders.rest.service.PrdRelServiceFacadeREST;
 import com.oncore.calorders.rest.service.PrdUnitCdFacadeREST;
 import com.oncore.calorders.rest.service.VendorFacadeREST;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -60,9 +57,6 @@ public class ProductFacadeRESTExtension extends ProductFacadeREST {
 
     @EJB
     private VendorFacadeREST vendorFacadeREST;
-
-    @EJB
-    private PrdRelServiceFacadeREST prdRelServiceFacadeREST;
 
     @EJB
     private PrdUnitCdFacadeREST prdUnitCdFacadeREST;
@@ -167,10 +161,11 @@ public class ProductFacadeRESTExtension extends ProductFacadeREST {
         product.setUpdateUserId(productData.getPartyUserId());
         product.setVndUidFk(this.vendorFacadeREST.find(productData.getVendor()));
 
-        Collection<RelatedService> relatedServiceCollection;
-        relatedServiceCollection = this.mapPrdRelServicesToRelatedServices(productData.getPartyUserId(), product, productData.getRelatedServices());
-
-        product.setRelatedServiceCollection(relatedServiceCollection);
+//TODO:  CLEAN UP, REMOVING RELATED SERVICE TABLE
+//        Collection<RelatedService> relatedServiceCollection;
+//        relatedServiceCollection = this.mapPrdRelServicesToRelatedServices(productData.getPartyUserId(), product, productData.getRelatedServices());
+//
+//        product.setRelatedServiceCollection(relatedServiceCollection);
         super.create(product);
     }
 
@@ -182,22 +177,32 @@ public class ProductFacadeRESTExtension extends ProductFacadeREST {
      * @param relatedServiceDatas
      * @return
      */
-    private Collection<RelatedService> mapPrdRelServicesToRelatedServices(String userId, Product product, List<Integer> relatedServiceDatas) {
-        Collection<RelatedService> relatedServices = null;
-        if (relatedServiceDatas != null && relatedServiceDatas.size() > 0) {
-            relatedServices = new ArrayList<RelatedService>();
+    private Collection<Object> mapPrdRelServicesToRelatedServices(String userId, Product product, List<Integer> relatedServiceDatas) {
 
-            for (Integer data : relatedServiceDatas) {
-                RelatedService relatedService = new RelatedService();
-                relatedService.setCreateTs(new Date());
-                relatedService.setCreateUserId(userId);
-                relatedService.setPrdUidFk(product);
-                relatedService.setPrsUidFk(this.prdRelServiceFacadeREST.find(data));
-                relatedService.setUpdateTs(new Date());
-                relatedService.setUpdateUserId(userId);
-                relatedServices.add(relatedService);
-            }
-        }
-        return relatedServices;
+//TODO:  CLEAN UP, REMOVING RELATED SERVICE TABLE
+//        Collection<RelatedService> relatedServiceCollection;
+//        relatedServiceCollection = this.mapPrdRelServicesToRelatedServices(productData.getPartyUserId(), product, productData.getRelatedServices());
+//
+//        product.setRelatedServiceCollection(relatedServiceCollection);
+
+
+//        Collection<RelatedService> relatedServices = null;
+//        if (relatedServiceDatas != null && relatedServiceDatas.size() > 0) {
+//            relatedServices = new ArrayList<RelatedService>();
+//
+//            for (Integer data : relatedServiceDatas) {
+//                RelatedService relatedService = new RelatedService();
+//                relatedService.setCreateTs(new Date());
+//                relatedService.setCreateUserId(userId);
+//                relatedService.setPrdUidFk(product);
+//                relatedService.setPrsUidFk(this.prdRelServiceFacadeREST.find(data));
+//                relatedService.setUpdateTs(new Date());
+//                relatedService.setUpdateUserId(userId);
+//                relatedServices.add(relatedService);
+//            }
+//        }
+//        return relatedServices;
+
+        return null;
     }
 }
