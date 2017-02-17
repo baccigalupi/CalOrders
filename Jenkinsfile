@@ -59,7 +59,7 @@ node {
         sh 'docker run \
             --name=calorders-rest \
             --link=calorders-mysql:mysqlserver \
-            --env-file=docker/env.testenvironment \
+            --env-file=docker/calorders.env \
             --publish=9080:8080 \
             --detach \
             kpoland/calorders-rest:$BUILD_ID'
