@@ -9,11 +9,11 @@ Oncore’s principle focus during development of CalOrders is summarized best by
 Oncore focused on delivering what the end user needed. This was done with a combination of user research, rapid prototyping, and constant interaction with end users through interviews and focus groups. These tight cycles between ideas and testing allowed us to respond quickly to change. Focusing on solutions not features and adhering to the [U.S. Digital Services](https://playbook.cio.gov/) Playbook promoted user satisfaction and adoption through continuous interaction/feedback. We [followed](https://github.com/OncoreLLC/CalOrders/wiki/Addressing-U.S.-Digital-Services-Playbook-Plays) all of the applicable Playbook plays.  
 
 ##Project Requirements
-Reqirement | Reference(s)
+Reqirements | Reference(s)
 --- | ---
-a. Assigned one (1) leader and gave that person authority and responsibility and held that person accountable for the quality of the prototype submitted; |
-b. Assembled a multidisciplinary and collaborative team that includes, at a minimum, five (5)of the labor categories as identified in Attachment B: PQVP DS-AD Labor Category Descriptions; |
-c. Understood what people needed1, by including people in the prototype development and design process; |
+a. Assigned one (1) leader and gave that person authority and responsibility and held that person accountable for the quality of the prototype submitted; | [Michael Tsay](https://github.com/OncoreLLC/CalOrders/tree/master/Artifacts#calorder-development-team)
+b. Assembled a multidisciplinary and collaborative team that includes, at a minimum, five (5)of the labor categories as identified in Attachment B: PQVP DS-AD Labor Category Descriptions; | [The team](https://github.com/OncoreLLC/CalOrders/tree/master/Artifacts#calorder-development-team))
+c. Understood what people needed1, by including people in the prototype development and design process; | [Focus Group](https://github.com/OncoreLLC/CalOrders/wiki/Focus-Group) [Interview](https://github.com/OncoreLLC/CalOrders/wiki/Interviews) [Sprint Review/Product Demo](https://github.com/OncoreLLC/CalOrders/wiki/Sprint-Reviews) [Usability Testing](https://github.com/OncoreLLC/CalOrders/wiki/Usability-Testing)
 d. Used at least a minimum of three (3) “user-centric design” techniques and/or tools; |
 e. Used GitHub to document code commits; |
 f. Used Swagger to document the RESTful API, and provided a link to the Swagger API; |
