@@ -26,7 +26,13 @@ j. Used an iterative approach, where feedback informed subsequent work or versio
 k. Created a prototype that works on multiple devices, and presents a responsive design; |[TODO link to mobile version][TODO link to desktop version]
 l. Used at least five (5) modern and open-source technologies, regardless of architectural layer (frontend, backend, etc.) | [Technologies](#modern-open-source-technologies-2l)
 m. Deployed the prototype on an Infrastructure as a Service (IaaS) or Platform as Service(PaaS) provider, and indicated which provider they used | [TODO link to page]
-n. Developed automated unit tests for their code | [JUnit](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersRest/test/com/oncore/calorders/rest/service/extension)<br>[Selenium](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersSelenium/test/test/oncore/calorders/selenium)
+n. Developed automated unit tests for their code | [JUnit](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersRest/test/com/oncore/calorders/rest/service/extension)<br>[Selenium](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersSelenium/test/test/oncore/calorders/selenium) |
+9. Setup or used a continuous integration system to automate the running of tests and continuously deployed their code to their IaaS or PaaS provider |
+p. Setup or used configuration management |
+q. Setup or used continuous monitoring |
+r. Deployed their software in an open source container, such as Docker (i.e., utilized operating-system-level virtualization) |
+s. Provided sufficient documentation to install and run their prototype on another machine and |
+t. Prototype and underlying platforms used to create and run the prototype are openly licensed and free of charge |
 
 ##CalOrder Development Team
 Oncore selected Mike Tsay as the Team Leader/Project Manager, who had authority over and was responsible and accountable for the quality of the prototype submitted _(2a)_.
