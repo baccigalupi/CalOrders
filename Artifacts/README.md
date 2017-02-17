@@ -29,7 +29,7 @@ m. Deployed the prototype on an Infrastructure as a Service (IaaS) or Platform a
 n. Developed automated unit tests for their code | [JUnit](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersRest/test/com/oncore/calorders/rest/service/extension)<br>[Selenium](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersSelenium/test/test/oncore/calorders/selenium) |
 o. Setup or used a continuous integration system to automate the running of tests and continuously deployed their code to their IaaS or PaaS provider | [Build and Deployment](https://github.com/OncoreLLC/CalOrders/wiki/Build-and-Deploy)
 p. Setup or used configuration management | [Configuration Management](https://github.com/OncoreLLC/CalOrders/wiki/Configuration-Management)
-q. Setup or used continuous monitoring |
+q. Setup or used continuous monitoring | [Continuous Monitoring](https://github.com/OncoreLLC/CalOrders/wiki/Continuous-Monitoring)
 r. Deployed their software in an open source container, such as Docker (i.e., utilized operating-system-level virtualization) |
 s. Provided sufficient documentation to install and run their prototype on another machine and | [Setup and Deployment](https://github.com/OncoreLLC/CalOrders/wiki/Setup-and-Deployment)
 t. Prototype and underlying platforms used to create and run the prototype are openly licensed and free of charge |
@@ -118,20 +118,3 @@ jQuery | Front-end Javascript library
 Swagger | Automated Documentation of RESTful services   
 NVDA | Screen Reader
 WAVE | ADA Browser testing plugin
-
-
-###Deployment Environment  
-  Azure Cloud _(2m)_  
-    [Architecture doc](Architecture doc)  
-
-
-###Continuous Monitoring and Integration  
-  Configured Jenkins within a Docker container on an Azure cloud environment _(2s)_.   
-
-  As we completed functioning code, we were able to continually show the end users how we were building checkin activity on GitHub generated builds through Jenkins resulting in automated testing and automatic Docker deployments to the Azure cloud. _(2m, 2p)_  
-
-###Build and Deploy
-  Jenkins  
-  Docker  
-
- 
