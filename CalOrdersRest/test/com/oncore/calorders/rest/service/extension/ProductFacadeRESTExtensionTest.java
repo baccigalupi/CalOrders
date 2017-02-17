@@ -26,7 +26,6 @@ package com.oncore.calorders.rest.service.extension;
 import com.oncore.calorders.rest.Product;
 import com.oncore.calorders.rest.service.PrdCategoryCdFacadeREST;
 import com.oncore.calorders.rest.service.PrdImgTypeCdFacadeREST;
-import com.oncore.calorders.rest.service.PrdRelServiceFacadeREST;
 import com.oncore.calorders.rest.service.PrdUnitCdFacadeREST;
 import com.oncore.calorders.rest.service.ProductFacadeREST;
 import com.oncore.calorders.rest.service.VendorFacadeREST;
@@ -159,9 +158,7 @@ public class ProductFacadeRESTExtensionTest {
 
         VendorFacadeREST vendorFacadeRESTMocked = mock(VendorFacadeREST.class);
         when(vendorFacadeRESTMocked.find(555)).thenReturn(null);
-
-        PrdRelServiceFacadeREST prdRelServiceFacadeRESTMocked = mock(PrdRelServiceFacadeREST.class);
-        when(prdRelServiceFacadeRESTMocked.find(777)).thenReturn(null);
+  
 
         PrdUnitCdFacadeREST prdUnitCdFacadeRESTMocked = mock(PrdUnitCdFacadeREST.class);
         when(prdUnitCdFacadeRESTMocked.find("DEF")).thenReturn(null);
