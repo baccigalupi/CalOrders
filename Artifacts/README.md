@@ -17,12 +17,12 @@ c. Understood what people needed, by including people in the prototype developme
 d. Used at least a minimum of three (3) “user-centric design” techniques and/or tools; | [Focus Group](https://github.com/OncoreLLC/CalOrders/wiki/Focus-Group)<br> [Interview](https://github.com/OncoreLLC/CalOrders/wiki/Interviews)<br> [Personas](https://github.com/OncoreLLC/CalOrders/wiki/Develop-Personas)<br> [Usability Testing](https://github.com/OncoreLLC/CalOrders/wiki/Usability-Testing)<br>[Wireframes](https://github.com/OncoreLLC/CalOrders/wiki/Wire-Frames)<br>[Wireframe Walkthrough](https://github.com/OncoreLLC/CalOrders/wiki/Wireframe-Walkthrough)<br>[Scenarios](https://github.com/OncoreLLC/CalOrders/wiki/Scenarios)
 e. Used GitHub to document code commits; | [Github Contributions](https://github.com/OncoreLLC/CalOrders/graphs/contributors)
 f. Used Swagger to document the RESTful API, and provided a link to the Swagger API; |
-g. Complied with Section 508 of the Americans with Disabilities Act and WCAG 2.0; |Jet as a UI component library is [ADA and WCAG compliant.](https://docs.oracle.com/middleware/jet112/jet/developer/GUID-9E3452C1-2A85-4700-83B1-B266F348C7E5.htm#JETDG257) 
+g. Complied with Section 508 of the Americans with Disabilities Act and WCAG 2.0; |[ADA and WCAG compliance](https://github.com/OncoreLLC/CalOrders/wiki/ADA-and-WCAG-Compliance) 
 h. Created or used a design style guide and/or a pattern library; | [Style Guide](http://www.oracle.com/webfolder/technetwork/jet/jetCookbook.html)
 i. Performed usability tests with people; | [Usability Testing](https://github.com/OncoreLLC/CalOrders/wiki/Usability-Testing)
 j. Used an iterative approach, where feedback informed subsequent work or versions of the prototype; | [Agile Methodolog](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Methodolgy)
-k. Created a prototype that works on multiple devices, and presents a responsive design; |
-l. Used at least five (5) modern2 and open-source technologies, regardless of architectural layer (frontend, backend, etc.); |
+k. Created a prototype that works on multiple devices, and presents a responsive design; |[TODO link to mobile version][TODO link to desktop version]
+l. Used at least five (5) modern and open-source technologies, regardless of architectural layer (frontend, backend, etc.); |
 m. Deployed the prototype on an Infrastructure as a Service (IaaS) or Platform as Service(PaaS) provider, and indicated which provider they used; |
 n. Developed automated unit tests for their code;  |
 
