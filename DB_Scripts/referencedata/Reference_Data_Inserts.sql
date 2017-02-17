@@ -224,10 +224,43 @@ VALUES
 CURRENT_TIMESTAMP,
 'system',
 CURRENT_TIMESTAMP);
+
+
+INSERT INTO `calordersdb`.`PRD_CATEGORY_CD`
+(`CODE`,
+`SHORT_DESC`,
+`LONG_DESC`,
+`CREATE_USER_ID`,
+`CREATE_TS`,
+`UPDATE_USER_ID`,
+`UPDATE_TS`)
+VALUES
+('SERR',
+'Related Services',
+'Related Services',
+'system',
+CURRENT_TIMESTAMP,
+'system',
+CURRENT_TIMESTAMP);
  
 
 
-
+INSERT INTO `calordersdb`.`PRD_CATEGORY_CD`
+(`CODE`,
+`SHORT_DESC`,
+`LONG_DESC`,
+`CREATE_USER_ID`,
+`CREATE_TS`,
+`UPDATE_USER_ID`,
+`UPDATE_TS`)
+VALUES
+('SERI',
+'Independent Services',
+'Independent Services',
+'system',
+CURRENT_TIMESTAMP,
+'system',
+CURRENT_TIMESTAMP);
 
 
 -- ORD_STATUS_CD
