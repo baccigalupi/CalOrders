@@ -1,7 +1,7 @@
 #California Department of Technology - OnCore Consulting ADPQ Vendor Pool Refresh Prototype - 
 ###[Prototype URL](Prototype URL)
 
-##Technical Approach _(2)_
+##Technical Approach
 Oncore’s principle focus during development of CalOrders is summarized best by Jeff Sutherland.
  
 “[Value] people over processes; products that actually work over documenting what that product is supposed to do; collaborating with customers over negotiating with them; and responding to change over following a plan.” (Scrum: The Art of Doing Twice the Work in Half the Time)
