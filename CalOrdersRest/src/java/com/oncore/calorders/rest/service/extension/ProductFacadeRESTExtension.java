@@ -183,49 +183,9 @@ public class ProductFacadeRESTExtension extends ProductFacadeREST {
         product.setUpdateTs(new Date());
         product.setUpdateUserId(productData.getPartyUserId());
         product.setVndUidFk(this.vendorFacadeREST.find(productData.getVendor()));
-
-//TODO:  CLEAN UP, REMOVING RELATED SERVICE TABLE
-//        Collection<RelatedService> relatedServiceCollection;
-//        relatedServiceCollection = this.mapPrdRelServicesToRelatedServices(productData.getPartyUserId(), product, productData.getRelatedServices());
-//
-//        product.setRelatedServiceCollection(relatedServiceCollection);
+        
         super.create(product);
     }
 
-    /**
-     *
-     *
-     * @param userId
-     * @param product
-     * @param relatedServiceDatas
-     * @return
-     */
-    private Collection<Object> mapPrdRelServicesToRelatedServices(String userId, Product product, List<Integer> relatedServiceDatas) {
-
-//TODO:  CLEAN UP, REMOVING RELATED SERVICE TABLE
-//        Collection<RelatedService> relatedServiceCollection;
-//        relatedServiceCollection = this.mapPrdRelServicesToRelatedServices(productData.getPartyUserId(), product, productData.getRelatedServices());
-//
-//        product.setRelatedServiceCollection(relatedServiceCollection);
-
-
-//        Collection<RelatedService> relatedServices = null;
-//        if (relatedServiceDatas != null && relatedServiceDatas.size() > 0) {
-//            relatedServices = new ArrayList<RelatedService>();
-//
-//            for (Integer data : relatedServiceDatas) {
-//                RelatedService relatedService = new RelatedService();
-//                relatedService.setCreateTs(new Date());
-//                relatedService.setCreateUserId(userId);
-//                relatedService.setPrdUidFk(product);
-//                relatedService.setPrsUidFk(this.prdRelServiceFacadeREST.find(data));
-//                relatedService.setUpdateTs(new Date());
-//                relatedService.setUpdateUserId(userId);
-//                relatedServices.add(relatedService);
-//            }
-//        }
-//        return relatedServices;
-
-        return null;
-    }
+  
 }
