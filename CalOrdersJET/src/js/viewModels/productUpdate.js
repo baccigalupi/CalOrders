@@ -52,8 +52,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                 self.productPrice = ko.observable();
                 self.productDescription = ko.observable();
                 self.productFullDesc = ko.observable();
-                self.relatedServices = ko.observableArray([]);
-                self.avaliableRelatedServices = ko.observableArray(ReferenceData.getRelatedServices());
                 self.productImage = ko.observable();
                 self.productSKU = ko.observable();
                 self.productOEMPartNumber = ko.observable();
@@ -110,8 +108,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                     self.productPrice = ko.observable();
                     self.productDescription = ko.observable();
                     self.productFullDesc = ko.observable();
-                    self.relatedServices = ko.observableArray([]);
-                    self.avaliableRelatedServices = ko.observableArray(ReferenceData.getRelatedServices());
                     self.productImage = ko.observable();
                     self.productSKU = ko.observable();
                     self.productOEMPartNumber = ko.observable();
@@ -215,7 +211,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                                     "productPrice": self.productPrice(),
                                     "productDescription": self.productDescription(),
                                     "productFullDesc": self.productFullDesc(),
-                                    "relatedServices": self.relatedServices(),
                                     "partyUserId": sessionStorage.userName
 
 
@@ -414,7 +409,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                     if (discount == NaN || discount == undefined || discount === 0) {
                         self.productContractUnitPrice(undefined);
                     } else {
-                        self.productContractUnitPrice(discount);
+                        self.productContractUnitPrice(price - discount);
                     }
                 };
             }
