@@ -94,7 +94,7 @@ public class Product implements Serializable {
     private String prdSku;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
+    @Size(min = 1, max = 128)
     @Column(name = "PRD_NAME")
     private String prdName;
     @Basic(optional = false)
