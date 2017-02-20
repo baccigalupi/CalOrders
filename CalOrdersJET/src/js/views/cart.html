@@ -47,11 +47,11 @@
     <!-- Page Content -->
     <div class="oj-panel oj-flex oj-sm-flex-wrap-nowrap">
         <div id="cartWrapperDiv" class="oj-panel oj-flex-item oj-sm-flex-wrap-nowrap">
- <!-- ko if: ready -->
+            <!-- ko if: ready -->
             <div id="productlistview" >
                 <div class="oj-flex oj-flex-items-pad oj-sm-flex-direction-column" data-bind="template: large() ? 'productListLayout' : 'productCardLayout'"></div>
             </div>
-                 <!-- /ko -->
+            <!-- /ko -->
 
             <!-- Product Card View -->
             <script id="productCardLayout" type="text/html">
@@ -82,16 +82,30 @@
                                 </div>
                                 <div class="oj-flex-item">
                                     <h3 aria-label="product description" data-bind="text: $data['prdName']" tabindex="0"></h3>
-<!--
+                                    <!-- ko if: $data['relatedServices']().length > 0 -->
                                     <label for="relatedServices">Related Services:</label>
                                     <select id="relatedServices" 
                                             data-bind="ojComponent: {
-                                    component: 'ojSelect', value: relatedServices, required: false,
-                                    options: $data['relatedServices']}">
-                                    </select>  
--->
+                                    component: 'ojSelect', value: $data['selectedRelatedService'], required: false,
+                                    options: $data['relatedServices'],
+                                rootAttributes: {style:'max-width:20em'}}">
+                                    </select> 
+                                    <button id= "addRelatedService" 
+                                            data-bind="click: $parent.addRelatedService, ojComponent: { component: 'ojButton', label: 'Add Related Service' }">
+                                    </button> 
+                                    <!-- /ko -->
                                     <div class="oj-flex-item oj-sm-12 oj-lg-2">
-                                        <span data-bind="text: $data['quantity']"/>
+
+
+                                        <input id="quantity" aria-label="quantity"
+                                               data-bind="ojComponent: {
+                         component: 'ojInputNumber', 
+                         max:10000,
+                         min:1, 
+                         step:1, 
+                         optionChange: function(event,data) { $parent.productQuantityChange( event,data,$data['prdUid']);},
+                         value:$data['quantity'],
+                         rootAttributes: {style:'max-width:40px; padding-right:20px'}}"/>
                                     </div>
                                     <span>Price: </span><div class="demo-employee-tenure" data-bind="text: '$' + $data['prdPrice']"></div>
                                 </div>
@@ -112,7 +126,7 @@
             item: {template: 'productlist_template'}}">
                         </ul>
                         <div class="oj-flex oj-flex-items-pad">
-                            <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: cardViewDataSource, pageSize: 4}">
+                            <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: cardViewDataSource, pageSize: 2}">
                             </div>
                         </div>
                         </script>
@@ -126,68 +140,78 @@
                                             <img alt="product image" class="demo-circular demo-employee-photo" style="float:left;" 
                                                  height="100" width="100" 
                                                  data-bind="attr: {id: 'productImage' + $data['prdUid'], src: $parent.getPhoto($data)}"/>
-                                            <div class="demo-employee-name" data-bind="text: $data['prdName']"></div>                                         
-                                           <label for="relatedServices">Related Services:</label>
+                                            <div class="demo-employee-name" data-bind="text: $data['prdName']"></div>    
+                                            <!-- ko if: $data['relatedServices']().length > 0 -->
+                                            <label for="relatedServices">Related Services:</label>
                                             <select id="relatedServices" 
                                                     data-bind="ojComponent: {
                                     component: 'ojSelect', value: $data['selectedRelatedService'], required: false,
                                     options: $data['relatedServices'],
                                 rootAttributes: {style:'max-width:20em'}}">
                                             </select> 
-                                           <button id= "addRelatedService" 
-                                    data-bind="click: $parent.addRelatedService, ojComponent: { component: 'ojButton', label: 'Add Related Service' }">
-                                        </button> 
+                                            <button id= "addRelatedService" 
+                                                    data-bind="click: $parent.addRelatedService, ojComponent: { component: 'ojButton', label: 'Add Related Service' }">
+                                            </button> 
+                                            <!-- /ko -->
                                         </div>
-                                            <div class="oj-flex-item oj-sm-12 oj-lg-2">
-                                                <span data-bind="text: $data['quantity']"/>
-                                            </div>
-
-                                            <div class="oj-flex-item oj-lg-5 oj-md-4">
-
-                                                <div class="oj-flex-item oj-sm-only-hide oj-md-4 oj-md-float-end">
-                                                    <span>Price: </span><div class="demo-employee-tenure" data-bind="text: '$' + $data['prdPrice']"></div>
-                                                </div>
-                                            </div>
-
+                                        <div class="oj-flex-item oj-sm-12 oj-lg-2">
+                                            <input aria-label="quantity"
+                                                   data-bind="ojComponent: {
+                         component: 'ojInputNumber', 
+                         max:10000,
+                         min:1, 
+                         step:1, 
+                            value:$data['quantity'],
+                         optionChange: function(event,data) { $parent.productQuantityChange( event,data,$data['prdUid']);},
+                         rootAttributes: {style:'max-width:40px; padding-right:20px'}}"/>
                                         </div>
+
+                                        <div class="oj-flex-item oj-lg-5 oj-md-4">
+
+                                            <div class="oj-flex-item oj-sm-only-hide oj-md-4 oj-md-float-end">
+                                                <span>Price: </span><div class="demo-employee-tenure" data-bind="text: '$' + $data['prdPrice']"></div>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
-                            </li>
-                            </script>
                         </div>
+                        </li>
+                        </script>
                     </div>
+                </div>
 
-                    <!-- Totals -->
-                    <div class="oj-padding-vertical"></div>
+                <!-- Totals -->
+                <div class="oj-padding-vertical"></div>
 
-                    <div class="oj-md-odd-cols-4">
-                        <div class="oj-flex">
+                <div class="oj-md-odd-cols-4">
+                    <div class="oj-flex">
+                        <div>
                             <div>
-                                <div>
-                                    <div class="oj-padding-vertical"></div>
-                                    <div class="oj-sm-justify-content confirmation_bold">Order Totals:</div>
-                                    <div class="oj-padding-vertical"></div>
-                                    <div class="oj-sm-justify-content"><div><div class="confirmation_bold_label">Total:</div> <div class="confirmation_float_right" data-bind="text: itemTotalPrice"></div></div></div>
-                                    <div class="oj-sm-justify-content"><div><div class="confirmation_bold_label">Shipping:</div> <div class="confirmation_float_right" data-bind="text: shippingPrice"></div></div></div>
-                                    <div class="oj-sm-justify-content"><div><div class="confirmation_bold_label">Total Price:</div> <div class="confirmation_float_right" data-bind="text: totalPrice"></div></div></div>
-                                </div>
+                                <div class="oj-padding-vertical"></div>
+                                <div class="oj-sm-justify-content confirmation_bold">Order Totals:</div>
+                                <div class="oj-padding-vertical"></div>
+                                <div class="oj-sm-justify-content"><div><div class="confirmation_bold_label">Total:</div> <div class="confirmation_float_right" data-bind="text: itemTotalPrice"></div></div></div>
+                                <div class="oj-sm-justify-content"><div><div class="confirmation_bold_label">Shipping:</div> <div class="confirmation_float_right" data-bind="text: shippingPrice"></div></div></div>
+                                <div class="oj-sm-justify-content"><div><div class="confirmation_bold_label">Total Price:</div> <div class="confirmation_float_right" data-bind="text: totalPrice"></div></div></div>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="oj-padding-vertical"></div>
+                <div class="oj-padding-vertical"></div>
 
-                    <!-- Action buttons (Continue Shopping and Order) -->
-                    <div class="oj-flex oj-sm-justify-content-flex-end">
+                <!-- Action buttons (Continue Shopping and Order) -->
+                <div class="oj-flex oj-sm-justify-content-flex-end">
 
-                        <div class="oj-flex"> 
-                            <button id= "continueShopping" 
-                                    data-bind="click: continueShoppingClick, ojComponent: { component: 'ojButton', label: 'Continue Shopping' }">
-                            </button> 
-                            <div class="oj-padding-horizontal"></div>
-                            <button id= "placeOrder" 
-                                    data-bind="click: placeOrderClick, ojComponent: { component: 'ojButton', label: 'Order' }">
-                            </button> 
-                        </div>
+                    <div class="oj-flex"> 
+                        <button id= "continueShopping" 
+                                data-bind="click: continueShoppingClick, ojComponent: { component: 'ojButton', label: 'Continue Shopping' }">
+                        </button> 
+                        <div class="oj-padding-horizontal"></div>
+                        <button id= "placeOrder" 
+                                data-bind="click: placeOrderClick, ojComponent: { component: 'ojButton', label: 'Order' }">
+                        </button> 
                     </div>
+                </div>
 

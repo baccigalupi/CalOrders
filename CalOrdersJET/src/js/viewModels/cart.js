@@ -86,6 +86,10 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
 
                 self.parseAddRelatedServiceProduct = function (response) {
                     response.quantity = ko.observable(1);
+
+                    response.relatedServices = ko.observableArray([]);
+                    response.selectedRelatedService = ko.observable();
+
                     self.cart.push(response);
                 };
 
@@ -144,6 +148,8 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
                             {
                                 cartProduct.selectedRelatedService = ko.observable();
                             }
+
+                            cartProduct.quantity = ko.observable(cartProduct.quantity);
 
                             var ProductModel = oj.Model.extend({
                                 urlRoot: self.findRelatedServiceProductsURL + "/SERR/" + cartProduct.vndUidFk.vndUid,
@@ -264,6 +270,44 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
                     self.productLayoutType('productListLayout');
                 };
 
+                self.productQuantityChange = function (event, data, product)
+                {
+                    if (data.previousValue !== undefined)
+                    {
+                        var sessionCart = JSON.parse(sessionStorage.cartProducts);
+
+                        for (i = 0; i < sessionCart.length; i++)
+                        {
+                            if (sessionCart[i].prdUid === product)
+                            {
+                                sessionCart[i].quantity = data.value;
+                            }
+                        }
+
+                        var tempItemTotalPrice = 0.0;
+                        var tempShippingPrice = 25.00;
+                        var tempTotalPrice = 0.00;
+
+                        for (i = 0; i < sessionCart.length; i++)
+                        {
+                            tempItemTotalPrice += (sessionCart[i].prdPrice * sessionCart[i].quantity);
+                        }
+
+                        self.itemTotalPrice("$" + tempItemTotalPrice.toFixed(2));
+                        self.shippingPrice("$" + tempShippingPrice.toFixed(2));
+
+                        tempTotalPrice = tempShippingPrice + tempItemTotalPrice;
+
+                        self.totalPrice("$" + tempTotalPrice.toFixed(2));
+
+                        sessionStorage.itemTotalPrice = self.itemTotalPrice();
+                        sessionStorage.shippingPrice = self.shippingPrice();
+                        sessionStorage.totalPrice = self.totalPrice();
+
+                        sessionStorage.cartProducts = JSON.stringify(sessionCart);
+                    }
+                };
+
                 /*
                  * Places the Order.
                  * 
@@ -315,13 +359,15 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
                     return self.router.go("productSearch");
                 };
 
+
                 self.addRelatedService = function (product) {
 
                     // Get product id of the related service
                     var ProductModel = oj.Model.extend({
                         urlRoot: self.findProductServiceURL + "/" + product.selectedRelatedService(),
                         parse: self.parseAddRelatedServiceProduct,
-                        attributeId: 'prdUid'
+                        attributeId: 'prdUid',
+                        quantityCnt: product.quantity
                     });
 
                     var pm = new ProductModel();
@@ -329,7 +375,30 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
                         success: function (myModel, response, options) {
                             console.log("Found related product");
 
+                            response.quantity = myModel.quantityCnt;
                             ProductHelper.addProductToCart(response);
+
+                            var sessionCart = JSON.parse(sessionStorage.cartProducts);
+
+                            var tempItemTotalPrice = 0.0;
+                            var tempShippingPrice = 25.00;
+                            var tempTotalPrice = 0.00;
+
+                            for (i = 0; i < sessionCart.length; i++)
+                            {
+                                tempItemTotalPrice += (sessionCart[i].prdPrice * sessionCart[i].quantity);
+                            }
+
+                            self.itemTotalPrice("$" + tempItemTotalPrice.toFixed(2));
+                            self.shippingPrice("$" + tempShippingPrice.toFixed(2));
+
+                            tempTotalPrice = tempShippingPrice + tempItemTotalPrice;
+
+                            self.totalPrice("$" + tempTotalPrice.toFixed(2));
+
+                            sessionStorage.itemTotalPrice = self.itemTotalPrice();
+                            sessionStorage.shippingPrice = self.shippingPrice();
+                            sessionStorage.totalPrice = self.totalPrice();
                             return false;
                         },
                         error: function (jqXHR, textStatus, errorThrown) {
