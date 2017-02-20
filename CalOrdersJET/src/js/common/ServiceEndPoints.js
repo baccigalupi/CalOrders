@@ -94,12 +94,18 @@ ServiceEndPoints.prototype = {
         } else if (key === "findActiveProductsByProductTypeAndVendor")
         {
             return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.product/findActiveProductsByProductTypeAndVendor";
-         } else if (key === "fetchOrdersByQuarter")
+        } else if (key === "fetchOrdersByQuarter")
         {
             return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.orderHistory/fetchOrdersByQuarter";
+        } else if (key === "fetchOrderStatusSummary")
+        {
+            return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.orderHistory/fetchOrderStatusSummary";
         } else
         {
             return "UNDEFINED";
         }
+
+
+
     }
 };
