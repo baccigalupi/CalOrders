@@ -125,8 +125,13 @@
 
             <div class="oj-padding-vertical"></div>
 
-            <div class="oj-flex-item">
-                <div data-bind="text: $data['prdLongDesc']"></div>
+            <div class="oj-flex-item ">
+                <div class="product-detail-label">Product Description:</div>
+
+                <div class="product-detail-value" data-bind="foreach: $data['prdLongDescLines']">
+                    <p data-bind="text: $data"></p>
+                </div>
+
             </div>
 
             <div class="oj-padding-vertical"></div>
