@@ -97,20 +97,20 @@ public class ProductFacadeRESTExtension extends ProductFacadeREST {
 
         return results;
     }
-    
+
     @GET
     @Path("findActiveProductsByProductTypeAndVendor/{productTypeCode}/{vendorUid}")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Product> findActiveProductsByProductTypeAndVendor(
             @PathParam("productTypeCode") String productTypeCode,
-            @PathParam("vendorUid") Integer vendorUid ) {
-        System.out.println("Running findActiveProductsByProductTypeAndVendor by " + productTypeCode +
-                " and " + vendorUid);
+            @PathParam("vendorUid") Integer vendorUid) {
+        System.out.println("Running findActiveProductsByProductTypeAndVendor by " + productTypeCode
+                + " and " + vendorUid);
 
         List<Product> results = super.getEntityManager()
                 .createQuery("SELECT p FROM Product p "
                         + "        JOIN p.prdCategoryCd c"
-                        +" JOIN p.vndUidFk v"
+                        + " JOIN p.vndUidFk v"
                         + "        WHERE c.code = :categoryCode "
                         + " AND v.vndUid = :vendorUid "
                         + "        AND p.prdActiveInd = 1", Product.class)
@@ -153,25 +153,23 @@ public class ProductFacadeRESTExtension extends ProductFacadeREST {
     @POST
     @Path("createProduct")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void createProduct(ProductData productData) {
-
-        System.out.println("Product: " + productData);
+    public void createProduct(ProductData productData) throws Exception{
 
         // Create Product
         Product product = new Product();
         product.setCreateTs(new Date());
         product.setCreateUserId(productData.getPartyUserId());
-        product.setPrdActiveInd(1);
+        product.setPrdActiveInd(productData.getProductActivationStatus());
         product.setPrdCategoryCd(this.categoryCdFacadeREST.find(productData.getProductCategory()));
         product.setPrdCntrDiscount(productData.getProductContractDiscount());
         product.setPrdCntrLnItm(productData.getProductContractLineItem());
         product.setPrdCntrUnitPrice(productData.getProductContractUnitPrice());
-        product.setPrdImgImage(null);
-        product.setPrdImgKey(null);
-        product.setPrdImgName(null);
-        product.setPrdImgOrigin(null);
-        product.setPrdImgSize(null);
-        product.setPrdImgTypeCd(this.prdImgTypeCdFacadeREST.find("JPEG"));
+        product.setPrdImgImage(productData.getProductImage().getBytes());
+        product.setPrdImgKey(productData.getProductImgageKey());
+        product.setPrdImgName(productData.getProductImageName());
+        product.setPrdImgOrigin(productData.getProductImageOrigin());
+        product.setPrdImgSize(productData.getProductImageSize());
+        product.setPrdImgTypeCd(this.prdImgTypeCdFacadeREST.find(productData.getProductImageType()));
         product.setPrdLongDesc(productData.getProductFullDesc());
         product.setPrdName(productData.getProductName());
         product.setPrdOemName(productData.getProductOEMName());
@@ -183,9 +181,8 @@ public class ProductFacadeRESTExtension extends ProductFacadeREST {
         product.setUpdateTs(new Date());
         product.setUpdateUserId(productData.getPartyUserId());
         product.setVndUidFk(this.vendorFacadeREST.find(productData.getVendor()));
-        
+
         super.create(product);
     }
 
-  
 }

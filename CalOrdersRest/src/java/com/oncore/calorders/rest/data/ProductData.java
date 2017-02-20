@@ -56,6 +56,7 @@ public class ProductData extends BaseData {
     private String productImageName;
     private String productImageOrigin;
     private Integer productImageSize;
+    private String productImageType;
 
     public String getProductName() {
         return productName;
@@ -215,6 +216,14 @@ public class ProductData extends BaseData {
 
     public void setProductImageSize(Integer productImageSize) {
         this.productImageSize = productImageSize;
+    }
+
+    public String getProductImageType() {
+        return productImageType;
+    }
+
+    public void setProductImageType(String productImageType) {
+        this.productImageType = productImageType;
     }
 
 }
