@@ -62,6 +62,38 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                 self.productUnitCodeMessages = ko.observableArray([]);
                 self.productContractLineItem = ko.observable();
                 self.productContractUnitPrice = ko.observable();
+
+
+                //===========================================================================
+//USED FOR FILE UPLOAD
+//===========================================================================
+                self.uploadFile = ko.observable(null);
+                self.uploadName = ko.computed(function () {
+                    return !!self.uploadFile() ? self.uploadFile().name : '-';
+                });
+
+                self.resetClickEvent = function () {
+                    self.uploadFile(null);
+                };
+
+                ko.bindingHandlers.fileUpload = {
+                    init: function (element, valueAccessor) {
+                        $(element).change(function () {
+                            valueAccessor()(element.files[0]);
+                        });
+                    },
+                    update: function (element, valueAccessor) {
+                        if (ko.unwrap(valueAccessor()) === null) {
+                            $(element).wrap('<form>').closest('form').get(0).reset();
+                            $(element).unwrap();
+                        }
+                    }
+                };
+
+
+//============================================================================
+//============================================================================
+//
                 // Below are a subset of the ViewModel methods invoked by the ojModule binding
                 // Please reference the ojModule jsDoc for additionaly available methods.
 
@@ -80,7 +112,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                     if (!SecurityUtils.isAuthenticated()) {
                         return self.router.go('welcome');
                     }
-                    
+
                     self.productsToCompareBreadcrumbs(sessionStorage.productsToCompareBreadcrumbs);
 
                     // Get product id from the search page
@@ -94,7 +126,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
 
                     var pm = new ProductModel();
                     pm.fetch();
-                    
+
                     // Implement if needed
                     // initialize session storage
                     self.productName = ko.observable();
@@ -120,7 +152,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                     self.productContractDiscount = ko.observable();
                     self.productContractUnitPrice = ko.observable();
                 };
-                
+
                 /**
                  * Parse product from Rest service
                  * @param {type} response
@@ -143,7 +175,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                 {
                     return self.product().prdUid;
                 };
-                
+
                 /**
                  * Optional ViewModel method invoked after the View is inserted into the
                  * document DOM.  The application can put logic that requires the DOM being
@@ -279,25 +311,31 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                 self.validateProductCategory = {validate: function (value)
                     {
                         var validProductCategory = true;
-                        // Hack for states dropdown and can't figure out how
-                        // required error message is thrown by itself
-                        if (typeof value === "undefined"
-                                || value === "")
+
+                        if (typeof value != "undefined"
+                                && value != "" && (value == "SERI"))
                         {
-                            this.productCategoryMessages([
-                                new oj.Message(
-                                        "Value is required.",
-                                        "You must select a value.",
-                                        oj.Message.SEVERITY_TYPE.ERROR)]);
-                            validProductCategory = false;
+                            self.productCategoryMessages([
+                                new oj.Message("Independent Services:",
+                                        "Independent Services are products that can be purchased individually",
+                                        oj.Message.SEVERITY_TYPE.INFO)]);
                         }
+                        if (typeof value != "undefined"
+                                && value != "" && (value == "SERR"))
+                        {
+                            self.productCategoryMessages([
+                                new oj.Message("Related Services:",
+                                        "Related Services are products that can only be purchased as part of an order",
+                                        oj.Message.SEVERITY_TYPE.INFO)]);
+                        }
+
                         return validProductCategory;
                     }};
-                self.isValideProductCategory = function ()
+
+                self.isValidProductCategory = function ()
                 {
                     var validProductCategory = true;
-                    // Hack for states dropdown and can't figure out how
-                    // required error message is thrown by itself
+
                     if (typeof self.productCategory() === "undefined"
                             || self.productCategory() === "")
                     {
@@ -313,12 +351,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                 self.validateVendor = {validate: function (value)
                     {
                         var validVendor = true;
-                        // Hack for states dropdown and can't figure out how
-                        // required error message is thrown by itself
+
                         if (typeof value === "undefined"
                                 || value === "")
                         {
-                            this.vendorMessages([
+                            self.vendorMessages([
                                 new oj.Message(
                                         "Value is required.",
                                         "You must select a value.",
@@ -330,8 +367,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                 self.isValidVendor = function ()
                 {
                     var validVendor = true;
-                    // Hack for states dropdown and can't figure out how
-                    // required error message is thrown by itself
+
                     if (typeof self.vendor() === "undefined"
                             || self.vendor() === "")
                     {
@@ -347,12 +383,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                 self.validateProductUnitCode = {validate: function (value)
                     {
                         var validProductUnitCode = true;
-                        // Hack for states dropdown and can't figure out how
-                        // required error message is thrown by itself
+
                         if (typeof value === "undefined"
                                 || value === "")
                         {
-                            this.productUnitCodeMessages([
+                            self.productUnitCodeMessages([
                                 new oj.Message(
                                         "Value is required.",
                                         "You must select a value.",
@@ -365,8 +400,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                 self.isValidProductUnitCode = function ()
                 {
                     var validProductUnitCode = true;
-                    // Hack for states dropdown and can't figure out how
-                    // required error message is thrown by itself
+
                     if (typeof self.productCategory() === "undefined"
                             || self.productCategory() === "")
                     {
@@ -412,6 +446,108 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                         self.productContractUnitPrice(price - discount);
                     }
                 };
+
+
+                //===========================================================================
+//USED FOR FILE UPLOAD
+//===========================================================================
+
+                /**
+                 * Demonstrates retrieving an image from the TempusImage domain.
+                 * In this example it is just going to grab the first record
+                 * in the image table.
+                 * 
+                 * @param {type} data
+                 * @param {type} event
+                 * @returns {Boolean}
+                 */
+                self.updateImageClick = function (data, event)
+                {
+
+
+                    var serviceEndPoints = new ServiceEndPoints();
+                    var serviceURL = serviceEndPoints.getEndPoint('fetchImage');
+
+                    serviceURL += "/" + "1";
+
+
+                    var ImageModel = oj.Model.extend({
+                        urlRoot: serviceURL,
+                        idAttribute: 'imgUid'
+                    });
+
+                    var image = new ImageModel();
+
+                    image.fetch({
+                        success: function () {
+                            var preview = document.getElementById('loginPicture');
+                            var file = image.attributes.imgImage;
+                            var imageSize = image.attributes.imgSize;
+                            var imageType = image.attributes.imgTypeCodeLongDescription;
+
+
+                            var reader = new FileReader();
+
+                            var data = window.atob(file);
+                            var arr = new Uint8Array(data.length);
+                            for (var i = 0; i < data.length; i++) {
+                                arr[i] = data.charCodeAt(i);
+                            }
+
+                            var blob = new Blob([arr.buffer], {size: imageSize, type: imageType});
+
+
+                            reader.addEventListener("load", function () {
+                                preview.src = reader.result;
+                            }, false);
+
+                            if (blob) {
+
+                                try {
+                                    reader.readAsDataURL(blob);
+                                } catch (err)
+                                {
+                                    console.log(err);
+                                }
+                            }
+
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.log("Image: not found: " + errorThrown);
+                            self.doShowErrorMessage = true;
+
+
+                            return false;
+                        }
+                    });
+
+
+                    return false;
+
+
+                };
+
+
+                /**
+                 * Closes the image warning dialog box
+                 * @param {type} data
+                 * @param {type} event
+                 * @returns {Boolean}
+                 */
+                self.closeImageDialogClick = function (data, event)
+                {
+                    $("#modalDialog2").ojDialog("close");
+                    self.resetClickEvent();
+                };
+
+
+
+
+
+//===========================================================================
+//USED FOR FILE UPLOAD END
+//===========================================================================
+
             }
 
 
