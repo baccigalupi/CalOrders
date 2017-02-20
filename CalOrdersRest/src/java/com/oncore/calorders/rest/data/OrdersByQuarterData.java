@@ -39,8 +39,8 @@ public class OrdersByQuarterData extends BaseData {
 
     private String name;
 
-    private List<OrderItemData> orderItemDataList = new ArrayList<>(1);
-     
+    private List<OrderItemData> items = new ArrayList<>(1);
+
     /**
      * @return the name
      */
@@ -56,17 +56,18 @@ public class OrdersByQuarterData extends BaseData {
     }
 
     /**
-     * @return the orderItemDataList
+     * @return the items
      */
-    public List<OrderItemData> getOrderItemDataList() {
-        return orderItemDataList;
+    public List<OrderItemData> getItems() {
+        return items;
     }
 
     /**
-     * @param orderItemDataList the orderItemDataList to set
+     * @param items the items to set
      */
-    public void setOrderItemDataList(List<OrderItemData> orderItemDataList) {
-        this.orderItemDataList = orderItemDataList;
+    public void setItems(List<OrderItemData> items) {
+        this.items = items;
     }
+    
 
 }

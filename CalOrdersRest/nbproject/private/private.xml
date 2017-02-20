@@ -2,6 +2,15 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/home/oncore/workspaces/CalOrders/CalOrdersRest/src/java/com/oncore/calorders/rest/service/extension/ProductFacadeRESTExtension.java</file>
+            <file>file:/home/oncore/workspaces/CalOrders/CalOrdersRest/src/java/com/oncore/calorders/rest/data/OrdersByQuarterData.java</file>
+            <file>file:/home/oncore/workspaces/CalOrders/CalOrdersRest/src/java/com/oncore/calorders/rest/service/extension/PartyFacadeRESTExtension.java</file>
+            <file>file:/home/oncore/workspaces/CalOrders/CalOrdersRest/src/java/com/oncore/calorders/rest/service/extension/OrderHistoryFacadeRESTExtension.java</file>
+            <file>file:/home/oncore/workspaces/CalOrders/CalOrdersRest/src/java/com/oncore/calorders/rest/OrderHistory.java</file>
+            <file>file:/home/oncore/workspaces/CalOrders/CalOrdersRest/src/java/com/oncore/calorders/rest/data/OrderItemData.java</file>
+            <file>file:/home/oncore/workspaces/CalOrders/CalOrdersRest/src/java/com/oncore/calorders/rest/data/ProductData.java</file>
+            <file>file:/home/oncore/workspaces/CalOrders/CalOrdersRest/src/java/com/oncore/calorders/rest/data/OrdersByQuarterSeriesData.java</file>
+        </group>
     </open-files>
 </project-private>

@@ -162,9 +162,9 @@ public class OrderHistoryFacadeRESTExtension extends OrderHistoryFacadeREST {
      * @throws com.oncore.calorders.core.exceptions.DataAccessException
      */
     @GET
-    @Path("fetchOrdersByQuarter/{ptyUid}")
+    @Path("fetchOrdersByQuarter")
     @Produces({MediaType.APPLICATION_JSON})
-    public OrdersByQuarterSeriesData fetchOrdersByQuarter(@PathParam("ptyUid") Integer ptyUid) throws DataAccessException {
+    public OrdersByQuarterSeriesData fetchOrdersByQuarter() throws DataAccessException {
 
         List<OrderHistory> orderHistoryList = null;
         OrdersByQuarterSeriesData ordersByQuarterSeriesData = new OrdersByQuarterSeriesData();
@@ -192,9 +192,8 @@ public class OrderHistoryFacadeRESTExtension extends OrderHistoryFacadeREST {
 
             Logger.debug(LOG, "Hey testing logging, the fetchOrdersByQuarter is being called!");
 
-            Party party = getEntityManager().find(Party.class, ptyUid);
-
-            orderHistoryList = getEntityManager().createQuery("SELECT o FROM OrderHistory o WHERE o.ptyUidFk = :ptyUidFk AND o.createTs > '2014:01:01 15:06:39.673' ORDER BY o.createTs ASC", OrderHistory.class).setParameter("ptyUidFk", party).getResultList();
+          
+            orderHistoryList = getEntityManager().createQuery("SELECT o FROM OrderHistory o WHERE o.createTs > '2014:01:01 15:06:39.673' ORDER BY o.createTs ASC", OrderHistory.class).getResultList();
 
             String month = null;
             Integer year = null;
@@ -218,14 +217,14 @@ public class OrderHistoryFacadeRESTExtension extends OrderHistoryFacadeREST {
 
                             found = false;
 
-                            if (CollectionUtils.isEmpty(quarter.getOrderItemDataList())) {
+                            if (CollectionUtils.isEmpty(quarter.getItems())) {
                                 OrderItemData item = new OrderItemData();
                                 item.setYear(year);
                                 item.setY(1);
                                 item.setLabel(1);
-                                quarter.getOrderItemDataList().add(item);
+                                quarter.getItems().add(item);
                             } else {
-                                for (OrderItemData item : quarter.getOrderItemDataList()) {
+                                for (OrderItemData item : quarter.getItems()) {
                                     if (year.equals(item.getYear())) {
                                         item.setY(item.getY() + 1);
                                         item.setLabel(item.getY());
@@ -240,7 +239,7 @@ public class OrderHistoryFacadeRESTExtension extends OrderHistoryFacadeREST {
                                     item.setYear(year);
                                     item.setY(1);
                                     item.setLabel(1);
-                                    quarter.getOrderItemDataList().add(item);
+                                    quarter.getItems().add(item);
                                     break;
                                 }
 
