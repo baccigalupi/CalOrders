@@ -79,9 +79,6 @@ ServiceEndPoints.prototype = {
         } else if (key === "findAllCategories")
         {
             return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.prdcategorycd";
-        } else if (key === "findAllRelatedServices")
-        {
-            return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.prdrelservice";
         } else if (key === "doesProductNameExist")
         {
             return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.product/doesProductNameExist";
@@ -90,7 +87,7 @@ ServiceEndPoints.prototype = {
             return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.product/createProduct";
         } else if (key === "findAllUnitCodes")
         {
-            return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.prdunitcd"; 
+            return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.prdunitcd";
         } else if (key === "findProductById")
         {
             return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.product";

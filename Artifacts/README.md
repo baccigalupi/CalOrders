@@ -1,30 +1,40 @@
 #California Department of Technology - OnCore Consulting ADPQ Vendor Pool Refresh Prototype - 
 ###[Prototype URL](Prototype URL)
 
-##Technical Approach _(2)_
+##Technical Approach
 Oncore’s principle focus during development of CalOrders is summarized best by Jeff Sutherland.
  
 “[Value] people over processes; products that actually work over documenting what that product is supposed to do; collaborating with customers over negotiating with them; and responding to change over following a plan.” (Scrum: The Art of Doing Twice the Work in Half the Time)
 
 Oncore focused on delivering what the end user needed. This was done with a combination of user research, rapid prototyping, and constant interaction with end users through interviews and focus groups. These tight cycles between ideas and testing allowed us to respond quickly to change. Focusing on solutions not features and adhering to the [U.S. Digital Services](https://playbook.cio.gov/) Playbook promoted user satisfaction and adoption through continuous interaction/feedback. We [followed](https://github.com/OncoreLLC/CalOrders/wiki/Addressing-U.S.-Digital-Services-Playbook-Plays) all of the applicable Playbook plays.  
+## US Digital Services Playbook
+[Playbook](https://github.com/OncoreLLC/CalOrders/wiki/Addressing-U.S.-Digital-Services-Playbook-Plays)
 
 ##Project Requirements
+The project requirements and how OnCore fulfilled each requirement is coveniently listed below.
+
 Reqirements | Reference(s)
 --- | ---
-a. Assigned one (1) leader and gave that person authority and responsibility and held that person accountable for the quality of the prototype submitted; | [Michael Tsay](https://github.com/OncoreLLC/CalOrders/tree/master/Artifacts#calorder-development-team)
-b. Assembled a multidisciplinary and collaborative team that includes, at a minimum, five (5)of the labor categories as identified in Attachment B: PQVP DS-AD Labor Category Descriptions; | [The team](https://github.com/OncoreLLC/CalOrders/tree/master/Artifacts#calorder-development-team)
-c. Understood what people needed1, by including people in the prototype development and design process; | [Focus Group](https://github.com/OncoreLLC/CalOrders/wiki/Focus-Group)<br> [Interview](https://github.com/OncoreLLC/CalOrders/wiki/Interviews) [Sprint Review/Product Demo](https://github.com/OncoreLLC/CalOrders/wiki/Sprint-Reviews) [Usability Testing](https://github.com/OncoreLLC/CalOrders/wiki/Usability-Testing)
-d. Used at least a minimum of three (3) “user-centric design” techniques and/or tools; |
-e. Used GitHub to document code commits; |
-f. Used Swagger to document the RESTful API, and provided a link to the Swagger API; |
-g. Complied with Section 508 of the Americans with Disabilities Act and WCAG 2.0; |
-h. Created or used a design style guide and/or a pattern library; |
-i. Performed usability tests with people; |
-j. Used an iterative approach, where feedback informed subsequent work or versions of the prototype; |
-k. Created a prototype that works on multiple devices, and presents a responsive design; |
-l. Used at least five (5) modern2 and open-source technologies, regardless of architectural layer (frontend, backend, etc.); |
-m. Deployed the prototype on an Infrastructure as a Service (IaaS) or Platform as Service(PaaS) provider, and indicated which provider they used; |
-n. Developed automated unit tests for their code;  |
+a. Assigned one (1) leader and gave that person authority and responsibility and held that person accountable for the quality of the prototype submitted | [Michael Tsay](#calorder-development-team)
+b. Assembled a multidisciplinary and collaborative team that includes, at a minimum, five (5) of the labor categories as identified in Attachment B: PQVP DS-AD Labor Category Descriptions | [The team](#calorder-development-team)
+c. Understood what people needed, by including people in the prototype development and design process | [Focus Group](https://github.com/OncoreLLC/CalOrders/wiki/Focus-Group)<br> [Interview](https://github.com/OncoreLLC/CalOrders/wiki/Interviews)<br> [Sprint Review/Product Demo](https://github.com/OncoreLLC/CalOrders/wiki/Sprint-Reviews)
+d. Used at least a minimum of three (3) “user-centric design” techniques and/or tools | [Focus Group](https://github.com/OncoreLLC/CalOrders/wiki/Focus-Group)<br> [Interview](https://github.com/OncoreLLC/CalOrders/wiki/Interviews)<br> [Personas](https://github.com/OncoreLLC/CalOrders/wiki/Develop-Personas)<br> [Usability Testing](https://github.com/OncoreLLC/CalOrders/wiki/Usability-Testing)<br>[Wireframes](https://github.com/OncoreLLC/CalOrders/wiki/Wire-Frames)<br>[Wireframe Walkthrough](https://github.com/OncoreLLC/CalOrders/wiki/Wireframe-Walkthrough)<br>[Scenarios](https://github.com/OncoreLLC/CalOrders/wiki/Scenarios)
+e. Used GitHub to document code commits | [Github Contributions](https://github.com/OncoreLLC/CalOrders/graphs/commit-activity)
+f. Used Swagger to document the RESTful API, and provided a link to the Swagger API | [RESTful API Documentation](https://github.com/OncoreLLC/CalOrders/wiki/RESTful-API-Documentation)
+g. Complied with Section 508 of the Americans with Disabilities Act and WCAG 2.0 |[ADA and WCAG compliance](https://github.com/OncoreLLC/CalOrders/wiki/ADA-and-WCAG-Compliance) 
+h. Created or used a design style guide and/or a pattern library | [Style Guide](https://github.com/OncoreLLC/CalOrders/wiki/Style-Guide)
+i. Performed usability tests with people | [Usability Testing](https://github.com/OncoreLLC/CalOrders/wiki/Usability-Testing)
+j. Used an iterative approach, where feedback informed subsequent work or versions of the prototype; | [Agile Methodology](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Methodolgy)
+k. Created a prototype that works on multiple devices, and presents a responsive design |[Responsive Application Design](https://github.com/OncoreLLC/CalOrders/wiki/Responsive-Application-Design)<br>[Architecture Overview])https://github.com/OncoreLLC/CalOrders/wiki/Architecture)
+l. Used at least five (5) modern and open-source technologies, regardless of architectural layer (frontend, backend, etc.) | [Technologies](https://github.com/OncoreLLC/CalOrders/wiki/Modern-and-Open-Source-Technologies)
+m. Deployed the prototype on an Infrastructure as a Service (IaaS) or Platform as Service(PaaS) provider, and indicated which provider they used | [Application Service Deployment](https://github.com/OncoreLLC/CalOrders/wiki/Application-Service-Deployment)
+n. Developed automated unit tests for their code |[Automated Testing](https://github.com/OncoreLLC/CalOrders/wiki/Automated-Testing) 
+o. Setup or used a continuous integration system to automate the running of tests and continuously deployed their code to their IaaS or PaaS provider | [Continuous Integration and Automated Testing](https://github.com/OncoreLLC/CalOrders/wiki/Continuous-Integration-and-Automated-Testing)
+p. Setup or used configuration management | [Configuration Management](https://github.com/OncoreLLC/CalOrders/wiki/Configuration-Management)
+q. Setup or used continuous monitoring | [Continuous Monitoring](https://github.com/OncoreLLC/CalOrders/wiki/Continuous-Monitoring)
+r. Deployed their software in an open source container, such as Docker (i.e., utilized operating-system-level virtualization) | [Application Container Deployment](https://github.com/OncoreLLC/CalOrders/wiki/Application-Container-Deployment)
+s. Provided sufficient documentation to install and run their prototype on another machine and | [Setup and Deployment](https://github.com/OncoreLLC/CalOrders/wiki/Setup-and-Deployment)
+t. Prototype and underlying platforms used to create and run the prototype are openly licensed and free of charge | [Software Licensing](https://github.com/OncoreLLC/CalOrders/wiki/Software-Licensing)
 
 ##CalOrder Development Team
 Oncore selected Mike Tsay as the Team Leader/Project Manager, who had authority over and was responsible and accountable for the quality of the prototype submitted _(2a)_.
@@ -92,46 +102,4 @@ The list below provides links to additional artifacts and other important inform
 ###Architecture & [DevOps](https://github.com/OncoreLLC/CalOrders/wiki/Environments)  
   The team's DevOps methodology.  
 
-###Modern Open-Source Technologies _(2l)_  
-Technology | Requirement  
---- | ---  
-Linux	| Operating System used for both the development workstation and the deployment environment 
-NetBeans | Development IDE  
-Oracle JET | Open Source JavaScript UI Component Library  
-Node JS | Frontend Javscript Engine  
-Payara | JEE Application Server  
-MySQL | Database  
-Jenkins | Continuous Integration  
-JUnit | [automated unit test cases are here in the repository]  (https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersRest/test/com/oncore/calorders/rest/service/extension)
-Selenium | [automated regression test cases are here in the repository](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersSelenium/test/test/oncore/calorders/selenium)  
-Knockout Js | Front-end Javascript library  
-Require Js | Front-end Javascript library  
-jQuery | Front-end Javascript library  
-Swagger | Automated Documentation of RESTful services   
-NVDA | Screen Reader
-WAVE | ADA Browser testing plugin
 
-
-###Deployment Environment  
-  Azure Cloud _(2m)_  
-    [Architecture doc](Architecture doc)  
-
-###Automated Unit Test _(2n)_  
-  Junit4  
-  Selenium  
-
-###Continuous Monitoring and Integration  
-  Configured Jenkins within a Docker container on an Azure cloud environment _(2s)_.   
-
-  As we completed functioning code, we were able to continually show the end users how we were building checkin activity on GitHub generated builds through Jenkins resulting in automated testing and automatic Docker deployments to the Azure cloud. _(2m, 2p)_  
-
-###Build and Deploy
-  Jenkins  
-  Docker  
-
-###Configuration Management  
-  GitHub _(2e, 2q)_  
-    [PRODUCT NAME GitHub](PRODUCT NAME GitHub)  
-  
-###Setup and Deployment Documentation _(2t)_  
-  [Deployment Documentation](Deployment Documentation)
