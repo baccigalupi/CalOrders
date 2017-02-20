@@ -111,6 +111,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
                  * the promise is resolved
                  */
                 self.handleActivated = function (info) {
+                    
                     if (!SecurityUtils.isAuthenticated()) {
                         return self.router.go('welcome');
                     }
@@ -127,8 +128,9 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
 
                     var pm = new ProductModel();
                     pm.fetch();
-
-
+                    
+                    // Initialize a blank object
+                    self.product(new Object());
                 };
             }
 
@@ -137,6 +139,6 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
              * each time the view is displayed.  Return an instance of the ViewModel if
              * only one instance of the ViewModel is needed.
              */
-            return new ProductDetailViewModel();
+            return ProductDetailViewModel;
         }
 );

@@ -34,7 +34,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
 
                 self.router = oj.Router.rootInstance;
                 self.findProductsByProductTypeService = serviceEndPoints.getEndPoint("findActiveProductsByProductType");
-                self.selectedProductMenuItem = ko.observable('DESK');
+                self.selectedProductMenuItem = ko.observable('DHST');
                 self.productLayoutType = ko.observable('productCardLayout');
                 self.allProduct = ko.observableArray([]);
                 self.ready = ko.observable(false);
@@ -44,19 +44,6 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
                 self.productCategoryBreadcrumbs = ko.observable();
                 self.errorMessage = ko.observable();
 
-                self.productCategories = [
-                    {code: "DESK", description: "Desktops", parent: "Hardware"},
-                    {code: "LAPT", description: "Laptops", parent: "Hardware"},
-                    {code: "MONT", description: "Monitors", parent: "Hardware"},
-                    {code: "PRNT", description: "Printers", parent: "Hardware"},
-                    {code: "PERI", description: "Peripherals", parent: "Hardware"},
-
-                    {code: "OPSY", description: "OS", parent: "Software"},
-                    {code: "OFFC", description: "Office", parent: "Software"},
-                    {code: "SECC", description: "Security", parent: "Software"},
-                    {code: "UTIL", description: "Utilities", parent: "Software"}
-                ];
-
                 var lgQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.LG_UP);
                 var mdQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.MD_UP);
                 var smQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.SM_UP);
@@ -65,6 +52,56 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
                 self.medium = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(mdQuery);
                 self.small = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(smQuery);
                 self.smallOnly = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(smOnlyQuery);
+
+
+                // Load Categories
+
+                self.productCategories = [
+                    {code: "DHST", level1: "Desktop Systems", level2: "Desktop Computers", level3: "Standard"},
+                    {code: "DHPO", level1: "Desktop Systems", level2: "Desktop Computers", level3: "Power"},
+                    {code: "DHWO", level1: "Desktop Systems", level2: "Desktop Computers", level3: "Workstation"},
+                    {code: "DHTH", level1: "Desktop Systems", level2: "Desktop Computers", level3: "Thin Client"},
+                    {code: "DHAL", level1: "Desktop Systems", level2: "Desktop Computers", level3: "All in One"},
+                    {code: "DUST", level1: "Desktop Systems", level2: "Desktop Upgrades", level3: "Standard "},
+                    {code: "DUPO", level1: "Desktop Systems", level2: "Desktop Upgrades", level3: "Power"},
+                    {code: "DUWO", level1: "Desktop Systems", level2: "Desktop Upgrades", level3: "Workstation"},
+                    {code: "DUTH", level1: "Desktop Systems", level2: "Desktop Upgrades", level3: "Thin Client"},
+                    {code: "DUAL", level1: "Desktop Systems", level2: "Desktop Upgrades", level3: "All in One"},
+                    {code: "DUMO", level1: "Monitors", level2: "Monitor Upgrades", level3: ""},
+                    {code: "DMMO", level1: "Monitors", level2: "Monitors", level3: ""},
+                    {code: "DSPO", level1: "Desktop Systems", level2: "Desktop Upgrades", level3: "Power"},
+                    {code: "DSST", level1: "Desktop Systems", level2: "Desktop Upgrades", level3: "Standard"},
+                    {code: "DSMO", level1: "Desktop Systems", level2: "Desktop Upgrades", level3: "Monitor"},
+                    {code: "DSWO", level1: "Desktop Systems", level2: "Desktop Upgrades", level3: "Workstation"},
+                    {code: "DSTH", level1: "Desktop Systems", level2: "Desktop Upgrades", level3: "Thin Client"},
+                    {code: "DSAL", level1: "Desktop Systems", level2: "Desktop Upgrades", level3: "All in One"},
+                    {code: "DAAL", level1: "Independent Services", level2: "Desktop Services", level3: ""},
+                    {code: "LHST", level1: "Laptop Systems", level2: "Laptop Computers", level3: "Standard"},
+                    {code: "LHPO", level1: "Laptop Systems", level2: "Laptop Computers", level3: "Power"},
+                    {code: "LHUL", level1: "Laptop Systems", level2: "Laptop Computers", level3: "Ultralight"},
+                    {code: "LHMO", level1: "Laptop Systems", level2: "Laptop Computers", level3: "Mobile"},
+                    {code: "LUMO", level1: "Laptop Systems", level2: "Laptop Upgrades", level3: "Mobile"},
+                    {code: "LUAL", level1: "Laptop Systems", level2: "Laptop Upgrades", level3: "All"},
+                    {code: "LUST", level1: "Laptop Systems", level2: "Laptop Upgrades", level3: "Standard"},
+                    {code: "LUPO", level1: "Laptop Systems", level2: "Laptop Upgrades", level3: "Power"},
+                    {code: "LUUL", level1: "Laptop Systems", level2: "Laptop Upgrades", level3: "Ultralight"},
+                    {code: "LSMO", level1: "Laptop Systems", level2: "Laptop Upgrades", level3: "Mobile"},
+                    {code: "LSPO", level1: "Laptop Systems", level2: "Laptop Upgrades", level3: "Power"},
+                    {code: "LSUL", level1: "Laptop Systems", level2: "Laptop Upgrades", level3: "Ultralight"},
+                    {code: "LSST", level1: "Laptop Systems", level2: "Laptop Upgrades", level3: "Standard"},
+                    {code: "LSAL", level1: "Laptop Systems", level2: "Laptop Upgrades", level3: "All"},
+                    {code: "LAAL", level1: "Independent Services", level2: "Laptop Services", level3: ""},
+                    {code: "DUOT", level1: "Desktop Systems", level2: "Desktop Upgrades", level3: "Other"},
+
+                    {code: "OPSY", level1: "Software", level2: "OS", level3: ""},
+                    {code: "OFFC", level1: "Software", level2: "Office", level3: ""},
+                    {code: "SECC", level1: "Software", level2: "Security", level3: ""},
+                    {code: "UTIL", level1: "Software", level2: "Utilities", level3: ""}
+
+                ];
+
+
+
 
 
                 // Below are a subset of the ViewModel methods invoked by the ojModule binding
@@ -82,13 +119,13 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
                  * the promise is resolved
                  */
                 self.handleActivated = function (info) {
-                    if(!SecurityUtils.isAuthenticated()){
+                    if (!SecurityUtils.isAuthenticated()) {
                         return self.router.go('welcome');
                     }
                     // Implement if needed
                     console.log("product search = handleActivated");
-                    self.selectedProductMenuItem('DESK');
-                    self.searchProducts('DESK');
+                    self.selectedProductMenuItem('DHST');
+                    self.searchProducts('DHST');
                 };
 
                 self.itemOnly = function (context) {
@@ -98,6 +135,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
                 self.parseProduct = function (response) {
                     response.compareProduct = ko.observable();
                     response.quantity = ko.observable(1);
+                    response.prdLongDescLines = response.prdLongDesc.split("\n");
 
                     self.allProduct.push(response);
                 };
@@ -142,16 +180,24 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
 
                 self.productCategoryBreadcrumbs = ko.computed(function () {
 
+                    var breadCrumbs, category;
                     var result = $.grep(self.productCategories, function (item) {
                         return item.code === self.selectedProductMenuItem();
                     });
-                    var category;
                     if (result.length === 1)
                     {
                         category = result[0];
                     }
 
-                    return category.parent + ' > ' + category.description;
+
+                    breadCrumbs = category.level1 + ' > ' + category.level2;
+
+                    if (category.level3 !== "")
+                    {
+                        breadCrumbs += ' > ' + category.level3;
+                    }
+
+                    return breadCrumbs;
                 });
 
                 self.filteredAllProduct = ko.computed(function () {
@@ -167,7 +213,8 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
                                     function (r) {
                                         var token = self.nameSearch().toLowerCase();
 
-                                        if (r.prdName.toLowerCase().indexOf(token) >= 0) {
+                                        if (r.prdName.toLowerCase().indexOf(token) >= 0
+                                                || r.prdLongDesc.toLowerCase().indexOf(token) >= 0) {
                                             productFilter.push(r);
                                         }
                                     });

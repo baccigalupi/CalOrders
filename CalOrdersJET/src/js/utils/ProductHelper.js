@@ -102,7 +102,8 @@ var ProductHelper = new function ()
             cartProduct.quantity += product.quantity();
         } else
         {
-            cartProduct = product;
+            // Deep copy
+            cartProduct = jQuery.extend(true, {}, product);
             cartProduct.quantity = product.quantity();
             cartProducts.push(cartProduct);
         }

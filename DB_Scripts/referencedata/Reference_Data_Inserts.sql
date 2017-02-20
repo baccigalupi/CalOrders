@@ -61,97 +61,42 @@ CURRENT_TIMESTAMP);
  
  
 
- 
--- PRD_CATEGORY_CD
-
-
-INSERT INTO `calordersdb`.`PRD_CATEGORY_CD`
-(`CODE`,
-`SHORT_DESC`,
-`LONG_DESC`,
-`CREATE_USER_ID`,
-`CREATE_TS`,
-`UPDATE_USER_ID`,
-`UPDATE_TS`)
-VALUES
-('LAPT',
-'Laptops',
-'Laptop Computer Systems',
-'system',
-CURRENT_TIMESTAMP,
-'system',
-CURRENT_TIMESTAMP);
-
-INSERT INTO `calordersdb`.`PRD_CATEGORY_CD`
-(`CODE`,
-`SHORT_DESC`,
-`LONG_DESC`,
-`CREATE_USER_ID`,
-`CREATE_TS`,
-`UPDATE_USER_ID`,
-`UPDATE_TS`)
-VALUES
-('DESK',
-'Desktops',
-'Desktop Computer Systems',
-'system',
-CURRENT_TIMESTAMP,
-'system',
-CURRENT_TIMESTAMP);
-
-INSERT INTO `calordersdb`.`PRD_CATEGORY_CD`
-(`CODE`,
-`SHORT_DESC`,
-`LONG_DESC`,
-`CREATE_USER_ID`,
-`CREATE_TS`,
-`UPDATE_USER_ID`,
-`UPDATE_TS`)
-VALUES
-('PRNT',
-'Printers',
-'Printers',
-'system',
-CURRENT_TIMESTAMP,
-'system',
-CURRENT_TIMESTAMP);
-
-INSERT INTO `calordersdb`.`PRD_CATEGORY_CD`
-(`CODE`,
-`SHORT_DESC`,
-`LONG_DESC`,
-`CREATE_USER_ID`,
-`CREATE_TS`,
-`UPDATE_USER_ID`,
-`UPDATE_TS`)
-VALUES
-('MONT',
-'Monitors',
-'Monitors',
-'system',
-CURRENT_TIMESTAMP,
-'system',
-CURRENT_TIMESTAMP);
-
-
-INSERT INTO `calordersdb`.`PRD_CATEGORY_CD`
-(`CODE`,
-`SHORT_DESC`,
-`LONG_DESC`,
-`CREATE_USER_ID`,
-`CREATE_TS`,
-`UPDATE_USER_ID`,
-`UPDATE_TS`)
-VALUES
-('PERI',
-'Peripherals',
-'Peripherals',
-'system',
-CURRENT_TIMESTAMP,
-'system',
-CURRENT_TIMESTAMP);
-
-
+ -- PRD_CATEGORY_CD
+INSERT INTO `calordersdb`.`PRD_CATEGORY_CD`(`CODE`,`SHORT_DESC`,`LONG_DESC`,`CREATE_USER_ID`,`CREATE_TS`,`UPDATE_USER_ID`,`UPDATE_TS`)VALUES('DHST','Desktop - Hardware - Standard','Desktop - Hardware - Standard','system',CURRENT_TIMESTAMP,'system',CURRENT_TIMESTAMP);
+INSERT INTO `calordersdb`.`PRD_CATEGORY_CD`(`CODE`,`SHORT_DESC`,`LONG_DESC`,`CREATE_USER_ID`,`CREATE_TS`,`UPDATE_USER_ID`,`UPDATE_TS`)VALUES('DHPO','Desktop - Hardware - Power','Desktop - Hardware - Power','system',CURRENT_TIMESTAMP,'system',CURRENT_TIMESTAMP);
+INSERT INTO `calordersdb`.`PRD_CATEGORY_CD`(`CODE`,`SHORT_DESC`,`LONG_DESC`,`CREATE_USER_ID`,`CREATE_TS`,`UPDATE_USER_ID`,`UPDATE_TS`)VALUES('DHWO','Desktop - Hardware - Workstation','Desktop - Hardware - Workstation','system',CURRENT_TIMESTAMP,'system',CURRENT_TIMESTAMP);
+INSERT INTO `calordersdb`.`PRD_CATEGORY_CD`(`CODE`,`SHORT_DESC`,`LONG_DESC`,`CREATE_USER_ID`,`CREATE_TS`,`UPDATE_USER_ID`,`UPDATE_TS`)VALUES('DHTH','Desktop - Hardware - Thin Client','Desktop - Hardware - Thin Client','system',CURRENT_TIMESTAMP,'system',CURRENT_TIMESTAMP);
+INSERT INTO `calordersdb`.`PRD_CATEGORY_CD`(`CODE`,`SHORT_DESC`,`LONG_DESC`,`CREATE_USER_ID`,`CREATE_TS`,`UPDATE_USER_ID`,`UPDATE_TS`)VALUES('DHAL','Desktop - Hardware - All in One','Desktop - Hardware - All in One','system',CURRENT_TIMESTAMP,'system',CURRENT_TIMESTAMP);
+INSERT INTO `calordersdb`.`PRD_CATEGORY_CD`(`CODE`,`SHORT_DESC`,`LONG_DESC`,`CREATE_USER_ID`,`CREATE_TS`,`UPDATE_USER_ID`,`UPDATE_TS`)VALUES('DUST','Desktop - Upgrades - Standard ','Desktop - Upgrades - Standard ','system',CURRENT_TIMESTAMP,'system',CURRENT_TIMESTAMP);
+INSERT INTO `calordersdb`.`PRD_CATEGORY_CD`(`CODE`,`SHORT_DESC`,`LONG_DESC`,`CREATE_USER_ID`,`CREATE_TS`,`UPDATE_USER_ID`,`UPDATE_TS`)VALUES('DUPO','Desktop - Upgrades - Power','Desktop - Upgrades - Power','system',CURRENT_TIMESTAMP,'system',CURRENT_TIMESTAMP);
+INSERT INTO `calordersdb`.`PRD_CATEGORY_CD`(`CODE`,`SHORT_DESC`,`LONG_DESC`,`CREATE_USER_ID`,`CREATE_TS`,`UPDATE_USER_ID`,`UPDATE_TS`)VALUES('DUWO','Desktop - Upgrades - Workstation','Desktop - Upgrades - Workstation','system',CURRENT_TIMESTAMP,'system',CURRENT_TIMESTAMP);
+INSERT INTO `calordersdb`.`PRD_CATEGORY_CD`(`CODE`,`SHORT_DESC`,`LONG_DESC`,`CREATE_USER_ID`,`CREATE_TS`,`UPDATE_USER_ID`,`UPDATE_TS`)VALUES('DUTH','Desktop - Upgrades - Thin Client','Desktop - Upgrades - Thin Client','system',CURRENT_TIMESTAMP,'system',CURRENT_TIMESTAMP);
+INSERT INTO `calordersdb`.`PRD_CATEGORY_CD`(`CODE`,`SHORT_DESC`,`LONG_DESC`,`CREATE_USER_ID`,`CREATE_TS`,`UPDATE_USER_ID`,`UPDATE_TS`)VALUES('DUAL','Desktop - Upgrades - All in One','Desktop - Upgrades - All in One','system',CURRENT_TIMESTAMP,'system',CURRENT_TIMESTAMP);
+INSERT INTO `calordersdb`.`PRD_CATEGORY_CD`(`CODE`,`SHORT_DESC`,`LONG_DESC`,`CREATE_USER_ID`,`CREATE_TS`,`UPDATE_USER_ID`,`UPDATE_TS`)VALUES('DUMO','Desktop - Upgrades - Monitor','Desktop - Upgrades - Monitor','system',CURRENT_TIMESTAMP,'system',CURRENT_TIMESTAMP);
+INSERT INTO `calordersdb`.`PRD_CATEGORY_CD`(`CODE`,`SHORT_DESC`,`LONG_DESC`,`CREATE_USER_ID`,`CREATE_TS`,`UPDATE_USER_ID`,`UPDATE_TS`)VALUES('DMMO','Desktop - Monitors - Monitor','Desktop - Monitors - Monitor','system',CURRENT_TIMESTAMP,'system',CURRENT_TIMESTAMP);
+INSERT INTO `calordersdb`.`PRD_CATEGORY_CD`(`CODE`,`SHORT_DESC`,`LONG_DESC`,`CREATE_USER_ID`,`CREATE_TS`,`UPDATE_USER_ID`,`UPDATE_TS`)VALUES('DSPO','Desktop - Service Upgrades - Power','Desktop - Service Upgrades - Power','system',CURRENT_TIMESTAMP,'system',CURRENT_TIMESTAMP);
+INSERT INTO `calordersdb`.`PRD_CATEGORY_CD`(`CODE`,`SHORT_DESC`,`LONG_DESC`,`CREATE_USER_ID`,`CREATE_TS`,`UPDATE_USER_ID`,`UPDATE_TS`)VALUES('DSST','Desktop - Service Upgrades - Standard','Desktop - Service Upgrades - Standard','system',CURRENT_TIMESTAMP,'system',CURRENT_TIMESTAMP);
+INSERT INTO `calordersdb`.`PRD_CATEGORY_CD`(`CODE`,`SHORT_DESC`,`LONG_DESC`,`CREATE_USER_ID`,`CREATE_TS`,`UPDATE_USER_ID`,`UPDATE_TS`)VALUES('DSMO','Desktop - Service Upgrades - Monitor','Desktop - Service Upgrades - Monitor','system',CURRENT_TIMESTAMP,'system',CURRENT_TIMESTAMP);
+INSERT INTO `calordersdb`.`PRD_CATEGORY_CD`(`CODE`,`SHORT_DESC`,`LONG_DESC`,`CREATE_USER_ID`,`CREATE_TS`,`UPDATE_USER_ID`,`UPDATE_TS`)VALUES('DSWO','Desktop - Service Upgrades - Workstation','Desktop - Service Upgrades - Workstation','system',CURRENT_TIMESTAMP,'system',CURRENT_TIMESTAMP);
+INSERT INTO `calordersdb`.`PRD_CATEGORY_CD`(`CODE`,`SHORT_DESC`,`LONG_DESC`,`CREATE_USER_ID`,`CREATE_TS`,`UPDATE_USER_ID`,`UPDATE_TS`)VALUES('DSTH','Desktop - Service Upgrades - Thin Client','Desktop - Service Upgrades - Thin Client','system',CURRENT_TIMESTAMP,'system',CURRENT_TIMESTAMP);
+INSERT INTO `calordersdb`.`PRD_CATEGORY_CD`(`CODE`,`SHORT_DESC`,`LONG_DESC`,`CREATE_USER_ID`,`CREATE_TS`,`UPDATE_USER_ID`,`UPDATE_TS`)VALUES('DSAL','Desktop - Service Upgrades - All in One','Desktop - Service Upgrades - All in One','system',CURRENT_TIMESTAMP,'system',CURRENT_TIMESTAMP);
+INSERT INTO `calordersdb`.`PRD_CATEGORY_CD`(`CODE`,`SHORT_DESC`,`LONG_DESC`,`CREATE_USER_ID`,`CREATE_TS`,`UPDATE_USER_ID`,`UPDATE_TS`)VALUES('DAAL','Desktop - Stand Alone Service','Desktop - Stand Alone Service','system',CURRENT_TIMESTAMP,'system',CURRENT_TIMESTAMP);
+INSERT INTO `calordersdb`.`PRD_CATEGORY_CD`(`CODE`,`SHORT_DESC`,`LONG_DESC`,`CREATE_USER_ID`,`CREATE_TS`,`UPDATE_USER_ID`,`UPDATE_TS`)VALUES('LHST','Laptop - Hardware - Standard','Laptop - Hardware - Standard','system',CURRENT_TIMESTAMP,'system',CURRENT_TIMESTAMP);
+INSERT INTO `calordersdb`.`PRD_CATEGORY_CD`(`CODE`,`SHORT_DESC`,`LONG_DESC`,`CREATE_USER_ID`,`CREATE_TS`,`UPDATE_USER_ID`,`UPDATE_TS`)VALUES('LHPO','Laptop - Hardware - Power','Laptop - Hardware - Power','system',CURRENT_TIMESTAMP,'system',CURRENT_TIMESTAMP);
+INSERT INTO `calordersdb`.`PRD_CATEGORY_CD`(`CODE`,`SHORT_DESC`,`LONG_DESC`,`CREATE_USER_ID`,`CREATE_TS`,`UPDATE_USER_ID`,`UPDATE_TS`)VALUES('LHUL','Laptop - Hardware - Ultralight','Laptop - Hardware - Ultralight','system',CURRENT_TIMESTAMP,'system',CURRENT_TIMESTAMP);
+INSERT INTO `calordersdb`.`PRD_CATEGORY_CD`(`CODE`,`SHORT_DESC`,`LONG_DESC`,`CREATE_USER_ID`,`CREATE_TS`,`UPDATE_USER_ID`,`UPDATE_TS`)VALUES('LHMO','Laptop - Hardware - Mobile','Laptop - Hardware - Mobile','system',CURRENT_TIMESTAMP,'system',CURRENT_TIMESTAMP);
+INSERT INTO `calordersdb`.`PRD_CATEGORY_CD`(`CODE`,`SHORT_DESC`,`LONG_DESC`,`CREATE_USER_ID`,`CREATE_TS`,`UPDATE_USER_ID`,`UPDATE_TS`)VALUES('LUMO','Laptop - Upgrades - Mobile','Laptop - Upgrades - Mobile','system',CURRENT_TIMESTAMP,'system',CURRENT_TIMESTAMP);
+INSERT INTO `calordersdb`.`PRD_CATEGORY_CD`(`CODE`,`SHORT_DESC`,`LONG_DESC`,`CREATE_USER_ID`,`CREATE_TS`,`UPDATE_USER_ID`,`UPDATE_TS`)VALUES('LUAL','Laptop - Upgrades - All','Laptop - Upgrades - All','system',CURRENT_TIMESTAMP,'system',CURRENT_TIMESTAMP);
+INSERT INTO `calordersdb`.`PRD_CATEGORY_CD`(`CODE`,`SHORT_DESC`,`LONG_DESC`,`CREATE_USER_ID`,`CREATE_TS`,`UPDATE_USER_ID`,`UPDATE_TS`)VALUES('LUST','Laptop - Upgrades - Standard','Laptop - Upgrades - Standard','system',CURRENT_TIMESTAMP,'system',CURRENT_TIMESTAMP);
+INSERT INTO `calordersdb`.`PRD_CATEGORY_CD`(`CODE`,`SHORT_DESC`,`LONG_DESC`,`CREATE_USER_ID`,`CREATE_TS`,`UPDATE_USER_ID`,`UPDATE_TS`)VALUES('LUPO','Laptop - Upgrades - Power','Laptop - Upgrades - Power','system',CURRENT_TIMESTAMP,'system',CURRENT_TIMESTAMP);
+INSERT INTO `calordersdb`.`PRD_CATEGORY_CD`(`CODE`,`SHORT_DESC`,`LONG_DESC`,`CREATE_USER_ID`,`CREATE_TS`,`UPDATE_USER_ID`,`UPDATE_TS`)VALUES('LUUL','Laptop - Upgrades - Ultralight','Laptop - Upgrades - Ultralight','system',CURRENT_TIMESTAMP,'system',CURRENT_TIMESTAMP);
+INSERT INTO `calordersdb`.`PRD_CATEGORY_CD`(`CODE`,`SHORT_DESC`,`LONG_DESC`,`CREATE_USER_ID`,`CREATE_TS`,`UPDATE_USER_ID`,`UPDATE_TS`)VALUES('LSMO','Laptop - Service Upgrades - Mobile','Laptop - Service Upgrades - Mobile','system',CURRENT_TIMESTAMP,'system',CURRENT_TIMESTAMP);
+INSERT INTO `calordersdb`.`PRD_CATEGORY_CD`(`CODE`,`SHORT_DESC`,`LONG_DESC`,`CREATE_USER_ID`,`CREATE_TS`,`UPDATE_USER_ID`,`UPDATE_TS`)VALUES('LSPO','Laptop - Service Upgrades - Power','Laptop - Service Upgrades - Power','system',CURRENT_TIMESTAMP,'system',CURRENT_TIMESTAMP);
+INSERT INTO `calordersdb`.`PRD_CATEGORY_CD`(`CODE`,`SHORT_DESC`,`LONG_DESC`,`CREATE_USER_ID`,`CREATE_TS`,`UPDATE_USER_ID`,`UPDATE_TS`)VALUES('LSUL','Laptop - Service Upgrades - Ultralight','Laptop - Service Upgrades - Ultralight','system',CURRENT_TIMESTAMP,'system',CURRENT_TIMESTAMP);
+INSERT INTO `calordersdb`.`PRD_CATEGORY_CD`(`CODE`,`SHORT_DESC`,`LONG_DESC`,`CREATE_USER_ID`,`CREATE_TS`,`UPDATE_USER_ID`,`UPDATE_TS`)VALUES('LSST','Laptop - Service Upgrades - Standard','Laptop - Service Upgrades - Standard','system',CURRENT_TIMESTAMP,'system',CURRENT_TIMESTAMP);
+INSERT INTO `calordersdb`.`PRD_CATEGORY_CD`(`CODE`,`SHORT_DESC`,`LONG_DESC`,`CREATE_USER_ID`,`CREATE_TS`,`UPDATE_USER_ID`,`UPDATE_TS`)VALUES('LSAL','Laptop - Service Upgrades - All','Laptop - Service Upgrades - All','system',CURRENT_TIMESTAMP,'system',CURRENT_TIMESTAMP);
+INSERT INTO `calordersdb`.`PRD_CATEGORY_CD`(`CODE`,`SHORT_DESC`,`LONG_DESC`,`CREATE_USER_ID`,`CREATE_TS`,`UPDATE_USER_ID`,`UPDATE_TS`)VALUES('LAAL','Laptop - Stand Alone Service','Laptop - Stand Alone Service','system',CURRENT_TIMESTAMP,'system',CURRENT_TIMESTAMP);
+INSERT INTO `calordersdb`.`PRD_CATEGORY_CD`(`CODE`,`SHORT_DESC`,`LONG_DESC`,`CREATE_USER_ID`,`CREATE_TS`,`UPDATE_USER_ID`,`UPDATE_TS`)VALUES('DUOT','Desktop - Upgrades - Other','Desktop - Upgrades - Other','system',CURRENT_TIMESTAMP,'system',CURRENT_TIMESTAMP);
 
 INSERT INTO `calordersdb`.`PRD_CATEGORY_CD`
 (`CODE`,
@@ -217,46 +162,26 @@ INSERT INTO `calordersdb`.`PRD_CATEGORY_CD`
 `UPDATE_USER_ID`,
 `UPDATE_TS`)
 VALUES
-('OFFC',
-'Office Software',
-'Office Software',
-'system',
-CURRENT_TIMESTAMP,
-'system',
-CURRENT_TIMESTAMP);
-
-
-INSERT INTO `calordersdb`.`PRD_CATEGORY_CD`
-(`CODE`,
-`SHORT_DESC`,
-`LONG_DESC`,
-`CREATE_USER_ID`,
-`CREATE_TS`,
-`UPDATE_USER_ID`,
-`UPDATE_TS`)
-VALUES
-('SERR',
-'Related Services',
-'Related Services',
-'system',
-CURRENT_TIMESTAMP,
-'system',
-CURRENT_TIMESTAMP);
- 
-
-
-INSERT INTO `calordersdb`.`PRD_CATEGORY_CD`
-(`CODE`,
-`SHORT_DESC`,
-`LONG_DESC`,
-`CREATE_USER_ID`,
-`CREATE_TS`,
-`UPDATE_USER_ID`,
-`UPDATE_TS`)
-VALUES
 ('SERI',
 'Independent Services',
 'Independent Services',
+'system',
+CURRENT_TIMESTAMP,
+'system',
+CURRENT_TIMESTAMP);
+
+INSERT INTO `calordersdb`.`PRD_CATEGORY_CD`
+(`CODE`,
+`SHORT_DESC`,
+`LONG_DESC`,
+`CREATE_USER_ID`,
+`CREATE_TS`,
+`UPDATE_USER_ID`,
+`UPDATE_TS`)
+VALUES
+('OFFC',
+'Office Software',
+'Office Software',
 'system',
 CURRENT_TIMESTAMP,
 'system',
