@@ -197,10 +197,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils'],
                     //fetchOrderStatusSummary
 
                     /* chart data */
-//                var pieSeries = [{name: "Submitted", items: [42]},
-//                    {name: "Processing", items: [55]},
-//                    {name: "Shipped", items: [36]},
-//                    {name: "Cancelled", items: [10]}];
+               
 
 
 
@@ -225,6 +222,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils'],
                     pie.fetch({
                         success: function () {
                             self.pieSeriesValue(self.pieSeriesCollection.models[0].attributes.items);
+                           
+//                            var pieSeries = [{name: "Submitted", items: [42]},
+//                    {name: "Processing", items: [55]},
+//                    {name: "Shipped", items: [36]},
+//                    {name: "Cancelled", items: [10]}];
+
+
+              //  self.pieSeriesValue(pieSeries);
                         },
                         error: function (jqXHR, textStatus, errorThrown) {
                             console.log("Error occurred when populating the dashboard" + errorThrown);

@@ -285,10 +285,11 @@ public class OrderHistoryFacadeRESTExtension extends OrderHistoryFacadeREST {
             TypedQuery<Long> query = getEntityManager().createQuery(
                     "SELECT COUNT(o) FROM OrderHistory o WHERE o.ordStatusCd = :code", Long.class).setParameter("code", ordStatusCd);
             Long count = query.getSingleResult();
-
+            List<Integer> items = new ArrayList<>(1);
             orderStatusData = new OrderStatusData();
             orderStatusData.setName("Cancelled");
-            orderStatusData.setItems(count.intValue());
+            items.add(count.intValue());
+            orderStatusData.setItems(items);
             orderStatusSummaryData.getItems().add(orderStatusData);
 
             ordStatusCd = getEntityManager().createNamedQuery("OrdStatusCd.findByCode", OrdStatusCd.class).setParameter("code", "PRCS").getSingleResult();
@@ -297,9 +298,11 @@ public class OrderHistoryFacadeRESTExtension extends OrderHistoryFacadeREST {
                     "SELECT COUNT(o) FROM OrderHistory o WHERE o.ordStatusCd = :code", Long.class).setParameter("code", ordStatusCd);
             count = query.getSingleResult();
 
+            items = new ArrayList<>(1);
             orderStatusData = new OrderStatusData();
             orderStatusData.setName("Processing");
-            orderStatusData.setItems(count.intValue());
+            items.add(count.intValue());
+            orderStatusData.setItems(items);
             orderStatusSummaryData.getItems().add(orderStatusData);
 
             ordStatusCd = getEntityManager().createNamedQuery("OrdStatusCd.findByCode", OrdStatusCd.class).setParameter("code", "SHIP").getSingleResult();
@@ -308,9 +311,11 @@ public class OrderHistoryFacadeRESTExtension extends OrderHistoryFacadeREST {
                     "SELECT COUNT(o) FROM OrderHistory o WHERE o.ordStatusCd = :code", Long.class).setParameter("code", ordStatusCd);
             count = query.getSingleResult();
 
+            items = new ArrayList<>(1);
             orderStatusData = new OrderStatusData();
             orderStatusData.setName("Shipped");
-            orderStatusData.setItems(count.intValue());
+            items.add(count.intValue());
+            orderStatusData.setItems(items);
             orderStatusSummaryData.getItems().add(orderStatusData);
 
             ordStatusCd = getEntityManager().createNamedQuery("OrdStatusCd.findByCode", OrdStatusCd.class).setParameter("code", "SUBT").getSingleResult();
@@ -319,9 +324,11 @@ public class OrderHistoryFacadeRESTExtension extends OrderHistoryFacadeREST {
                     "SELECT COUNT(o) FROM OrderHistory o WHERE o.ordStatusCd = :code", Long.class).setParameter("code", ordStatusCd);
             count = query.getSingleResult();
 
+            items = new ArrayList<>(1);
             orderStatusData = new OrderStatusData();
             orderStatusData.setName("Submitted");
-            orderStatusData.setItems(count.intValue());
+            items.add(count.intValue());
+            orderStatusData.setItems(items);
             orderStatusSummaryData.getItems().add(orderStatusData);
 
         } catch (Exception ex) {

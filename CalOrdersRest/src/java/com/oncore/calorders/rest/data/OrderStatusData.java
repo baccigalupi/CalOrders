@@ -37,8 +37,22 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class OrderStatusData extends BaseData {
 
+    private List<Integer> items = new ArrayList<>(1);
     private String name;
-    private Integer items;
+
+    /**
+     * @return the items
+     */
+    public List<Integer> getItems() {
+        return items;
+    }
+
+    /**
+     * @param items the items to set
+     */
+    public void setItems(List<Integer> items) {
+        this.items = items;
+    }
 
     /**
      * @return the name
@@ -52,20 +66,6 @@ public class OrderStatusData extends BaseData {
      */
     public void setName(String name) {
         this.name = name;
-    }
-
-    /**
-     * @return the items
-     */
-    public Integer getItems() {
-        return items;
-    }
-
-    /**
-     * @param items the items to set
-     */
-    public void setItems(Integer items) {
-        this.items = items;
     }
 
 }
