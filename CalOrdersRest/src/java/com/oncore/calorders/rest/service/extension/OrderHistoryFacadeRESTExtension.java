@@ -142,26 +142,6 @@ public class OrderHistoryFacadeRESTExtension extends OrderHistoryFacadeREST {
                 order.getOrderProductAssocCollection().add(orderProductAssoc);
             }
 
-            // TODO: Sprint 2 will add related services
-//            JsonArray serviceList = orderObject.getJsonArray("services");
-//
-//            for (int i = 0; i < serviceList.size(); i++) {
-//                JsonObject serviceObject = serviceList.getJsonObject(i);
-//                OrderProductAssoc orderProductAssoc = new OrderProductAssoc();
-//
-//                PrdRelService service = this.prdRelServiceFacadeREST.find(serviceObject.getInt("prsUid"));
-//
-//                orderProductAssoc.setPrsUidFk(service);
-//                orderProductAssoc.setOrdUidFk(order);
-//                orderProductAssoc.setUpdateTs(new Date());
-//                orderProductAssoc.setUpdateUserId(orderObject.getString("updateUserId", null));
-//                orderProductAssoc.setCreateTs(new Date());
-//                orderProductAssoc.setCreateUserId(orderObject.getString("createUserId", null));
-//                orderProductAssoc.setOpaQuantity(serviceObject.getInt("quantity"));
-//                orderProductAssoc.setOpaPrice(service.getPrsPrice().multiply(BigDecimal.valueOf(orderProductAssoc.getOpaQuantity())));
-//
-//                order.getOrderProductAssocCollection().add(orderProductAssoc);
-//            }
             super.create(order);
         } catch (Exception ex) {
             Logger.error(LOG, FormatHelper.getStackTrace(ex));
