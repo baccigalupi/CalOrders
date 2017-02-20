@@ -42,7 +42,6 @@ public class ProductData extends BaseData {
     private BigDecimal productPrice;
     private String productDescription;
     private String productFullDesc;
-    private List<Integer> relatedServices;
     private String partyUserId;
     private String productSKU;
     private String productOEMPartNumber;
@@ -51,6 +50,12 @@ public class ProductData extends BaseData {
     private Integer productContractDiscount;
     private String productUnitCode;
     private String productContractLineItem;
+    private Integer productActivationStatus;
+    private String productImage;
+    private String productImgageKey;
+    private String productImageName;
+    private String productImageOrigin;
+    private Integer productImageSize;
 
     public String getProductName() {
         return productName;
@@ -98,14 +103,6 @@ public class ProductData extends BaseData {
 
     public void setProductFullDesc(String productFullDesc) {
         this.productFullDesc = productFullDesc;
-    }
-
-    public List<Integer> getRelatedServices() {
-        return relatedServices;
-    }
-
-    public void setRelatedServices(List<Integer> relatedServices) {
-        this.relatedServices = relatedServices;
     }
 
     public String getPartyUserId() {
@@ -170,6 +167,54 @@ public class ProductData extends BaseData {
 
     public void setProductContractLineItem(String productContractLineItem) {
         this.productContractLineItem = productContractLineItem;
+    }
+
+    public Integer getProductActivationStatus() {
+        return productActivationStatus;
+    }
+
+    public void setProductActivationStatus(Integer productActivationStatus) {
+        this.productActivationStatus = productActivationStatus;
+    }
+
+    public String getProductImage() {
+        return productImage;
+    }
+
+    public void setProductImage(String productImage) {
+        this.productImage = productImage;
+    }
+
+    public String getProductImgageKey() {
+        return productImgageKey;
+    }
+
+    public void setProductImgageKey(String productImgageKey) {
+        this.productImgageKey = productImgageKey;
+    }
+
+    public String getProductImageName() {
+        return productImageName;
+    }
+
+    public void setProductImageName(String productImageName) {
+        this.productImageName = productImageName;
+    }
+
+    public String getProductImageOrigin() {
+        return productImageOrigin;
+    }
+
+    public void setProductImageOrigin(String productImageOrigin) {
+        this.productImageOrigin = productImageOrigin;
+    }
+
+    public Integer getProductImageSize() {
+        return productImageSize;
+    }
+
+    public void setProductImageSize(Integer productImageSize) {
+        this.productImageSize = productImageSize;
     }
 
 }

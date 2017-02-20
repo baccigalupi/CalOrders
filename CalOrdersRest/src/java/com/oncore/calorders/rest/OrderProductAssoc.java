@@ -97,9 +97,7 @@ public class OrderProductAssoc implements Serializable {
     @JoinColumn(name = "ORD_UID_FK", referencedColumnName = "ORD_UID")
     @ManyToOne(optional = false)
     private OrderHistory ordUidFk;
-    @JoinColumn(name = "PRS_UID_FK", referencedColumnName = "PRS_UID")
-    @ManyToOne(optional = false)
-    private PrdRelService prsUidFk;
+   
     @JoinColumn(name = "PRD_UID_FK", referencedColumnName = "PRD_UID")
     @ManyToOne(optional = false)
     private Product prdUidFk;
@@ -181,14 +179,6 @@ public class OrderProductAssoc implements Serializable {
 
     public void setOrdUidFk(OrderHistory ordUidFk) {
         this.ordUidFk = ordUidFk;
-    }
-
-    public PrdRelService getPrsUidFk() {
-        return prsUidFk;
-    }
-
-    public void setPrsUidFk(PrdRelService prsUidFk) {
-        this.prsUidFk = prsUidFk;
     }
 
     public Product getPrdUidFk() {

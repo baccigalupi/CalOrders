@@ -163,13 +163,12 @@ public class Product implements Serializable {
     @Column(name = "UPDATE_TS")
     @Temporal(TemporalType.TIMESTAMP)
     private Date updateTs;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "prdUidFk")
-    private Collection<RelatedService> relatedServiceCollection;
+    
     @JoinColumn(name = "PRD_CATEGORY_CD", referencedColumnName = "CODE")
     @ManyToOne(optional = false)
     private PrdCategoryCd prdCategoryCd;
     @JoinColumn(name = "PRD_IMG_TYPE_CD", referencedColumnName = "CODE")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = true)
     private PrdImgTypeCd prdImgTypeCd;
     @JoinColumn(name = "PRD_UNIT_CD", referencedColumnName = "CODE")
     @ManyToOne(optional = false)
@@ -369,15 +368,7 @@ public class Product implements Serializable {
         this.updateTs = updateTs;
     }
 
-    @XmlTransient
-    public Collection<RelatedService> getRelatedServiceCollection() {
-        return relatedServiceCollection;
-    }
-
-    public void setRelatedServiceCollection(Collection<RelatedService> relatedServiceCollection) {
-        this.relatedServiceCollection = relatedServiceCollection;
-    }
-
+    
     public PrdCategoryCd getPrdCategoryCd() {
         return prdCategoryCd;
     }

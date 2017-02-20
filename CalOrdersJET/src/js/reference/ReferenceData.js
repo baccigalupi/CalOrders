@@ -99,39 +99,6 @@ var ReferenceData = new function ()
     };
 
     /**
-     * Fetch the related services for display in a related services  drop down list
-     * 
-     * @returns {Arrays}
-     */
-    this.getRelatedServices = function ()
-    {
-        if (this.relatedServices === null)
-        {
-            this.relatedServices = [{label: "", value: ""}];
-
-            var relatedServiceURL = new ServiceEndPoints().getEndPoint("findAllRelatedServices");
-
-            var parseRelatedServices = function (response)
-            {
-                ReferenceData.relatedServices.push({label: response.prsName, value: response.prsUid});
-            };
-
-            var RelatedService = oj.Model.extend({
-                urlRoot: relatedServiceURL,
-                parse: parseRelatedServices,
-                id: "prsUid"});
-            var RelatedServices = oj.Collection.extend({
-                url: relatedServiceURL,
-                model: new RelatedService()});
-            var relatedServicesCollection = new RelatedServices();
-
-            relatedServicesCollection.fetch({});
-        }
-
-        return this.relatedServices;
-    };
-
-    /**
      * Fetch the unit codes for display in a unit code drop down list
      * 
      * @returns {Arrays}

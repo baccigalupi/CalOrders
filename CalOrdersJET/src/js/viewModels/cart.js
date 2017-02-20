@@ -21,9 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-/*
- * Your about ViewModel code goes here
- */
 define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojrouter', 'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojpagingcontrol', 'ojs/ojpagingcontrol-model'],
         function (oj, ko, data) {
 
@@ -31,14 +28,19 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
                 var self = this;
 
                 var serviceEndPoints = new ServiceEndPoints();
-                self.createOrderServiceURL = serviceEndPoints.getEndPoint('createOrder');
+                self.createOrderServiceURL = serviceEndPoints.getEndPoint("createOrder");
+                self.findRelatedServiceProductsURL = serviceEndPoints.getEndPoint("findActiveProductsByProductTypeAndVendor");
+                self.findProductServiceURL = serviceEndPoints.getEndPoint("findProductById");
 
                 self.router = oj.Router.rootInstance;
+                self.ready = ko.observable(false);
+// Vendor Id is the key
+                self.relatedServicesMap = new Map();
 
                 self.itemTotalPrice = ko.observable();
                 self.shippingPrice = ko.observable();
                 self.totalPrice = ko.observable();
-                self.cart = ko.observableArray();
+                self.cart = ko.observableArray([]);
                 self.listViewDataSource = null;
                 self.cardViewDataSource = null;
                 self.productLayoutType = ko.observable('productCardLayout');
@@ -54,6 +56,42 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
 
                 // Below are a subset of the ViewModel methods invoked by the ojModule binding
                 // Please reference the ojModule jsDoc for additionaly available methods.
+
+
+                self.parseProduct = function (response) {
+
+                    for (i = 0; i < self.cart().length; i++)
+                    {
+                        if (self.cart()[i].vndUid === response.vndUid)
+                        {
+                            var containsRelatedService = false;
+                            for (j = 0; j < self.cart()[i].relatedServices().length; j++)
+                            {
+                                var relatedService = self.cart()[i].relatedServices()[j];
+                                if (relatedService.value === response.prdUid)
+                                {
+                                    containsRelatedService = true;
+                                    break;
+                                }
+                            }
+
+                            if (!containsRelatedService)
+                            {
+                                self.cart()[i].relatedServices.push({label: response.prdName, value: response.prdUid});
+                            }
+
+                        }
+                    }
+                };
+
+                self.parseAddRelatedServiceProduct = function (response) {
+                    response.quantity = ko.observable(1);
+
+                    response.relatedServices = ko.observableArray([]);
+                    response.selectedRelatedService = ko.observable();
+
+                    self.cart.push(response);
+                };
 
                 /**
                  * Optional ViewModel method invoked when this ViewModel is about to be
@@ -96,6 +134,52 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
                         sessionStorage.shippingPrice = self.shippingPrice();
                         sessionStorage.totalPrice = self.totalPrice();
 
+                        for (i = 0; i < sessionCart.length; i++)
+                        {
+                            var cartProduct = sessionCart[i];
+
+
+                            if (cartProduct.relatedServices === undefined)
+                            {
+                                cartProduct.relatedServices = ko.observableArray([{label: "", value: ""}]);
+                            }
+
+                            if (cartProduct.selectedRelatedService === undefined)
+                            {
+                                cartProduct.selectedRelatedService = ko.observable();
+                            }
+
+                            cartProduct.quantity = ko.observable(cartProduct.quantity);
+
+                            var ProductModel = oj.Model.extend({
+                                urlRoot: self.findRelatedServiceProductsURL + "/SERR/" + cartProduct.vndUidFk.vndUid,
+                                parse: self.parseProduct,
+                                idAttribute: 'prdUid'
+                            });
+                            var product = new ProductModel();
+
+                            var ProductCollection = oj.Collection.extend({
+                                url: self.findRelatedServiceProductsURL + "/SERR/" + cartProduct.vndUidFk.vndUid,
+                                model: product,
+                                comparator: 'prdUid'
+                            });
+
+                            var collection = new ProductCollection();
+
+                            collection.fetch({
+                                success: function (myModel, response, options) {
+                                    console.log("Search success");
+                                    return false;
+                                },
+                                error: function (jqXHR, textStatus, errorThrown) {
+                                    console.log("Search failed" + errorThrown);
+                                    return false;
+                                }
+                            });
+
+                            self.relatedServicesMap.set(cartProduct.vndUidFk.vndUid, collection);
+                        }
+
                         self.cart(sessionCart);
 
                         self.listViewDataSource = ko.computed(function () {
@@ -124,7 +208,11 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
                             return new oj.PagingTableDataSource(self.listViewDataSource());
                         });
                     }
+                    self.ready(true);
                 };
+
+
+
 
                 /**
                  * Optional ViewModel method invoked after the View is inserted into the
@@ -182,6 +270,44 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
                     self.productLayoutType('productListLayout');
                 };
 
+                self.productQuantityChange = function (event, data, product)
+                {
+                    if (data.previousValue !== undefined)
+                    {
+                        var sessionCart = JSON.parse(sessionStorage.cartProducts);
+
+                        for (i = 0; i < sessionCart.length; i++)
+                        {
+                            if (sessionCart[i].prdUid === product)
+                            {
+                                sessionCart[i].quantity = data.value;
+                            }
+                        }
+
+                        var tempItemTotalPrice = 0.0;
+                        var tempShippingPrice = 25.00;
+                        var tempTotalPrice = 0.00;
+
+                        for (i = 0; i < sessionCart.length; i++)
+                        {
+                            tempItemTotalPrice += (sessionCart[i].prdPrice * sessionCart[i].quantity);
+                        }
+
+                        self.itemTotalPrice("$" + tempItemTotalPrice.toFixed(2));
+                        self.shippingPrice("$" + tempShippingPrice.toFixed(2));
+
+                        tempTotalPrice = tempShippingPrice + tempItemTotalPrice;
+
+                        self.totalPrice("$" + tempTotalPrice.toFixed(2));
+
+                        sessionStorage.itemTotalPrice = self.itemTotalPrice();
+                        sessionStorage.shippingPrice = self.shippingPrice();
+                        sessionStorage.totalPrice = self.totalPrice();
+
+                        sessionStorage.cartProducts = JSON.stringify(sessionCart);
+                    }
+                };
+
                 /*
                  * Places the Order.
                  * 
@@ -231,6 +357,56 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
                 self.continueShoppingClick = function (data, event)
                 {
                     return self.router.go("productSearch");
+                };
+
+
+                self.addRelatedService = function (product) {
+
+                    // Get product id of the related service
+                    var ProductModel = oj.Model.extend({
+                        urlRoot: self.findProductServiceURL + "/" + product.selectedRelatedService(),
+                        parse: self.parseAddRelatedServiceProduct,
+                        attributeId: 'prdUid',
+                        quantityCnt: product.quantity
+                    });
+
+                    var pm = new ProductModel();
+                    pm.fetch({
+                        success: function (myModel, response, options) {
+                            console.log("Found related product");
+
+                            response.quantity = myModel.quantityCnt;
+                            ProductHelper.addProductToCart(response);
+
+                            var sessionCart = JSON.parse(sessionStorage.cartProducts);
+
+                            var tempItemTotalPrice = 0.0;
+                            var tempShippingPrice = 25.00;
+                            var tempTotalPrice = 0.00;
+
+                            for (i = 0; i < sessionCart.length; i++)
+                            {
+                                tempItemTotalPrice += (sessionCart[i].prdPrice * sessionCart[i].quantity);
+                            }
+
+                            self.itemTotalPrice("$" + tempItemTotalPrice.toFixed(2));
+                            self.shippingPrice("$" + tempShippingPrice.toFixed(2));
+
+                            tempTotalPrice = tempShippingPrice + tempItemTotalPrice;
+
+                            self.totalPrice("$" + tempTotalPrice.toFixed(2));
+
+                            sessionStorage.itemTotalPrice = self.itemTotalPrice();
+                            sessionStorage.shippingPrice = self.shippingPrice();
+                            sessionStorage.totalPrice = self.totalPrice();
+                            return false;
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.log("Search for related product failed" + errorThrown);
+                            return false;
+                        }
+                    });
+
                 };
 
 // TODO: Do we want Enter key to do anything by default on Cart page?

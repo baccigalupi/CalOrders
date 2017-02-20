@@ -33,26 +33,113 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils'],
 
                 self.router = oj.Router.rootInstance;
 
+                /* Active orders by month data */
+
+
                 /* toggle button variables */
+                self.stackValue = ko.observable('on');
+                self.stackLabelValue = ko.observable('on');
                 self.orientationValue = ko.observable('vertical');
+                self.labelPosition = ko.observable('auto');
 
-                /* time chart data */
-                var timeSeries = [{name: "EDR LOE", items: [155, 165, 160, 140, 120]},
-                    {name: "Business Development", items: [15, 8, 12, 25, 42]},
-                    {name: "Holiday (Non-Billable)", items: [0, 8, 0, 16, 0]}];
+                /* chart data */
+                var barSeries = [{name: "Jan", items: [{y: 42, label: "42"}, {y: 34, label: "34"},
+                            {y: 42, label: "42"}, {y: 34, label: "34"}]},
+                    {name: "Apr", items: [{y: 55, label: "55"}, {y: 30, label: "30"},
+                            {y: 55, label: "55"}, {y: 30, label: "30"}]},
+                    {name: "Jul", items: [{y: 36, label: "36"}, {y: 50, label: "50"},
+                            {y: 36, label: "36"}, {y: 50, label: "50"}]},
+                    {name: "Oct", items: [{y: 22, label: "22"}, {y: 22, label: "22"},
+                            {y: 22, label: "22"}, {y: 22, label: "22"}]}];
 
-                var timeGroups = ["1/2016", "2/2016", "3/2016", "4/2016", "5/2016"];
+                var barGroups = ["2012", "2013", "2014", "2015"];
+
+                self.barSeriesValue = ko.observableArray(barSeries);
+                self.barGroupsValue = ko.observableArray(barGroups);
+
+                /* toggle buttons*/
+                self.stackOptions = [
+                    {id: 'unstacked', label: 'unstacked', value: 'off', icon: 'oj-icon demo-bar-unstack'},
+                    {id: 'stacked', label: 'stacked', value: 'on', icon: 'oj-icon demo-bar-stack'}
+                ];
+                self.stackLabelOptions = [
+                    {id: 'labelOff', label: 'off', value: 'off'},
+                    {id: 'labelOn', label: 'on', value: 'on'}
+                ];
+                self.orientationOptions = [
+                    {id: 'vertical', label: 'vertical', value: 'vertical', icon: 'oj-icon demo-bar-vert'},
+                    {id: 'horizontal', label: 'horizontal', value: 'horizontal', icon: 'oj-icon demo-bar-horiz'}
+                ];
+                self.labelPositionOptions = ko.observableArray([
+                    {id: 'auto', label: 'auto', value: 'auto'},
+                    {id: 'center', label: 'center', value: 'center'},
+                    {id: 'insideBarEdge', label: 'insideBarEdge', value: 'insideBarEdge'},
+                    {id: 'none', label: 'none', value: 'none'}
+                ]);
+                self.labelPositionChange = function (event, ui) {
+                    var seriesInfo = ko.toJS(self.barSeriesValue);
+                    for (var i = 0; i < seriesInfo.length; i++) {
+                        for (var j = 0; j < seriesInfo[i].items.length; j++) {
+                            seriesInfo[i].items[j].labelPosition = ui.value;
+                        }
+                    }
+                    self.barSeriesValue(seriesInfo);
+                    return true;
+                };
+                self.stackLValueChange = function (event, ui) {
+                    var isOn = true;
+                    if (ui.value == "on") {
+                        isOn = false;
+                        self.labelPositionOptions([
+                            {id: 'auto', label: 'auto', value: 'auto'},
+                            {id: 'center', label: 'center', value: 'center'},
+                            {id: 'insideBarEdge', label: 'insideBarEdge', value: 'insideBarEdge'},
+                            {id: 'none', label: 'none', value: 'none'}
+                        ]);
+                    } else {
+                        self.labelPositionOptions([
+                            {id: 'auto', label: 'auto', value: 'auto'},
+                            {id: 'center', label: 'center', value: 'center'},
+                            {id: 'insideBarEdge', label: 'insideBarEdge', value: 'insideBarEdge'},
+                            {id: 'outsideBarEdge', label: 'outsideBarEdge', value: 'outsideBarEdge'},
+                            {id: 'none', label: 'none', value: 'none'}
+                        ]);
+                    }
+                    $("#radioButtonset4").ojButtonset({disabled: isOn});
+                };
 
 
-                this.timeSeriesValue = ko.observableArray(timeSeries);
-                this.timeGroupsValue = ko.observableArray(timeGroups);
+                /* Active orders data */
+                self.threeDValue = ko.observable('off');
+                self.dataLabelPositionValue = ko.observable('auto');
+
+                /* chart data */
+                var pieSeries = [{name: "Submitted", items: [42]},
+                    {name: "Processing", items: [55]},
+                    {name: "Shipped", items: [36]},
+                    {name: "Cancelled", items: [10]}];
+
+                self.pieSeriesValue = ko.observableArray(pieSeries);
+
+                /* toggle buttons*/
+                self.threeDOptions = [
+                    {id: '2D', label: '2D', value: 'off', icon: 'oj-icon demo-2d'},
+                    {id: '3D', label: '3D', value: 'on', icon: 'oj-icon demo-3d'}
+                ];
+                self.threeDOptions = [
+                    {id: '2D', label: '2D', value: 'off', icon: 'oj-icon demo-2d'},
+                    {id: '3D', label: '3D', value: 'on', icon: 'oj-icon demo-3d'}
+                ];
+                self.threeDValueChange = function (event, data) {
+                    self.threeDValue(data.value);
+                    return true;
+                };
 
 
-
-                /* Expense chart data */
-                var expenseSeries = [{name: "EDR", items: [400, 0, 56.32, 32.33, 0]},
-                    {name: "Business Development", items: [100.43, 800.32, 0, 0, 323.32]},
-                    {name: "OnCore", items: [80, 80, 80, 80, 80]}];
+                /* Total Sold By Month */
+                var expenseSeries = [{name: "Desktops", items: [400, 0, 56.32, 32.33, 0]},
+                    {name: "Laptops", items: [100.43, 800.32, 0, 0, 323.32]},
+                    {name: "Monitors", items: [80, 80, 80, 80, 80]}];
 
                 var expenseGroups = ["1/2016", "2/2016", "3/2016", "4/2016", "5/2016"];
 
@@ -63,11 +150,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils'],
 
 
 
-                /* PTO chart data */
-                var ptoSeries = [{name: "Vacation", items: [16, 0, 8, 12, 0]},
-                    {name: "Birthday", items: [0, 0, 0, 0, 8]},
-                    {name: "Floating", items: [0, 8, 0, 0, 0]},
-                    {name: "Holiday", items: [16, 0, 8, 8, 8]}];
+                /* Orders by Agency */
+                var ptoSeries = [{name: "DOJ", items: [16, 0, 8, 12, 0]},
+                    {name: "FTB", items: [0, 0, 0, 0, 8]},
+                    {name: "DTS", items: [0, 8, 0, 0, 0]},
+                    {name: "BOE", items: [16, 0, 8, 8, 8]}];
 
                 var ptoGroups = ["1/2016", "2/2016", "3/2016", "4/2016", "5/2016"];
 
