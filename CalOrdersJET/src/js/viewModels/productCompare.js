@@ -100,10 +100,10 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils','ojs/ojrou
                     if(!SecurityUtils.isAuthenticated()){
                         return self.router.go('welcome');
                     }
-                    // Implement if needed
+
                     self.productsToCompareBreadcrumbs(sessionStorage.productsToCompareBreadcrumbs);
                     self.productsToCompare(JSON.parse(sessionStorage.productsToCompare));
-
+                    
                     self.listViewDataSource
                             = ko.observable(new oj.ArrayTableDataSource(self.productsToCompare(), {idAttribute: 'prdUid'}));
                     self.cardViewDataSource
