@@ -33,29 +33,22 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils'],
 
                 self.router = oj.Router.rootInstance;
 
-                /* Active orders by month data */
+
 
 
                 /* toggle button variables */
+
+                self.ordersByQuarterCollection = null;
                 self.stackValue = ko.observable('on');
                 self.stackLabelValue = ko.observable('on');
                 self.orientationValue = ko.observable('vertical');
                 self.labelPosition = ko.observable('auto');
 
-                /* chart data */
-                var barSeries = [{name: "Jan", items: [{y: 42, label: "42"}, {y: 34, label: "34"},
-                            {y: 42, label: "42"}, {y: 34, label: "34"}]},
-                    {name: "Apr", items: [{y: 55, label: "55"}, {y: 30, label: "30"},
-                            {y: 55, label: "55"}, {y: 30, label: "30"}]},
-                    {name: "Jul", items: [{y: 36, label: "36"}, {y: 50, label: "50"},
-                            {y: 36, label: "36"}, {y: 50, label: "50"}]},
-                    {name: "Oct", items: [{y: 22, label: "22"}, {y: 22, label: "22"},
-                            {y: 22, label: "22"}, {y: 22, label: "22"}]}];
 
-                var barGroups = ["2012", "2013", "2014", "2015"];
 
-                self.barSeriesValue = ko.observableArray(barSeries);
-                self.barGroupsValue = ko.observableArray(barGroups);
+
+                self.barSeriesValue = ko.observableArray();
+                self.barGroupsValue = ko.observableArray();
 
                 /* toggle buttons*/
                 self.stackOptions = [
@@ -76,37 +69,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils'],
                     {id: 'insideBarEdge', label: 'insideBarEdge', value: 'insideBarEdge'},
                     {id: 'none', label: 'none', value: 'none'}
                 ]);
-                self.labelPositionChange = function (event, ui) {
-                    var seriesInfo = ko.toJS(self.barSeriesValue);
-                    for (var i = 0; i < seriesInfo.length; i++) {
-                        for (var j = 0; j < seriesInfo[i].items.length; j++) {
-                            seriesInfo[i].items[j].labelPosition = ui.value;
-                        }
-                    }
-                    self.barSeriesValue(seriesInfo);
-                    return true;
-                };
-                self.stackLValueChange = function (event, ui) {
-                    var isOn = true;
-                    if (ui.value == "on") {
-                        isOn = false;
-                        self.labelPositionOptions([
-                            {id: 'auto', label: 'auto', value: 'auto'},
-                            {id: 'center', label: 'center', value: 'center'},
-                            {id: 'insideBarEdge', label: 'insideBarEdge', value: 'insideBarEdge'},
-                            {id: 'none', label: 'none', value: 'none'}
-                        ]);
-                    } else {
-                        self.labelPositionOptions([
-                            {id: 'auto', label: 'auto', value: 'auto'},
-                            {id: 'center', label: 'center', value: 'center'},
-                            {id: 'insideBarEdge', label: 'insideBarEdge', value: 'insideBarEdge'},
-                            {id: 'outsideBarEdge', label: 'outsideBarEdge', value: 'outsideBarEdge'},
-                            {id: 'none', label: 'none', value: 'none'}
-                        ]);
-                    }
-                    $("#radioButtonset4").ojButtonset({disabled: isOn});
-                };
+
+
+
+
+
 
 
                 /* Active orders data */
@@ -114,62 +81,48 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils'],
                 self.dataLabelPositionValue = ko.observable('auto');
 
                 /* chart data */
-                var pieSeries = [{name: "Submitted", items: [42]},
-                    {name: "Processing", items: [55]},
-                    {name: "Shipped", items: [36]},
-                    {name: "Cancelled", items: [10]}];
 
-                self.pieSeriesValue = ko.observableArray(pieSeries);
-
-                /* toggle buttons*/
-                self.threeDOptions = [
-                    {id: '2D', label: '2D', value: 'off', icon: 'oj-icon demo-2d'},
-                    {id: '3D', label: '3D', value: 'on', icon: 'oj-icon demo-3d'}
-                ];
-                self.threeDOptions = [
-                    {id: '2D', label: '2D', value: 'off', icon: 'oj-icon demo-2d'},
-                    {id: '3D', label: '3D', value: 'on', icon: 'oj-icon demo-3d'}
-                ];
-                self.threeDValueChange = function (event, data) {
-                    self.threeDValue(data.value);
-                    return true;
-                };
-
-
-                /* Total Sold By Month */
-                var expenseSeries = [{name: "Desktops", items: [400, 0, 56.32, 32.33, 0]},
-                    {name: "Laptops", items: [100.43, 800.32, 0, 0, 323.32]},
-                    {name: "Monitors", items: [80, 80, 80, 80, 80]}];
-
-                var expenseGroups = ["1/2016", "2/2016", "3/2016", "4/2016", "5/2016"];
-
-
-                this.expenseSeriesValue = ko.observableArray(expenseSeries);
-                this.expenseGroupsValue = ko.observableArray(expenseGroups);
+                self.pieSeriesValue = ko.observableArray();
+                self.pieSeriesCollection = null;
 
 
 
 
-                /* Orders by Agency */
-                var ptoSeries = [{name: "DOJ", items: [16, 0, 8, 12, 0]},
-                    {name: "FTB", items: [0, 0, 0, 0, 8]},
-                    {name: "DTS", items: [0, 8, 0, 0, 0]},
-                    {name: "BOE", items: [16, 0, 8, 8, 8]}];
 
-                var ptoGroups = ["1/2016", "2/2016", "3/2016", "4/2016", "5/2016"];
-
-
-                this.ptoSeriesValue = ko.observableArray(ptoSeries);
-                this.ptoGroupsValue = ko.observableArray(ptoGroups);
-
-
-
-                var profileArray = [{Key: 'Name', Value: 'Ricky Bobby'},
-                    {Key: 'Phone', Value: '916.392.3233'},
-                    {Key: 'Address', Value: '3923 Racecar Ct Folsom, CA 95630'},
-                    {Key: 'Hire Date', Value: '04/01/2016'},
-                    {Key: 'Title', Value: 'Driver'}];
-                self.datasource = new oj.ArrayTableDataSource(profileArray, {idAttribute: 'Key'});
+//                /* Total Sold By Month */
+//                var expenseSeries = [{name: "Desktops", items: [400, 0, 56.32, 32.33, 0]},
+//                    {name: "Laptops", items: [100.43, 800.32, 0, 0, 323.32]},
+//                    {name: "Monitors", items: [80, 80, 80, 80, 80]}];
+//
+//                var expenseGroups = ["1/2016", "2/2016", "3/2016", "4/2016", "5/2016"];
+//
+//
+//                this.expenseSeriesValue = ko.observableArray(expenseSeries);
+//                this.expenseGroupsValue = ko.observableArray(expenseGroups);
+//
+//
+//
+//
+//                /* Orders by Agency */
+//                var ptoSeries = [{name: "DOJ", items: [16, 0, 8, 12, 0]},
+//                    {name: "FTB", items: [0, 0, 0, 0, 8]},
+//                    {name: "DTS", items: [0, 8, 0, 0, 0]},
+//                    {name: "BOE", items: [16, 0, 8, 8, 8]}];
+//
+//                var ptoGroups = ["1/2016", "2/2016", "3/2016", "4/2016", "5/2016"];
+//
+//
+//                this.ptoSeriesValue = ko.observableArray(ptoSeries);
+//                this.ptoGroupsValue = ko.observableArray(ptoGroups);
+//
+//
+//
+//                var profileArray = [{Key: 'Name', Value: 'Ricky Bobby'},
+//                    {Key: 'Phone', Value: '916.392.3233'},
+//                    {Key: 'Address', Value: '3923 Racecar Ct Folsom, CA 95630'},
+//                    {Key: 'Hire Date', Value: '04/01/2016'},
+//                    {Key: 'Title', Value: 'Driver'}];
+//                self.datasource = new oj.ArrayTableDataSource(profileArray, {idAttribute: 'Key'});
 
 
 
@@ -195,9 +148,108 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils'],
                  * the promise is resolved
                  */
                 self.handleActivated = function (info) {
+
                     if (!SecurityUtils.isAuthenticated()) {
                         return self.router.go('welcome');
                     }
+
+                    var serviceEndPoints = new ServiceEndPoints();
+                    var serviceURL = serviceEndPoints.getEndPoint('fetchOrdersByQuarter');
+
+                    self.ordersByQuarterCollection = new oj.Collection();
+
+                    var dashModel = oj.Model.extend({
+                        urlRoot: serviceURL,
+                        parse: parseOrderByQuarter
+                    });
+
+                    var dash = new dashModel();
+
+                    self.DashCollection = oj.Collection.extend({
+                        url: serviceURL,
+                        model: dash
+                    });
+
+
+                    dash.fetch({
+                        success: function () {
+
+                            // load data for Total Orders by Quarter Chart
+
+                            var barGroups = ["2014", "2015", "2016", "2017"];
+
+                            self.barSeriesValue(self.ordersByQuarterCollection.models[0].attributes.ordersByQuarterDataList);
+                            self.barGroupsValue(barGroups);
+
+
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.log("Error occurred when populating the dashboard" + errorThrown);
+
+                            return false;
+                        }
+                    });
+
+
+
+
+
+                    //fetchOrderStatusSummary
+
+                    /* chart data */
+               
+
+
+
+                    serviceEndPoints = new ServiceEndPoints();
+                    serviceURL = serviceEndPoints.getEndPoint('fetchOrderStatusSummary');
+
+                    self.pieSeriesCollection = new oj.Collection();
+
+                    var pieModel = oj.Model.extend({
+                        urlRoot: serviceURL,
+                        parse: parsePieData
+                    });
+
+                    var pie = new pieModel();
+
+                    self.PieCollection = oj.Collection.extend({
+                        url: serviceURL,
+                        model: pie
+                    });
+
+
+                    pie.fetch({
+                        success: function () {
+                            self.pieSeriesValue(self.pieSeriesCollection.models[0].attributes.items);
+                           
+//                            var pieSeries = [{name: "Submitted", items: [42]},
+//                    {name: "Processing", items: [55]},
+//                    {name: "Shipped", items: [36]},
+//                    {name: "Cancelled", items: [10]}];
+
+
+              //  self.pieSeriesValue(pieSeries);
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.log("Error occurred when populating the dashboard" + errorThrown);
+
+                            return false;
+                        }
+                    });
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                 };
 
@@ -238,6 +290,76 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils'],
                 self.handleDetached = function (info) {
                     // Implement if needed
                 };
+
+
+
+
+                /* Active orders by month data */
+
+                var parseOrderByQuarter = function (response)
+                {
+                    self.ordersByQuarterCollection.push(response);
+                };
+
+                var parsePieData = function (response)
+                {
+                    self.pieSeriesCollection.push(response);
+                };
+
+
+                self.labelPositionChange = function (event, ui) {
+                    var seriesInfo = ko.toJS(self.barSeriesValue);
+                    for (var i = 0; i < seriesInfo.length; i++) {
+                        for (var j = 0; j < seriesInfo[i].items.length; j++) {
+                            seriesInfo[i].items[j].labelPosition = ui.value;
+                        }
+                    }
+                    self.barSeriesValue(seriesInfo);
+                    return true;
+                };
+                self.stackLValueChange = function (event, ui) {
+                    var isOn = true;
+                    if (ui.value == "on") {
+                        isOn = false;
+                        self.labelPositionOptions([
+                            {id: 'auto', label: 'auto', value: 'auto'},
+                            {id: 'center', label: 'center', value: 'center'},
+                            {id: 'insideBarEdge', label: 'insideBarEdge', value: 'insideBarEdge'},
+                            {id: 'none', label: 'none', value: 'none'}
+                        ]);
+                    } else {
+                        self.labelPositionOptions([
+                            {id: 'auto', label: 'auto', value: 'auto'},
+                            {id: 'center', label: 'center', value: 'center'},
+                            {id: 'insideBarEdge', label: 'insideBarEdge', value: 'insideBarEdge'},
+                            {id: 'outsideBarEdge', label: 'outsideBarEdge', value: 'outsideBarEdge'},
+                            {id: 'none', label: 'none', value: 'none'}
+                        ]);
+                    }
+                    $("#radioButtonset4").ojButtonset({disabled: isOn});
+                };
+
+
+
+
+
+                /* toggle buttons*/
+                self.threeDOptions = [
+                    {id: '2D', label: '2D', value: 'off', icon: 'oj-icon demo-2d'},
+                    {id: '3D', label: '3D', value: 'on', icon: 'oj-icon demo-3d'}
+                ];
+                self.threeDOptions = [
+                    {id: '2D', label: '2D', value: 'off', icon: 'oj-icon demo-2d'},
+                    {id: '3D', label: '3D', value: 'on', icon: 'oj-icon demo-3d'}
+                ];
+                self.threeDValueChange = function (event, data) {
+                    self.threeDValue(data.value);
+                    return true;
+                };
+
+
+
+
             }
 
 

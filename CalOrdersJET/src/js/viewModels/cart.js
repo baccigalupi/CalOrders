@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojrouter', 'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojpagingcontrol', 'ojs/ojpagingcontrol-model'],
+define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojrouter', 'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojpagingcontrol', 'ojs/ojpagingcontrol-model', 'utils/ProductHelper'],
         function (oj, ko, data) {
 
             function CartViewModel() {
@@ -62,7 +62,8 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
 
                     for (i = 0; i < self.cart().length; i++)
                     {
-                        if (self.cart()[i].vndUid === response.vndUid)
+                        if (self.cart()[i].vndUid == response.vndUid &&
+                                self.cart()[i].prdCategoryCd.code != 'SERR')
                         {
                             var containsRelatedService = false;
                             for (j = 0; j < self.cart()[i].relatedServices().length; j++)
@@ -78,6 +79,11 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
                             if (!containsRelatedService)
                             {
                                 self.cart()[i].relatedServices.push({label: response.prdName, value: response.prdUid});
+
+                                if (self.cart()[i].relatedServices().length == 1)
+                                {
+                                    self.cart()[i].selectedRelatedService(response.prdUid);
+                                }
                             }
 
                         }
@@ -141,7 +147,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
 
                             if (cartProduct.relatedServices === undefined)
                             {
-                                cartProduct.relatedServices = ko.observableArray([{label: "", value: ""}]);
+                                cartProduct.relatedServices = ko.observableArray([]);
                             }
 
                             if (cartProduct.selectedRelatedService === undefined)
@@ -208,6 +214,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
                             return new oj.PagingTableDataSource(self.listViewDataSource());
                         });
                     }
+                    
                     self.ready(true);
                 };
 
