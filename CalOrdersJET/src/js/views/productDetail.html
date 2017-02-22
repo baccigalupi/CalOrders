@@ -28,17 +28,19 @@
         <h2 style="margin-bottom:0">Product Detail</h2>
     </div>
 
-    <div class="oj-padding-vertical"></div>
-
-    <!-- Bread crumbs -->
-    <div id="productSearchBreadcrumbs" class="oj-sm-only-hide">
-        <span data-bind="text: productsToCompareBreadcrumbs"></span>
-        <div class="oj-padding-vertical"></div>
-    </div>
-
     <!-- Page Content -->
 
     <div class="oj-panel oj-flex-item oj-panel-shadow-md">
+
+        <!-- Bread crumbs -->
+        <div id="productSearchBreadcrumbs" class="oj-sm-only-hide">
+            <span data-bind="text: productsToCompareBreadcrumbs"></span>
+            <div class="oj-padding-vertical"></div>
+        </div>
+
+        <a data-bind="click: navigateToProductSearch">Back to Search Results</a>
+
+        <div class="oj-padding-vertical"></div>
 
         <div class="oj-flex">
             <!-- Image -->
@@ -57,12 +59,19 @@
 
                 <div class="product-detail-label">List Price:</div>
                 <div data-bind="text: '$' + product().prdPrice"></div>
-                
+
                 <div class="oj-padding-vertical"></div>
- 
+
                 <div class="product-detail-label">Discount Price:</div>
                 <div class="product-detail-price" data-bind="text: '$' + product().prdCntrUnitPrice + ' (' + product().prdCntrDiscount +'%)'"></div>
 
+                <!-- ko if: admin -->
+                <div class="oj-padding-vertical"></div>
+                <div class="product-detail-label">Status:</div>
+                <div data-bind="text: product().prdActiveInd === 1 ? 'Active' : 'Inactive'"></div>
+                <!-- /ko -->
+
+                <!-- ko if: user -->
                 <div class="oj-padding-vertical"></div>
 
                 <div class="oj-flex">
@@ -77,11 +86,12 @@
 
                     <button id= "addToCart" data-bind="click: addToCart, ojComponent: { component: 'ojButton', label: 'Add to Cart'}"></button>
                 </div>
+                <!-- /ko -->
             </div>
         </div>
 
         <div class="oj-padding-vertical"></div>
-        
+
         <div id="detailTabs">
             <div id="tabs" data-bind="ojComponent:{component: 'ojTabs'}">
                 <!-- tab bar -->

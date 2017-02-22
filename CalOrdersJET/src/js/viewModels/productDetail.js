@@ -40,6 +40,9 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
                 self.addedProductPhoto = ko.observable();
                 self.addedProductName = ko.observable();
                 self.productsToCompareBreadcrumbs = ko.observable();
+                self.admin = ko.observable(false);
+                self.user = ko.observable(false);
+
 
                 var lgQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.LG_UP);
                 var mdQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.MD_UP);
@@ -92,6 +95,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
                 };
 
                 self.navigateToProductSearch = function () {
+                    sessionStorage.keepSearchResults = true;
                     console.log("continue shopping");
                     $("#addToCartConfirmationDialog").ojDialog("close");
                     return self.router.go("productSearch");
@@ -137,6 +141,17 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
                     
                     // Initialize a blank object
                     self.product(new Object());
+                        
+                    if ( sessionStorage.admin === 'true')
+                    {
+                        self.admin(true);   
+                        self.user(false);
+                    }
+                    else
+                    {
+                        self.admin(false);   
+                        self.user(true);
+                    }
                 };
             }
 
