@@ -66,7 +66,6 @@ public class ProductFacadeRESTExtensionTest {
 
         productsList.add(new Product(1, "11111", "Desktop 1", "DT1", "Desktop PC 1", new BigDecimal(100.00), 1, "1", new Date(), "1", new Date()));
         productsList.add(new Product(2, "22222", "Laptop 1", "LT1", "Laptop PC 1", new BigDecimal(1000.00), 1, "1", new Date(), "1", new Date()));
-        productsList.add(new Product(3, "33333", "Desktop 2", "DT2", "Desktop PC 2", new BigDecimal(200.00), 0, "1", new Date(), "1", new Date()));
 
         EntityManager mockedEm = mock(EntityManager.class);
         TypedQuery mockedTypedQuery = mock(TypedQuery.class);
@@ -82,7 +81,7 @@ public class ProductFacadeRESTExtensionTest {
 
         List<Product> expectedProductsList = productFacadeRESTExtension.findActiveProductsByProductType("HDW");
 
-        Assert.assertTrue(expectedProductsList.size() == 3);
+        Assert.assertTrue(expectedProductsList.size() == 2);
         Assert.assertEquals("Desktop 1", expectedProductsList.get(0).getPrdName());
         Assert.assertEquals("Desktop PC 1", expectedProductsList.get(0).getPrdLongDesc());
         Assert.assertEquals("11111", expectedProductsList.get(0).getPrdSku());
@@ -93,6 +92,49 @@ public class ProductFacadeRESTExtensionTest {
         Assert.assertEquals("22222", expectedProductsList.get(1).getPrdSku());
         Assert.assertEquals(1, expectedProductsList.get(1).getPrdActiveInd());
 
+        verify(mockedEm, times(1)).createQuery("SELECT p FROM Product p "
+                + "        JOIN p.prdCategoryCd c"
+                + "        WHERE c.code = :categoryCode "
+                + "        AND p.prdActiveInd = 1", Product.class);
+    }
+
+    /**
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testFindProductsByProductType() throws Exception {
+
+        List<Product> productsList = new ArrayList<>();
+
+        productsList.add(new Product(1, "11111", "Desktop 1", "DT1", "Desktop PC 1", new BigDecimal(100.00), 1, "1", new Date(), "1", new Date()));
+        productsList.add(new Product(2, "22222", "Laptop 1", "LT1", "Laptop PC 1", new BigDecimal(1000.00), 0, "1", new Date(), "1", new Date()));
+        productsList.add(new Product(3, "33333", "Desktop 2", "DT2", "Desktop PC 2", new BigDecimal(200.00), 0, "1", new Date(), "1", new Date()));
+
+        EntityManager mockedEm = mock(EntityManager.class);
+        TypedQuery mockedTypedQuery = mock(TypedQuery.class);
+
+        given(mockedEm.createQuery("SELECT p FROM Product p "
+                + "        JOIN p.prdCategoryCd c"
+                + "        WHERE c.code = :categoryCode ", Product.class)).willReturn(mockedTypedQuery);
+        given(mockedTypedQuery.setParameter("categoryCode", "HDW")).willReturn(mockedTypedQuery);
+        given(mockedTypedQuery.getResultList()).willReturn(productsList);
+
+        ProductFacadeRESTExtension productFacadeRESTExtension = new ProductFacadeRESTExtension(mockedEm);
+
+        List<Product> expectedProductsList = productFacadeRESTExtension.findProductsByProductType("HDW");
+
+        Assert.assertTrue(expectedProductsList.size() == 3);
+        Assert.assertEquals("Desktop 1", expectedProductsList.get(0).getPrdName());
+        Assert.assertEquals("Desktop PC 1", expectedProductsList.get(0).getPrdLongDesc());
+        Assert.assertEquals("11111", expectedProductsList.get(0).getPrdSku());
+        Assert.assertEquals(1, expectedProductsList.get(0).getPrdActiveInd());
+
+        Assert.assertEquals("Laptop 1", expectedProductsList.get(1).getPrdName());
+        Assert.assertEquals("Laptop PC 1", expectedProductsList.get(1).getPrdLongDesc());
+        Assert.assertEquals("22222", expectedProductsList.get(1).getPrdSku());
+        Assert.assertEquals(0, expectedProductsList.get(1).getPrdActiveInd());
+
         Assert.assertEquals("Desktop 2", expectedProductsList.get(2).getPrdName());
         Assert.assertEquals("Desktop PC 2", expectedProductsList.get(2).getPrdLongDesc());
         Assert.assertEquals("33333", expectedProductsList.get(2).getPrdSku());
@@ -100,8 +142,7 @@ public class ProductFacadeRESTExtensionTest {
 
         verify(mockedEm, times(1)).createQuery("SELECT p FROM Product p "
                 + "        JOIN p.prdCategoryCd c"
-                + "        WHERE c.code = :categoryCode "
-                + "        AND p.prdActiveInd = 1", Product.class);
+                + "        WHERE c.code = :categoryCode ", Product.class);
     }
 
     /**
@@ -158,7 +199,6 @@ public class ProductFacadeRESTExtensionTest {
 
         VendorFacadeREST vendorFacadeRESTMocked = mock(VendorFacadeREST.class);
         when(vendorFacadeRESTMocked.find(555)).thenReturn(null);
-  
 
         PrdUnitCdFacadeREST prdUnitCdFacadeRESTMocked = mock(PrdUnitCdFacadeREST.class);
         when(prdUnitCdFacadeRESTMocked.find("DEF")).thenReturn(null);
@@ -169,6 +209,47 @@ public class ProductFacadeRESTExtensionTest {
         instance.create(product);
 
         verify(instance).create(productCaptor.capture());
+
+        Product actual = productCaptor.getValue();
+        Assert.assertEquals(3333, actual.getPrdUid().intValue());
+        Assert.assertEquals("Laptop", actual.getPrdName());
+        Assert.assertEquals("LT1234", actual.getPrdSku());
+    }
+
+    /**
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testUpdateProduct() {
+
+        Product product = new Product();
+        product.setPrdUid(3333);
+        product.setPrdActiveInd(1);
+        product.setPrdName("Laptop");
+        product.setPrdSku("LT1234");
+
+        ProductFacadeRESTExtension instance = spy(new ProductFacadeRESTExtension());
+
+        ArgumentCaptor<Product> productCaptor = ArgumentCaptor.forClass(Product.class);
+
+        doNothing().when((ProductFacadeREST) instance).edit(product);
+
+        PrdCategoryCdFacadeREST categoryCdFacadeRESTMocked = mock(PrdCategoryCdFacadeREST.class);
+        when(categoryCdFacadeRESTMocked.find("HDW")).thenReturn(null);
+
+        VendorFacadeREST vendorFacadeRESTMocked = mock(VendorFacadeREST.class);
+        when(vendorFacadeRESTMocked.find(555)).thenReturn(null);
+
+        PrdUnitCdFacadeREST prdUnitCdFacadeRESTMocked = mock(PrdUnitCdFacadeREST.class);
+        when(prdUnitCdFacadeRESTMocked.find("DEF")).thenReturn(null);
+
+        PrdImgTypeCdFacadeREST prdImgTypeCdFacadeRESTMocked = mock(PrdImgTypeCdFacadeREST.class);
+        when(prdImgTypeCdFacadeRESTMocked.find("GIF")).thenReturn(null);
+
+        instance.edit(product);
+
+        verify(instance).edit(productCaptor.capture());
 
         Product actual = productCaptor.getValue();
         Assert.assertEquals(3333, actual.getPrdUid().intValue());
