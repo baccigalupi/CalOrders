@@ -31,7 +31,7 @@ n. Developed automated unit tests for their code |[Automated Testing](https://gi
 o. Setup or used a continuous integration system to automate the running of tests and continuously deployed their code to their IaaS or PaaS provider | [Continuous Integration and Automated Testing](https://github.com/OncoreLLC/CalOrders/wiki/Environments)
 p. Setup or used configuration management | [Configuration Management](https://github.com/OncoreLLC/CalOrders/wiki/Environments)
 q. Setup or used continuous monitoring | [Continuous Monitoring](https://github.com/OncoreLLC/CalOrders/wiki/Environments)
-r. Deployed their software in an open source container, such as Docker (i.e., utilized operating-system-level virtualization) | [Application Container Deployment]https://github.com/OncoreLLC/CalOrders/wiki/Environments)
+r. Deployed their software in an open source container, such as Docker (i.e., utilized operating-system-level virtualization) | [Application Container Deployment](https://github.com/OncoreLLC/CalOrders/wiki/Environments)
 s. Provided sufficient documentation to install and run their prototype on another machine and | [Setup and Deployment](https://github.com/OncoreLLC/CalOrders/wiki/Environments)
 t. Prototype and underlying platforms used to create and run the prototype are openly licensed and free of charge | [Software Licensing](https://github.com/OncoreLLC/CalOrders/wiki/Software-Licensing)
 
