@@ -96,6 +96,9 @@ public class OrderHistory implements Serializable {
     @JoinColumn(name = "PTY_UID_FK", referencedColumnName = "PTY_UID")
     @ManyToOne(optional = false)
     private Party ptyUidFk;
+    @JoinColumn(name = "DEP_UID_FK", referencedColumnName = "DEP_UID")
+    @ManyToOne(optional = false)
+    private Department depUidFk;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ordUidFk")
     private Collection<OrderProductAssoc> orderProductAssocCollection;
 
@@ -170,6 +173,20 @@ public class OrderHistory implements Serializable {
         this.ptyUidFk = ptyUidFk;
     }
 
+    /**
+     * @return the depUidFk
+     */
+    public Department getDepUidFk() {
+        return depUidFk;
+    }
+
+    /**
+     * @param depUidFk the depUidFk to set
+     */
+    public void setDepUidFk(Department depUidFk) {
+        this.depUidFk = depUidFk;
+    }
+
     @XmlTransient
     public Collection<OrderProductAssoc> getOrderProductAssocCollection() {
         return orderProductAssocCollection;
@@ -203,5 +220,5 @@ public class OrderHistory implements Serializable {
     public String toString() {
         return "com.oncore.calorders.rest.OrderHistory[ ordUid=" + ordUid + " ]";
     }
-    
+
 }

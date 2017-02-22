@@ -108,6 +108,8 @@ public class Department implements Serializable {
     private Collection<ContactInfo> contactInfoCollection;
     @OneToMany(mappedBy = "depUidFk")
     private Collection<Address> addressCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "depUidFk")
+    private Collection<OrderHistory> orderHistoryCollection;
 
     public Department() {
     }
@@ -216,6 +218,21 @@ public class Department implements Serializable {
         this.addressCollection = addressCollection;
     }
 
+    /**
+     * @return the orderHistoryCollection
+     */
+    @XmlTransient
+    public Collection<OrderHistory> getOrderHistoryCollection() {
+        return orderHistoryCollection;
+    }
+
+    /**
+     * @param orderHistoryCollection the orderHistoryCollection to set
+     */
+    public void setOrderHistoryCollection(Collection<OrderHistory> orderHistoryCollection) {
+        this.orderHistoryCollection = orderHistoryCollection;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -240,5 +257,5 @@ public class Department implements Serializable {
     public String toString() {
         return "com.oncore.calorders.rest.Department[ depUid=" + depUid + " ]";
     }
-    
+
 }

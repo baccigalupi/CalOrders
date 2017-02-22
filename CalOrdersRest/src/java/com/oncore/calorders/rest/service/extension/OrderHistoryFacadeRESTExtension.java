@@ -28,6 +28,7 @@ import com.oncore.calorders.core.exceptions.DataAccessException;
 import com.oncore.calorders.core.utils.FormatHelper;
 import static com.oncore.calorders.core.utils.FormatHelper.LOG;
 import com.oncore.calorders.core.utils.Logger;
+import com.oncore.calorders.rest.Department;
 import com.oncore.calorders.rest.GroupPartyAssoc;
 import com.oncore.calorders.rest.OrdStatusCd;
 import com.oncore.calorders.rest.OrderHistory;
@@ -48,7 +49,6 @@ import java.math.BigInteger;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
@@ -168,15 +168,16 @@ public class OrderHistoryFacadeRESTExtension extends OrderHistoryFacadeREST {
      * @throws com.oncore.calorders.core.exceptions.DataAccessException
      */
     @GET
-    @Path("fetchOrdersByQuarter")
+    @Path("fetchOrdersByQuarter/{departmentId}")
     @Produces({MediaType.APPLICATION_JSON})
-    public OrdersByQuarterSeriesData fetchOrdersByQuarter() throws DataAccessException {
+    public OrdersByQuarterSeriesData fetchOrdersByQuarter(@PathParam("departmentId") Integer departmentId) throws DataAccessException {
 
         List<OrderHistory> orderHistoryList = null;
         OrdersByQuarterSeriesData ordersByQuarterSeriesData = new OrdersByQuarterSeriesData();
         OrdersByQuarterData ordersByQuarterData = null;
         OrderItemData orderItemData = null;
         Calendar cal = Calendar.getInstance();
+        Department department = null;
 
         ordersByQuarterData = new OrdersByQuarterData();
         ordersByQuarterData.setName("Jan");
@@ -198,7 +199,9 @@ public class OrderHistoryFacadeRESTExtension extends OrderHistoryFacadeREST {
 
             Logger.debug(LOG, "Hey testing logging, the fetchOrdersByQuarter is being called!");
 
-            orderHistoryList = getEntityManager().createQuery("SELECT o FROM OrderHistory o WHERE o.createTs > '2014:01:01 15:06:39.673' ORDER BY o.createTs ASC", OrderHistory.class).getResultList();
+            department = getEntityManager().createNamedQuery("Department.findByDepUid", Department.class).setParameter("depUid", departmentId).getSingleResult();
+
+            orderHistoryList = getEntityManager().createQuery("SELECT o FROM OrderHistory o WHERE o.depUidFk = :departmentId AND o.createTs > '2014:01:01 15:06:39.673' ORDER BY o.createTs ASC", OrderHistory.class).setParameter("departmentId", department).getResultList();
 
             String month = null;
             Integer year = null;
@@ -274,22 +277,25 @@ public class OrderHistoryFacadeRESTExtension extends OrderHistoryFacadeREST {
      * @throws com.oncore.calorders.core.exceptions.DataAccessException
      */
     @GET
-    @Path("fetchOrderStatusSummary")
+    @Path("fetchOrderStatusSummary/{departmentId}")
     @Produces({MediaType.APPLICATION_JSON})
-    public OrderStatusSummaryData fetchOrderStatusSummary() throws DataAccessException {
+    public OrderStatusSummaryData fetchOrderStatusSummary(@PathParam("departmentId") Integer departmentId) throws DataAccessException {
 
         OrderStatusSummaryData orderStatusSummaryData = new OrderStatusSummaryData();
         OrderStatusData orderStatusData = null;
         OrdStatusCd ordStatusCd = null;
+        Department department = null;
 
         try {
 
             Logger.debug(LOG, "Hey testing logging, the fetchOrderStatusSummary is being called!");
 
+            department = getEntityManager().createNamedQuery("Department.findByDepUid", Department.class).setParameter("depUid", departmentId).getSingleResult();
+
             ordStatusCd = getEntityManager().createNamedQuery("OrdStatusCd.findByCode", OrdStatusCd.class).setParameter("code", "CANC").getSingleResult();
 
             TypedQuery<Long> query = getEntityManager().createQuery(
-                    "SELECT COUNT(o) FROM OrderHistory o WHERE o.ordStatusCd = :code", Long.class).setParameter("code", ordStatusCd);
+                    "SELECT COUNT(o) FROM OrderHistory o WHERE o.depUidFk = :departmentId AND o.ordStatusCd = :code", Long.class).setParameter("departmentId", department).setParameter("code", ordStatusCd);
             Long count = query.getSingleResult();
             List<Integer> items = new ArrayList<>(1);
             orderStatusData = new OrderStatusData();
@@ -301,7 +307,7 @@ public class OrderHistoryFacadeRESTExtension extends OrderHistoryFacadeREST {
             ordStatusCd = getEntityManager().createNamedQuery("OrdStatusCd.findByCode", OrdStatusCd.class).setParameter("code", "PRCS").getSingleResult();
 
             query = getEntityManager().createQuery(
-                    "SELECT COUNT(o) FROM OrderHistory o WHERE o.ordStatusCd = :code", Long.class).setParameter("code", ordStatusCd);
+                    "SELECT COUNT(o) FROM OrderHistory o WHERE o.depUidFk = :departmentId AND o.ordStatusCd = :code", Long.class).setParameter("departmentId", department).setParameter("code", ordStatusCd);
             count = query.getSingleResult();
 
             items = new ArrayList<>(1);
@@ -314,7 +320,7 @@ public class OrderHistoryFacadeRESTExtension extends OrderHistoryFacadeREST {
             ordStatusCd = getEntityManager().createNamedQuery("OrdStatusCd.findByCode", OrdStatusCd.class).setParameter("code", "SHIP").getSingleResult();
 
             query = getEntityManager().createQuery(
-                    "SELECT COUNT(o) FROM OrderHistory o WHERE o.ordStatusCd = :code", Long.class).setParameter("code", ordStatusCd);
+                    "SELECT COUNT(o) FROM OrderHistory o WHERE o.depUidFk = :departmentId AND o.ordStatusCd = :code", Long.class).setParameter("departmentId", department).setParameter("code", ordStatusCd);
             count = query.getSingleResult();
 
             items = new ArrayList<>(1);
@@ -327,7 +333,7 @@ public class OrderHistoryFacadeRESTExtension extends OrderHistoryFacadeREST {
             ordStatusCd = getEntityManager().createNamedQuery("OrdStatusCd.findByCode", OrdStatusCd.class).setParameter("code", "SUBT").getSingleResult();
 
             query = getEntityManager().createQuery(
-                    "SELECT COUNT(o) FROM OrderHistory o WHERE o.ordStatusCd = :code", Long.class).setParameter("code", ordStatusCd);
+                    "SELECT COUNT(o) FROM OrderHistory o WHERE o.depUidFk = :departmentId AND o.ordStatusCd = :code", Long.class).setParameter("departmentId", department).setParameter("code", ordStatusCd);
             count = query.getSingleResult();
 
             items = new ArrayList<>(1);

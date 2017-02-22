@@ -120,7 +120,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils'],
 
                     var serviceEndPoints = new ServiceEndPoints();
                     var serviceURL = serviceEndPoints.getEndPoint('fetchOrdersByQuarter');
-
+                    serviceURL += "/" + sessionStorage.departmentUid;
+                    
                     self.ordersByQuarterCollection = new oj.Collection();
 
                     var dashModel = oj.Model.extend({
@@ -158,6 +159,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils'],
 
                     serviceEndPoints = new ServiceEndPoints();
                     serviceURL = serviceEndPoints.getEndPoint('fetchOrderStatusSummary');
+                    serviceURL += "/" + sessionStorage.departmentUid;
 
                     self.pieSeriesCollection = new oj.Collection();
 
