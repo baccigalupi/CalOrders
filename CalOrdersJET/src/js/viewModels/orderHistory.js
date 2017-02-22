@@ -24,15 +24,15 @@
 /*
  * Your customer ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'moment'],
-        function (oj, ko, $) {
+define(['ojs/ojcore', 'knockout', 'jquery', 'moment', 'common/SecurityUtils'],
+        function (oj, ko, $, moment) {
 
             function OrdersViewModel() {
                 var self = this;
                 self.router = oj.Router.rootInstance;
                 var self = this;
                 var serviceEndPoints = new ServiceEndPoints();
-                self.serviceURL = serviceEndPoints.getEndPoint('findAllOrderHistoryByUserId');
+                self.serviceURL = serviceEndPoints.getEndPoint('findAllOrderHistoryByPartyUid');
                 self.orderHistoryCol = ko.observable();
                 self.datasource = ko.observable();
                 self.tracker = ko.observable();
@@ -55,7 +55,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'moment'],
                         return self.router.go('welcome');
                     }
 
-                    self.serviceURL = serviceEndPoints.getEndPoint('findAllOrderHistoryByUserId') + "/" + sessionStorage.userName;
+                    self.serviceURL = serviceEndPoints.getEndPoint('findAllOrderHistoryByPartyUid') + "/" + sessionStorage.partyUid;
                     var OrderHistoryModel = oj.Model.extend({
                         urlRoot: self.serviceURL,
                         parse: self.parseOrderHistory,
@@ -114,16 +114,21 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'moment'],
                     });
                 };
                 self.parseOrderHistory = function (response) {
-                    var orderDate = null;
+                    var orderDate = "";
+                    var orderPoNumber = "";
                     if (response.orderDate !== undefined)
                     {
-                       orderDate = moment().format('MM/dd/yyyy');
+                        orderDate = moment().format('MM/DD/YYYY');
                     }
+                    if (response.orderPoNumber !== undefined)
+                    {
+                        orderPoNumber = response.orderPoNumber;
+                    } 
 
-                    var result = {'orderId': response['orderId'],
+                    var result = {'orderHistoryId': response['orderHistoryId'],
                         'orderDate': orderDate,
                         'orderStatus': response['orderStatus'],
-                        'orderPoNumber': response['orderPoNumber'],
+                        'orderPoNumber': orderPoNumber,
                         'orderAgency': response['orderAgency'],
                         'orderPrice': response['orderPrice'],
                         'orderDescription': response['orderDescription']};
