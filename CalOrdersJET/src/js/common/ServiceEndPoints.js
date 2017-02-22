@@ -100,9 +100,9 @@ ServiceEndPoints.prototype = {
         } else if (key === "fetchOrderStatusSummary")
         {
             return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.orderHistory/fetchOrderStatusSummary";
-        } else if (key === "findAllOrderHistoryByUserId")
+        } else if (key === "findAllOrderHistoryByPartyUid")
         {
-            return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.orderHistory/findAllOrderHistoryByUserId";
+            return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.orderHistory/findAllOrderHistoryByPartyUid";
         } else
         {
             return "UNDEFINED";
