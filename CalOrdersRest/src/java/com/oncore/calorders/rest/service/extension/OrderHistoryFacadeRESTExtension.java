@@ -48,6 +48,7 @@ import java.math.BigInteger;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
@@ -381,13 +382,24 @@ public class OrderHistoryFacadeRESTExtension extends OrderHistoryFacadeREST {
                 if (orderHistory.getOrderProductAssocCollection() != null
                         && orderHistory.getOrderProductAssocCollection().size() > 0) {
                     String skuConcat = new String();
-                    for (OrderProductAssoc assoc : orderHistory.getOrderProductAssocCollection()) {
+                    List<OrderProductAssoc> productAssocs = new ArrayList<OrderProductAssoc>();
+                    orderHistory.getOrderProductAssocCollection().forEach((assoc) -> {
+                        productAssocs.add(assoc);
+                    });
+                    for (int i = 0; i < productAssocs.size(); i++) {
+
                         if (skuConcat.length() > 25) {
                             skuConcat = skuConcat + "...";
                             break;
                         }
-                        if (assoc.getPrdUidFk() != null && assoc.getPrdUidFk().getPrdSku() != null) {
-                            skuConcat = skuConcat + ", " + assoc.getPrdUidFk().getPrdSku();
+
+                        if (productAssocs.get(i).getPrdUidFk() != null
+                                && productAssocs.get(i).getPrdUidFk().getPrdSku() != null) {
+                            if (i == 0) {
+                                skuConcat = productAssocs.get(i).getPrdUidFk().getPrdSku();
+                            } else {
+                                skuConcat = skuConcat + ", " + productAssocs.get(i).getPrdUidFk().getPrdSku();
+                            }
                         }
                     }
                     data.setOrderDescription(skuConcat.trim());
