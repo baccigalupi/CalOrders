@@ -28,11 +28,11 @@ k. Created a prototype that works on multiple devices, and presents a responsive
 l. Used at least five (5) modern and open-source technologies, regardless of architectural layer (frontend, backend, etc.) | [Technologies](https://github.com/OncoreLLC/CalOrders/wiki/Modern-and-Open-Source-Technologies)
 m. Deployed the prototype on an Infrastructure as a Service (IaaS) or Platform as Service(PaaS) provider, and indicated which provider they used | [Application Service Deployment](https://github.com/OncoreLLC/CalOrders/wiki/Application-Service-Deployment)
 n. Developed automated unit tests for their code |[Automated Testing](https://github.com/OncoreLLC/CalOrders/wiki/Automated-Testing) 
-o. Setup or used a continuous integration system to automate the running of tests and continuously deployed their code to their IaaS or PaaS provider | [Continuous Integration and Automated Testing](https://github.com/OncoreLLC/CalOrders/wiki/Continuous-Integration-and-Automated-Testing)
-p. Setup or used configuration management | [Configuration Management](https://github.com/OncoreLLC/CalOrders/wiki/Configuration-Management)
-q. Setup or used continuous monitoring | [Continuous Monitoring](https://github.com/OncoreLLC/CalOrders/wiki/Continuous-Monitoring)
-r. Deployed their software in an open source container, such as Docker (i.e., utilized operating-system-level virtualization) | [Application Container Deployment](https://github.com/OncoreLLC/CalOrders/wiki/Application-Container-Deployment)
-s. Provided sufficient documentation to install and run their prototype on another machine and | [Setup and Deployment](https://github.com/OncoreLLC/CalOrders/wiki/Setup-and-Deployment)
+o. Setup or used a continuous integration system to automate the running of tests and continuously deployed their code to their IaaS or PaaS provider | [Continuous Integration and Automated Testing](https://github.com/OncoreLLC/CalOrders/wiki/Environments)
+p. Setup or used configuration management | [Configuration Management](https://github.com/OncoreLLC/CalOrders/wiki/Environments)
+q. Setup or used continuous monitoring | [Continuous Monitoring](https://github.com/OncoreLLC/CalOrders/wiki/Environments)
+r. Deployed their software in an open source container, such as Docker (i.e., utilized operating-system-level virtualization) | [Application Container Deployment]https://github.com/OncoreLLC/CalOrders/wiki/Environments)
+s. Provided sufficient documentation to install and run their prototype on another machine and | [Setup and Deployment](https://github.com/OncoreLLC/CalOrders/wiki/Environments)
 t. Prototype and underlying platforms used to create and run the prototype are openly licensed and free of charge | [Software Licensing](https://github.com/OncoreLLC/CalOrders/wiki/Software-Licensing)
 
 ## US Digital Services Playbook
