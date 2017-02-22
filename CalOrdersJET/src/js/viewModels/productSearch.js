@@ -92,8 +92,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
                     {code: "LSAL", level1: "Laptop Systems", level2: "Laptop Upgrades", level3: "All"},
                     {code: "LAAL", level1: "Independent Services", level2: "Laptop Services", level3: ""},
                     {code: "DUOT", level1: "Desktop Systems", level2: "Desktop Upgrades", level3: "Other"},
-                    
-                    
+
                     {code: "OPSY", level1: "Software", level2: "OS", level3: ""},
                     {code: "OFFC", level1: "Software", level2: "Office", level3: ""},
                     {code: "SECC", level1: "Software", level2: "Security", level3: ""},
@@ -136,6 +135,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
                 self.parseProduct = function (response) {
                     response.compareProduct = ko.observable();
                     response.quantity = ko.observable(1);
+                    response.prdLongDescLines = response.prdLongDesc.split("\n");
 
                     response.prdLongDescLines = response.prdLongDesc.split("\n");
                     
@@ -190,10 +190,10 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
                     {
                         category = result[0];
                     }
-                    
+
 
                     breadCrumbs = category.level1 + ' > ' + category.level2;
-                    
+
                     if (category.level3 !== "")
                     {
                         breadCrumbs += ' > ' + category.level3;
@@ -215,7 +215,8 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
                                     function (r) {
                                         var token = self.nameSearch().toLowerCase();
 
-                                        if (r.prdName.toLowerCase().indexOf(token) >= 0) {
+                                        if (r.prdName.toLowerCase().indexOf(token) >= 0
+                                                || r.prdLongDesc.toLowerCase().indexOf(token) >= 0) {
                                             productFilter.push(r);
                                         }
                                     });
