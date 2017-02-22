@@ -57,6 +57,8 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils','ojs/ojrou
                  * @returns {undefined}
                  */
                 self.addToCart = function (product) {
+                    console.log("adding: " + product.prdUid);
+                    
                     ProductHelper.addProductToCart(product);
 
                     // Show confirmation message                    
@@ -104,6 +106,14 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils','ojs/ojrou
                     self.productsToCompareBreadcrumbs(sessionStorage.productsToCompareBreadcrumbs);
                     self.productsToCompare(JSON.parse(sessionStorage.productsToCompare));
                     
+                    // Init quantity
+                    var prd;
+                    for ( prd in self.productsToCompare())
+                    {
+                        self.productsToCompare()[prd].quantity = ko.observable(1);
+                    }
+
+
                     self.listViewDataSource
                             = ko.observable(new oj.ArrayTableDataSource(self.productsToCompare(), {idAttribute: 'prdUid'}));
                     self.cardViewDataSource

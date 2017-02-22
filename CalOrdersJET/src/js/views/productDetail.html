@@ -55,8 +55,13 @@
 
                 <div class="oj-padding-vertical"></div>
 
-                <div class="product-detail-label">Price:</div>
-                <div class="product-detail-price" data-bind="text: '$' + product().prdPrice"></div>
+                <div class="product-detail-label">List Price:</div>
+                <div data-bind="text: '$' + product().prdPrice"></div>
+                
+                <div class="oj-padding-vertical"></div>
+ 
+                <div class="product-detail-label">Discount Price:</div>
+                <div class="product-detail-price" data-bind="text: '$' + product().prdCntrUnitPrice + ' (' + product().prdCntrDiscount +'%)'"></div>
 
                 <div class="oj-padding-vertical"></div>
 
@@ -75,13 +80,60 @@
             </div>
         </div>
 
-        <div class="oj-panel oj-flex-item ">
-            <div class="product-detail-label">Product Description:</div>
+        <div class="oj-padding-vertical"></div>
+        
+        <div id="detailTabs">
+            <div id="tabs" data-bind="ojComponent:{component: 'ojTabs'}">
+                <!-- tab bar -->
+                <ul>
+                    <li><span>Description</span></li>
+                    <li><span>Specifications</span></li>
+                </ul>
 
-            <div class="product-detail-value" data-bind="foreach: product().prdLongDescLines">
-                <p data-bind="text: $data"></p>
+                <!-- tab contents -->
+                <div id="tabs-1">
+                    <div class="oj-panel oj-flex-item ">
+                        <div class="product-detail-value" data-bind="foreach: product().prdLongDescLines">
+                            <p data-bind="text: $data"></p>
+                        </div>
+                    </div>
+                </div>
+                <div id="tabs-2">
+                    <div class="oj-flex">
+                        <div class="oj-flex-item oj-sm-2 product-detail-specification-label">Vendor:</div> 
+                        <div class="oj-flex-item product-detail-value" data-bind="text: product().vndName"></div>
+                    </div>
+
+                    <div class="oj-flex">
+                        <div class="oj-flex-item oj-sm-2 product-detail-specification-label">SKU:</div> 
+                        <div class="oj-flex-item product-detail-value" data-bind="text: product().prdSku"></div>
+                    </div>
+                    <div class="oj-flex">
+                        <div class="oj-flex-item oj-sm-2 product-detail-specification-label">Contract Line Item:</div> 
+                        <div class="oj-flex-item product-detail-value" data-bind="text: product().prdCntrLnItm"></div>
+                    </div>
+                    <div class="oj-flex">
+
+                        <div class="oj-flex-item oj-sm-2 product-detail-specification-label">Manufacturer:</div> 
+                        <div class="oj-flex-item product-detail-value" data-bind="text: product().prdOemName"></div>
+                    </div>
+                    <div class="oj-flex">
+
+                        <div class="oj-flex-item oj-sm-2 product-detail-specification-label">Manufacturer Part Number:</div> 
+                        <div class="oj-flex-item product-detail-value" data-bind="text: product().prdOemPartNum"></div>
+                    </div>
+                    <div class="oj-flex">
+
+                        <div class="oj-flex-item oj-sm-2 product-detail-specification-label">Product Unit:</div> 
+                        <div class="oj-flex-item product-detail-value" data-bind="text: product().unitLongDesc"></div>
+                    </div>
+                    <div class="oj-flex">
+
+                        <div class="oj-flex-item oj-sm-2 product-detail-specification-label">Category:</div> 
+                        <div class="oj-flex-item product-detail-value" data-bind="text: product().categoryLongDesc"></div>
+                    </div>
+                </div>
             </div>
-
         </div>
     </div>
 </div>

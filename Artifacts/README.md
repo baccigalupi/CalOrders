@@ -1,17 +1,16 @@
 #California Department of Technology - OnCore Consulting ADPQ Vendor Pool Refresh Prototype - 
 ###[Prototype URL](Prototype URL)
 
-##Technical Approach
-Oncore’s principle focus during development of CalOrders is summarized best by Jeff Sutherland.
- 
-“[Value] people over processes; products that actually work over documenting what that product is supposed to do; collaborating with customers over negotiating with them; and responding to change over following a plan.” (Scrum: The Art of Doing Twice the Work in Half the Time)
+##Introduction
 
-Oncore focused on delivering what the end user needed. This was done with a combination of user research, rapid prototyping, and constant interaction with end users through interviews and focus groups. These tight cycles between ideas and testing allowed us to respond quickly to change. Focusing on solutions not features and adhering to the [U.S. Digital Services](https://playbook.cio.gov/) Playbook promoted user satisfaction and adoption through continuous interaction/feedback. We [followed](https://github.com/OncoreLLC/CalOrders/wiki/Addressing-U.S.-Digital-Services-Playbook-Plays) all of the applicable Playbook plays.  
-## US Digital Services Playbook
-[Playbook](https://github.com/OncoreLLC/CalOrders/wiki/Addressing-U.S.-Digital-Services-Playbook-Plays)
+OnCore’s [Statement of Work]( https://github.com/OncoreLLC/CalOrders/wiki/Statement-of-Work) for this RFP is focused on delivering what the end user needs.  Combining an Agile methodology and User Centered design provides an ideal vehicle to quickly understand the what users want and delivering functioning, high value features for the business and development teams to incrementally improve on.  Using Agile stories that built up functionality over the sprints, we were able to adjust quickly to the needs of the business as they were able to quickly see the application and the requirements they were providing.  These tight cycles between ideas and testing allowed us to respond quickly to change and focused on solutions not features.    
+
+In addition to the Agile Team, we had support from the client executive team that enabled the end users we were working with to have the power to make decisions and own the product. This ensured that we would be building and delivering a product that end user wanted and needed with this collaboration. With this level of collaboration, we defined our strategy as 'try, fail fast, learn, and then try again."   
+
+The following documentation represents our demonstration in designing under a User Centered Design methodology, building with modern technologies in an Agile methodology with an adherence to the US Digital Playbook.
 
 ##Project Requirements
-The project requirements and how OnCore fulfilled each requirement is coveniently listed below.
+The project requirements and how OnCore fulfilled each requirement is listed below.
 
 Reqirements | Reference(s)
 --- | ---
@@ -36,6 +35,10 @@ r. Deployed their software in an open source container, such as Docker (i.e., ut
 s. Provided sufficient documentation to install and run their prototype on another machine and | [Setup and Deployment](https://github.com/OncoreLLC/CalOrders/wiki/Setup-and-Deployment)
 t. Prototype and underlying platforms used to create and run the prototype are openly licensed and free of charge | [Software Licensing](https://github.com/OncoreLLC/CalOrders/wiki/Software-Licensing)
 
+## US Digital Services Playbook
+[Playbook](https://github.com/OncoreLLC/CalOrders/wiki/Addressing-U.S.-Digital-Services-Playbook-Plays)
+
+
 ##CalOrder Development Team
 Oncore selected Mike Tsay as the Team Leader/Project Manager, who had authority over and was responsible and accountable for the quality of the prototype submitted _(2a)_.
 
@@ -54,9 +57,9 @@ Backend Web Developer | [Won Lee](https://github.com/OncoreLLC/CalOrders/wiki/Ag
 DevOps Engineer | [Suganya Ravikumar](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Team-Bios)  
 
 ##User Centric Design - Understanding what people need  
-The first step of a User-Centered-Design (UCD) process is to formulate a plan.  We developed a [statement of work](https://github.com/OncoreLLC/CalOrders/wiki/Statement-of-Work) to identify the project objectives, requirements, user community, constraints, schedule, and deliverables.
+The first step of a [User-Centered-Design](https://github.com/OncoreLLC/CalOrders/wiki/User-Centric-Design) (UCD) process is to formulate a plan.  We developed a [statement of work](https://github.com/OncoreLLC/CalOrders/wiki/Statement-of-Work) to identify the project objectives, requirements, user community, constraints, schedule, and deliverables.
 
-Our plan combines our UCD and Agile processes into a cohesive and flexible workflow.
+Our plan combines our UCD and Agile processes into a cohesive and flexible workflow.  It was this combination that we were able to identify the features that the users valued the most, and were able to focus our story and build activities to deliver working functionality after each sprint.  This allowed for feedback and changes to the design and resulted in a product that reflected what the end users were really asking for.
 
 The team utilized User-Centered-Design (UCD) and Agile development techniques to formulate the product backlog.  All team members participated in the initial meetings with the users which was a natural hook into our Agile methodolgy and gave everyone the opportunity to understand the scope of the project and understand how each of them would contribute to the project's success.  
 
@@ -70,6 +73,10 @@ Plan | Analyze| Design | Implement | Test & Measure
 ||[Interviews](https://github.com/OncoreLLC/CalOrders/wiki/Interviews) ||
 
 ##Agile Prototype Development   
+
+The team's principle focus during development of CalOrders is summarized best by Jeff Sutherland.
+ 
+“[Value] people over processes; products that actually work over documenting what that product is supposed to do; collaborating with customers over negotiating with them; and responding to change over following a plan.” (Scrum: The Art of Doing Twice the Work in Half the Time)
 
 [Oncore's Agile methodology](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Methodolgy) provided the team an iterative approach, where feedback informed subsequent work or versions of the prototype_(2j)_.   
 
@@ -98,6 +105,8 @@ The list below provides links to additional artifacts and other important inform
 * [Sprint Reviews](https://github.com/OncoreLLC/CalOrders/wiki/Sprint-Reviews)
 * [Retrospectives](https://github.com/OncoreLLC/CalOrders/wiki/Sprint-Retrospectives) 
 * [Daily Standups](https://github.com/OncoreLLC/CalOrders/wiki/Sprint-Daily-Stand-ups)
+
+##Technical Approach
 
 ###Architecture & [DevOps](https://github.com/OncoreLLC/CalOrders/wiki/Environments)  
   The team's DevOps methodology.  

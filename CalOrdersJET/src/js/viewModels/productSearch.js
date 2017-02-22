@@ -137,6 +137,8 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
                     response.quantity = ko.observable(1);
                     response.prdLongDescLines = response.prdLongDesc.split("\n");
 
+                    response.prdLongDescLines = response.prdLongDesc.split("\n");
+                    
                     self.allProduct.push(response);
                 };
 

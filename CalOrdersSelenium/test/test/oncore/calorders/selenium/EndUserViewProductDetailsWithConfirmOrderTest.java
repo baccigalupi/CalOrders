@@ -7,10 +7,10 @@ import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
-import org.apache.commons.lang3.RandomStringUtils;
 
-public class AdminUserAddNewProductTest {
+public class EndUserViewProductDetailsWithConfirmOrderTest {
   private WebDriver driver;
   private String baseUrl;
   private boolean acceptNextAlert = true;
@@ -25,39 +25,18 @@ public class AdminUserAddNewProductTest {
   }
 
   @Test
-  public void testAdminUserAddNewProduct() throws Exception {
+  public void testEndUserViewProductDetailsWithConfirmOrder() throws Exception {
     driver.get(baseUrl + "/");
     driver.findElement(By.id("login")).click();
     driver.findElement(By.id("userName")).clear();
-    driver.findElement(By.id("userName")).sendKeys("joeadmin");
-    driver.findElement(By.cssSelector("#loginInnerWrapperDiv > div.oj-flex")).click();
+    driver.findElement(By.id("userName")).sendKeys("rickybobby");
     driver.findElement(By.id("continue")).click();
-    driver.findElement(By.id("userMenu")).click();
-    driver.findElement(By.id("ui-id-13")).click();
-    driver.findElement(By.id("productName")).clear();
-    driver.findElement(By.id("productName")).sendKeys("RandomStringUtils.randomAlphabetic(10)");
-    driver.findElement(By.id("productOEMName")).clear();
-    driver.findElement(By.id("productOEMName")).sendKeys("Travel Mouse");
-    driver.findElement(By.id("productOEMPartNumber")).clear();
-    driver.findElement(By.id("productOEMPartNumber")).sendKeys("1234");
-    driver.findElement(By.id("productSKU")).clear();
-    driver.findElement(By.id("productSKU")).sendKeys("abcdef");
-    driver.findElement(By.id("productOEMPartNumber")).clear();
-    driver.findElement(By.id("productOEMPartNumber")).sendKeys("123456");
-    driver.findElement(By.id("productSKU")).clear();
-    driver.findElement(By.id("productSKU")).sendKeys("abcdefg");
-    driver.findElement(By.id("productCategrory")).sendKeys("l");
-
-    driver.findElement(By.id("productPrice")).clear();
-    driver.findElement(By.id("productPrice")).sendKeys("150");
-    driver.findElement(By.id("productContractDiscount")).clear();
-    driver.findElement(By.id("productContractDiscount")).sendKeys("25");
-    driver.findElement(By.id("productDescription")).clear();
-    driver.findElement(By.id("productDescription")).sendKeys("Mini Travel Mouse");
-    driver.findElement(By.id("productFullDesc")).clear();
-    driver.findElement(By.id("productFullDesc")).sendKeys("Mini Travel Mouse with Charger");
-    driver.findElement(By.id("save")).click();
-    driver.findElement(By.id("close")).click();
+    driver.findElement(By.cssSelector("input.oj-inputtext-input.oj-component-initnode")).clear();
+    driver.findElement(By.cssSelector("input.oj-inputtext-input.oj-component-initnode")).sendKeys("sff");
+    driver.findElement(By.id("productImage6")).click();
+    driver.findElement(By.id("addToCart")).click();
+    driver.findElement(By.id("cart")).click();
+    driver.findElement(By.xpath("(//button[@id='placeOrder'])[2]")).click();
   }
 
   @After
