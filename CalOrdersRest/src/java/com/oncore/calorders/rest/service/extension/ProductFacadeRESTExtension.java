@@ -100,6 +100,23 @@ public class ProductFacadeRESTExtension extends ProductFacadeREST {
     }
 
     @GET
+    @Path("findProductsByProductType/{productTypeCode}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Product> findProductsByProductType(
+            @PathParam("productTypeCode") String productTypeCode) {
+        System.out.println("Running findProductsByProductType by " + productTypeCode);
+
+        List<Product> results = super.getEntityManager()
+                .createQuery("SELECT p FROM Product p "
+                        + "        JOIN p.prdCategoryCd c"
+                        + "        WHERE c.code = :categoryCode ", Product.class)
+                .setParameter("categoryCode", productTypeCode)
+                .getResultList();
+
+        return results;
+    }
+
+    @GET
     @Path("findActiveProductsByProductTypeAndVendor/{productTypeCode}/{vendorUid}")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Product> findActiveProductsByProductTypeAndVendor(
