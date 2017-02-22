@@ -30,7 +30,6 @@ import com.oncore.calorders.rest.service.PrdCategoryCdFacadeREST;
 import com.oncore.calorders.rest.service.PrdImgTypeCdFacadeREST;
 import com.oncore.calorders.rest.service.PrdUnitCdFacadeREST;
 import com.oncore.calorders.rest.service.VendorFacadeREST;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
@@ -164,7 +163,7 @@ public class ProductFacadeRESTExtension extends ProductFacadeREST {
     }
 
     /**
-     * Creates the employee
+     * Creates the product
      *
      * @param productData text containing product information in JSON.
      */
@@ -173,7 +172,6 @@ public class ProductFacadeRESTExtension extends ProductFacadeREST {
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void createProduct(ProductData productData) throws Exception{
 
-        System.out.print("test: "+ productData.getProductImage());
         // Create Product
         Product product = new Product();
         product.setCreateTs(new Date());
@@ -201,8 +199,46 @@ public class ProductFacadeRESTExtension extends ProductFacadeREST {
         product.setUpdateUserId(productData.getPartyUserId());
         product.setVndUidFk(this.vendorFacadeREST.find(productData.getVendor()));
 
-        //throw new Exception();
         super.create(product);
+    }
+    
+    /**
+     * Updated the product
+     *
+     * @param productData text containing product information in JSON.
+     */
+    @POST
+    @Path("updateProduct")
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public void updateProduct(ProductData productData) throws Exception{
+
+        // Update Product
+        Product product = super.find(productData.getProductUid());
+
+        product.setPrdActiveInd(productData.getProductActivationStatus());
+        product.setPrdCategoryCd(this.categoryCdFacadeREST.find(productData.getProductCategory()));
+        product.setPrdCntrDiscount(productData.getProductContractDiscount());
+        product.setPrdCntrLnItm(productData.getProductContractLineItem());
+        product.setPrdCntrUnitPrice(productData.getProductContractUnitPrice());
+        product.setPrdImgImage(DatatypeConverter.parseBase64Binary(productData.getProductImage()));
+        product.setPrdImgKey(productData.getProductImgageKey());
+        product.setPrdImgName(productData.getProductImageName());
+        product.setPrdImgOrigin(productData.getProductImageOrigin());
+        product.setPrdImgSize(productData.getProductImageSize());
+        product.setPrdImgTypeCd(this.prdImgTypeCdFacadeREST.find(productData.getProductImageType()));
+        product.setPrdLongDesc(productData.getProductFullDesc());
+        product.setPrdName(productData.getProductName());
+        product.setPrdOemName(productData.getProductOEMName());
+        product.setPrdOemPartNum(productData.getProductOEMPartNumber());
+        product.setPrdPrice(productData.getProductPrice());
+        product.setPrdShortDesc(productData.getProductDescription());
+        product.setPrdSku(productData.getProductSKU());
+        product.setPrdUnitCd(this.prdUnitCdFacadeREST.find(productData.getProductUnitCode()));
+        product.setUpdateTs(new Date());
+        product.setUpdateUserId(productData.getPartyUserId());
+        product.setVndUidFk(this.vendorFacadeREST.find(productData.getVendor()));
+
+        super.edit(product.getPrdUid(), product);
     }
 
 }
