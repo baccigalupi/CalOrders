@@ -73,6 +73,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils','ojs/ojrou
                  * @returns router value for "productSearch"
                  */
                 self.navigateToProductSearch = function () {
+                    sessionStorage.keepSearchResults = true;
                     console.log("continue shopping");
                     $("#addToCartConfirmationDialog").ojDialog("close");
                     return self.router.go("productSearch");

@@ -124,21 +124,30 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
                     if (!SecurityUtils.isAuthenticated()) {
                         return self.router.go('welcome');
                     }
-                    // Implement if needed
-                    self.selectedProductMenuItem('DHST');
-                    self.searchProducts('DHST');
-                                        
-                    if ( sessionStorage.admin === 'true')
+
+                    if (sessionStorage.admin === 'true')
                     {
-                        self.admin(true);   
+                        self.admin(true);
                         self.user(false);
                         self.findProductsByProductTypeService = serviceEndPoints.getEndPoint("findProductsByProductType");
+                    } else
+                    {
+                        self.findProductsByProductTypeService = serviceEndPoints.getEndPoint("findActiveProductsByProductType");
+                        self.admin(false);
+                        self.user(true);
+                    }
+                    
+                    console.log("sessionStorage.keepSearchResults: " + sessionStorage.keepSearchResults)
+                    
+                    if ( sessionStorage.keepSearchResults !== 'true')
+                    {
+                        // Implement if needed
+                        self.selectedProductMenuItem('DHST');
+                        self.searchProducts('DHST');
                     }
                     else
                     {
-                        self.findProductsByProductTypeService = serviceEndPoints.getEndPoint("findActiveProductsByProductType");
-                        self.admin(false);   
-                        self.user(true);
+                        sessionStorage.keepSearchResults = false;
                     }
                 };
 
@@ -152,7 +161,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
                     response.prdLongDescLines = response.prdLongDesc.split("\n");
 
                     response.prdLongDescLines = response.prdLongDesc.split("\n");
-                    
+
                     self.allProduct.push(response);
                 };
 
@@ -293,6 +302,9 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
                 };
 
                 self.navigateToProductDetail = function (product) {
+
+                    sessionStorage.productsToCompareBreadcrumbs = self.productCategoryBreadcrumbs();
+
                     // Store product id parameter
                     self.router.store(product.prdUid);
                     return self.router.go("productDetail");
