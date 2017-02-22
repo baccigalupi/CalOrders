@@ -55,7 +55,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
                 self.smallOnly = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(smOnlyQuery);
 
                 // Below are a subset of the ViewModel methods invoked by the ojModule binding
-                // Please reference the ojModule jsDoc for additionaly available methods.
+                // Please reference the ojModule jsDoc for additional available methods.
 
 
                 self.parseProduct = function (response) {
@@ -63,7 +63,8 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
                     for (i = 0; i < self.cart().length; i++)
                     {
                         if (self.cart()[i].vndUid == response.vndUid &&
-                                self.cart()[i].prdCategoryCd.code != 'SERR')
+                                !self.cart()[i].prdCategoryCd.code.startsWith("DS") &&
+                                !self.cart()[i].prdCategoryCd.code.startsWith("LS"))
                         {
                             var containsRelatedService = false;
                             for (j = 0; j < self.cart()[i].relatedServices().length; j++)
@@ -156,16 +157,34 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
                             }
 
                             cartProduct.quantity = ko.observable(cartProduct.quantity);
+                            
+                            var productType = "";
+                            
+                            if (cartProduct.prdCategoryCd.code.startsWith('DH'))
+                            {
+                                productType = 'DS' + cartProduct.prdCategoryCd.code.substring(2);
+                            }
+                            else if (cartProduct.prdCategoryCd.code.startsWith('LH'))
+                            {
+                                productType = 'LS' + cartProduct.prdCategoryCd.code.substring(2);
+                            }
+                            else if (cartProduct.prdCategoryCd.code.startsWith('DM'))
+                            {
+                                productType = 'DS' + cartProduct.prdCategoryCd.code.substring(2);
+                            }
+                            
+                            if (productType != "")
+                            {
 
                             var ProductModel = oj.Model.extend({
-                                urlRoot: self.findRelatedServiceProductsURL + "/SERR/" + cartProduct.vndUidFk.vndUid,
+                                urlRoot: self.findRelatedServiceProductsURL + "/" + productType + "/" + cartProduct.vndUidFk.vndUid,
                                 parse: self.parseProduct,
                                 idAttribute: 'prdUid'
                             });
                             var product = new ProductModel();
 
                             var ProductCollection = oj.Collection.extend({
-                                url: self.findRelatedServiceProductsURL + "/SERR/" + cartProduct.vndUidFk.vndUid,
+                                url: self.findRelatedServiceProductsURL + "/" + productType + "/" + cartProduct.vndUidFk.vndUid,
                                 model: product,
                                 comparator: 'prdUid'
                             });
@@ -182,8 +201,11 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
                                     return false;
                                 }
                             });
+                            
+                            var mapKey = cartProduct.vndUidFk.vndUid + productType;
 
-                            self.relatedServicesMap.set(cartProduct.vndUidFk.vndUid, collection);
+                            self.relatedServicesMap.set(mapKey, collection);
+                        }
                         }
 
                         self.cart(sessionCart);
