@@ -31,12 +31,21 @@ import java.util.Date;
  */
 public class OrderHistoryData {
 
+    private Integer orderHistoryId;
     private Date orderDate;
     private String orderStatus;
     private String orderPoNumber;
     private String orderAgency;
     private String orderPrice;
     private String orderDescription;
+
+    public Integer getOrderHistoryId() {
+        return orderHistoryId;
+    }
+
+    public void setOrderHistoryId(Integer orderHistoryId) {
+        this.orderHistoryId = orderHistoryId;
+    }
 
     public Date getOrderDate() {
         return orderDate;

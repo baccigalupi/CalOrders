@@ -28,6 +28,7 @@ import com.oncore.calorders.core.exceptions.DataAccessException;
 import com.oncore.calorders.core.utils.FormatHelper;
 import static com.oncore.calorders.core.utils.FormatHelper.LOG;
 import com.oncore.calorders.core.utils.Logger;
+import com.oncore.calorders.rest.GroupPartyAssoc;
 import com.oncore.calorders.rest.OrdStatusCd;
 import com.oncore.calorders.rest.OrderHistory;
 import com.oncore.calorders.rest.OrderProductAssoc;
@@ -43,6 +44,8 @@ import com.oncore.calorders.rest.service.OrdStatusCdFacadeREST;
 import com.oncore.calorders.rest.service.OrderHistoryFacadeREST;
 import java.io.StringReader;
 import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -59,6 +62,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import org.apache.commons.collections4.CollectionUtils;
@@ -342,21 +346,73 @@ public class OrderHistoryFacadeRESTExtension extends OrderHistoryFacadeREST {
     }
 
     /**
-     * Fetch all orders by UserId and ordered by Date ascending
+     * Fetch all orders by PartyUid and ordered by Date ascending
      *
      * @return a structure of orders history ordered by Date
      *
      * @throws com.oncore.calorders.core.exceptions.DataAccessException
      */
     @GET
-    @Path("findAllOrderHistoryByUserId")
+    @Path("findAllOrderHistoryByPartyUid/{partyUid}")
     @Produces({MediaType.APPLICATION_JSON})
-    public List<OrderHistoryData> findAllOrderHistoryByUserId() throws DataAccessException {
+    public List<OrderHistoryData> findAllOrderHistoryByPartyUid(@PathParam("partyUid") Integer partyUid) throws DataAccessException {
         List<OrderHistoryData> orderHistoryDatas = new ArrayList<OrderHistoryData>();
-        
-        
-        return orderHistoryDatas;
+        List<OrderHistory> orderHistorys = new ArrayList<OrderHistory>();
 
+        orderHistorys = getEntityManager().createQuery("SELECT oh FROM OrderHistory oh join oh.ordStatusCd os join oh.ptyUidFk pt join pt.groupPartyAssocCollection gpa join gpa.grpUidFk g join g.depUidFk d WHERE pt.ptyUid = :partyUid ORDER BY oh.createTs DESC", OrderHistory.class).setParameter("partyUid", partyUid).getResultList();
+        if (orderHistorys != null && orderHistorys.size() > 0) {
+            for (OrderHistory orderHistory : orderHistorys) {
+                OrderHistoryData data = new OrderHistoryData();
+
+                data.setOrderHistoryId(orderHistory.getOrdUid());
+                if (orderHistory.getPtyUidFk() != null
+                        && orderHistory.getPtyUidFk().getGroupPartyAssocCollection() != null
+                        && orderHistory.getPtyUidFk().getGroupPartyAssocCollection().size() > 0) {
+                    for (GroupPartyAssoc assoc : orderHistory.getPtyUidFk().getGroupPartyAssocCollection()) {
+                        if (assoc.getGrpUidFk() != null && assoc.getGrpUidFk().getDepUidFk() != null) {
+                            data.setOrderAgency(assoc.getGrpUidFk().getDepUidFk().getDepName());
+                            break;
+                        }
+                    }
+                }
+
+                data.setOrderDate(orderHistory.getCreateTs());
+
+                if (orderHistory.getOrderProductAssocCollection() != null
+                        && orderHistory.getOrderProductAssocCollection().size() > 0) {
+                    String skuConcat = new String();
+                    for (OrderProductAssoc assoc : orderHistory.getOrderProductAssocCollection()) {
+                        if (skuConcat.length() > 25) {
+                            skuConcat = skuConcat + "...";
+                            break;
+                        }
+                        if (assoc.getPrdUidFk() != null && assoc.getPrdUidFk().getPrdSku() != null) {
+                            skuConcat = skuConcat + ", " + assoc.getPrdUidFk().getPrdSku();
+                        }
+                    }
+                    data.setOrderDescription(skuConcat.trim());
+                }
+
+                data.setOrderPoNumber(null);
+                if (orderHistory.getOrderProductAssocCollection() != null
+                        && orderHistory.getOrderProductAssocCollection().size() > 0) {
+                    BigDecimal totalPrice = new BigDecimal(BigInteger.ZERO);
+                    for (OrderProductAssoc assoc : orderHistory.getOrderProductAssocCollection()) {
+                        totalPrice = totalPrice.add(assoc.getOpaPrice());
+                    }
+
+                    data.setOrderPrice(NumberFormat.getCurrencyInstance().format(totalPrice));
+                }
+
+                if (orderHistory.getOrdStatusCd() != null) {
+                    data.setOrderStatus(orderHistory.getOrdStatusCd().getShortDesc());
+                }
+                orderHistoryDatas.add(data);
+            }
+
+        }
+
+        return orderHistoryDatas;
     }
 
     private String getQuarterMonth(int month) {
