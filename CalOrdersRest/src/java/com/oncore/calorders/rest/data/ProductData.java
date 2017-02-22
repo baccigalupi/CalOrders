@@ -36,6 +36,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class ProductData extends BaseData {
 
+    private Integer productUid;
     private String productName;
     private String productCategory;
     private Integer vendor;
@@ -56,6 +57,15 @@ public class ProductData extends BaseData {
     private String productImageName;
     private String productImageOrigin;
     private Integer productImageSize;
+    private String productImageType;
+
+    public Integer getProductUid() {
+        return productUid;
+    }
+
+    public void setProductUid(Integer productUid) {
+        this.productUid = productUid;
+    }
 
     public String getProductName() {
         return productName;
@@ -215,6 +225,14 @@ public class ProductData extends BaseData {
 
     public void setProductImageSize(Integer productImageSize) {
         this.productImageSize = productImageSize;
+    }
+
+    public String getProductImageType() {
+        return productImageType;
+    }
+
+    public void setProductImageType(String productImageType) {
+        this.productImageType = productImageType;
     }
 
 }

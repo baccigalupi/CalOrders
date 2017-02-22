@@ -33,7 +33,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
                 var serviceEndPoints = new ServiceEndPoints();
 
                 self.router = oj.Router.rootInstance;
-                self.findProductsByProductTypeService = serviceEndPoints.getEndPoint("findActiveProductsByProductType");
+                self.findProductsByProductTypeService = "";
                 self.selectedProductMenuItem = ko.observable('DHST');
                 self.productLayoutType = ko.observable('productCardLayout');
                 self.allProduct = ko.observableArray([]);
@@ -43,6 +43,8 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
                 self.addedProductName = ko.observable();
                 self.productCategoryBreadcrumbs = ko.observable();
                 self.errorMessage = ko.observable();
+                self.admin = ko.observable(false);
+                self.user = ko.observable(false);
 
                 var lgQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.LG_UP);
                 var mdQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.MD_UP);
@@ -122,10 +124,31 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
                     if (!SecurityUtils.isAuthenticated()) {
                         return self.router.go('welcome');
                     }
-                    // Implement if needed
-                    console.log("product search = handleActivated");
-                    self.selectedProductMenuItem('DHST');
-                    self.searchProducts('DHST');
+
+                    if (sessionStorage.admin === 'true')
+                    {
+                        self.admin(true);
+                        self.user(false);
+                        self.findProductsByProductTypeService = serviceEndPoints.getEndPoint("findProductsByProductType");
+                    } else
+                    {
+                        self.findProductsByProductTypeService = serviceEndPoints.getEndPoint("findActiveProductsByProductType");
+                        self.admin(false);
+                        self.user(true);
+                    }
+                    
+                    console.log("sessionStorage.keepSearchResults: " + sessionStorage.keepSearchResults)
+                    
+                    if ( sessionStorage.keepSearchResults !== 'true')
+                    {
+                        // Implement if needed
+                        self.selectedProductMenuItem('DHST');
+                        self.searchProducts('DHST');
+                    }
+                    else
+                    {
+                        sessionStorage.keepSearchResults = false;
+                    }
                 };
 
                 self.itemOnly = function (context) {
@@ -135,6 +158,8 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
                 self.parseProduct = function (response) {
                     response.compareProduct = ko.observable();
                     response.quantity = ko.observable(1);
+                    response.prdLongDescLines = response.prdLongDesc.split("\n");
+
                     response.prdLongDescLines = response.prdLongDesc.split("\n");
 
                     self.allProduct.push(response);
@@ -277,10 +302,18 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
                 };
 
                 self.navigateToProductDetail = function (product) {
-                    console.log("navigating to product detail for " + product.prdUid);
+
+                    sessionStorage.productsToCompareBreadcrumbs = self.productCategoryBreadcrumbs();
+
                     // Store product id parameter
                     self.router.store(product.prdUid);
                     return self.router.go("productDetail");
+                };
+
+
+                self.navigateToAddProduct = function (product) {
+                    // Store product id parameter
+                    return self.router.go("productAdd");
                 };
 
                 self.navigateToCompareProducts = function ()

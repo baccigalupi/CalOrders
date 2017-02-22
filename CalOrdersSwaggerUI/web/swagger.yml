@@ -6,142 +6,178 @@ swagger: '2.0'
 # This is your document metadata
 info:
   version: 1.0.0
-  title: Tempus API
-  description: The Tempus REST API specification
-  termsOfService: https://github.com/OncoreLLC/TempusRESTAPI/blob/master/LICENSE
+  title: Calorders API
+  description: The Calorders Swagger API specification
+  termsOfService: https://github.com/OncoreLLC/CalOrdersSwaggerUI/blob/master/LICENSE
   contact:
-    name: Tempus Team
+    name: Calorders Team
     email: tempus@oncorellc.com
-    url: https://github.com/OncoreLLC/TempusArtifacts/blob/master/README.md
+    url: https://github.com/OncoreLLC/CalordersArtifacts/blob/master/README.md
   license:
     name: OnCore Private License
-    url: https://github.com/OncoreLLC/TempusRESTAPI/blob/master/LICENSE
+    url: https://github.com/OncoreLLC/CalOrdersSwaggerUI/blob/master/LICENSE
+host: calorderstest.oncorellc.com:9080
+basePath: /CalOrdersRest/webresources
 schemes:
   - http
 consumes:
   - application/json
 produces:
   - application/json
-
-# Describe your paths here
-paths:
- 
-  /TempusImages/webresources/com.oncore.tempus.services.images.images/findImageByKey/{key}:
-    # This is a HTTP operation
+paths: 
+   /com.oncore.calorders.rest.product/findActiveProductsByProductType/{productTypeCode}:
     get:
-      # Describe this verb here. Note: you can use markdown
-      description: |
-        Gets an Image by UUID.
-        
-      # This is array of GET operation parameters:
+      description: Gets an Active product by product type.
+      operationId: findActiveProductsByProductType
       parameters:
-        # An example parameter that is in query and is required
-        -
-          name: key
+        - name: productTypeCode
           in: path
-          description: unique image uuid
+          description: active products by product type
           required: true
           type: string
           format: string
-          
-      # Expected responses for this operation:
       responses:
-        200:
-          description: An image
-          schema:
-            type: array
-            items:
-              required:
-                - imageData
-              properties:
-                imgUid:
-                  type: integer
-                imgKey:
-                  type: string
-                imgName:
-                  type: string
-                imgSize:
-                  type: integer
-                imgOrigin:
-                  type: string
-                imgImage:
-                  type: array
-                createUserId:
-                  type: string
-                createTs:
-                  type: string
-                updateUserId:
-                  type: string
-                updateTs:
-                  type: string
-                imgTypeCode:
-                  type: string
-                imgTypeCodeShortDescription:
-                  type: string
-                imgTypeCodeLongDescription:
-                  type: string
-  /TempusImages/webresources/com.oncore.tempus.services.images.images/findImageByKeyAndCompanyIdAndOrEmployeeId/{key}/{cmpUid}/{empUid}:
-    # This is a HTTP operation
+        '200':
+          description: Product response
+   /com.oncore.calorders.rest.product/findActiveProductsByProductTypeAndVendor/{productTypeCode}/{vendorUid}:
     get:
-      # Describe this verb here. Note: you can use markdown
-      description: |
-        Gets an Image by UUID, company id, and employee id if the employee id is supplied.
-        
-      # This is array of GET operation parameters:
+      description: Gets an Active product by product type and vendor.
+      operationId: findActiveProductsByProductTypeAndVendor
       parameters:
-        # An example parameter that is in query and is required
-        - name: key
+        - name: productTypeCode
           in: path
-          description: unique image uuid
+          description: active products by product type
           required: true
           type: string
           format: string
-        - name: cmpUid
+        - name: vendorUid
           in: path
-          description: unique company id
+          description: vendor Id
           required: true
           type: integer
-        - name: empUid
-          in: path
-          description: unique employee id
-          required: false
-          type: integer
-      # Expected responses for this operation:
+          format: int32
       responses:
-        200:
-          description: An image
-          schema:
-            type: array
-            items:
-              required:
-                - imageData
-              properties:
-                imgUid:
-                  type: integer
-                imgKey:
-                  type: string
-                imgName:
-                  type: string
-                imgSize:
-                  type: integer
-                imgOrigin:
-                  type: string
-                imgImage:
-                  type: array
-                createUserId:
-                  type: string
-                createTs:
-                  type: string
-                updateUserId:
-                  type: string
-                updateTs:
-                  type: string
-                imgTypeCode:
-                  type: string
-                imgTypeCodeShortDescription:
-                  type: string
-                imgTypeCodeLongDescription:
-                  type: string                
-               
-               
-                  
+        '200':
+          description: Product response
+   /com.oncore.calorders.rest.product/doesProductNameExist/{productName}:
+    get:
+      description: Check to see if a product exists by name.
+      operationId: doesProductNameExist
+      parameters:
+        - name: productName
+          in: path
+          description: name of the product
+          required: true
+          type: string
+          format: string
+      responses:
+        '200':
+          description: Product response
+   /com.oncore.calorders.rest.product/createProduct:
+    post:
+      description: Creates a new prodcuct.
+      operationId: createProduct
+      parameters: []
+      responses:
+        '405':
+          description: Invalid input
+   /com.oncore.calorders.rest.orderHistory/fetchOrdersByQuarter:
+    get:
+      description: get all order by quarter.
+      operationId: fetchOrdersByQuarter
+      parameters: []
+      responses:
+        '200':
+          description: Order history response
+   /com.oncore.calorders.rest.orderHistory/fetchOrderStatusSummary:
+    get:
+      description: Get order statuses.
+      operationId: fetchOrderStatusSummary
+      parameters: []
+      responses:
+        '200':
+          description: Order history response
+   /com.oncore.calorders.rest.orderHistory/createOrder:
+    post:
+      description: Creates new Order.
+      operationId: createOrder
+      parameters: []
+      responses:
+        '405':
+          description: Invalid input
+   /com.oncore.calorders.rest.party/findPartyByUserIdAndPassword/{userId}/{password}:
+    get:
+      description: Get the party by userId and password.
+      operationId: findPartyByUserIdAndPassword
+      parameters:
+        - name: userId
+          in: path
+          description: active products by product type
+          required: true
+          type: string
+          format: string
+        - name: password
+          in: path
+          description: active products by product type
+          required: true
+          type: string
+          format: string
+      responses:
+        '200':
+          description: Party response
+   /com.oncore.calorders.rest.party/findAllGroupsByPartyId/{partyId}:
+    get:
+      description: Gets all groups by party.
+      operationId: findAllGroupsByPartyId
+      parameters:
+        - name: partyId
+          in: path
+          description: unique party Id
+          required: true
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Party response
+   /com.oncore.calorders.rest.party/findAllPrivilegesByPartyId/{partyId}:
+    get:
+      description: Get all privileges by party.
+      operationId: findAllPrivilegesByPartyId
+      parameters:
+        - name: partyId
+          in: path
+          description: unique party Id
+          required: true
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Party response
+   /com.oncore.calorders.rest.party/findNavBarPrivilegesByPartyId/{partyId}:
+    get:
+      description: Get authorized nav bar by party.
+      operationId: findNavBarPrivilegesByPartyId
+      parameters:
+        - name: partyId
+          in: path
+          description: unique party Id
+          required: true
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Product response
+   /com.oncore.calorders.rest.party/findNavMenuPrivilegesByPartyId/{partyId}:
+    get:
+      description: Get authorized nav menu by party.
+      operationId: findNavMenuPrivilegesByPartyId
+      parameters:
+        - name: partyId
+          in: path
+          description: unique party Id
+          required: true
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Party response

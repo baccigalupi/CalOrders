@@ -28,27 +28,45 @@ import com.oncore.calorders.core.exceptions.DataAccessException;
 import com.oncore.calorders.core.utils.FormatHelper;
 import static com.oncore.calorders.core.utils.FormatHelper.LOG;
 import com.oncore.calorders.core.utils.Logger;
+import com.oncore.calorders.rest.Department;
+import com.oncore.calorders.rest.GroupPartyAssoc;
 import com.oncore.calorders.rest.OrdStatusCd;
 import com.oncore.calorders.rest.OrderHistory;
 import com.oncore.calorders.rest.OrderProductAssoc;
 import com.oncore.calorders.rest.Party;
 import com.oncore.calorders.rest.Product;
+import com.oncore.calorders.rest.data.OrderHistoryData;
+import com.oncore.calorders.rest.data.OrderItemData;
+import com.oncore.calorders.rest.data.OrderStatusData;
+import com.oncore.calorders.rest.data.OrderStatusSummaryData;
+import com.oncore.calorders.rest.data.OrdersByQuarterData;
+import com.oncore.calorders.rest.data.OrdersByQuarterSeriesData;
 import com.oncore.calorders.rest.service.OrdStatusCdFacadeREST;
 import com.oncore.calorders.rest.service.OrderHistoryFacadeREST;
 import java.io.StringReader;
 import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
+import javax.persistence.TypedQuery;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import org.apache.commons.collections4.CollectionUtils;
 
 /**
  *
@@ -138,6 +156,329 @@ public class OrderHistoryFacadeRESTExtension extends OrderHistoryFacadeREST {
             throw new DataAccessException(ex, ErrorCode.DATAACCESSERROR);
         }
 
+    }
+
+    /**
+     * Fetch all orders grouped by quarter for the last 4 years. For this
+     * iteration the orders are pulled for the last four years (including the
+     * current year), which are 2017,16,15,14
+     *
+     * @return a structure of order totals grouped by quarter
+     *
+     * @throws com.oncore.calorders.core.exceptions.DataAccessException
+     */
+    @GET
+    @Path("fetchOrdersByQuarter/{departmentId}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public OrdersByQuarterSeriesData fetchOrdersByQuarter(@PathParam("departmentId") Integer departmentId) throws DataAccessException {
+
+        List<OrderHistory> orderHistoryList = null;
+        OrdersByQuarterSeriesData ordersByQuarterSeriesData = new OrdersByQuarterSeriesData();
+        OrdersByQuarterData ordersByQuarterData = null;
+        OrderItemData orderItemData = null;
+        Calendar cal = Calendar.getInstance();
+        Department department = null;
+
+        ordersByQuarterData = new OrdersByQuarterData();
+        ordersByQuarterData.setName("Jan");
+        ordersByQuarterSeriesData.getOrdersByQuarterDataList().add(ordersByQuarterData);
+
+        ordersByQuarterData = new OrdersByQuarterData();
+        ordersByQuarterData.setName("Apr");
+        ordersByQuarterSeriesData.getOrdersByQuarterDataList().add(ordersByQuarterData);
+
+        ordersByQuarterData = new OrdersByQuarterData();
+        ordersByQuarterData.setName("Jul");
+        ordersByQuarterSeriesData.getOrdersByQuarterDataList().add(ordersByQuarterData);
+
+        ordersByQuarterData = new OrdersByQuarterData();
+        ordersByQuarterData.setName("Oct");
+        ordersByQuarterSeriesData.getOrdersByQuarterDataList().add(ordersByQuarterData);
+
+        try {
+
+            Logger.debug(LOG, "Hey testing logging, the fetchOrdersByQuarter is being called!");
+
+            department = getEntityManager().createNamedQuery("Department.findByDepUid", Department.class).setParameter("depUid", departmentId).getSingleResult();
+
+            orderHistoryList = getEntityManager().createQuery("SELECT o FROM OrderHistory o WHERE o.depUidFk = :departmentId AND o.createTs > '2014:01:01 15:06:39.673' ORDER BY o.createTs ASC", OrderHistory.class).setParameter("departmentId", department).getResultList();
+
+            String month = null;
+            Integer year = null;
+
+            if (CollectionUtils.isNotEmpty(orderHistoryList)) {
+
+                for (OrderHistory order : orderHistoryList) {
+                    cal.setTime(order.getCreateTs());
+
+                    month = this.getQuarterMonth(cal.get(Calendar.MONTH));
+                    year = cal.get(Calendar.YEAR);
+
+                    if (year.equals(2015)) {
+                        year = 2015;
+                    }
+
+                    boolean found = false;
+
+                    for (OrdersByQuarterData quarter : ordersByQuarterSeriesData.getOrdersByQuarterDataList()) {
+                        if (month.equalsIgnoreCase(quarter.getName())) {
+
+                            found = false;
+
+                            if (CollectionUtils.isEmpty(quarter.getItems())) {
+                                OrderItemData item = new OrderItemData();
+                                item.setYear(year);
+                                item.setY(1);
+                                item.setLabel(1);
+                                quarter.getItems().add(item);
+                            } else {
+                                for (OrderItemData item : quarter.getItems()) {
+                                    if (year.equals(item.getYear())) {
+                                        item.setY(item.getY() + 1);
+                                        item.setLabel(item.getY());
+                                        found = true;
+                                        break;
+                                    }
+
+                                }
+
+                                if (!found) {
+                                    OrderItemData item = new OrderItemData();
+                                    item.setYear(year);
+                                    item.setY(1);
+                                    item.setLabel(1);
+                                    quarter.getItems().add(item);
+                                    break;
+                                }
+
+                            }
+
+                        }
+                    }
+
+                }
+
+            }
+
+        } catch (Exception ex) {
+            Logger.error(LOG, FormatHelper.getStackTrace(ex));
+            throw new DataAccessException(ex, ErrorCode.DATAACCESSERROR);
+        }
+
+        return ordersByQuarterSeriesData;
+
+    }
+
+    /**
+     * Fetch all orders grouped by status
+     *
+     * @return a structure of order totals grouped by status
+     *
+     * @throws com.oncore.calorders.core.exceptions.DataAccessException
+     */
+    @GET
+    @Path("fetchOrderStatusSummary/{departmentId}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public OrderStatusSummaryData fetchOrderStatusSummary(@PathParam("departmentId") Integer departmentId) throws DataAccessException {
+
+        OrderStatusSummaryData orderStatusSummaryData = new OrderStatusSummaryData();
+        OrderStatusData orderStatusData = null;
+        OrdStatusCd ordStatusCd = null;
+        Department department = null;
+
+        try {
+
+            Logger.debug(LOG, "Hey testing logging, the fetchOrderStatusSummary is being called!");
+
+            department = getEntityManager().createNamedQuery("Department.findByDepUid", Department.class).setParameter("depUid", departmentId).getSingleResult();
+
+            ordStatusCd = getEntityManager().createNamedQuery("OrdStatusCd.findByCode", OrdStatusCd.class).setParameter("code", "CANC").getSingleResult();
+
+            TypedQuery<Long> query = getEntityManager().createQuery(
+                    "SELECT COUNT(o) FROM OrderHistory o WHERE o.depUidFk = :departmentId AND o.ordStatusCd = :code", Long.class).setParameter("departmentId", department).setParameter("code", ordStatusCd);
+            Long count = query.getSingleResult();
+            List<Integer> items = new ArrayList<>(1);
+            orderStatusData = new OrderStatusData();
+            orderStatusData.setName("Cancelled");
+            items.add(count.intValue());
+            orderStatusData.setItems(items);
+            orderStatusSummaryData.getItems().add(orderStatusData);
+
+            ordStatusCd = getEntityManager().createNamedQuery("OrdStatusCd.findByCode", OrdStatusCd.class).setParameter("code", "PRCS").getSingleResult();
+
+            query = getEntityManager().createQuery(
+                    "SELECT COUNT(o) FROM OrderHistory o WHERE o.depUidFk = :departmentId AND o.ordStatusCd = :code", Long.class).setParameter("departmentId", department).setParameter("code", ordStatusCd);
+            count = query.getSingleResult();
+
+            items = new ArrayList<>(1);
+            orderStatusData = new OrderStatusData();
+            orderStatusData.setName("Processing");
+            items.add(count.intValue());
+            orderStatusData.setItems(items);
+            orderStatusSummaryData.getItems().add(orderStatusData);
+
+            ordStatusCd = getEntityManager().createNamedQuery("OrdStatusCd.findByCode", OrdStatusCd.class).setParameter("code", "SHIP").getSingleResult();
+
+            query = getEntityManager().createQuery(
+                    "SELECT COUNT(o) FROM OrderHistory o WHERE o.depUidFk = :departmentId AND o.ordStatusCd = :code", Long.class).setParameter("departmentId", department).setParameter("code", ordStatusCd);
+            count = query.getSingleResult();
+
+            items = new ArrayList<>(1);
+            orderStatusData = new OrderStatusData();
+            orderStatusData.setName("Shipped");
+            items.add(count.intValue());
+            orderStatusData.setItems(items);
+            orderStatusSummaryData.getItems().add(orderStatusData);
+
+            ordStatusCd = getEntityManager().createNamedQuery("OrdStatusCd.findByCode", OrdStatusCd.class).setParameter("code", "SUBT").getSingleResult();
+
+            query = getEntityManager().createQuery(
+                    "SELECT COUNT(o) FROM OrderHistory o WHERE o.depUidFk = :departmentId AND o.ordStatusCd = :code", Long.class).setParameter("departmentId", department).setParameter("code", ordStatusCd);
+            count = query.getSingleResult();
+
+            items = new ArrayList<>(1);
+            orderStatusData = new OrderStatusData();
+            orderStatusData.setName("Submitted");
+            items.add(count.intValue());
+            orderStatusData.setItems(items);
+            orderStatusSummaryData.getItems().add(orderStatusData);
+
+        } catch (Exception ex) {
+            Logger.error(LOG, FormatHelper.getStackTrace(ex));
+            throw new DataAccessException(ex, ErrorCode.DATAACCESSERROR);
+        }
+
+        return orderStatusSummaryData;
+
+    }
+
+    /**
+     * Fetch all orders by PartyUid and ordered by Date ascending
+     *
+     * @return a structure of orders history ordered by Date
+     *
+     * @throws com.oncore.calorders.core.exceptions.DataAccessException
+     */
+    @GET
+    @Path("findAllOrderHistoryByPartyUid/{partyUid}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public List<OrderHistoryData> findAllOrderHistoryByPartyUid(@PathParam("partyUid") Integer partyUid) throws DataAccessException {
+        List<OrderHistoryData> orderHistoryDatas = new ArrayList<OrderHistoryData>();
+        List<OrderHistory> orderHistorys = new ArrayList<OrderHistory>();
+
+        orderHistorys = getEntityManager().createQuery("SELECT oh FROM OrderHistory oh join oh.ordStatusCd os join oh.ptyUidFk pt join pt.groupPartyAssocCollection gpa join gpa.grpUidFk g join g.depUidFk d WHERE pt.ptyUid = :partyUid ORDER BY oh.createTs DESC", OrderHistory.class).setParameter("partyUid", partyUid).getResultList();
+        if (orderHistorys != null && orderHistorys.size() > 0) {
+            for (OrderHistory orderHistory : orderHistorys) {
+                OrderHistoryData data = new OrderHistoryData();
+
+                data.setOrderHistoryId(orderHistory.getOrdUid());
+                if (orderHistory.getPtyUidFk() != null
+                        && orderHistory.getPtyUidFk().getGroupPartyAssocCollection() != null
+                        && orderHistory.getPtyUidFk().getGroupPartyAssocCollection().size() > 0) {
+                    for (GroupPartyAssoc assoc : orderHistory.getPtyUidFk().getGroupPartyAssocCollection()) {
+                        if (assoc.getGrpUidFk() != null && assoc.getGrpUidFk().getDepUidFk() != null) {
+                            data.setOrderAgency(assoc.getGrpUidFk().getDepUidFk().getDepName());
+                            break;
+                        }
+                    }
+                }
+
+                data.setOrderDate(orderHistory.getCreateTs());
+
+                if (orderHistory.getOrderProductAssocCollection() != null
+                        && orderHistory.getOrderProductAssocCollection().size() > 0) {
+                    String skuConcat = new String();
+                    List<OrderProductAssoc> productAssocs = new ArrayList<OrderProductAssoc>();
+                    orderHistory.getOrderProductAssocCollection().forEach((assoc) -> {
+                        productAssocs.add(assoc);
+                    });
+                    for (int i = 0; i < productAssocs.size(); i++) {
+
+                        if (skuConcat.length() > 25) {
+                            skuConcat = skuConcat + "...";
+                            break;
+                        }
+
+                        if (productAssocs.get(i).getPrdUidFk() != null
+                                && productAssocs.get(i).getPrdUidFk().getPrdSku() != null) {
+                            if (i == 0) {
+                                skuConcat = productAssocs.get(i).getPrdUidFk().getPrdSku();
+                            } else {
+                                skuConcat = skuConcat + ", " + productAssocs.get(i).getPrdUidFk().getPrdSku();
+                            }
+                        }
+                    }
+                    data.setOrderDescription(skuConcat.trim());
+                }
+
+                data.setOrderPoNumber(null);
+                if (orderHistory.getOrderProductAssocCollection() != null
+                        && orderHistory.getOrderProductAssocCollection().size() > 0) {
+                    BigDecimal totalPrice = new BigDecimal(BigInteger.ZERO);
+                    for (OrderProductAssoc assoc : orderHistory.getOrderProductAssocCollection()) {
+                        totalPrice = totalPrice.add(assoc.getOpaPrice());
+                    }
+
+                    data.setOrderPrice(NumberFormat.getCurrencyInstance().format(totalPrice));
+                }
+
+                if (orderHistory.getOrdStatusCd() != null) {
+                    data.setOrderStatus(orderHistory.getOrdStatusCd().getShortDesc());
+                }
+                orderHistoryDatas.add(data);
+            }
+
+        }
+
+        return orderHistoryDatas;
+    }
+
+    private String getQuarterMonth(int month) {
+        String result = "Jan";
+
+        switch (month) {
+            case 1:
+                result = "Jan";
+                break;
+            case 2:
+                result = "Jan";
+                break;
+            case 3:
+                result = "Jan";
+                break;
+            case 4:
+                result = "Apr";
+                break;
+            case 5:
+                result = "Apr";
+                break;
+            case 6:
+                result = "Apr";
+                break;
+            case 7:
+                result = "Jul";
+                break;
+            case 8:
+                result = "Jul";
+                break;
+            case 9:
+                result = "Jul";
+                break;
+            case 10:
+                result = "Oct";
+                break;
+            case 11:
+                result = "Oct";
+                break;
+            case 12:
+                result = "Oct";
+                break;
+            default:
+                result = "Jan";
+
+        }
+
+        return result;
     }
 
 }

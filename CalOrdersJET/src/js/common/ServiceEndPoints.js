@@ -70,6 +70,9 @@ ServiceEndPoints.prototype = {
         } else if (key === "findActiveProductsByProductType")
         {
             return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.product/findActiveProductsByProductType";
+        } else if (key === "findProductsByProductType")
+        {
+            return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.product/findProductsByProductType";
         } else if (key === "createOrder")
         {
             return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.orderHistory/createOrder";
@@ -85,6 +88,9 @@ ServiceEndPoints.prototype = {
         } else if (key === "createProduct")
         {
             return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.product/createProduct";
+        } else if (key === "updateProduct")
+        {
+            return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.product/updateProduct";
         } else if (key === "findAllUnitCodes")
         {
             return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.prdunitcd";
@@ -94,9 +100,21 @@ ServiceEndPoints.prototype = {
         } else if (key === "findActiveProductsByProductTypeAndVendor")
         {
             return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.product/findActiveProductsByProductTypeAndVendor";
+        } else if (key === "fetchOrdersByQuarter")
+        {
+            return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.orderHistory/fetchOrdersByQuarter";
+        } else if (key === "fetchOrderStatusSummary")
+        {
+            return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.orderHistory/fetchOrderStatusSummary";
+        } else if (key === "findAllOrderHistoryByPartyUid")
+        {
+            return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.orderHistory/findAllOrderHistoryByPartyUid";
         } else
         {
             return "UNDEFINED";
         }
+
+
+
     }
 };

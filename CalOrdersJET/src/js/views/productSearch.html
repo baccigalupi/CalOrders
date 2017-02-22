@@ -44,7 +44,7 @@
     </div>
     <!-- end global error message -->
 
-    <div class="oj-panel oj-flex oj-sm-flex-wrap-nowrap">
+    <div class="oj-panel oj-flex oj-sm-flex-wrap-nowrap oj-panel-shadow-md">
 
 
         <!-- Product Left Hand Navigation Panel -->
@@ -210,61 +210,61 @@
                                     optionChange: productSelectChange,
                                                   option: selectedProductMenuItem,
                                                   rootAttributes: {style:'max-width:20em'}}">
-                                
 
-                                        <optgroup label="Desktop Computers">
-                                            <option value="DHST" selected="selected">Standard</option>
-                                            <option value="DHPO" >Power</option>
-                                            <option value="DHWO" >Workstation</option>
-                                            <option value="DHTH" >Thin Client</option>
-                                            <option value="DHAL" >All in One</option>
-                                        </optgroup>
-                                        <optgroup label="Desktop Upgrades">
-                                            <option value="DUST" >Standard</option>
-                                            <option value="DUPO" >Power</option>
-                                            <option value="DUWO" >Workstation</option>
-                                            <option value="DUTH" >Thin Client</option>
-                                            <option value="DUAL" >All in One</option>
-                                        </optgroup>
-                                        <optgroup label="Desktop Services">
-                                            <option value="DSST" >Standard</option>
-                                            <option value="DSPO" >Power</option>
-                                            <option value="DSWO" >Workstation</option>
-                                            <option value="DSTH" >Thin Client</option>
-                                            <option value="DSAL" >All in One</option>
-                                        </optgroup>
-                                
-                                        <optgroup label="Laptop Computers">
-                                            <option value="LHST" >Standard</option>
-                                            <option value="LHPO" >Power</option>
-                                            <option value="LHUL" >Ultralight</option>
-                                            <option value="LHMO" >Mobile</option>
-                                        </optgroup>
-                                        <optgroup label="Laptop Upgrades">
-                                            <option value="LUST" >Standard</option>
-                                            <option value="LUPO" >Power</option>
-                                            <option value="LUUL" >Ultralight</option>
-                                            <option value="LUMO" >Mobile</option>
-                                        </optgroup>
-                                        <optgroup label="Laptop Services">
-                                            <option value="LSST" >Standard</option>
-                                            <option value="LSPO" >Power</option>
-                                            <option value="LSUL" >Ultralight</option>
-                                            <option value="LSMO" >Mobile</option>
-                                        </optgroup>
-                                
+
+                                <optgroup label="Desktop Computers">
+                                    <option value="DHST" selected="selected">Standard</option>
+                                    <option value="DHPO" >Power</option>
+                                    <option value="DHWO" >Workstation</option>
+                                    <option value="DHTH" >Thin Client</option>
+                                    <option value="DHAL" >All in One</option>
+                                </optgroup>
+                                <optgroup label="Desktop Upgrades">
+                                    <option value="DUST" >Standard</option>
+                                    <option value="DUPO" >Power</option>
+                                    <option value="DUWO" >Workstation</option>
+                                    <option value="DUTH" >Thin Client</option>
+                                    <option value="DUAL" >All in One</option>
+                                </optgroup>
+                                <optgroup label="Desktop Services">
+                                    <option value="DSST" >Standard</option>
+                                    <option value="DSPO" >Power</option>
+                                    <option value="DSWO" >Workstation</option>
+                                    <option value="DSTH" >Thin Client</option>
+                                    <option value="DSAL" >All in One</option>
+                                </optgroup>
+
+                                <optgroup label="Laptop Computers">
+                                    <option value="LHST" >Standard</option>
+                                    <option value="LHPO" >Power</option>
+                                    <option value="LHUL" >Ultralight</option>
+                                    <option value="LHMO" >Mobile</option>
+                                </optgroup>
+                                <optgroup label="Laptop Upgrades">
+                                    <option value="LUST" >Standard</option>
+                                    <option value="LUPO" >Power</option>
+                                    <option value="LUUL" >Ultralight</option>
+                                    <option value="LUMO" >Mobile</option>
+                                </optgroup>
+                                <optgroup label="Laptop Services">
+                                    <option value="LSST" >Standard</option>
+                                    <option value="LSPO" >Power</option>
+                                    <option value="LSUL" >Ultralight</option>
+                                    <option value="LSMO" >Mobile</option>
+                                </optgroup>
+
                                 <optgroup label="Monitors">
                                     <option value="DMMO">Monitors</option>
                                     <option value="DUMO">Monitor Upgrades</option>
                                 </optgroup>
-                                
+
                                 <optgroup label="Software">
                                     <option value="OPSY">OS</option>
                                     <option value="OFFC">Office</option>
                                     <option value="UTIL">Utilities</option>
                                     <option value="SECC">Security</option>
                                 </optgroup>
-                                
+
                                 <optgroup label="Independent Services">
                                     <option value="DAAL">Desktop Services</option>
                                     <option value="LAAL">Laptop Services</option>
@@ -311,9 +311,19 @@
                             </div>
 
                             <!-- Compare products button -->
+                            <!-- ko if: user -->
                             <div class="oj-flex-item">                              
                                 <button id= "compareProductsButton" data-bind="click: navigateToCompareProducts, ojComponent: { component: 'ojButton', label: 'Compare'}"></button>                             
                             </div>
+                            <!-- /ko -->
+
+                            <!-- Add products button -->
+                            <!-- ko if: admin -->
+                            <div class="oj-flex-item">                              
+                                <button id= "addProductsButton" data-bind="click: navigateToAddProduct, ojComponent: { component: 'ojButton', label: 'Add Product'}"></button>                             
+                            </div>
+                            <!-- /ko -->
+
                         </div>
                     </div>
                 </div>
@@ -391,16 +401,16 @@
             <div data-bind="click: $parent.navigateToProductDetail">
 
                 <div class="oj-flex-item oj-sm-4">
-                    <img alt="product" data-bind="attr: {id: 'productImage' + $data['prdUid'], src: $parent.getPhoto($data)}" height="100" width="100"/>
+                    <img data-bind="attr: {alt: $data['prdName'],  id: 'productImage' + $data['prdUid'], src: $parent.getPhoto($data)}" height="100" width="100"/>
                 </div>
                 <div class="oj-flex-item">
                     <h3 aria-label="product description" data-bind="text: $data['prdName']" tabindex="0"></h3>
-                    <div data-bind="text: '$' + $data['prdPrice']"></div>
+                    <div class="product-detail-price" data-bind="text: '$' + $data['prdCntrUnitPrice']"></div>
                 </div>
             </div>
 
+            <!-- ko if: $parent.user -->
             <div class="oj-padding-vertical"></div>
-
             <div style="position: absolute; bottom: 0px">
                 <div class="oj-flex-item">
                     <button id= "addToCart" data-bind="click: $parent.addToCart, ojComponent: { component: 'ojButton', label: 'Add to Cart'}"></button> 
@@ -419,6 +429,7 @@
                     </div>
                 </div>
             </div>
+            <!-- /ko -->
         </div>
     </li>
 </script>
@@ -443,14 +454,15 @@
         <div>
             <div class="oj-flex oj-flex-items-pad">
                 <div class="oj-flex-item oj-lg-4 oj-md-4" data-bind="click: $parent.navigateToProductDetail">
-                    <img alt="product" class="demo-circular demo-employee-photo" style="float:left;" height="100" width="100" data-bind="attr: {id: 'productImage' + $data['prdUid'], src: $parent.getPhoto($data)}"/>
-                    <h2 class="demo-employee-name" data-bind="text: $data['prdName']"></h2>
+                    <img style="float:left;" height="100" width="100" data-bind="attr: {alt: $data['prdName'],  id: 'productImage' + $data['prdUid'], src: $parent.getPhoto($data)}"/>
+                    <h2 class="product-search-name" data-bind="text: $data['prdName']"></h2>
                 </div>
 
                 <div class="oj-flex-item oj-md-4">
-                    <div class="demo-employee-tenure" data-bind="text: '$' + $data['prdPrice']"></div>
+                    <div class="product-detail-price" data-bind="text: '$' + $data['prdCntrUnitPrice']"></div>
                 </div>
 
+                <!-- ko if: $parent.user -->
                 <div class="oj-flex-item oj-md-4 oj-sm-float-end">
                     <button id= "addToCart" data-bind="click: $parent.addToCart, ojComponent: { component: 'ojButton', label: 'Add to Cart'}"></button>
 
@@ -465,7 +477,7 @@
                         </span>
                     </div>
                 </div>
-
+                <!-- /ko -->
             </div>
         </div>
     </li>

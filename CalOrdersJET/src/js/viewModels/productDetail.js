@@ -24,7 +24,9 @@
 /*
  * Your about ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojrouter', 'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojpagingcontrol', 'ojs/ojpagingcontrol-model', 'utils/ProductHelper'],
+define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojrouter', 
+    'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojpagingcontrol', 
+    'ojs/ojpagingcontrol-model', 'utils/ProductHelper','ojs/ojtabs'],
         function (oj, ko, data) {
 
             function ProductDetailViewModel() {
@@ -38,6 +40,9 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
                 self.addedProductPhoto = ko.observable();
                 self.addedProductName = ko.observable();
                 self.productsToCompareBreadcrumbs = ko.observable();
+                self.admin = ko.observable(false);
+                self.user = ko.observable(false);
+
 
                 var lgQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.LG_UP);
                 var mdQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.MD_UP);
@@ -57,7 +62,10 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
                 {
                     response.quantity = ko.observable(1);
                     response.prdLongDescLines = ko.observableArray(response.prdLongDesc.split("\n"));
-
+                    response.vndName = ko.observable(response.vndUidFk.vndName);
+                    response.categoryLongDesc = ko.observable(response.prdCategoryCd.longDesc);
+                    response.unitLongDesc = ko.observable(response.prdUnitCd.longDesc);
+                    
                     self.product(response);
                 };
 
@@ -87,13 +95,21 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
                 };
 
                 self.navigateToProductSearch = function () {
+                    sessionStorage.keepSearchResults = true;
                     console.log("continue shopping");
                     $("#addToCartConfirmationDialog").ojDialog("close");
                     return self.router.go("productSearch");
                 };
 
                 self.navigateToCart = function () {
+                    
                     return self.router.go("cart");
+                };
+                
+                self.navigateToProductUpdate = function (product) {
+                    // Store product id parameter
+                    self.router.store(self.getPrdUid());
+                    return self.router.go("productUpdate");
                 };
 
                 // Below are a subset of the ViewModel methods invoked by the ojModule binding
@@ -131,6 +147,17 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
                     
                     // Initialize a blank object
                     self.product(new Object());
+                        
+                    if ( sessionStorage.admin === 'true')
+                    {
+                        self.admin(true);   
+                        self.user(false);
+                    }
+                    else
+                    {
+                        self.admin(false);   
+                        self.user(true);
+                    }
                 };
             }
 

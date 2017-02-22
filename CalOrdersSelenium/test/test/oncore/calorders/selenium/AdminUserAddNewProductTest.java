@@ -33,7 +33,7 @@ public class AdminUserAddNewProductTest {
     driver.findElement(By.cssSelector("#loginInnerWrapperDiv > div.oj-flex")).click();
     driver.findElement(By.id("continue")).click();
     driver.findElement(By.id("userMenu")).click();
-    driver.findElement(By.id("ui-id-19")).click();
+    driver.findElement(By.id("ui-id-13")).click();
     driver.findElement(By.id("productName")).clear();
     driver.findElement(By.id("productName")).sendKeys("RandomStringUtils.randomAlphabetic(10)");
     driver.findElement(By.id("productOEMName")).clear();
@@ -46,6 +46,8 @@ public class AdminUserAddNewProductTest {
     driver.findElement(By.id("productOEMPartNumber")).sendKeys("123456");
     driver.findElement(By.id("productSKU")).clear();
     driver.findElement(By.id("productSKU")).sendKeys("abcdefg");
+    driver.findElement(By.id("productCategrory")).sendKeys("l");
+
     driver.findElement(By.id("productPrice")).clear();
     driver.findElement(By.id("productPrice")).sendKeys("150");
     driver.findElement(By.id("productContractDiscount")).clear();

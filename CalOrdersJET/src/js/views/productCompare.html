@@ -36,16 +36,145 @@
         <div class="oj-padding-vertical"></div>
     </div>
 
-    <!-- Page Content -->
-    <div id="productCompareWrapperDiv" class="oj-panel oj-flex-item">
-        <div class="justifyCenter">
+    <a data-bind="click: navigateToProductSearch">Back to Search Results</a>
 
-            <!-- Product Compare Results -->
-            <div id="productlistview" >
-                <div class="oj-flex oj-flex-items-pad oj-sm-flex-direction-column" data-bind="template: 'productCardLayout'"></div>
-            </div>
-        </div>
-    </div>
+    <table class="product-compare-table">
+        <tr>
+            <td class="product-detail-name">Product</td>
+            <td>
+                <img alt="product" data-bind="attr: {
+                        id: 'productImage' + productsToCompare()[0].prdUid, 
+                        src: getPhoto(productsToCompare()[0]), 
+                        height: large() ? '300' : '150',
+                        width: large() ? '300' : '150'}"/>
+                <div class="oj-flex-item">
+                    <h3 aria-label="product name" data-bind="text: productsToCompare()[0].prdName" tabindex="0"></h3>
+                    <div class="product-detail-label">List Price:</div>
+                    <div data-bind="text: '$' + productsToCompare()[0].prdPrice"></div>
+
+                    <div class="oj-padding-vertical"></div>
+
+                    <div class="product-detail-label">Discount Price:</div>
+                    <div class="product-detail-price" data-bind="text: '$' + productsToCompare()[0].prdCntrUnitPrice + ' (' + productsToCompare()[0].prdCntrDiscount +'%)'"></div>
+                </div>
+
+                <div class="oj-padding-vertical"></div>
+
+                <div class="oj-flex-item">
+                    <button id= "addToCart" data-bind="click: function(data, event) {addToCart(productsToCompare()[0])}, ojComponent: { component: 'ojButton', label: 'Add to Cart'}"></button> 
+                </div>
+
+            </td>
+            <td>
+                <img alt="product" data-bind="attr: {
+                        id: 'productImage' + productsToCompare()[1].prdUid, 
+                        src: getPhoto(productsToCompare()[1]), 
+                        height: large() ? '300' : '150',
+                        width: large() ? '300' : '150'}"/>
+                <div class="oj-flex-item">
+                    <h3 aria-label="product name" data-bind="text: productsToCompare()[1].prdName" tabindex="0"></h3>
+                    <div class="product-detail-label">List Price:</div>
+                    <div data-bind="text: '$' + productsToCompare()[1].prdPrice"></div>
+
+                    <div class="oj-padding-vertical"></div>
+
+                    <div class="product-detail-label">Discount Price:</div>
+                    <div class="product-detail-price" data-bind="text: '$' + productsToCompare()[1].prdCntrUnitPrice + ' (' + productsToCompare()[1].prdCntrDiscount +'%)'"></div>
+
+                </div>
+
+                <div class="oj-padding-vertical"></div>
+
+                <div class="oj-flex-item">
+                    <button id= "addToCart" data-bind="click: function(data, event) {addToCart(productsToCompare()[1])}, ojComponent: { component: 'ojButton', label: 'Add to Cart'}"></button> 
+                </div>
+
+            </td>
+        </tr>
+        <tr>
+            <td class="product-detail-name">Description</td>
+            <td>
+                <div class="oj-flex-item ">
+                    <div class="product-detail-label">Product Description</div>
+                    <div class="product-detail-value" data-bind="foreach: productsToCompare()[0].prdLongDescLines">
+                        <p data-bind="text: $data"></p>
+                    </div>
+                </div>
+
+            </td>
+            <td>
+                <div class="oj-flex-item ">
+                    <div class="product-detail-label">Product Description</div>
+                    <div class="product-detail-value" data-bind="foreach: productsToCompare()[1].prdLongDescLines">
+                        <p data-bind="text: $data"></p>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="product-detail-name">Vendor</td>
+            <td>
+                <div data-bind="text: productsToCompare()[0].vndUidFk.vndName"></div>
+            </td>
+            <td>
+                <div data-bind="text: productsToCompare()[1].vndUidFk.vndName"></div>
+            </td>
+        </tr>
+        <tr>
+            <td class="product-detail-name">SKU</td>
+            <td>
+                <div data-bind="text: productsToCompare()[0].prdSku"></div>
+            </td>
+            <td>
+                <div data-bind="text: productsToCompare()[1].prdSku"></div>
+            </td>
+        </tr>
+        <tr>
+            <td class="product-detail-name">Contract Line Item</td>
+            <td>
+                <div data-bind="text: productsToCompare()[0].prdCntrLnItm"></div>
+            </td>
+            <td>
+                <div data-bind="text: productsToCompare()[1].prdCntrLnItm"></div>
+            </td>
+        </tr>
+        <tr>
+            <td class="product-detail-name">Manufacturer</td>
+            <td>
+                <div data-bind="text: productsToCompare()[0].prdOemName"></div>
+            </td>
+            <td>
+                <div data-bind="text: productsToCompare()[1].prdOemName"></div>
+            </td>
+        </tr>
+        <tr>
+            <td class="product-detail-name">Manufacturer Part Number</td>
+            <td>
+                <div data-bind="text: productsToCompare()[0].prdOemPartNum"></div>
+            </td>
+            <td>
+                <div data-bind="text: productsToCompare()[1].prdOemPartNum"></div>
+            </td>
+        </tr>
+        <tr>
+            <td class="product-detail-name">Product Unit</td>
+            <td>
+                <div data-bind="text: productsToCompare()[0].prdUnitCd.longDesc"></div>
+            </td>
+            <td>
+                <div data-bind="text: productsToCompare()[1].prdUnitCd.longDesc"></div>
+            </td>
+        </tr>
+        <tr>
+            <td class="product-detail-name">Category</td>
+            <td>
+                <div data-bind="text: productsToCompare()[0].prdCategoryCd.longDesc"></div>
+            </td>
+            <td>
+                <div data-bind="text: productsToCompare()[1].prdCategoryCd.longDesc"></div>
+            </td>
+        </tr>
+    </table>
 </div>
 
 <!-- start add cart dialog box -->
@@ -84,61 +213,3 @@
     </div>
 </div>
 <!-- end add cart dialog box-->
-
-
-<!-- Product Card View -->
-<script id="productCardLayout" type="text/html">
-    <div class="oj-flex oj-flex-items-pad">
-        <ul id="listviewcard"
-            class="oj-flex oj-listview-card-layout"
-            data-bind="ojComponent: {component: 'ojListView',
-                data: cardViewDataSource,
-                rootAttributes: {'style': 'width:100%'},
-            item: {template: 'productcard_template'}}">
-        </ul>
-    </div>
-    <div class="oj-flex oj-flex-items-pad">
-        <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', mode: 'loadMore', data: cardViewDataSource, pageSize: 2}">
-        </div>
-    </div>
-</script>
-
-<!-- Product Card view (card format)  -->
-<script id="productcard_template" type="text/html">
-    <li class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-4 oj-xl-3" style="margin:0;border-style:none">
-        <div class="oj-panel oj-panel-alt1" style="margin: 5px 0px 10px 0px;">
-
-            <div data-bind="click: $parent.navigateToProductDetail">
-
-                <div class="oj-flex-item oj-sm-4">
-                    <img alt="product" data-bind="attr: {
-                        id: 'productImage' + $data['prdUid'], 
-                        src: $parent.getPhoto($data), 
-                        height: $parent.large() ? '300' : '150',
-                        width: $parent.large() ? '300' : '150'}"/>
-                </div>
-                <div class="oj-flex-item">
-                    <h3 aria-label="product description" data-bind="text: $data['prdName']" tabindex="0"></h3>
-                    <div data-bind="text: '$' + $data['prdPrice']"></div>
-                </div>
-            </div>
-
-            <div class="oj-padding-vertical"></div>
-
-            <div class="oj-flex-item ">
-                <div class="product-detail-label">Product Description:</div>
-
-                <div class="product-detail-value" data-bind="foreach: $data['prdLongDescLines']">
-                    <p data-bind="text: $data"></p>
-                </div>
-
-            </div>
-
-            <div class="oj-padding-vertical"></div>
-
-            <div class="oj-flex-item">
-                <button id= "addToCart" data-bind="click: $parent.addToCart, ojComponent: { component: 'ojButton', label: 'Add to Cart'}"></button> 
-            </div>
-        </div>
-    </li>
-</script>

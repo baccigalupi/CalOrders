@@ -123,8 +123,29 @@
 
 .product-detail-price {
     font-size:20px;
+    color: #a01010;
 }
 
+.product-detail-specification-label {
+    padding-left: 25px; 
+    padding-top: 10px;
+    color: gray;
+}
 
+.product-compare-table table {
+  width: 100%;
+}
+
+.product-compare-table table, tr, td {
+  border: 1px solid gray;
+}
+
+.product-compare-table tr, td {
+  padding: 15px;
+}
+   
+.product-search-name {
+    padding-left: 50px;
+}
 
 

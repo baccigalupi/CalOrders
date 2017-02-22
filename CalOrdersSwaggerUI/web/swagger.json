@@ -1,41 +1,271 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "version": "1.0.0",
-        "title": "Find Image By UUID"
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Calorders API",
+    "description": "The Calorders Swagger API specification",
+    "termsOfService": "https://github.com/OncoreLLC/CalOrdersSwaggerUI/blob/master/LICENSE",
+    "contact": {
+      "name": "Calorders Team",
+      "email": "tempus@oncorellc.com",
+      "url": "https://github.com/OncoreLLC/CalordersArtifacts/blob/master/README.md"
     },
-    "paths": {
-        "/TempusImages/webresources/com.oncore.tempus.services.images.images/findImageByKey/{key}": {
-            "get": {
-                "description": "Gets an Image by UUID.\n",
-                "parameters": [
-                    {
-                        "name": "key",
-                        "in": "path",
-                        "description": "unique image uuid",
-                        "required": true,
-                        "type": "string",
-                        "format": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful response",
-                        "schema": {
-                            "title": "ImageData",
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string"
-                                },
-                                "single": {
-                                    "type": "boolean"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+    "license": {
+      "name": "OnCore Private License",
+      "url": "https://github.com/OncoreLLC/CalOrdersSwaggerUI/blob/master/LICENSE"
     }
+  },
+  "host": "calorderstest.oncorellc.com:9080",
+  "basePath": "/CalOrdersRest/webresources",
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/com.oncore.calorders.rest.product/findActiveProductsByProductType/{productTypeCode}": {
+      "get": {
+        "description": "Gets an Active product by product type.",
+        "operationId": "findActiveProductsByProductType",
+        "parameters": [
+          {
+            "name": "productTypeCode",
+            "in": "path",
+            "description": "active products by product type",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Product response"
+          }
+        }
+      }
+    },
+    "/com.oncore.calorders.rest.product/findActiveProductsByProductTypeAndVendor/{productTypeCode}/{vendorUid}": {
+      "get": {
+        "description": "Gets an Active product by product type and vendor.",
+        "operationId": "findActiveProductsByProductTypeAndVendor",
+        "parameters": [
+          {
+            "name": "productTypeCode",
+            "in": "path",
+            "description": "active products by product type",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "vendorUid",
+            "in": "path",
+            "description": "vendor Id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Product response"
+          }
+        }
+      }
+    },
+    "/com.oncore.calorders.rest.product/doesProductNameExist/{productName}": {
+      "get": {
+        "description": "Check to see if a product exists by name.",
+        "operationId": "doesProductNameExist",
+        "parameters": [
+          {
+            "name": "productName",
+            "in": "path",
+            "description": "name of the product",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Product response"
+          }
+        }
+      }
+    },
+    "/com.oncore.calorders.rest.product/createProduct": {
+      "post": {
+        "description": "Creates a new prodcuct.",
+        "operationId": "createProduct",
+        "parameters": [
+
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/com.oncore.calorders.rest.orderHistory/fetchOrdersByQuarter": {
+      "get": {
+        "description": "get all order by quarter.",
+        "operationId": "fetchOrdersByQuarter",
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": "Order history response"
+          }
+        }
+      }
+    },
+    "/com.oncore.calorders.rest.orderHistory/fetchOrderStatusSummary": {
+      "get": {
+        "description": "Get order statuses.",
+        "operationId": "fetchOrderStatusSummary",
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": "Order history response"
+          }
+        }
+      }
+    },
+    "/com.oncore.calorders.rest.orderHistory/createOrder": {
+      "post": {
+        "description": "Creates new Order.",
+        "operationId": "createOrder",
+        "parameters": [
+
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/com.oncore.calorders.rest.party/findPartyByUserIdAndPassword/{userId}/{password}": {
+      "get": {
+        "description": "Get the party by userId and password.",
+        "operationId": "findPartyByUserIdAndPassword",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "active products by product type",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "password",
+            "in": "path",
+            "description": "active products by product type",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Party response"
+          }
+        }
+      }
+    },
+    "/com.oncore.calorders.rest.party/findAllGroupsByPartyId/{partyId}": {
+      "get": {
+        "description": "Gets all groups by party.",
+        "operationId": "findAllGroupsByPartyId",
+        "parameters": [
+          {
+            "name": "partyId",
+            "in": "path",
+            "description": "unique party Id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Party response"
+          }
+        }
+      }
+    },
+    "/com.oncore.calorders.rest.party/findAllPrivilegesByPartyId/{partyId}": {
+      "get": {
+        "description": "Get all privileges by party.",
+        "operationId": "findAllPrivilegesByPartyId",
+        "parameters": [
+          {
+            "name": "partyId",
+            "in": "path",
+            "description": "unique party Id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Party response"
+          }
+        }
+      }
+    },
+    "/com.oncore.calorders.rest.party/findNavBarPrivilegesByPartyId/{partyId}": {
+      "get": {
+        "description": "Get authorized nav bar by party.",
+        "operationId": "findNavBarPrivilegesByPartyId",
+        "parameters": [
+          {
+            "name": "partyId",
+            "in": "path",
+            "description": "unique party Id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Product response"
+          }
+        }
+      }
+    },
+    "/com.oncore.calorders.rest.party/findNavMenuPrivilegesByPartyId/{partyId}": {
+      "get": {
+        "description": "Get authorized nav menu by party.",
+        "operationId": "findNavMenuPrivilegesByPartyId",
+        "parameters": [
+          {
+            "name": "partyId",
+            "in": "path",
+            "description": "unique party Id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Party response"
+          }
+        }
+      }
+    }
+  }
 }

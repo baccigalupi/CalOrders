@@ -26,8 +26,8 @@
 /*
  * Your about ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/ReferenceData'],
-        function (oj, ko, $) {
+define(['ojs/ojcore', 'knockout', 'jquery', 'accounting', 'common/SecurityUtils', 'reference/ReferenceData', 'utils/ProductHelper'],
+        function (oj, ko, $, accounting) {
 
             function ProductAddViewModel() {
                 var self = this;
@@ -58,6 +58,41 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                 self.productUnitCodeMessages = ko.observableArray([]);
                 self.productContractLineItem = ko.observable();
                 self.productContractUnitPrice = ko.observable();
+                self.productContractUnitPriceDisplay = ko.observable();
+                self.productActiveStatus = ko.observable("1");
+                self.productImage = ko.observable();
+                self.productImageBytes = ko.observable();
+                self.productImgageKey = ko.observable();
+                self.productImageName = ko.observable();
+                self.productImageOrigin = ko.observable();
+                self.productImageSize = ko.observable();
+                self.productImageType = ko.observable();
+                self.uploadFile = ko.observable(null);
+                self.uploadName = ko.computed(function () {
+                    return !!self.uploadFile() ? self.uploadFile().name : '-';
+                });
+
+                /**
+                 * Apply KO bindings for the Product Image
+                 */
+                ko.bindingHandlers.fileUpload = {
+                    init: function (element, valueAccessor) {
+                        $(element).change(function () {
+                            valueAccessor()(element.files[0]);
+                        });
+                    },
+                    update: function (element, valueAccessor) {
+                        if (ko.unwrap(valueAccessor()) === null) {
+                            $(element).wrap('<form>').closest('form').get(0).reset();
+                            $(element).unwrap();
+                        }
+                    }
+                };
+
+                var mdQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.MD_UP);
+                self.medium = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(mdQuery);
+
+
                 // Below are a subset of the ViewModel methods invoked by the ojModule binding
                 // Please reference the ojModule jsDoc for additionaly available methods.
 
@@ -100,6 +135,19 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                     self.productContractLineItem = ko.observable();
                     self.productContractDiscount = ko.observable();
                     self.productContractUnitPrice = ko.observable();
+                    self.productContractUnitPriceDisplay = ko.observable();
+                    self.productActiveStatus = ko.observable("1");
+                    self.productImage = ko.observable();
+                    self.productImageBytes = ko.observable();
+                    self.productImgageKey = ko.observable();
+                    self.productImageName = ko.observable();
+                    self.productImageOrigin = ko.observable();
+                    self.productImageSize = ko.observable();
+                    self.productImageType = ko.observable();
+                    self.uploadFile = ko.observable(null);
+                    self.uploadName = ko.computed(function () {
+                        return !!self.uploadFile() ? self.uploadFile().name : '-';
+                    });
                 };
                 /**
                  * Optional ViewModel method invoked after the View is inserted into the
@@ -135,6 +183,34 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                 self.handleDetached = function (info) {
                     // Implement if needed
                 };
+
+                /**
+                 * Get the default photo
+                 * @returns {ProductHelper.ProductHelperProductHelper.getPhoto.src|String}
+                 */
+                self.getPhoto = function ()
+                {
+                    return ProductHelper.getPhoto(undefined);
+                };
+
+                self.computeContractPrice = function (data, event) {
+                    var percent = $("#productContractDiscount").val();
+                    var price = $("#productPrice").val();
+
+                    self.calculateContractPrice(price, percent);
+                };
+
+                self.calculateContractPrice = function (price, percent) {
+                    var discount = ((percent / 100) * price);
+                    if (discount == NaN || discount == undefined || discount === 0) {
+                        self.productContractUnitPrice(undefined);
+                        self.productContractUnitPriceDisplay(accounting.formatMoney(0))
+                    } else {
+                        self.productContractUnitPrice(price - discount);
+                        self.productContractUnitPriceDisplay(accounting.formatMoney(price - discount))
+                    }
+                };
+
                 self.buttonClick = function (data, event) {
                     if (event.currentTarget.id === 'save')
                     {
@@ -152,6 +228,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                                 idAttribute: 'prdUid'
                             });
                         var productService = new ProductService();
+
                         productService.save(
                                 {
                                     //Product Info
@@ -168,8 +245,13 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                                     "productPrice": self.productPrice(),
                                     "productDescription": self.productDescription(),
                                     "productFullDesc": self.productFullDesc(),
+                                    "productActivationStatus": self.productActiveStatus(),
+                                    "productImage": self.productImageBytes(),
+                                    "productImageName": self.productImageName(),
+                                    "imgOrigin": "tbd",
+                                    "productImageSize": self.productImageSize(),
+                                    "productImageType": self.productImageType(),
                                     "partyUserId": sessionStorage.userName
-
 
                                 },
                                 {
@@ -188,8 +270,104 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                         // Do nothing and go back to search page
                         return self.router.go('productSearch');
                     }
-                }
-                ;
+                };
+
+                /**
+                 * The showSuccessMessage method displays the success dialog.
+                 * 
+                 * @returns {undefined}
+                 */
+                self.showSuccessMessage = function ()
+                {
+                    $("#modalDialog1").ojDialog("open");
+                };
+                /**
+                 * The closeClickEvent method handles the click event
+                 * generated from the close button.
+                 * 
+                 * @param {type} data
+                 * @param {type} event
+                 * @returns {unresolved}
+                 */
+                self.closeClickEvent = function (data, event) {
+                    $("#modalDialog1").ojDialog("close");
+                    return self.router.go('productSearch');
+                };
+
+                /**
+                 * Closes the image warning dialog box
+                 * @param {type} data
+                 * @param {type} event
+                 * @returns {Boolean}
+                 */
+                self.closeImageDialogClick = function (data, event)
+                {
+                    $("#modalDialog2").ojDialog("close");
+                    self.resetClickEvent();
+                };
+
+                self.resetClickEvent = function () {
+                    self.uploadFile(null);
+                };
+
+                /**
+                 * Demonstrates uploading an image to the CalOrders domain.
+                 * 
+                 * @param {type} data
+                 * @param {type} event
+                 * @returns {Boolean}
+                 */
+                self.uploadImageClick = function (data, event)
+                {
+
+                    if (self.uploadFile._latestValue !== null && self.uploadFile._latestValue.name !== "")
+                    {
+                        self.productImage(self.uploadFile._latestValue);
+                        self.productImageName(self.uploadFile._latestValue.name);
+                        self.productImageSize(self.uploadFile._latestValue.size);
+
+                        var fileTypeUtils = new FileTypeUtils();
+                        var imageType = fileTypeUtils.determineTypeCode(self.uploadFile._latestValue.type)
+                        self.productImageType(imageType);
+                        if (self.productImageType === "unknown")
+                        {
+                            $("#modalDialog2").ojDialog("open");
+                        } else
+                        {
+                            var preview = document.getElementById('productPicture');
+                            // read the file into a byte array
+                            var reader = new FileReader();
+
+                            /**
+                             * Add an event listener to the FileReader which will
+                             * fire when the file has been completely read.
+                             */
+                            reader.onloadend = function () {
+                                if (imageType === "PNG" || imageType === "JPEG")
+                                {
+                                    preview.src = reader.result;
+                                    self.productImageBytes(reader.result.split(',')[1]);
+
+                                } else
+                                {
+                                    alert("Your PDF was uploaded, but no preview is available.");
+                                }
+                            }, false;
+
+                            // load the file
+                            try {
+                                reader.readAsDataURL(self.productImage._latestValue);
+
+                            } catch (err)
+                            {
+                                console.log(err);
+                            }
+                        }
+
+                    }
+                    return false;
+                };
+
                 self.validateProductName = {
                     validate: function (value)
                     {
@@ -228,7 +406,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                 };
                 self.isValidDropDowns = function ()
                 {
-                    var validProductCategory = self.isValideProductCategory();
+                    var validProductCategory = self.isValidProductCategory();
                     var validVendor = self.isValidVendor();
                     var validProductUnitCode = self.isValidProductUnitCode();
                     return validProductCategory && validVendor && validProductUnitCode;
@@ -236,25 +414,41 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                 self.validateProductCategory = {validate: function (value)
                     {
                         var validProductCategory = true;
-                        // Hack for states dropdown and can't figure out how
-                        // required error message is thrown by itself
-                        if (typeof value === "undefined"
-                                || value === "")
-                        {
-                            this.productCategoryMessages([
-                                new oj.Message(
-                                        "Value is required.",
-                                        "You must select a value.",
-                                        oj.Message.SEVERITY_TYPE.ERROR)]);
-                            validProductCategory = false;
+                        var serviceIndicator = undefined;
+                        if (typeof value != "undefined"
+                                && value != "") {
+                            serviceIndicator = value[0].substring(1, 2);
                         }
+                        if (typeof value != "undefined"
+                                && value != "" && (value == "SERI"))
+                        {
+                            self.productCategoryMessages([
+                                new oj.Message("Independent Services:",
+                                        "Independent Services are products that can be purchased individually",
+                                        oj.Message.SEVERITY_TYPE.INFO)]);
+                        }
+                        if (typeof serviceIndicator != "undefined"
+                                && serviceIndicator != "" && serviceIndicator === "S")
+                        {
+                            self.productCategoryMessages([
+                                new oj.Message("Upgrade Services:",
+                                        "Upgrade Services are products that can only be purchased as part of an order",
+                                        oj.Message.SEVERITY_TYPE.INFO)]);
+                        }
+                        if (typeof serviceIndicator != "undefined"
+                                && serviceIndicator != "" && serviceIndicator === "A")
+                        {
+                            self.productCategoryMessages([
+                                new oj.Message("Stand Alone Services:",
+                                        "Stand Alone Services are products that can be purchased individually",
+                                        oj.Message.SEVERITY_TYPE.INFO)]);
+                        }
+
                         return validProductCategory;
                     }};
-                self.isValideProductCategory = function ()
+                self.isValidProductCategory = function ()
                 {
                     var validProductCategory = true;
-                    // Hack for states dropdown and can't figure out how
-                    // required error message is thrown by itself
                     if (typeof self.productCategory() === "undefined"
                             || self.productCategory() === "")
                     {
@@ -270,12 +464,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                 self.validateVendor = {validate: function (value)
                     {
                         var validVendor = true;
-                        // Hack for states dropdown and can't figure out how
-                        // required error message is thrown by itself
                         if (typeof value === "undefined"
                                 || value === "")
                         {
-                            this.vendorMessages([
+                            self.vendorMessages([
                                 new oj.Message(
                                         "Value is required.",
                                         "You must select a value.",
@@ -287,8 +479,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                 self.isValidVendor = function ()
                 {
                     var validVendor = true;
-                    // Hack for states dropdown and can't figure out how
-                    // required error message is thrown by itself
                     if (typeof self.vendor() === "undefined"
                             || self.vendor() === "")
                     {
@@ -304,12 +494,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                 self.validateProductUnitCode = {validate: function (value)
                     {
                         var validProductUnitCode = true;
-                        // Hack for states dropdown and can't figure out how
-                        // required error message is thrown by itself
                         if (typeof value === "undefined"
                                 || value === "")
                         {
-                            this.productUnitCodeMessages([
+                            self.productUnitCodeMessages([
                                 new oj.Message(
                                         "Value is required.",
                                         "You must select a value.",
@@ -318,12 +506,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                         }
                         return validProductUnitCode;
                     }};
-
                 self.isValidProductUnitCode = function ()
                 {
                     var validProductUnitCode = true;
-                    // Hack for states dropdown and can't figure out how
-                    // required error message is thrown by itself
                     if (typeof self.productCategory() === "undefined"
                             || self.productCategory() === "")
                     {
@@ -336,39 +521,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                     }
                     return validProductUnitCode;
                 };
-                self.router = oj.Router.rootInstance;
-                /**
-                 * The showSuccessMessage method displays the success dialog.
-                 * 
-                 * @returns {undefined}
-                 */
-                self.showSuccessMessage = function ()
-                {
-                    $("#modalDialog1").ojDialog("open");
-                };
-                /**
-                 * The closeClickEvent method handles the click event
-                 * generated from the close button.
-                 * 
-                 * @param {type} data
-                 * @param {type} event
-                 * @returns {unresolved}
-                 */
-                self.closeClickEvent = function (data, event) {
-                    $("#modalDialog1").ojDialog("close");
-                    return self.router.go('productSearch');
-                };
 
-                self.computeContractPrice = function (data, event) {
-                    var percent = $("#productContractDiscount").val();
-                    var price = $("#productPrice").val();
-                    var discount = ((percent / 100) * price).toFixed(2);
-                    if (discount == NaN || discount == undefined || discount === 0) {
-                        self.productContractUnitPrice(undefined);
-                    } else {
-                        self.productContractUnitPrice(price-discount);
-                    }
-                };
+
             }
 
 
