@@ -71,6 +71,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                     return !!self.uploadFile() ? self.uploadFile().name : '-';
                 });
 
+                /**
+                 * Apply KO bindings for the Product Image
+                 */
                 ko.bindingHandlers.fileUpload = {
                     init: function (element, valueAccessor) {
                         $(element).change(function () {
@@ -179,6 +182,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                     // Implement if needed
                 };
 
+                /**
+                 * Get the default photo
+                 * @returns {ProductHelper.ProductHelperProductHelper.getPhoto.src|String}
+                 */
                 self.getPhoto = function ()
                 {
                     return ProductHelper.getPhoto(undefined);
@@ -212,6 +219,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                                 idAttribute: 'prdUid'
                             });
                         var productService = new ProductService();
+                        console.log(self.productImageBytes().length);
                         productService.save(
                                 {
                                     //Product Info
@@ -306,8 +314,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                     if (self.uploadFile._latestValue !== null && self.uploadFile._latestValue.name !== "")
                     {
                         self.productImage(self.uploadFile._latestValue);
-                        self.productImageSize(self.uploadFile._latestValue.size);
                         self.productImageName(self.uploadFile._latestValue.name);
+                        self.productImageSize(self.uploadFile._latestValue.size);
+
                         var fileTypeUtils = new FileTypeUtils();
                         var imageType = fileTypeUtils.determineTypeCode(self.uploadFile._latestValue.type)
                         self.productImageType(imageType);
@@ -316,32 +325,31 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                             $("#modalDialog2").ojDialog("open");
                         } else
                         {
-
                             var preview = document.getElementById('productPicture');
                             // read the file into a byte array
                             var reader = new FileReader();
+
                             /**
                              * Add an event listener to the FileReader which will
-                             * fire when the file has been completely read. Once 
-                             * complete we will save the data.
+                             * fire when the file has been completely read.
                              */
-                            reader.addEventListener("load", function () {
-                                
-                                self.productImageBytes(reader.result);
-                                //console.log( self.productImageBytes());
-                                console.log( reader.result.length);
-                                console.log(self.productImageBytes().length);
+                            reader.onloadend = function () {
                                 if (imageType === "PNG" || imageType === "JPEG")
                                 {
                                     preview.src = reader.result;
+                                    self.productImageBytes(reader.result.split(',')[1]);
+                                    console.log(reader.result.split(',')[1]);
+
                                 } else
                                 {
                                     alert("Your PDF was uploaded, but no preview is available.");
                                 }
-                            }, false);
+                            }, false;
+
                             // load the file
                             try {
                                 reader.readAsDataURL(self.productImage._latestValue);
+
                             } catch (err)
                             {
                                 console.log(err);
@@ -398,6 +406,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                 self.validateProductCategory = {validate: function (value)
                     {
                         var validProductCategory = true;
+                        var serviceIndicator = value[0].substring(1, 2);
                         if (typeof value != "undefined"
                                 && value != "" && (value == "SERI"))
                         {
@@ -406,12 +415,20 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                                         "Independent Services are products that can be purchased individually",
                                         oj.Message.SEVERITY_TYPE.INFO)]);
                         }
-                        if (typeof value != "undefined"
-                                && value != "" && (value == "SERR"))
+                        if (typeof serviceIndicator != "undefined"
+                                && serviceIndicator != "" && serviceIndicator === "S")
                         {
                             self.productCategoryMessages([
-                                new oj.Message("Related Services:",
-                                        "Related Services are products that can only be purchased as part of an order",
+                                new oj.Message("Upgrade Services:",
+                                        "Upgrade Services are products that can only be purchased as part of an order",
+                                        oj.Message.SEVERITY_TYPE.INFO)]);
+                        }
+                        if (typeof serviceIndicator != "undefined"
+                                && serviceIndicator != "" && serviceIndicator === "A")
+                        {
+                            self.productCategoryMessages([
+                                new oj.Message("Stand Alone Services:",
+                                        "Stand Alone Services are products that can be purchased individually",
                                         oj.Message.SEVERITY_TYPE.INFO)]);
                         }
 
