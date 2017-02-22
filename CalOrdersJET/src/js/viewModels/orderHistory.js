@@ -24,16 +24,18 @@
 /*
  * Your customer ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils'],
+define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'moment'],
         function (oj, ko, $) {
 
             function OrdersViewModel() {
                 var self = this;
-
-
                 self.router = oj.Router.rootInstance;
-
-
+                var self = this;
+                var serviceEndPoints = new ServiceEndPoints();
+                self.serviceURL = serviceEndPoints.getEndPoint('findAllOrderHistoryByUserId');
+                self.orderHistoryCol = ko.observable();
+                self.datasource = ko.observable();
+                self.tracker = ko.observable();
                 // Below are a subset of the ViewModel methods invoked by the ojModule binding
                 // Please reference the ojModule jsDoc for additionaly available methods.
 
@@ -53,8 +55,22 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils'],
                         return self.router.go('welcome');
                     }
 
-                };
+                    self.serviceURL = serviceEndPoints.getEndPoint('findAllOrderHistoryByUserId') + "/" + sessionStorage.userName;
+                    var OrderHistoryModel = oj.Model.extend({
+                        urlRoot: self.serviceURL,
+                        parse: self.parseOrderHistory,
+                        idAttribute: 'orderHistoryId'
+                    });
+                    var orderHistory = new OrderHistoryModel();
+                    var OrderHistoryCollection = oj.Collection.extend({
+                        url: self.serviceURL,
+                        model: orderHistory,
+                        comparator: 'orderHistoryId'
+                    });
+                    self.orderHistoryCol = new OrderHistoryCollection();
 
+                    self.datasource(new oj.PagingTableDataSource(new oj.CollectionTableDataSource(self.orderHistoryCol, {idAttribute: 'orderHistoryId'})));
+                };
                 /**
                  * Optional ViewModel method invoked after the View is inserted into the
                  * document DOM.  The application can put logic that requires the DOM being
@@ -67,8 +83,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils'],
                 self.handleAttached = function (info) {
                     // Implement if needed
                 };
-
-
                 /**
                  * Optional ViewModel method invoked after the bindings are applied on this View. 
                  * If the current View is retrieved from cache, the bindings will not be re-applied
@@ -80,7 +94,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils'],
                 self.handleBindingsApplied = function (info) {
                     // Implement if needed
                 };
-
                 /*
                  * Optional ViewModel method invoked after the View is removed from the
                  * document DOM.
@@ -91,6 +104,30 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils'],
                  */
                 self.handleDetached = function (info) {
                     // Implement if needed
+                };
+                self.fetch = function (successCallBack) {
+                    self.orderHistoryCol().fetch({
+                        success: successCallBack,
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.log('Error in fetch: ' + textStatus);
+                        }
+                    });
+                };
+                self.parseOrderHistory = function (response) {
+                    var orderDate = null;
+                    if (response.orderDate !== undefined)
+                    {
+                       orderDate = moment().format('MM/dd/yyyy');
+                    }
+
+                    var result = {'orderId': response['orderId'],
+                        'orderDate': orderDate,
+                        'orderStatus': response['orderStatus'],
+                        'orderPoNumber': response['orderPoNumber'],
+                        'orderAgency': response['orderAgency'],
+                        'orderPrice': response['orderPrice'],
+                        'orderDescription': response['orderDescription']};
+                    return result;
                 };
             }
 

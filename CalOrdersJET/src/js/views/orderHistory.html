@@ -21,8 +21,31 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  * -->
-<div class="oj-hybrid-padding">
-  <h2>Order History</h2>
+<div id="orderHistoryWrapper" class="oj-hybrid-padding">
+    <h2>Order History</h2>
     <div class="oj-panel oj-flex">
-    </div>    
+        <div id="orderHistoryContent" class="oj-hybrid-padding">
+            <div id="orderHistoryTableContent" class="oj-md-12 oj-flex-item page-padding">
+                <div class="page-padding">
+                    <div id="orderHistoryTable">
+                        <table id="table" summary="Order History Table" aria-label="Order History Table"
+                               data-bind="ojComponent: {component: 'ojTable', 
+                                selectionMode: {row: 'multiple', column: 'multiple'}, data: datasource, 
+                                columns: [{headerText: 'Order No.', field: 'orderId', sortable: 'enabled'},
+                                  {headerText: 'Date', field: 'orderDate', sortable: 'enabled'},
+                                  {headerText: 'Status', field: 'orderStatus', sortable: 'enabled'},   
+                                  {headerText: 'PO. Number', field: 'orderPoNumber', sortable: 'enabled'},
+                                  {headerText: 'Agency', field: 'orderAgency', sortable: 'enabled'},
+                                  {headerText: 'Price', field: 'orderPrice', sortable: 'enabled'},
+                                  {headerText: 'Description', field: 'orderDescription', sortable: 'enabled'}], 
+                                 rootAttributes: {'style':'width: 100%;'}}">
+                        </table>
+                        <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: datasource, pageSize: 5}">
+                        </div>
+                    </div>
+                    <br/><br/>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
