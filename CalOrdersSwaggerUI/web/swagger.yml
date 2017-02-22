@@ -16,8 +16,8 @@ info:
   license:
     name: OnCore Private License
     url: https://github.com/OncoreLLC/CalOrdersSwaggerUI/blob/master/LICENSE
-host: localhost:8080
-basePath: /CalOrdersSwaggerUI/webresources
+host: calorderstest.oncorellc.com:9080
+basePath: /CalOrdersRest/webresources
 schemes:
   - http
 consumes:
