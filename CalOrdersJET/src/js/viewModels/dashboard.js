@@ -34,35 +34,39 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils'],
                 self.router = oj.Router.rootInstance;
 
 
-
-
                 /* toggle button variables */
 
                 self.ordersByQuarterCollection = null;
-                self.stackValue = ko.observable('on');
-                self.stackLabelValue = ko.observable('on');
-                self.orientationValue = ko.observable('vertical');
-                self.labelPosition = ko.observable('auto');
-
-
-
-
+                self.stackValue = ko.observable();
+                self.stackLabelValue = ko.observable();
+                self.orientationValue = ko.observable();
+                self.labelPosition = ko.observable();
                 self.barSeriesValue = ko.observableArray();
                 self.barGroupsValue = ko.observableArray();
+                /* pie series data */
+                self.threeDValue = ko.observable();
+                self.dataLabelPositionValue = ko.observable();
+                self.pieSeriesValue = ko.observableArray();
+                self.pieSeriesCollection = null;
 
-                /* toggle buttons*/
+
+
+
                 self.stackOptions = [
                     {id: 'unstacked', label: 'unstacked', value: 'off', icon: 'oj-icon demo-bar-unstack'},
                     {id: 'stacked', label: 'stacked', value: 'on', icon: 'oj-icon demo-bar-stack'}
                 ];
+
                 self.stackLabelOptions = [
                     {id: 'labelOff', label: 'off', value: 'off'},
                     {id: 'labelOn', label: 'on', value: 'on'}
                 ];
+
                 self.orientationOptions = [
                     {id: 'vertical', label: 'vertical', value: 'vertical', icon: 'oj-icon demo-bar-vert'},
                     {id: 'horizontal', label: 'horizontal', value: 'horizontal', icon: 'oj-icon demo-bar-horiz'}
                 ];
+
                 self.labelPositionOptions = ko.observableArray([
                     {id: 'auto', label: 'auto', value: 'auto'},
                     {id: 'center', label: 'center', value: 'center'},
@@ -71,70 +75,16 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils'],
                 ]);
 
 
+                self.threeDOptions = [
+                    {id: '2D', label: '2D', value: 'off', icon: 'oj-icon demo-2d'},
+                    {id: '3D', label: '3D', value: 'on', icon: 'oj-icon demo-3d'}
+                ];
 
+                self.threeDOptions = [
+                    {id: '2D', label: '2D', value: 'off', icon: 'oj-icon demo-2d'},
+                    {id: '3D', label: '3D', value: 'on', icon: 'oj-icon demo-3d'}
+                ];
 
-
-
-
-                /* Active orders data */
-                self.threeDValue = ko.observable('off');
-                self.dataLabelPositionValue = ko.observable('auto');
-
-                /* chart data */
-
-                self.pieSeriesValue = ko.observableArray();
-                self.pieSeriesCollection = null;
-
-
-
-
-
-//                /* Total Sold By Month */
-//                var expenseSeries = [{name: "Desktops", items: [400, 0, 56.32, 32.33, 0]},
-//                    {name: "Laptops", items: [100.43, 800.32, 0, 0, 323.32]},
-//                    {name: "Monitors", items: [80, 80, 80, 80, 80]}];
-//
-//                var expenseGroups = ["1/2016", "2/2016", "3/2016", "4/2016", "5/2016"];
-//
-//
-//                this.expenseSeriesValue = ko.observableArray(expenseSeries);
-//                this.expenseGroupsValue = ko.observableArray(expenseGroups);
-//
-//
-//
-//
-//                /* Orders by Agency */
-//                var ptoSeries = [{name: "DOJ", items: [16, 0, 8, 12, 0]},
-//                    {name: "FTB", items: [0, 0, 0, 0, 8]},
-//                    {name: "DTS", items: [0, 8, 0, 0, 0]},
-//                    {name: "BOE", items: [16, 0, 8, 8, 8]}];
-//
-//                var ptoGroups = ["1/2016", "2/2016", "3/2016", "4/2016", "5/2016"];
-//
-//
-//                this.ptoSeriesValue = ko.observableArray(ptoSeries);
-//                this.ptoGroupsValue = ko.observableArray(ptoGroups);
-//
-//
-//
-//                var profileArray = [{Key: 'Name', Value: 'Ricky Bobby'},
-//                    {Key: 'Phone', Value: '916.392.3233'},
-//                    {Key: 'Address', Value: '3923 Racecar Ct Folsom, CA 95630'},
-//                    {Key: 'Hire Date', Value: '04/01/2016'},
-//                    {Key: 'Title', Value: 'Driver'}];
-//                self.datasource = new oj.ArrayTableDataSource(profileArray, {idAttribute: 'Key'});
-
-
-
-
-
-
-
-
-
-
-                // Below are a subset of the ViewModel methods invoked by the ojModule binding
-                // Please reference the ojModule jsDoc for additionaly available methods.
 
                 /**
                  * Optional ViewModel method invoked when this ViewModel is about to be
@@ -152,6 +102,21 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils'],
                     if (!SecurityUtils.isAuthenticated()) {
                         return self.router.go('welcome');
                     }
+
+                    self.ordersByQuarterCollection = null;
+                    self.stackValue('on');
+                    self.stackLabelValue('on');
+                    self.orientationValue('vertical');
+                    self.labelPosition('auto');
+                    self.barSeriesValue = ko.observableArray();
+                    self.barGroupsValue = ko.observableArray();
+                    self.threeDValue('off');
+                    self.dataLabelPositionValue('auto');
+                    self.pieSeriesValue = ko.observableArray();
+                    self.pieSeriesCollection = null;
+
+
+
 
                     var serviceEndPoints = new ServiceEndPoints();
                     var serviceURL = serviceEndPoints.getEndPoint('fetchOrdersByQuarter');
@@ -191,16 +156,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils'],
                     });
 
 
-
-
-
-                    //fetchOrderStatusSummary
-
-                    /* chart data */
-               
-
-
-
                     serviceEndPoints = new ServiceEndPoints();
                     serviceURL = serviceEndPoints.getEndPoint('fetchOrderStatusSummary');
 
@@ -222,14 +177,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils'],
                     pie.fetch({
                         success: function () {
                             self.pieSeriesValue(self.pieSeriesCollection.models[0].attributes.items);
-                           
-//                            var pieSeries = [{name: "Submitted", items: [42]},
-//                    {name: "Processing", items: [55]},
-//                    {name: "Shipped", items: [36]},
-//                    {name: "Cancelled", items: [10]}];
-
-
-              //  self.pieSeriesValue(pieSeries);
                         },
                         error: function (jqXHR, textStatus, errorThrown) {
                             console.log("Error occurred when populating the dashboard" + errorThrown);
@@ -237,18 +184,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils'],
                             return false;
                         }
                     });
-
-
-
-
-
-
-
-
-
-
-
-
 
 
                 };
@@ -292,21 +227,37 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils'],
                 };
 
 
-
-
-                /* Active orders by month data */
-
+                /**
+                 * Parse data returned from REST call
+                 * 
+                 * @param {type} response
+                 * @returns {undefined}
+                 */
                 var parseOrderByQuarter = function (response)
                 {
                     self.ordersByQuarterCollection.push(response);
                 };
 
+                /**
+                 * Parse data returned from REST call
+                 * 
+                 * @param {type} response
+                 * @returns {undefined}
+                 */
                 var parsePieData = function (response)
                 {
                     self.pieSeriesCollection.push(response);
                 };
 
 
+                /**
+                 * Adjusts position of labels on bar chart when 
+                 * the chart alignment and format changes.
+                 * 
+                 * @param {type} event
+                 * @param {type} ui
+                 * @returns {Boolean}
+                 */
                 self.labelPositionChange = function (event, ui) {
                     var seriesInfo = ko.toJS(self.barSeriesValue);
                     for (var i = 0; i < seriesInfo.length; i++) {
@@ -317,6 +268,15 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils'],
                     self.barSeriesValue(seriesInfo);
                     return true;
                 };
+                
+                /**
+                 * Adjusts the icon, text, value, labels etc. for the
+                 * for the bar chart when in stacked view
+                 * 
+                 * @param {type} event
+                 * @param {type} ui
+                 * @returns {undefined}
+                 */
                 self.stackLValueChange = function (event, ui) {
                     var isOn = true;
                     if (ui.value == "on") {
@@ -341,29 +301,20 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils'],
 
 
 
-
-
-                /* toggle buttons*/
-                self.threeDOptions = [
-                    {id: '2D', label: '2D', value: 'off', icon: 'oj-icon demo-2d'},
-                    {id: '3D', label: '3D', value: 'on', icon: 'oj-icon demo-3d'}
-                ];
-                self.threeDOptions = [
-                    {id: '2D', label: '2D', value: 'off', icon: 'oj-icon demo-2d'},
-                    {id: '3D', label: '3D', value: 'on', icon: 'oj-icon demo-3d'}
-                ];
+                /**
+                 * Adjusts the pie chart format from 2D to 3D and 
+                 * vice versa
+                 * 
+                 * @param {type} event
+                 * @param {type} data
+                 * @returns {Boolean}
+                 */
                 self.threeDValueChange = function (event, data) {
                     self.threeDValue(data.value);
                     return true;
                 };
 
-
-
-
             }
-
-
-
 
             return new DashboardViewModel();
         }
