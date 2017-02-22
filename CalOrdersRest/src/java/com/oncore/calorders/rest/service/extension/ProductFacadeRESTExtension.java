@@ -43,6 +43,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.xml.bind.DatatypeConverter;
 
 /**
  *
@@ -155,6 +156,7 @@ public class ProductFacadeRESTExtension extends ProductFacadeREST {
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void createProduct(ProductData productData) throws Exception{
 
+        System.out.print("test: "+ productData.getProductImage());
         // Create Product
         Product product = new Product();
         product.setCreateTs(new Date());
@@ -164,7 +166,7 @@ public class ProductFacadeRESTExtension extends ProductFacadeREST {
         product.setPrdCntrDiscount(productData.getProductContractDiscount());
         product.setPrdCntrLnItm(productData.getProductContractLineItem());
         product.setPrdCntrUnitPrice(productData.getProductContractUnitPrice());
-        product.setPrdImgImage(productData.getProductImage().getBytes());
+        product.setPrdImgImage(DatatypeConverter.parseBase64Binary(productData.getProductImage()));
         product.setPrdImgKey(productData.getProductImgageKey());
         product.setPrdImgName(productData.getProductImageName());
         product.setPrdImgOrigin(productData.getProductImageOrigin());
@@ -182,6 +184,7 @@ public class ProductFacadeRESTExtension extends ProductFacadeREST {
         product.setUpdateUserId(productData.getPartyUserId());
         product.setVndUidFk(this.vendorFacadeREST.find(productData.getVendor()));
 
+        //throw new Exception();
         super.create(product);
     }
 
