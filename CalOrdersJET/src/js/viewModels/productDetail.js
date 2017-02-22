@@ -24,7 +24,9 @@
 /*
  * Your about ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojrouter', 'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojpagingcontrol', 'ojs/ojpagingcontrol-model', 'utils/ProductHelper'],
+define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojrouter', 
+    'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojpagingcontrol', 
+    'ojs/ojpagingcontrol-model', 'utils/ProductHelper','ojs/ojtabs'],
         function (oj, ko, data) {
 
             function ProductDetailViewModel() {
@@ -57,7 +59,10 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
                 {
                     response.quantity = ko.observable(1);
                     response.prdLongDescLines = ko.observableArray(response.prdLongDesc.split("\n"));
-
+                    response.vndName = ko.observable(response.vndUidFk.vndName);
+                    response.categoryLongDesc = ko.observable(response.prdCategoryCd.longDesc);
+                    response.unitLongDesc = ko.observable(response.prdUnitCd.longDesc);
+                    
                     self.product(response);
                 };
 
@@ -93,6 +98,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
                 };
 
                 self.navigateToCart = function () {
+                    
                     return self.router.go("cart");
                 };
 
