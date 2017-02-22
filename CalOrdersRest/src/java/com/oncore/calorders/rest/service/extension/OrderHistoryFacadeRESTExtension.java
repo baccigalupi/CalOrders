@@ -33,6 +33,7 @@ import com.oncore.calorders.rest.OrderHistory;
 import com.oncore.calorders.rest.OrderProductAssoc;
 import com.oncore.calorders.rest.Party;
 import com.oncore.calorders.rest.Product;
+import com.oncore.calorders.rest.data.OrderHistoryData;
 import com.oncore.calorders.rest.data.OrderItemData;
 import com.oncore.calorders.rest.data.OrderStatusData;
 import com.oncore.calorders.rest.data.OrderStatusSummaryData;
@@ -337,6 +338,24 @@ public class OrderHistoryFacadeRESTExtension extends OrderHistoryFacadeREST {
         }
 
         return orderStatusSummaryData;
+
+    }
+
+    /**
+     * Fetch all orders by UserId and ordered by Date ascending
+     *
+     * @return a structure of orders history ordered by Date
+     *
+     * @throws com.oncore.calorders.core.exceptions.DataAccessException
+     */
+    @GET
+    @Path("findAllOrderHistoryByUserId")
+    @Produces({MediaType.APPLICATION_JSON})
+    public List<OrderHistoryData> findAllOrderHistoryByUserId() throws DataAccessException {
+        List<OrderHistoryData> orderHistoryDatas = new ArrayList<OrderHistoryData>();
+        
+        
+        return orderHistoryDatas;
 
     }
 
