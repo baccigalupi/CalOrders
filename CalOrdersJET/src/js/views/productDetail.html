@@ -45,12 +45,22 @@
         <div class="oj-flex">
             <!-- Image -->
             <div class="oj-flex-item">
-                <img alt="product" data-bind="attr: {
+                <div class="oj-flex">
+                    <div class="oj-flex-item ">
+                        <img alt="product" data-bind="attr: {
                         id: 'productImage' + prdUid(), 
                         src: getPhoto(), 
                         height: medium() ? '400' : '200',
                         width: medium() ? '400' : '200'}"/>
+                    </div>
+                    <!-- ko if: admin -->
+                    <div class="oj-flex-item">
+                        <button id= "productUpdate" data-bind="click: navigateToProductUpdate, ojComponent: { component: 'ojButton', label: 'Update Product'}"></button>
+                    </div>
+                    <!-- /ko -->
+                </div>
             </div>
+
 
             <div class="oj-flex-item oj-sm-6">
                 <h3 class="product-detail-name" aria-label="product name" data-bind="text: product().prdName" tabindex="0"></h3>
@@ -88,6 +98,7 @@
                 </div>
                 <!-- /ko -->
             </div>
+
         </div>
 
         <div class="oj-padding-vertical"></div>

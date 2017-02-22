@@ -26,21 +26,20 @@
 /*
  * Your about ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/ReferenceData'],
-        function (oj, ko, $) {
+define(['ojs/ojcore', 'knockout', 'jquery', 'accounting', 'common/SecurityUtils', 'reference/ReferenceData', 'utils/ProductHelper'],
+        function (oj, ko, $, accounting) {
 
             function ProductUpdateViewModel() {
                 var self = this;
                 self.applicationVersion = ko.observable("1.0");
                 var serviceEndPoints = new ServiceEndPoints();
                 self.serviceURL = serviceEndPoints.getEndPoint('updateProduct');
-                self.productNameServiceURL = serviceEndPoints.getEndPoint('doesProductNameExist');
                 self.findProdutService = serviceEndPoints.getEndPoint("findProductById");
-                self.product = ko.observable();
-                self.prdUid = ko.observable();
-                self.productsToCompareBreadcrumbs = ko.observable();
+                self.productNameServiceURL = serviceEndPoints.getEndPoint('doesProductNameExist');
                 self.router = oj.Router.rootInstance;
                 self.tracker = ko.observable();
+                self.prdUid = ko.observable();
+                self.product = ko.observable();
                 self.productName = ko.observable();
                 self.productNameMessage = ko.observable();
                 self.productCategory = ko.observable();
@@ -62,20 +61,23 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                 self.productUnitCodeMessages = ko.observableArray([]);
                 self.productContractLineItem = ko.observable();
                 self.productContractUnitPrice = ko.observable();
-
-
-                //===========================================================================
-//USED FOR FILE UPLOAD
-//===========================================================================
+                self.productContractUnitPriceDisplay = ko.observable();
+                self.productActiveStatus = ko.observable("1");
+                self.productImage = ko.observable();
+                self.productImageBytes = ko.observable();
+                self.productImgageKey = ko.observable();
+                self.productImageName = ko.observable();
+                self.productImageOrigin = ko.observable();
+                self.productImageSize = ko.observable();
+                self.productImageType = ko.observable();
                 self.uploadFile = ko.observable(null);
                 self.uploadName = ko.computed(function () {
                     return !!self.uploadFile() ? self.uploadFile().name : '-';
                 });
 
-                self.resetClickEvent = function () {
-                    self.uploadFile(null);
-                };
-
+                /**
+                 * Apply KO bindings for the Product Image
+                 */
                 ko.bindingHandlers.fileUpload = {
                     init: function (element, valueAccessor) {
                         $(element).change(function () {
@@ -90,10 +92,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                     }
                 };
 
+                var mdQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.MD_UP);
+                self.medium = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(mdQuery);
 
-//============================================================================
-//============================================================================
-//
+
                 // Below are a subset of the ViewModel methods invoked by the ojModule binding
                 // Please reference the ojModule jsDoc for additionaly available methods.
 
@@ -113,8 +115,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                         return self.router.go('welcome');
                     }
 
-                    self.productsToCompareBreadcrumbs(sessionStorage.productsToCompareBreadcrumbs);
-
                     // Get product id from the search page
                     self.prdUid(self.router.retrieve());
 
@@ -127,8 +127,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                     var pm = new ProductModel();
                     pm.fetch();
 
+                    // Initialize a blank object
+                    self.product(new Object());
+
                     // Implement if needed
-                    // initialize session storage
                     self.productName = ko.observable();
                     self.productNameMessage = ko.observable();
                     self.productCategory = ko.observable();
@@ -140,7 +142,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                     self.productPrice = ko.observable();
                     self.productDescription = ko.observable();
                     self.productFullDesc = ko.observable();
-                    self.productImage = ko.observable();
                     self.productSKU = ko.observable();
                     self.productOEMPartNumber = ko.observable();
                     self.productOEMName = ko.observable();
@@ -151,6 +152,19 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                     self.productContractLineItem = ko.observable();
                     self.productContractDiscount = ko.observable();
                     self.productContractUnitPrice = ko.observable();
+                    self.productContractUnitPriceDisplay = ko.observable();
+                    self.productActiveStatus = ko.observable();
+                    self.productImage = ko.observable();
+                    self.productImageBytes = ko.observable();
+                    self.productImgageKey = ko.observable();
+                    self.productImageName = ko.observable();
+                    self.productImageOrigin = ko.observable();
+                    self.productImageSize = ko.observable();
+                    self.productImageType = ko.observable();
+                    self.uploadFile = ko.observable(null);
+                    self.uploadName = ko.computed(function () {
+                        return !!self.uploadFile() ? self.uploadFile().name : '-';
+                    });
                 };
 
                 /**
@@ -160,20 +174,28 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                  */
                 self.parseProduct = function (response)
                 {
-                    response.quantity = ko.observable(1);
-                    response.prdLongDescLines = ko.observableArray(response.prdLongDesc.split("\n"));
-
                     self.product(response);
-                };
-
-                self.getPhoto = function ()
-                {
-                    return ProductHelper.getPhoto(self.product());
-                };
-
-                self.getPrdUid = function ()
-                {
-                    return self.product().prdUid;
+                    self.prdUid(response.prdUid);
+                    self.productName(response.prdName);
+                    self.productCategory(response.prdCategoryCd.code);
+                    self.vendor(response.vndUidFk.vndUid);
+                    self.productPrice(response.prdPrice);
+                    self.productDescription(response.prdShortDesc);
+                    self.productFullDesc(response.prdLongDesc);
+                    self.productSKU(response.prdSku);
+                    self.productOEMPartNumber(response.prdOemPartNum);
+                    self.productOEMName(response.prdOemName);
+                    self.productUnitCode(response.prdUnitCd.code);
+                    self.productContractLineItem(response.prdCntrLnItm);
+                    self.productContractDiscount(response.prdCntrDiscount);self.productContractUnitPriceDisplay = ko.observable(self.calculateContractPrice(response.prdPrice, response.prdCntrDiscount));
+                    self.productActiveStatus(self.getActiveInd(response.prdActiveInd));
+//                    self.productImage(response.prdImgImage);
+//                    self.productImageBytes(response.prdImgImage);
+//                    self.productImgageKey(response.prdImgKey);
+//                    self.productImageName(response.prdImgName);
+//                    self.productImageOrigin(response.prdImgOrigin);
+//                    self.productImageSize(response.prdImgSize);
+//                    self.productImageType(response.prdImgTypeCd.code);
                 };
 
                 /**
@@ -210,6 +232,53 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                 self.handleDetached = function (info) {
                     // Implement if needed
                 };
+
+                /**
+                 * Get the default photo
+                 * @returns {ProductHelper.ProductHelperProductHelper.getPhoto.src|String}
+                 */
+                self.getPhoto = function ()
+                {
+                    return ProductHelper.getPhoto(self.product());
+                };
+
+                self.getPrdUid = function ()
+                {
+                    return self.product().prdUid;
+                };
+
+                self.getActiveInd = function (activeInd) {
+                    var activeStatus = "";
+                    if (activeInd !== undefined && activeInd !== NaN) {
+                        if (activeInd === 1) {
+                            activeStatus = "1";
+                        }
+                        if (activeInd === 0) {
+                            activeStatus = "0";
+                        }
+                    }
+                    return activeStatus;
+                };
+
+
+                self.computeContractPrice = function (data, event) {
+                    var percent = $("#productContractDiscount").val();
+                    var price = $("#productPrice").val();
+
+                    self.calculateContractPrice(price, percent);
+                };
+
+                self.calculateContractPrice = function (price, percent) {
+                    var discount = ((percent / 100) * price);
+                    if (discount == NaN || discount == undefined || discount === 0) {
+                        self.productContractUnitPrice(undefined);
+                        self.productContractUnitPriceDisplay(accounting.formatMoney(0))
+                    } else {
+                        self.productContractUnitPrice(price - discount);
+                        self.productContractUnitPriceDisplay(accounting.formatMoney(price - discount))
+                    }
+                };
+
                 self.buttonClick = function (data, event) {
                     if (event.currentTarget.id === 'save')
                     {
@@ -227,9 +296,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                                 idAttribute: 'prdUid'
                             });
                         var productService = new ProductService();
+
                         productService.save(
                                 {
                                     //Product Info
+                                    "productUid": this.getPrdUid(),
                                     "productSKU": self.productSKU(),
                                     "productOEMPartNumber": self.productOEMPartNumber(),
                                     "productOEMName": self.productOEMName(),
@@ -243,8 +314,13 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                                     "productPrice": self.productPrice(),
                                     "productDescription": self.productDescription(),
                                     "productFullDesc": self.productFullDesc(),
+                                    "productActivationStatus": self.productActiveStatus(),
+                                    "productImage": self.productImageBytes(),
+                                    "productImageName": self.productImageName(),
+                                    "imgOrigin": "tbd",
+                                    "productImageSize": self.productImageSize(),
+                                    "productImageType": self.productImageType(),
                                     "partyUserId": sessionStorage.userName
-
 
                                 },
                                 {
@@ -260,18 +336,119 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                                 });
                     } else if (event.currentTarget.id === 'cancel')
                     {
-                        // Do nothing and go back to search page
-                        return self.router.go('productSearch');
+                        // Do nothing and go back to product detail page
+                        return self.navigateToProductDetail();
                     }
-                }
-                ;
+                };
+
+                /**
+                 * The showSuccessMessage method displays the success dialog.
+                 * 
+                 * @returns {undefined}
+                 */
+                self.showSuccessMessage = function ()
+                {
+                    $("#modalDialog1").ojDialog("open");
+                };
+                /**
+                 * The closeClickEvent method handles the click event
+                 * generated from the close button.
+                 * 
+                 * @param {type} data
+                 * @param {type} event
+                 * @returns {unresolved}
+                 */
+                self.closeClickEvent = function (data, event) {
+                    $("#modalDialog1").ojDialog("close");
+                    return self.navigateToProductDetail();
+                };
+
+                self.navigateToProductDetail = function () {
+                    // Store product id parameter
+                    self.router.store(this.getPrdUid());
+                    return self.router.go("productDetail");
+                };
+
+                /**
+                 * Closes the image warning dialog box
+                 * @param {type} data
+                 * @param {type} event
+                 * @returns {Boolean}
+                 */
+                self.closeImageDialogClick = function (data, event)
+                {
+                    $("#modalDialog2").ojDialog("close");
+                    self.resetClickEvent();
+                };
+
+                self.resetClickEvent = function () {
+                    self.uploadFile(null);
+                };
+
+                /**
+                 * Demonstrates uploading an image to the CalOrders domain.
+                 * 
+                 * @param {type} data
+                 * @param {type} event
+                 * @returns {Boolean}
+                 */
+                self.uploadImageClick = function (data, event)
+                {
+
+                    if (self.uploadFile._latestValue !== null && self.uploadFile._latestValue.name !== "")
+                    {
+                        self.productImage(self.uploadFile._latestValue);
+                        self.productImageName(self.uploadFile._latestValue.name);
+                        self.productImageSize(self.uploadFile._latestValue.size);
+
+                        var fileTypeUtils = new FileTypeUtils();
+                        var imageType = fileTypeUtils.determineTypeCode(self.uploadFile._latestValue.type)
+                        self.productImageType(imageType);
+                        if (self.productImageType === "unknown")
+                        {
+                            $("#modalDialog2").ojDialog("open");
+                        } else
+                        {
+                            var preview = document.getElementById('productPicture');
+                            // read the file into a byte array
+                            var reader = new FileReader();
+
+                            /**
+                             * Add an event listener to the FileReader which will
+                             * fire when the file has been completely read.
+                             */
+                            reader.onloadend = function () {
+                                if (imageType === "PNG" || imageType === "JPEG")
+                                {
+                                    preview.src = reader.result;
+                                    self.productImageBytes(reader.result.split(',')[1]);
+                                } else
+                                {
+                                    alert("Your PDF was uploaded, but no preview is available.");
+                                }
+                            }, false;
+
+                            // load the file
+                            try {
+                                reader.readAsDataURL(self.productImage._latestValue);
+
+                            } catch (err)
+                            {
+                                console.log(err);
+                            }
+                        }
+
+                    }
+                    return false;
+                };
+
                 self.validateProductName = {
                     validate: function (value)
                     {
 
                         parseProduct = function (response)
                         {
-                            if (response != undefined && response.length > 0)
+                            if (response != undefined && response.length > 0 && response.prdUid !== self.getPrdUid())
                             {
                                 var errorMsg = new oj.Message("That product name is already taken.", "", oj.Message.SEVERITY_TYPE.ERROR);
                                 self.productNameMessage([errorMsg]);
@@ -303,7 +480,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                 };
                 self.isValidDropDowns = function ()
                 {
-                    var validProductCategory = self.isValideProductCategory();
+                    var validProductCategory = self.isValidProductCategory();
                     var validVendor = self.isValidVendor();
                     var validProductUnitCode = self.isValidProductUnitCode();
                     return validProductCategory && validVendor && validProductUnitCode;
@@ -311,7 +488,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                 self.validateProductCategory = {validate: function (value)
                     {
                         var validProductCategory = true;
-
+                        var serviceIndicator = undefined;
+                        if (typeof value != "undefined"
+                                && value != "") {
+                            serviceIndicator = value[0].substring(1, 2);
+                        }
                         if (typeof value != "undefined"
                                 && value != "" && (value == "SERI"))
                         {
@@ -320,22 +501,28 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                                         "Independent Services are products that can be purchased individually",
                                         oj.Message.SEVERITY_TYPE.INFO)]);
                         }
-                        if (typeof value != "undefined"
-                                && value != "" && (value == "SERR"))
+                        if (typeof serviceIndicator != "undefined"
+                                && serviceIndicator != "" && serviceIndicator === "S")
                         {
                             self.productCategoryMessages([
-                                new oj.Message("Related Services:",
-                                        "Related Services are products that can only be purchased as part of an order",
+                                new oj.Message("Upgrade Services:",
+                                        "Upgrade Services are products that can only be purchased as part of an order",
+                                        oj.Message.SEVERITY_TYPE.INFO)]);
+                        }
+                        if (typeof serviceIndicator != "undefined"
+                                && serviceIndicator != "" && serviceIndicator === "A")
+                        {
+                            self.productCategoryMessages([
+                                new oj.Message("Stand Alone Services:",
+                                        "Stand Alone Services are products that can be purchased individually",
                                         oj.Message.SEVERITY_TYPE.INFO)]);
                         }
 
                         return validProductCategory;
                     }};
-
                 self.isValidProductCategory = function ()
                 {
                     var validProductCategory = true;
-
                     if (typeof self.productCategory() === "undefined"
                             || self.productCategory() === "")
                     {
@@ -351,7 +538,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                 self.validateVendor = {validate: function (value)
                     {
                         var validVendor = true;
-
                         if (typeof value === "undefined"
                                 || value === "")
                         {
@@ -367,7 +553,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                 self.isValidVendor = function ()
                 {
                     var validVendor = true;
-
                     if (typeof self.vendor() === "undefined"
                             || self.vendor() === "")
                     {
@@ -383,7 +568,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                 self.validateProductUnitCode = {validate: function (value)
                     {
                         var validProductUnitCode = true;
-
                         if (typeof value === "undefined"
                                 || value === "")
                         {
@@ -396,11 +580,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                         }
                         return validProductUnitCode;
                     }};
-
                 self.isValidProductUnitCode = function ()
                 {
                     var validProductUnitCode = true;
-
                     if (typeof self.productCategory() === "undefined"
                             || self.productCategory() === "")
                     {
@@ -413,140 +595,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                     }
                     return validProductUnitCode;
                 };
-                self.router = oj.Router.rootInstance;
-                /**
-                 * The showSuccessMessage method displays the success dialog.
-                 * 
-                 * @returns {undefined}
-                 */
-                self.showSuccessMessage = function ()
-                {
-                    $("#modalDialog1").ojDialog("open");
-                };
-                /**
-                 * The closeClickEvent method handles the click event
-                 * generated from the close button.
-                 * 
-                 * @param {type} data
-                 * @param {type} event
-                 * @returns {unresolved}
-                 */
-                self.closeClickEvent = function (data, event) {
-                    $("#modalDialog1").ojDialog("close");
-                    return self.router.go('productSearch');
-                };
 
-                self.computeContractPrice = function (data, event) {
-                    var percent = $("#productContractDiscount").val();
-                    var price = $("#productPrice").val();
-                    var discount = ((percent / 100) * price).toFixed(2);
-                    if (discount == NaN || discount == undefined || discount === 0) {
-                        self.productContractUnitPrice(undefined);
-                    } else {
-                        self.productContractUnitPrice(price - discount);
-                    }
-                };
-
-
-                //===========================================================================
-//USED FOR FILE UPLOAD
-//===========================================================================
-
-                /**
-                 * Demonstrates retrieving an image from the TempusImage domain.
-                 * In this example it is just going to grab the first record
-                 * in the image table.
-                 * 
-                 * @param {type} data
-                 * @param {type} event
-                 * @returns {Boolean}
-                 */
-                self.updateImageClick = function (data, event)
-                {
-
-
-                    var serviceEndPoints = new ServiceEndPoints();
-                    var serviceURL = serviceEndPoints.getEndPoint('fetchImage');
-
-                    serviceURL += "/" + "1";
-
-
-                    var ImageModel = oj.Model.extend({
-                        urlRoot: serviceURL,
-                        idAttribute: 'imgUid'
-                    });
-
-                    var image = new ImageModel();
-
-                    image.fetch({
-                        success: function () {
-                            var preview = document.getElementById('loginPicture');
-                            var file = image.attributes.imgImage;
-                            var imageSize = image.attributes.imgSize;
-                            var imageType = image.attributes.imgTypeCodeLongDescription;
-
-
-                            var reader = new FileReader();
-
-                            var data = window.atob(file);
-                            var arr = new Uint8Array(data.length);
-                            for (var i = 0; i < data.length; i++) {
-                                arr[i] = data.charCodeAt(i);
-                            }
-
-                            var blob = new Blob([arr.buffer], {size: imageSize, type: imageType});
-
-
-                            reader.addEventListener("load", function () {
-                                preview.src = reader.result;
-                            }, false);
-
-                            if (blob) {
-
-                                try {
-                                    reader.readAsDataURL(blob);
-                                } catch (err)
-                                {
-                                    console.log(err);
-                                }
-                            }
-
-                        },
-                        error: function (jqXHR, textStatus, errorThrown) {
-                            console.log("Image: not found: " + errorThrown);
-                            self.doShowErrorMessage = true;
-
-
-                            return false;
-                        }
-                    });
-
-
-                    return false;
-
-
-                };
-
-
-                /**
-                 * Closes the image warning dialog box
-                 * @param {type} data
-                 * @param {type} event
-                 * @returns {Boolean}
-                 */
-                self.closeImageDialogClick = function (data, event)
-                {
-                    $("#modalDialog2").ojDialog("close");
-                    self.resetClickEvent();
-                };
-
-
-
-
-
-//===========================================================================
-//USED FOR FILE UPLOAD END
-//===========================================================================
 
             }
 

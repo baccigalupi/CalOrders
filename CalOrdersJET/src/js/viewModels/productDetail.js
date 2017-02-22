@@ -105,6 +105,12 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
                     
                     return self.router.go("cart");
                 };
+                
+                self.navigateToProductUpdate = function (product) {
+                    // Store product id parameter
+                    self.router.store(self.getPrdUid());
+                    return self.router.go("productUpdate");
+                };
 
                 // Below are a subset of the ViewModel methods invoked by the ojModule binding
                 // Please reference the ojModule jsDoc for additionaly available methods.
