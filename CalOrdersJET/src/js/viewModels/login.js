@@ -243,6 +243,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'ojs/ojarray
                             }
 
                             sessionStorage.groups = groups;
+                            sessionStorage.admin = !isUser;
 
                             sessionStorage.authenticated = true;
 
