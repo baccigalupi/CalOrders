@@ -61,6 +61,7 @@ import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
+import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -93,6 +94,10 @@ public class OrderHistoryFacadeRESTExtension extends OrderHistoryFacadeREST {
 
     public OrderHistoryFacadeRESTExtension() {
         super();
+    }
+
+    public OrderHistoryFacadeRESTExtension(EntityManager em) {
+        super(em);
     }
 
     /**
@@ -394,10 +399,16 @@ public class OrderHistoryFacadeRESTExtension extends OrderHistoryFacadeREST {
                 if (orderHistory.getOrderProductAssocCollection() != null
                         && orderHistory.getOrderProductAssocCollection().size() > 0) {
                     String skuConcat = new String();
+                    BigDecimal totalPrice = new BigDecimal(BigInteger.ZERO);
                     List<OrderProductAssoc> productAssocs = new ArrayList<OrderProductAssoc>();
-                    orderHistory.getOrderProductAssocCollection().forEach((assoc) -> {
+
+                    for (OrderProductAssoc assoc : orderHistory.getOrderProductAssocCollection()) {
                         productAssocs.add(assoc);
-                    });
+                        totalPrice = totalPrice.add(assoc.getOpaPrice());
+                    }
+
+                    data.setOrderPrice(totalPrice);
+                    
                     for (int i = 0; i < productAssocs.size(); i++) {
 
                         if (skuConcat.length() > 25) {
@@ -418,15 +429,6 @@ public class OrderHistoryFacadeRESTExtension extends OrderHistoryFacadeREST {
                 }
 
                 data.setOrderPoNumber(null);
-                if (orderHistory.getOrderProductAssocCollection() != null
-                        && orderHistory.getOrderProductAssocCollection().size() > 0) {
-                    BigDecimal totalPrice = new BigDecimal(BigInteger.ZERO);
-                    for (OrderProductAssoc assoc : orderHistory.getOrderProductAssocCollection()) {
-                        totalPrice = totalPrice.add(assoc.getOpaPrice());
-                    }
-
-                    data.setOrderPrice(NumberFormat.getCurrencyInstance().format(totalPrice));
-                }
 
                 if (orderHistory.getOrdStatusCd() != null) {
                     data.setOrderStatus(orderHistory.getOrdStatusCd().getShortDesc());

@@ -24,8 +24,8 @@
 /*
  * Your customer ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'moment', 'common/SecurityUtils'],
-        function (oj, ko, $, moment) {
+define(['ojs/ojcore', 'knockout', 'jquery', 'moment', 'accounting', 'common/SecurityUtils'],
+        function (oj, ko, $, moment, accounting) {
 
             function OrdersViewModel() {
                 var self = this;
@@ -116,6 +116,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'moment', 'common/SecurityUtils'],
                 self.parseOrderHistory = function (response) {
                     var orderDate = "";
                     var orderPoNumber = "";
+                    var totalPrice = null
                     if (response.orderDate !== undefined)
                     {
                         orderDate = moment().format('MM/DD/YYYY');
@@ -124,13 +125,16 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'moment', 'common/SecurityUtils'],
                     {
                         orderPoNumber = response.orderPoNumber;
                     }
+                    if(response.orderPrice!==undefined){
+                        totalPrice = accounting.formatMoney(response.orderPrice);
+                    }
 
                     var result = {'orderHistoryId': response['orderHistoryId'],
                         'orderDate': orderDate,
                         'orderStatus': response['orderStatus'],
                         'orderPoNumber': orderPoNumber,
                         'orderAgency': response['orderAgency'],
-                        'orderPrice': response['orderPrice'],
+                        'orderPrice': totalPrice,
                         'orderDescription': response['orderDescription']};
                     return result;
                 };

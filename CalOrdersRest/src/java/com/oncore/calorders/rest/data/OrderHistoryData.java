@@ -23,6 +23,7 @@
  */
 package com.oncore.calorders.rest.data;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -36,7 +37,7 @@ public class OrderHistoryData {
     private String orderStatus;
     private String orderPoNumber;
     private String orderAgency;
-    private String orderPrice;
+    private BigDecimal orderPrice;
     private String orderDescription;
 
     public Integer getOrderHistoryId() {
@@ -79,11 +80,11 @@ public class OrderHistoryData {
         this.orderAgency = orderAgency;
     }
 
-    public String getOrderPrice() {
+    public BigDecimal getOrderPrice() {
         return orderPrice;
     }
 
-    public void setOrderPrice(String orderPrice) {
+    public void setOrderPrice(BigDecimal orderPrice) {
         this.orderPrice = orderPrice;
     }
 
