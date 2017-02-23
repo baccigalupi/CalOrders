@@ -117,10 +117,10 @@ CalOrders is a product catalog and ordering solution designed with the premise o
 
 CalOrders core principles:
 
-* Open Source architecture built on the latest HTML5 and Java frameworks and technologies
+* Open Source architecture built on the latest JavaScript, HTML5, CSS, and Java technologies
 * Supports latest architectural concepts of speed, replace-ability, and continuous delivery
 * Supports Agile development and project management techniques  
-* GitHub repository open to public 
+* Transparency, GitHub repository open to public 
 
 
 ![Figure 1](https://github.com/OncoreLLC/CalOrders/blob/master/Artifacts/images/Architecture_files/calorders_arch01.png)
@@ -136,11 +136,11 @@ CalOrders by default uses the open source NetBeans IDE for development.  NetBean
 
 The CalOrders application is separated by area of concern into separate NetBeans projects. 
  
-* CalOrdersJET - [(CDT–ADPQ–0117-2-Technical Approach: Client UI)](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersJET)  JET HTML5 project providing the front end for the CalOrders application.
+* CalOrdersJET - [(CDT–ADPQ–0117-2-Technical Approach: Client UI)](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersJET)  JET JavaScript, HTML5, CSS project providing the front end for the CalOrders application
 * JavaScript Library - [(CDT–ADPQ–0117-2-Technical Approach: JavaScript Library)](http://www.oracle.com/webfolder/technetwork/jet/index.html) Orcle JET is an open source JavaScript framework proving a rich set of ADA compliant components. See User Interface section below for more details about Oracle JET
 * CalOrdersREST - [(CDT–ADPQ–0117-2-Technical Approach: REST Service)](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersRest) Java dynamic web project providing support for REST services and the data access layer via Java JEE (Java Enterprise Edition) and JPA (Java Persistence API)
-* CalOrdersCore - Java API project holding shared utility classes, interfaces, and base classes designed to support the other CalOrders Java projects.  
-* CalOrders Database = [(CDT–ADPQ–0117-2-Technical Approach: Database)](https://github.com/OncoreLLC/CalOrders/tree/master/DB_Scripts) MySQL database model, DDL, and reference data scripts.
+* CalOrdersCore - Java API project holding shared utility classes, interfaces, and base classes designed to support the other CalOrders Java projects
+* CalOrders Database = [(CDT–ADPQ–0117-2-Technical Approach: Database)](https://github.com/OncoreLLC/CalOrders/tree/master/DB_Scripts) MySQL database model, DDL, and reference data scripts
 
 
 
@@ -154,7 +154,7 @@ Oracle JET is designed to meet the following application needs:
 * Create a new end-to-end client-side web application using JavaScript, HTML5, CSS, and best practices for responsive design.
 * Create a hybrid mobile application that looks and feels like a native iOS, Android or Windows application.
 
-Unlike many competing open source JavaScript alternatives, Oracle JET has an excellent and complete [component](http://www.oracle.com/webfolder/technetwork/jet/jetCookbook.html) library covering all aspects of user interface construction. In addition, it has a rich set of documentation and a complete and fully documented API.  Oracle JET forms the basis for Oracle's own product lines and is therefore updated and enhanced on a regular basis. 
+Unlike many competing open source JavaScript alternatives, Oracle JET has an excellent and complete [component](http://www.oracle.com/webfolder/technetwork/jet/jetCookbook.html) library covering all aspects of user interface construction. In addition, it has a rich set of documentation and a complete and fully documented API.  Oracle JET is actively used by Oracle in its own offerings and is therefore updated and enhanced on a regular basis. 
 
 JET also covers the following critical areas of modern web user interface construction:
 
@@ -171,7 +171,7 @@ Due to these features and its extensive component library, JET provides an excel
 
 ### SPA (Single Page Application)
 
-CalOrders is a Single Page Application, having a single entry point, index.html.  Each screen in the application is a distinct HTML fragment substituted by the JET routing framework, however, they are not full HTML pages.  
+CalOrders is a Single Page Application, having a single entry point, [index.html](https://github.com/OncoreLLC/CalOrders/blob/master/CalOrdersJET/src/index.html).  Each screen in the application is a distinct HTML fragment substituted by the JET routing framework, however, they are not full HTML pages.  
 
 ### Views
 
@@ -188,12 +188,12 @@ A [view model](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersJET/s
 
 Figure 6: CalOrders Service Architecture
 
-CalOrders uses [REST services](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersRest/src/java/com/oncore/calorders/rest/service) exposed from JEE Session Beans using the built in annotations available from Java.  Java provides excellent REST service support in JEE making it extremely easy to create REST services supporting CRUD operations on an underlying datastore.  CalOrders uses the NetBeans REST services generator to create the core set of JPA entities and REST facades needed for the application.  Customizing the service entities is supported via built in JPA functionality using the persistence.xml file and xml files containing custom named queries or custom queries can be defined directly in the REST Facades using the JPA create query method and syntax.  See the [HOW TO Create Custom Queries and REST Facades](https://github.com/OncoreLLC/CalOrders/wiki/HOW-TO-Create-Custom-Queries-and-REST-Facades) Wiki page for more details on how to create custom JPA Named Queries and REST Facades.  Core classes and utilities needed to support the underlying architecture across domains are defined in CalOrdersCore, which is addressed later in this document.
+CalOrders uses [REST services](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersRest/src/java/com/oncore/calorders/rest/service) exposed from JEE Session Beans using the built in annotations available from Java.  Java provides excellent REST service support in JEE making it extremely easy to create REST services supporting CRUD operations on an underlying datastore.  CalOrders uses the NetBeans REST services generator to create the core set of JPA entities and REST facades needed for the application.  Customizing the service entities is supported via built in JPA functionality using the persistence.xml file and xml files containing custom named queries or custom queries can be defined directly in the REST Facades using the JPA create query method and syntax.  See the [HOW TO Create Custom Queries and REST Facades](https://github.com/OncoreLLC/CalOrders/wiki/HOW-TO-Create-Custom-Queries-and-REST-Facades) Wiki page for more details on how to create custom JPA Named Queries and REST Facades.  Core classes and utilities needed to support the underlying architecture across domains are defined in CalOrdersCore.
 
 
 ## Shared Architectural Components
 
-As CalOrders places common architectural components in the shared CalOrdersCore project. CalOrdersCore only contains base classes and interfaces, and shared utility classes.  NetBeans simplifies compilation and deployment by allowing other NetBeans projects such as CalOrdersREST to reference core in the editor. The option is also available to compile and bundle the CalOrdersCore project into an independent Jar, which can then be referenced by other projects. 
+CalOrders places common architectural components in the shared CalOrdersCore project. CalOrdersCore only contains base classes and interfaces, and shared utility classes.  NetBeans simplifies compilation and deployment by allowing other NetBeans projects such as CalOrdersREST to reference core in the editor. The option is also available to compile and bundle the CalOrdersCore project into an independent JAR, which can then be referenced by other projects. 
 
 ## Databases
 
