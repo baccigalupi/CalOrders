@@ -25,7 +25,6 @@ package com.oncore.calorders.rest.service;
 
 import com.oncore.calorders.rest.OrderHistory;
 import java.util.List;
-import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
@@ -49,6 +48,11 @@ public class OrderHistoryFacadeREST extends AbstractFacade<OrderHistory> {
 
     public OrderHistoryFacadeREST() {
         super(OrderHistory.class);
+    }
+
+    public OrderHistoryFacadeREST(EntityManager entityManager) {
+        super(OrderHistory.class);
+        this.em = entityManager;
     }
 
     @POST
@@ -103,5 +107,5 @@ public class OrderHistoryFacadeREST extends AbstractFacade<OrderHistory> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
 }

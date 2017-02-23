@@ -22,23 +22,30 @@
  * THE SOFTWARE.
  * -->
 <div id="orderHistoryWrapper" class="oj-hybrid-padding">
-    <h2>Order History</h2>
+
+    <!-- Page Title -->
+    <div id="pageTitleContainer" class="oj-flex-item oj-sm-2">
+        <h2 style="margin-bottom:0">Order History</h2>
+    </div>
+
     <div class="oj-panel oj-flex">
-        <div id="orderHistoryTableContent" class="oj-md-12 oj-flex-item page-padding">
+        <div id="orderHistoryTableContent" class="oj-sm-12 oj-flex-item">
             <div id="orderHistoryTable">
                 <table id="table" summary="Order History Table" aria-label="Order History Table"
-                       data-bind="ojComponent: {component: 'ojTable', 
-                                selectionMode: {row: 'multiple', column: 'multiple'}, data: datasource,
+                       data-bind="ojComponent: {component: 'ojTable', beforeCurrentRow:   currentRowListener,
+                                selectionMode: {row: 'single', column: 'multiple'} ,
+                                data: datasource,
                                 display: 'grid',
                                 columnsDefault: {sortable: 'enabled'}, 
-                                columns: [{headerText: 'Order No.', field: 'orderHistoryId', sortable: 'enabled', style: 'min-width: 10%; max-width: 33%'},
-                                  {headerText: 'Date', field: 'orderDate', sortable: 'enabled', style: 'max-width: 33%'},
-                                  {headerText: 'Status', field: 'orderStatus', sortable: 'enabled', style: 'max-width: 33%'},   
-                                  {headerText: 'PO. Number', field: 'orderPoNumber', sortable: 'enabled', style: 'width: 10%', headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide'},
-                                  {headerText: 'Agency', field: 'orderAgency', sortable: 'enabled', style: 'width: 20%', headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide'},
-                                  {headerText: 'Price', field: 'orderPrice', sortable: 'enabled', style: 'width: 10%', headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide'},
-                                  {headerText: 'Description', field: 'orderDescription', sortable: 'enabled', style: 'width: 30%',headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide'}], 
-                                 rootAttributes: {'style':'width: 100%'}}">
+                                columns: [
+                                  {headerText: 'Order No.', field: 'orderHistoryId', sortable: 'enabled'},
+                                  {headerText: 'Date', field: 'orderDate', sortable: 'enabled'},
+                                  {headerText: 'Status', field: 'orderStatus', sortable: 'enabled'},   
+                                  {headerText: 'PO No.', field: 'orderPoNumber', sortable: 'enabled', headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide'},
+                                  {headerText: 'Agency', field: 'orderAgency', sortable: 'enabled', headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide'},
+                                  {headerText: 'Price', field: 'orderPrice', sortable: 'enabled', headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide'},
+                                  {headerText: 'Description', field: 'orderDescription', sortable: 'enabled', headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide'}], 
+                                 rootAttributes: {'style':'width: 100%;'}}">
                 </table>
                 <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: datasource, pageSize: 10}">
                 </div>

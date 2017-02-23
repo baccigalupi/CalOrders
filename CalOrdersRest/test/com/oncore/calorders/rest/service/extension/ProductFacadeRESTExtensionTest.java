@@ -24,6 +24,7 @@
 package com.oncore.calorders.rest.service.extension;
 
 import com.oncore.calorders.rest.Product;
+import com.oncore.calorders.rest.Vendor;
 import com.oncore.calorders.rest.service.PrdCategoryCdFacadeREST;
 import com.oncore.calorders.rest.service.PrdImgTypeCdFacadeREST;
 import com.oncore.calorders.rest.service.PrdUnitCdFacadeREST;
@@ -143,6 +144,59 @@ public class ProductFacadeRESTExtensionTest {
         verify(mockedEm, times(1)).createQuery("SELECT p FROM Product p "
                 + "        JOIN p.prdCategoryCd c"
                 + "        WHERE c.code = :categoryCode ", Product.class);
+    }
+
+    /**
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testFindActiveProductsByProductTypeAndVendor() throws Exception {
+
+        List<Product> productsList = new ArrayList<>();
+
+        productsList.add(new Product(1, "11111", "Desktop 1", "DT1", "Desktop PC 1", new BigDecimal(100.00), 1, "1", new Date(), "1", new Date()));
+        productsList.add(new Product(2, "22222", "Laptop 1", "LT1", "Laptop PC 1", new BigDecimal(1000.00), 1, "1", new Date(), "1", new Date()));
+
+        Vendor vendor = new Vendor(1, "DELL Vendor", 1, "1", new Date(), "1", new Date());
+        productsList.get(0).setVndUidFk(vendor);
+        productsList.get(1).setVndUidFk(vendor);
+
+        EntityManager mockedEm = mock(EntityManager.class);
+        TypedQuery mockedTypedQuery = mock(TypedQuery.class);
+
+        given(mockedEm.createQuery("SELECT p FROM Product p "
+                + "        JOIN p.prdCategoryCd c"
+                + " JOIN p.vndUidFk v"
+                + "        WHERE c.code = :categoryCode "
+                + " AND v.vndUid = :vendorUid "
+                + "        AND p.prdActiveInd = 1", Product.class)).willReturn(mockedTypedQuery);
+        given(mockedTypedQuery.setParameter("categoryCode", "Dell")).willReturn(mockedTypedQuery);
+        given(mockedTypedQuery.setParameter("vendorUid", 1)).willReturn(mockedTypedQuery);
+        given(mockedTypedQuery.getResultList()).willReturn(productsList);
+
+        ProductFacadeRESTExtension productFacadeRESTExtension = new ProductFacadeRESTExtension(mockedEm);
+
+        List<Product> expectedProductsList = productFacadeRESTExtension.findActiveProductsByProductTypeAndVendor("Dell", 1);
+
+        Assert.assertTrue(expectedProductsList.size() == 2);
+        Assert.assertEquals("Desktop 1", expectedProductsList.get(0).getPrdName());
+        Assert.assertEquals("Desktop PC 1", expectedProductsList.get(0).getPrdLongDesc());
+        Assert.assertEquals("11111", expectedProductsList.get(0).getPrdSku());
+        Assert.assertEquals(1, expectedProductsList.get(0).getPrdActiveInd());
+        Assert.assertEquals("DELL Vendor", expectedProductsList.get(0).getVndUidFk().getVndName());
+
+        Assert.assertEquals("Laptop 1", expectedProductsList.get(1).getPrdName());
+        Assert.assertEquals("Laptop PC 1", expectedProductsList.get(1).getPrdLongDesc());
+        Assert.assertEquals("22222", expectedProductsList.get(1).getPrdSku());
+        Assert.assertEquals(1, expectedProductsList.get(1).getPrdActiveInd());
+
+        verify(mockedEm, times(1)).createQuery("SELECT p FROM Product p "
+                + "        JOIN p.prdCategoryCd c"
+                + " JOIN p.vndUidFk v"
+                + "        WHERE c.code = :categoryCode "
+                + " AND v.vndUid = :vendorUid "
+                + "        AND p.prdActiveInd = 1", Product.class);
     }
 
     /**

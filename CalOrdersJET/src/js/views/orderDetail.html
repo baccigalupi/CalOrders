@@ -1,0 +1,226 @@
+
+<!--
+ * The MIT License
+ *
+ * Copyright 2017 OnCore Consulting LLC, 2017
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ * -->
+<div id="productSearchWrapperDiv" class="oj-hybrid-padding">
+
+    <!-- Page Title -->
+    <div id="pageTitleContainer" class="oj-flex-item oj-sm-6">
+        <h2 style="margin-bottom:0">Order Detail</h2>
+    </div>
+
+    <!-- global error messages -->
+    <div class="oj-flex-item oj-messaging-inline-container" id="pageErrorContainer" aria-live="polite" hidden>
+        <div class="oj-padding-vertical"></div>
+        <div class="oj-message oj-message-error">
+            <div class="oj-component-icon oj-message-status-icon oj-message-error-icon" title="Error" role="img"></div>
+            <div class="oj-message-content">
+                <div class="oj-message-summary">Error</div>
+                <div class="oj-message-detail">
+                    <span data-bind="text: errorMessage"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end global error message -->
+
+
+    <!-- Page Content -->
+    <div class="oj-panel oj-sm-flex-wrap-nowrap oj-panel-shadow-md">
+
+        <div class="oj-flex">
+            <div class="oj-flex-item oj-sm-2 confirmation_bold_label">Order Number:</div>
+            <div class="oj-flex-item oj-sm-6" data-bind="text: orderDetail().id"></div>
+        </div>
+
+        <div class="oj-padding-vertical"></div>
+
+        <div class="oj-flex">
+            <div class="oj-flex-item oj-sm-2 confirmation_bold_label">Order Status:</div>
+            <div class="oj-flex-item oj-sm-6" data-bind="text: orderDetail().statusDescription"></div>
+        </div>
+
+        <div class="oj-padding-vertical"></div>
+        <!--        <div class="oj-flex oj-sm-12">
+                     CONFIRMATION SUMMARY 
+                    
+                    
+                    <div class="oj-md-odd-cols-6">
+                        <div class="oj-flex">
+                            <div>
+                                <div>
+                                    <div class="oj-sm-justify-content"><div><div class="confirmation_bold_label">Order Number:</div> <div class="confirmation_float_right" data-bind="text: orderDetail().id"></div></div></div>
+                                    <div class="oj-sm-justify-content"><div><div class="confirmation_bold_label">Order Status:</div> <div class="confirmation_float_right" data-bind="text: orderDetail().statusDescription"></div></div></div>
+                                    <div class="oj-sm-justify-content"><div><div class="confirmation_bold_label">Total Price:</div> <div class="confirmation_float_right" data-bind="text: orderDetail().totalPrice"></div></div></div>
+                                </div>
+                            </div>
+                        </div>
+                         END CONFIRMATION SUMMARY 
+                    </div>-->
+
+        <div class="oj-flex oj-sm-12">
+            <div id="cartWrapperDiv" class="oj-panel oj-flex-item oj-sm-flex-wrap-nowrap">
+                <div id="productlistview" >
+                    <div class="oj-flex oj-flex-items-pad oj-sm-flex-direction-column" data-bind="template: smallOnly() ? 'productCardLayout' : 'productListLayout'"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="oj-padding-vertical"></div>
+
+        <div class="oj-flex oj-sm-12">
+            <!-- CONFIRMATION SUMMARY -->
+            <div class="oj-md-odd-cols-4">
+                <div class="oj-flex">
+                    <div>
+
+                        <div class="oj-sm-justify-content confirmation_bold">Shipping Address:</div>
+                        <div class="oj-padding-vertical"></div>
+                        <div class="oj-sm-justify-content"><div data-bind="text: orderDetail().shippingAddressLine1"></div></div>
+                        <!-- ko if: orderDetail().shippingAddressLine2 != undefined && orderDetail().shippingAddressLine2.length > 0 -->
+                        <div class="oj-sm-justify-content"><div data-bind="text: orderDetail().shippingAddressLine2"></div></div>
+                        <!-- /ko -->
+                        <div class="oj-sm-justify-content"><div data-bind="text: orderDetail().shippingAddressCity + ' ' + orderDetail().shippingAddressStateCode + ', ' + orderDetail().shippingAddressZipCode"></div></div>
+
+
+                        <div>
+
+                            <div class="oj-padding-vertical"></div>
+                            <div class="oj-sm-justify-content confirmation_bold">Order Totals:</div>
+                            <div class="oj-padding-vertical"></div>
+                            <div class="oj-sm-justify-content"><div><div class="confirmation_bold_label">Total:</div> <div class="confirmation_float_right" data-bind="text: orderDetail().productTotalPrice"></div></div></div>
+                            <div class="oj-sm-justify-content"><div><div class="confirmation_bold_label">Shipping:</div> <div class="confirmation_float_right" data-bind="text: orderDetail().shippingPrice"></div></div></div>
+                            <div class="oj-sm-justify-content"><div><div class="confirmation_bold_label">Total Price:</div> <div class="confirmation_float_right" data-bind="text: orderDetail().totalPrice"></div></div></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END CONFIRMATION SUMMARY -->
+            </div>
+        </div>
+        <div class="oj-padding-vertical"></div>
+    </div>
+</div>
+
+
+<!-- Product Card View -->
+<script id="productCardLayout" type="text/html">
+    <div class="oj-flex oj-flex-items-pad">
+        <ul id="listviewcard"
+            class="oj-flex oj-listview-card-layout"
+            data-bind="ojComponent: {component: 'ojListView',
+                data: cardViewDataSource,
+                rootAttributes: {'style': 'width:100%'},
+            item: {template: 'productcard_template'}}">
+        </ul>
+    </div>
+    <div class="oj-flex oj-flex-items-pad">
+        <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', mode: 'loadMore', data: cardViewDataSource, pageSize: 10}">
+        </div>
+    </div>
+</script>
+
+<!-- Product Card view (card format)  -->
+<script id="productcard_template" type="text/html">
+    <li class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-4 oj-xl-3"  style="margin:0;border-style:none">
+        <div class="oj-panel" style="margin: 5px 0px 10px 0px;">
+
+            <div data-bind="click: $parent.navigateToProductDetail">
+
+                <div class="oj-flex">
+                    <div class="oj-flex-item confirmation_bold_label" data-bind="text: $data['prdName']"></div>
+                </div>
+
+                <div class="oj-padding-vertical"></div>
+
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <img style="float:left;" 
+                             height="100" width="100" 
+                             data-bind="attr: {alt: $data['prdName'], id: 'productImage' + $data['prdUid'], src: $parent.getPhoto($data)}"/>
+                    </div>
+                    <div class="oj-flex-item">
+                        <div class="oj-flex">
+                            <div class="oj-flex-item">
+                                <div data-bind="text: 'Quanitity: ' + $data['prdQuantity']"/></div>
+                        </div>
+
+                        <div class="oj-padding-vertical"></div>
+
+                        <div class="oj-flex">
+                            <div class="oj-flex-item">
+                                <div data-bind="text: 'Price: ' + $data['prdPrice']"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>  
+        </div>
+    </div>
+</div>
+</li>
+</script>
+
+
+<!-- Product List view -->
+<script id="productListLayout" type="text/html">
+    <ul id="listview"
+        data-bind="ojComponent: {component: 'ojListView',
+                data: listViewDataSource,
+            rootAttributes: {style: 'width:100%;overflow:auto; margin-top: 5px'},
+            selectionMode: 'single',
+            item: {template: 'productlist_template'},
+        scrollPolicy: 'loadMoreOnScroll',
+            scrollPolicyOptions: {fetchSize: 10}}">
+    </ul>
+    <!--    <div class="oj-flex oj-flex-items-pad">
+            <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: cardViewDataSource, pageSize: 100}">
+            </div>
+        </div>-->
+</script>
+
+<!-- Product List view (row format) -->
+<script id="productlist_template" type="text/html">
+    <li class="oj-flex-item oj-sm-12">
+        <div>
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-2">
+                    <img style="float:left;" 
+                         height="100" width="100" 
+                         data-bind="attr: {alt: $data['prdName'], id: 'productImage' + $data['prdUid'], src: $parent.getPhoto($data)}"/>
+                </div>
+                <div class="oj-flex-item oj-sm-4">
+                    <div class="confirmation_bold_label" data-bind="text: $data['prdName']"></div>
+                </div>
+                <div class="oj-flex-item oj-sm-2">
+                    <span>Quantity: </span><span data-bind="text: $data['prdQuantity']"/>
+                </div>
+                <div class="oj-flex-item oj-sm-4">
+
+                    <div class="oj-flex-item oj-sm-only-hide oj-md-4 oj-md-float-end">
+                        <div data-bind="text: '$' + $data['prdPrice']"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+</script>

@@ -170,7 +170,7 @@ public class ProductFacadeRESTExtension extends ProductFacadeREST {
     @POST
     @Path("createProduct")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void createProduct(ProductData productData) throws Exception{
+    public void createProduct(ProductData productData) throws Exception {
 
         // Create Product
         Product product = new Product();
@@ -181,12 +181,22 @@ public class ProductFacadeRESTExtension extends ProductFacadeREST {
         product.setPrdCntrDiscount(productData.getProductContractDiscount());
         product.setPrdCntrLnItm(productData.getProductContractLineItem());
         product.setPrdCntrUnitPrice(productData.getProductContractUnitPrice());
-        product.setPrdImgImage(DatatypeConverter.parseBase64Binary(productData.getProductImage()));
+        try {
+            if (productData.getProductImage() != null) {
+                product.setPrdImgImage(DatatypeConverter.parseBase64Binary(productData.getProductImage()));
+            }
+        } catch (Exception e) {
+            product.setPrdImgImage(null);
+        }
         product.setPrdImgKey(productData.getProductImgageKey());
         product.setPrdImgName(productData.getProductImageName());
         product.setPrdImgOrigin(productData.getProductImageOrigin());
         product.setPrdImgSize(productData.getProductImageSize());
-        product.setPrdImgTypeCd(this.prdImgTypeCdFacadeREST.find(productData.getProductImageType()));
+        if (productData.getProductImageType() != null) {
+            product.setPrdImgTypeCd(this.prdImgTypeCdFacadeREST.find(productData.getProductImageType()));
+        }else{
+             product.setPrdImgTypeCd(null);
+        }
         product.setPrdLongDesc(productData.getProductFullDesc());
         product.setPrdName(productData.getProductName());
         product.setPrdOemName(productData.getProductOEMName());
@@ -201,7 +211,7 @@ public class ProductFacadeRESTExtension extends ProductFacadeREST {
 
         super.create(product);
     }
-    
+
     /**
      * Updated the product
      *
@@ -210,7 +220,7 @@ public class ProductFacadeRESTExtension extends ProductFacadeREST {
     @POST
     @Path("updateProduct")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void updateProduct(ProductData productData) throws Exception{
+    public void updateProduct(ProductData productData) throws Exception {
 
         // Update Product
         Product product = super.find(productData.getProductUid());
@@ -220,12 +230,22 @@ public class ProductFacadeRESTExtension extends ProductFacadeREST {
         product.setPrdCntrDiscount(productData.getProductContractDiscount());
         product.setPrdCntrLnItm(productData.getProductContractLineItem());
         product.setPrdCntrUnitPrice(productData.getProductContractUnitPrice());
-        product.setPrdImgImage(DatatypeConverter.parseBase64Binary(productData.getProductImage()));
+        try {
+            if (productData.getProductImage() != null) {
+                product.setPrdImgImage(DatatypeConverter.parseBase64Binary(productData.getProductImage()));
+            }
+        } catch (Exception e) {
+            product.setPrdImgImage(null);
+        }
         product.setPrdImgKey(productData.getProductImgageKey());
         product.setPrdImgName(productData.getProductImageName());
         product.setPrdImgOrigin(productData.getProductImageOrigin());
         product.setPrdImgSize(productData.getProductImageSize());
-        product.setPrdImgTypeCd(this.prdImgTypeCdFacadeREST.find(productData.getProductImageType()));
+        if (productData.getProductImageType() != null) {
+            product.setPrdImgTypeCd(this.prdImgTypeCdFacadeREST.find(productData.getProductImageType()));
+        }else{
+             product.setPrdImgTypeCd(null);
+        }
         product.setPrdLongDesc(productData.getProductFullDesc());
         product.setPrdName(productData.getProductName());
         product.setPrdOemName(productData.getProductOEMName());

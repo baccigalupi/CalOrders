@@ -306,8 +306,16 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'accounting', 'common/SecurityUtils'
                     self.resetClickEvent();
                 };
 
-                self.resetClickEvent = function () {
+                self.resetClickEvent = function (data, event) {
                     self.uploadFile(null);
+                    self.productImage(null);
+                    self.productImageName(null);
+                    self.productImageSize(null);
+                    self.productImageBytes(null);
+                    self.productImageType(null);
+                    var preview = document.getElementById('productImage');
+
+                    preview.src = ProductHelper.getPhoto(undefined);
                 };
 
                 /**
@@ -334,7 +342,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'accounting', 'common/SecurityUtils'
                             $("#modalDialog2").ojDialog("open");
                         } else
                         {
-                            var preview = document.getElementById('productPicture');
+                            var preview = document.getElementById('productImage');
                             // read the file into a byte array
                             var reader = new FileReader();
 

@@ -187,15 +187,16 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'accounting', 'common/SecurityUtils'
                     self.productOEMName(response.prdOemName);
                     self.productUnitCode(response.prdUnitCd.code);
                     self.productContractLineItem(response.prdCntrLnItm);
-                    self.productContractDiscount(response.prdCntrDiscount);self.productContractUnitPriceDisplay = ko.observable(self.calculateContractPrice(response.prdPrice, response.prdCntrDiscount));
+                    self.productContractDiscount(response.prdCntrDiscount);
+                    self.productContractUnitPriceDisplay = ko.observable(self.calculateContractPrice(response.prdPrice, response.prdCntrDiscount));
                     self.productActiveStatus(self.getActiveInd(response.prdActiveInd));
-//                    self.productImage(response.prdImgImage);
-//                    self.productImageBytes(response.prdImgImage);
-//                    self.productImgageKey(response.prdImgKey);
-//                    self.productImageName(response.prdImgName);
-//                    self.productImageOrigin(response.prdImgOrigin);
-//                    self.productImageSize(response.prdImgSize);
-//                    self.productImageType(response.prdImgTypeCd.code);
+                    self.productImage(response.prdImgImage);
+                    self.productImageBytes(response.prdImgImage);
+                    self.productImgageKey(response.prdImgKey);
+                    self.productImageName(response.prdImgName);
+                    self.productImageOrigin(response.prdImgOrigin);
+                    self.productImageSize(response.prdImgSize);
+                    self.productImageType(response.prdImgTypeCd.code);
                 };
 
                 /**
@@ -317,7 +318,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'accounting', 'common/SecurityUtils'
                                     "productActivationStatus": self.productActiveStatus(),
                                     "productImage": self.productImageBytes(),
                                     "productImageName": self.productImageName(),
-                                    "imgOrigin": "tbd",
+                                    "imgOrigin": self.productImageOrigin(),
                                     "productImageSize": self.productImageSize(),
                                     "productImageType": self.productImageType(),
                                     "partyUserId": sessionStorage.userName
@@ -381,8 +382,16 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'accounting', 'common/SecurityUtils'
                     self.resetClickEvent();
                 };
 
-                self.resetClickEvent = function () {
+                self.resetClickEvent = function (data, event) {
                     self.uploadFile(null);
+                    self.productImage(null);
+                    self.productImageName(null);
+                    self.productImageSize(null);
+                    self.productImageBytes(null);
+                    self.productImageType(null);
+                    var preview = document.getElementById('productImage' + self.prdUid());
+
+                    preview.src = ProductHelper.getPhoto(undefined);
                 };
 
                 /**
@@ -409,7 +418,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'accounting', 'common/SecurityUtils'
                             $("#modalDialog2").ojDialog("open");
                         } else
                         {
-                            var preview = document.getElementById('productPicture');
+                            var preview = document.getElementById('productImage' + self.prdUid());
                             // read the file into a byte array
                             var reader = new FileReader();
 

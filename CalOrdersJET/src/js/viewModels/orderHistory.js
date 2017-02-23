@@ -24,8 +24,8 @@
 /*
  * Your customer ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'moment', 'common/SecurityUtils'],
-        function (oj, ko, $, moment) {
+define(['ojs/ojcore', 'knockout', 'jquery', 'moment', 'accounting', 'common/SecurityUtils'],
+        function (oj, ko, $, moment, accounting) {
 
             function OrdersViewModel() {
                 var self = this;
@@ -36,6 +36,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'moment', 'common/SecurityUtils'],
                 self.orderHistoryCol = ko.observable();
                 self.datasource = ko.observable();
                 self.tracker = ko.observable();
+                self.index = ko.observable();
                 // Below are a subset of the ViewModel methods invoked by the ojModule binding
                 // Please reference the ojModule jsDoc for additionaly available methods.
 
@@ -54,7 +55,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'moment', 'common/SecurityUtils'],
                     if (!SecurityUtils.isAuthenticated()) {
                         return self.router.go('welcome');
                     }
-
+                    self.index = ko.observable();
                     self.serviceURL = serviceEndPoints.getEndPoint('findAllOrderHistoryByPartyUid') + "/" + sessionStorage.partyUid;
                     var OrderHistoryModel = oj.Model.extend({
                         urlRoot: self.serviceURL,
@@ -116,6 +117,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'moment', 'common/SecurityUtils'],
                 self.parseOrderHistory = function (response) {
                     var orderDate = "";
                     var orderPoNumber = "";
+                    var totalPrice = null
                     if (response.orderDate !== undefined)
                     {
                         orderDate = moment().format('MM/DD/YYYY');
@@ -123,18 +125,34 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'moment', 'common/SecurityUtils'],
                     if (response.orderPoNumber !== undefined)
                     {
                         orderPoNumber = response.orderPoNumber;
-                    } 
+                    }
+                    if (response.orderPrice !== undefined) {
+                        totalPrice = accounting.formatMoney(response.orderPrice);
+                    }
 
                     var result = {'orderHistoryId': response['orderHistoryId'],
                         'orderDate': orderDate,
                         'orderStatus': response['orderStatus'],
                         'orderPoNumber': orderPoNumber,
                         'orderAgency': response['orderAgency'],
-                        'orderPrice': response['orderPrice'],
+                        'orderPrice': totalPrice,
                         'orderDescription': response['orderDescription']};
                     return result;
                 };
+
+                self.currentRowListener = function (event, ui) {
+                    var orderHistoryId = self.datasource._latestValue.dataSource.data.models[ui.currentRow.rowIndex].attributes.orderHistoryId;
+                    self.navigateToOrderDetail(orderHistoryId);
+                };
+
+
+                self.navigateToOrderDetail = function (orderHistoryId) {
+                    // Store order id parameter
+                    self.router.store(orderHistoryId);
+                    return self.router.go("orderDetail");
+                };
             }
+
 
             /*
              * Returns a constructor for the ViewModel so that the ViewModel is constrcuted
@@ -142,5 +160,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'moment', 'common/SecurityUtils'],
              * only one instance of the ViewModel is needed.
              */
             return new OrdersViewModel();
+
         }
 );

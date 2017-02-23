@@ -38,27 +38,29 @@
             <div class="oj-padding-vertical"></div>
         </div>
 
-        <a data-bind="click: navigateToProductSearch">Back to Search Results</a>
+        <div class="oj-flex ">
+            <div class="oj-flex-item">
+                <a data-bind="click: navigateToProductSearch">Back to Search Results</a>
+            </div>
+            <div class="oj-flex-item">
+                <!-- ko if: admin -->
+                <button id= "productUpdate" style="float: right" data-bind="click: navigateToProductUpdate, ojComponent: { component: 'ojButton', label: 'Update Product'}"></button>
+                <!-- /ko -->
+            </div>
+        </div>
 
         <div class="oj-padding-vertical"></div>
+
 
         <div class="oj-flex">
             <!-- Image -->
             <div class="oj-flex-item">
-                <div class="oj-flex">
-                    <div class="oj-flex-item ">
-                        <img alt="product" data-bind="attr: {
+
+                <img alt="product" data-bind="attr: {
                         id: 'productImage' + prdUid(), 
                         src: getPhoto(), 
                         height: medium() ? '400' : '200',
-                        width: medium() ? '400' : '200'}"/>
-                    </div>
-                    <!-- ko if: admin -->
-                    <div class="oj-flex-item">
-                        <button id= "productUpdate" data-bind="click: navigateToProductUpdate, ojComponent: { component: 'ojButton', label: 'Update Product'}"></button>
-                    </div>
-                    <!-- /ko -->
-                </div>
+                        width: medium() ? '400' : '200'}"/>  
             </div>
 
 
@@ -99,7 +101,14 @@
                 <!-- /ko -->
             </div>
 
+
         </div>
+
+
+
+
+
+
 
         <div class="oj-padding-vertical"></div>
 
