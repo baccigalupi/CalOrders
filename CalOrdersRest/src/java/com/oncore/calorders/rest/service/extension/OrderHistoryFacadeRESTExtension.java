@@ -58,6 +58,7 @@ import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
+import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -87,6 +88,10 @@ public class OrderHistoryFacadeRESTExtension extends OrderHistoryFacadeREST {
 
     public OrderHistoryFacadeRESTExtension() {
         super();
+    }
+
+    public OrderHistoryFacadeRESTExtension(EntityManager em) {
+        super(em);
     }
 
     /**
