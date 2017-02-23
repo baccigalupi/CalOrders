@@ -366,7 +366,7 @@ public class OrderHistoryFacadeRESTExtension extends OrderHistoryFacadeREST {
         List<OrderHistoryData> orderHistoryDatas = new ArrayList<OrderHistoryData>();
         List<OrderHistory> orderHistorys = new ArrayList<OrderHistory>();
 
-        orderHistorys = getEntityManager().createQuery("SELECT oh FROM OrderHistory oh join oh.ordStatusCd os join oh.ptyUidFk pt join pt.groupPartyAssocCollection gpa join gpa.grpUidFk g join g.depUidFk d WHERE pt.ptyUid = :partyUid ORDER BY oh.createTs DESC", OrderHistory.class).setParameter("partyUid", partyUid).getResultList();
+        orderHistorys = getEntityManager().createQuery("SELECT oh FROM OrderHistory oh join oh.ordStatusCd os join oh.ptyUidFk pt join pt.groupPartyAssocCollection gpa join gpa.grpUidFk g join g.depUidFk d join oh.orderProductAssocCollection opa WHERE pt.ptyUid = :partyUid ORDER BY oh.createTs DESC", OrderHistory.class).setParameter("partyUid", partyUid).getResultList();
         if (orderHistorys != null && orderHistorys.size() > 0) {
             for (OrderHistory orderHistory : orderHistorys) {
                 OrderHistoryData data = new OrderHistoryData();
