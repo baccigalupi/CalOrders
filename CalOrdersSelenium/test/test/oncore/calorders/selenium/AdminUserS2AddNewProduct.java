@@ -18,7 +18,7 @@ public class AdminUserS2AddNewProduct {
 
   @Before
   public void setUp() throws Exception {
-    System.setProperty("webdriver.chrome.driver","/home/oncore/workspaces/	CalOrders/libs/selenium-java-3.0.1/chromedriver");
+    System.setProperty("webdriver.chrome.driver","/home/oncore/workspaces/CalOrders/libs/selenium-java-3.0.1/chromedriver");
     driver = new ChromeDriver();
     baseUrl = "http://localhost:8000/";
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
