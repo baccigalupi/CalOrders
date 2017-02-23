@@ -117,25 +117,10 @@ CalOrders is a product catalog and ordering solution designed with the premise o
 
 CalOrders core principles:
 
-* Pluggable architecture built on the latest HTML5 and Java frameworks and technologies
+* Open Source architecture built on the latest HTML5 and Java frameworks and technologies
 * Supports latest architectural concepts of speed, replace-ability, and continuous delivery
 * Supports Agile development and project management techniques  
 * GitHub repository open to public 
-
-
-CalOrders currently encompasses the following technologies:
-
-* GitHub - Source Control
-* Pivotal Tracker - Agile project management
-* Java - REST Service Layer/Data Access Layer
-* Payara - JEE Application Server
-* Oracle JET - Front end UI
-* MySQL - Database
-* OS Independent, but a Linux Mint Developer image is available for download
-* NetBeans Development IDE, however, other IDE's and tools can be used including Eclipse and Brackets
-
-
-
 
 
 ![Figure 1](https://github.com/OncoreLLC/CalOrders/blob/master/Artifacts/images/Architecture_files/calorders_arch01.png)
@@ -159,12 +144,9 @@ The CalOrders application is separated by area of concern into separate NetBeans
 
 
 
- 
-
-
 ## User Interface
 
-The CalOrders user interface layer is comprised of the open source Oracle JET JavaScript framework. From the Oracle JET user guide, "Oracle JET is a collection of Oracle and open source JavaScript libraries engineered to make it as simple and efficient as possible to build client-side web and hybrid mobile applications based on JavaScript, HTML5, and CSS.
+The CalOrders user interface layer [(CDT–ADPQ–0117-2-Technical Approach: Client UI)](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersJET) is comprised of the open source Oracle JET JavaScript framework. From the Oracle JET user guide, "Oracle JET is a collection of Oracle and open source JavaScript libraries engineered to make it as simple and efficient as possible to build client-side web and hybrid mobile applications based on JavaScript, HTML5, and CSS.
 
 Oracle JET is designed to meet the following application needs:
 
@@ -187,6 +169,18 @@ JET also covers the following critical areas of modern web user interface constr
 
 Due to these features and its extensive component library, JET provides an excellent foundation for the CalOrders UI. For more information about the Oracle JET framework please see [About Oracle JET](http://docs.oracle.com/middleware/jet220/jet/developer/GUID-C6947139-DF37-4258-8E02-2679F40535E1.htm#JETDG108)
 
+### SPA (Single Page Application)
+
+CalOrders is a Single Page Application, having a single entry point, index.html.  Each screen in the application is a distinct HTML fragment substituted by the JET routing framework, however, they are not full HTML pages.  
+
+### Views
+
+A [view](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersJET/src/js/views) in CalOrders is a distinct SPA HTML fragment, which holds the front end visual static content and components for the view. JET uses Knockout for data binding, which binds the view model to the view.  
+
+
+### View Models
+
+A [view model](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersJET/src/js/viewModels) holds the business logic for the view and also manages the REST operations for the view.  The view model uses a consistent pattern defined by JET, which helps to ensure consistency across models and simplifies coding.
 
 ## Services
 
@@ -194,7 +188,7 @@ Due to these features and its extensive component library, JET provides an excel
 
 Figure 6: CalOrders Service Architecture
 
-CalOrders uses REST services exposed from JEE Session Beans using the built in annotations available from Java.  Java provides excellent REST service support in JEE making it extremely easy to create REST services supporting CRUD operations on an underlying datastore.  CalOrders uses the NetBeans REST services generator to create the core set of JPA entities and REST facades needed for the application.  Customizing the service entities is supported via built in JPA functionality using the persistence.xml file and xml files containing custom named queries or custom queries can be defined directly in the REST Facades using the JPA create query method and syntax.  See the [HOW TO Create Custom Queries and REST Facades](https://github.com/OncoreLLC/CalOrders/wiki/HOW-TO-Create-Custom-Queries-and-REST-Facades) Wiki page for more details on how to create custom JPA Named Queries and REST Facades.  Core classes and utilities needed to support the underlying architecture across domains are defined in CalOrdersCore, which is addressed later in this document.
+CalOrders uses [REST services](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersRest/src/java/com/oncore/calorders/rest/service) exposed from JEE Session Beans using the built in annotations available from Java.  Java provides excellent REST service support in JEE making it extremely easy to create REST services supporting CRUD operations on an underlying datastore.  CalOrders uses the NetBeans REST services generator to create the core set of JPA entities and REST facades needed for the application.  Customizing the service entities is supported via built in JPA functionality using the persistence.xml file and xml files containing custom named queries or custom queries can be defined directly in the REST Facades using the JPA create query method and syntax.  See the [HOW TO Create Custom Queries and REST Facades](https://github.com/OncoreLLC/CalOrders/wiki/HOW-TO-Create-Custom-Queries-and-REST-Facades) Wiki page for more details on how to create custom JPA Named Queries and REST Facades.  Core classes and utilities needed to support the underlying architecture across domains are defined in CalOrdersCore, which is addressed later in this document.
 
 
 ## Shared Architectural Components
@@ -203,15 +197,11 @@ As CalOrders places common architectural components in the shared CalOrdersCore 
 
 ## Databases
 
-The CalOrders application currently uses the MySQL database for back-end storage. However, as CalOrders uses JPA as an abstraction layer, there is nothing preventing migrating the database to a different provider such as Oracle or SQL Server. JPA provides CalOrders impressive flexibility and upgradability in this regard.
+The CalOrders application currently uses the MySQL [database](https://github.com/OncoreLLC/CalOrders/tree/master/DB_Scripts) for back-end storage. However, as CalOrders uses JPA as an abstraction layer, there is nothing preventing migrating the database to a different provider such as Oracle or SQL Server. JPA provides CalOrders impressive flexibility and upgradability in this regard.
 
-The CalOrdersREST project contains a dedicated folder to hold the MySQL DDL, database model, reference, and test data insert scripts as seen in Figure 7.
+The CalOrdersREST project contains a dedicated folder to hold the MySQL DDL, [database model](https://github.com/OncoreLLC/CalOrders/blob/master/Artifacts/images/Architecture_files/database.png), reference, and test data insert scripts as seen in Figure 7.
 
-![database folders](https://github.com/OncoreLLC/CalOrders/blob/master/Artifacts/images/Architecture_files/folders.png)
-
-Figure 7: Database Folders and Files
-
-The database model can be viewed and updated by using the MySQL Workbench tool.  Please see the [MySQL](http://www.mysql.com) website for more information about MySQL and to obtain the database and WorkBench tools for your operating system.
+The [database model](https://github.com/OncoreLLC/CalOrders/blob/master/Artifacts/images/Architecture_files/database.png) can be viewed and updated by using the MySQL Workbench tool.  Please see the [MySQL](http://www.mysql.com) website for more information about MySQL and to obtain the database and WorkBench tools for your operating system.
 
 ## Accessibility
 
