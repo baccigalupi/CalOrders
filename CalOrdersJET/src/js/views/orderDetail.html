@@ -114,7 +114,7 @@
             data-bind="ojComponent: {component: 'ojListView',
                 data: cardViewDataSource,
                 rootAttributes: {'style': 'width:100%'},
-            item: {template: 'productcard_template'}}">
+                item: {template: 'productcard_template'}}">
         </ul>
     </div>
     <div class="oj-flex oj-flex-items-pad">
@@ -149,7 +149,7 @@
 
                         <div class="oj-padding-vertical"></div>
                         
-                        <div data-bind="text: $data['prdPrice']"></div>
+                        <div data-bind="text: '$' + $data['prdPrice']"></div>
                     </div>  
                 </div>
             </div>
@@ -193,7 +193,7 @@
                 <div class="oj-flex-item oj-sm-4">
 
                     <div class="oj-flex-item oj-sm-only-hide oj-md-4 oj-md-float-end">
-                        <div data-bind="text: $data['prdPrice']"></div>
+                        <div data-bind="text: '$' + $data['prdPrice']"></div>
                     </div>
                 </div>
             </div>
