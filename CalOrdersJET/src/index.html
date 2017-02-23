@@ -1,11 +1,5 @@
 <!DOCTYPE html>
 <!--
- Copyright (c) 2014, 2016, Oracle and/or its affiliates.
- The Universal Permissive License (UPL), Version 1.0
--->
-
-
-<!--
   The OnCore Consulting LLC License
  
   Copyright 2016 OnCore Consulting LLC, All Rights Reserved.
@@ -32,19 +26,9 @@
 -->
 
 <!-- ************************ IMPORTANT INFORMATION ************************************
-  This web navigation bar template is provided as an example of how to configure
-  a JET web application with a navigation bar as a single page application
-  using ojRouter and ojModule.  It contains the Oracle JET framework and a default
-  requireJS configuration file to show how JET can be setup in a common application.
-  This project template can be used in conjunction with demo code from the JET
-  website to test JET component behavior and interactions.
-
-  Any CSS styling with the prefix "demo-" is for demonstration only and is not
-  provided as part of the JET framework.
-
-  Please see the demos under Cookbook/Patterns/App Shell: Web and the CSS documentation
-  under Support/API Docs/Non-Component Styling on the JET website for more information on how to use 
-  the best practice patterns shown in this template.
+  This is the entry point for the CalOrders single page application
+  using ojRouter and ojModule.  It contains the Oracle JET framework and a 
+  requireJS configuration which configures JET for CalOrders.   
 
   Aria Landmark role attributes are added to the different sections of the application
   for accessibility compliance. If you change the type of content for a specific
@@ -98,9 +82,6 @@
         <div id="globalBody" class="oj-web-applayout-page">
             <!--
                ** Oracle JET V2.2.0 web application navigation bar and header patterns.
-               ** Please see the demos under Cookbook/Patterns/App Shell: Web
-               ** and the CSS documentation under Support/API Docs/Non-Component Styling
-               ** on the JET website for more information on how to use this pattern.
             -->
             <header role="banner" class="oj-web-applayout-header">
                 <div class="oj-web-applayout-max-width oj-flex-bar oj-sm-align-items-center">
@@ -148,17 +129,7 @@
             <div role="main" class="oj-web-applayout-max-width oj-web-applayout-content" data-bind="ojModule: router.moduleConfig">
             </div>
             
-            
-            <!-- POSITION NAVIGATION BAR AT BOTTOM -->
-<!--              <div role="navigation" class="oj-web-applayout-max-width oj-web-applayout-navbar">
-                    <div data-bind="ojComponent: {component: 'ojNavigationList',
-            navigationLevel: 'application', display: smScreen() ? 'icons' : 'all',
-            item: {template: 'navTemplate'}, data: navBarDataSource,
-            selection: router.stateId, edge: 'top'},
-            css: smScreen() ? '' : 'oj-md-condense oj-md-justify-content-flex-end'">
-                    </div>
-                </div>-->
-            <!-- END NAVIGATION BAR -->
+ 
             
             <footer class="oj-web-applayout-footer" role="contentinfo">
                 <div class="oj-web-applayout-footer-item oj-web-applayout-max-width">
