@@ -28,6 +28,7 @@ import com.oncore.calorders.core.exceptions.DataAccessException;
 import com.oncore.calorders.core.utils.FormatHelper;
 import static com.oncore.calorders.core.utils.FormatHelper.LOG;
 import com.oncore.calorders.core.utils.Logger;
+import com.oncore.calorders.rest.Address;
 import com.oncore.calorders.rest.Department;
 import com.oncore.calorders.rest.GroupPartyAssoc;
 import com.oncore.calorders.rest.OrdStatusCd;
@@ -35,6 +36,8 @@ import com.oncore.calorders.rest.OrderHistory;
 import com.oncore.calorders.rest.OrderProductAssoc;
 import com.oncore.calorders.rest.Party;
 import com.oncore.calorders.rest.Product;
+import com.oncore.calorders.rest.data.OrderDetailData;
+import com.oncore.calorders.rest.data.OrderDetailProductData;
 import com.oncore.calorders.rest.data.OrderHistoryData;
 import com.oncore.calorders.rest.data.OrderItemData;
 import com.oncore.calorders.rest.data.OrderStatusData;
@@ -67,6 +70,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  *
@@ -84,6 +88,8 @@ public class OrderHistoryFacadeRESTExtension extends OrderHistoryFacadeREST {
 
     @EJB
     ProductFacadeRESTExtension productFacadeRESTExtension;
+
+    private static final BigDecimal SHIPPING_PRICE = new BigDecimal(25.00);
 
     public OrderHistoryFacadeRESTExtension() {
         super();
@@ -431,6 +437,57 @@ public class OrderHistoryFacadeRESTExtension extends OrderHistoryFacadeREST {
         }
 
         return orderHistoryDatas;
+    }
+
+    @GET
+    @Path("findOrderDetailById/{orderUid}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public OrderDetailData findOrderDetailById(@PathParam("orderUid") Integer orderUid) {
+        OrderDetailData order = new OrderDetailData();
+        BigDecimal productTotalPrice = new BigDecimal(0);
+
+        OrderHistory orderHistory = super.find(orderUid);
+
+        order.setId(orderHistory.getOrdUid());
+        order.setStatusDescription(orderHistory.getOrdStatusCd().getLongDesc());
+        order.setStatusCode(orderHistory.getOrdStatusCd().getCode());
+
+        if (orderHistory.getDepUidFk().getAddressCollection() != null && !orderHistory.getDepUidFk().getAddressCollection().isEmpty()) {
+            Address address = orderHistory.getDepUidFk().getAddressCollection().iterator().next();
+
+            order.setShippingAddressLine1(address.getAdrLine1());
+            order.setShippingAddressLine2(address.getAdrLine2());
+            order.setShippingAddressCity(address.getAdrCity());
+            order.setShippingAddressStateCode(address.getAdrStateCd().getCode());
+            order.setShippingAddressZipCode(address.getAdrZip5());
+
+            if (StringUtils.isNotBlank(address.getAdrZip4())) {
+                order.setShippingAddressZipCode(order.getShippingAddressZipCode() + "-" + address.getAdrZip4());
+            }
+        }
+
+        for (OrderProductAssoc productAssoc : orderHistory.getOrderProductAssocCollection()) {
+            OrderDetailProductData orderProduct = new OrderDetailProductData();
+            orderProduct.setPrdUid(productAssoc.getPrdUidFk().getPrdUid());
+            orderProduct.setPrdName(productAssoc.getPrdUidFk().getPrdName());
+            orderProduct.setPrdImgImage(productAssoc.getPrdUidFk().getPrdImgImage());
+            orderProduct.setPrdPrice(productAssoc.getOpaPrice());
+            orderProduct.setPrdQuantity(productAssoc.getOpaQuantity());
+            orderProduct.setPrdImgTypeCd(productAssoc.getPrdUidFk().getPrdImgTypeCd());
+
+            productTotalPrice = productTotalPrice.add(productAssoc.getOpaPrice().multiply(new BigDecimal(productAssoc.getOpaQuantity())));
+            
+            order.getOrderDetailProductDataList().add(orderProduct);
+        }
+
+        // Set pricing
+        order.setShippingPrice(SHIPPING_PRICE);
+        order.setProductTotalPrice(productTotalPrice);
+        order.setTotalPrice(order.getShippingPrice().add(order.getProductTotalPrice()));
+        
+        System.out.println("total product: " + order.getProductTotalPrice());
+
+        return order;
     }
 
     private String getQuarterMonth(int month) {
