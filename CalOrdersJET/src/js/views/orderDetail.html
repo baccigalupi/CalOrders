@@ -61,22 +61,6 @@
         </div>
 
         <div class="oj-padding-vertical"></div>
-        <!--        <div class="oj-flex oj-sm-12">
-                     CONFIRMATION SUMMARY 
-                    
-                    
-                    <div class="oj-md-odd-cols-6">
-                        <div class="oj-flex">
-                            <div>
-                                <div>
-                                    <div class="oj-sm-justify-content"><div><div class="confirmation_bold_label">Order Number:</div> <div class="confirmation_float_right" data-bind="text: orderDetail().id"></div></div></div>
-                                    <div class="oj-sm-justify-content"><div><div class="confirmation_bold_label">Order Status:</div> <div class="confirmation_float_right" data-bind="text: orderDetail().statusDescription"></div></div></div>
-                                    <div class="oj-sm-justify-content"><div><div class="confirmation_bold_label">Total Price:</div> <div class="confirmation_float_right" data-bind="text: orderDetail().totalPrice"></div></div></div>
-                                </div>
-                            </div>
-                        </div>
-                         END CONFIRMATION SUMMARY 
-                    </div>-->
 
         <div class="oj-flex oj-sm-12">
             <div id="cartWrapperDiv" class="oj-panel oj-flex-item oj-sm-flex-wrap-nowrap">
@@ -124,13 +108,13 @@
 
 <!-- Product Card View -->
 <script id="productCardLayout" type="text/html">
-    <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex oj-flex-items-pad ">
         <ul id="listviewcard"
             class="oj-flex oj-listview-card-layout"
             data-bind="ojComponent: {component: 'ojListView',
                 data: cardViewDataSource,
                 rootAttributes: {'style': 'width:100%'},
-            item: {template: 'productcard_template'}}">
+                item: {template: 'productcard_template'}}">
         </ul>
     </div>
     <div class="oj-flex oj-flex-items-pad">
@@ -141,13 +125,13 @@
 
 <!-- Product Card view (card format)  -->
 <script id="productcard_template" type="text/html">
-    <li class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-4 oj-xl-3"  style="margin:0;border-style:none">
+    <li class="oj-flex-item oj-sm-12"  style="margin:0;border-style:none">
         <div class="oj-panel" style="margin: 5px 0px 10px 0px;">
 
             <div data-bind="click: $parent.navigateToProductDetail">
 
                 <div class="oj-flex">
-                    <div class="oj-flex-item confirmation_bold_label" data-bind="text: $data['prdName']"></div>
+                    <div class="oj-flex-item oj-sm-12 confirmation_bold_label" data-bind="text: $data['prdName']"></div>
                 </div>
 
                 <div class="oj-padding-vertical"></div>
@@ -185,17 +169,14 @@
 <script id="productListLayout" type="text/html">
     <ul id="listview"
         data-bind="ojComponent: {component: 'ojListView',
-                data: listViewDataSource,
+            data: listViewDataSource,
             rootAttributes: {style: 'width:100%;overflow:auto; margin-top: 5px'},
             selectionMode: 'single',
             item: {template: 'productlist_template'},
-        scrollPolicy: 'loadMoreOnScroll',
+            scrollPolicy: 'loadMoreOnScroll',
             scrollPolicyOptions: {fetchSize: 10}}">
     </ul>
-    <!--    <div class="oj-flex oj-flex-items-pad">
-            <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: cardViewDataSource, pageSize: 100}">
-            </div>
-        </div>-->
+
 </script>
 
 <!-- Product List view (row format) -->
@@ -211,6 +192,11 @@
                 <div class="oj-flex-item oj-sm-4">
                     <div class="confirmation_bold_label" data-bind="text: $data['prdName']"></div>
                 </div>
+                
+                <div class="oj-flex-item oj-sm-4">
+                    <div class="confirmation_bold_label" data-bind="text: $data['prdName']"></div>
+                </div>
+                
                 <div class="oj-flex-item oj-sm-2">
                     <span>Quantity: </span><span data-bind="text: $data['prdQuantity']"/>
                 </div>

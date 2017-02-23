@@ -123,6 +123,8 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
                     if (self.doShowErrorMessage)
                     {
                         document.getElementById('errorMessage').hidden = false;
+                        
+                        document.getElementById('confirmationMessage').hidden = true;
                         self.errorMessage('Oops we can not get your cart right now, please try refreshing the screen.')
                     }
                 };
