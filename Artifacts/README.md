@@ -164,7 +164,7 @@ The CalOrders application is separated by area of concern into separate NetBeans
 
 ## User Interface
 
-The CalOrders user interface layer is comprised of the open source Oracle JET JavaScript framework. From the Oracle JET user guide, "Oracle JET is a collection of Oracle and open source JavaScript libraries engineered to make it as simple and efficient as possible to build client-side web and hybrid mobile applications based on JavaScript, HTML5, and CSS.
+The CalOrders user interface layer [(CDT–ADPQ–0117-2-Technical Approach: Client UI)](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersJET) is comprised of the open source Oracle JET JavaScript framework. From the Oracle JET user guide, "Oracle JET is a collection of Oracle and open source JavaScript libraries engineered to make it as simple and efficient as possible to build client-side web and hybrid mobile applications based on JavaScript, HTML5, and CSS.
 
 Oracle JET is designed to meet the following application needs:
 
@@ -186,6 +186,23 @@ JET also covers the following critical areas of modern web user interface constr
 * Support for SPA (Single Page Application) design ( see [Single Page Application - WikiPedia](https://en.wikipedia.org/wiki/Single-page_application) ) Note, CalOrders is a SPA application.
 
 Due to these features and its extensive component library, JET provides an excellent foundation for the CalOrders UI. For more information about the Oracle JET framework please see [About Oracle JET](http://docs.oracle.com/middleware/jet220/jet/developer/GUID-C6947139-DF37-4258-8E02-2679F40535E1.htm#JETDG108)
+
+### SPA (Single Page Application)
+
+CalOrders is a Single Page Application, having a single entry point, index.html.  Each screen in the application is a distinct HTML fragment substituted by the JET routing framework, however, they are not full HTML pages.  
+
+### Views
+
+A [view](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersJET/src/js/views) in CalOrders is a distinct SPA HTML fragment, which holds the front end visual static content and components for the view. JET uses Knockout for data binding, which binds the view model to the view.  
+
+The following example is taken from the [product Search view](https://github.com/OncoreLLC/CalOrders/blob/master/CalOrdersJET/src/js/views/productSearch.html)
+
+
+
+
+### View Models
+
+
 
 
 ## Services
