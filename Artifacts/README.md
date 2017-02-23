@@ -151,9 +151,14 @@ CalOrders by default uses the open source NetBeans IDE for development.  NetBean
 
 The CalOrders application is separated by area of concern into separate NetBeans projects. 
  
-* CalOrdersCore - This Java API project holding shared utility classes, interfaces, and base classes designed to support the other CalOrders Java projects.  
-* CalOrdersREST - This Java dynamic web project provides support for REST services and the data access layer via Java JEE (Java Enterprise Edition) and JPA (Java Persistence API)
-* CalOrdersJET - [(CDT–ADPQ–0117-2-Technical Approach: Client UI)](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersJET) This JET HTML5 project provides the front end for the CalOrders application.
+* CalOrdersJET - [(CDT–ADPQ–0117-2-Technical Approach: Client UI)](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersJET)  JET HTML5 project providing the front end for the CalOrders application.
+* JavaScript Library - [(CDT–ADPQ–0117-2-Technical Approach: JavaScript Library)](http://www.oracle.com/webfolder/technetwork/jet/index.html) Orcle JET is an open source JavaScript framework proving a rich set of ADA compliant components. See User Interface section below for more details about Oracle JET
+* CalOrdersREST - [(CDT–ADPQ–0117-2-Technical Approach: REST Service)](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersRest) Java dynamic web project providing support for REST services and the data access layer via Java JEE (Java Enterprise Edition) and JPA (Java Persistence API)
+* CalOrdersCore - Java API project holding shared utility classes, interfaces, and base classes designed to support the other CalOrders Java projects.  
+* CalOrders Database = [(CDT–ADPQ–0117-2-Technical Approach: Database)](https://github.com/OncoreLLC/CalOrders/tree/master/DB_Scripts) MySQL database model, DDL, and reference data scripts.
+
+
+
  
 
 
