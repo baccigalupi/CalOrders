@@ -32,12 +32,13 @@
         <div id="orderHistoryTableContent" class="oj-sm-12 oj-flex-item">
             <div id="orderHistoryTable">
                 <table id="table" summary="Order History Table" aria-label="Order History Table"
-                       data-bind="ojComponent: {component: 'ojTable', 
-                                selectionMode: {row: 'multiple', column: 'multiple'}, data: datasource,
+                       data-bind="ojComponent: {component: 'ojTable', beforeCurrentRow:   currentRowListener,
+                                selectionMode: {row: 'single', column: 'multiple'} ,
+                                data: datasource,
                                 display: 'grid',
                                 columnsDefault: {sortable: 'enabled'}, 
                                 columns: [
-                                  {headerTemplate: 'header_order_link', template: 'order_link', sortable: 'enabled'},
+                                  {headerText: 'Order No.', field: 'orderHistoryId', sortable: 'enabled'},
                                   {headerText: 'Date', field: 'orderDate', sortable: 'enabled'},
                                   {headerText: 'Status', field: 'orderStatus', sortable: 'enabled'},   
                                   {headerText: 'PO No.', field: 'orderPoNumber', sortable: 'enabled', headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide'},
@@ -52,18 +53,3 @@
         </div>
     </div>
 </div>
-
-<script type="text/html" id="header_order_link">
-<th>
-  Order No.
-  </td>
-</script>
-
-<script type="text/html" id="order_link">
-<td>
-  <a href="#" data-bind="click: function() {$parent.navigateToOrderDetail($data['orderHistoryId'])}">
-  <span data-bind="text: $data['orderHistoryId']"></span>
-  </a>
-  </td>
-</script>
-

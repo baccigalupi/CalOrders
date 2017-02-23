@@ -442,6 +442,84 @@ public class OrderHistoryFacadeRESTExtension extends OrderHistoryFacadeREST {
 
         return orderHistoryDatas;
     }
+    
+     /**
+     * Fetch all orders by PartyUid and ordered by Date ascending
+     *
+     * @return a structure of orders history ordered by Date
+     *
+     * @throws com.oncore.calorders.core.exceptions.DataAccessException
+     */
+    @GET
+    @Path("findAllOrderHistory")
+    @Produces({MediaType.APPLICATION_JSON})
+    public List<OrderHistoryData> findAllOrderHistory() throws DataAccessException {
+        List<OrderHistoryData> orderHistoryDatas = new ArrayList<OrderHistoryData>();
+        List<OrderHistory> orderHistorys = new ArrayList<OrderHistory>();
+
+        orderHistorys = getEntityManager().createQuery("SELECT oh FROM OrderHistory oh join oh.ordStatusCd os join oh.ptyUidFk pt join pt.groupPartyAssocCollection gpa join gpa.grpUidFk g join g.depUidFk d join oh.orderProductAssocCollection opa ORDER BY oh.createTs DESC", OrderHistory.class).getResultList();
+        if (orderHistorys != null && orderHistorys.size() > 0) {
+            for (OrderHistory orderHistory : orderHistorys) {
+                OrderHistoryData data = new OrderHistoryData();
+
+                data.setOrderHistoryId(orderHistory.getOrdUid());
+                if (orderHistory.getPtyUidFk() != null
+                        && orderHistory.getPtyUidFk().getGroupPartyAssocCollection() != null
+                        && orderHistory.getPtyUidFk().getGroupPartyAssocCollection().size() > 0) {
+                    for (GroupPartyAssoc assoc : orderHistory.getPtyUidFk().getGroupPartyAssocCollection()) {
+                        if (assoc.getGrpUidFk() != null && assoc.getGrpUidFk().getDepUidFk() != null) {
+                            data.setOrderAgency(assoc.getGrpUidFk().getDepUidFk().getDepName());
+                            break;
+                        }
+                    }
+                }
+
+                data.setOrderDate(orderHistory.getCreateTs());
+
+                if (orderHistory.getOrderProductAssocCollection() != null
+                        && orderHistory.getOrderProductAssocCollection().size() > 0) {
+                    String skuConcat = new String();
+                    BigDecimal totalPrice = new BigDecimal(BigInteger.ZERO);
+                    List<OrderProductAssoc> productAssocs = new ArrayList<OrderProductAssoc>();
+
+                    for (OrderProductAssoc assoc : orderHistory.getOrderProductAssocCollection()) {
+                        productAssocs.add(assoc);
+                        totalPrice = totalPrice.add(assoc.getOpaPrice());
+                    }
+
+                    data.setOrderPrice(totalPrice);
+                    
+                    for (int i = 0; i < productAssocs.size(); i++) {
+
+                        if (skuConcat.length() > 25) {
+                            skuConcat = skuConcat + "...";
+                            break;
+                        }
+
+                        if (productAssocs.get(i).getPrdUidFk() != null
+                                && productAssocs.get(i).getPrdUidFk().getPrdSku() != null) {
+                            if (i == 0) {
+                                skuConcat = productAssocs.get(i).getPrdUidFk().getPrdSku();
+                            } else {
+                                skuConcat = skuConcat + ", " + productAssocs.get(i).getPrdUidFk().getPrdSku();
+                            }
+                        }
+                    }
+                    data.setOrderDescription(skuConcat.trim());
+                }
+
+                data.setOrderPoNumber(null);
+
+                if (orderHistory.getOrdStatusCd() != null) {
+                    data.setOrderStatus(orderHistory.getOrdStatusCd().getShortDesc());
+                }
+                orderHistoryDatas.add(data);
+            }
+
+        }
+
+        return orderHistoryDatas;
+    }
 
     @GET
     @Path("findOrderDetailById/{orderUid}")
