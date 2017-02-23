@@ -119,9 +119,6 @@ public class Privilege implements Serializable {
     @Column(name = "UPDATE_TS")
     @Temporal(TemporalType.TIMESTAMP)
     private Date updateTs;
-    @JoinColumn(name = "GRP_UID_FK", referencedColumnName = "GRP_UID")
-    @ManyToOne(optional = false)
-    private Groups grpUidFk;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "prvUidFk")
     private Collection<GroupPrivilegeAssoc> groupPrivilegeAssocCollection;
 
@@ -221,14 +218,6 @@ public class Privilege implements Serializable {
 
     public void setUpdateTs(Date updateTs) {
         this.updateTs = updateTs;
-    }
-
-    public Groups getGrpUidFk() {
-        return grpUidFk;
-    }
-
-    public void setGrpUidFk(Groups grpUidFk) {
-        this.grpUidFk = grpUidFk;
     }
 
     @XmlTransient
