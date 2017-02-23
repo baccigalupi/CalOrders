@@ -26,8 +26,8 @@
 /*
  * Your about ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/ReferenceData', 'utils/ProductHelper'],
-        function (oj, ko, $) {
+define(['ojs/ojcore', 'knockout', 'jquery', 'accounting', 'common/SecurityUtils', 'reference/ReferenceData', 'utils/ProductHelper'],
+        function (oj, ko, $, accounting) {
 
             function ProductAddViewModel() {
                 var self = this;
@@ -58,6 +58,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                 self.productUnitCodeMessages = ko.observableArray([]);
                 self.productContractLineItem = ko.observable();
                 self.productContractUnitPrice = ko.observable();
+                self.productContractUnitPriceDisplay = ko.observable();
                 self.productActiveStatus = ko.observable("1");
                 self.productImage = ko.observable();
                 self.productImageBytes = ko.observable();
@@ -134,6 +135,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                     self.productContractLineItem = ko.observable();
                     self.productContractDiscount = ko.observable();
                     self.productContractUnitPrice = ko.observable();
+                    self.productContractUnitPriceDisplay = ko.observable();
                     self.productActiveStatus = ko.observable("1");
                     self.productImage = ko.observable();
                     self.productImageBytes = ko.observable();
@@ -194,11 +196,18 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                 self.computeContractPrice = function (data, event) {
                     var percent = $("#productContractDiscount").val();
                     var price = $("#productPrice").val();
-                    var discount = ((percent / 100) * price).toFixed(2);
+
+                    self.calculateContractPrice(price, percent);
+                };
+
+                self.calculateContractPrice = function (price, percent) {
+                    var discount = ((percent / 100) * price);
                     if (discount == NaN || discount == undefined || discount === 0) {
                         self.productContractUnitPrice(undefined);
+                        self.productContractUnitPriceDisplay(accounting.formatMoney(0))
                     } else {
                         self.productContractUnitPrice(price - discount);
+                        self.productContractUnitPriceDisplay(accounting.formatMoney(price - discount))
                     }
                 };
 
@@ -219,7 +228,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                                 idAttribute: 'prdUid'
                             });
                         var productService = new ProductService();
-                        console.log(self.productImageBytes().length);
+
                         productService.save(
                                 {
                                     //Product Info
@@ -338,7 +347,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                                 {
                                     preview.src = reader.result;
                                     self.productImageBytes(reader.result.split(',')[1]);
-                                    console.log(reader.result.split(',')[1]);
 
                                 } else
                                 {
@@ -406,7 +414,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'reference/R
                 self.validateProductCategory = {validate: function (value)
                     {
                         var validProductCategory = true;
-                        var serviceIndicator = value[0].substring(1, 2);
+                        var serviceIndicator = undefined;
+                        if (typeof value != "undefined"
+                                && value != "") {
+                            serviceIndicator = value[0].substring(1, 2);
+                        }
                         if (typeof value != "undefined"
                                 && value != "" && (value == "SERI"))
                         {

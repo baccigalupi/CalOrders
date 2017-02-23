@@ -55,6 +55,7 @@ requirejs.config(
                                 'ojtranslations': 'libs/oj/v2.2.0/resources',
                                 'text': 'libs/require/text',
                                 'moment': 'libs/moment/min/moment.min',
+                                'accounting': 'libs/accounting/accounting',
                                 'signals': 'libs/js-signals/signals'
                             }
                     //endinjector

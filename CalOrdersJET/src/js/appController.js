@@ -49,6 +49,7 @@ define(['ojs/ojcore', 'knockout', 'common/SecurityUtils', 'ojs/ojknockout-model'
                     'productDetail': {label: 'Product Detail', isDefault: false},
                     'productCompare': {label: 'Compare Products', isDefault: false},
                     'productAdd': {label: 'Add Product', isDefault: false},
+                    'productUpdate': {label: 'Update Product', isDefault: false},
                     'serviceAdd': {label: 'Add Service', isDefault: false},
                     'dashboard': {label: 'Dashboard'},
                     'cart': {label: 'Cart'},

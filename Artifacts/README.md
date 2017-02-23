@@ -3,7 +3,7 @@
 
 ##Introduction
 
-OnCore’s [Statement of Work]( https://github.com/OncoreLLC/CalOrders/wiki/Statement-of-Work) for this RFP is focused on delivering what the end user needs.  Combining an Agile methodology and User Centered design provides an ideal vehicle to quickly understand the what users want and delivering functioning, high value features for the business and development teams to incrementally improve on.  Using Agile stories that built up functionality over the sprints, we were able to adjust quickly to the needs of the business as they were able to quickly see the application and the requirements they were providing.  These tight cycles between ideas and testing allowed us to respond quickly to change and focused on solutions not features.    
+OnCore’s [Statement of Work]( https://github.com/OncoreLLC/CalOrders/wiki/Statement-of-Work) for this RFP is focused on delivering what the end user needs.  Combining an Agile methodology and User Centered design provides an ideal vehicle to quickly understand what users want and delivering functioning, high value features for the business and development teams to incrementally improve on.  Using Agile stories that built up functionality over the sprints, we were able to adjust quickly to the needs of the business as they were able to immediatley see the application and the requirements they were providing.  These tight cycles between ideas and testing allowed us to respond quickly to change and focused on solutions not features.    
 
 In addition to the Agile Team, we had support from the client executive team that enabled the end users we were working with to have the power to make decisions and own the product. This ensured that we would be building and delivering a product that end user wanted and needed with this collaboration. With this level of collaboration, we defined our strategy as 'try, fail fast, learn, and then try again."   
 
@@ -28,11 +28,11 @@ k. Created a prototype that works on multiple devices, and presents a responsive
 l. Used at least five (5) modern and open-source technologies, regardless of architectural layer (frontend, backend, etc.) | [Technologies](https://github.com/OncoreLLC/CalOrders/wiki/Modern-and-Open-Source-Technologies)
 m. Deployed the prototype on an Infrastructure as a Service (IaaS) or Platform as Service(PaaS) provider, and indicated which provider they used | [Application Service Deployment](https://github.com/OncoreLLC/CalOrders/wiki/Application-Service-Deployment)
 n. Developed automated unit tests for their code |[Automated Testing](https://github.com/OncoreLLC/CalOrders/wiki/Automated-Testing) 
-o. Setup or used a continuous integration system to automate the running of tests and continuously deployed their code to their IaaS or PaaS provider | [Continuous Integration and Automated Testing](https://github.com/OncoreLLC/CalOrders/wiki/Continuous-Integration-and-Automated-Testing)
-p. Setup or used configuration management | [Configuration Management](https://github.com/OncoreLLC/CalOrders/wiki/Configuration-Management)
-q. Setup or used continuous monitoring | [Continuous Monitoring](https://github.com/OncoreLLC/CalOrders/wiki/Continuous-Monitoring)
-r. Deployed their software in an open source container, such as Docker (i.e., utilized operating-system-level virtualization) | [Application Container Deployment](https://github.com/OncoreLLC/CalOrders/wiki/Application-Container-Deployment)
-s. Provided sufficient documentation to install and run their prototype on another machine and | [Setup and Deployment](https://github.com/OncoreLLC/CalOrders/wiki/Setup-and-Deployment)
+o. Setup or used a continuous integration system to automate the running of tests and continuously deployed their code to their IaaS or PaaS provider | [Continuous Integration and Automated Testing](https://github.com/OncoreLLC/CalOrders/wiki/Environments)
+p. Setup or used configuration management | [Configuration Management](https://github.com/OncoreLLC/CalOrders/wiki/Environments)
+q. Setup or used continuous monitoring | [Continuous Monitoring](https://github.com/OncoreLLC/CalOrders/wiki/Environments)
+r. Deployed their software in an open source container, such as Docker (i.e., utilized operating-system-level virtualization) | [Application Container Deployment](https://github.com/OncoreLLC/CalOrders/wiki/Environments)
+s. Provided sufficient documentation to install and run their prototype on another machine and | [Setup and Deployment](https://github.com/OncoreLLC/CalOrders/wiki/Environments)
 t. Prototype and underlying platforms used to create and run the prototype are openly licensed and free of charge | [Software Licensing](https://github.com/OncoreLLC/CalOrders/wiki/Software-Licensing)
 
 ## US Digital Services Playbook
@@ -69,7 +69,7 @@ Plan | Analyze| Design | Implement | Test & Measure
 --- | --- | --- | --- | ----
 [Kickoff Meeting](https://github.com/OncoreLLC/CalOrders/wiki/Hold-Kick-Off-Meeting) | [Research Domain](https://github.com/OncoreLLC/CalOrders/wiki/Domain-Research)    |[Scenarios](https://github.com/OncoreLLC/CalOrders/wiki/Scenarios) | [Style Guide](http://www.oracle.com/webfolder/technetwork/jet/jetCookbook.html)    |[Usability Test](https://github.com/OncoreLLC/CalOrders/wiki/Usability-Testing)
 [Statement of Work](https://github.com/OncoreLLC/CalOrders/wiki/Statement-of-Work)   |[Focus Groups](https://github.com/OncoreLLC/CalOrders/wiki/Focus-Group)|[Story Boarding](https://github.com/OncoreLLC/CalOrders/wiki/Story-Boards)     |[Wireframe Walkthrough](https://github.com/OncoreLLC/CalOrders/wiki/Wireframe-Walkthrough) | Refine Application            
-[Develop a Plan](https://github.com/OncoreLLC/CalOrders/wiki/Develop-a-Plan)   | [Personas](https://github.com/OncoreLLC/CalOrders/wiki/Develop-Personas)||                       | Retest
+[Develop a Plan](https://github.com/OncoreLLC/CalOrders/wiki/User-Centric-Design)   | [Personas](https://github.com/OncoreLLC/CalOrders/wiki/Develop-Personas)||                       | Retest
 ||[Interviews](https://github.com/OncoreLLC/CalOrders/wiki/Interviews) ||
 
 ##Agile Prototype Development   
