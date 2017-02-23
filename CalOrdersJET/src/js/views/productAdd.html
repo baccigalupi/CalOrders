@@ -77,7 +77,7 @@ THE SOFTWARE.
                         <div class="oj-flex">  
                             <div class="oj-flex-item">
                                 <label for="productName">Product Name:</label>
-                                <input id="productName"  type="text" required maxlength="45"
+                                <input id="productName"  type="text" required 
                                        data-bind="ojComponent: {
                                                 component: 'ojInputText', 
                                                 value:productName, required: true,
@@ -251,7 +251,7 @@ THE SOFTWARE.
                         <div class="oj-flex"> 
                             <div class="oj-flex-item">
                                 <label for="productContractDiscount">Product Contract Discount:</label>
-                                <input id="productContractDiscount" type="text"  maxlength="9"
+                                <input id="productContractDiscount" type="text"  maxlength="2"
                                        data-bind="event: { change: computeContractPrice} ,ojComponent: {
                                     component: 'ojInputText', 
                                     value: productContractDiscount, 
@@ -314,7 +314,7 @@ THE SOFTWARE.
                 <div id="productPicturePanel" class="oj-panel oj-flex-item">
 
                     <img alt="product" data-bind="attr: {
-                        id: 'productPicture', 
+                        id: 'productImage', 
                         src: getPhoto(), 
                         height: medium() ? '400' : '200',
                         width: medium() ? '400' : '200'}"/>
