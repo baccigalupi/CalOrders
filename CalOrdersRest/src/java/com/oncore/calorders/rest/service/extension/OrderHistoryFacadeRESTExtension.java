@@ -137,6 +137,8 @@ public class OrderHistoryFacadeRESTExtension extends OrderHistoryFacadeREST {
                 throw new DataAccessException(ErrorCode.DATAACCESSERROR.toString());
             } else {
                 order.setPtyUidFk(party);
+                
+                order.setDepUidFk(party.getGroupPartyAssocCollection().iterator().next().getGrpUidFk().getDepUidFk());
             }
 
             order.setOrderProductAssocCollection(new ArrayList<OrderProductAssoc>());
