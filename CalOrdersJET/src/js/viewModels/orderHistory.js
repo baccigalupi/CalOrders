@@ -123,7 +123,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'moment', 'common/SecurityUtils'],
                     if (response.orderPoNumber !== undefined)
                     {
                         orderPoNumber = response.orderPoNumber;
-                    } 
+                    }
 
                     var result = {'orderHistoryId': response['orderHistoryId'],
                         'orderDate': orderDate,
@@ -133,6 +133,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'moment', 'common/SecurityUtils'],
                         'orderPrice': response['orderPrice'],
                         'orderDescription': response['orderDescription']};
                     return result;
+                };
+
+
+                self.navigateToOrderDetail = function (orderHistoryId) {
+
+                    // Store order id parameter
+                    self.router.store(orderHistoryId);
+                    return self.router.go("orderDetail");
                 };
             }
 
