@@ -190,7 +190,7 @@ Due to these features and its extensive component library, JET provides an excel
 
 ## Services
 
-![Figure 6](https://github.com/OncoreLLC/CalOrders/blob/master/Artifacts/images/Architecture_files/calorders_arch01.png)
+![Figure 6](https://github.com/OncoreLLC/CalOrders/blob/master/Artifacts/images/Architecture_files/calorders_arch03.jpg)
 
 Figure 6: CalOrders Service Architecture
 
