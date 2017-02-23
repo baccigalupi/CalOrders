@@ -201,10 +201,6 @@ The CalOrders application currently uses the MySQL [database](https://github.com
 
 The CalOrdersREST project contains a dedicated folder to hold the MySQL DDL, [database model](https://github.com/OncoreLLC/CalOrders/blob/master/Artifacts/images/Architecture_files/database.png), reference, and test data insert scripts as seen in Figure 7.
 
-![database folders](https://github.com/OncoreLLC/CalOrders/blob/master/Artifacts/images/Architecture_files/folders.png)
-
-Figure 7: Database Folders and Files
-
 The [database model](https://github.com/OncoreLLC/CalOrders/blob/master/Artifacts/images/Architecture_files/database.png) can be viewed and updated by using the MySQL Workbench tool.  Please see the [MySQL](http://www.mysql.com) website for more information about MySQL and to obtain the database and WorkBench tools for your operating system.
 
 ## Accessibility
