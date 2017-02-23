@@ -153,7 +153,7 @@ The CalOrders application is separated by area of concern into separate NetBeans
  
 * CalOrdersCore - This Java API project holding shared utility classes, interfaces, and base classes designed to support the other CalOrders Java projects.  
 * CalOrdersREST - This Java dynamic web project provides support for REST services and the data access layer via Java JEE (Java Enterprise Edition) and JPA (Java Persistence API)
-* CalOrdersJET - This JET HTML5 project provides the front end for the CalOrders application.
+* CalOrdersJET - [(CDT–ADPQ–0117-2-Technical Approach: Client UI)](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersJET) This JET HTML5 project provides the front end for the CalOrders application.
  
 
 
