@@ -50,20 +50,28 @@
                 <div class="oj-flex-item">
                     <h3 aria-label="product name" data-bind="text: productsToCompare()[0].prdName" tabindex="0"></h3>
                     <div class="product-detail-label">List Price:</div>
-                    <div data-bind="text: '$' + productsToCompare()[0].prdPrice"></div>
+                    <div data-bind="text: getPrice(productsToCompare()[0].prdPrice)"></div>
 
                     <div class="oj-padding-vertical"></div>
 
                     <div class="product-detail-label">Discount Price:</div>
-                    <div class="product-detail-price" data-bind="text: '$' + productsToCompare()[0].prdCntrUnitPrice + ' (' + productsToCompare()[0].prdCntrDiscount +'%)'"></div>
+                    <div class="product-detail-price" data-bind="text: getPrice(productsToCompare()[0].prdCntrUnitPrice) + ' (' + productsToCompare()[0].prdCntrDiscount +'%)'"></div>
                 </div>
 
                 <div class="oj-padding-vertical"></div>
 
                 <div class="oj-flex-item">
+                    <input id="quantity" aria-label="quantity"
+                           data-bind="ojComponent: {
+                         component: 'ojInputNumber', 
+                         max:10000,
+                         min:1, 
+                         step:1, 
+                         value: productsToCompare()[0].quantity,
+                         rootAttributes: {style:'max-width:40px; padding-right:20px'}}"/>
+
                     <button id= "addToCart" data-bind="click: function(data, event) {addToCart(productsToCompare()[0])}, ojComponent: { component: 'ojButton', label: 'Add to Cart'}"></button> 
                 </div>
-
             </td>
             <td>
                 <img alt="product" data-bind="attr: {
@@ -74,20 +82,31 @@
                 <div class="oj-flex-item">
                     <h3 aria-label="product name" data-bind="text: productsToCompare()[1].prdName" tabindex="0"></h3>
                     <div class="product-detail-label">List Price:</div>
-                    <div data-bind="text: '$' + productsToCompare()[1].prdPrice"></div>
+                    <div data-bind="text: getPrice(productsToCompare()[1].prdPrice)"></div>
 
                     <div class="oj-padding-vertical"></div>
 
                     <div class="product-detail-label">Discount Price:</div>
-                    <div class="product-detail-price" data-bind="text: '$' + productsToCompare()[1].prdCntrUnitPrice + ' (' + productsToCompare()[1].prdCntrDiscount +'%)'"></div>
+                    <div class="product-detail-price" data-bind="text: getPrice(productsToCompare()[1].prdCntrUnitPrice) + ' (' + productsToCompare()[1].prdCntrDiscount +'%)'"></div>
 
                 </div>
 
                 <div class="oj-padding-vertical"></div>
 
                 <div class="oj-flex-item">
-                    <button id= "addToCart" data-bind="click: function(data, event) {addToCart(productsToCompare()[1])}, ojComponent: { component: 'ojButton', label: 'Add to Cart'}"></button> 
-                </div>
+
+                    <div class="oj-flex-item">
+                        <input id="quantity" aria-label="quantity"
+                               data-bind="ojComponent: {
+                         component: 'ojInputNumber', 
+                         max:10000,
+                         min:1, 
+                         step:1, 
+                         value: productsToCompare()[1].quantity,
+                         rootAttributes: {style:'max-width:40px; padding-right:20px'}}"/>
+
+                        <button id= "addToCart" data-bind="click: function(data, event) {addToCart(productsToCompare()[1])}, ojComponent: { component: 'ojButton', label: 'Add to Cart'}"></button> 
+                    </div>
 
             </td>
         </tr>
