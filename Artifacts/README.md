@@ -203,6 +203,26 @@ The CalOrdersREST project contains a dedicated folder to hold the MySQL DDL, [da
 
 The [database model](https://github.com/OncoreLLC/CalOrders/blob/master/Artifacts/images/Architecture_files/database.png) can be viewed and updated by using the MySQL Workbench tool.  Please see the [MySQL](http://www.mysql.com) website for more information about MySQL and to obtain the database and WorkBench tools for your operating system.
 
+## Modern and Open Source Technologies
+
+Technology | Requirement  
+--- | ---  
+[Unbuntu Linux](https://www.ubuntu.com)	| Operating System used for both the development workstation and the deployment environment 
+[NetBeans](https://netbeans.org) | Development IDE  
+[Oracle JET]() | Open Source JavaScript UI Component Library  
+[Node JS](https://nodejs.org/en/) | Frontend Javscript Engine  
+[Payara](http://www.payara.fish/) | JEE Application Server  
+[MySQL](https://www.mysql.com/) | Database  
+[Jenkins](https://jenkins.io/) | Continuous Integration  
+[JUnit](http://junit.org/junit4/) | [automated unit test cases are here in the repository]  (https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersRest/test/com/oncore/calorders/rest/service/extension)
+[Selenium](http://www.seleniumhq.org/) | [automated regression test cases are here in the repository](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersSelenium/test/test/oncore/calorders/selenium)  
+[Knockout Js](http://knockoutjs.com/) | Front-end Javascript library  
+[Require Js](http://requirejs.org/) | Front-end Javascript library  
+[jQuery](https://jquery.com/) | Front-end Javascript library  
+[Swagger](http://swagger.io/) | Automated Documentation of RESTful services   
+[NVDA](https://www.paciellogroup.com/blog/2008/01/nvda-a-free-and-open-source-screen-reader-for-windows/) | Screen Reader
+[WAVE](https://chrome.google.com/webstore/detail/wave-evaluation-tool/jbbplnpkjmmeebjpijfedlgcdilocofh?hl=en-US) | ADA Browser testing plugin
+
 ## Accessibility
 
 Please see the [Accessibility](http://docs.oracle.com/middleware/jet220/jet/developer/GUID-A8970DC0-7935-46B8-9A55-BCF4380B2CFC.htm#JETDG253) section of the Oracle JET Development Guide. As part of the quality control process for CalOrders, ADA testing via the WAVE plugin and the NVDA screen reader are used to ensure pages are accessible.
