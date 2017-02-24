@@ -36,11 +36,13 @@ import com.oncore.calorders.rest.OrderProductAssoc;
 import com.oncore.calorders.rest.Party;
 import com.oncore.calorders.rest.Privilege;
 import com.oncore.calorders.rest.Product;
+import com.oncore.calorders.rest.data.OrderDetailData;
 import com.oncore.calorders.rest.data.OrderHistoryData;
 import com.oncore.calorders.rest.data.OrderStatusSummaryData;
 import com.oncore.calorders.rest.data.OrdersByQuarterSeriesData;
 import com.oncore.calorders.rest.service.OrdStatusCdFacadeREST;
 import com.oncore.calorders.rest.service.OrderHistoryFacadeREST;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -251,6 +253,55 @@ public class OrderHistoryFacadeRESTExtensionTest {
         Assert.assertEquals("Depart Name", expectedData.get(2).getOrderAgency());
 
         verify(mockedEm, times(1)).createQuery("SELECT oh FROM OrderHistory oh join oh.ordStatusCd os join oh.ptyUidFk pt join pt.groupPartyAssocCollection gpa join gpa.grpUidFk g join g.depUidFk d join oh.orderProductAssocCollection opa WHERE pt.ptyUid = :partyUid ORDER BY oh.createTs DESC", OrderHistory.class);
+    }
+
+    /**
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testFindOrderDetailById() throws Exception {
+        OrderHistory orderHistory = new OrderHistory(1, "1", formatter.parse("01/01/2015"), "1", new Date());
+        orderHistory.setOrdStatusCd(new OrdStatusCd("PROC"));
+        Department dept = new Department(11);
+
+        Address address = new Address();
+        address.setAdrLine1("1 s st");
+        address.setAdrCity("SF");
+        address.setAdrStateCd(new AdrStateCd("CA"));
+
+        dept.setAddressCollection(new ArrayList<>());
+        dept.getAddressCollection().add(address);
+        orderHistory.setDepUidFk(dept);
+
+        Product product = new Product();
+        product.setPrdActiveInd(1);
+        product.setPrdName("Laptop");
+        product.setPrdSku("LT1234");
+        product.setPrdPrice(new BigDecimal(100));
+
+        OrderProductAssoc orderProductAssoc = new OrderProductAssoc();
+        orderProductAssoc.setOrdUidFk(orderHistory);
+        orderProductAssoc.setPrdUidFk(product);
+        orderProductAssoc.setOpaPrice(new BigDecimal(200));
+        orderProductAssoc.setOpaQuantity(2);
+
+        orderHistory.setOrderProductAssocCollection(new ArrayList<>());
+        orderHistory.getOrderProductAssocCollection().add(orderProductAssoc);
+
+        EntityManager mockedEm = mock(EntityManager.class);
+
+        given(mockedEm.find(OrderHistory.class, 1)).willReturn(orderHistory);
+
+        OrderHistoryFacadeRESTExtension instance = new OrderHistoryFacadeRESTExtension(mockedEm);
+
+        OrderDetailData orderDetailData = instance.findOrderDetailById(1);
+
+        Assert.assertEquals("SF", orderDetailData.getShippingAddressCity());
+        Assert.assertEquals(new BigDecimal(400), orderDetailData.getProductTotalPrice());
+        Assert.assertEquals("1 s st", orderDetailData.getShippingAddressLine1());
+
+        verify(mockedEm, times(1)).find(OrderHistory.class, 1);
     }
 
     /**
