@@ -30,7 +30,7 @@ define(['ojs/ojcore', 'knockout', 'common/SecurityUtils', 'ojs/ojknockout-model'
     'ojs/ojmodule', 'ojs/ojrouter', 'ojs/ojnavigationlist', 'ojs/ojbutton', 'ojs/ojinputtext', 'ojs/ojchart', 'ojs/ojmodel',
     'ojs/ojpagingcontrol', 'ojs/ojpagingtabledatasource', 'ojs/ojdatagrid',
     'ojs/ojcollectiondatagriddatasource', 'ojs/ojtoolbar', 'ojs/ojknockout-validation', 'ojs/ojselectcombobox',
-    'ojs/ojlistview', 'ojs/ojdatacollection-common','ojs/ojjsontreedatasource'],
+    'ojs/ojlistview', 'ojs/ojdatacollection-common', 'ojs/ojjsontreedatasource'],
         function (oj, ko) {
             function ControllerViewModel() {
                 var self = this;
@@ -65,7 +65,7 @@ define(['ojs/ojcore', 'knockout', 'common/SecurityUtils', 'ojs/ojknockout-model'
                 navBarData = ko.observableArray([]);
                 navBarDataSource = ko.observable(new oj.ArrayTableDataSource(navBarData, {idAttribute: 'id'}));
                 SecurityUtils.getNavBarItems(navBarDataSource);
-               
+
                 navMenuData = ko.observableArray([]);
                 navMenuDataSource = ko.observableArray([]);
                 SecurityUtils.getNavMenuItems(navMenuDataSource);
@@ -103,6 +103,24 @@ define(['ojs/ojcore', 'knockout', 'common/SecurityUtils', 'ojs/ojknockout-model'
 
                     return self.router.go(this.id);
 
+                };
+
+                self.navBarEventClick = function (data, event) {
+                    var navBarDesc = event.target.innerText;
+                    navBarDesc = navBarDesc.replace(/[^a-z0-9+]+/gi, '');
+                    if (navBarDesc === "") {
+                        navBarDesc = event.target.nextSibling.innerText;
+                        navBarDesc = navBarDesc.replace(/[^a-z0-9+]+/gi, '');
+                    }
+                    
+                    for (var i = 0; i < navBarDataSource._latestValue._rows.data.length; i++) {
+                        if (navBarDataSource._latestValue._rows.data[i].name === navBarDesc) {
+                            return self.router.go(navBarDataSource._latestValue._rows.data[i].id);
+                        }
+                    }
+
+                    //var test2 =event.target.nextSibling.innerText;
+                    //return self.router.go(self.routerId());
                 };
 
                 self.aboutClick = function (data, event) {
