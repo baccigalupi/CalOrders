@@ -283,7 +283,7 @@
                             <!-- Product search field -->
                             <div class="oj-flex-item oj-sm-8  oj-flex">
                                 <div class="oj-flex-item" style="max-width: 400px; white-space: nowrap;  float: left">
-                                    <input aria-label="search box" placeholder="Search within" data-bind="value: nameSearch, valueUpdate: 'afterkeydown', ojComponent: {component: 'ojInputText', rootAttributes:{'style':'max-width:100%;'}}"/>
+                                    <input aria-label="search box" title="Search within the visible products to further filter your results" placeholder="Search within" data-bind="value: nameSearch, valueUpdate: 'afterkeydown', ojComponent: {component: 'ojInputText', rootAttributes:{'style':'max-width:100%;'}}"/>
                                     <div id="searchIcon" class="demo-icon-sprite demo-icon-search demo-search-position"></div>
                                 </div>
                             </div>
@@ -320,7 +320,7 @@
                             <!-- Add products button -->
                             <!-- ko if: admin -->
                             <div class="oj-flex-item">                              
-                                <button id= "addProductsButton" data-bind="click: navigateToAddProduct, ojComponent: { component: 'ojButton', label: 'Add Product'}"></button>                             
+                                <button id= "addProductsButton" type="button" data-bind="click: navigateToAddProduct, ojComponent: { component: 'ojButton', label: 'Add Product'}"></button>                             
                             </div>
                             <!-- /ko -->
 
@@ -405,7 +405,7 @@
                 </div>
                 <div class="oj-flex-item">
                     <h3 aria-label="product description" data-bind="text: $data['prdName']" tabindex="0"></h3>
-                    <div class="product-detail-price" data-bind="text: '$' + $data['prdCntrUnitPrice']"></div>
+                    <div class="product-detail-price" data-bind="text: $parent.getPrice($data['prdCntrUnitPrice'])"></div>
                 </div>
             </div>
 
@@ -476,7 +476,7 @@
                 <div class="oj-flex-item oj-sm-2">
                     <div class="oj-flex">
                         <div class="oj-flex-item">
-                            <div class="product-detail-price" data-bind="text: '$' + $data['prdCntrUnitPrice']"></div>
+                            <div class="product-detail-price" data-bind="text: $parent.getPrice($data['prdCntrUnitPrice'])"></div>
                         </div>
                     </div>
 

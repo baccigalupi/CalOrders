@@ -24,8 +24,10 @@
 /*
  * Your about ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojrouter', 'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojpagingcontrol', 'ojs/ojpagingcontrol-model', 'utils/ProductHelper'],
-        function (oj, ko, data) {
+define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUtils', 
+    'ojs/ojrouter', 'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 
+    'ojs/ojpagingcontrol', 'ojs/ojpagingcontrol-model', 'utils/ProductHelper'],
+        function (oj, ko, data, accounting) {
 
             function ProductSearchViewModel() {
                 var self = this;
@@ -153,6 +155,11 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
 
                 self.itemOnly = function (context) {
                     return context['leaf'];
+                };
+                
+                self.getPrice = function (price)
+                {
+                    return accounting.formatMoney(price);
                 };
 
                 self.parseProduct = function (response) {
@@ -325,8 +332,12 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
 
                     for (val in self.filteredAllProduct())
                     {
-                        if (self.filteredAllProduct()[val].compareProduct())
+                        console.log("compare:" + self.filteredAllProduct()[val].compareProduct());
+                                                
+                        if (self.filteredAllProduct()[val].compareProduct() !== undefined 
+                                && self.filteredAllProduct()[val].compareProduct()[0])
                         {
+                            console.log("adding item to compare list");
                             productsToCompare.push(self.filteredAllProduct()[val]);
                         }
                     }
