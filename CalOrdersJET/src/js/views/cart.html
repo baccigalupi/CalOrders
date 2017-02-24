@@ -59,6 +59,12 @@
         <div class="oj-padding-vertical"></div>
 
         <div class="oj-flex">
+
+            <!-- Remove products button -->
+
+            <div class="oj-flex-item">                              
+                <button id= "removeProductsButton" data-bind="click: removeProductsFromCart, ojComponent: { component: 'ojButton', label: 'Remove Selected'}"></button>                             
+            </div>
             <!-- Totals -->
 
             <div class="oj-md-odd-cols-4">
@@ -171,46 +177,17 @@
                 </div>
             </div>
             <!-- /ko -->
-
+            <div id="removeProductWrapper"
+                 data-bind=
+                 "ojComponent: {
+                        component: 'ojCheckboxset', 
+                        value: removeProduct}" >
+                <span class="oj-choice-row">
+                    <input data-bind="attr: {id: 'removeProduct' + $data['prdUid']}" type="checkbox" value="true">
+                    <label data-bind="attr: {for: 'removeProduct' + $data['prdUid']}">Remove</label>
+                </span>
+            </div>
         </div>
-
-
-
-
-        <!--                <div class="oj-flex-item oj-sm-4">
-                            <img style="float:left;" 
-                                 height="100" width="100" 
-                                 data-bind="attr: {alt: $data['prdName'], id: 'productImage' + $data['prdUid'], src: $parent.getPhoto($data)}"/>
-                        </div>
-                        <div class="oj-flex-item">
-                            <h3 aria-label="product name" data-bind="text: $data['prdName']"></h3>
-                             ko if: $data['relatedServices']().length > 0 
-                            <label data-bind="attr: {for: relatedServices + $data['prdUid']}">Available Services:</label>
-                            <select 
-                                data-bind="ojComponent: {
-                                            component: 'ojSelect', value: $data['selectedRelatedService'], required: false,
-                                            options: $data['relatedServices'],
-                                        rootAttributes: {style:'max-width:20em'}},attr: {id: relatedServices + $data['prdUid']}">
-                            </select> 
-                            <button id= "addRelatedService" 
-                                    data-bind="click: $parent.addRelatedService, ojComponent: { component: 'ojButton', label: 'Add Related Service' }">
-                            </button> 
-                             /ko 
-                            <div class="oj-flex-item oj-sm-12 oj-lg-2">
-        
-        
-                                <input id="quantity" aria-label="quantity"
-                                       data-bind="ojComponent: {
-                                 component: 'ojInputNumber', 
-                                 max:10000,
-                                 min:1, 
-                                 step:1, 
-                                 optionChange: function(event,data) { $parent.productQuantityChange( event,data,$data['prdUid']);},
-                                 value:$data['quantity'],
-                                 rootAttributes: {style:'max-width:40px; padding-right:20px'}}"/>
-                            </div>
-                            <span>Price: </span><div data-bind="text: '$' + $data['prdCntrUnitPrice']"></div>
-                        </div>-->
 
         <div class="oj-padding-vertical"></div>
 
@@ -271,7 +248,7 @@
                             <div class="oj-flex-item oj-sm-2">
 
                                 <div class="oj-flex-item oj-sm-only-hide oj-md-4 oj-md-float-end">
-                                    <div data-bind="text: '$' + $data['prdCntrUnitPrice']"></div>
+                                    <div data-bind="text: $parent.getPrice($data['prdCntrUnitPrice'])"></div>
                                 </div>
                             </div>
                         </div>
@@ -306,6 +283,16 @@
                             </div>
                         </div>
                         <!-- /ko -->
+                        <div id="removeProductWrapper"
+                             data-bind=
+                             "ojComponent: {
+                        component: 'ojCheckboxset', 
+                        value: removeProduct}" >
+                            <span class="oj-choice-row">
+                                <input data-bind="attr: {id: 'removeProduct' + $data['prdUid']}" type="checkbox" value="true">
+                                <label data-bind="attr: {for: 'removeProduct' + $data['prdUid']}">Remove</label>
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>

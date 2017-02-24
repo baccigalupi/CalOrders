@@ -93,7 +93,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
 
                 self.parseAddRelatedServiceProduct = function (response) {
                     response.quantity = ko.observable(1);
-
+response.removeProduct = ko.observable();
                     response.relatedServices = ko.observableArray([]);
                     response.selectedRelatedService = ko.observable();
 
@@ -157,6 +157,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                             }
 
                             cartProduct.quantity = ko.observable(cartProduct.quantity);
+                            cartProduct.removeProduct = ko.observable();
                             
                             var productType = "";
                             
@@ -315,7 +316,60 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                         {
                             if (sessionCart[i].prdUid === product)
                             {
-                                sessionCart[i].quantity = data.value;
+                                sessionCart[i].quantity = accounting.unformat(data.value);
+                            }
+                        }
+
+                        var tempItemTotalPrice = 0.0;
+                        var tempShippingPrice = 25.00;
+                        var tempTotalPrice = 0.00;
+
+                        for (i = 0; i < sessionCart.length; i++)
+                        {
+                            tempItemTotalPrice += (sessionCart[i].prdCntrUnitPrice * sessionCart[i].quantity);
+                        }
+
+                        self.itemTotalPrice(self.getPrice(tempItemTotalPrice));
+                        self.shippingPrice(self.getPrice(tempShippingPrice));
+
+                        tempTotalPrice = tempShippingPrice + tempItemTotalPrice;
+
+                        self.totalPrice(self.getPrice(tempTotalPrice));
+
+                        sessionStorage.itemTotalPrice = self.itemTotalPrice();
+                        sessionStorage.shippingPrice = self.shippingPrice();
+                        sessionStorage.totalPrice = self.totalPrice();
+
+                        sessionStorage.cartProducts = JSON.stringify(sessionCart);
+                    }
+                };
+                
+                self.removeProductsFromCart = function()
+                {
+                    var val;
+                    var productsToRemove = [];
+
+                    for (val in self.cart())
+                    {
+                        console.log("remove:" + self.cart()[val].removeProduct());
+                                                
+                        if (self.cart()[val].removeProduct() !== undefined 
+                                && self.cart()[val].removeProduct()[0])
+                        {
+                            console.log("adding item to remove list");
+                            productsToRemove.push(self.cart()[val].prdUid);
+                            self.cart.remove(self.cart()[val]);
+                        }
+                    }
+                    
+                    var sessionCart = JSON.parse(sessionStorage.cartProducts);
+
+                        for (i = 0; i < sessionCart.length; i++)
+                        {
+                            var index = productsToRemove.indexOf(sessionCart[i].prdUid);
+                            if (index > -1)
+                            {
+                                sessionCart.splice(index, 1);
                             }
                         }
 
@@ -340,7 +394,6 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                         sessionStorage.totalPrice = self.totalPrice();
 
                         sessionStorage.cartProducts = JSON.stringify(sessionCart);
-                    }
                 };
 
                 /*
