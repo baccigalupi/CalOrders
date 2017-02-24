@@ -40,7 +40,7 @@ t. Prototype and underlying platforms used to create and run the prototype are o
 
 
 ##CalOrder Development Team
-Oncore selected Mike Tsay as the Team Leader/Project Manager, who had authority over and was responsible and accountable for the quality of the prototype submitted _(2a)_.
+Oncore selected Mike Tsay as the Team Leader/Project Manager, who had authority over and was responsible and accountable for the quality of the prototype submitted.
 
 **We selected a multidisciplinary and collaborative team that fulfilled the following 8 labor categories _(2b)_:**  
 
@@ -63,7 +63,7 @@ Our plan combines our UCD and Agile processes into a cohesive and flexible workf
 
 The team utilized User-Centered-Design (UCD) and Agile development techniques to formulate the product backlog.  All team members participated in the initial meetings with the users which was a natural hook into our Agile methodolgy and gave everyone the opportunity to understand the scope of the project and understand how each of them would contribute to the project's success.  
 
-The table below summarizes how we incorporated the UCD practices in the development of CalOrders.  Each section includes a link to another page that provides detail on the subject. _(2d)_  
+The table below summarizes how we incorporated the UCD practices in the development of CalOrders.  Each section includes a link to another page that provides detail on the subject.  
 
 Plan | Analyze| Design | Implement | Test & Measure  
 --- | --- | --- | --- | ----
@@ -78,7 +78,7 @@ The team's principle focus during development of CalOrders is summarized best by
  
 “[Value] people over processes; products that actually work over documenting what that product is supposed to do; collaborating with customers over negotiating with them; and responding to change over following a plan.” (Scrum: The Art of Doing Twice the Work in Half the Time)
 
-[Oncore's Agile methodology](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Methodolgy) provided the team an iterative approach, where feedback informed subsequent work or versions of the prototype_(2j)_.   
+[Oncore's Agile methodology](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Methodolgy) provided the team an iterative approach, where feedback informed subsequent work or versions of the prototype.   
 
 ###Principles
 
