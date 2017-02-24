@@ -70,12 +70,12 @@
                 <div class="oj-padding-vertical"></div>
 
                 <div class="product-detail-label">List Price:</div>
-                <div data-bind="text: '$' + product().prdPrice"></div>
+                <div data-bind="text: getPrice(product().prdPrice)"></div>
 
                 <div class="oj-padding-vertical"></div>
 
                 <div class="product-detail-label">Discount Price:</div>
-                <div class="product-detail-price" data-bind="text: '$' + product().prdCntrUnitPrice + ' (' + product().prdCntrDiscount +'%)'"></div>
+                <div class="product-detail-price" data-bind="text: getPrice(product().prdCntrUnitPrice) + ' (' + product().prdCntrDiscount +'%)'"></div>
 
                 <!-- ko if: admin -->
                 <div class="oj-padding-vertical"></div>

@@ -24,10 +24,10 @@
 /*
  * Your about ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojrouter', 
+define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUtils', 'ojs/ojrouter', 
     'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojpagingcontrol', 
     'ojs/ojpagingcontrol-model', 'utils/ProductHelper','ojs/ojtabs'],
-        function (oj, ko, data) {
+        function (oj, ko, data, accounting) {
 
             function ProductDetailViewModel() {
                 var self = this;
@@ -110,6 +110,11 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
                     // Store product id parameter
                     self.router.store(self.getPrdUid());
                     return self.router.go("productUpdate");
+                };
+                
+                self.getPrice = function (price)
+                {
+                    return accounting.formatMoney(price);
                 };
 
                 // Below are a subset of the ViewModel methods invoked by the ojModule binding
