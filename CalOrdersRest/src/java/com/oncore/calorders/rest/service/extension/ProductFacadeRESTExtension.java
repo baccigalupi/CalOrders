@@ -181,13 +181,13 @@ public class ProductFacadeRESTExtension extends ProductFacadeREST {
         product.setPrdCntrDiscount(productData.getProductContractDiscount());
         product.setPrdCntrLnItm(productData.getProductContractLineItem());
         product.setPrdCntrUnitPrice(productData.getProductContractUnitPrice());
-        try {
-            if (productData.getProductImage() != null) {
-                product.setPrdImgImage(DatatypeConverter.parseBase64Binary(productData.getProductImage()));
-            }
-        } catch (Exception e) {
+
+        if (productData.getProductImage() != null) {
+            product.setPrdImgImage(DatatypeConverter.parseBase64Binary(productData.getProductImage()));
+        } else {
             product.setPrdImgImage(null);
         }
+
         product.setPrdImgKey(productData.getProductImgageKey());
         product.setPrdImgName(productData.getProductImageName());
         product.setPrdImgOrigin(productData.getProductImageOrigin());
