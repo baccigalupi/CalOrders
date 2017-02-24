@@ -146,7 +146,7 @@
 
                     <div class="oj-flex">
                         <div class="oj-flex-item">
-                            <div data-bind="text: 'Price: $' + $data['prdPrice']"></div>
+                            <div data-bind="text: $parent.getPrice($data['prdCntrUnitPrice'])"></div>
                         </div>
                     </div>
                 </div>
@@ -271,7 +271,7 @@
                             <div class="oj-flex-item oj-sm-2">
 
                                 <div class="oj-flex-item oj-sm-only-hide oj-md-4 oj-md-float-end">
-                                    <span>Price: </span><div data-bind="text: '$' + $data['prdCntrUnitPrice']"></div>
+                                    <div data-bind="text: '$' + $data['prdCntrUnitPrice']"></div>
                                 </div>
                             </div>
                         </div>

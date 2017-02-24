@@ -21,8 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojrouter', 'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojpagingcontrol', 'ojs/ojpagingcontrol-model', 'utils/ProductHelper'],
-        function (oj, ko, data) {
+define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUtils', 'ojs/ojrouter', 'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojpagingcontrol', 'ojs/ojpagingcontrol-model', 'utils/ProductHelper'],
+        function (oj, ko, data, accounting) {
 
             function CartViewModel() {
                 var self = this;
@@ -127,15 +127,15 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
 
                         for (i = 0; i < sessionCart.length; i++)
                         {
-                            tempItemTotalPrice += (sessionCart[i].prdPrice * sessionCart[i].quantity);
+                            tempItemTotalPrice += (sessionCart[i].prdCntrUnitPrice * sessionCart[i].quantity);
                         }
 
-                        self.itemTotalPrice("$" + tempItemTotalPrice.toFixed(2));
-                        self.shippingPrice("$" + tempShippingPrice.toFixed(2));
+                        self.itemTotalPrice(self.getPrice(tempItemTotalPrice));
+                        self.shippingPrice(self.getPrice(tempShippingPrice));
 
                         tempTotalPrice = tempShippingPrice + tempItemTotalPrice;
 
-                        self.totalPrice("$" + tempTotalPrice.toFixed(2));
+                        self.totalPrice(self.getPrice(tempTotalPrice));
 
                         sessionStorage.itemTotalPrice = self.itemTotalPrice();
                         sessionStorage.shippingPrice = self.shippingPrice();
@@ -298,6 +298,12 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
                 self.listLayoutHandler = function () {
                     self.productLayoutType('productListLayout');
                 };
+              
+                
+                self.getPrice = function (price)
+                {
+                    return accounting.formatMoney(price);
+                };
 
                 self.productQuantityChange = function (event, data, product)
                 {
@@ -319,7 +325,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
 
                         for (i = 0; i < sessionCart.length; i++)
                         {
-                            tempItemTotalPrice += (sessionCart[i].prdPrice * sessionCart[i].quantity);
+                            tempItemTotalPrice += (sessionCart[i].prdCntrUnitPrice * sessionCart[i].quantity);
                         }
 
                         self.itemTotalPrice("$" + tempItemTotalPrice.toFixed(2));
@@ -415,7 +421,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
 
                             for (i = 0; i < sessionCart.length; i++)
                             {
-                                tempItemTotalPrice += (sessionCart[i].prdPrice * sessionCart[i].quantity);
+                                tempItemTotalPrice += (sessionCart[i].prdCntrUnitPrice * sessionCart[i].quantity);
                             }
 
                             self.itemTotalPrice("$" + tempItemTotalPrice.toFixed(2));
