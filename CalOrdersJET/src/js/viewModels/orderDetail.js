@@ -24,10 +24,10 @@
 /*
  * Your about ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojrouter',
+define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUtils', 'ojs/ojrouter',
     'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojpagingcontrol',
     'ojs/ojpagingcontrol-model', 'utils/ProductHelper'],
-        function (oj, ko, data) {
+        function (oj, ko, data, accounting) {
 
             function OrderDetailViewModel() {
                 var self = this;
@@ -39,6 +39,8 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
                 self.errorMessage = ko.observable();
                 self.orderUid = ko.observable();
                 self.orderDetail = ko.observable();
+                self.orderProducts = ko.observableArray([]);
+                
                 self.listViewDataSource = null;
                 self.cardViewDataSource = null;
                 self.productLayoutType = ko.observable('productListdLayout');
@@ -54,11 +56,22 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
 
                 self.parseOrderDetail = function (response)
                 {
-                    console.log("order detail: " + response);
+                    // Format prices
+                    response.shippingPrice = accounting.formatMoney(response.shippingPrice);
+                    response.totalPrice = accounting.formatMoney(response.totalPrice);
+                    response.productTotalPrice = accounting.formatMoney(response.productTotalPrice);
+                    
+                    var i;
+                    for (i in response.orderDetailProductDataList)
+                    {
+                        response.orderDetailProductDataList[i].prdPrice = accounting.formatMoney(response.orderDetailProductDataList[i].prdPrice);
+                        self.orderProducts.push(response.orderDetailProductDataList[i]);
+                    }
+                                       
                     self.orderDetail(response);
-
+                    
                     self.listViewDataSource = ko.computed(function () {
-                        return new oj.ArrayTableDataSource(response.orderDetailProductDataList, {idAttribute: 'prdUid'});
+                        return new oj.ArrayTableDataSource(self.orderProducts(), {idAttribute: 'prdUid'});
                     });
 
                     self.cardViewDataSource = ko.computed(function () {
@@ -86,6 +99,10 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
                     if (!SecurityUtils.isAuthenticated()) {
                         return self.router.go('welcome');
                     }
+
+                    // Init
+                    self.orderDetail(new Object());
+                    self.orderProducts([]);
 
                     self.orderUid(self.router.retrieve());
 
