@@ -260,6 +260,38 @@ public class OrderHistoryFacadeRESTExtensionTest {
      * @throws Exception
      */
     @Test
+    public void testFindAllOrderHistory() throws Exception {
+        List<OrderHistory> orderHistoryList = new ArrayList<OrderHistory>();
+        orderHistoryList.add(new OrderHistory(1, "1", formatter.parse("01/01/2015"), "1", new Date()));
+        orderHistoryList.add(new OrderHistory(2, "1", formatter.parse("07/01/2015"), "1", new Date()));
+        orderHistoryList.add(new OrderHistory(3, "1", formatter.parse("07/01/2015"), "1", new Date()));
+        orderHistoryList.add(new OrderHistory(4, "1", formatter.parse("10/01/2015"), "1", new Date()));
+
+        orderHistoryList.get(2).setPtyUidFk(this.buildPartyRecord());
+
+        EntityManager mockedEm = mock(EntityManager.class);
+        TypedQuery mockedTypedQuery = mock(TypedQuery.class);
+
+        given(mockedEm.createQuery("SELECT oh FROM OrderHistory oh join oh.ordStatusCd os join oh.ptyUidFk pt join pt.groupPartyAssocCollection gpa join gpa.grpUidFk g join g.depUidFk d join oh.orderProductAssocCollection opa ORDER BY oh.createTs DESC", OrderHistory.class))
+                .willReturn(mockedTypedQuery);
+        given(mockedTypedQuery.getResultList()).willReturn(orderHistoryList);
+
+        OrderHistoryFacadeRESTExtension orderHistoryFacadeRESTExtension = new OrderHistoryFacadeRESTExtension(mockedEm);
+
+        List<OrderHistoryData> expectedData
+                = orderHistoryFacadeRESTExtension.findAllOrderHistory();
+
+        Assert.assertTrue(expectedData.size() == 4);
+        Assert.assertEquals("Depart Name", expectedData.get(2).getOrderAgency());
+
+        verify(mockedEm, times(1)).createQuery("SELECT oh FROM OrderHistory oh join oh.ordStatusCd os join oh.ptyUidFk pt join pt.groupPartyAssocCollection gpa join gpa.grpUidFk g join g.depUidFk d join oh.orderProductAssocCollection opa ORDER BY oh.createTs DESC", OrderHistory.class);
+    }
+
+    /**
+     *
+     * @throws Exception
+     */
+    @Test
     public void testFindOrderDetailById() throws Exception {
         OrderHistory orderHistory = new OrderHistory(1, "1", formatter.parse("01/01/2015"), "1", new Date());
         orderHistory.setOrdStatusCd(new OrdStatusCd("PROC"));
