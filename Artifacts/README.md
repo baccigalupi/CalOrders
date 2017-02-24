@@ -142,8 +142,6 @@ The CalOrders application is separated by area of concern into separate NetBeans
 * CalOrdersCore - Java API project holding shared utility classes, interfaces, and base classes designed to support the other CalOrders Java projects
 * CalOrders Database = [(CDT–ADPQ–0117-2-Technical Approach: Database)](https://github.com/OncoreLLC/CalOrders/tree/master/DB_Scripts) MySQL database model, DDL, and reference data scripts
 
-
-
 ## User Interface
 
 The CalOrders user interface layer [(CDT–ADPQ–0117-2-Technical Approach: Client UI)](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersJET) is comprised of the open source Oracle JET JavaScript framework. From the Oracle JET user guide, "Oracle JET is a collection of Oracle and open source JavaScript libraries engineered to make it as simple and efficient as possible to build client-side web and hybrid mobile applications based on JavaScript, HTML5, and CSS.
@@ -177,7 +175,6 @@ CalOrders is a Single Page Application, having a single entry point, [index.html
 
 A [view](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersJET/src/js/views) in CalOrders is a distinct SPA HTML fragment, which holds the front end visual static content and components for the view. JET uses Knockout for data binding, which binds the view model to the view.  
 
-
 ### View Models
 
 A [view model](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersJET/src/js/viewModels) holds the business logic for the view and also manages the REST operations for the view.  The view model uses a consistent pattern defined by JET, which helps to ensure consistency across models and simplifies coding.
@@ -188,7 +185,7 @@ A [view model](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersJET/s
 
 Figure 6: CalOrders Service Architecture
 
-CalOrders uses [REST services](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersRest/src/java/com/oncore/calorders/rest/service) exposed from JEE Session Beans using the built in annotations available from Java.  Java provides excellent REST service support in JEE making it extremely easy to create REST services supporting CRUD operations on an underlying datastore.  CalOrders uses the NetBeans REST services generator to create the core set of JPA entities and REST facades needed for the application.  Customizing the service entities is supported via built in JPA functionality using the persistence.xml file and xml files containing custom named queries or custom queries can be defined directly in the REST Facades using the JPA create query method and syntax.  See the [HOW TO Create Custom Queries and REST Facades](https://github.com/OncoreLLC/CalOrders/wiki/HOW-TO-Create-Custom-Queries-and-REST-Facades) Wiki page for more details on how to create custom JPA Named Queries and REST Facades.  Core classes and utilities needed to support the underlying architecture across domains are defined in CalOrdersCore.
+CalOrders uses [REST services](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersRest/src/java/com/oncore/calorders/rest/service) exposed from JEE Session Beans using the built in annotations available from Java.  Java provides excellent REST service support in JEE making it extremely easy to create REST services supporting [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) operations on an underlying datastore.  CalOrders uses the NetBeans REST services generator to create the core set of [JPA](https://en.wikipedia.org/wiki/Java_Persistence_API) entities and REST facades needed for the application.  Customizing the service entities is supported via built in JPA functionality using the persistence.xml file and xml files containing custom named queries or custom queries can be defined directly in the REST Facades using the JPA create query method and syntax.  See the [HOW TO Create Custom Queries and REST Facades](https://github.com/OncoreLLC/CalOrders/wiki/HOW-TO-Create-Custom-Queries-and-REST-Facades) Wiki page for more details on how to create custom JPA Named Queries and REST Facades.  Core classes and utilities needed to support the underlying architecture across domains are defined in CalOrdersCore.
 
 
 ## Shared Architectural Components
