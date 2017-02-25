@@ -112,7 +112,7 @@
         </ul>
     </div>
     <div class="oj-flex oj-flex-items-pad">
-        <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', mode: 'loadMore', data: cardViewDataSource, pageSize: 10}">
+        <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', mode: 'loadMore', data: cardViewDataSource, pageSize: 50}">
         </div>
     </div>
 </script>
@@ -206,7 +206,7 @@
                                 selectionMode: 'single',
                                 item: {template: 'productlist_template'},
                                 scrollPolicy: 'loadMoreOnScroll',
-                                scrollPolicyOptions: {fetchSize: 10}}">
+                                scrollPolicyOptions: {fetchSize: 50}}">
     </ul>
 </script>
 

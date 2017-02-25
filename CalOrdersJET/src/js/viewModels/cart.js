@@ -91,14 +91,6 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                     }
                 };
 
-                self.parseAddRelatedServiceProduct = function (response) {
-                    response.quantity = ko.observable(1);
-response.removeProduct = ko.observable();
-                    response.relatedServices = ko.observableArray([]);
-                    response.selectedRelatedService = ko.observable();
-
-                    self.cart.push(response);
-                };
 
                 /**
                  * Optional ViewModel method invoked when this ViewModel is about to be
@@ -158,55 +150,53 @@ response.removeProduct = ko.observable();
 
                             cartProduct.quantity = ko.observable(cartProduct.quantity);
                             cartProduct.removeProduct = ko.observable();
-                            
+
                             var productType = "";
-                            
+
                             if (cartProduct.prdCategoryCd.code.startsWith('DH'))
                             {
                                 productType = 'DS' + cartProduct.prdCategoryCd.code.substring(2);
-                            }
-                            else if (cartProduct.prdCategoryCd.code.startsWith('LH'))
+                            } else if (cartProduct.prdCategoryCd.code.startsWith('LH'))
                             {
                                 productType = 'LS' + cartProduct.prdCategoryCd.code.substring(2);
-                            }
-                            else if (cartProduct.prdCategoryCd.code.startsWith('DM'))
+                            } else if (cartProduct.prdCategoryCd.code.startsWith('DM'))
                             {
                                 productType = 'DS' + cartProduct.prdCategoryCd.code.substring(2);
                             }
-                            
+
                             if (productType != "")
                             {
 
-                            var ProductModel = oj.Model.extend({
-                                urlRoot: self.findRelatedServiceProductsURL + "/" + productType + "/" + cartProduct.vndUidFk.vndUid,
-                                parse: self.parseProduct,
-                                idAttribute: 'prdUid'
-                            });
-                            var product = new ProductModel();
+                                var ProductModel = oj.Model.extend({
+                                    urlRoot: self.findRelatedServiceProductsURL + "/" + productType + "/" + cartProduct.vndUidFk.vndUid,
+                                    parse: self.parseProduct,
+                                    idAttribute: 'prdUid'
+                                });
+                                var product = new ProductModel();
 
-                            var ProductCollection = oj.Collection.extend({
-                                url: self.findRelatedServiceProductsURL + "/" + productType + "/" + cartProduct.vndUidFk.vndUid,
-                                model: product,
-                                comparator: 'prdUid'
-                            });
+                                var ProductCollection = oj.Collection.extend({
+                                    url: self.findRelatedServiceProductsURL + "/" + productType + "/" + cartProduct.vndUidFk.vndUid,
+                                    model: product,
+                                    comparator: 'prdUid'
+                                });
 
-                            var collection = new ProductCollection();
+                                var collection = new ProductCollection();
 
-                            collection.fetch({
-                                success: function (myModel, response, options) {
-                                    console.log("Search success");
-                                    return false;
-                                },
-                                error: function (jqXHR, textStatus, errorThrown) {
-                                    console.log("Search failed" + errorThrown);
-                                    return false;
-                                }
-                            });
-                            
-                            var mapKey = cartProduct.vndUidFk.vndUid + productType;
+                                collection.fetch({
+                                    success: function (myModel, response, options) {
+                                        console.log("Search success");
+                                        return false;
+                                    },
+                                    error: function (jqXHR, textStatus, errorThrown) {
+                                        console.log("Search failed" + errorThrown);
+                                        return false;
+                                    }
+                                });
 
-                            self.relatedServicesMap.set(mapKey, collection);
-                        }
+                                var mapKey = cartProduct.vndUidFk.vndUid + productType;
+
+                                self.relatedServicesMap.set(mapKey, collection);
+                            }
                         }
 
                         self.cart(sessionCart);
@@ -237,7 +227,7 @@ response.removeProduct = ko.observable();
                             return new oj.PagingTableDataSource(self.listViewDataSource());
                         });
                     }
-                    
+
                     self.ready(true);
                 };
 
@@ -299,8 +289,8 @@ response.removeProduct = ko.observable();
                 self.listLayoutHandler = function () {
                     self.productLayoutType('productListLayout');
                 };
-              
-                
+
+
                 self.getPrice = function (price)
                 {
                     return accounting.formatMoney(price);
@@ -343,8 +333,8 @@ response.removeProduct = ko.observable();
                         sessionStorage.cartProducts = JSON.stringify(sessionCart);
                     }
                 };
-                
-                self.removeProductsFromCart = function()
+
+                self.removeProductsFromCart = function ()
                 {
                     var val;
                     var productsToRemove = [];
@@ -352,8 +342,8 @@ response.removeProduct = ko.observable();
                     for (val in self.cart())
                     {
                         console.log("remove:" + self.cart()[val].removeProduct());
-                                                
-                        if (self.cart()[val].removeProduct() !== undefined 
+
+                        if (self.cart()[val].removeProduct() !== undefined
                                 && self.cart()[val].removeProduct()[0])
                         {
                             console.log("adding item to remove list");
@@ -361,39 +351,39 @@ response.removeProduct = ko.observable();
                             self.cart.remove(self.cart()[val]);
                         }
                     }
-                    
+
                     var sessionCart = JSON.parse(sessionStorage.cartProducts);
 
-                        for (i = 0; i < sessionCart.length; i++)
+                    for (i = 0; i < sessionCart.length; i++)
+                    {
+                        var index = productsToRemove.indexOf(sessionCart[i].prdUid);
+                        if (index > -1)
                         {
-                            var index = productsToRemove.indexOf(sessionCart[i].prdUid);
-                            if (index > -1)
-                            {
-                                sessionCart.splice(index, 1);
-                            }
+                            sessionCart.splice(index, 1);
                         }
+                    }
 
-                        var tempItemTotalPrice = 0.0;
-                        var tempShippingPrice = 25.00;
-                        var tempTotalPrice = 0.00;
+                    var tempItemTotalPrice = 0.0;
+                    var tempShippingPrice = 25.00;
+                    var tempTotalPrice = 0.00;
 
-                        for (i = 0; i < sessionCart.length; i++)
-                        {
-                            tempItemTotalPrice += (sessionCart[i].prdCntrUnitPrice * sessionCart[i].quantity);
-                        }
+                    for (i = 0; i < sessionCart.length; i++)
+                    {
+                        tempItemTotalPrice += (sessionCart[i].prdCntrUnitPrice * sessionCart[i].quantity);
+                    }
 
-                        self.itemTotalPrice("$" + tempItemTotalPrice.toFixed(2));
-                        self.shippingPrice("$" + tempShippingPrice.toFixed(2));
+                    self.itemTotalPrice(self.getPrice(tempItemTotalPrice));
+                    self.shippingPrice(self.getPrice(tempShippingPrice));
 
-                        tempTotalPrice = tempShippingPrice + tempItemTotalPrice;
+                    tempTotalPrice = tempShippingPrice + tempItemTotalPrice;
 
-                        self.totalPrice("$" + tempTotalPrice.toFixed(2));
+                    self.totalPrice(self.getPrice(tempTotalPrice));
 
-                        sessionStorage.itemTotalPrice = self.itemTotalPrice();
-                        sessionStorage.shippingPrice = self.shippingPrice();
-                        sessionStorage.totalPrice = self.totalPrice();
+                    sessionStorage.itemTotalPrice = self.itemTotalPrice();
+                    sessionStorage.shippingPrice = self.shippingPrice();
+                    sessionStorage.totalPrice = self.totalPrice();
 
-                        sessionStorage.cartProducts = JSON.stringify(sessionCart);
+                    sessionStorage.cartProducts = JSON.stringify(sessionCart);
                 };
 
                 /*
@@ -453,9 +443,8 @@ response.removeProduct = ko.observable();
                     // Get product id of the related service
                     var ProductModel = oj.Model.extend({
                         urlRoot: self.findProductServiceURL + "/" + product.selectedRelatedService(),
-                        parse: self.parseAddRelatedServiceProduct,
                         attributeId: 'prdUid',
-                        quantityCnt: product.quantity
+                        quantityCnt: product.quantity()
                     });
 
                     var pm = new ProductModel();
@@ -463,8 +452,28 @@ response.removeProduct = ko.observable();
                         success: function (myModel, response, options) {
                             console.log("Found related product");
 
-                            response.quantity = myModel.quantityCnt;
+                            // If the product already exists in the cart, then just change the quantity
+                            var result = $.grep(self.cart(), function (item) {
+                                return item.prdUid === response.prdUid;
+                            });
+
+                            var cartProduct;
+
+                            response.quantity = ko.observable(myModel.quantityCnt);
                             ProductHelper.addProductToCart(response);
+                            
+                            if (result.length === 1)
+                            {
+                                cartProduct = result[0];
+                                cartProduct.quantity(cartProduct.quantity() + myModel.quantityCnt);
+                            } else
+                            {
+                                response.removeProduct = ko.observable();
+                                response.relatedServices = ko.observableArray([]);
+                                response.selectedRelatedService = ko.observable();
+
+                                self.cart.push(response);
+                            }
 
                             var sessionCart = JSON.parse(sessionStorage.cartProducts);
 
@@ -477,12 +486,12 @@ response.removeProduct = ko.observable();
                                 tempItemTotalPrice += (sessionCart[i].prdCntrUnitPrice * sessionCart[i].quantity);
                             }
 
-                            self.itemTotalPrice("$" + tempItemTotalPrice.toFixed(2));
-                            self.shippingPrice("$" + tempShippingPrice.toFixed(2));
+                            self.itemTotalPrice(self.getPrice(tempItemTotalPrice));
+                            self.shippingPrice(self.getPrice(tempShippingPrice));
 
                             tempTotalPrice = tempShippingPrice + tempItemTotalPrice;
 
-                            self.totalPrice("$" + tempTotalPrice.toFixed(2));
+                            self.totalPrice(self.getPrice(tempTotalPrice));
 
                             sessionStorage.itemTotalPrice = self.itemTotalPrice();
                             sessionStorage.shippingPrice = self.shippingPrice();
