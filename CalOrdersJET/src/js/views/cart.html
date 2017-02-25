@@ -153,7 +153,13 @@
 
                     <div class="oj-flex">
                         <div class="oj-flex-item">
-                            <div data-bind="text: $parent.getPrice($data['prdCntrUnitPrice'])"></div>
+                            <div data-bind="text: $parent.getPrice($data['prdCntrUnitPrice']) + '/ea'"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="oj-flex">
+                        <div class="oj-flex-item">
+                            <div data-bind="text: $parent.getPrice($data['totalItemPrice']())"></div>
                         </div>
                     </div>
                 </div>
@@ -228,12 +234,12 @@
                     <div class="oj-flex-item oj-sm-10">
                         <div class="oj-flex">
                             <!-- Name -->
-                            <div class="oj-flex-item oj-sm-6">
+                            <div class="oj-flex-item oj-sm-4">
                                 <div class="confirmation_bold_label" data-bind="text: $data['prdName']"></div>  
                             </div>
 
                             <!-- Quantity -->
-                            <div class="oj-flex-item oj-sm-3">
+                            <div class="oj-flex-item oj-sm-2">
                                 <input aria-label="quantity" id="quantity"
                                        data-bind="ojComponent: {
                                                                     component: 'ojInputNumber', 
@@ -249,9 +255,15 @@
                             <div class="oj-flex-item oj-sm-2">
 
                                 <div class="oj-flex-item oj-sm-only-hide oj-md-4 oj-md-float-end">
-                                    <div data-bind="text: $parent.getPrice($data['prdCntrUnitPrice'])"></div>
+                                    <div data-bind="text: $parent.getPrice($data['prdCntrUnitPrice']) + '/ea'"></div>
                                 </div>
                             </div>
+                            
+                                 <div class="oj-flex-item oj-sm-2">
+                        <div class="oj-flex-item oj-sm-only-hide oj-md-4 oj-md-float-end">
+                            <div data-bind="text: $parent.getPrice($data['totalItemPrice']())"></div>
+                        </div>
+                    </div>
                         </div>
 
 

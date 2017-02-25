@@ -147,9 +147,13 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                             {
                                 cartProduct.selectedRelatedService = ko.observable();
                             }
+                            
+                            var totalItemPrice = cartProduct.quantity * cartProduct.prdCntrUnitPrice;
 
+                            cartProduct.totalItemPrice = ko.observable(totalItemPrice);
                             cartProduct.quantity = ko.observable(cartProduct.quantity);
                             cartProduct.removeProduct = ko.observable();
+                            
 
                             var productType = "";
 
@@ -296,17 +300,27 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                     return accounting.formatMoney(price);
                 };
 
-                self.productQuantityChange = function (event, data, product)
+                self.productQuantityChange = function (event, data, updatedPrdUid)
                 {
                     if (data.previousValue !== undefined)
                     {
+                        for (i = 0; i < self.cart().length; i++)
+                        {
+                            if (self.cart()[i].prdUid === updatedPrdUid)
+                            {
+                                var totalItemPrice = accounting.unformat(data.value) * self.cart()[i].prdCntrUnitPrice;
+                                self.cart()[i].totalItemPrice(totalItemPrice);
+                            }
+                        }
+                        
                         var sessionCart = JSON.parse(sessionStorage.cartProducts);
 
                         for (i = 0; i < sessionCart.length; i++)
                         {
-                            if (sessionCart[i].prdUid === product)
+                            if (sessionCart[i].prdUid === updatedPrdUid)
                             {
                                 sessionCart[i].quantity = accounting.unformat(data.value);
+                                sessionCart[i].totalItemPrice = sessionCart[i].quantity * sessionCart[i].prdCntrUnitPrice;
                             }
                         }
 
@@ -359,7 +373,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                         var index = productsToRemove.indexOf(sessionCart[i].prdUid);
                         if (index > -1)
                         {
-                            sessionCart.splice(index, 1);
+                            sessionCart.splice(i, 1);
                         }
                     }
 
@@ -460,17 +474,20 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                             var cartProduct;
 
                             response.quantity = ko.observable(myModel.quantityCnt);
+                            response.totalItemPrice = myModel.quantityCnt * response.prdCntrUnitPrice;
                             ProductHelper.addProductToCart(response);
                             
                             if (result.length === 1)
                             {
                                 cartProduct = result[0];
                                 cartProduct.quantity(cartProduct.quantity() + myModel.quantityCnt);
+                                cartProduct.totalItemPrice = cartProduct.quantity() * cartProduct.prdCntrUnitPrice;
                             } else
                             {
                                 response.removeProduct = ko.observable();
                                 response.relatedServices = ko.observableArray([]);
                                 response.selectedRelatedService = ko.observable();
+                                response.totalItemPrice = ko.observable(myModel.quantityCnt * response.prdCntrUnitPrice);
 
                                 self.cart.push(response);
                             }
