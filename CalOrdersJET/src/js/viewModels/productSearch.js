@@ -335,7 +335,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                         console.log("compare:" + self.filteredAllProduct()[val].compareProduct());
                                                 
                         if (self.filteredAllProduct()[val].compareProduct() !== undefined 
-                                && self.filteredAllProduct()[val].compareProduct()[0])
+                                && self.filteredAllProduct()[val].compareProduct())
                         {
                             console.log("adding item to compare list");
                             productsToCompare.push(self.filteredAllProduct()[val]);

@@ -87,16 +87,12 @@
                 <div class="oj-padding-vertical"></div>
 
                 <div class="oj-flex">
-                    <input id="quantity" aria-label="quantity"
-                           data-bind="ojComponent: {
-                         component: 'ojInputNumber', 
-                         max:10000,
-                         min:1, 
-                         step:1, 
-                         value:product().quantity,
-                         rootAttributes: {style:'max-width:40px; padding-right:20px'}}"/>
+                    <div class="oj-flex-item">
+                         <input class="product-quantity" id="quantity" data-bind="value: product().quantity" aria-label="quantity" type="number" min="1" max="1000"/>
 
-                    <button id= "addToCart" data-bind="click: addToCart, ojComponent: { component: 'ojButton', label: 'Add to Cart'}"></button>
+
+                        <button id= "addToCart" data-bind="click: addToCart, ojComponent: { component: 'ojButton', label: 'Add to Cart'}"></button>
+                    </div>
                 </div>
                 <!-- /ko -->
             </div>
