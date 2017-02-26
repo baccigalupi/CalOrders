@@ -31,7 +31,7 @@ define(['ojs/ojcore', 'knockout', 'jquery'],
                 var self = this;
 
                 self.applicationVersion = ko.observable("1.0");
-
+                self.userName = ko.observable();
 
                 // Below are a subset of the ViewModel methods invoked by the ojModule binding
                 // Please reference the ojModule jsDoc for additionaly available methods.
@@ -54,6 +54,13 @@ define(['ojs/ojcore', 'knockout', 'jquery'],
                     self.large = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(lgQuery);
 
 
+                     if (!SecurityUtils.isAuthenticated()) {
+                         self.userName('');
+                    }else
+                    {
+                        self.userName('Currently logged in as: ' + sessionStorage.userFullName);
+                    }
+                   
                 };
 
                 /**

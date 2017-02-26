@@ -196,6 +196,14 @@ var SecurityUtils = new function ()
                 comparator: 'pageIdentifier'
             });
             var navMenuItems = new PrivilegeCollection();
+            
+            
+             koTableMenu.push(
+                                {name: sessionStorage.userFullName, id: 'about',
+                                    iconClass: 'oj-navigationlist-item-icon demo-icon-font-24'});
+                                
+                                
+                                
             navMenuItems.fetch({
                 success: function () {
                     
