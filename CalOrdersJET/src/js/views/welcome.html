@@ -24,38 +24,51 @@
 <div id="welcomeWrapperDiv" class="oj-hybrid-padding">
 
     <div class="oj-panel oj-flex oj-panel-shadow-md">
+
         <div id="welcomePicturePanel" class="oj-panel oj-flex-item">
             <img alt="welcomePicture" src="../css/images/482190423.jpg" height="300" width="400"/>
         </div>
-        <div id="welcomeWrapperDiv" class="oj-panel oj-flex-item">
+        <div id="welcomeWrapperDiv" class="oj-panel oj-flex-item oj-flex-end">
             <h2>Welcome to CalOrders</h2>
-            <div class="oj-padding-vertical"/>
-            <p>CalOrders is a prototype developed by OnCore Consulting, LLC for the California Department of Technology.</p>
-            <p>CalOrders simulates an online ordering system, for products and services, designed to support California IT Departments.</p>
-            <p>All data in this site is simulated test data and any relation to actual products, services, </p>
-            <p>companies, or any other entity is for testing purposes only and </p>
-            <p>is not reflective of real product offerings or services.</p>
-            <div class="oj-padding-vertical"/>
-            <div class="oj-flex">
+            <div class="oj-padding-vertical" />
 
-                <!-- buttons -->
-                <div class="oj-flex">    
+            <!-- large template -->
+            <script type="text/html" id="lg_xl_template">
+                <div id="lg_xl" style="width: 40em; word-wrap: break-word;"><p>CalOrders is a prototype developed by OnCore Consulting, LLC for the California Department of Technology. CalOrders simulates an online ordering system, for products and services, designed to support California IT Departments. All data in this site is simulated test data and any relation to actual products, services, companies, or any other entity is for testing purposes only and is not reflective of real product offerings or services.</p></div>
+                </script>
 
-<!--                    <button id= "registration"
-                            data-bind="click: onClickLoadRegistration, ojComponent: { component: 'ojButton', label: 'Register' }">
-                    </button>
-                    
-                    <div class="oj-padding-horizontal"></div>-->
+                <!-- small template -->
+                <script type="text/html" id="sm_md_template">
+                    <div id="sm_md" style="width: 100%; word-wrap: break-word;"><p>CalOrders is a prototype developed by OnCore Consulting, LLC for the California Department of Technology. CalOrders simulates an online ordering system, for products and services, designed to support California IT Departments. All data in this site is simulated test data and any relation to actual products, services, companies, or any other entity is for testing purposes only and is not reflective of real product offerings or services.</p></div>  
+                    </script>
 
-                    <button id= "login" type="button"
-                              data-bind="click: onClickLoadLogin, ojComponent: { component: 'ojButton', label: 'Login'}">
-                    </button> 
+                    <!-- display template -->
+                    <div data-bind="template: {name: large() ? 'lg_xl_template' : 
+                                             'sm_md_template'}"></div>
+
+
+
+                    <div class="oj-padding-vertical"/>
+                    <div class="oj-flex">
+
+                        <!-- buttons -->
+                        <div class="oj-flex">    
+
+                            <!--                    <button id= "registration"
+                                                        data-bind="click: onClickLoadRegistration, ojComponent: { component: 'ojButton', label: 'Register' }">
+                                                </button>
+                                                
+                                                <div class="oj-padding-horizontal"></div>-->
+
+                            <button id= "login" type="button"
+                                    data-bind="click: onClickLoadLogin, ojComponent: { component: 'ojButton', label: 'Login'}">
+                            </button> 
+                        </div>
+                        <!-- end buttons -->
+
+                        <div class="oj-padding-vertical"/>
+
+                    </div>
                 </div>
-                <!-- end buttons -->
-                
-                <div class="oj-padding-vertical"/>
-
             </div>
         </div>
-    </div>
-</div>

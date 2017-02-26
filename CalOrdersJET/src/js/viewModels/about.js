@@ -31,7 +31,7 @@ define(['ojs/ojcore', 'knockout', 'jquery'],
                 var self = this;
 
                 self.applicationVersion = ko.observable("1.0");
-  
+
 
                 // Below are a subset of the ViewModel methods invoked by the ojModule binding
                 // Please reference the ojModule jsDoc for additionaly available methods.
@@ -48,7 +48,12 @@ define(['ojs/ojcore', 'knockout', 'jquery'],
                  * the promise is resolved
                  */
                 self.handleActivated = function (info) {
-                    // Implement if needed
+                    var lgQuery = oj.ResponsiveUtils.getFrameworkQuery(
+                            oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.LG_UP);
+
+                    self.large = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(lgQuery);
+
+
                 };
 
                 /**
@@ -90,11 +95,11 @@ define(['ojs/ojcore', 'knockout', 'jquery'],
                 };
 
 
- 
+
 
             }
 
- 
+
 
             /*
              * Returns a constructor for the ViewModel so that the ViewModel is constrcuted

@@ -33,6 +33,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils'],
                 self.applicationVersion = ko.observable("1.0");
                 self.userLogin = ko.observable();
 
+
+
+
                 // Below are a subset of the ViewModel methods invoked by the ojModule binding
                 // Please reference the ojModule jsDoc for additionaly available methods.
 
@@ -50,6 +53,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils'],
                 self.handleActivated = function (info) {
                     // Implement if needed
                     // initialize session storage
+
+                    var lgQuery = oj.ResponsiveUtils.getFrameworkQuery(
+                            oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.LG_UP);
+
+                    self.large = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(lgQuery);
 
 
                     SecurityUtils.clearSessionStorage();
