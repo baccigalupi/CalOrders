@@ -54,13 +54,13 @@ define(['ojs/ojcore', 'knockout', 'jquery'],
                     self.large = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(lgQuery);
 
 
-                     if (!SecurityUtils.isAuthenticated()) {
-                         self.userName('');
-                    }else
+                    if (!SecurityUtils.isAuthenticated()) {
+                        self.userName('');
+                    } else
                     {
                         self.userName('Currently logged in as: ' + sessionStorage.userFullName);
                     }
-                   
+
                 };
 
                 /**
