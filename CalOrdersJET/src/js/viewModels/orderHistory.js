@@ -127,7 +127,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'moment', 'accounting', 'common/Secu
                         orderPoNumber = response.orderPoNumber;
                     }
                     if (response.orderPrice !== undefined) {
-                        totalPrice = accounting.formatMoney(response.orderPrice);
+                        totalPrice = accounting.formatNumber(response.orderPrice,2);
                     }
 
                     var result = {'orderHistoryId': response['orderHistoryId'],
@@ -138,6 +138,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'moment', 'accounting', 'common/Secu
                         'orderPrice': totalPrice,
                         'orderDescription': response['orderDescription']};
                     return result;
+                };
+                
+                                
+                self.priceRenderer = function (context)
+                {
+                    return accounting.formatMoney(context.row.orderPrice);
                 };
 
                 self.currentRowListener = function (event, ui) {

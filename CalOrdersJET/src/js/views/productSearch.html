@@ -283,13 +283,13 @@
                             <!-- Product search field -->
                             <div class="oj-flex-item oj-sm-8  oj-flex">
                                 <div class="oj-flex-item" style="max-width: 400px; white-space: nowrap;  float: left">
-                                    <input aria-label="search box" placeholder="filter" data-bind="value: nameSearch, valueUpdate: 'afterkeydown', ojComponent: {component: 'ojInputText', rootAttributes:{'style':'max-width:100%;'}}"/>
+                                    <input aria-label="search box" title="Search within the visible products to further filter your results" placeholder="Search within" data-bind="value: nameSearch, valueUpdate: 'afterkeydown', ojComponent: {component: 'ojInputText', rootAttributes:{'style':'max-width:100%;'}}"/>
                                     <div id="searchIcon" class="demo-icon-sprite demo-icon-search demo-search-position"></div>
                                 </div>
                             </div>
 
                             <!-- Product Search Result type -->
-                            <div class="oj-flex-item oj-sm-only-hide  oj-padding-horizontal">
+                            <div class="oj-flex-item oj-md-down-hide oj-padding-horizontal">
                                 <div id="layoutSet" class="oj-buttonset-width-auto" aria-label="Choose layout type."  style="float: right" data-bind="ojComponent: {component: 'ojButtonset', checked: productLayoutType}">
                                     <label for="cardLayout"></label>
                                     <input id="cardLayout" type="radio" name="layoutGroup" value="productCardLayout"
@@ -320,7 +320,7 @@
                             <!-- Add products button -->
                             <!-- ko if: admin -->
                             <div class="oj-flex-item">                              
-                                <button id= "addProductsButton" data-bind="click: navigateToAddProduct, ojComponent: { component: 'ojButton', label: 'Add Product'}"></button>                             
+                                <button id= "addProductsButton" type="button" data-bind="click: navigateToAddProduct, ojComponent: { component: 'ojButton', label: 'Add Product'}"></button>                             
                             </div>
                             <!-- /ko -->
 
@@ -331,7 +331,7 @@
                 <!-- Product Search Results (uses either productCardLayout or productListLayout) -->
                 <!-- ko if: ready -->
                 <div id="productlistview" >
-                    <div class="oj-flex oj-flex-items-pad oj-sm-flex-direction-column" data-bind="template: productLayoutType()"></div>
+                    <div class="oj-flex oj-flex-items-pad oj-sm-flex-direction-column" data-bind="template: large()?  productLayoutType() : 'productCardLayout'"></div>
                 </div>
                 <!-- /ko -->
             </div>
@@ -396,7 +396,7 @@
 <!-- Product Card view (card format)  -->
 <script id="productcard_template" type="text/html">
     <li class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-4 oj-xl-3" style="margin:0;border-style:none">
-        <div class="oj-panel oj-panel-alt1" style="margin: 5px 0px 10px 0px; min-height: 350px">
+        <div class="oj-panel" style="margin: 5px 0px 10px 0px; min-height: 350px">
 
             <div data-bind="click: $parent.navigateToProductDetail">
 
@@ -405,26 +405,28 @@
                 </div>
                 <div class="oj-flex-item">
                     <h3 aria-label="product description" data-bind="text: $data['prdName']" tabindex="0"></h3>
-                    <div class="product-detail-price" data-bind="text: '$' + $data['prdCntrUnitPrice']"></div>
+                    <div class="product-detail-price" data-bind="text: $parent.getPrice($data['prdCntrUnitPrice'])"></div>
                 </div>
             </div>
 
             <!-- ko if: $parent.user -->
             <div class="oj-padding-vertical"></div>
             <div style="position: absolute; bottom: 0px">
+
+
+                <div class="oj-flex-item" style="margin-bottom: 10px">
+                    <input class="product-quantity" id="quantity" data-bind="value: quantity" aria-label="quantity" type="number" min="1" max="1000"/>
+                </div>
+
                 <div class="oj-flex-item">
-                    <button id= "addToCart" data-bind="click: $parent.addToCart, ojComponent: { component: 'ojButton', label: 'Add to Cart'}"></button> 
+                    <button class="oj-button oj-enabled oj-default oj-button-full-chrome oj-button-text-only"  id= "addToCart" data-bind="click: $parent.addToCart"><div class="oj-button-label"><span class="oj-button-text">Add to Cart</span></div></button> 
                 </div>
 
                 <div class="oj-flex-item" >
-                    <div id="compareProductWrapper" 
-                         data-bind=
-                         "ojComponent: {
-                        component: 'ojCheckboxset', 
-                        value: compareProduct}" >
+                    <div id="compareProductWrapper">
                         <span class="oj-choice-row">
-                            <input data-bind="attr: {id: 'compareProduct' + $data['prdUid']}" type="checkbox" value="true">
-                            <label data-bind="attr: {for: 'compareProduct' + $data['prdUid']}">Compare</label>
+                            <input data-bind="checked: compareProduct, attr: {id: 'compareProduct' + $data['prdUid']}" type="checkbox" value="true">
+                            <label style="padding-left: 5px" data-bind="attr: {for: 'compareProduct' + $data['prdUid']}">Compare</label>
                         </span>
                     </div>
                 </div>
@@ -453,27 +455,41 @@
     <li class="oj-flex-item oj-sm-12">
         <div>
             <div class="oj-flex oj-flex-items-pad">
-                <div class="oj-flex-item oj-lg-4 oj-md-4" data-bind="click: $parent.navigateToProductDetail">
-                    <img style="float:left;" height="100" width="100" data-bind="attr: {alt: $data['prdName'],  id: 'productImage' + $data['prdUid'], src: $parent.getPhoto($data)}"/>
-                    <h2 class="product-search-name" data-bind="text: $data['prdName']"></h2>
+                <div class="oj-flex-item oj-sm-2" data-bind="click: $parent.navigateToProductDetail">
+                    <img style="float: left" height="100" width="100" data-bind="attr: {alt: $data['prdName'],  id: 'productImage' + $data['prdUid'], src: $parent.getPhoto($data)}"/>
                 </div>
 
-                <div class="oj-flex-item oj-md-4">
-                    <div class="product-detail-price" data-bind="text: '$' + $data['prdCntrUnitPrice']"></div>
+                <div class="oj-flex-item oj-sm-6" data-bind="click: $parent.navigateToProductDetail">
+                    <div class="product-search-name" data-bind="text: $data['prdName']"></div>
                 </div>
+
+                <div class="oj-flex-item oj-sm-2">
+                    <div class="oj-flex">
+                        <div class="oj-flex-item">
+                            <div class="product-detail-price" data-bind="text: $parent.getPrice($data['prdCntrUnitPrice'])"></div>
+                        </div>
+                    </div>
+
+                    <div class="oj-padding-vertical"></div>
+
+                    <!-- ko if: $parent.user -->
+                    <div class="oj-flex">
+                        <div class="oj-flex-item">
+                            <input class="product-quantity" id="quantity" data-bind="value: quantity" aria-label="quantity" type="number" min="1" max="1000"/>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                </div>
+
 
                 <!-- ko if: $parent.user -->
-                <div class="oj-flex-item oj-md-4 oj-sm-float-end">
-                    <button id= "addToCart" data-bind="click: $parent.addToCart, ojComponent: { component: 'ojButton', label: 'Add to Cart'}"></button>
+                <div class="oj-flex-item oj-sm-2 oj-sm-float-end">
+                    <button class="oj-button oj-enabled oj-default oj-button-full-chrome oj-button-text-only"  id= "addToCart" data-bind="click: $parent.addToCart"><div class="oj-button-label"><span class="oj-button-text">Add to Cart</span></div></button> 
 
-                    <div id="compareProductWrapper"
-                         data-bind=
-                         "ojComponent: {
-                        component: 'ojCheckboxset', 
-                        value: compareProduct}" >
+                    <div id="compareProductWrapper">
                         <span class="oj-choice-row">
-                            <input data-bind="attr: {id: 'compareProduct' + $data['prdUid']}" type="checkbox" value="true">
-                            <label data-bind="attr: {for: 'compareProduct' + $data['prdUid']}">Compare</label>
+                            <input data-bind="checked: compareProduct, attr: {id: 'compareProduct' + $data['prdUid']}" type="checkbox" value="true">
+                            <label style="padding-left: 5px" data-bind="attr: {for: 'compareProduct' + $data['prdUid']}">Compare</label>
                         </span>
                     </div>
                 </div>

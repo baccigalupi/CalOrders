@@ -21,8 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojrouter', 'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojpagingcontrol', 'ojs/ojpagingcontrol-model', 'utils/ProductHelper'],
-        function (oj, ko, data) {
+define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUtils', 'ojs/ojrouter', 'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojpagingcontrol', 'ojs/ojpagingcontrol-model', 'utils/ProductHelper'],
+        function (oj, ko, data, accounting) {
 
             function OrderConfirmationViewModel() {
                 var self = this;
@@ -180,6 +180,10 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'common/SecurityUtils', 'ojs/ojro
 
                 };
 
+                self.getPrice = function (price)
+                {
+                    return accounting.formatMoney(price);
+                };
             }
 
             /*

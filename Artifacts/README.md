@@ -40,7 +40,7 @@ t. Prototype and underlying platforms used to create and run the prototype are o
 
 
 ##CalOrder Development Team
-Oncore selected Mike Tsay as the Team Leader/Project Manager, who had authority over and was responsible and accountable for the quality of the prototype submitted _(2a)_.
+Oncore selected Mike Tsay as the Team Leader/Project Manager, who had authority over and was responsible and accountable for the quality of the prototype submitted.
 
 **We selected a multidisciplinary and collaborative team that fulfilled the following 8 labor categories _(2b)_:**  
 
@@ -63,7 +63,7 @@ Our plan combines our UCD and Agile processes into a cohesive and flexible workf
 
 The team utilized User-Centered-Design (UCD) and Agile development techniques to formulate the product backlog.  All team members participated in the initial meetings with the users which was a natural hook into our Agile methodolgy and gave everyone the opportunity to understand the scope of the project and understand how each of them would contribute to the project's success.  
 
-The table below summarizes how we incorporated the UCD practices in the development of CalOrders.  Each section includes a link to another page that provides detail on the subject. _(2d)_  
+The table below summarizes how we incorporated the UCD practices in the development of CalOrders.  Each section includes a link to another page that provides detail on the subject.  
 
 Plan | Analyze| Design | Implement | Test & Measure  
 --- | --- | --- | --- | ----
@@ -78,7 +78,7 @@ The team's principle focus during development of CalOrders is summarized best by
  
 “[Value] people over processes; products that actually work over documenting what that product is supposed to do; collaborating with customers over negotiating with them; and responding to change over following a plan.” (Scrum: The Art of Doing Twice the Work in Half the Time)
 
-[Oncore's Agile methodology](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Methodolgy) provided the team an iterative approach, where feedback informed subsequent work or versions of the prototype_(2j)_.   
+[Oncore's Agile methodology](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Methodolgy) provided the team an iterative approach, where feedback informed subsequent work or versions of the prototype.   
 
 ###Principles
 
@@ -134,15 +134,13 @@ CalOrders by default uses the open source NetBeans IDE for development.  NetBean
 
 ## Projects
 
-The CalOrders application is separated by area of concern into separate NetBeans projects. 
+The CalOrders application is separated by area of [concern into separate](https://www.google.com/search?q=separation+of+concerns&rlz=1C1CHBF_enUS728US729&oq=separ&aqs=chrome.2.69i57j0l5.2947j0j4&sourceid=chrome&ie=UTF-8) NetBeans projects. 
  
 * CalOrdersJET - [(CDT–ADPQ–0117-2-Technical Approach: Client UI)](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersJET)  JET JavaScript, HTML5, CSS project providing the front end for the CalOrders application
 * JavaScript Library - [(CDT–ADPQ–0117-2-Technical Approach: JavaScript Library)](http://www.oracle.com/webfolder/technetwork/jet/index.html) Orcle JET is an open source JavaScript framework proving a rich set of ADA compliant components. See User Interface section below for more details about Oracle JET
 * CalOrdersREST - [(CDT–ADPQ–0117-2-Technical Approach: REST Service)](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersRest) Java dynamic web project providing support for REST services and the data access layer via Java JEE (Java Enterprise Edition) and JPA (Java Persistence API)
 * CalOrdersCore - Java API project holding shared utility classes, interfaces, and base classes designed to support the other CalOrders Java projects
 * CalOrders Database = [(CDT–ADPQ–0117-2-Technical Approach: Database)](https://github.com/OncoreLLC/CalOrders/tree/master/DB_Scripts) MySQL database model, DDL, and reference data scripts
-
-
 
 ## User Interface
 
@@ -177,7 +175,6 @@ CalOrders is a Single Page Application, having a single entry point, [index.html
 
 A [view](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersJET/src/js/views) in CalOrders is a distinct SPA HTML fragment, which holds the front end visual static content and components for the view. JET uses Knockout for data binding, which binds the view model to the view.  
 
-
 ### View Models
 
 A [view model](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersJET/src/js/viewModels) holds the business logic for the view and also manages the REST operations for the view.  The view model uses a consistent pattern defined by JET, which helps to ensure consistency across models and simplifies coding.
@@ -188,7 +185,7 @@ A [view model](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersJET/s
 
 Figure 6: CalOrders Service Architecture
 
-CalOrders uses [REST services](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersRest/src/java/com/oncore/calorders/rest/service) exposed from JEE Session Beans using the built in annotations available from Java.  Java provides excellent REST service support in JEE making it extremely easy to create REST services supporting CRUD operations on an underlying datastore.  CalOrders uses the NetBeans REST services generator to create the core set of JPA entities and REST facades needed for the application.  Customizing the service entities is supported via built in JPA functionality using the persistence.xml file and xml files containing custom named queries or custom queries can be defined directly in the REST Facades using the JPA create query method and syntax.  See the [HOW TO Create Custom Queries and REST Facades](https://github.com/OncoreLLC/CalOrders/wiki/HOW-TO-Create-Custom-Queries-and-REST-Facades) Wiki page for more details on how to create custom JPA Named Queries and REST Facades.  Core classes and utilities needed to support the underlying architecture across domains are defined in CalOrdersCore.
+CalOrders uses [REST services](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersRest/src/java/com/oncore/calorders/rest/service) exposed from JEE Session Beans using the built in annotations available from Java.  Java provides excellent REST service support in JEE making it extremely easy to create REST services supporting [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) operations on an underlying datastore.  CalOrders uses the NetBeans REST services generator to create the core set of [JPA](https://en.wikipedia.org/wiki/Java_Persistence_API) entities and REST facades needed for the application.  Customizing the service entities is supported via built in JPA functionality using the persistence.xml file and xml files containing custom named queries or custom queries can be defined directly in the REST Facades using the JPA create query method and syntax.  See the [HOW TO Create Custom Queries and REST Facades](https://github.com/OncoreLLC/CalOrders/wiki/HOW-TO-Create-Custom-Queries-and-REST-Facades) Wiki page for more details on how to create custom JPA Named Queries and REST Facades.  Core classes and utilities needed to support the underlying architecture across domains are defined in CalOrdersCore.
 
 
 ## Shared Architectural Components
@@ -202,6 +199,26 @@ The CalOrders application currently uses the MySQL [database](https://github.com
 The CalOrdersREST project contains a dedicated folder to hold the MySQL DDL, [database model](https://github.com/OncoreLLC/CalOrders/blob/master/Artifacts/images/Architecture_files/database.png), reference, and test data insert scripts as seen in Figure 7.
 
 The [database model](https://github.com/OncoreLLC/CalOrders/blob/master/Artifacts/images/Architecture_files/database.png) can be viewed and updated by using the MySQL Workbench tool.  Please see the [MySQL](http://www.mysql.com) website for more information about MySQL and to obtain the database and WorkBench tools for your operating system.
+
+## Modern and Open Source Technologies
+
+Technology | Requirement  
+--- | ---  
+[Unbuntu Linux](https://www.ubuntu.com)	| Operating System used for both the development workstation and the deployment environment 
+[NetBeans](https://netbeans.org) | Development IDE  
+[Oracle JET]() | Open Source JavaScript UI Component Library  
+[Node JS](https://nodejs.org/en/) | Frontend Javscript Engine  
+[Payara](http://www.payara.fish/) | JEE Application Server  
+[MySQL](https://www.mysql.com/) | Database  
+[Jenkins](https://jenkins.io/) | Continuous Integration  
+[JUnit](http://junit.org/junit4/) | [automated unit test cases are here in the repository]  (https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersRest/test/com/oncore/calorders/rest/service/extension)
+[Selenium](http://www.seleniumhq.org/) | [automated regression test cases are here in the repository](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersSelenium/test/test/oncore/calorders/selenium)  
+[Knockout Js](http://knockoutjs.com/) | Front-end Javascript library  
+[Require Js](http://requirejs.org/) | Front-end Javascript library  
+[jQuery](https://jquery.com/) | Front-end Javascript library  
+[Swagger](http://swagger.io/) | Automated Documentation of RESTful services   
+[NVDA](https://www.paciellogroup.com/blog/2008/01/nvda-a-free-and-open-source-screen-reader-for-windows/) | Screen Reader
+[WAVE](https://chrome.google.com/webstore/detail/wave-evaluation-tool/jbbplnpkjmmeebjpijfedlgcdilocofh?hl=en-US) | ADA Browser testing plugin
 
 ## Accessibility
 
