@@ -42,8 +42,8 @@
         </div>
     </div>
     <!-- end global error message -->
-    
-    
+
+
 
     <!-- global error messages -->
     <div class="oj-flex-item oj-messaging-inline-container" id="confirmationMessage" aria-live="polite">
@@ -58,7 +58,7 @@
         </div>
     </div>
     <!-- end global error message -->
-    
+
 
     <!-- Page Content -->
     <div class="oj-panel oj-sm-flex-wrap-nowrap oj-panel-shadow-md">
@@ -159,13 +159,18 @@
                     </div>
                     <div class="oj-flex-item">
                         <div class="oj-flex-item">
-                            <span>Quantity: </span><span data-bind="text: $data['quantity']"/>
+                            <span style="font-weight: bold">Quantity: </span><span data-bind="text: $data['quantity']"/>
                         </div>
-
                         <div class="oj-padding-vertical"></div>
-                        
-                        <div data-bind="text: $parent.getPrice($data['prdCntrUnitPrice'])"></div>
-                    </div>  
+                         <div class="oj-flex-item">
+                             <span style="font-weight: bold">Price: </span><span data-bind="text: $data['prdCntrUnitPrice'] + '/ea'"/>
+                        </div>
+                        <div class="oj-padding-vertical"></div>
+                        <div class="oj-flex-item">
+                            <span style="font-weight: bold">Total: </span><span data-bind="text: $data['totalItemPrice']"/>
+                        </div>
+                    </div> 
+ 
                 </div>
             </div>
         </div>
@@ -195,18 +200,25 @@
                          height="100" width="100" 
                          data-bind="attr: {alt: $data['prdName'], id: 'productImage' + $data['prdUid'], src: $parent.getPhoto($data)}"/>                    
                 </div>
-                
+
                 <div class="oj-flex-item oj-sm-4">
                     <div class="confirmation_bold_label" data-bind="text: $data['prdName']"></div>
                 </div>
-                
+
                 <div class="oj-flex-item oj-sm-2">
-                    <span>Quantity: </span><span data-bind="text: $data['quantity']"/>
+                    <span style="font-weight: bold">Quantity: </span><span data-bind="text: $data['quantity']"/>
                 </div>
-                <div class="oj-flex-item oj-sm-4">
+                <!-- Price -->
+                <div class="oj-flex-item oj-sm-2">
 
                     <div class="oj-flex-item oj-sm-only-hide oj-md-4 oj-md-float-end">
-                        <div data-bind="text: $parent.getPrice($data['prdCntrUnitPrice'])"></div>
+                        <span style="font-weight: bold">Price: </span><span data-bind="text: $data['prdCntrUnitPrice'] + '/ea'"/>
+                    </div>
+                </div>
+
+                <div class="oj-flex-item oj-sm-2">
+                    <div class="oj-flex-item oj-sm-only-hide oj-md-4 oj-md-float-end">
+                        <span style="font-weight: bold">Total: </span><span data-bind="text: $data['totalItemPrice']"/>
                     </div>
                 </div>
             </div>
