@@ -194,6 +194,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'ojs/ojarray
                             sessionStorage.cartProducts = [];
                             sessionStorage.itemTotalPrice = 0;
                             sessionStorage.itemQuantityTotal = 0;
+                            userLogin(sessionStorage.userFullName);
 
                             var temp = null;
 

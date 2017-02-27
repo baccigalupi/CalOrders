@@ -123,27 +123,29 @@ var SecurityUtils = new function ()
                     // need the tabs to reflect the order specified 
                     // in the database
                     var Item = oj.Model.extend({
-                       description: '', pageId: '', order: 0 
+                        description: '', pageId: '', order: 0
                     });
                     var item = null;
                     var data = [];
-             
+
                     for (var i = 0; i < navBarItems.length; i++) {
 
-                       item = new Item();
-                       item.description = navBarItems.models[i].attributes.pageDescription;
-                       item.pageId = navBarItems.models[i].attributes.pageIdentifier;
-                       item.order = navBarItems.models[i].attributes.pageOrder;
-                       data.push(item);
- 
+                        item = new Item();
+                        item.description = navBarItems.models[i].attributes.pageDescription;
+                        item.pageId = navBarItems.models[i].attributes.pageIdentifier;
+                        item.order = navBarItems.models[i].attributes.pageOrder;
+                        data.push(item);
+
                     }
 
-                    data.sort(function(a, b){return a.order > b.order});
+                    data.sort(function (a, b) {
+                        return a.order > b.order
+                    });
 
-                    for(var i = 0; i < data.length; i++)
+                    for (var i = 0; i < data.length; i++)
                     {
-                        
-                         if ('productSearch' === data[i].pageId)
+
+                        if ('productSearch' === data[i].pageId)
                         {
                             iconStyle = 'demo-catalog-icon-24';
                         } else if ('orderHistory' === data[i].pageId)
@@ -159,10 +161,10 @@ var SecurityUtils = new function ()
                         {
                             iconStyle = 'demo-info-icon-24';
                         }
-                        
+
                         koTableBar().add(
-                            {name: data[i].description, id: data[i].pageId,
-                                iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 ' + iconStyle}, {idAttribute: 'id'});
+                                {name: data[i].description, id: data[i].pageId,
+                                    iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 ' + iconStyle}, {idAttribute: 'id'});
                     }
 
 
@@ -196,39 +198,41 @@ var SecurityUtils = new function ()
                 comparator: 'pageIdentifier'
             });
             var navMenuItems = new PrivilegeCollection();
-            
-            
-             koTableMenu.push(
-                                {name: sessionStorage.userFullName, id: 'about',
-                                    iconClass: 'oj-navigationlist-item-icon demo-icon-font-24'});
-                                
-                                
-                                
+
+
+            koTableMenu.push(
+                    {name: 'Profile', id: 'profile',
+                        iconClass: 'oj-navigationlist-item-icon demo-icon-font-24'});
+
+
+
             navMenuItems.fetch({
                 success: function () {
-                    
-                    
+
+
                     // create a temporary model just for sorting.. we 
                     // need the tabs to reflect the order specified 
                     // in the database
                     var Item = oj.Model.extend({
-                       description: '', pageId: '', order: 0 
+                        description: '', pageId: '', order: 0
                     });
                     var item = null;
                     var data = [];
-             
+
                     for (var i = 0; i < navMenuItems.length; i++) {
 
-                       item = new Item();
-                       item.description = navMenuItems.models[i].attributes.pageDescription;
-                       item.pageId = navMenuItems.models[i].attributes.pageIdentifier;
-                       item.order = navMenuItems.models[i].attributes.pageOrder;
-                       data.push(item);
- 
+                        item = new Item();
+                        item.description = navMenuItems.models[i].attributes.pageDescription;
+                        item.pageId = navMenuItems.models[i].attributes.pageIdentifier;
+                        item.order = navMenuItems.models[i].attributes.pageOrder;
+                        data.push(item);
+
                     }
 
-                    data.sort(function(a, b){return a.order > b.order});
-                    
+                    data.sort(function (a, b) {
+                        return a.order > b.order
+                    });
+
 
                     for (var i = 0; i < navMenuItems.length; i++) {
                         koTableMenu.push(
@@ -284,6 +288,7 @@ var SecurityUtils = new function ()
             sessionStorage.groups = [];
             sessionStorage.cartProducts = [];
             sessionStorage.authenticated = false;
+            userLogin("Options");
         }
     };
 
@@ -302,6 +307,8 @@ var SecurityUtils = new function ()
             sessionStorage.groups = [];
             sessionStorage.cartProducts = [];
             sessionStorage.authenticated = false;
+            
+            userLogin("Options");
         }
     };
 };

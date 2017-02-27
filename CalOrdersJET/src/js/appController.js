@@ -45,20 +45,21 @@ define(['ojs/ojcore', 'knockout', 'common/SecurityUtils', 'ojs/ojknockout-model'
                 self.router.configure({
                     'welcome': {label: 'Welcome', isDefault: true},
                     'login': {label: 'Login', isDefault: false},
-                    'productSearch': {label: 'Products', isDefault: false},
+                    'productSearch': {label: 'Product Search', isDefault: false},
                     'productDetail': {label: 'Product Detail', isDefault: false},
                     'productCompare': {label: 'Compare Products', isDefault: false},
                     'productAdd': {label: 'Add Product', isDefault: false},
                     'productUpdate': {label: 'Update Product', isDefault: false},
                     'serviceAdd': {label: 'Add Service', isDefault: false},
-                    'dashboard': {label: 'Dashboard'},
+                    'dashboard': {label: 'Administrator Dashboard'},
                     'cart': {label: 'Cart'},
                     'orderConfirmation': {label: 'Order Confirmation'},
                     'orderHistory': {label: 'Order History'},
                     'orderHistoryAdmin': {label: 'Order History'},
                     'orderDetail': {label: 'Order Detail'},
                     'orderConfirmation': {label: 'Order Confirmation'},
-                    'about': {label: 'About'}
+                    'about': {label: 'About'},
+                    'profile': {label: 'Profile'}
                 });
                 oj.Router.defaults['urlAdapter'] = new oj.Router.urlParamAdapter();
                 // Navigation setup                
@@ -77,7 +78,7 @@ define(['ojs/ojcore', 'knockout', 'common/SecurityUtils', 'ojs/ojknockout-model'
                 self.company = ko.observable("By OnCore");
 
                 // User Info used in Global Navigation area
-                self.userLogin = ko.observable("Options");
+                userLogin = ko.observable("Options");
 
                 if (typeof (Storage) !== "undefined" && sessionStorage.authenticated !== "true")
                 {
@@ -98,6 +99,7 @@ define(['ojs/ojcore', 'knockout', 'common/SecurityUtils', 'ojs/ojknockout-model'
                         navBarDataSource(new oj.ArrayTableDataSource(navBarData, {idAttribute: 'id'}));
                         SecurityUtils.getNavBarItems(navBarDataSource);
                         SecurityUtils.getNavMenuItems(navMenuDataSource);
+                        userLogin("Options");
                         return self.router.go('welcome');
                     }
 

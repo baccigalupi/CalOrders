@@ -27,11 +27,14 @@
 define(['ojs/ojcore', 'knockout', 'jquery'],
         function (oj, ko, $) {
 
-            function AboutViewModel() {
+            function ProfileViewModel() {
                 var self = this;
 
                 self.applicationVersion = ko.observable("1.0");
                 self.userName = ko.observable();
+                self.userFullName = ko.observable();
+                self.department = ko.observable();
+                self.departmentAddress = ko.observable();
 
                 // Below are a subset of the ViewModel methods invoked by the ojModule binding
                 // Please reference the ojModule jsDoc for additionaly available methods.
@@ -55,10 +58,32 @@ define(['ojs/ojcore', 'knockout', 'jquery'],
 
 
                     if (!SecurityUtils.isAuthenticated()) {
-                        SecurityUtils.clearSessionStorage();
+                        self.userName('');
+                        self.userFullName('');
+                        self.department('');
+                        self.departmentAddress('');
+                        return self.router.go('welcome');
                     } else
                     {
-                        self.userName('Currently logged in as: ' + sessionStorage.userFullName);
+                        self.userName('Currently logged in as: ' + sessionStorage.userName);
+                        self.userFullName('Name: ' + sessionStorage.userFullName);
+                        self.department('Department: ' + sessionStorage.departmentName);
+
+                        var address = sessionStorage.departmentAddressLine1;
+
+                        if (oj.StringUtils.isEmptyOrUndefined(sessionStorage.departmentAddressLine2) || 'undefined' === sessionStorage.departmentAddressLine2)
+                        {
+                            address += " " + sessionStorage.departmentCityStateZip;
+                        } else
+                        {
+                            address += ", " + sessionStorage.departmentAddressLine2;
+                            address += " " + sessionStorage.departmentCityStateZip;
+                        }
+
+
+
+                        self.departmentAddress(address);
+
                     }
 
                 };
@@ -113,7 +138,7 @@ define(['ojs/ojcore', 'knockout', 'jquery'],
              * each time the view is displayed.  Return an instance of the ViewModel if
              * only one instance of the ViewModel is needed.
              */
-            return new AboutViewModel();
+            return new ProfileViewModel();
         }
 
 

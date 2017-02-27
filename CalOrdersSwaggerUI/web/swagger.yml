@@ -37,8 +37,16 @@ paths:
           type: string
           format: string
       responses:
-        '200':
-          description: Product response
+        200:
+          description: Active Products by product type.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Product'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
    /com.oncore.calorders.rest.product/findActiveProductsByProductTypeAndVendor/{productTypeCode}/{vendorUid}:
     get:
       description: Gets an Active product by product type and vendor.
@@ -57,8 +65,38 @@ paths:
           type: integer
           format: int32
       responses:
-        '200':
-          description: Product response
+        200:
+          description: Active Products by product type and vendor
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Product'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+   /com.oncore.calorders.rest.product/findProductsByProductType/{productTypeCode}:
+    get:
+      description: Gets an product by product type.
+      operationId: findProductsByProductType
+      parameters:
+        - name: productTypeCode
+          in: path
+          description: products by product type
+          required: true
+          type: string
+          format: string
+      responses:
+        200:
+          description: Products by product type and vendor
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Product'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
    /com.oncore.calorders.rest.product/doesProductNameExist/{productName}:
     get:
       description: Check to see if a product exists by name.
@@ -71,40 +109,133 @@ paths:
           type: string
           format: string
       responses:
-        '200':
-          description: Product response
+        200:
+          description: Prduct exists by name or not.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Product'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
    /com.oncore.calorders.rest.product/createProduct:
     post:
       description: Creates a new prodcuct.
       operationId: createProduct
+      consumes:
+        - application/json
+        - application/xml
       parameters: []
       responses:
-        '405':
-          description: Invalid input
-   /com.oncore.calorders.rest.orderHistory/fetchOrdersByQuarter:
+        default:
+          description: successful operation
+   /com.oncore.calorders.rest.product/updateProduct:
+    post:
+      description: Update a prodcuct.
+      operationId: updateProduct
+      consumes:
+        - application/json
+        - application/xml
+      parameters: []
+      responses:
+        default:
+          description: successful operation
+   /com.oncore.calorders.rest.orderHistory/fetchOrdersByQuarter/{departmentId}:
     get:
-      description: get all order by quarter.
+      description: get all order for a department by quarter .
       operationId: fetchOrdersByQuarter
-      parameters: []
+      parameters: 
+        - name: departmentId
+          in: path
+          description: department id
+          required: true
+          type: integer
+          format: int32
       responses:
-        '200':
-          description: Order history response
-   /com.oncore.calorders.rest.orderHistory/fetchOrderStatusSummary:
+        200:
+          description: All orders by grouped by quarter
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+   /com.oncore.calorders.rest.orderHistory/fetchOrderStatusSummary/{departmentId}:
     get:
-      description: Get order statuses.
+      description: Get orders statuses for a department.
       operationId: fetchOrderStatusSummary
+      parameters: 
+        - name: departmentId
+          in: path
+          description: department id
+          required: true
+          type: integer
+          format: int32
+      responses:
+        200:
+          description: All orders summary.
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+   /com.oncore.calorders.rest.orderHistory/findAllOrderHistoryByPartyUid/{partyUid}:
+    get:
+      description: get all order by party uid.
+      operationId: findAllOrderHistoryByPartyUid
+      parameters:
+        - name: partyUid
+          in: path
+          description: party id
+          required: true
+          type: integer
+          format: int32
+      responses:
+        200:
+          description: All orders by party.
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+   /com.oncore.calorders.rest.orderHistory/findAllOrderHistory:
+    get:
+      description: Get all order summaries.
+      operationId: findAllOrderHistory
       parameters: []
       responses:
-        '200':
-          description: Order history response
+        200:
+          description: All orders
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+   /com.oncore.calorders.rest.orderHistory/findOrderDetailById/{orderUid}:
+    get:
+      description: Get order detail by order id.
+      operationId: findOrderDetailById
+      parameters:
+        - name: orderUid
+          in: path
+          description: order id
+          required: true
+          type: integer
+          format: int32
+      responses:
+        200:
+          description: Order detail
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
    /com.oncore.calorders.rest.orderHistory/createOrder:
     post:
       description: Creates new Order.
       operationId: createOrder
+      consumes:
+        - application/json
+        - application/x
       parameters: []
       responses:
-        '405':
-          description: Invalid input
+        default:
+          description: successful operation
    /com.oncore.calorders.rest.party/findPartyByUserIdAndPassword/{userId}/{password}:
     get:
       description: Get the party by userId and password.
@@ -123,8 +254,12 @@ paths:
           type: string
           format: string
       responses:
-        '200':
-          description: Party response
+        200:
+          description: Party by username and password
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
    /com.oncore.calorders.rest.party/findAllGroupsByPartyId/{partyId}:
     get:
       description: Gets all groups by party.
@@ -137,8 +272,12 @@ paths:
           type: integer
           format: int32
       responses:
-        '200':
-          description: Party response
+        200:
+          description: All groups by party
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
    /com.oncore.calorders.rest.party/findAllPrivilegesByPartyId/{partyId}:
     get:
       description: Get all privileges by party.
@@ -151,8 +290,12 @@ paths:
           type: integer
           format: int32
       responses:
-        '200':
-          description: Party response
+        200:
+          description: All privileges by party
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
    /com.oncore.calorders.rest.party/findNavBarPrivilegesByPartyId/{partyId}:
     get:
       description: Get authorized nav bar by party.
@@ -165,8 +308,12 @@ paths:
           type: integer
           format: int32
       responses:
-        '200':
-          description: Product response
+        200:
+          description: Navigation bar privileges by party
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
    /com.oncore.calorders.rest.party/findNavMenuPrivilegesByPartyId/{partyId}:
     get:
       description: Get authorized nav menu by party.
@@ -179,5 +326,119 @@ paths:
           type: integer
           format: int32
       responses:
-        '200':
-          description: Party response
+        200:
+          description: Navigation menu privileges by party
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+definitions:
+  Product:
+    type: object
+    properties:
+      prdUid:
+        type: integer
+        format: int64
+      prdActiveInd:
+        type: string
+        description: Product active Indicator
+      prdCategoryCd:
+        $ref: '#/definitions/Code'
+      prdCntrDiscount:
+        type: integer
+        format: int32
+        description: product control discount percentage
+      prdCntrLnItm:
+        type: string
+        description: Product control line item.
+      prdCntrUnitPrice:
+        type: number
+        description: Product control unit price.
+      prdImgTypeCd:
+        $ref: '#/definitions/Code'
+      prdShortDesc:
+        type: string
+        description: Short description of the product.
+      prdLongDesc:
+        type: string
+        description: Long description of the product.
+      prdName:
+        type: string
+        description: Product name.
+      prdOemName:
+        type: string
+        description: Product OEM name.
+      prdOemPartNum:
+        type: string
+        description: Product OEM part number.
+      prdPrice:
+        type: number
+        description: Product price.
+      prdSku:
+        type: string
+        description: Product SKU.        
+      prdUnitCd:
+        $ref: '#/definitions/Code'
+      vendor:
+        $ref: '#/definitions/Vendor'
+      audit:
+        $ref: '#/definitions/ObjAudit'
+  Vendor:
+    type: object
+    properties:
+      vndUid:
+        type: integer
+        format: int64
+      vndActiveInd:
+        type: string
+        description: Vendor active indicator.
+      vndDesc:
+        type: string
+        description: Vendor description.
+      vndManager:
+        type: string
+        description: Vendor manager name.
+      vndName:
+        type: string
+        description: Vendor nam.
+      audit:
+        $ref: '#/definitions/ObjAudit'
+  Code:
+    type: object
+    properties:
+      code:
+        type: string
+        description: Code value.
+      shortDesc:
+        type: string
+        description: Short description of the code value.
+      longDesc:
+        type: string
+        description: Long description of the code value.
+      audit:
+        $ref: '#/definitions/ObjAudit'
+  ObjAudit:
+    type: object
+    properties:
+      createTs:
+        type: string
+        format: date-time
+      createUserId:
+        type: string
+        description: Created by user Id.
+      updateTs:
+        type: string
+        format: date-time
+      updateUserId:
+        type: string
+        description: Update by user Id.
+  Error:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      fields:
+        type: string
