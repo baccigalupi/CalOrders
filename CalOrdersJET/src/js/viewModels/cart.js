@@ -53,6 +53,8 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                 self.medium = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(mdQuery);
                 self.small = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(smQuery);
                 self.smallOnly = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(smOnlyQuery);
+                
+                 self.errorMessage = ko.observable();
 
                 // Below are a subset of the ViewModel methods invoked by the ojModule binding
                 // Please reference the ojModule jsDoc for additional available methods.
@@ -147,13 +149,13 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                             {
                                 cartProduct.selectedRelatedService = ko.observable();
                             }
-                            
+
                             var totalItemPrice = cartProduct.quantity * cartProduct.prdCntrUnitPrice;
 
                             cartProduct.totalItemPrice = ko.observable(totalItemPrice);
                             cartProduct.quantity = ko.observable(cartProduct.quantity);
                             cartProduct.removeProduct = ko.observable();
-                            
+
 
                             var productType = "";
 
@@ -300,69 +302,16 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                     return accounting.formatMoney(price);
                 };
 
-                self.productQuantityChange = function (event, data, updatedPrdUid)
+                self.productQuantityChange = function (product, event)
                 {
-                    if (data.previousValue !== undefined)
+//                    if (data.previousValue !== undefined)
+//                    {
+                    for (i = 0; i < self.cart().length; i++)
                     {
-                        for (i = 0; i < self.cart().length; i++)
+                        if (self.cart()[i].prdUid === product.prdUid)
                         {
-                            if (self.cart()[i].prdUid === updatedPrdUid)
-                            {
-                                var totalItemPrice = accounting.unformat(data.value) * self.cart()[i].prdCntrUnitPrice;
-                                self.cart()[i].totalItemPrice(totalItemPrice);
-                            }
-                        }
-                        
-                        var sessionCart = JSON.parse(sessionStorage.cartProducts);
-
-                        for (i = 0; i < sessionCart.length; i++)
-                        {
-                            if (sessionCart[i].prdUid === updatedPrdUid)
-                            {
-                                sessionCart[i].quantity = accounting.unformat(data.value);
-                                sessionCart[i].totalItemPrice = sessionCart[i].quantity * sessionCart[i].prdCntrUnitPrice;
-                            }
-                        }
-
-                        var tempItemTotalPrice = 0.0;
-                        var tempShippingPrice = 25.00;
-                        var tempTotalPrice = 0.00;
-
-                        for (i = 0; i < sessionCart.length; i++)
-                        {
-                            tempItemTotalPrice += (sessionCart[i].prdCntrUnitPrice * sessionCart[i].quantity);
-                        }
-
-                        self.itemTotalPrice(self.getPrice(tempItemTotalPrice));
-                        self.shippingPrice(self.getPrice(tempShippingPrice));
-
-                        tempTotalPrice = tempShippingPrice + tempItemTotalPrice;
-
-                        self.totalPrice(self.getPrice(tempTotalPrice));
-
-                        sessionStorage.itemTotalPrice = self.itemTotalPrice();
-                        sessionStorage.shippingPrice = self.shippingPrice();
-                        sessionStorage.totalPrice = self.totalPrice();
-
-                        sessionStorage.cartProducts = JSON.stringify(sessionCart);
-                    }
-                };
-
-                self.removeProductsFromCart = function ()
-                {
-                    var val;
-                    var productsToRemove = [];
-
-                    for (val in self.cart())
-                    {
-                        console.log("remove:" + self.cart()[val].removeProduct());
-
-                        if (self.cart()[val].removeProduct() !== undefined
-                                && self.cart()[val].removeProduct()[0])
-                        {
-                            console.log("adding item to remove list");
-                            productsToRemove.push(self.cart()[val].prdUid);
-                            self.cart.remove(self.cart()[val]);
+                            var totalItemPrice = product.quantity() * self.cart()[i].prdCntrUnitPrice;
+                            self.cart()[i].totalItemPrice(totalItemPrice);
                         }
                     }
 
@@ -370,10 +319,10 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
 
                     for (i = 0; i < sessionCart.length; i++)
                     {
-                        var index = productsToRemove.indexOf(sessionCart[i].prdUid);
-                        if (index > -1)
+                        if (sessionCart[i].prdUid === product.prdUid)
                         {
-                            sessionCart.splice(i, 1);
+                            sessionCart[i].quantity = product.quantity();
+                            sessionCart[i].totalItemPrice = sessionCart[i].quantity * sessionCart[i].prdCntrUnitPrice;
                         }
                     }
 
@@ -398,6 +347,68 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                     sessionStorage.totalPrice = self.totalPrice();
 
                     sessionStorage.cartProducts = JSON.stringify(sessionCart);
+//                    }
+                };
+
+                self.removeProductsFromCart = function ()
+                {
+
+                    var productsToRemove = [];
+
+                    for (var val = self.cart().length - 1; val >= 0; val--)
+                    {
+                        console.log("remove:" + self.cart()[val].removeProduct());
+
+                        if (self.cart()[val].removeProduct() !== undefined
+                                && self.cart()[val].removeProduct())
+                        {
+                            console.log("adding item to remove list");
+                            productsToRemove.push(self.cart()[val].prdUid);
+                            self.cart.remove(self.cart()[val]);
+                        }
+                    }
+
+                    if (productsToRemove.length > 0)
+                    {
+
+                        var sessionCart = JSON.parse(sessionStorage.cartProducts);
+
+                        for (var i = sessionCart.length - 1; i >= 0; i--)
+                        {
+                            var index = productsToRemove.indexOf(sessionCart[i].prdUid);
+                            if (index > -1)
+                            {
+                                sessionCart.splice(i, 1);
+                            }
+                        }
+
+                        var tempItemTotalPrice = 0.0;
+                        var tempShippingPrice = 25.00;
+                        var tempTotalPrice = 0.00;
+
+                        for (i = 0; i < sessionCart.length; i++)
+                        {
+                            tempItemTotalPrice += (sessionCart[i].prdCntrUnitPrice * sessionCart[i].quantity);
+                        }
+
+                        self.itemTotalPrice(self.getPrice(tempItemTotalPrice));
+                        self.shippingPrice(self.getPrice(tempShippingPrice));
+
+                        tempTotalPrice = tempShippingPrice + tempItemTotalPrice;
+
+                        self.totalPrice(self.getPrice(tempTotalPrice));
+
+                        sessionStorage.itemTotalPrice = self.itemTotalPrice();
+                        sessionStorage.shippingPrice = self.shippingPrice();
+                        sessionStorage.totalPrice = self.totalPrice();
+
+                        sessionStorage.cartProducts = JSON.stringify(sessionCart);
+                        document.getElementById('pageErrorContainer').hidden = true;
+                    } else
+                    {
+                        self.errorMessage("Please select one or more products to remove");
+                        document.getElementById('pageErrorContainer').hidden = false;
+                    }
                 };
 
                 /*
@@ -458,7 +469,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                     var ProductModel = oj.Model.extend({
                         urlRoot: self.findProductServiceURL + "/" + product.selectedRelatedService(),
                         attributeId: 'prdUid',
-                        quantityCnt: product.quantity()
+                        quantityCnt: parseInt(product.quantity())
                     });
 
                     var pm = new ProductModel();
@@ -476,11 +487,11 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                             response.quantity = ko.observable(myModel.quantityCnt);
                             response.totalItemPrice = myModel.quantityCnt * response.prdCntrUnitPrice;
                             ProductHelper.addProductToCart(response);
-                            
+
                             if (result.length === 1)
                             {
                                 cartProduct = result[0];
-                                cartProduct.quantity(cartProduct.quantity() + myModel.quantityCnt);
+                                cartProduct.quantity((parseInt(cartProduct.quantity()) + myModel.quantityCnt).toString());
                                 cartProduct.totalItemPrice = cartProduct.quantity() * cartProduct.prdCntrUnitPrice;
                             } else
                             {
