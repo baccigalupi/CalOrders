@@ -76,31 +76,42 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                         self.addressLine1(sessionStorage.departmentAddressLine1);
                         self.addressLine2(sessionStorage.departmentAddressLine2);
                         self.cityStateZip(sessionStorage.departmentCityStateZip);
-                        self.itemTotalPrice(sessionStorage.itemTotalPrice);
-                        self.totalPrice(sessionStorage.totalPrice);
-                        self.shippingPrice(sessionStorage.shippingPrice);
+                        self.itemTotalPrice(accounting.formatMoney(sessionStorage.itemTotalPrice));
+                        self.totalPrice(accounting.formatMoney(sessionStorage.totalPrice));
+                        self.shippingPrice(accounting.formatMoney(sessionStorage.shippingPrice));
 
-                        var sessionCart = JSON.parse(
-                                sessionStorage.cartProducts);
-
-
-                        self.cart(sessionCart);
-
-
-                        self.listViewDataSource = ko.computed(function () {
-                            return new oj.ArrayTableDataSource(self.cart(), {idAttribute: 'prdUid'});
-                        });
-
-                        self.cardViewDataSource = ko.computed(function () {
-                            return new oj.PagingTableDataSource(self.listViewDataSource());
-                        });
-
-                        sessionStorage.cartProducts = [];
-
-                        if (sessionStorage.authenticated === "false")
+                        if (sessionStorage.cartProducts !== "")
                         {
-                            return self.router.go('welcome');
+                            var sessionCart = JSON.parse(sessionStorage.cartProducts);
+ 
+ 
+                            for (i = 0; i < sessionCart.length; i++)
+                            {
+                                var cartProduct = sessionCart[i];
+
+                                var totalItemPrice = accounting.formatMoney(cartProduct.quantity * cartProduct.prdCntrUnitPrice);
+                                cartProduct.prdCntrUnitPrice = accounting.formatMoney(cartProduct.prdCntrUnitPrice);
+                                cartProduct.totalItemPrice = ko.observable(totalItemPrice);
+                                cartProduct.quantity = ko.observable(cartProduct.quantity);
+
+                            }
+
+                            self.cart(sessionCart);
+
+                            self.listViewDataSource = ko.computed(function () {
+                                return new oj.ArrayTableDataSource(self.cart(), {idAttribute: 'prdUid'});
+                            });
+
+                            self.cardViewDataSource = ko.computed(function () {
+                                return new oj.PagingTableDataSource(self.listViewDataSource());
+                            });
+
+                            sessionStorage.cartProducts = [];
+
                         }
+
+
+
 
                     } catch (err)
                     {
@@ -123,7 +134,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                     if (self.doShowErrorMessage)
                     {
                         document.getElementById('errorMessage').hidden = false;
-                        
+
                         document.getElementById('confirmationMessage').hidden = true;
                         self.errorMessage('Oops we can not get your cart right now, please try refreshing the screen.')
                     }
@@ -158,7 +169,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
 
 
                 self.continueShoppingClick = function (data, event)
-                {
+                { 
                     return self.router.go("productSearch");
                 };
 
