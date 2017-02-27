@@ -70,7 +70,7 @@ define(['ojs/ojcore', 'knockout', 'common/SecurityUtils', 'ojs/ojknockout-model'
                 navMenuData = ko.observableArray([]);
                 navMenuDataSource = ko.observableArray([]);
                 SecurityUtils.getNavMenuItems(navMenuDataSource);
-
+                userLogin = ko.observable();
                 // Header
                 // Application Name used in Branding Area
                 self.appName = ko.observable("CalOrders");
@@ -78,7 +78,11 @@ define(['ojs/ojcore', 'knockout', 'common/SecurityUtils', 'ojs/ojknockout-model'
                 self.company = ko.observable("By OnCore");
 
                 // User Info used in Global Navigation area
-                userLogin = ko.observable("Options");
+                if (!SecurityUtils.isAuthenticated()) {
+                    userLogin("Options");
+                } else {
+                    userLogin(sessionStorage.userFullName);
+                }
 
                 if (typeof (Storage) !== "undefined" && sessionStorage.authenticated !== "true")
                 {
@@ -114,7 +118,7 @@ define(['ojs/ojcore', 'knockout', 'common/SecurityUtils', 'ojs/ojknockout-model'
                         navBarDesc = event.target.nextSibling.innerText;
                         navBarDesc = navBarDesc.replace(/[^a-z0-9+]+/gi, '');
                     }
-                    
+
                     for (var i = 0; i < navBarDataSource._latestValue._rows.data.length; i++) {
                         if (navBarDataSource._latestValue._rows.data[i].name === navBarDesc) {
                             return self.router.go(navBarDataSource._latestValue._rows.data[i].id);
