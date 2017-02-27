@@ -163,7 +163,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'moment', 'common/S
 
                     var model = new CancelOrderModel();
                     model.save({
-                        async: false,
+
                         success: function (myModel, response, options) {
                             return false;
                         },
@@ -174,7 +174,14 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'moment', 'common/S
                     });
 
                     $("#cancelOrderConfirmationDialog").ojDialog("close");
-                    self.router.go("orderHistory");
+                    if (sessionStorage.admin === 'true')
+                    {
+                        self.router.go("orderHistoryAdmin");
+                    } else
+                    {
+                        self.router.go("orderHistory");
+                    }
+
                 };
             }
 
