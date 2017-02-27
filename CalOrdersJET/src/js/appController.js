@@ -58,7 +58,8 @@ define(['ojs/ojcore', 'knockout', 'common/SecurityUtils', 'ojs/ojknockout-model'
                     'orderHistoryAdmin': {label: 'Order History'},
                     'orderDetail': {label: 'Order Detail'},
                     'orderConfirmation': {label: 'Order Confirmation'},
-                    'about': {label: 'About'}
+                    'about': {label: 'About'},
+                    'profile': {label: 'Profile'}
                 });
                 oj.Router.defaults['urlAdapter'] = new oj.Router.urlParamAdapter();
                 // Navigation setup                

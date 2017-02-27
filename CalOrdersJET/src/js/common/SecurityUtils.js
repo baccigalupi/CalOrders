@@ -199,7 +199,7 @@ var SecurityUtils = new function ()
             
             
              koTableMenu.push(
-                                {name: sessionStorage.userFullName, id: 'about',
+                                {name: sessionStorage.userFullName, id: 'profile',
                                     iconClass: 'oj-navigationlist-item-icon demo-icon-font-24'});
                                 
                                 
