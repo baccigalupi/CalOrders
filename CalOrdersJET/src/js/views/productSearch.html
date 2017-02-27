@@ -45,154 +45,224 @@
     <!-- end global error message -->
 
     <div class="oj-panel oj-flex oj-sm-flex-wrap-nowrap oj-panel-shadow-md">
-
-
-        <!-- Product Left Hand Navigation Panel -->
         <div id="productSearchNavigationPanel" class="oj-panel oj-sm-2 oj-flex-item oj-sm-only-hide" style="min-width: 250px">
-            <div id="navlistcontainer" style="max-width:300px" >
-                <div class="oj-navigationlist-item-text-wrap" data-bind="ojComponent:{
+
+            <div class="oj-flex oj-panel oj-panel-shadow-md">
+                <div class="oj-flex-item">
+                    <div class="oj-flex">
+                        <div style="font-weight: bold; font-size: 20px; align-content: center" class="oj-flex-item" data-bind="text: 'Cart Summary'"></div>
+                    </div>
+
+                    <div class="oj-padding-vertical"></div>
+
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div style="font-weight: bold"class="oj-flex-item oj-flex-items-pad oj-sm-4" data-bind="text: 'Items:'"></div>
+                        <div class="oj-flex-item" data-bind="text: cartTotalItems"></div>
+                    </div>
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div style="font-weight: bold; padding-top: 10px" class="oj-flex-item oj-flex-items-pad oj-sm-4" data-bind="text: 'Total:'"></div>
+                        <div style="padding-top: 10px" class="oj-flex-item" data-bind="text: cartTotalPrice"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="oj-padding-vertical"></div>
+
+            <!-- Product Left Hand Navigation Panel -->
+            <div class="oj-flex">
+                <div class="oj-flex-item" id="navlistcontainer" style="max-width:300px" >
+                    <div class="oj-navigationlist-item-text-wrap" data-bind="ojComponent:{
                         component: 'ojNavigationList',
                         drillMode: 'collapsible',
                         item: {selectable: itemOnly},
                         selection: selectedProductMenuItem,
                         expanded: ['desktopSystems','desktopComputers'] }">
-                    <ul>
-                        <li id="desktopSystems" >
-                            <a href="#" >Desktop Systems</a>
-                            <ul >
+                        <ul>
+                            <li id="desktopSystems" >
+                                <a href="#" >Desktop Systems</a>
+                                <ul >
 
-                                <li id="desktopComputers" >
-                                    <a href="#" >Desktop Computers</a>
-                                    <ul >
-                                        <li id="DHST">
-                                            <a href="#" data-bind="click: function() {searchProducts('DHST')}">Standard</a>
-                                        </li>
-                                        <li id="DHPO">
-                                            <a href="#" data-bind="click: function() {searchProducts('DHPO')}">Power</a>
-                                        </li>
-                                        <li id="DHWO">
-                                            <a href="#" data-bind="click: function() {searchProducts('DHWO')}" >Workstations</a>
-                                        </li>
-                                        <li id="DHTH">
-                                            <a href="#" data-bind="click: function() {searchProducts('DHTH')}" >Thin Client</a>
-                                        </li>
-                                        <li id="DHAL">
-                                            <a href="#" data-bind="click: function() {searchProducts('DHAL')}" >All in One</a>
-                                        </li>
-                                    </ul>
-                                </li>
-
-
-                                <li id="desktopUpgrades" >
-                                    <a href="#" >Desktop Upgrades</a>
-                                    <ul >
-                                        <li id="DUST">
-                                            <a href="#" data-bind="click: function() {searchProducts('DUST')}">Standard</a>
-                                        </li>
-                                        <li id="DUPO">
-                                            <a href="#" data-bind="click: function() {searchProducts('DUPO')}">Power</a>
-                                        </li>
-                                        <li id="DUWO">
-                                            <a href="#" data-bind="click: function() {searchProducts('DUWO')}" >Workstations</a>
-                                        </li>
-                                        <li id="DUTH">
-                                            <a href="#" data-bind="click: function() {searchProducts('DUTH')}" >Thin Client</a>
-                                        </li>
-                                        <li id="DUAL">
-                                            <a href="#" data-bind="click: function() {searchProducts('DUAL')}" >All in One</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
+                                    <li id="desktopComputers" >
+                                        <a href="#" >Desktop Computers</a>
+                                        <ul >
+                                            <li id="DHST">
+                                                <a href="#" data-bind="click: function() {searchProducts('DHST')}">Standard</a>
+                                            </li>
+                                            <li id="DHPO">
+                                                <a href="#" data-bind="click: function() {searchProducts('DHPO')}">Power</a>
+                                            </li>
+                                            <li id="DHWO">
+                                                <a href="#" data-bind="click: function() {searchProducts('DHWO')}" >Workstations</a>
+                                            </li>
+                                            <li id="DHTH">
+                                                <a href="#" data-bind="click: function() {searchProducts('DHTH')}" >Thin Client</a>
+                                            </li>
+                                            <li id="DHAL">
+                                                <a href="#" data-bind="click: function() {searchProducts('DHAL')}" >All in One</a>
+                                            </li>
+                                        </ul>
+                                    </li>
 
 
-                        <li id="laptopSystems" >
-                            <a href="#" >Laptop Systems</a>
-                            <ul >
+                                    <li id="desktopUpgrades" >
+                                        <a href="#" >Desktop Upgrades</a>
+                                        <ul >
+                                            <li id="DUST">
+                                                <a href="#" data-bind="click: function() {searchProducts('DUST')}">Standard</a>
+                                            </li>
+                                            <li id="DUPO">
+                                                <a href="#" data-bind="click: function() {searchProducts('DUPO')}">Power</a>
+                                            </li>
+                                            <li id="DUWO">
+                                                <a href="#" data-bind="click: function() {searchProducts('DUWO')}" >Workstations</a>
+                                            </li>
+                                            <li id="DUTH">
+                                                <a href="#" data-bind="click: function() {searchProducts('DUTH')}" >Thin Client</a>
+                                            </li>
+                                            <li id="DUAL">
+                                                <a href="#" data-bind="click: function() {searchProducts('DUAL')}" >All in One</a>
+                                            </li>
+                                        </ul>
+                                    </li>
 
-                                <li id="laptopComputers" >
-                                    <a href="#" >Laptop Computers</a>
-                                    <ul >
-                                        <li id="LHST">
-                                            <a href="#" data-bind="click: function() {searchProducts('LHST')}">Standard</a>
-                                        </li>
-                                        <li id="LHPO">
-                                            <a href="#" data-bind="click: function() {searchProducts('LHPO')}">Power</a>
-                                        </li>
-                                        <li id="LHUL">
-                                            <a href="#" data-bind="click: function() {searchProducts('LHUL')}" >Ultralight</a>
-                                        </li>
-                                        <li id="LHMO">
-                                            <a href="#" data-bind="click: function() {searchProducts('LHMO')}" >Mobile</a>
-                                        </li>
-                                    </ul>
-                                </li>
+                                     <!-- ko if: admin -->
+                                    <li id="desktopServices" >
+                                        <a href="#" >Desktop Services</a>
+                                        <ul >
+                                            <li id="DSST">
+                                                <a href="#" data-bind="click: function() {searchProducts('DSST')}">Standard</a>
+                                            </li>
+                                            <li id="DSPO">
+                                                <a href="#" data-bind="click: function() {searchProducts('DSPO')}">Power</a>
+                                            </li>
+                                            <li id="DSWO">
+                                                <a href="#" data-bind="click: function() {searchProducts('DSWO')}" >Workstations</a>
+                                            </li>
+                                            <li id="DSTH">
+                                                <a href="#" data-bind="click: function() {searchProducts('DSTH')}" >Thin Client</a>
+                                            </li>
+                                            <li id="DSAL">
+                                                <a href="#" data-bind="click: function() {searchProducts('DSAL')}" >All in One</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <!-- /ko -->
+                                </ul>
+                            </li>
 
-                                <li id="laptopUpgrades" >
-                                    <a href="#" >Laptop Upgrades</a>
-                                    <ul >
-                                        <li id="LUST">
-                                            <a href="#" data-bind="click: function() {searchProducts('LUST')}">Standard</a>
-                                        </li>
-                                        <li id="LUPO">
-                                            <a href="#" data-bind="click: function() {searchProducts('LUPO')}">Power</a>
-                                        </li>
-                                        <li id="LUUL">
-                                            <a href="#" data-bind="click: function() {searchProducts('LUUL')}" >Ultralight</a>
-                                        </li>
-                                        <li id="LUMO">
-                                            <a href="#" data-bind="click: function() {searchProducts('LUMO')}" >Mobile</a>
-                                        </li>
-                                    </ul>
-                                </li>
 
-                            </ul>
-                        </li>
+                            <li id="laptopSystems" >
+                                <a href="#" >Laptop Systems</a>
+                                <ul >
 
-                        <li id="monitors" >
-                            <a href="#" >Monitors</a>
-                            <ul >
-                                <li id="DMMO">
-                                    <a href="#" data-bind="click: function() {searchProducts('DMMO')}">Monitors</a>
-                                </li>
-                                <li id="DUMO">
-                                    <a href="#" data-bind="click: function() {searchProducts('DUMO')}">Monitor Upgrades</a>
-                                </li>
-                            </ul>
-                        </li>
+                                    <li id="laptopComputers" >
+                                        <a href="#" >Laptop Computers</a>
+                                        <ul >
+                                            <li id="LHST">
+                                                <a href="#" data-bind="click: function() {searchProducts('LHST')}">Standard</a>
+                                            </li>
+                                            <li id="LHPO">
+                                                <a href="#" data-bind="click: function() {searchProducts('LHPO')}">Power</a>
+                                            </li>
+                                            <li id="LHUL">
+                                                <a href="#" data-bind="click: function() {searchProducts('LHUL')}" >Ultralight</a>
+                                            </li>
+                                            <li id="LHMO">
+                                                <a href="#" data-bind="click: function() {searchProducts('LHMO')}" >Mobile</a>
+                                            </li>
+                                        </ul>
+                                    </li>
 
-                        <li id="software" >
-                            <a href="#" >Software</a>
-                            <ul >
-                                <li id="OPSY">
-                                    <a href="#" data-bind="click: function() {searchProducts('OPSY')}">OS</a>
-                                </li>
-                                <li id="OFFC">
-                                    <a href="#" data-bind="click: function() {searchProducts('OFFC')}">Office</a>
-                                </li>
-                                <li id="UTIL">
-                                    <a href="#" data-bind="click: function() {searchProducts('UTIL')}" >Utilities</a>
-                                </li>
-                                <li id="SECC">
-                                    <a href="#" data-bind="click: function() {searchProducts('SECC')}" >Security</a>
-                                </li>
-                            </ul>
-                        </li>
+                                    <li id="laptopUpgrades" >
+                                        <a href="#" >Laptop Upgrades</a>
+                                        <ul >
+                                            <li id="LUST">
+                                                <a href="#" data-bind="click: function() {searchProducts('LUST')}">Standard</a>
+                                            </li>
+                                            <li id="LUPO">
+                                                <a href="#" data-bind="click: function() {searchProducts('LUPO')}">Power</a>
+                                            </li>
+                                            <li id="LUUL">
+                                                <a href="#" data-bind="click: function() {searchProducts('LUUL')}" >Ultralight</a>
+                                            </li>
+                                            <li id="LUMO">
+                                                <a href="#" data-bind="click: function() {searchProducts('LUMO')}" >Mobile</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    
+                                    <!-- ko if: admin -->
+                                    <li id="laptopServices" >
+                                        <a href="#" >Laptop Services</a>
+                                        <ul >
+                                            <li id="LSST">
+                                                <a href="#" data-bind="click: function() {searchProducts('LSST')}">Standard</a>
+                                            </li>
+                                            <li id="LSPO">
+                                                <a href="#" data-bind="click: function() {searchProducts('LSPO')}">Power</a>
+                                            </li>
+                                            <li id="LSUL">
+                                                <a href="#" data-bind="click: function() {searchProducts('LSUL')}" >Ultralight</a>
+                                            </li>
+                                            <li id="LSMO">
+                                                <a href="#" data-bind="click: function() {searchProducts('LSMO')}" >Mobile</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <!-- /ko -->
 
-                        <li id="services" >
-                            <a href="#" >Independent Services</a>
-                            <ul >
-                                <li id="DAAL">
-                                    <a href="#" data-bind="click: function() {searchProducts('DAAL')}">Desktop Services</a>
-                                </li>
-                                <li id="LAAL">
-                                    <a href="#" data-bind="click: function() {searchProducts('LAAL')}">Laptop Services</a>
-                                </li>
-                            </ul>
-                        </li>
+                                </ul>
+                            </li>
 
-                    </ul>
+                            <li id="monitors" >
+                                <a href="#" >Monitors</a>
+                                <ul >
+                                    <li id="DMMO">
+                                        <a href="#" data-bind="click: function() {searchProducts('DMMO')}">Monitors</a>
+                                    </li>
+                                    <li id="DUMO">
+                                        <a href="#" data-bind="click: function() {searchProducts('DUMO')}">Monitor Upgrades</a>
+                                    </li>
+                                    <!-- ko if: admin -->
+                                    <li id="DUMO">
+                                        <a href="#" data-bind="click: function() {searchProducts('DSMO')}">Monitor Services</a>
+                                    </li>
+                                    <!-- /ko -->
+                                </ul>
+                            </li>
+
+                            <li id="software" >
+                                <a href="#" >Software</a>
+                                <ul >
+                                    <li id="OPSY">
+                                        <a href="#" data-bind="click: function() {searchProducts('OPSY')}">OS</a>
+                                    </li>
+                                    <li id="OFFC">
+                                        <a href="#" data-bind="click: function() {searchProducts('OFFC')}">Office</a>
+                                    </li>
+                                    <li id="UTIL">
+                                        <a href="#" data-bind="click: function() {searchProducts('UTIL')}" >Utilities</a>
+                                    </li>
+                                    <li id="SECC">
+                                        <a href="#" data-bind="click: function() {searchProducts('SECC')}" >Security</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li id="services" >
+                                <a href="#" >Independent Services</a>
+                                <ul >
+                                    <li id="DAAL">
+                                        <a href="#" data-bind="click: function() {searchProducts('DAAL')}">Desktop Services</a>
+                                    </li>
+                                    <li id="LAAL">
+                                        <a href="#" data-bind="click: function() {searchProducts('LAAL')}">Laptop Services</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -202,6 +272,20 @@
             <div class="justifyCenter">
                 <div class="oj-flex oj-flex-items-pad">
                     <div class="oj-flex-item oj-sm-12" style="padding-bottom: 10px">
+                        <div class="oj-flex oj-md-hide">
+                            <div class="oj-flex-item">
+                                <div class="oj-flex oj-flex-items-pad" >
+                                    <div style="font-weight: bold;" class="oj-flex-item oj-sm-6" data-bind="text: 'Cart Total:'"></div>
+                                    <div class="oj-flex-item" data-bind="text: cartTotalPrice"></div>
+                                </div>
+                                
+                                <hr>
+                                
+                                <div class="oj-padding-vertical"></div>
+                            </div>
+                        </div>
+
+
                         <div class="oj-flex oj-flex-items oj-sm-align-items-flex-end oj-md-hide ">
                             <label for="productSelect">Product Category: </label>
                         </div>

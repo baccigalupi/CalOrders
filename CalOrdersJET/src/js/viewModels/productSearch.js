@@ -24,8 +24,8 @@
 /*
  * Your about ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUtils', 
-    'ojs/ojrouter', 'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 
+define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUtils',
+    'ojs/ojrouter', 'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel',
     'ojs/ojpagingcontrol', 'ojs/ojpagingcontrol-model', 'utils/ProductHelper'],
         function (oj, ko, data, accounting) {
 
@@ -47,6 +47,8 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                 self.errorMessage = ko.observable();
                 self.admin = ko.observable(false);
                 self.user = ko.observable(false);
+                self.cartTotalPrice = ko.observable();
+                self.cartTotalItems = ko.observable();
 
                 var lgQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.LG_UP);
                 var mdQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.MD_UP);
@@ -138,25 +140,25 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                         self.admin(false);
                         self.user(true);
                     }
-                    
-                    console.log("sessionStorage.keepSearchResults: " + sessionStorage.keepSearchResults)
-                    
-                    if ( sessionStorage.keepSearchResults !== 'true')
+
+                    if (sessionStorage.keepSearchResults !== 'true')
                     {
                         // Implement if needed
                         self.selectedProductMenuItem('DHST');
                         self.searchProducts('DHST');
-                    }
-                    else
+                    } else
                     {
                         sessionStorage.keepSearchResults = false;
                     }
+
+                    self.cartTotalPrice(self.getPrice(sessionStorage.itemTotalPrice));
+                    self.cartTotalItems(sessionStorage.itemQuantityTotal);
                 };
 
                 self.itemOnly = function (context) {
                     return context['leaf'];
                 };
-                
+
                 self.getPrice = function (price)
                 {
                     return accounting.formatMoney(price);
@@ -299,7 +301,9 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                 };
 
                 self.navigateToProductSearch = function () {
-                    console.log("continue shopping");
+                    self.cartTotalPrice(self.getPrice(sessionStorage.itemTotalPrice));
+                    self.cartTotalItems(sessionStorage.itemQuantityTotal);
+                    
                     $("#addToCartConfirmationDialog").ojDialog("close");
                     return self.router.go("productSearch");
                 };
@@ -333,8 +337,8 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                     for (val in self.filteredAllProduct())
                     {
                         console.log("compare:" + self.filteredAllProduct()[val].compareProduct());
-                                                
-                        if (self.filteredAllProduct()[val].compareProduct() !== undefined 
+
+                        if (self.filteredAllProduct()[val].compareProduct() !== undefined
                                 && self.filteredAllProduct()[val].compareProduct())
                         {
                             console.log("adding item to compare list");
@@ -363,6 +367,11 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                     {
                         self.searchProducts(data.value);
                     }
+                };
+
+                self.getCartTotalPrice = function (event, data)
+                {
+                    return self.getPrice(sessionStorage.itemTotalPrice);
                 };
             }
 

@@ -8,7 +8,7 @@ info:
   version: 1.0.0
   title: Calorders API
   description: The Calorders Swagger API specification
-  termsOfService: https://github.com/OncoreLLC/CalOrdersSwaggerUI/blob/master/LICENSE
+  termsOfService: https://github.com/OncoreLLC/CalOrders/CalOrdersSwaggerUI/blob/master/LICENSE
   contact:
     name: Calorders Team
     email: calorders@oncorellc.com
@@ -155,6 +155,10 @@ paths:
       responses:
         200:
           description: All orders by grouped by quarter
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/OrderItemData'
         default:
           description: Unexpected error
           schema:
@@ -172,7 +176,11 @@ paths:
           format: int32
       responses:
         200:
-          description: All orders summary.
+          description: All orders summary
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/OrderStatusData'
         default:
           description: Unexpected error
           schema:
@@ -191,6 +199,10 @@ paths:
       responses:
         200:
           description: All orders by party.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/OrderHistoryData'
         default:
           description: Unexpected error
           schema:
@@ -203,6 +215,10 @@ paths:
       responses:
         200:
           description: All orders
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/OrderHistoryData'
         default:
           description: Unexpected error
           schema:
@@ -221,7 +237,9 @@ paths:
       responses:
         200:
           description: Order detail
-        default:
+          schema:
+            $ref: '#/definitions/OrderDetailData'
+        default:    
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
@@ -233,6 +251,23 @@ paths:
         - application/json
         - application/x
       parameters: []
+      responses:
+        default:
+          description: successful operation
+   /com.oncore.calorders.rest.orderHistory/cancelOrder/{orderUid}:
+    post:
+      description: Cancel an order.
+      operationId: cancelOrder
+      consumes:
+        - application/json
+        - application/x
+      parameters:
+        - name: orderUid
+          in: path
+          description: order id
+          required: true
+          type: integer
+          format: int32
       responses:
         default:
           description: successful operation
@@ -256,6 +291,8 @@ paths:
       responses:
         200:
           description: Party by username and password
+          schema:
+            $ref: '#/definitions/PartyData'
         default:
           description: Unexpected error
           schema:
@@ -274,6 +311,10 @@ paths:
       responses:
         200:
           description: All groups by party
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/GroupData'
         default:
           description: Unexpected error
           schema:
@@ -292,6 +333,10 @@ paths:
       responses:
         200:
           description: All privileges by party
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/PrivilegeData'
         default:
           description: Unexpected error
           schema:
@@ -310,6 +355,10 @@ paths:
       responses:
         200:
           description: Navigation bar privileges by party
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/PrivilegeData'
         default:
           description: Unexpected error
           schema:
@@ -328,6 +377,10 @@ paths:
       responses:
         200:
           description: Navigation menu privileges by party
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/PrivilegeData'
         default:
           description: Unexpected error
           schema:
@@ -403,6 +456,222 @@ definitions:
         description: Vendor nam.
       audit:
         $ref: '#/definitions/ObjAudit'
+  OrderHistoryData:
+    type: object
+    properties:
+      orderAgency:
+        type: string
+        description: Ordering Agency     
+      orderDate:
+        type: string
+        format: date-time
+      orderDescription:
+        type: string
+        description: Order Description     
+      orderHistoryId:
+        type: integer
+        format: int64
+      orderPrice:
+        type: number
+        description: Order price.
+      orderStatus:
+        type: string
+        description: Order Status
+  OrderItemData:
+    type: object
+    properties:
+      label:
+        type: integer
+        format: int32
+        description: Label shown on the page for the order number.
+      y:
+        type: integer
+        format: int32
+        description: Order number for a particular year.
+      year:
+        type: integer
+        format: int32
+        description: Year of the order numbers.
+  OrderDetailData:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        description: Order number Id.
+      statusDescription:
+        type: string
+        description: Status description of the order.
+      statusCode:
+        type: string
+        description: Status code of the order.   
+      orderDate:
+        type: string
+        format: date-time        
+      shippingName:
+        type: string
+        description: Shipping name on the order. 
+      shippingAddressLine1:
+        type: string
+        description: Order shipping address line 1.
+      shippingAddressLine2:
+        type: string
+        description: Order shipping address line 2.
+      shippingAddressCity:
+        type: string
+        description: Order shipping address city.
+      shippingAddressStateCode:
+        type: string
+        description: Order shipping address state.
+      shippingAddressZipCode:
+        type: string
+        description: Order shipping address zip code.
+      productTotalPrice:
+        type: number
+        description: Total product price.      
+      shippingPrice:
+        type: number
+        description: shipping price for the order.        
+      totalPrice:
+        type: number
+        description: Total price of the order        
+      orderDetailProductDataList:
+        $ref: '#/definitions/OrderDetailProductData'
+  OrderDetailProductData:
+    type: object
+    properties:
+      prdUid:
+        type: integer
+        format: int32
+        description: product Id.
+      prdName:
+        type: string
+        description: Product name.
+      prdQuantity:
+        type: integer
+        format: int32
+        description: Product Quantity.
+      prdPrice:
+        type: number
+        description: Product price for order.    
+      prdEachPrice:
+        type: number
+        description: Product each price.
+      prdImgImage:
+        type: string
+        description: Product iamge.
+      prdImgTypeCd:
+        $ref: '#/definitions/Code'
+  OrderStatusData:
+    type: object
+    properties:
+      items:
+        type: integer
+        format: int32
+        description: Number of orders.
+      name:
+        type: string
+        description: Status of the order number.
+  PartyData:
+    type: object
+    properties:
+      ptyUid:
+        type: integer
+        format: int32
+        description: Party Id.
+      ptyUserId:
+        type: string
+        description: Party User ID.
+      ptyPassword:
+        type: string
+        description: Party password.   
+      ptyFirstNm:
+        type: string
+        description: Party first name.  
+      ptyMidNm:
+        type: string
+        description: Party middle name.  
+      ptyLastNm:
+        type: string
+        description: Party last name.  
+      ptyTitle:
+        type: string
+        description: Party title.          
+      ptyHireDt:
+        type: string
+        format: date-time
+        description: Party hire date.  
+      depUid:
+        type: integer
+        format: int32
+        description: Department Id.        
+      depName:
+        type: string
+        description: Department name.        
+      depAddressLine1:
+        type: string
+        description: Department address line 1.        
+      depAddressLine2:
+        type: string
+        description: Department address line 2.        
+      depCity:
+        type: string
+        description: Department address city.        
+      depState:
+        type: string
+        description: Department address state.        
+      depZip5:
+        type: string
+        description: Department address zip 5 number.        
+      depZip4:
+        type: string
+        description: Department address zip 4 number.        
+      calculatedCityStateZip:
+        type: string
+        description: Concatenates city, state, and zip.
+      groupList:
+        $ref: '#/definitions/GroupData'
+  GroupData:
+    type: object
+    properties:
+      grpUid:
+        type: integer
+        format: int32
+        description: Group Id.
+      grpTypeCd:
+        type: string
+        description: Group type code.
+      grpTypeCdDescription:
+        type: string
+        description: Group type code description.   
+      privilegesList:
+        $ref: '#/definitions/PrivilegeData'
+  PrivilegeData:
+    type: object
+    properties:
+      prvUid:
+        type: integer
+        format: int32
+        description: Privilege Id.
+      pageIdentifier:
+        type: string
+        description: Page identifier.
+      pageDescription:
+        type: string
+        description: Page Description.        
+      componentIdentifier:
+        type: string
+        description: Component Identifier.          
+      pageOrder:
+        type: integer
+        format: int32
+        description: Page order.        
+      canRead:
+        type: boolean
+        description: Can read.        
+      canWrite:
+        type: boolean
+        description: Can write.
   Code:
     type: object
     properties:
