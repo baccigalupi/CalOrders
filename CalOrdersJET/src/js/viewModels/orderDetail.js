@@ -169,7 +169,8 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'moment', 'common/S
                         error: function (jqXHR, textStatus, errorThrown) {
                             self.errorMessage("There was an error cancelling the order");
                             return false;
-                        }
+                        },
+                        async: false
                     });
                     
                     $("#cancelOrderConfirmationDialog").ojDialog("close");
