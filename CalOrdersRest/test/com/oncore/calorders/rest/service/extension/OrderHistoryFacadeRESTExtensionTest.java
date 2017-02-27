@@ -348,8 +348,6 @@ public class OrderHistoryFacadeRESTExtensionTest {
 
         EntityManager mockedEm = mock(EntityManager.class);
 
-        ArgumentCaptor<OrderHistory> orderHistoryCaptor = ArgumentCaptor.forClass(OrderHistory.class);
-
         given(mockedEm.find(OrderHistory.class, 1)).willReturn(orderHistory);
 
         OrdStatusCdFacadeREST ordStatusCdFacadeRESTMocked = mock(OrdStatusCdFacadeREST.class);
