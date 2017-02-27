@@ -27,7 +27,7 @@ import com.oncore.calorders.core.enums.AbstractEnum;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * WebServiceException provides a means to customize Tempus service exceptions.
+ * WebServiceException provides a means to customize Calorders service exceptions.
  *
  * @author OnCore Consulting LLC
  */

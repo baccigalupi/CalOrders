@@ -27,7 +27,7 @@ import com.oncore.calorders.core.enums.AbstractEnum;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * DataAccessException provides a means for Tempus to create custom exceptions
+ * DataAccessException provides a means for Calorders to create custom exceptions
  * for data access conditions.
  *
  * @author OnCore Consulting LLC
