@@ -124,6 +124,29 @@
                                             </li>
                                         </ul>
                                     </li>
+
+                                     <!-- ko if: admin -->
+                                    <li id="desktopServices" >
+                                        <a href="#" >Desktop Services</a>
+                                        <ul >
+                                            <li id="DSST">
+                                                <a href="#" data-bind="click: function() {searchProducts('DSST')}">Standard</a>
+                                            </li>
+                                            <li id="DSPO">
+                                                <a href="#" data-bind="click: function() {searchProducts('DSPO')}">Power</a>
+                                            </li>
+                                            <li id="DSWO">
+                                                <a href="#" data-bind="click: function() {searchProducts('DSWO')}" >Workstations</a>
+                                            </li>
+                                            <li id="DSTH">
+                                                <a href="#" data-bind="click: function() {searchProducts('DSTH')}" >Thin Client</a>
+                                            </li>
+                                            <li id="DSAL">
+                                                <a href="#" data-bind="click: function() {searchProducts('DSAL')}" >All in One</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <!-- /ko -->
                                 </ul>
                             </li>
 
@@ -167,6 +190,26 @@
                                             </li>
                                         </ul>
                                     </li>
+                                    
+                                    <!-- ko if: admin -->
+                                    <li id="laptopServices" >
+                                        <a href="#" >Laptop Services</a>
+                                        <ul >
+                                            <li id="LSST">
+                                                <a href="#" data-bind="click: function() {searchProducts('LSST')}">Standard</a>
+                                            </li>
+                                            <li id="LSPO">
+                                                <a href="#" data-bind="click: function() {searchProducts('LSPO')}">Power</a>
+                                            </li>
+                                            <li id="LSUL">
+                                                <a href="#" data-bind="click: function() {searchProducts('LSUL')}" >Ultralight</a>
+                                            </li>
+                                            <li id="LSMO">
+                                                <a href="#" data-bind="click: function() {searchProducts('LSMO')}" >Mobile</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <!-- /ko -->
 
                                 </ul>
                             </li>
@@ -180,6 +223,11 @@
                                     <li id="DUMO">
                                         <a href="#" data-bind="click: function() {searchProducts('DUMO')}">Monitor Upgrades</a>
                                     </li>
+                                    <!-- ko if: admin -->
+                                    <li id="DUMO">
+                                        <a href="#" data-bind="click: function() {searchProducts('DSMO')}">Monitor Services</a>
+                                    </li>
+                                    <!-- /ko -->
                                 </ul>
                             </li>
 
