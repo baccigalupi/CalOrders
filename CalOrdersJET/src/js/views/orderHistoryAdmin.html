@@ -29,6 +29,13 @@
     </div>
 
     <div class="oj-panel oj-flex">
+        <!-- buttons -->
+        <div class="oj-flex-item">    
+            <button id= "refresh" type="button"
+                    data-bind="click: refreshClick, ojComponent: { component: 'ojButton', label: 'Refresh' }">
+            </button>             
+            <div class="oj-padding-vertical"></div>
+        </div>
         <div id="orderHistoryTableContent" class="oj-sm-12 oj-flex-item">
             <div id="orderHistoryTable">
                 <table id="table" summary="Order History Table" aria-label="Order History Table"

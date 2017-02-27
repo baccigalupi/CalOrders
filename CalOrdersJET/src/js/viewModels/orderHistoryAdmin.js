@@ -56,6 +56,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'moment', 'accounting', 'common/Secu
                         return self.router.go('welcome');
                     }
                     self.index = ko.observable();
+                    self.orderHistoryCol = ko.observable();
+                    self.datasource = ko.observable();
                     self.serviceURL = serviceEndPoints.getEndPoint('findAllOrderHistory');
                     var OrderHistoryModel = oj.Model.extend({
                         urlRoot: self.serviceURL,
@@ -172,6 +174,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'moment', 'accounting', 'common/Secu
                             return dateA > dateB ? -1 : 1;
                         }
                     }
+                };
+
+                self.refreshClick = function (data, event) {
+                    self.orderHistoryCol.reset();
                 };
 
 

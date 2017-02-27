@@ -86,7 +86,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'moment', 'common/S
                     {
                         self.showCancelButton(true);
                     }
-                    
+
                     self.ready(true);
                 };
 
@@ -108,7 +108,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'moment', 'common/S
                     if (!SecurityUtils.isAuthenticated()) {
                         return self.router.go('welcome');
                     }
-                    
+
                     // Init
                     self.orderDetail(new Object());
                     self.orderProducts([]);
@@ -144,25 +144,26 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'moment', 'common/S
                 {
                     return accounting.formatMoney(price);
                 };
-                
-                self.showCancelDialog = function()
+
+                self.showCancelDialog = function ()
                 {
                     $("#cancelOrderConfirmationDialog").ojDialog("open");
                 };
-                
-                self.backAction = function()
+
+                self.backAction = function ()
                 {
                     $("#cancelOrderConfirmationDialog").ojDialog("close");
                 };
-                
-                self.cancelOrderAction = function()
+
+                self.cancelOrderAction = function ()
                 {
                     var CancelOrderModel = oj.Model.extend({
                         urlRoot: self.cancelOrderServiceEndPoint + "/" + self.orderUid()
                     });
-                    
+
                     var model = new CancelOrderModel();
                     model.save({
+
                         success: function (myModel, response, options) {
                             return false;
                         },
@@ -171,9 +172,16 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'moment', 'common/S
                             return false;
                         }
                     });
-                    
+
                     $("#cancelOrderConfirmationDialog").ojDialog("close");
-                    self.router.go("orderHistory");
+                    if (sessionStorage.admin === 'true')
+                    {
+                        self.router.go("orderHistoryAdmin");
+                    } else
+                    {
+                        self.router.go("orderHistory");
+                    }
+
                 };
             }
 
