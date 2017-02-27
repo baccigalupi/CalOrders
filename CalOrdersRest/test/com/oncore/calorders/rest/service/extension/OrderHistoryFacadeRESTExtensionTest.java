@@ -331,7 +331,7 @@ public class OrderHistoryFacadeRESTExtensionTest {
         OrderDetailData orderDetailData = instance.findOrderDetailById(1);
 
         Assert.assertEquals("SF", orderDetailData.getShippingAddressCity());
-        Assert.assertEquals(new BigDecimal(400), orderDetailData.getProductTotalPrice());
+        Assert.assertEquals(new BigDecimal(200), orderDetailData.getProductTotalPrice());
         Assert.assertEquals("1 s st", orderDetailData.getShippingAddressLine1());
 
         verify(mockedEm, times(1)).find(OrderHistory.class, 1);
