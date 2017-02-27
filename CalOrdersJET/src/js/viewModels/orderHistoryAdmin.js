@@ -176,6 +176,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'moment', 'accounting', 'common/Secu
                     }
                 };
 
+                self.refreshClick = function (data, event) {
+                    self.orderHistoryCol.reset();
+                };
+
 
                 self.priceRenderer = function (context)
                 {
