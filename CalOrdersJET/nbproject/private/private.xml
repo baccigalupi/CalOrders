@@ -8,6 +8,18 @@
             <file>file:/home/oncore/workspaces/CalOrders/CalOrdersJET/src/css/calorders.css</file>
             <file>file:/home/oncore/workspaces/CalOrders/CalOrdersJET/src/js/views/productSearch.html</file>
         </group>
-        <group/>
+        <group>
+            <file>file:/home/oncore/workspaces/CalOrders/CalOrdersJET/src/js/views/welcome.html</file>
+            <file>file:/home/oncore/workspaces/CalOrders/CalOrdersJET/src/js/views/about.html</file>
+            <file>file:/home/oncore/workspaces/CalOrders/CalOrdersJET/src/js/appController.js</file>
+            <file>file:/home/oncore/workspaces/CalOrders/CalOrdersJET/src/js/common/SecurityUtils.js</file>
+            <file>file:/home/oncore/workspaces/CalOrders/CalOrdersJET/src/js/viewModels/dashboard.js</file>
+            <file>file:/home/oncore/workspaces/CalOrders/CalOrdersJET/src/js/views/login.html</file>
+            <file>file:/home/oncore/workspaces/CalOrders/CalOrdersJET/src/js/viewModels/welcome.js</file>
+            <file>file:/home/oncore/workspaces/CalOrders/CalOrdersJET/src/index.html</file>
+            <file>file:/home/oncore/workspaces/CalOrders/CalOrdersJET/src/js/viewModels/about.js</file>
+            <file>file:/home/oncore/workspaces/CalOrders/CalOrdersJET/src/js/viewModels/login.js</file>
+            <file>file:/home/oncore/workspaces/CalOrders/CalOrdersJET/src/js/views/productSearch.html</file>
+        </group>
     </open-files>
 </project-private>

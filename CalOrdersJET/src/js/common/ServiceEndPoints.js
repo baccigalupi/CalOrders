@@ -115,9 +115,9 @@ ServiceEndPoints.prototype = {
         } else if (key === "findOrderDetailById")
         {
             return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.orderHistory/findOrderDetailById";
-        } else if (key === "cancelOrderHistory")
+        } else if (key === "cancelOrder")
         {
-            return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.orderHistory/cancelOrderDetail";
+            return calOrdersHost + "/CalOrdersRest/webresources/com.oncore.calorders.rest.orderHistory/cancelOrder";
         } else
         {
             return "UNDEFINED";
