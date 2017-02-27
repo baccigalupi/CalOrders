@@ -69,7 +69,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'moment', 'accounting', 'common/Secu
                         url: self.serviceURL,
                         model: orderHistory,
                         comparator: 'orderDate',
-                        sortDirection:-1
+                        sortDirection: -1
                     });
                     self.orderHistoryCol = new OrderHistoryCollection();
 
@@ -176,6 +176,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'moment', 'accounting', 'common/Secu
                             return dateA > dateB ? -1 : 1;
                         }
                     }
+                };
+
+                self.refreshClick = function (data, event) {
+                    self.orderHistoryCol.reset();
                 };
 
 
