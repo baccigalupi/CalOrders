@@ -25,6 +25,7 @@ package com.oncore.calorders.rest.data;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -36,6 +37,7 @@ public class OrderDetailData {
     private Integer id;
     private String statusDescription;
     private String statusCode;
+    private Date orderDate;
 
     private String shippingName;
     private String shippingAddressLine1;
@@ -156,6 +158,14 @@ public class OrderDetailData {
 
     public void setShippingAddressLine2(String shippingAddressLine2) {
         this.shippingAddressLine2 = shippingAddressLine2;
+    }
+
+    public Date getOrderDate() {
+        return orderDate;
+    }
+
+    public void setOrderDate(Date orderDate) {
+        this.orderDate = orderDate;
     }
     
     

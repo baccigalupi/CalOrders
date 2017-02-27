@@ -137,7 +137,7 @@ public class OrderHistoryFacadeRESTExtension extends OrderHistoryFacadeREST {
                 throw new DataAccessException(ErrorCode.DATAACCESSERROR.toString());
             } else {
                 order.setPtyUidFk(party);
-                
+
                 order.setDepUidFk(party.getGroupPartyAssocCollection().iterator().next().getGrpUidFk().getDepUidFk());
             }
 
@@ -158,7 +158,7 @@ public class OrderHistoryFacadeRESTExtension extends OrderHistoryFacadeREST {
                 orderProductAssoc.setCreateTs(new Date());
                 orderProductAssoc.setCreateUserId(productObject.getString("createUserId", null));
                 orderProductAssoc.setOpaQuantity(productObject.getInt("quantity"));
-                orderProductAssoc.setOpaPrice(product.getPrdPrice().multiply(BigDecimal.valueOf(productObject.getInt("quantity"))));
+                orderProductAssoc.setOpaPrice(product.getPrdCntrUnitPrice().multiply(BigDecimal.valueOf(productObject.getInt("quantity"))));
 
                 order.getOrderProductAssocCollection().add(orderProductAssoc);
             }
@@ -410,7 +410,7 @@ public class OrderHistoryFacadeRESTExtension extends OrderHistoryFacadeREST {
                     }
 
                     data.setOrderPrice(totalPrice);
-                    
+
                     for (int i = 0; i < productAssocs.size(); i++) {
 
                         if (skuConcat.length() > 25) {
@@ -442,8 +442,8 @@ public class OrderHistoryFacadeRESTExtension extends OrderHistoryFacadeREST {
 
         return orderHistoryDatas;
     }
-    
-     /**
+
+    /**
      * Fetch all orders by PartyUid and ordered by Date ascending
      *
      * @return a structure of orders history ordered by Date
@@ -488,7 +488,7 @@ public class OrderHistoryFacadeRESTExtension extends OrderHistoryFacadeREST {
                     }
 
                     data.setOrderPrice(totalPrice);
-                    
+
                     for (int i = 0; i < productAssocs.size(); i++) {
 
                         if (skuConcat.length() > 25) {
@@ -532,6 +532,7 @@ public class OrderHistoryFacadeRESTExtension extends OrderHistoryFacadeREST {
 
         order.setId(orderHistory.getOrdUid());
         order.setStatusDescription(orderHistory.getOrdStatusCd().getLongDesc());
+        order.setOrderDate(orderHistory.getCreateTs());
         order.setStatusCode(orderHistory.getOrdStatusCd().getCode());
 
         if (orderHistory.getDepUidFk().getAddressCollection() != null && !orderHistory.getDepUidFk().getAddressCollection().isEmpty()) {
@@ -554,11 +555,13 @@ public class OrderHistoryFacadeRESTExtension extends OrderHistoryFacadeREST {
             orderProduct.setPrdName(productAssoc.getPrdUidFk().getPrdName());
             orderProduct.setPrdImgImage(productAssoc.getPrdUidFk().getPrdImgImage());
             orderProduct.setPrdPrice(productAssoc.getOpaPrice());
+            orderProduct.setPrdEachPrice(productAssoc.getOpaPrice().divide(new BigDecimal(productAssoc.getOpaQuantity())));
+
             orderProduct.setPrdQuantity(productAssoc.getOpaQuantity());
             orderProduct.setPrdImgTypeCd(productAssoc.getPrdUidFk().getPrdImgTypeCd());
 
-            productTotalPrice = productTotalPrice.add(productAssoc.getOpaPrice().multiply(new BigDecimal(productAssoc.getOpaQuantity())));
-            
+            productTotalPrice = productTotalPrice.add(productAssoc.getOpaPrice());
+
             order.getOrderDetailProductDataList().add(orderProduct);
         }
 
@@ -566,7 +569,7 @@ public class OrderHistoryFacadeRESTExtension extends OrderHistoryFacadeREST {
         order.setShippingPrice(SHIPPING_PRICE);
         order.setProductTotalPrice(productTotalPrice);
         order.setTotalPrice(order.getShippingPrice().add(order.getProductTotalPrice()));
-        
+
         System.out.println("total product: " + order.getProductTotalPrice());
 
         return order;

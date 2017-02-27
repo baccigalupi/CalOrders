@@ -311,6 +311,7 @@ public class OrderHistoryFacadeRESTExtensionTest {
         product.setPrdName("Laptop");
         product.setPrdSku("LT1234");
         product.setPrdPrice(new BigDecimal(100));
+        product.setPrdCntrUnitPrice(new BigDecimal(50));
 
         OrderProductAssoc orderProductAssoc = new OrderProductAssoc();
         orderProductAssoc.setOrdUidFk(orderHistory);

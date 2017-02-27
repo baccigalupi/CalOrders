@@ -24,10 +24,10 @@
 /*
  * Your about ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUtils', 'ojs/ojrouter',
+define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'moment', 'common/SecurityUtils', 'ojs/ojrouter',
     'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojpagingcontrol',
     'ojs/ojpagingcontrol-model', 'utils/ProductHelper'],
-        function (oj, ko, data, accounting) {
+        function (oj, ko, data, accounting, moment) {
 
             function OrderDetailViewModel() {
                 var self = this;
@@ -40,7 +40,8 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                 self.orderUid = ko.observable();
                 self.orderDetail = ko.observable();
                 self.orderProducts = ko.observableArray([]);
-                
+                self.ready = ko.observable(false);
+
                 self.listViewDataSource = null;
                 self.cardViewDataSource = null;
                 self.productLayoutType = ko.observable('productListdLayout');
@@ -56,20 +57,22 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
 
                 self.parseOrderDetail = function (response)
                 {
+                    self.ready(false);
+
                     // Format prices
                     response.shippingPrice = accounting.formatMoney(response.shippingPrice);
                     response.totalPrice = accounting.formatMoney(response.totalPrice);
                     response.productTotalPrice = accounting.formatMoney(response.productTotalPrice);
-                    
+                    response.orderDate = moment().format('MM/DD/YYYY');
                     var i;
                     for (i in response.orderDetailProductDataList)
                     {
                         response.orderDetailProductDataList[i].prdPrice = accounting.formatMoney(response.orderDetailProductDataList[i].prdPrice);
                         self.orderProducts.push(response.orderDetailProductDataList[i]);
                     }
-                                       
+
                     self.orderDetail(response);
-                    
+
                     self.listViewDataSource = ko.computed(function () {
                         return new oj.ArrayTableDataSource(self.orderProducts(), {idAttribute: 'prdUid'});
                     });
@@ -77,8 +80,8 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                     self.cardViewDataSource = ko.computed(function () {
                         return new oj.PagingTableDataSource(self.listViewDataSource());
                     });
-                   
-                
+
+                    self.ready(true);
                 };
 
                 // Below are a subset of the ViewModel methods invoked by the ojModule binding
@@ -123,14 +126,21 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                         }
                     });
                 };
-                
-                
+
+
 
 
                 self.getPhoto = function (product) {
 
                     return ProductHelper.getPhoto(product);
 
+                };
+
+
+
+                self.getPrice = function (price)
+                {
+                    return accounting.formatMoney(price);
                 };
             }
 

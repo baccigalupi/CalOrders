@@ -56,12 +56,21 @@
         <div class="oj-padding-vertical"></div>
 
         <div class="oj-flex">
-            <div class="oj-flex-item oj-sm-2 confirmation_bold_label">Order Status:</div>
-            <div class="oj-flex-item oj-sm-6" data-bind="text: orderDetail().statusDescription"></div>
+            <div class="oj-flex-item oj-sm-2 confirmation_bold_label">Order Date:</div>
+            <div class="oj-flex-item oj-sm-6" data-bind="text: orderDetail().orderDate"></div>
         </div>
 
         <div class="oj-padding-vertical"></div>
 
+        <div class="oj-flex">
+            <div class="oj-flex-item oj-sm-2 confirmation_bold_label">Order Status:</div>
+            <div class="oj-flex-item oj-sm-6" data-bind="text: orderDetail().statusDescription"></div>
+        </div>
+
+        
+        <div class="oj-padding-vertical"></div>
+
+        <!-- ko if: ready -->
         <div class="oj-flex oj-sm-12">
             <div id="cartWrapperDiv" class="oj-panel oj-flex-item oj-sm-flex-wrap-nowrap">
                 <div id="productlistview" >
@@ -69,6 +78,7 @@
                 </div>
             </div>
         </div>
+        <!-- /ko -->
 
         <div class="oj-padding-vertical"></div>
 
@@ -152,7 +162,7 @@
 
                         <div class="oj-flex">
                             <div class="oj-flex-item">
-                                <div data-bind="text: 'Price: ' + $data['prdPrice']"></div>
+                                <div data-bind="text: 'Price: ' + $parent.getPrice($data['prdPrice']) + ' (' + $parent.getPrice($data['prdEachPrice']) + '/ea)'"></div>
                             </div>
                         </div>
                     </div>
@@ -189,9 +199,6 @@
                          height="100" width="100" 
                          data-bind="attr: {alt: $data['prdName'], id: 'productImage' + $data['prdUid'], src: $parent.getPhoto($data)}"/>
                 </div>
-                <div class="oj-flex-item oj-sm-4">
-                    <div class="confirmation_bold_label" data-bind="text: $data['prdName']"></div>
-                </div>
                 
                 <div class="oj-flex-item oj-sm-4">
                     <div class="confirmation_bold_label" data-bind="text: $data['prdName']"></div>
@@ -200,10 +207,18 @@
                 <div class="oj-flex-item oj-sm-2">
                     <span>Quantity: </span><span data-bind="text: $data['prdQuantity']"/>
                 </div>
-                <div class="oj-flex-item oj-sm-4">
+                
+                <div class="oj-flex-item oj-sm-2">
 
                     <div class="oj-flex-item oj-sm-only-hide oj-md-4 oj-md-float-end">
-                        <div data-bind="text: '$' + $data['prdPrice']"></div>
+                        <div data-bind="text: $parent.getPrice($data['prdEachPrice']) + '/ea'"></div>
+                    </div>
+                </div>
+                
+                <div class="oj-flex-item oj-sm-2">
+
+                    <div class="oj-flex-item oj-sm-only-hide oj-md-4 oj-md-float-end">
+                        <div data-bind="text: $parent.getPrice($data['prdPrice'])"></div>
                     </div>
                 </div>
             </div>

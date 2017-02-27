@@ -38,6 +38,7 @@ public class OrderDetailProductData {
     private String prdName;
     private Integer prdQuantity;
     private BigDecimal prdPrice;
+    private BigDecimal prdEachPrice;
     private byte[] prdImgImage;
     private PrdImgTypeCd prdImgTypeCd;
 
@@ -88,4 +89,14 @@ public class OrderDetailProductData {
     public void setPrdImgTypeCd(PrdImgTypeCd prdImgTypeCd) {
         this.prdImgTypeCd = prdImgTypeCd;
     }
+
+    public BigDecimal getPrdEachPrice() {
+        return prdEachPrice;
+    }
+
+    public void setPrdEachPrice(BigDecimal prdEachPrice) {
+        this.prdEachPrice = prdEachPrice;
+    }
+    
+    
 }
