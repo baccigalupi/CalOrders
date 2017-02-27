@@ -66,11 +66,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'moment', 'accounting', 'common/Secu
                     var OrderHistoryCollection = oj.Collection.extend({
                         url: self.serviceURL,
                         model: orderHistory,
-                        comparator: 'orderHistoryId'
+                        comparator: 'orderDate',
+                        sortDirection:-1
                     });
                     self.orderHistoryCol = new OrderHistoryCollection();
 
                     self.datasource(new oj.PagingTableDataSource(new oj.CollectionTableDataSource(self.orderHistoryCol, {idAttribute: 'orderHistoryId'})));
+
+
                 };
                 /**
                  * Optional ViewModel method invoked after the View is inserted into the
@@ -115,23 +118,19 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'moment', 'accounting', 'common/Secu
                     });
                 };
                 self.parseOrderHistory = function (response) {
-                    var orderDate = "";
                     var orderPoNumber = "";
                     var totalPrice = null
-                    if (response.orderDate !== undefined)
-                    {
-                        orderDate = moment().format('MM/DD/YYYY');
-                    }
+
                     if (response.orderPoNumber !== undefined)
                     {
                         orderPoNumber = response.orderPoNumber;
                     }
                     if (response.orderPrice !== undefined) {
-                        totalPrice = accounting.formatNumber(response.orderPrice,2);
+                        totalPrice = accounting.formatNumber(response.orderPrice, 2);
                     }
 
                     var result = {'orderHistoryId': response['orderHistoryId'],
-                        'orderDate': orderDate,
+                        'orderDate': response['orderDate'],
                         'orderStatus': response['orderStatus'],
                         'orderPoNumber': orderPoNumber,
                         'orderAgency': response['orderAgency'],
@@ -139,11 +138,57 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'moment', 'accounting', 'common/Secu
                         'orderDescription': response['orderDescription']};
                     return result;
                 };
-                
-                                
+
+                self.datasource.comparator = function (rowA, rowB)
+                {
+                    var key = this['sortCriteria']['key'];
+                    var direction = this['sortCriteria']['direction'];
+                    var a, b;
+                    a = rowA[key];
+                    b = rowB[key];
+
+                    if (a === b)
+                    {
+                        return 0;
+                    }
+
+                    if (key != 'orderDate')
+                    {
+                        if (direction == 'ascending')
+                        {
+                            return a < b ? -1 : 1;
+                        } else
+                        {
+                            return a > b ? -1 : 1;
+                        }
+                    } else
+                    {
+                        var dateA = new Date(a).getTime();
+                        var dateB = new Date(b).getTime();
+
+                        if (direction == 'ascending')
+                        {
+                            return dateA < dateB ? -1 : 1;
+                        } else
+                        {
+                            return dateA > dateB ? -1 : 1;
+                        }
+                    }
+                };
+
+
                 self.priceRenderer = function (context)
                 {
                     return accounting.formatMoney(context.row.orderPrice);
+                };
+
+                self.orderDateRenderer = function (context) {
+                    if (context.row.orderDate !== undefined)
+                    {
+                        return moment(context.row.orderDate).format('MM/DD/YYYY');
+                    } else {
+                        return "";
+                    }
                 };
 
                 self.currentRowListener = function (event, ui) {
