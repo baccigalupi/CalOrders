@@ -2,17 +2,14 @@
   "swagger": "2.0",
   "info": {
     "version": "1.0.0",
-    "title": "Calorders API",
-    "description": "The Calorders Swagger API specification",
-    "termsOfService": "https://github.com/OncoreLLC/CalOrdersSwaggerUI/blob/master/LICENSE",
+    "title": "CalOrders API",
+    "description": "CalOrders Swagger API specification by OnCore Consulting LLC.",
     "contact": {
-      "name": "Calorders Team",
-      "email": "calorders@oncorellc.com",
-      "url": "https://github.com/OncoreLLC/CalordersArtifacts/blob/master/README.md"
+      "name": "CalOrders Team",
+      "url": "http://www.oncorellc.com/contact-us/"
     },
     "license": {
-      "name": "OnCore Private License",
-      "url": "https://github.com/OncoreLLC/CalOrdersSwaggerUI/blob/master/LICENSE"
+      "name": "CalOrders REST services provided under the MIT License."
     }
   },
   "host": "calorderstest.oncorellc.com:9080",
