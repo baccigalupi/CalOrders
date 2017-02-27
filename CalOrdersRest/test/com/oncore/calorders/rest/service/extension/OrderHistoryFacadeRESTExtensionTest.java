@@ -339,6 +339,35 @@ public class OrderHistoryFacadeRESTExtensionTest {
 
     /**
      *
+     * @throws Exception
+     */
+    @Test
+    public void testCancelOrder() throws Exception {
+        OrderHistory orderHistory = new OrderHistory(1, "1", formatter.parse("01/01/2015"), "1", new Date());
+        orderHistory.setOrdStatusCd(new OrdStatusCd("PROC"));
+
+        EntityManager mockedEm = mock(EntityManager.class);
+
+        ArgumentCaptor<OrderHistory> orderHistoryCaptor = ArgumentCaptor.forClass(OrderHistory.class);
+
+        given(mockedEm.find(OrderHistory.class, 1)).willReturn(orderHistory);
+
+        OrdStatusCdFacadeREST ordStatusCdFacadeRESTMocked = mock(OrdStatusCdFacadeREST.class);
+        when(ordStatusCdFacadeRESTMocked.find("CANC")).thenReturn(new OrdStatusCd("CANC"));
+
+        OrderHistoryFacadeRESTExtension instance = new OrderHistoryFacadeRESTExtension(mockedEm);
+
+        instance.ordStatusCdFacadeREST = ordStatusCdFacadeRESTMocked;
+
+        instance.cancelOrder(1);
+
+        Assert.assertEquals("CANC", orderHistory.getOrdStatusCd().getCode());
+
+        verify(mockedEm, times(1)).find(OrderHistory.class, 1);
+    }
+
+    /**
+     *
      * @return Party
      */
     private Party buildPartyRecord() {
