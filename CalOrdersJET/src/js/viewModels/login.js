@@ -192,6 +192,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'ojs/ojarray
                             sessionStorage.departmentCityStateZip = party.attributes.calculatedCityStateZip;
                             sessionStorage.userName = party.attributes.ptyUserId;
                             sessionStorage.cartProducts = [];
+                            userLogin(sessionStorage.userFullName);
 
                             var temp = null;
 

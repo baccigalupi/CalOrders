@@ -62,28 +62,28 @@ define(['ojs/ojcore', 'knockout', 'jquery'],
                         self.userFullName('');
                         self.department('');
                         self.departmentAddress('');
+                        return self.router.go('welcome');
                     } else
                     {
                         self.userName('Currently logged in as: ' + sessionStorage.userName);
                         self.userFullName('Name: ' + sessionStorage.userFullName);
                         self.department('Department: ' + sessionStorage.departmentName);
-                        
+
                         var address = sessionStorage.departmentAddressLine1;
-                    
-                        if(oj.StringUtils.isEmptyOrUndefined(sessionStorage.departmentAddressLine2) || 'undefined' === sessionStorage.departmentAddressLine2)
-                        { 
-                            address += " " + sessionStorage.departmentCityStateZip;   
-                        }
-                        else
+
+                        if (oj.StringUtils.isEmptyOrUndefined(sessionStorage.departmentAddressLine2) || 'undefined' === sessionStorage.departmentAddressLine2)
+                        {
+                            address += " " + sessionStorage.departmentCityStateZip;
+                        } else
                         {
                             address += ", " + sessionStorage.departmentAddressLine2;
-                            address += " " + sessionStorage.departmentCityStateZip; 
+                            address += " " + sessionStorage.departmentCityStateZip;
                         }
-                        
-                        
-                        
+
+
+
                         self.departmentAddress(address);
-                         
+
                     }
 
                 };
