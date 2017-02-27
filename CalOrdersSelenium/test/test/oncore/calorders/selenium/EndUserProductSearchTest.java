@@ -30,7 +30,6 @@ public class EndUserProductSearchTest {
     driver.findElement(By.id("userName")).clear();
     driver.findElement(By.id("userName")).sendKeys("rickybobby");
     driver.findElement(By.id("continue")).click();
-    driver.findElement(By.xpath("//li[@id='OFFC']/a/span")).click();
     driver.findElement(By.id("addToCart")).click();
     driver.findElement(By.id("cart")).click();
   }

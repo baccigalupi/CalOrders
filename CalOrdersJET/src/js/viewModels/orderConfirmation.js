@@ -96,7 +96,9 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                         });
 
                         sessionStorage.cartProducts = [];
-
+                        sessionStorage.itemTotalPrice = 0;
+                        sessionStorage.itemQuantityTotal = 0;
+        
                         if (sessionStorage.authenticated === "false")
                         {
                             return self.router.go('welcome');

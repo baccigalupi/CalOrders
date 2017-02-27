@@ -31,16 +31,15 @@ var ProductHelper = new function ()
      */
     this.getPhoto = function (product)
     {
-        if (product === undefined || product === null || product.prdImgImage === null 
+        if (product === undefined || product === null || product.prdImgImage === null
                 || product.prdImgImage === undefined || product.prdImgImage.length === 0)
         {
             var src = '../../css/images/unknown_product.jpg';
             return src;
-        } 
-        else
+        } else
         {
             var file = product.prdImgImage;
-                    
+
             var imageSize = product.prdImgImage.length;
             var imageType = product.prdImgTypeCd.longDesc;
 
@@ -56,8 +55,8 @@ var ProductHelper = new function ()
 
             reader.addEventListener("load", function (event) {
                 var preview = document.getElementById('productImage' + product.prdUid);
-                
-                if ( preview !== null)
+
+                if (preview !== null)
                 {
                     preview.src = reader.result;
                 }
@@ -99,21 +98,29 @@ var ProductHelper = new function ()
         if (result.length === 1)
         {
             cartProduct = result[0];
-            cartProduct.quantity += product.quantity();
+            cartProduct.quantity += Number(product.quantity());
         } else
         {
             // Deep copy
             cartProduct = jQuery.extend(true, {}, product);
-            cartProduct.quantity = product.quantity();
+            cartProduct.quantity = Number(product.quantity());
             cartProducts.push(cartProduct);
         }
 
-        console.log("CART CONTENTS:");
-        var val;
-        for (val in cartProducts)
+        var tempItemTotalPrice = 0;
+        var tempItemQuantityTotal = 0;
+        for (i = 0; i < cartProducts.length; i++)
         {
-            console.log("     Prodcut Id: " + cartProducts[val].prdUid + " - Quantity: " + cartProducts[val].quantity);
+            tempItemTotalPrice += (cartProducts[i].prdCntrUnitPrice * cartProducts[i].quantity);
+            
+            console.log("Quantity: " + cartProducts[i].quantity);
+            tempItemQuantityTotal += Number(cartProducts[i].quantity);
         }
+        sessionStorage.itemTotalPrice = tempItemTotalPrice;
+        sessionStorage.itemQuantityTotal = tempItemQuantityTotal;
+        
+        console.log("Cart Price: " +  sessionStorage.itemTotalPrice);
+
 
         // Save cart back into session
         sessionStorage.cartProducts = JSON.stringify(cartProducts);

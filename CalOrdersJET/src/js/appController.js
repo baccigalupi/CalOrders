@@ -58,7 +58,8 @@ define(['ojs/ojcore', 'knockout', 'common/SecurityUtils', 'ojs/ojknockout-model'
                     'orderHistoryAdmin': {label: 'Order History'},
                     'orderDetail': {label: 'Order Detail'},
                     'orderConfirmation': {label: 'Order Confirmation'},
-                    'about': {label: 'About'}
+                    'about': {label: 'About'},
+                    'profile': {label: 'Profile'}
                 });
                 oj.Router.defaults['urlAdapter'] = new oj.Router.urlParamAdapter();
                 // Navigation setup                
@@ -77,7 +78,7 @@ define(['ojs/ojcore', 'knockout', 'common/SecurityUtils', 'ojs/ojknockout-model'
                 self.company = ko.observable("By OnCore");
 
                 // User Info used in Global Navigation area
-                self.userLogin = ko.observable("Options");
+                userLogin = ko.observable("Options");
 
                 if (typeof (Storage) !== "undefined" && sessionStorage.authenticated !== "true")
                 {
@@ -98,6 +99,7 @@ define(['ojs/ojcore', 'knockout', 'common/SecurityUtils', 'ojs/ojknockout-model'
                         navBarDataSource(new oj.ArrayTableDataSource(navBarData, {idAttribute: 'id'}));
                         SecurityUtils.getNavBarItems(navBarDataSource);
                         SecurityUtils.getNavMenuItems(navMenuDataSource);
+                        userLogin("Options");
                         return self.router.go('welcome');
                     }
 
