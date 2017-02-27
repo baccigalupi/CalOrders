@@ -220,6 +220,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                         self.itemTotalPrice("$0.00");
                         self.shippingPrice("$0.00");
                         self.totalPrice("$0.00");
+                        
                         sessionStorage.itemTotalPrice = self.itemTotalPrice();
                         sessionStorage.shippingPrice = self.shippingPrice();
                         sessionStorage.totalPrice = self.totalPrice();
@@ -383,12 +384,13 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                         }
 
                         var tempItemTotalPrice = 0.0;
-                        var tempShippingPrice = 25.00;
+                        var tempShippingPrice = 0.00;
                         var tempTotalPrice = 0.00;
 
                         for (i = 0; i < sessionCart.length; i++)
                         {
                             tempItemTotalPrice += (sessionCart[i].prdCntrUnitPrice * sessionCart[i].quantity);
+                            tempShippingPrice = 25.00;
                         }
 
                         self.itemTotalPrice(self.getPrice(tempItemTotalPrice));
@@ -425,6 +427,11 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                         var partyUid = sessionStorage.partyUid;
 
                         var sessionCart = JSON.parse(sessionStorage.cartProducts);
+                        
+                      for (i = 0; i < sessionCart.length; i++)
+                    {
+                        sessionCart[i].quantity = parseInt(sessionCart[i].quantity);
+                    }
 
 
                         var order = {createUserId: partyUid, updateUserId: partyUid,
