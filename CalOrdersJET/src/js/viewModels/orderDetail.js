@@ -34,13 +34,14 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'moment', 'common/S
 
                 var serviceEndPoints = new ServiceEndPoints();
                 self.findOrderServiceEndPoint = serviceEndPoints.getEndPoint("findOrderDetailById");
-                self.cancelOrerServiceEndPoint = serviceEndPoints.getEndPoint("cancelOrder");
+                self.cancelOrderServiceEndPoint = serviceEndPoints.getEndPoint("cancelOrder");
                 self.router = oj.Router.rootInstance;
                 self.errorMessage = ko.observable();
                 self.orderUid = ko.observable();
                 self.orderDetail = ko.observable();
                 self.orderProducts = ko.observableArray([]);
                 self.ready = ko.observable(false);
+                self.showCancelButton = ko.observable(false);
 
                 self.listViewDataSource = null;
                 self.cardViewDataSource = null;
@@ -81,6 +82,11 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'moment', 'common/S
                         return new oj.PagingTableDataSource(self.listViewDataSource());
                     });
 
+                    if (self.orderDetail().statusCode === "SUBT")
+                    {
+                        self.showCancelButton(true);
+                    }
+                    
                     self.ready(true);
                 };
 
@@ -102,10 +108,11 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'moment', 'common/S
                     if (!SecurityUtils.isAuthenticated()) {
                         return self.router.go('welcome');
                     }
-
+                    
                     // Init
                     self.orderDetail(new Object());
                     self.orderProducts([]);
+                    self.showCancelButton(false);
 
                     self.orderUid(self.router.retrieve());
 
@@ -127,20 +134,46 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'moment', 'common/S
                     });
                 };
 
-
-
-
                 self.getPhoto = function (product) {
 
                     return ProductHelper.getPhoto(product);
 
                 };
 
-
-
                 self.getPrice = function (price)
                 {
                     return accounting.formatMoney(price);
+                };
+                
+                self.showCancelDialog = function()
+                {
+                    $("#cancelOrderConfirmationDialog").ojDialog("open");
+                };
+                
+                self.backAction = function()
+                {
+                    $("#cancelOrderConfirmationDialog").ojDialog("close");
+                };
+                
+                self.cancelOrderAction = function()
+                {
+                    var CancelOrderModel = oj.Model.extend({
+                        urlRoot: self.cancelOrderServiceEndPoint + "/" + self.orderUid()
+                    });
+                    
+                    var model = new CancelOrderModel();
+                    model.save({
+                        success: function (myModel, response, options) {
+                            return false;
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            self.errorMessage("There was an error cancelling the order");
+                            return false;
+                        }
+                    });
+                    
+                    $("#cancelOrderConfirmationDialog").ojDialog("close");
+                    self.router.go("orderHistory");
                 };
             }
 

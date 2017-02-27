@@ -574,6 +574,16 @@ public class OrderHistoryFacadeRESTExtension extends OrderHistoryFacadeREST {
 
         return order;
     }
+    
+    @POST
+    @Path("cancelOrder/{orderUid}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public void cancelOrder(@PathParam("orderUid") Integer orderUid)
+    {
+        OrderHistory history = super.find(orderUid);
+        
+        history.setOrdStatusCd(this.ordStatusCdFacadeREST.find("CANC"));
+    }
 
     private String getQuarterMonth(int month) {
         String result = "Jan";
