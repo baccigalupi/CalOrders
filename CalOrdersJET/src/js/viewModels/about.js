@@ -55,7 +55,7 @@ define(['ojs/ojcore', 'knockout', 'jquery'],
 
 
                     if (!SecurityUtils.isAuthenticated()) {
-                        self.userName('');
+                        SecurityUtils.clearSessionStorage();
                     } else
                     {
                         self.userName('Currently logged in as: ' + sessionStorage.userFullName);
