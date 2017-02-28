@@ -3,11 +3,16 @@
 
 ## Introduction
 
-OnCore focused on delivering what the end user needs by combining an Agile methodology and User Centered design to deliver functioning, high value features for the business and development teams to incrementally improve on.  Using Agile stories that built up functionality over the sprints, we were able to adjust quickly to the needs of the business as they were able to immediatley see the application and the requirements they were providing.  These tight cycles between ideas and testing allowed us to respond quickly to change and focused on solutions not features.    
+Agile methodology and User Centered Design combine to form an ideal vehicle to quickly understand what users want and delivering functioning, high value features for the business.  
 
-In addition to the Agile Team, we had support from the client executive team that enabled the end users we were working with to have the power to make decisions and own the product. This ensured that we would be building and delivering a product that end user wanted and needed with this collaboration. With this level of collaboration, we defined our strategy as 'try, fail fast, learn, and then try again."   
+OnCore’s primary focus [Statement of Work](https://github.com/OncoreLLC/CalOrders/wiki/Statement-of-Work) is on delivering what the end user needs. Agile user stories that incrementally build up functionality over the sprints allowed the development team to adjust quickly to the needs of the business as they were able to immediately see the application and the requirements they were providing. 
 
-The following documentation represents our demonstration in designing under a User Centered Design methodology, building with modern technologies in an Agile methodology with an adherence to the US Digital Playbook.
+These tight cycles between ideas and testing allowed us to respond quickly to change and focused on solutions not features.
+In addition to the Agile Team, we had support from the client executive team that enabled the end users we were working with to have the power to make decisions and own the product. This ensured that we would be building and delivering a product that end user wanted and needed with this collaboration. 
+
+With this level of collaboration, we defined our strategy as 'try, fail fast, learn, and then try again."
+The following documentation represents our demonstration in designing under a User Centered Design methodology, building with modern technologies in an Agile methodology with adherence to the US Digital Playbook.
+
 
 ##Project Requirements
 The project requirements and how OnCore fulfilled each requirement is listed below.
