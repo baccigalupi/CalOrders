@@ -469,6 +469,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                         for (i = 0; i < sessionCart.length; i++)
                         {
                             sessionCart[i].quantity = parseInt(sessionCart[i].quantity);
+                            sessionCart[i].prdImgImage = null;
                         }
 
 
