@@ -95,7 +95,6 @@ public class ProductFacadeRESTExtension extends ProductFacadeREST {
                         + "        AND p.prdActiveInd = 1", Product.class)
                 .setParameter("categoryCode", productTypeCode)
                 .getResultList();
-        //return results;
 
         List<Product> products = new ArrayList<Product>();
 
