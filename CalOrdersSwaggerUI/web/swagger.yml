@@ -13,7 +13,6 @@ info:
     url: http://www.oncorellc.com/contact-us/
   license:
     name: CalOrders REST services provided under the MIT License.
-    
 host: calorders.oncorellc.com:9080
 basePath: /CalOrdersRest/webresources
 schemes:
@@ -25,7 +24,7 @@ produces:
 paths: 
    /com.oncore.calorders.rest.product/findActiveProductsByProductType/{productTypeCode}:
     get:
-      description: Gets an Active product by product type.
+      description: Gets Active products by product type.
       operationId: findActiveProductsByProductType
       parameters:
         - name: productTypeCode
@@ -47,7 +46,7 @@ paths:
             $ref: '#/definitions/Error'
    /com.oncore.calorders.rest.product/findActiveProductsByProductTypeAndVendor/{productTypeCode}/{vendorUid}:
     get:
-      description: Gets an Active product by product type and vendor.
+      description: Gets Active products by product type and vendor.
       operationId: findActiveProductsByProductTypeAndVendor
       parameters:
         - name: productTypeCode
@@ -75,7 +74,7 @@ paths:
             $ref: '#/definitions/Error'
    /com.oncore.calorders.rest.product/findProductsByProductType/{productTypeCode}:
     get:
-      description: Gets an product by product type.
+      description: Gets products by product type.
       operationId: findProductsByProductType
       parameters:
         - name: productTypeCode
@@ -97,7 +96,7 @@ paths:
             $ref: '#/definitions/Error'
    /com.oncore.calorders.rest.product/doesProductNameExist/{productName}:
     get:
-      description: Check to see if a product exists by name.
+      description: Gets products by the product name.
       operationId: doesProductNameExist
       parameters:
         - name: productName
@@ -130,7 +129,7 @@ paths:
           description: successful operation
    /com.oncore.calorders.rest.product/updateProduct:
     post:
-      description: Update a prodcuct.
+      description: Update a product.
       operationId: updateProduct
       consumes:
         - application/json
@@ -141,7 +140,7 @@ paths:
           description: successful operation
    /com.oncore.calorders.rest.orderHistory/fetchOrdersByQuarter/{departmentId}:
     get:
-      description: get all order for a department by quarter .
+      description: gets all orders for a department by quarter .
       operationId: fetchOrdersByQuarter
       parameters: 
         - name: departmentId
@@ -163,7 +162,7 @@ paths:
             $ref: '#/definitions/Error'
    /com.oncore.calorders.rest.orderHistory/fetchOrderStatusSummary/{departmentId}:
     get:
-      description: Get orders statuses for a department.
+      description: Get orders with status for a department.
       operationId: fetchOrderStatusSummary
       parameters: 
         - name: departmentId
@@ -185,7 +184,7 @@ paths:
             $ref: '#/definitions/Error'
    /com.oncore.calorders.rest.orderHistory/findAllOrderHistoryByPartyUid/{partyUid}:
     get:
-      description: get all order by party uid.
+      description: gets all orders by party uid.
       operationId: findAllOrderHistoryByPartyUid
       parameters:
         - name: partyUid
@@ -207,7 +206,7 @@ paths:
             $ref: '#/definitions/Error'
    /com.oncore.calorders.rest.orderHistory/findAllOrderHistory:
     get:
-      description: Get all order summaries.
+      description: Get all orders.
       operationId: findAllOrderHistory
       parameters: []
       responses:
@@ -223,7 +222,7 @@ paths:
             $ref: '#/definitions/Error'
    /com.oncore.calorders.rest.orderHistory/findOrderDetailById/{orderUid}:
     get:
-      description: Get order detail by order id.
+      description: Get order detail by order Id.
       operationId: findOrderDetailById
       parameters:
         - name: orderUid
@@ -341,7 +340,7 @@ paths:
             $ref: '#/definitions/Error'
    /com.oncore.calorders.rest.party/findNavBarPrivilegesByPartyId/{partyId}:
     get:
-      description: Get authorized nav bar by party.
+      description: Gets privileges for the nav bar by party.
       operationId: findNavBarPrivilegesByPartyId
       parameters:
         - name: partyId
@@ -363,7 +362,7 @@ paths:
             $ref: '#/definitions/Error'
    /com.oncore.calorders.rest.party/findNavMenuPrivilegesByPartyId/{partyId}:
     get:
-      description: Get authorized nav menu by party.
+      description: Gets privileges for the nav menu by party.
       operationId: findNavMenuPrivilegesByPartyId
       parameters:
         - name: partyId

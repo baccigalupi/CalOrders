@@ -1,21 +1,26 @@
 #California Department of Technology - OnCore Consulting ADPQ Vendor Pool Refresh Prototype - 
 ###[Prototype URL](Prototype URL)
 
-##Introduction
+## Introduction
 
-OnCore focused on delivering what the end user needs by combining an Agile methodology and User Centered design to deliver functioning, high value features for the business and development teams to incrementally improve on.  Using Agile stories that built up functionality over the sprints, we were able to adjust quickly to the needs of the business as they were able to immediatley see the application and the requirements they were providing.  These tight cycles between ideas and testing allowed us to respond quickly to change and focused on solutions not features.    
+Agile methodology and User Centered Design combine to form an ideal vehicle to quickly understand what users want and delivering functioning, high value features for the business.  
 
-In addition to the Agile Team, we had support from the client executive team that enabled the end users we were working with to have the power to make decisions and own the product. This ensured that we would be building and delivering a product that end user wanted and needed with this collaboration. With this level of collaboration, we defined our strategy as 'try, fail fast, learn, and then try again."   
+OnCore’s primary focus [Statement of Work](https://github.com/OncoreLLC/CalOrders/wiki/Statement-of-Work) is on delivering what the end user needs. Agile user stories that incrementally build up functionality over the sprints allowed the development team to adjust quickly to the needs of the business as they were able to immediately see the application and the requirements they were providing. 
 
-The following documentation represents our demonstration in designing under a User Centered Design methodology, building with modern technologies in an Agile methodology with an adherence to the US Digital Playbook.
+These tight cycles between ideas and testing allowed us to respond quickly to change and focused on solutions not features.
+In addition to the Agile Team, we had support from the client executive team that enabled the end users we were working with to have the power to make decisions and own the product. This ensured that we would be building and delivering a product that end user wanted and needed with this collaboration. 
+
+With this level of collaboration, we defined our strategy as 'try, fail fast, learn, and then try again."
+The following documentation represents our demonstration in designing under a User Centered Design methodology, building with modern technologies in an Agile methodology with adherence to the US Digital Playbook.
+
 
 ##Project Requirements
-The project requirements and how OnCore fulfilled each requirement is listed below.
+The following table presents each of the project requirements, with links to the corresponding artifacts and evidence of meeting or exceeding it. 
 
-Reqirements | Reference(s)
+Reqirement | How it was met
 --- | ---
 a. Assigned one (1) leader and gave that person authority and responsibility and held that person accountable for the quality of the prototype submitted | [Michael Tsay](#calorder-development-team)
-b. Assembled a multidisciplinary and collaborative team that includes, at a minimum, five (5) of the labor categories as identified in Attachment B: PQVP DS-AD Labor Category Descriptions | [The team](#calorder-development-team)
+b. Assembled a multidisciplinary and collaborative team that includes, at a minimum, five (5) of the labor categories as identified in Attachment B: PQVP DS-AD Labor Category Descriptions | [Our team](#calorder-development-team)
 c. Understood what people needed, by including people in the prototype development and design process | [Focus Group](https://github.com/OncoreLLC/CalOrders/wiki/Focus-Group)<br> [Interview](https://github.com/OncoreLLC/CalOrders/wiki/Interviews)<br> [Sprint Review/Product Demo](https://github.com/OncoreLLC/CalOrders/wiki/Sprint-Reviews)
 d. Used at least a minimum of three (3) “user-centric design” techniques and/or tools | [Focus Group](https://github.com/OncoreLLC/CalOrders/wiki/Focus-Group)<br> [Interview](https://github.com/OncoreLLC/CalOrders/wiki/Interviews)<br> [Personas](https://github.com/OncoreLLC/CalOrders/wiki/Develop-Personas)<br>[Scenarios](https://github.com/OncoreLLC/CalOrders/wiki/Scenarios)<br>[Storyboards](https://github.com/OncoreLLC/CalOrders/wiki/Story-Boards)<br>[Wireframes](https://github.com/OncoreLLC/CalOrders/wiki/Wire-Frames)<br>[Wireframe Walkthrough](https://github.com/OncoreLLC/CalOrders/wiki/Wireframe-Walkthrough)<br>[Usability Testing](https://github.com/OncoreLLC/CalOrders/wiki/Usability-Testing)
 e. Used GitHub to document code commits | [Github Contributions](https://github.com/OncoreLLC/CalOrders/graphs/commit-activity)
@@ -23,7 +28,7 @@ f. Used Swagger to document the RESTful API, and provided a link to the Swagger 
 g. Complied with Section 508 of the Americans with Disabilities Act and WCAG 2.0 |[ADA and WCAG compliance](https://github.com/OncoreLLC/CalOrders/wiki/ADA-and-WCAG-Compliance) 
 h. Created or used a design style guide and/or a pattern library | [Style Guide](https://github.com/OncoreLLC/CalOrders/wiki/Style-Guide)
 i. Performed usability tests with people | [Usability Testing](https://github.com/OncoreLLC/CalOrders/wiki/Usability-Testing)
-j. Used an iterative approach, where feedback informed subsequent work or versions of the prototype; | [Agile Methodology](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Methodolgy)
+j. Used an iterative approach, where feedback informed subsequent work or versions of the prototype; | [OnCore's Agile Methodology](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Methodolgy)
 k. Created a prototype that works on multiple devices, and presents a responsive design |[Responsive Application Design](https://github.com/OncoreLLC/CalOrders/wiki/Responsive-Application-Design)<br>[Architecture Overview](https://github.com/OncoreLLC/CalOrders/wiki/Architecture)<br>[Application Overview](https://github.com/OncoreLLC/CalOrders/wiki/Application-Overview)
 l. Used at least five (5) modern and open-source technologies, regardless of architectural layer (frontend, backend, etc.) | [Technologies](https://github.com/OncoreLLC/CalOrders/wiki/Modern-and-Open-Source-Technologies)
 m. Deployed the prototype on an Infrastructure as a Service (IaaS) or Platform as Service(PaaS) provider, and indicated which provider they used | [Application Service Deployment](https://github.com/OncoreLLC/CalOrders/wiki/Application-Service-Deployment)
@@ -36,11 +41,12 @@ s. Provided sufficient documentation to install and run their prototype on anoth
 t. Prototype and underlying platforms used to create and run the prototype are openly licensed and free of charge | [Software Licensing](https://github.com/OncoreLLC/CalOrders/wiki/Software-Licensing)
 
 ## US Digital Services Playbook
-[Playbook](https://github.com/OncoreLLC/CalOrders/wiki/Addressing-U.S.-Digital-Services-Playbook-Plays)
+Our team followed the US Digital Services Playbook, covering each of the 13 plays, from understanding what people need, to defaulting to open.  Follow this link for [evidence on how each play was followed](https://github.com/OncoreLLC/CalOrders/wiki/Addressing-U.S.-Digital-Services-Playbook-Plays).
 
 
-##CalOrder Development Team
-Oncore selected Mike Tsay as the Team Leader/Project Manager, who had authority over and was responsible and accountable for the quality of the prototype submitted.
+## Development Team
+
+OnCore asked Mike Tsay to be the Team Leader/Project Manager.  Mike was given authority over and was responsible and accountable for the quality of the prototype submitted.  The following table presents the balance of the OnCore team. 
 
 **We selected a multidisciplinary and collaborative team that fulfilled the following 8 labor categories _(2b)_:**  
 
@@ -56,8 +62,9 @@ Backend Web Developer | [Janice Wiley](https://github.com/OncoreLLC/CalOrders/wi
 Backend Web Developer | [Won Lee](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Team-Bios)  
 DevOps Engineer | [Suganya Ravikumar](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Team-Bios)  
 
-##User Centric Design - Understanding what people need  
-The first step of a [User-Centered-Design](https://github.com/OncoreLLC/CalOrders/wiki/User-Centric-Design) (UCD) process is to formulate a plan.  We developed a [statement of work](https://github.com/OncoreLLC/CalOrders/wiki/Statement-of-Work) to identify the project objectives, requirements, user community, constraints, schedule, and deliverables.
+## User Centric Design - Understanding what people need  
+
+The first step of a  [User-Centered-Design](https://github.com/OncoreLLC/CalOrders/wiki/User-Centric-Designn (UCD) process is to formulate a plan.  Our plan, framed by our [statement of work](https://github.com/OncoreLLC/CalOrders/wiki/Statement-of-Work), identified the project objectives, requirements, user community, constraints, schedule, and deliverables.
 
 Our plan combines our UCD and Agile processes into a cohesive and flexible workflow.  It was this combination that we were able to identify the features that the users valued the most, and were able to focus our story and build activities to deliver working functionality after each sprint.  This allowed for feedback and changes to the design and resulted in a product that reflected what the end users were really asking for.
 
@@ -72,15 +79,19 @@ Plan | Analyze| Design | Implement | Test & Measure
 [Develop a Plan](https://github.com/OncoreLLC/CalOrders/wiki/User-Centric-Design)   | [Personas](https://github.com/OncoreLLC/CalOrders/wiki/Develop-Personas)||                       | Retest
 ||[Interviews](https://github.com/OncoreLLC/CalOrders/wiki/Interviews) ||
 
-##Agile Prototype Development   
+## Agile Development   
 
 The team's principle focus during development of CalOrders is summarized best by Jeff Sutherland.
  
 “[Value] people over processes; products that actually work over documenting what that product is supposed to do; collaborating with customers over negotiating with them; and responding to change over following a plan.” (Scrum: The Art of Doing Twice the Work in Half the Time)
 
-[Oncore's Agile methodology](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Methodolgy) provided the team an iterative approach, where feedback informed subsequent work or versions of the prototype.   
+[Oncore's Agile methodology](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Methodolgy) provided the team with an iterative approach, where fast feedback informed subsequent work or versions of the prototype, each time making it better.
 
-###Principles
+For example, during the early focus group sessions the users described the need for improvement of the add product business process as being an important feature for the new application.  This allowed us to deliver in Sprint 1 a simplified add product page that got the core functionality quickly to the users.  In Sprint 2, we enhanced, adding the ability to upload images, and integrated it to the navigation bar but the users still remarked at how they were pleased that they received the core feature early.
+
+Another time where UCD and Agile combined was during the walkthrough of the Sprint 1 pages.  The end users noticed that the product search tree did not include Services.  This kicked off an impromptu design session to better understand the concept, which resulted in data model changes and application changes that were quickly incorporated.  Had the interaction with the end users not been part of the methodology thus change would have been more complicated in the future.
+
+### Principles
 
 There are many different specific project development methodologies within agile. but they all center around a core set of principles:
 
@@ -93,7 +104,7 @@ There are many different specific project development methodologies within agile
 
 ###Process   
 
-Our [Agile](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Methodolgy) process allowed us to rapidly deliver a working product to maintain the momentum from the User Centered Design Sessions, allowing us to show the end user the system we were building. Combined with sprint cycles we were able to add new stories; existing stories in the backlog and icebox were continually evolving and reprioritized with continued meetings outside of the development cycle. These meeting took place between the product owner, business analysts and end users. Focusing on keeping things simple and evolving fostered the environment of rapid delivery and allowed for face to face interactions with the end users on how the system was evolving.  More importanly, it allowed for failure, and with the quick adjustments yieled a system that worked for the end users.
+Our [Agile](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Methodolgy) process allowed us to rapidly deliver a working product to maintain the momentum from the User Centered Design Sessions, allowing us to show the end user the system we were building. Combined with sprint cycles we were able to add new stories; existing stories in the backlog and icebox were continually evolving and reprioritized with continued meetings outside of the development cycle. These meeting took place between the product owner, business analysts and end users. Focusing on keeping things simple and evolving fostered the environment of rapid delivery and allowed for face to face interactions with the end users on how the system was evolving.  More importantly, it allowed for failure, and with the quick adjustments yielded a system that worked for the end users.
 
 ###Practices
 The list below provides links to additional artifacts and other important information about each agile practice that was utilized for this project.<br>
@@ -107,11 +118,14 @@ The list below provides links to additional artifacts and other important inform
 * [Daily Standups](https://github.com/OncoreLLC/CalOrders/wiki/Sprint-Daily-Stand-ups)
 
 
-## DevOps
+##Technical Approach
+Our Technical Approach centers on user centered design, agile methods, using modern technology.  Our goal is to build what the user really needs, and as such, we structure our methods, tooling and architecture around iterative, collaborative activities, that allow development staff to integrate and iterate quickly with end users.  Our goal is to realize the agile potential of developing twice the functionality, in half the time.  
+
+The following sections describe our technical approach to building the CalOrders application. They describe our approach to DevOps, our Architecture, our Development Environment, and our Responsive User Interface and Application Design. Finally, they conclude with our approach to using shared architectural components, use of modern and open source technologies, and our accessible user interface.
+
+### DevOps
 
 [DevOps](https://github.com/OncoreLLC/CalOrders/wiki/Environments)  
-
-##Technical Approach
  
 CalOrders is a product catalog and ordering solution designed with the premise of multi-client support to provide a single system for both the Department of General Services and Department of Technology to use for hardware, software and services.
 
@@ -127,12 +141,12 @@ CalOrders core principles:
 
 Figure 1: CalOrders Architecture
 
-## Development Environment
+### Development Environment
 
 CalOrders by default uses the open source NetBeans IDE for development.  NetBeans provides excellent Java and JavaScript support as well as an integrated Oracle JET plugin providing command line completion and other useful features when working with Oracle JET. However, NetBeans is not required and Eclipse or IntelliJ can be used to work on the backend JEE components and any editor can be used to edit the user interface code as it is just standard JavaScript, HTML, and CSS. For more information about setting up a local development environment, see the [CalOrders Help](https://github.com/OncoreLLC/CalOrders/wiki/Help) wiki page.
 
 
-## Projects
+### Projects
 
 The CalOrders application is separated by area of concern into separate NetBeans projects. 
  
@@ -142,7 +156,7 @@ The CalOrders application is separated by area of concern into separate NetBeans
 * CalOrdersCore - Java API project holding shared utility classes, interfaces, and base classes designed to support the other CalOrders Java projects
 * CalOrders Database = [(CDT–ADPQ–0117-2-Technical Approach: Database)](https://github.com/OncoreLLC/CalOrders/tree/master/DB_Scripts) MySQL database model, DDL, and reference data scripts
 
-## User Interface
+### User Interface
 
 The CalOrders user interface layer [(CDT–ADPQ–0117-2-Technical Approach: Client UI)](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersJET) is comprised of the open source Oracle JET JavaScript framework. From the Oracle JET user guide, "Oracle JET is a collection of Oracle and open source JavaScript libraries engineered to make it as simple and efficient as possible to build client-side web and hybrid mobile applications based on JavaScript, HTML5, and CSS.
 
@@ -167,11 +181,11 @@ JET also covers the following critical areas of modern web user interface constr
 
 Due to these features and its extensive component library, JET provides an excellent foundation for the CalOrders UI. For more information about the Oracle JET framework please see [About Oracle JET](http://docs.oracle.com/middleware/jet220/jet/developer/GUID-C6947139-DF37-4258-8E02-2679F40535E1.htm#JETDG108)
 
-### SPA (Single Page Application)
+#### SPA (Single Page Application)
 
 CalOrders is a Single Page Application, having a single entry point, [index.html](https://github.com/OncoreLLC/CalOrders/blob/master/CalOrdersJET/src/index.html).  Each screen in the application is a distinct HTML fragment substituted by the JET routing framework, however, they are not full HTML pages.  
 
-### Views
+#### Views
 
 A view in CalOrders is a distinct SPA HTML fragment, which holds the front end static and 
 dynamic content for the view. JET uses Knockout for data binding, which binds the view model 
@@ -204,13 +218,63 @@ development of the page and also allows for useful features like realtime update
 as the input changes without refreshing the content.  For more information about Knockout visit (here)[http://knockoutjs.com]. To
 learn more about how JET incorporates Knockout, see (here)[http://docs.oracle.com/middleware/jet230/jet/developer/GUID-808434E0-CA80-405C-9450-59E0BF525700.htm#JETDG334].
 
+#### View Models
+
+A view model holds the business logic for the view and also manages the REST operations for the view. 
+The view model uses a consistent pattern defined by JET, which helps to ensure consistency across models and simplifies coding. In the view model,
+variables can be defined as Knockout observables.  Using the view example from above, the productName is defined as a Knockout variable in the view
+model and any input provided by the user on the page is accessible via the variable as shown below.
+
+```
+self.productName = ko.observable();
 
 
-### View Models
+self.somefunction = function()
+{
+	 if(StringUtils.isEmptyOrUndefined(self.productName))
+     {
+        console.log("Hey the user provided product name : " + self.productName);
+     }
+     
+	....
+	
+}
 
-A [view model](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersJET/src/js/viewModels) holds the business logic for the view and also manages the REST operations for the view.  The view model uses a consistent pattern defined by JET, which helps to ensure consistency across models and simplifies coding.
+```
 
-## Services
+REST calls are managed via the view model as well using the JET oj Model. 
+
+
+
+```
+ var SomeModel = oj.Model.extend({
+                     urlRoot: serviceURL,
+                     idAttribute: 'id'
+                   });
+
+ var someModel = new SomeModel();
+
+ someModel.fetch({
+                 
+                 
+ success: function () {
+             console.log("Service call success! " + someModel.attributes);  
+                    ... 
+             },
+ error: function (jqXHR, textStatus, errorThrown) {
+             console.log("Error calling Service!" + errorThrown);
+                    ...
+             }
+ });
+                    
+```
+
+The views and view models combine to form the most common pattern when building CalOrders, however, 
+JET provides many additional features not covered in this overview.  For more information, visit the 
+Oracle JET [resource](http://www.oracle.com/webfolder/technetwork/jet/globalResources.html)
+and [support](http://www.oracle.com/webfolder/technetwork/jet/globalSupport.html) pages.
+
+### Services
 
 ![Figure 6](https://github.com/OncoreLLC/CalOrders/blob/master/Artifacts/images/Architecture_files/calorders_arch02_small.png)
 
@@ -219,11 +283,11 @@ Figure 6: CalOrders Service Architecture
 CalOrders uses [REST services](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersRest/src/java/com/oncore/calorders/rest/service) exposed from JEE Session Beans using the built in annotations available from Java.  Java provides excellent REST service support in JEE making it extremely easy to create REST services supporting CRUD operations on an underlying datastore.  CalOrders uses the NetBeans REST services generator to create the core set of JPA entities and REST facades needed for the application.  Customizing the service entities is supported via built in JPA functionality using the persistence.xml file and xml files containing custom named queries or custom queries can be defined directly in the REST Facades using the JPA create query method and syntax.  See the [HOW TO Create Custom Queries and REST Facades](https://github.com/OncoreLLC/CalOrders/wiki/HOW-TO-Create-Custom-Queries-and-REST-Facades) Wiki page for more details on how to create custom JPA Named Queries and REST Facades.  Core classes and utilities needed to support the underlying architecture across domains are defined in CalOrdersCore.
 
 
-## Shared Architectural Components
+### Shared Architectural Components
 
 CalOrders places common architectural components in the shared CalOrdersCore project. CalOrdersCore only contains base classes and interfaces, and shared utility classes.  NetBeans simplifies compilation and deployment by allowing other NetBeans projects such as CalOrdersREST to reference core in the editor. The option is also available to compile and bundle the CalOrdersCore project into an independent JAR, which can then be referenced by other projects. 
 
-## Databases
+### Databases
 
 The CalOrders application currently uses the MySQL [database](https://github.com/OncoreLLC/CalOrders/tree/master/DB_Scripts) for back-end storage. However, as CalOrders uses JPA as an abstraction layer, there is nothing preventing migrating the database to a different provider such as Oracle or SQL Server. JPA provides CalOrders impressive flexibility and upgradability in this regard.
 
@@ -231,7 +295,7 @@ The CalOrdersREST project contains a dedicated folder to hold the MySQL DDL, [da
 
 The [database model](https://github.com/OncoreLLC/CalOrders/blob/master/Artifacts/images/Architecture_files/database.png) can be viewed and updated by using the MySQL Workbench tool.  Please see the [MySQL](http://www.mysql.com) website for more information about MySQL and to obtain the database and WorkBench tools for your operating system.
 
-## Modern and Open Source Technologies
+### Modern and Open Source Technologies
 
 Technology | Requirement  
 --- | ---  
@@ -251,6 +315,6 @@ Technology | Requirement
 [NVDA](https://www.paciellogroup.com/blog/2008/01/nvda-a-free-and-open-source-screen-reader-for-windows/) | Screen Reader
 [WAVE](https://chrome.google.com/webstore/detail/wave-evaluation-tool/jbbplnpkjmmeebjpijfedlgcdilocofh?hl=en-US) | ADA Browser testing plugin
 
-## Accessibility
+### Accessibility
 
 Please see the [Accessibility](http://docs.oracle.com/middleware/jet220/jet/developer/GUID-A8970DC0-7935-46B8-9A55-BCF4380B2CFC.htm#JETDG253) section of the Oracle JET Development Guide. As part of the CalOrders quality control process, ADA testing was conducted using the WAVE plugin for Chrome and the NVDA screen reader with FireFox to ensure pages are accessible.
