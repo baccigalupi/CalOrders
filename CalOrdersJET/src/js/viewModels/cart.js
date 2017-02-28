@@ -26,7 +26,9 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
 
             function CartViewModel() {
                 var self = this;
-
+                
+                var savingData = false;
+                
                 var serviceEndPoints = new ServiceEndPoints();
                 self.createOrderServiceURL = serviceEndPoints.getEndPoint("createOrder");
                 self.findRelatedServiceProductsURL = serviceEndPoints.getEndPoint("findActiveProductsByProductTypeAndVendor");
@@ -53,8 +55,8 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                 self.medium = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(mdQuery);
                 self.small = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(smQuery);
                 self.smallOnly = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(smOnlyQuery);
-                
-                 self.errorMessage = ko.observable();
+
+                self.errorMessage = ko.observable();
 
                 // Below are a subset of the ViewModel methods invoked by the ojModule binding
                 // Please reference the ojModule jsDoc for additional available methods.
@@ -116,8 +118,13 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                         var sessionCart = JSON.parse(sessionStorage.cartProducts);
 
                         var tempItemTotalPrice = 0.0;
-                        var tempShippingPrice = 25.00;
+                        var tempShippingPrice = 0.00;
                         var tempTotalPrice = 0.00;
+
+                        if (sessionCart.length > 0)
+                        {
+                            tempShippingPrice = 25.00;
+                        }
 
                         for (i = 0; i < sessionCart.length; i++)
                         {
@@ -220,7 +227,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                         self.itemTotalPrice("$0.00");
                         self.shippingPrice("$0.00");
                         self.totalPrice("$0.00");
-                        
+
                         sessionStorage.itemTotalPrice = self.itemTotalPrice();
                         sessionStorage.shippingPrice = self.shippingPrice();
                         sessionStorage.totalPrice = self.totalPrice();
@@ -251,7 +258,22 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                  * @param {boolean} info.fromCache - A boolean indicating whether the module was retrieved from cache.
                  */
                 self.handleAttached = function (info) {
-                    // Implement if needed
+
+                    if (sessionStorage.cartProducts !== "")
+                    {
+                        var sessionCart = JSON.parse(sessionStorage.cartProducts);
+                        if (sessionCart.length == 0)
+                        {
+                            document.getElementById('placeOrderBottom').disabled = true;
+                            document.getElementById('placeOrderTop').disabled = true;
+                            document.getElementById('removeProductsButton').disabled = true;
+                        }
+                    } else
+                    {
+                        document.getElementById('placeOrderBottom').disabled = true;
+                        document.getElementById('placeOrderTop').disabled = true;
+                        document.getElementById('removeProductsButton').disabled = true;
+                    }
                 };
 
 
@@ -317,15 +339,19 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                     }
 
                     var sessionCart = JSON.parse(sessionStorage.cartProducts);
+                    var tempItemQuantityTotal = 0;
 
                     for (i = 0; i < sessionCart.length; i++)
                     {
                         if (sessionCart[i].prdUid === product.prdUid)
                         {
-                            sessionCart[i].quantity = product.quantity();
+                            sessionCart[i].quantity = Number(product.quantity());
                             sessionCart[i].totalItemPrice = sessionCart[i].quantity * sessionCart[i].prdCntrUnitPrice;
+                            tempItemQuantityTotal += sessionCart[i].quantity;
                         }
                     }
+
+                    sessionStorage.itemQuantityTotal = tempItemQuantityTotal;
 
                     var tempItemTotalPrice = 0.0;
                     var tempShippingPrice = 25.00;
@@ -387,11 +413,25 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                         var tempShippingPrice = 0.00;
                         var tempTotalPrice = 0.00;
 
+                        if (sessionCart.length > 0)
+                        {
+                            tempShippingPrice = 25.00;
+                        } else
+                        {
+                            $("#placeOrderBottom").ojButton("option", "disabled", true);
+                            $("#placeOrderTop").ojButton("option", "disabled", true);
+                            $("#removeProductsButton").ojButton("option", "disabled", true);
+                        }
+
+                        var tempItemQuantityTotal = 0;
+
                         for (i = 0; i < sessionCart.length; i++)
                         {
                             tempItemTotalPrice += (sessionCart[i].prdCntrUnitPrice * sessionCart[i].quantity);
-                            tempShippingPrice = 25.00;
+                            tempItemQuantityTotal += Number(sessionCart[i].quantity);
                         }
+
+                        sessionStorage.itemQuantityTotal = tempItemQuantityTotal;
 
                         self.itemTotalPrice(self.getPrice(tempItemTotalPrice));
                         self.shippingPrice(self.getPrice(tempShippingPrice));
@@ -422,16 +462,20 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                 self.placeOrderClick = function (trackerObj)
                 {
                     if (sessionStorage.partyUid !== "" && sessionStorage.cartProducts !== ""
-                            && sessionStorage.authenticated !== "false")
+                            && sessionStorage.authenticated !== "false" && savingData == false)
                     {
+                        savingData = true;
+                        console.log("inside placeOrderClick!!!!");
+                        
                         var partyUid = sessionStorage.partyUid;
 
                         var sessionCart = JSON.parse(sessionStorage.cartProducts);
-                        
-                      for (i = 0; i < sessionCart.length; i++)
-                    {
-                        sessionCart[i].quantity = parseInt(sessionCart[i].quantity);
-                    }
+
+                        for (i = 0; i < sessionCart.length; i++)
+                        {
+                            sessionCart[i].quantity = parseInt(sessionCart[i].quantity);
+                            sessionCart[i].prdImgImage = null;
+                        }
 
 
                         var order = {createUserId: partyUid, updateUserId: partyUid,
@@ -453,10 +497,11 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                                 order,
                                 {
                                     success: function (myModel, response, options) {
+                                        savingData = false;
                                         return self.router.go("orderConfirmation");
                                     },
                                     error: function (jqXHR, textStatus, errorThrown) {
-
+                                        savingData = false;
                                         console.log("Unable to create the order: " + errorThrown);
                                     }
                                 });

@@ -187,25 +187,44 @@
                              height="100" width="100" 
                              data-bind="attr: {alt: $data['prdName'], id: 'productImage' + $data['prdUid'], src: $parent.getPhoto($data)}"/>
                     </div>
+
+
                     <div class="oj-flex-item">
-                        <div class="oj-flex">
-                            <div class="oj-flex-item">
-                                <div data-bind="text: 'Quanitity: ' + $data['prdQuantity']"/></div>
+                        <div class="oj-flex-item">
+                            <span style="font-weight: bold">Quantity: </span><span data-bind="text: $data['prdQuantity']"/>
                         </div>
-
                         <div class="oj-padding-vertical"></div>
-
-                        <div class="oj-flex">
-                            <div class="oj-flex-item">
-                                <div data-bind="text: 'Price: ' + $parent.getPrice($data['prdPrice']) + ' (' + $parent.getPrice($data['prdEachPrice']) + '/ea)'"></div>
-                            </div>
+                        <div class="oj-flex-item">
+                            <span style="font-weight: bold">Price: </span><span data-bind="text: $parent.getPrice($data['prdEachPrice']) + '/ea'"/>
                         </div>
-                    </div>
-                </div>
-            </div>  
+                        <div class="oj-padding-vertical"></div>
+                        <div class="oj-flex-item">
+                            <span style="font-weight: bold">Total: </span><span data-bind="text: $parent.getPrice($data['prdPrice'])"/>
+                        </div>
+                    </div> 
+
+
+
+                    <!--                    <div class="oj-flex-item">
+                                            <div class="oj-flex">
+                                                <div class="oj-flex-item">
+                                                    <span style="font-weight: bold">Quantity:</span>
+                                                    <span data-bind="text: $data['prdQuantity']"/></span>
+                                                </div>
+                    
+                                                <div class="oj-padding-vertical"></div>
+                    
+                                                <div class="oj-flex">
+                                                    <div class="oj-flex-item">
+                                                        <div data-bind="text: 'Price: ' + $parent.getPrice($data['prdPrice']) + ' (' + $parent.getPrice($data['prdEachPrice']) + '/ea)'"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>-->
+                </div>  
+            </div>
         </div>
     </div>
-</div>
 </li>
 </script>
 
@@ -240,12 +259,14 @@
                 </div>
 
                 <div class="oj-flex-item oj-sm-2">
-                    <span>Quantity: </span><span data-bind="text: $data['prdQuantity']"/>
+                    <span style="font-weight: bold">Quantity:</span>
+                    <span data-bind="text: $data['prdQuantity']"/>
                 </div>
 
                 <div class="oj-flex-item oj-sm-2">
 
                     <div class="oj-flex-item oj-sm-only-hide oj-md-4 oj-md-float-end">
+                        <span style="font-weight: bold">Price:</span>
                         <div data-bind="text: $parent.getPrice($data['prdEachPrice']) + '/ea'"></div>
                     </div>
                 </div>
@@ -253,6 +274,8 @@
                 <div class="oj-flex-item oj-sm-2">
 
                     <div class="oj-flex-item oj-sm-only-hide oj-md-4 oj-md-float-end">
+
+                        <span style="font-weight: bold">Total:</span>
                         <div data-bind="text: $parent.getPrice($data['prdPrice'])"></div>
                     </div>
                 </div>

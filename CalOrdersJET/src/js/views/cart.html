@@ -54,7 +54,7 @@
                         data-bind="click: continueShoppingClick, ojComponent: { component: 'ojButton', label: 'Continue Shopping' }">
                 </button> 
                 <div class="oj-padding-horizontal"></div>
-                <button id= "placeOrder" 
+                <button id= "placeOrderTop" 
                         data-bind="click: placeOrderClick, ojComponent: { component: 'ojButton', label: 'Order' }">
                 </button> 
             </div>
@@ -106,7 +106,7 @@
                         data-bind="click: continueShoppingClick, ojComponent: { component: 'ojButton', label: 'Continue Shopping' }">
                 </button> 
                 <div class="oj-padding-horizontal"></div>
-                <button id= "placeOrder" 
+                <button id= "placeOrderBottom" 
                         data-bind="click: placeOrderClick, ojComponent: { component: 'ojButton', label: 'Order' }">
                 </button> 
             </div>
@@ -152,6 +152,7 @@
                 <div class="oj-flex-item">
                     <div class="oj-flex">
                         <div class="oj-flex-item">
+                            <span style="font-weight: bold">Quantity: </span>
                             <input class="product-quantity" id="quantity" aria-label="quantity"
                                    data-bind="value: quantity, 
                             event: {change: function(product,event) { $parent.productQuantityChange( product );} }"
@@ -164,13 +165,14 @@
 
                 <div class="oj-flex">
                     <div class="oj-flex-item">
-                        <div data-bind="text: $parent.getPrice($data['prdCntrUnitPrice']) + '/ea'"></div>
+                        <span style="font-weight: bold">Price: </span>
+                        <span data-bind="text: $parent.getPrice($data['prdCntrUnitPrice']) + '/ea'"/>
                     </div>
                 </div>
 
                 <div class="oj-flex">
                     <div class="oj-flex-item">
-                        <div data-bind="text: $parent.getPrice($data['totalItemPrice']())"></div>
+                       <span style="font-weight: bold">Total: </span><span data-bind="text: $parent.getPrice($data['totalItemPrice']())"/>
                     </div>
                 </div>
             </div>
@@ -248,7 +250,7 @@
 
                             <!-- Quantity -->
                             <div class="oj-flex-item oj-sm-2">
-
+<span style="font-weight: bold">Quantity: </span>
                                 <input class="product-quantity" id="quantity" aria-label="quantity"
                                        data-bind="value: quantity, 
                             event: {change: function(product,event) { $parent.productQuantityChange( product );} }"
@@ -259,13 +261,15 @@
                             <div class="oj-flex-item oj-sm-2">
 
                                 <div class="oj-flex-item oj-sm-only-hide oj-md-4 oj-md-float-end">
-                                    <div data-bind="text: $parent.getPrice($data['prdCntrUnitPrice']) + '/ea'"></div>
+                                    <span style="font-weight: bold">Price: </span>
+                                    <span data-bind="text: $parent.getPrice($data['prdCntrUnitPrice']) + '/ea'"/>
                                 </div>
                             </div>
 
                             <div class="oj-flex-item oj-sm-2">
                                 <div class="oj-flex-item oj-sm-only-hide oj-md-4 oj-md-float-end">
-                                    <div data-bind="text: $parent.getPrice($data['totalItemPrice']())"></div>
+                                    <span style="font-weight: bold">Total: </span>
+                                    <span data-bind="text: $parent.getPrice($data['totalItemPrice']())"/>
                                 </div>
                             </div>
                         </div>
