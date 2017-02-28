@@ -173,7 +173,37 @@ CalOrders is a Single Page Application, having a single entry point, [index.html
 
 ### Views
 
-A [view](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersJET/src/js/views) in CalOrders is a distinct SPA HTML fragment, which holds the front end visual static content and components for the view. JET uses Knockout for data binding, which binds the view model to the view.  
+A view in CalOrders is a distinct SPA HTML fragment, which holds the front end static and 
+dynamic content for the view. JET uses Knockout for data binding, which binds the view model 
+to the view.   In JET the view must match its supporting view model by name.  So a view named
+"about.html" will have a corresponding view model named "about.js".   Views are composed of HTML,
+CSS, and JavaScript tags and are editable in any editor. 
+
+The following is an example view showing Knockout data binding in action.
+
+-- 
+ <div class="oj-flex-item">
+  <label for="productName">Product Name:</label>
+   <input id="productName"  type="text" required 
+        data-bind="ojComponent: {
+                                  component: 'ojInputText', 
+                                  value:productName, required: true,
+                                  validators: [{type: 'regExp', options: {
+                                  pattern: '[:\\-!@#$%^&*,?.;:()+={}<>\'\&quot\\w\\s]{1,128}',
+                                   hint: 'Enter a product name that is less than 128 alphanumeric characters (including the following characters :-!@#$%^&*();?+={}<>,\'\&quot',
+                                   messageDetail: 'The product name must be less than 128 alphanumeric characters (including the following characters :-!@#$%^&*();?+={}<>,\'\&quot'} },
+                                   validateProductName],
+                                  messagesCustom: productNameMessage,
+                                  invalidComponentTracker: tracker}">
+ </div>
+--
+
+In this example, "productName" is a Knockout variable defined in the view model.  As the user
+types in the input field, Knockout binds the user input to the view model.  This greatly simplifies
+development of the page and also allows for useful features like realtime updates on the page
+as the input changes without refreshing the content. 
+
+
 
 ### View Models
 
