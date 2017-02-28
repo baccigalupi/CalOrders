@@ -125,7 +125,7 @@
                                         </ul>
                                     </li>
 
-                                     <!-- ko if: admin -->
+                                    <!-- ko if: admin -->
                                     <li id="desktopServices" >
                                         <a href="#" >Desktop Services</a>
                                         <ul >
@@ -190,7 +190,7 @@
                                             </li>
                                         </ul>
                                     </li>
-                                    
+
                                     <!-- ko if: admin -->
                                     <li id="laptopServices" >
                                         <a href="#" >Laptop Services</a>
@@ -278,9 +278,9 @@
                                     <div style="font-weight: bold;" class="oj-flex-item oj-sm-6" data-bind="text: 'Cart Total:'"></div>
                                     <div class="oj-flex-item" data-bind="text: cartTotalPrice"></div>
                                 </div>
-                                
+
                                 <hr>
-                                
+
                                 <div class="oj-padding-vertical"></div>
                             </div>
                         </div>
@@ -310,6 +310,7 @@
                                     <option value="DUTH" >Thin Client</option>
                                     <option value="DUAL" >All in One</option>
                                 </optgroup>
+                                <!-- ko if: admin -->
                                 <optgroup label="Desktop Services">
                                     <option value="DSST" >Standard</option>
                                     <option value="DSPO" >Power</option>
@@ -317,6 +318,7 @@
                                     <option value="DSTH" >Thin Client</option>
                                     <option value="DSAL" >All in One</option>
                                 </optgroup>
+                                <!-- /ko -->
 
                                 <optgroup label="Laptop Computers">
                                     <option value="LHST" >Standard</option>
@@ -330,16 +332,21 @@
                                     <option value="LUUL" >Ultralight</option>
                                     <option value="LUMO" >Mobile</option>
                                 </optgroup>
+                                <!-- ko if: admin -->
                                 <optgroup label="Laptop Services">
                                     <option value="LSST" >Standard</option>
                                     <option value="LSPO" >Power</option>
                                     <option value="LSUL" >Ultralight</option>
                                     <option value="LSMO" >Mobile</option>
                                 </optgroup>
+                                <!-- /ko -->
 
                                 <optgroup label="Monitors">
                                     <option value="DMMO">Monitors</option>
                                     <option value="DUMO">Monitor Upgrades</option>
+                                    <!-- ko if: admin -->
+                                    <option value="DSMO">Monitor Services</option>
+                                    <!-- /ko -->
                                 </optgroup>
 
                                 <optgroup label="Software">
@@ -480,7 +487,7 @@
 <!-- Product Card view (card format)  -->
 <script id="productcard_template" type="text/html">
     <li class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-4 oj-xl-3" style="margin:0;border-style:none">
-        <div class="oj-panel" style="margin: 5px 0px 10px 0px; min-height: 350px">
+        <div class="oj-panel" style="margin: 5px 0px 10px 0px; min-height: 375px">
 
             <div data-bind="click: $parent.navigateToProductDetail">
 
