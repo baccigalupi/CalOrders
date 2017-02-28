@@ -181,7 +181,7 @@ CSS, and JavaScript tags and are editable in any editor.
 
 The following is an example view showing Knockout data binding in action.
 
--- 
+```
  <div class="oj-flex-item">
   <label for="productName">Product Name:</label>
    <input id="productName"  type="text" required 
@@ -196,7 +196,7 @@ The following is an example view showing Knockout data binding in action.
                                   messagesCustom: productNameMessage,
                                   invalidComponentTracker: tracker}">
  </div>
---
+```
 
 In this example, "productName" is a Knockout variable defined in the view model.  As the user
 types in the input field, Knockout binds the user input to the view model.  This greatly simplifies
