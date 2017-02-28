@@ -25,7 +25,7 @@
 <div id="productSearchWrapperDiv" class="oj-hybrid-padding">
 
     <!-- Page Title -->
-    <div id="pageTitleContainer" class="oj-flex-item oj-sm-2">
+    <div id="pageTitleContainer" class="oj-flex-item oj-sm-12">
         <h2 style="margin-bottom:0">Product Search</h2>
     </div>
 
@@ -273,6 +273,7 @@
             <div class="justifyCenter">
                 <div class="oj-flex oj-flex-items-pad">
                     <div class="oj-flex-item oj-sm-12" style="padding-bottom: 10px">
+                        <!-- ko if: user --> 
                         <div class="oj-flex oj-md-hide">
                             <div class="oj-flex-item">
                                 <div class="oj-flex oj-flex-items-pad" >
@@ -285,7 +286,7 @@
                                 <div class="oj-padding-vertical"></div>
                             </div>
                         </div>
-
+                        <!-- /ko -->
 
                         <div class="oj-flex oj-flex-items oj-sm-align-items-flex-end oj-md-hide ">
                             <label for="productSelect">Product Category: </label>
