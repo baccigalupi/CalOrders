@@ -125,9 +125,11 @@ The following sections describe our technical approach to building the CalOrders
 
 ### DevOps
 
-[DevOps](https://github.com/OncoreLLC/CalOrders/wiki/Environments)  
- 
-CalOrders is a product catalog and ordering solution designed with the premise of multi-client support to provide a single system for both the Department of General Services and Department of Technology to use for hardware, software and services.
+DevOps the convergence of application development and operations.  It is prevalent through the entire lifecycle, starting with design and continuing through production deployment. 
+
+[Our DevOps Approach](https://github.com/OncoreLLC/CalOrders/wiki/Environments) is centered on continuous integration, including regular builds, automated testing, and efficient environment buildout and maintenance.  It leverages Docker images for container based deployments, and Status Cake for monitoring.  
+
+### Architecture
 
 CalOrders core principles:
 
@@ -143,12 +145,14 @@ Figure 1: CalOrders Architecture
 
 ### Development Environment
 
-CalOrders by default uses the open source NetBeans IDE for development.  NetBeans provides excellent Java and JavaScript support as well as an integrated Oracle JET plugin providing command line completion and other useful features when working with Oracle JET. However, NetBeans is not required and Eclipse or IntelliJ can be used to work on the backend JEE components and any editor can be used to edit the user interface code as it is just standard JavaScript, HTML, and CSS. For more information about setting up a local development environment, see the [CalOrders Help](https://github.com/OncoreLLC/CalOrders/wiki/Help) wiki page.
+CalOrders by default uses the open source NetBeans IDE for development.  NetBeans provides excellent Java and JavaScript support as well as an integrated Oracle JET plugin providing command line completion and other useful features when working with Oracle JET. 
+
+However, NetBeans is not required and Eclipse or IntelliJ can be used to work on the backend JEE components and any editor can be used to edit the user interface code as it is just standard JavaScript, HTML, and CSS. For more information about setting up a local development environment, see the [CalOrders Help](https://github.com/OncoreLLC/CalOrders/wiki/Help) wiki page.
 
 
 ### Projects
 
-The CalOrders application is separated by area of concern into separate NetBeans projects. 
+The CalOrders application is separated by area of concern into separate NetBeans projects. Separating the user interface from the backend services makes it easier to allocate the layers to user interface or service development specialists.
  
 * CalOrdersJET - [(CDT–ADPQ–0117-2-Technical Approach: Client UI)](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersJET)  JET JavaScript, HTML5, CSS project providing the front end for the CalOrders application
 * JavaScript Library - [(CDT–ADPQ–0117-2-Technical Approach: JavaScript Library)](http://www.oracle.com/webfolder/technetwork/jet/index.html) Orcle JET is an open source JavaScript framework proving a rich set of ADA compliant components. See User Interface section below for more details about Oracle JET
@@ -289,7 +293,9 @@ CalOrders places common architectural components in the shared CalOrdersCore pro
 
 ### Databases
 
-The CalOrders application currently uses the MySQL [database](https://github.com/OncoreLLC/CalOrders/tree/master/DB_Scripts) for back-end storage. However, as CalOrders uses JPA as an abstraction layer, there is nothing preventing migrating the database to a different provider such as Oracle or SQL Server. JPA provides CalOrders impressive flexibility and upgradability in this regard.
+The CalOrders application currently uses the MySQL [database](https://github.com/OncoreLLC/CalOrders/tree/master/DB_Scripts) for back-end storage. MySQL is one of the most popular open source databases available, with years of proven implementations.  Further, MySQL has a rich library of information available for support, whether in the form of online discussions or in actual documentation from MySQL. The MySQL supporting libraries and tools are also multi-platform, stable, and provide all the functionality a development team needs to build applications.
+
+CalOrders uses JPA as an abstraction layer, there is nothing preventing migrating the database to a different provider such as Oracle or SQL Server. JPA provides CalOrders impressive flexibility and upgradability in this regard.
 
 The CalOrdersREST project contains a dedicated folder to hold the MySQL DDL, [database model](https://github.com/OncoreLLC/CalOrders/blob/master/Artifacts/images/Architecture_files/database.png), reference, and test data insert scripts as seen in Figure 7.
 
