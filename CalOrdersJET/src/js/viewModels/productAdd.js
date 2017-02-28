@@ -201,10 +201,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'accounting', 'common/SecurityUtils'
                 };
 
                 self.calculateContractPrice = function (price, percent) {
-                    var discount = ((percent / 100) * price);
+
+                    var discount = 0;
+                    if (percent !== NaN && percent != undefined && percent !== 0) {
+                        discount = ((percent / 100) * price);
+                    }
                     if (discount == NaN || discount == undefined || discount === 0) {
                         self.productContractUnitPrice(undefined);
-                        self.productContractUnitPriceDisplay(accounting.formatMoney(0))
+                        self.productContractUnitPriceDisplay(accounting.formatMoney(price))
                     } else {
                         self.productContractUnitPrice(price - discount);
                         self.productContractUnitPriceDisplay(accounting.formatMoney(price - discount))
