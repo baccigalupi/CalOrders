@@ -207,7 +207,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'accounting', 'common/SecurityUtils'
                         discount = ((percent / 100) * price);
                     }
                     if (discount == NaN || discount == undefined || discount === 0) {
-                        self.productContractUnitPrice(undefined);
+                        self.productContractUnitPrice(price);
                         self.productContractUnitPriceDisplay(accounting.formatMoney(price))
                     } else {
                         self.productContractUnitPrice(price - discount);
