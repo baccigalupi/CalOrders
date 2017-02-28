@@ -46,7 +46,7 @@
 
     <div class="oj-panel oj-flex oj-sm-flex-wrap-nowrap oj-panel-shadow-md">
         <div id="productSearchNavigationPanel" class="oj-panel oj-sm-2 oj-flex-item oj-sm-only-hide" style="min-width: 250px">
-
+            <!-- ko if: user --> 
             <div class="oj-flex oj-panel oj-panel-shadow-md">
                 <div class="oj-flex-item">
                     <div class="oj-flex">
@@ -56,7 +56,7 @@
                     <div class="oj-padding-vertical"></div>
 
                     <div class="oj-flex oj-flex-items-pad">
-                        <div style="font-weight: bold"class="oj-flex-item oj-flex-items-pad oj-sm-4" data-bind="text: 'Items:'"></div>
+                        <div style="font-weight: bold" class="oj-flex-item oj-flex-items-pad oj-sm-4" data-bind="text: 'Items:'"></div>
                         <div class="oj-flex-item" data-bind="text: cartTotalItems"></div>
                     </div>
                     <div class="oj-flex oj-flex-items-pad">
@@ -65,6 +65,7 @@
                     </div>
                 </div>
             </div>
+            <!-- /ko -->
 
             <div class="oj-padding-vertical"></div>
 
