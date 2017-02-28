@@ -179,7 +179,7 @@ to the view.   In JET the view must match its supporting view model by name.  So
 "about.html" will have a corresponding view model named "about.js".   Views are composed of HTML,
 CSS, and JavaScript tags and are editable in any editor. 
 
-The following is an example view showing Knockout data binding in action.
+The following code snippet is taken from a CalOrders JET view showing Knockout data binding in action.
 
 ```
  <div class="oj-flex-item">
@@ -201,7 +201,8 @@ The following is an example view showing Knockout data binding in action.
 In this example, "productName" is a Knockout variable defined in the view model.  As the user
 types in the input field, Knockout binds the user input to the view model.  This greatly simplifies
 development of the page and also allows for useful features like realtime updates on the page
-as the input changes without refreshing the content. 
+as the input changes without refreshing the content.  For more information about Knockout visit (here)[http://knockoutjs.com]. To
+learn more about how JET incorporates Knockout, see (here)[http://docs.oracle.com/middleware/jet230/jet/developer/GUID-808434E0-CA80-405C-9450-59E0BF525700.htm#JETDG334].
 
 
 
@@ -252,4 +253,4 @@ Technology | Requirement
 
 ## Accessibility
 
-Please see the [Accessibility](http://docs.oracle.com/middleware/jet220/jet/developer/GUID-A8970DC0-7935-46B8-9A55-BCF4380B2CFC.htm#JETDG253) section of the Oracle JET Development Guide. As part of the quality control process for CalOrders, ADA testing via the WAVE plugin and the NVDA screen reader are used to ensure pages are accessible.
+Please see the [Accessibility](http://docs.oracle.com/middleware/jet220/jet/developer/GUID-A8970DC0-7935-46B8-9A55-BCF4380B2CFC.htm#JETDG253) section of the Oracle JET Development Guide. As part of the CalOrders quality control process, ADA testing was conducted using the WAVE plugin for Chrome and the NVDA screen reader with FireFox to ensure pages are accessible.
