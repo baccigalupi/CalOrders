@@ -1,7 +1,7 @@
 #California Department of Technology - OnCore Consulting ADPQ Vendor Pool Refresh Prototype - 
 ###[Prototype URL](Prototype URL)
 
-##Introduction
+## Introduction
 
 OnCore focused on delivering what the end user needs by combining an Agile methodology and User Centered design to deliver functioning, high value features for the business and development teams to incrementally improve on.  Using Agile stories that built up functionality over the sprints, we were able to adjust quickly to the needs of the business as they were able to immediatley see the application and the requirements they were providing.  These tight cycles between ideas and testing allowed us to respond quickly to change and focused on solutions not features.    
 
