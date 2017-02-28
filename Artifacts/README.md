@@ -123,7 +123,7 @@ CalOrders core principles:
 * Transparency, GitHub repository open to public 
 
 
-![Figure 1](https://github.com/OncoreLLC/CalOrders/blob/master/Artifacts/images/Architecture_files/calorders_arch01.png)
+![Figure 1](https://github.com/OncoreLLC/CalOrders/blob/master/Artifacts/images/Architecture_files/calorders_arch01_small.png)
 
 Figure 1: CalOrders Architecture
 
@@ -212,7 +212,7 @@ A [view model](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersJET/s
 
 ## Services
 
-![Figure 6](https://github.com/OncoreLLC/CalOrders/blob/master/Artifacts/images/Architecture_files/calorders_arch03.jpg)
+![Figure 6](https://github.com/OncoreLLC/CalOrders/blob/master/Artifacts/images/Architecture_files/calorders_arch02_small.jpg)
 
 Figure 6: CalOrders Service Architecture
 
