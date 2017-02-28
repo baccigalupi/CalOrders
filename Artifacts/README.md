@@ -15,12 +15,12 @@ The following documentation represents our demonstration in designing under a Us
 
 
 ##Project Requirements
-The project requirements and how OnCore fulfilled each requirement is listed below.
+The following table presents each of the project requirements, with links to the corresponding artifacts and evidence of meeting or exceeding it. 
 
-Reqirements | Reference(s)
+Reqirement | How it was met
 --- | ---
 a. Assigned one (1) leader and gave that person authority and responsibility and held that person accountable for the quality of the prototype submitted | [Michael Tsay](#calorder-development-team)
-b. Assembled a multidisciplinary and collaborative team that includes, at a minimum, five (5) of the labor categories as identified in Attachment B: PQVP DS-AD Labor Category Descriptions | [The team](#calorder-development-team)
+b. Assembled a multidisciplinary and collaborative team that includes, at a minimum, five (5) of the labor categories as identified in Attachment B: PQVP DS-AD Labor Category Descriptions | [Our team](#calorder-development-team)
 c. Understood what people needed, by including people in the prototype development and design process | [Focus Group](https://github.com/OncoreLLC/CalOrders/wiki/Focus-Group)<br> [Interview](https://github.com/OncoreLLC/CalOrders/wiki/Interviews)<br> [Sprint Review/Product Demo](https://github.com/OncoreLLC/CalOrders/wiki/Sprint-Reviews)
 d. Used at least a minimum of three (3) “user-centric design” techniques and/or tools | [Focus Group](https://github.com/OncoreLLC/CalOrders/wiki/Focus-Group)<br> [Interview](https://github.com/OncoreLLC/CalOrders/wiki/Interviews)<br> [Personas](https://github.com/OncoreLLC/CalOrders/wiki/Develop-Personas)<br>[Scenarios](https://github.com/OncoreLLC/CalOrders/wiki/Scenarios)<br>[Storyboards](https://github.com/OncoreLLC/CalOrders/wiki/Story-Boards)<br>[Wireframes](https://github.com/OncoreLLC/CalOrders/wiki/Wire-Frames)<br>[Wireframe Walkthrough](https://github.com/OncoreLLC/CalOrders/wiki/Wireframe-Walkthrough)<br>[Usability Testing](https://github.com/OncoreLLC/CalOrders/wiki/Usability-Testing)
 e. Used GitHub to document code commits | [Github Contributions](https://github.com/OncoreLLC/CalOrders/graphs/commit-activity)
@@ -28,7 +28,7 @@ f. Used Swagger to document the RESTful API, and provided a link to the Swagger 
 g. Complied with Section 508 of the Americans with Disabilities Act and WCAG 2.0 |[ADA and WCAG compliance](https://github.com/OncoreLLC/CalOrders/wiki/ADA-and-WCAG-Compliance) 
 h. Created or used a design style guide and/or a pattern library | [Style Guide](https://github.com/OncoreLLC/CalOrders/wiki/Style-Guide)
 i. Performed usability tests with people | [Usability Testing](https://github.com/OncoreLLC/CalOrders/wiki/Usability-Testing)
-j. Used an iterative approach, where feedback informed subsequent work or versions of the prototype; | [Agile Methodology](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Methodolgy)
+j. Used an iterative approach, where feedback informed subsequent work or versions of the prototype; | [OnCore's Agile Methodology](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Methodolgy)
 k. Created a prototype that works on multiple devices, and presents a responsive design |[Responsive Application Design](https://github.com/OncoreLLC/CalOrders/wiki/Responsive-Application-Design)<br>[Architecture Overview](https://github.com/OncoreLLC/CalOrders/wiki/Architecture)<br>[Application Overview](https://github.com/OncoreLLC/CalOrders/wiki/Application-Overview)
 l. Used at least five (5) modern and open-source technologies, regardless of architectural layer (frontend, backend, etc.) | [Technologies](https://github.com/OncoreLLC/CalOrders/wiki/Modern-and-Open-Source-Technologies)
 m. Deployed the prototype on an Infrastructure as a Service (IaaS) or Platform as Service(PaaS) provider, and indicated which provider they used | [Application Service Deployment](https://github.com/OncoreLLC/CalOrders/wiki/Application-Service-Deployment)
@@ -41,11 +41,12 @@ s. Provided sufficient documentation to install and run their prototype on anoth
 t. Prototype and underlying platforms used to create and run the prototype are openly licensed and free of charge | [Software Licensing](https://github.com/OncoreLLC/CalOrders/wiki/Software-Licensing)
 
 ## US Digital Services Playbook
-[Playbook](https://github.com/OncoreLLC/CalOrders/wiki/Addressing-U.S.-Digital-Services-Playbook-Plays)
+Our team followed the US Digital Services Playbook, covering each of the 13 plays, from understanding what people need, to defaulting to open.  Follow this link for [evidence on how each play was followed](https://github.com/OncoreLLC/CalOrders/wiki/Addressing-U.S.-Digital-Services-Playbook-Plays).
 
 
-##CalOrder Development Team
-Oncore selected Mike Tsay as the Team Leader/Project Manager, who had authority over and was responsible and accountable for the quality of the prototype submitted.
+## Development Team
+
+OnCore asked Mike Tsay to be the Team Leader/Project Manager.  Mike was given authority over and was responsible and accountable for the quality of the prototype submitted.  The following table presents the balance of the OnCore team. 
 
 **We selected a multidisciplinary and collaborative team that fulfilled the following 8 labor categories _(2b)_:**  
 
@@ -61,8 +62,9 @@ Backend Web Developer | [Janice Wiley](https://github.com/OncoreLLC/CalOrders/wi
 Backend Web Developer | [Won Lee](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Team-Bios)  
 DevOps Engineer | [Suganya Ravikumar](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Team-Bios)  
 
-##User Centric Design - Understanding what people need  
-The first step of a [User-Centered-Design](https://github.com/OncoreLLC/CalOrders/wiki/User-Centric-Design) (UCD) process is to formulate a plan.  We developed a [statement of work](https://github.com/OncoreLLC/CalOrders/wiki/Statement-of-Work) to identify the project objectives, requirements, user community, constraints, schedule, and deliverables.
+## User Centric Design - Understanding what people need  
+
+The first step of a  [User-Centered-Design](https://github.com/OncoreLLC/CalOrders/wiki/User-Centric-Designn (UCD) process is to formulate a plan.  Our plan, framed by our [statement of work](https://github.com/OncoreLLC/CalOrders/wiki/Statement-of-Work), identified the project objectives, requirements, user community, constraints, schedule, and deliverables.
 
 Our plan combines our UCD and Agile processes into a cohesive and flexible workflow.  It was this combination that we were able to identify the features that the users valued the most, and were able to focus our story and build activities to deliver working functionality after each sprint.  This allowed for feedback and changes to the design and resulted in a product that reflected what the end users were really asking for.
 
@@ -77,19 +79,19 @@ Plan | Analyze| Design | Implement | Test & Measure
 [Develop a Plan](https://github.com/OncoreLLC/CalOrders/wiki/User-Centric-Design)   | [Personas](https://github.com/OncoreLLC/CalOrders/wiki/Develop-Personas)||                       | Retest
 ||[Interviews](https://github.com/OncoreLLC/CalOrders/wiki/Interviews) ||
 
-##Agile Prototype Development   
+## Agile Development   
 
 The team's principle focus during development of CalOrders is summarized best by Jeff Sutherland.
  
 “[Value] people over processes; products that actually work over documenting what that product is supposed to do; collaborating with customers over negotiating with them; and responding to change over following a plan.” (Scrum: The Art of Doing Twice the Work in Half the Time)
 
-[Oncore's Agile methodology](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Methodolgy) provided the team an iterative approach, where feedback informed subsequent work or versions of the prototype.   
+[Oncore's Agile methodology](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Methodolgy) provided the team with an iterative approach, where fast feedback informed subsequent work or versions of the prototype, each time making it better.
 
 For example, during the early focus group sessions the users described the need for improvement of the add product business process as being an important feature for the new application.  This allowed us to deliver in Sprint 1 a simplified add product page that got the core functionality quickly to the users.  In Sprint 2, we enhanced, adding the ability to upload images, and integrated it to the navigation bar but the users still remarked at how they were pleased that they received the core feature early.
 
 Another time where UCD and Agile combined was during the walkthrough of the Sprint 1 pages.  The end users noticed that the product search tree did not include Services.  This kicked off an impromptu design session to better understand the concept, which resulted in data model changes and application changes that were quickly incorporated.  Had the interaction with the end users not been part of the methodology thus change would have been more complicated in the future.
 
-###Principles
+### Principles
 
 There are many different specific project development methodologies within agile. but they all center around a core set of principles:
 
@@ -102,7 +104,7 @@ There are many different specific project development methodologies within agile
 
 ###Process   
 
-Our [Agile](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Methodolgy) process allowed us to rapidly deliver a working product to maintain the momentum from the User Centered Design Sessions, allowing us to show the end user the system we were building. Combined with sprint cycles we were able to add new stories; existing stories in the backlog and icebox were continually evolving and reprioritized with continued meetings outside of the development cycle. These meeting took place between the product owner, business analysts and end users. Focusing on keeping things simple and evolving fostered the environment of rapid delivery and allowed for face to face interactions with the end users on how the system was evolving.  More importanly, it allowed for failure, and with the quick adjustments yieled a system that worked for the end users.
+Our [Agile](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Methodolgy) process allowed us to rapidly deliver a working product to maintain the momentum from the User Centered Design Sessions, allowing us to show the end user the system we were building. Combined with sprint cycles we were able to add new stories; existing stories in the backlog and icebox were continually evolving and reprioritized with continued meetings outside of the development cycle. These meeting took place between the product owner, business analysts and end users. Focusing on keeping things simple and evolving fostered the environment of rapid delivery and allowed for face to face interactions with the end users on how the system was evolving.  More importantly, it allowed for failure, and with the quick adjustments yielded a system that worked for the end users.
 
 ###Practices
 The list below provides links to additional artifacts and other important information about each agile practice that was utilized for this project.<br>
