@@ -24,7 +24,7 @@
 /*
  * Your about ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUtils','ojs/ojrouter', 'ojs/ojknockout', 'promise',
+define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUtils', 'ojs/ojrouter', 'ojs/ojknockout', 'promise',
     'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojpagingcontrol', 'ojs/ojpagingcontrol-model', 'utils/ProductHelper'],
         function (oj, ko, data, accounting) {
 
@@ -39,6 +39,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                 self.addedProductName = ko.observable();
                 self.productsToCompareBreadcrumbs = ko.observable();
                 self.productsToCompare = ko.observableArray();
+                self.errorMessage = ko.observable();
 
                 /**
                  * Get the photo for the product
@@ -57,14 +58,23 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                  * @returns {undefined}
                  */
                 self.addToCart = function (product) {
-                    console.log("adding: " + product.prdUid);
-                    
-                    ProductHelper.addProductToCart(product);
+                    self.errorMessage("");
+                    document.getElementById('pageErrorContainer').hidden = true;
 
-                    // Show confirmation message                    
-                    self.addedProductName(product.prdName);
-                    self.addedProductPhoto($("#productImage" + product.prdUid).attr("src"));
-                    $("#addToCartConfirmationDialog").ojDialog("open");
+                    if (Number(product.quantity()) <= 0 || Number(product.quantity()) > 10000)
+                    {
+                        self.errorMessage("Please enter a quantity between 1 and 10,000");
+                        document.getElementById('pageErrorContainer').hidden = false;
+                        return false;
+                    } else
+                    {
+                        ProductHelper.addProductToCart(product);
+
+                        // Show confirmation message                    
+                        self.addedProductName(product.prdName);
+                        self.addedProductPhoto($("#productImage" + product.prdUid).attr("src"));
+                        $("#addToCartConfirmationDialog").ojDialog("open");
+                    }
                 };
 
                 /**
@@ -87,7 +97,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                 self.navigateToCart = function () {
                     return self.router.go("cart");
                 };
-                
+
                 self.getPrice = function (price)
                 {
                     return accounting.formatMoney(price);
@@ -105,16 +115,17 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                  * the promise is resolved
                  */
                 self.handleActivated = function (info) {
-                    if(!SecurityUtils.isAuthenticated()){
+                    if (!SecurityUtils.isAuthenticated()) {
                         return self.router.go('welcome');
                     }
 
+                    self.errorMessage("");
                     self.productsToCompareBreadcrumbs(sessionStorage.productsToCompareBreadcrumbs);
                     self.productsToCompare(JSON.parse(sessionStorage.productsToCompare));
-                    
+
                     // Init quantity
                     var prd;
-                    for ( prd in self.productsToCompare())
+                    for (prd in self.productsToCompare())
                     {
                         self.productsToCompare()[prd].quantity = ko.observable(1);
                     }

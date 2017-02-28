@@ -28,6 +28,21 @@
         <h2 style="margin-bottom:0">Product Detail</h2>
     </div>
 
+        <!-- global error messages -->
+    <div class="oj-flex-item oj-messaging-inline-container" id="pageErrorContainer" aria-live="polite" hidden>
+        <div class="oj-padding-vertical"></div>
+        <div class="oj-message oj-message-error">
+            <div class="oj-component-icon oj-message-status-icon oj-message-error-icon" title="Error" role="img"></div>
+            <div class="oj-message-content">
+                <div class="oj-message-summary">Error</div>
+                <div class="oj-message-detail">
+                    <span data-bind="text: errorMessage"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end global error message -->
+    
     <!-- Page Content -->
 
     <div class="oj-panel oj-flex-item oj-panel-shadow-md">

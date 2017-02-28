@@ -63,7 +63,7 @@ Our plan combines our UCD and Agile processes into a cohesive and flexible workf
 
 The team utilized User-Centered-Design (UCD) and Agile development techniques to formulate the product backlog.  All team members participated in the initial meetings with the users which was a natural hook into our Agile methodolgy and gave everyone the opportunity to understand the scope of the project and understand how each of them would contribute to the project's success.  
 
-The table below summarizes how we incorporated the UCD practices in the development of CalOrders.  Each section includes a link to another page that provides detail on the subject.  
+The table below summarizes how we incorporated the UCD practices of Plan, Analyze, Design, Implement and Test & Measure in the development of CalOrders.  Each section includes a link to another page that provides detail on the subject.
 
 Plan | Analyze| Design | Implement | Test & Measure  
 --- | --- | --- | --- | ----
@@ -134,7 +134,7 @@ CalOrders by default uses the open source NetBeans IDE for development.  NetBean
 
 ## Projects
 
-The CalOrders application is separated by area of [concern into separate](https://www.google.com/search?q=separation+of+concerns&rlz=1C1CHBF_enUS728US729&oq=separ&aqs=chrome.2.69i57j0l5.2947j0j4&sourceid=chrome&ie=UTF-8) NetBeans projects. 
+The CalOrders application is separated by area of concern into separate NetBeans projects. 
  
 * CalOrdersJET - [(CDT–ADPQ–0117-2-Technical Approach: Client UI)](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersJET)  JET JavaScript, HTML5, CSS project providing the front end for the CalOrders application
 * JavaScript Library - [(CDT–ADPQ–0117-2-Technical Approach: JavaScript Library)](http://www.oracle.com/webfolder/technetwork/jet/index.html) Orcle JET is an open source JavaScript framework proving a rich set of ADA compliant components. See User Interface section below for more details about Oracle JET
@@ -216,7 +216,7 @@ A [view model](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersJET/s
 
 Figure 6: CalOrders Service Architecture
 
-CalOrders uses [REST services](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersRest/src/java/com/oncore/calorders/rest/service) exposed from JEE Session Beans using the built in annotations available from Java.  Java provides excellent REST service support in JEE making it extremely easy to create REST services supporting [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) operations on an underlying datastore.  CalOrders uses the NetBeans REST services generator to create the core set of [JPA](https://en.wikipedia.org/wiki/Java_Persistence_API) entities and REST facades needed for the application.  Customizing the service entities is supported via built in JPA functionality using the persistence.xml file and xml files containing custom named queries or custom queries can be defined directly in the REST Facades using the JPA create query method and syntax.  See the [HOW TO Create Custom Queries and REST Facades](https://github.com/OncoreLLC/CalOrders/wiki/HOW-TO-Create-Custom-Queries-and-REST-Facades) Wiki page for more details on how to create custom JPA Named Queries and REST Facades.  Core classes and utilities needed to support the underlying architecture across domains are defined in CalOrdersCore.
+CalOrders uses [REST services](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersRest/src/java/com/oncore/calorders/rest/service) exposed from JEE Session Beans using the built in annotations available from Java.  Java provides excellent REST service support in JEE making it extremely easy to create REST services supporting CRUD operations on an underlying datastore.  CalOrders uses the NetBeans REST services generator to create the core set of JPA entities and REST facades needed for the application.  Customizing the service entities is supported via built in JPA functionality using the persistence.xml file and xml files containing custom named queries or custom queries can be defined directly in the REST Facades using the JPA create query method and syntax.  See the [HOW TO Create Custom Queries and REST Facades](https://github.com/OncoreLLC/CalOrders/wiki/HOW-TO-Create-Custom-Queries-and-REST-Facades) Wiki page for more details on how to create custom JPA Named Queries and REST Facades.  Core classes and utilities needed to support the underlying architecture across domains are defined in CalOrdersCore.
 
 
 ## Shared Architectural Components

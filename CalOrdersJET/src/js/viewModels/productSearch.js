@@ -75,12 +75,12 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                     {code: "DUAL", level1: "Desktop Systems", level2: "Desktop Upgrades", level3: "All in One"},
                     {code: "DUMO", level1: "Monitors", level2: "Monitor Upgrades", level3: ""},
                     {code: "DMMO", level1: "Monitors", level2: "Monitors", level3: ""},
-                    {code: "DSPO", level1: "Desktop Systems", level2: "Desktop Upgrades", level3: "Power"},
-                    {code: "DSST", level1: "Desktop Systems", level2: "Desktop Upgrades", level3: "Standard"},
-                    {code: "DSMO", level1: "Desktop Systems", level2: "Desktop Upgrades", level3: "Monitor"},
-                    {code: "DSWO", level1: "Desktop Systems", level2: "Desktop Upgrades", level3: "Workstation"},
-                    {code: "DSTH", level1: "Desktop Systems", level2: "Desktop Upgrades", level3: "Thin Client"},
-                    {code: "DSAL", level1: "Desktop Systems", level2: "Desktop Upgrades", level3: "All in One"},
+                    {code: "DSPO", level1: "Desktop Systems", level2: "Desktop Services", level3: "Power"},
+                    {code: "DSST", level1: "Desktop Systems", level2: "Desktop Services", level3: "Standard"},
+                    {code: "DSMO", level1: "Desktop Systems", level2: "Desktop Services", level3: "Monitor"},
+                    {code: "DSWO", level1: "Desktop Systems", level2: "Desktop Services", level3: "Workstation"},
+                    {code: "DSTH", level1: "Desktop Systems", level2: "Desktop Services", level3: "Thin Client"},
+                    {code: "DSAL", level1: "Desktop Systems", level2: "Desktop Services", level3: "All in One"},
                     {code: "DAAL", level1: "Independent Services", level2: "Desktop Services", level3: ""},
                     {code: "LHST", level1: "Laptop Systems", level2: "Laptop Computers", level3: "Standard"},
                     {code: "LHPO", level1: "Laptop Systems", level2: "Laptop Computers", level3: "Power"},
@@ -91,11 +91,11 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                     {code: "LUST", level1: "Laptop Systems", level2: "Laptop Upgrades", level3: "Standard"},
                     {code: "LUPO", level1: "Laptop Systems", level2: "Laptop Upgrades", level3: "Power"},
                     {code: "LUUL", level1: "Laptop Systems", level2: "Laptop Upgrades", level3: "Ultralight"},
-                    {code: "LSMO", level1: "Laptop Systems", level2: "Laptop Upgrades", level3: "Mobile"},
-                    {code: "LSPO", level1: "Laptop Systems", level2: "Laptop Upgrades", level3: "Power"},
-                    {code: "LSUL", level1: "Laptop Systems", level2: "Laptop Upgrades", level3: "Ultralight"},
-                    {code: "LSST", level1: "Laptop Systems", level2: "Laptop Upgrades", level3: "Standard"},
-                    {code: "LSAL", level1: "Laptop Systems", level2: "Laptop Upgrades", level3: "All"},
+                    {code: "LSMO", level1: "Laptop Systems", level2: "Laptop Services", level3: "Mobile"},
+                    {code: "LSPO", level1: "Laptop Systems", level2: "Laptop Services", level3: "Power"},
+                    {code: "LSUL", level1: "Laptop Systems", level2: "Laptop Services", level3: "Ultralight"},
+                    {code: "LSST", level1: "Laptop Systems", level2: "Laptop Services", level3: "Standard"},
+                    {code: "LSAL", level1: "Laptop Systems", level2: "Laptop Services", level3: "All"},
                     {code: "LAAL", level1: "Independent Services", level2: "Laptop Services", level3: ""},
                     {code: "DUOT", level1: "Desktop Systems", level2: "Desktop Upgrades", level3: "Other"},
 
@@ -143,7 +143,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
 
                     if (sessionStorage.keepSearchResults !== 'true')
                     {
-                        // Implement if needed
+                        self.nameSearch = ko.observable('');
                         self.selectedProductMenuItem('DHST');
                         self.searchProducts('DHST');
                     } else
@@ -292,18 +292,30 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                  * @returns {undefined}
                  */
                 self.addToCart = function (product) {
-                    ProductHelper.addProductToCart(product);
+                    self.errorMessage("");
+                    document.getElementById('pageErrorContainer').hidden = true;
 
-                    // Show confirmation message                    
-                    self.addedProductName(product.prdName);
-                    self.addedProductPhoto($("#productImage" + product.prdUid).attr("src"));
-                    $("#addToCartConfirmationDialog").ojDialog("open");
+                    if (Number(product.quantity()) <= 0 || Number(product.quantity()) > 10000)
+                    {
+                        self.errorMessage("Please enter a quantity between 1 and 10,000");
+                        document.getElementById('pageErrorContainer').hidden = false;
+                        return false;
+                    } else
+                    {
+
+                        ProductHelper.addProductToCart(product);
+
+                        // Show confirmation message                    
+                        self.addedProductName(product.prdName);
+                        self.addedProductPhoto($("#productImage" + product.prdUid).attr("src"));
+                        $("#addToCartConfirmationDialog").ojDialog("open");
+                    }
                 };
 
                 self.navigateToProductSearch = function () {
                     self.cartTotalPrice(self.getPrice(sessionStorage.itemTotalPrice));
                     self.cartTotalItems(sessionStorage.itemQuantityTotal);
-                    
+
                     $("#addToCartConfirmationDialog").ojDialog("close");
                     return self.router.go("productSearch");
                 };
