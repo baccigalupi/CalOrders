@@ -26,7 +26,9 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
 
             function CartViewModel() {
                 var self = this;
-
+                
+                var savingData = false;
+                
                 var serviceEndPoints = new ServiceEndPoints();
                 self.createOrderServiceURL = serviceEndPoints.getEndPoint("createOrder");
                 self.findRelatedServiceProductsURL = serviceEndPoints.getEndPoint("findActiveProductsByProductTypeAndVendor");
@@ -460,8 +462,11 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                 self.placeOrderClick = function (trackerObj)
                 {
                     if (sessionStorage.partyUid !== "" && sessionStorage.cartProducts !== ""
-                            && sessionStorage.authenticated !== "false")
+                            && sessionStorage.authenticated !== "false" && savingData == false)
                     {
+                        savingData = true;
+                        console.log("inside placeOrderClick!!!!");
+                        
                         var partyUid = sessionStorage.partyUid;
 
                         var sessionCart = JSON.parse(sessionStorage.cartProducts);
@@ -492,10 +497,11 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                                 order,
                                 {
                                     success: function (myModel, response, options) {
+                                        savingData = false;
                                         return self.router.go("orderConfirmation");
                                     },
                                     error: function (jqXHR, textStatus, errorThrown) {
-
+                                        savingData = false;
                                         console.log("Unable to create the order: " + errorThrown);
                                     }
                                 });
