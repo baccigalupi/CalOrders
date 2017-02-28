@@ -75,6 +75,88 @@ var ProductHelper = new function ()
         }
     };
 
+    /**
+     * Gets the photo for a product asyncroniously and sets it on the product image
+     */
+    this.getPhotoAsync = function (prdUid)
+    {
+        if (prdUid === undefined || prdUid === null || prdUid.length === 0)
+        {
+            var src = '../../css/images/unknown_product.jpg';
+            return src;
+        } else
+        {
+
+            var serviceEndPoints = new ServiceEndPoints();
+
+            var findProdutService = serviceEndPoints.getEndPoint("findProductById");
+
+            var ProductModel = oj.Model.extend({
+                urlRoot: findProdutService + "/" + prdUid,
+                attributeId: 'prdUid'
+
+            });
+
+            var pm = new ProductModel();
+            pm.fetch({
+                success: function (myModel, response, options) {
+                    var product = pm;
+                    if (product === undefined || product === null || product.attributes === undefined || product.attributes.prdImgImage === null
+                            || product.attributes.prdImgImage === undefined || product.attributes.prdImgImage.length === 0)
+                    {
+                        var src = '../../css/images/unknown_product.jpg';
+                        var preview = document.getElementById('productImage' + product.attributes.prdUid);
+                        preview.src = src;
+                    } else
+                    {
+                        var file = product.attributes.prdImgImage;
+
+                        var imageSize = product.attributes.prdImgImage.length;
+                        var imageType = product.attributes.prdImgTypeCd.longDesc;
+
+                        var reader = new FileReader();
+
+                        var data = window.atob(file);
+                        var arr = new Uint8Array(data.length);
+                        for (var i = 0; i < data.length; i++) {
+                            arr[i] = data.charCodeAt(i);
+                        }
+
+                        var blob = new Blob([arr.buffer], {size: imageSize, type: imageType});
+
+                        reader.addEventListener("load", function (event) {
+                            var preview = document.getElementById('productImage' + product.attributes.prdUid);
+
+                            if (preview !== null)
+                            {
+                                preview.src = reader.result;
+                            }
+                        }, false);
+
+                        if (blob) {
+
+                            try {
+                                reader.readAsDataURL(blob);
+
+                            } catch (err)
+                            {
+                                console.log(err);
+                            }
+                        }
+                    }
+                    return false;
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log("Failed to load product image" + errorThrown);
+                    return false;
+                }
+            });
+
+            var src = '../../css/images/unknown_product.jpg';
+            return src;
+        }
+    };
+
     this.addProductToCart = function (product)
     {
         var cartProducts;
@@ -112,14 +194,14 @@ var ProductHelper = new function ()
         for (i = 0; i < cartProducts.length; i++)
         {
             tempItemTotalPrice += (cartProducts[i].prdCntrUnitPrice * cartProducts[i].quantity);
-            
+
             console.log("Quantity: " + cartProducts[i].quantity);
             tempItemQuantityTotal += Number(cartProducts[i].quantity);
         }
         sessionStorage.itemTotalPrice = tempItemTotalPrice;
         sessionStorage.itemQuantityTotal = tempItemQuantityTotal;
-        
-        console.log("Cart Price: " +  sessionStorage.itemTotalPrice);
+
+        console.log("Cart Price: " + sessionStorage.itemTotalPrice);
 
 
         // Save cart back into session
