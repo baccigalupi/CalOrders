@@ -114,6 +114,8 @@ The list below provides links to additional artifacts and other important inform
 ##Technical Approach
 Our Technical Approach centers on user centered design, agile methods, using modern technology.  Our goal is to build what the user really needs, and as such, we structure our methods, tooling and architecture around iterative, collaborative activities, that allow development staff to integrate and iterate quickly with end users.  Our goal is to realize the agile potential of developing twice the functionality, in half the time.  
 
+The following sections describe our approach to using user centered design and agile methods to drive our efforts.  They describe our approach to DevOps, our Architecture, our Development Environment, and our Responsive User Interface and Application Design.  Finally, they conclude with our approach to using shared architectural components, use of modern and open source technologies, and our accessible user interface. 
+
 ### DevOps
 
 [DevOps](https://github.com/OncoreLLC/CalOrders/wiki/Environments)  
