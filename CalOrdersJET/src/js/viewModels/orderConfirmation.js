@@ -107,6 +107,8 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                             });
 
                             sessionStorage.cartProducts = [];
+                            sessionStorage.itemQuantityTotal = 0;
+                            sessionStorage.itemTotalPrice = 0;
 
                         }
 
