@@ -40,15 +40,15 @@ r. Deployed their software in an open source container, such as Docker (i.e., ut
 s. Provided sufficient documentation to install and run their prototype on another machine and | [Setup and Deployment](https://github.com/OncoreLLC/CalOrders/wiki/Environments)
 t. Prototype and underlying platforms used to create and run the prototype are openly licensed and free of charge | [Software Licensing](https://github.com/OncoreLLC/CalOrders/wiki/Software-Licensing)
 
-## US Digital Services Playbook
+## [US Digital Services Playbook](https://github.com/OncoreLLC/CalOrders/wiki/Addressing-U.S.-Digital-Services-Playbook-Plays)
 Our team followed the US Digital Services Playbook, covering each of the 13 plays, from understanding what people need, to defaulting to open.  Follow this link for [evidence on how each play was followed](https://github.com/OncoreLLC/CalOrders/wiki/Addressing-U.S.-Digital-Services-Playbook-Plays).
 
 
-## Development Team
+## [Development Team](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Team-Bios)
 
 OnCore asked Mike Tsay to be the Team Leader/Project Manager.  Mike was given authority over and was responsible and accountable for the quality of the prototype submitted.  The following table presents the balance of the OnCore team. 
 
-**We selected a multidisciplinary and collaborative team that fulfilled the following 8 labor categories _(2b)_:**  
+**We selected a multidisciplinary and collaborative team that fulfilled the following 8 labor categories:**  
 
 Role | Team Member  
 --- | ---  
@@ -62,7 +62,7 @@ Backend Web Developer | [Janice Wiley](https://github.com/OncoreLLC/CalOrders/wi
 Backend Web Developer | [Won Lee](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Team-Bios)  
 DevOps Engineer | [Suganya Ravikumar](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Team-Bios)  
 
-## User Centric Design - Understanding what people need  
+## [User Centric Design](https://github.com/OncoreLLC/CalOrders/wiki/User-Centric-Design) - Understanding what people need  
 
 The first step of a  [User-Centered-Design](https://github.com/OncoreLLC/CalOrders/wiki/User-Centric-Designn (UCD) process is to formulate a plan.  Our plan, framed by our [statement of work](https://github.com/OncoreLLC/CalOrders/wiki/Statement-of-Work), identified the project objectives, requirements, user community, constraints, schedule, and deliverables.
 
@@ -79,7 +79,7 @@ Plan | Analyze| Design | Implement | Test & Measure
 [Develop a Plan](https://github.com/OncoreLLC/CalOrders/wiki/User-Centric-Design)   | [Personas](https://github.com/OncoreLLC/CalOrders/wiki/Develop-Personas)||                       | Retest
 ||[Interviews](https://github.com/OncoreLLC/CalOrders/wiki/Interviews) ||
 
-## Agile Development   
+## [Agile Development](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Methodolgy)   
 
 The team's principle focus during development of CalOrders is summarized best by Jeff Sutherland.
  
@@ -102,11 +102,11 @@ There are many different specific project development methodologies within agile
 5. Measure success.
 6. Reflect, adjust, iterate.
 
-###Process   
+### Process   
 
 Our [Agile](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Methodolgy) process allowed us to rapidly deliver a working product to maintain the momentum from the User Centered Design Sessions, allowing us to show the end user the system we were building. Combined with sprint cycles we were able to add new stories; existing stories in the backlog and icebox were continually evolving and reprioritized with continued meetings outside of the development cycle. These meeting took place between the product owner, business analysts and end users. Focusing on keeping things simple and evolving fostered the environment of rapid delivery and allowed for face to face interactions with the end users on how the system was evolving.  More importantly, it allowed for failure, and with the quick adjustments yielded a system that worked for the end users.
 
-###Practices
+###  Practices
 The list below provides links to additional artifacts and other important information about each agile practice that was utilized for this project.<br>
 * [User Stories (Pivotal Tracker)](https://www.pivotaltracker.com/n/projects/1968721) 
 * [User Story Estimation](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Story-Estimation) 
@@ -118,7 +118,7 @@ The list below provides links to additional artifacts and other important inform
 * [Daily Standups](https://github.com/OncoreLLC/CalOrders/wiki/Sprint-Daily-Stand-ups)
 
 
-##Technical Approach
+## Technical Approach
 Our Technical Approach centers on user centered design, agile methods, using modern technology.  Our goal is to build what the user really needs, and as such, we structure our methods, tooling and architecture around iterative, collaborative activities, that allow development staff to integrate and iterate quickly with end users.  Our goal is to realize the agile potential of developing twice the functionality, in half the time.  
 
 The following sections describe our technical approach to building the CalOrders application. They describe our approach to DevOps, our Architecture, our Development Environment, and our Responsive User Interface and Application Design. Finally, they conclude with our approach to using shared architectural components, use of modern and open source technologies, and our accessible user interface.
