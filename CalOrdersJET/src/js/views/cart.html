@@ -27,8 +27,8 @@
     <div id="pageTitleContainer" class="oj-flex-item oj-sm-6">
         <h2 style="margin-bottom:0">Cart</h2>
     </div>
-    
-        <!-- global error messages -->
+
+    <!-- global error messages -->
     <div class="oj-flex-item oj-messaging-inline-container" id="pageErrorContainer" aria-live="polite" hidden>
         <div class="oj-padding-vertical"></div>
         <div class="oj-message oj-message-error">
@@ -155,8 +155,8 @@
                             <span style="font-weight: bold">Quantity: </span>
                             <input class="product-quantity" id="quantity" aria-label="quantity"
                                    data-bind="value: quantity, 
-                            event: {change: function(product,event) { $parent.productQuantityChange( product );} }"
-                                   type="number" min="1" max="1000" />
+                            event: {change: $parent.productQuantityChange}"
+                                   type="number" min="1" max="10000" />
                         </div>
                     </div>
                 </div>
@@ -172,7 +172,7 @@
 
                 <div class="oj-flex">
                     <div class="oj-flex-item">
-                       <span style="font-weight: bold">Total: </span><span data-bind="text: $parent.getPrice($data['totalItemPrice']())"/>
+                        <span style="font-weight: bold">Total: </span><span data-bind="text: $parent.getPrice($data['totalItemPrice']())"/>
                     </div>
                 </div>
             </div>
@@ -250,11 +250,11 @@
 
                             <!-- Quantity -->
                             <div class="oj-flex-item oj-sm-2">
-<span style="font-weight: bold">Quantity: </span>
+                                <span style="font-weight: bold">Quantity: </span>
                                 <input class="product-quantity" id="quantity" aria-label="quantity"
                                        data-bind="value: quantity, 
-                            event: {change: function(product,event) { $parent.productQuantityChange( product );} }"
-                                       type="number" min="1" max="1000" />
+                            event: {change: $parent.productQuantityChange}"
+                                       type="number" min="1" max="10000" />
                             </div>
 
                             <!-- Price -->

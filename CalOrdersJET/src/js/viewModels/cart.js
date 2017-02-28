@@ -26,9 +26,9 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
 
             function CartViewModel() {
                 var self = this;
-                
+
                 var savingData = false;
-                
+
                 var serviceEndPoints = new ServiceEndPoints();
                 self.createOrderServiceURL = serviceEndPoints.getEndPoint("createOrder");
                 self.findRelatedServiceProductsURL = serviceEndPoints.getEndPoint("findActiveProductsByProductTypeAndVendor");
@@ -36,7 +36,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
 
                 self.router = oj.Router.rootInstance;
                 self.ready = ko.observable(false);
-// Vendor Id is the key
+                // Vendor Id + Product Type is the key
                 self.relatedServicesMap = new Map();
 
                 self.itemTotalPrice = ko.observable();
@@ -61,8 +61,12 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                 // Below are a subset of the ViewModel methods invoked by the ojModule binding
                 // Please reference the ojModule jsDoc for additional available methods.
 
-
-                self.parseProduct = function (response) {
+                /**
+                 * Parses each related service for display in the Additional Services combo box. 
+                 * @param {type} response
+                 * @returns {undefined}
+                 */
+                self.parseRelatedService = function (response) {
 
                     for (i = 0; i < self.cart().length; i++)
                     {
@@ -179,10 +183,9 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
 
                             if (productType != "")
                             {
-
                                 var ProductModel = oj.Model.extend({
                                     urlRoot: self.findRelatedServiceProductsURL + "/" + productType + "/" + cartProduct.vndUidFk.vndUid,
-                                    parse: self.parseProduct,
+                                    parse: self.parseRelatedService,
                                     idAttribute: 'prdUid'
                                 });
                                 var product = new ProductModel();
@@ -201,7 +204,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                                         return false;
                                     },
                                     error: function (jqXHR, textStatus, errorThrown) {
-                                        console.log("Search failed" + errorThrown);
+                                        console.log("Search failed " + errorThrown);
                                         return false;
                                     }
                                 });
@@ -262,6 +265,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                     if (sessionStorage.cartProducts !== "")
                     {
                         var sessionCart = JSON.parse(sessionStorage.cartProducts);
+
                         if (sessionCart.length == 0)
                         {
                             document.getElementById('placeOrderBottom').disabled = true;
@@ -319,64 +323,100 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                     self.productLayoutType('productListLayout');
                 };
 
-
+                /**
+                 * Gets the formatted price value.
+                 * @param {type} price
+                 * @returns {unresolved}
+                 */
                 self.getPrice = function (price)
                 {
                     return accounting.formatMoney(price);
                 };
 
+                /**
+                 * Event for item quantity change.  If new quantity value is not valid, 
+                 * set it back to previous value and display an error message.  If new
+                 * quantity value is valid, update the cart in session storage and update
+                 * the totals.
+                 * 
+                 * @param {type} product
+                 * @param {type} event
+                 * @returns {undefined}
+                 */
                 self.productQuantityChange = function (product, event)
                 {
-//                    if (data.previousValue !== undefined)
-//                    {
-                    for (i = 0; i < self.cart().length; i++)
-                    {
-                        if (self.cart()[i].prdUid === product.prdUid)
-                        {
-                            var totalItemPrice = product.quantity() * self.cart()[i].prdCntrUnitPrice;
-                            self.cart()[i].totalItemPrice(totalItemPrice);
-                        }
-                    }
-
                     var sessionCart = JSON.parse(sessionStorage.cartProducts);
-                    var tempItemQuantityTotal = 0;
 
-                    for (i = 0; i < sessionCart.length; i++)
+                    if (Number(product.quantity()) <= 0 || Number(product.quantity()) > 10000)
                     {
-                        if (sessionCart[i].prdUid === product.prdUid)
+                        self.errorMessage("Please enter a quantity between 1 and 10,000");
+                        document.getElementById('pageErrorContainer').hidden = false;
+
+                        for (i = 0; i < sessionCart.length; i++)
                         {
-                            sessionCart[i].quantity = Number(product.quantity());
-                            sessionCart[i].totalItemPrice = sessionCart[i].quantity * sessionCart[i].prdCntrUnitPrice;
-                            tempItemQuantityTotal += sessionCart[i].quantity;
+                            // set the quantity back to the previous value if it's out of bounds
+                            if (sessionCart[i].prdUid === product.prdUid)
+                            {
+                                product.quantity(sessionCart[i].quantity);
+                            }
                         }
-                    }
-
-                    sessionStorage.itemQuantityTotal = tempItemQuantityTotal;
-
-                    var tempItemTotalPrice = 0.0;
-                    var tempShippingPrice = 25.00;
-                    var tempTotalPrice = 0.00;
-
-                    for (i = 0; i < sessionCart.length; i++)
+                    } else
                     {
-                        tempItemTotalPrice += (sessionCart[i].prdCntrUnitPrice * sessionCart[i].quantity);
+                        document.getElementById('pageErrorContainer').hidden = true;
+
+                        for (i = 0; i < self.cart().length; i++)
+                        {
+                            if (self.cart()[i].prdUid === product.prdUid)
+                            {
+                                var totalItemPrice = product.quantity() * self.cart()[i].prdCntrUnitPrice;
+                                self.cart()[i].totalItemPrice(totalItemPrice);
+                            }
+                        }
+
+                        var tempItemQuantityTotal = 0;
+
+                        for (i = 0; i < sessionCart.length; i++)
+                        {
+                            if (sessionCart[i].prdUid === product.prdUid)
+                            {
+                                sessionCart[i].quantity = Number(product.quantity());
+                                sessionCart[i].totalItemPrice = sessionCart[i].quantity * sessionCart[i].prdCntrUnitPrice;
+                                tempItemQuantityTotal += sessionCart[i].quantity;
+                            }
+                        }
+
+                        sessionStorage.itemQuantityTotal = tempItemQuantityTotal;
+
+                        var tempItemTotalPrice = 0.0;
+                        var tempShippingPrice = 25.00;
+                        var tempTotalPrice = 0.00;
+
+                        for (i = 0; i < sessionCart.length; i++)
+                        {
+                            tempItemTotalPrice += (sessionCart[i].prdCntrUnitPrice * sessionCart[i].quantity);
+                        }
+
+                        self.itemTotalPrice(self.getPrice(tempItemTotalPrice));
+                        self.shippingPrice(self.getPrice(tempShippingPrice));
+
+                        tempTotalPrice = tempShippingPrice + tempItemTotalPrice;
+
+                        self.totalPrice(self.getPrice(tempTotalPrice));
+
+                        sessionStorage.itemTotalPrice = self.itemTotalPrice();
+                        sessionStorage.shippingPrice = self.shippingPrice();
+                        sessionStorage.totalPrice = self.totalPrice();
+
+                        sessionStorage.cartProducts = JSON.stringify(sessionCart);
                     }
-
-                    self.itemTotalPrice(self.getPrice(tempItemTotalPrice));
-                    self.shippingPrice(self.getPrice(tempShippingPrice));
-
-                    tempTotalPrice = tempShippingPrice + tempItemTotalPrice;
-
-                    self.totalPrice(self.getPrice(tempTotalPrice));
-
-                    sessionStorage.itemTotalPrice = self.itemTotalPrice();
-                    sessionStorage.shippingPrice = self.shippingPrice();
-                    sessionStorage.totalPrice = self.totalPrice();
-
-                    sessionStorage.cartProducts = JSON.stringify(sessionCart);
-//                    }
                 };
 
+                /**
+                 * Removes selected products from the cart.  Displays an error message
+                 * if no products are selected for removal.
+                 * 
+                 * @returns {undefined}
+                 */
                 self.removeProductsFromCart = function ()
                 {
 
@@ -397,7 +437,6 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
 
                     if (productsToRemove.length > 0)
                     {
-
                         var sessionCart = JSON.parse(sessionStorage.cartProducts);
 
                         for (var i = sessionCart.length - 1; i >= 0; i--)
@@ -448,6 +487,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                         document.getElementById('pageErrorContainer').hidden = true;
                     } else
                     {
+                        // No products selected for removal
                         self.errorMessage("Please select one or more products to remove");
                         document.getElementById('pageErrorContainer').hidden = false;
                     }
@@ -466,7 +506,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                     {
                         savingData = true;
                         console.log("inside placeOrderClick!!!!");
-                        
+
                         var partyUid = sessionStorage.partyUid;
 
                         var sessionCart = JSON.parse(sessionStorage.cartProducts);
@@ -509,12 +549,25 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
 
                 };
 
+                /**
+                 * Continue Shopping event handler.
+                 * 
+                 * @param {type} data
+                 * @param {type} event
+                 * @returns {unresolved}
+                 */
                 self.continueShoppingClick = function (data, event)
                 {
                     return self.router.go("productSearch");
                 };
 
 
+                /**
+                 * Add Related Service button event handler.  
+                 * 
+                 * @param {type} product
+                 * @returns {undefined}
+                 */
                 self.addRelatedService = function (product) {
 
                     // Get product id of the related service
@@ -586,7 +639,6 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
 
                 };
 
-// TODO: Do we want Enter key to do anything by default on Cart page?
                 self.onEnter = function (data, event) {
                     if (event.keyCode === 13) {
 
@@ -594,7 +646,6 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                     return true;
                 };
 
-// TODO: Do we want to do anything when clicking on an item from the Cart?
                 self.changeHandler = function (page, event) {
                     if (event.option === 'currentItem') {
 
