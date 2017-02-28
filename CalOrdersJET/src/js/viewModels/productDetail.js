@@ -24,9 +24,9 @@
 /*
  * Your about ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUtils', 'ojs/ojrouter', 
-    'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojpagingcontrol', 
-    'ojs/ojpagingcontrol-model', 'utils/ProductHelper','ojs/ojtabs'],
+define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUtils', 'ojs/ojrouter',
+    'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojpagingcontrol',
+    'ojs/ojpagingcontrol-model', 'utils/ProductHelper', 'ojs/ojtabs'],
         function (oj, ko, data, accounting) {
 
             function ProductDetailViewModel() {
@@ -42,6 +42,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                 self.productsToCompareBreadcrumbs = ko.observable();
                 self.admin = ko.observable(false);
                 self.user = ko.observable(false);
+                self.errorMessage = ko.observable();
 
 
                 var lgQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.LG_UP);
@@ -65,7 +66,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                     response.vndName = ko.observable(response.vndUidFk.vndName);
                     response.categoryLongDesc = ko.observable(response.prdCategoryCd.longDesc);
                     response.unitLongDesc = ko.observable(response.prdUnitCd.longDesc);
-                    
+
                     self.product(response);
                 };
 
@@ -86,13 +87,26 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                  * @returns {undefined}
                  */
                 self.addToCart = function () {
-                    ProductHelper.addProductToCart(self.product());
 
-                    // Show confirmation message                    
-                    self.addedProductName(self.product().prdName);
-                    self.addedProductPhoto($("#productImage" + self.product().prdUid).attr("src"));
-                    $("#addToCartConfirmationDialog").ojDialog("open");
-                };
+                    self.errorMessage("");
+                    document.getElementById('pageErrorContainer').hidden = true;
+
+                    if (Number(self.product().quantity()) <= 0 || Number(self.product().quantity()) > 10000)
+                    {
+                        self.errorMessage("Please enter a quantity between 1 and 10,000");
+                        document.getElementById('pageErrorContainer').hidden = false;
+                        return false;
+                    } else
+                    {
+                        ProductHelper.addProductToCart(self.product());
+
+                        // Show confirmation message                    
+                        self.addedProductName(self.product().prdName);
+                        self.addedProductPhoto($("#productImage" + self.product().prdUid).attr("src"));
+                        $("#addToCartConfirmationDialog").ojDialog("open");
+                    }
+                }
+                ;
 
                 self.navigateToProductSearch = function () {
                     sessionStorage.keepSearchResults = true;
@@ -102,16 +116,16 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                 };
 
                 self.navigateToCart = function () {
-                    
+
                     return self.router.go("cart");
                 };
-                
+
                 self.navigateToProductUpdate = function (product) {
                     // Store product id parameter
                     self.router.store(self.getPrdUid());
                     return self.router.go("productUpdate");
                 };
-                
+
                 self.getPrice = function (price)
                 {
                     return accounting.formatMoney(price);
@@ -132,11 +146,12 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                  * the promise is resolved
                  */
                 self.handleActivated = function (info) {
-                    
+
                     if (!SecurityUtils.isAuthenticated()) {
                         return self.router.go('welcome');
                     }
                     self.productsToCompareBreadcrumbs(sessionStorage.productsToCompareBreadcrumbs);
+                    self.errorMessage("");
 
                     // Get product id from the search page
                     self.prdUid(self.router.retrieve());
@@ -149,18 +164,17 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
 
                     var pm = new ProductModel();
                     pm.fetch();
-                    
+
                     // Initialize a blank object
                     self.product(new Object());
-                        
-                    if ( sessionStorage.admin === 'true')
+
+                    if (sessionStorage.admin === 'true')
                     {
-                        self.admin(true);   
+                        self.admin(true);
                         self.user(false);
-                    }
-                    else
+                    } else
                     {
-                        self.admin(false);   
+                        self.admin(false);
                         self.user(true);
                     }
                 };

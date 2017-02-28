@@ -404,7 +404,7 @@
                             <!-- Compare products button -->
                             <!-- ko if: user -->
                             <div class="oj-flex-item">                              
-                                <button id= "compareProductsButton" data-bind="click: navigateToCompareProducts, ojComponent: { component: 'ojButton', label: 'Compare'}"></button>                             
+                                <button id= "compareProductsButton" type="button" data-bind="click: navigateToCompareProducts, ojComponent: { component: 'ojButton', label: 'Compare'}"></button>                             
                             </div>
                             <!-- /ko -->
 
@@ -510,7 +510,7 @@
                 </div>
 
                 <div class="oj-flex-item">
-                    <button class="oj-button oj-enabled oj-default oj-button-full-chrome oj-button-text-only"  id= "addToCart" data-bind="click: $parent.addToCart"><div class="oj-button-label"><span class="oj-button-text">Add to Cart</span></div></button> 
+                    <button type="button" class="oj-button oj-enabled oj-default oj-button-full-chrome oj-button-text-only"  id= "addToCart" data-bind="click: $parent.addToCart"><div class="oj-button-label"><span class="oj-button-text">Add to Cart</span></div></button> 
                 </div>
 
                 <div class="oj-flex-item" >
@@ -575,7 +575,7 @@
 
                 <!-- ko if: $parent.user -->
                 <div class="oj-flex-item oj-sm-2 oj-sm-float-end">
-                    <button class="oj-button oj-enabled oj-default oj-button-full-chrome oj-button-text-only"  id= "addToCart" data-bind="click: $parent.addToCart"><div class="oj-button-label"><span class="oj-button-text">Add to Cart</span></div></button> 
+                    <button  type="button" class="oj-button oj-enabled oj-default oj-button-full-chrome oj-button-text-only"  id= "addToCart" data-bind="click: $parent.addToCart"><div class="oj-button-label"><span class="oj-button-text">Add to Cart</span></div></button> 
 
                     <div id="compareProductWrapper">
                         <span class="oj-choice-row">

@@ -28,158 +28,174 @@
         <h2 style="margin-bottom:0">Product Compare</h2>
     </div>
 
-    <div class="oj-padding-vertical"></div>
-
-    <!-- Bread crumbs -->
-    <div id="productSearchBreadcrumbs" class="oj-sm-only-hide">
-        <span data-bind="text: productsToCompareBreadcrumbs"></span>
+    <!-- global error messages -->
+    <div class="oj-flex-item oj-messaging-inline-container" id="pageErrorContainer" aria-live="polite" hidden>
         <div class="oj-padding-vertical"></div>
+        <div class="oj-message oj-message-error">
+            <div class="oj-component-icon oj-message-status-icon oj-message-error-icon" title="Error" role="img"></div>
+            <div class="oj-message-content">
+                <div class="oj-message-summary">Error</div>
+                <div class="oj-message-detail">
+                    <span data-bind="text: errorMessage"></span>
+                </div>
+            </div>
+        </div>
     </div>
+    <!-- end global error message -->
 
-    <a data-bind="click: navigateToProductSearch">Back to Search Results</a>
+    <div class="oj-panel oj-flex-item oj-panel-shadow-md">
 
-    <table class="product-compare-table">
-        <tr>
-            <td class="product-detail-name">Product</td>
-            <td>
-                <img alt="product" data-bind="attr: {
+        <!-- Bread crumbs -->
+        <div id="productSearchBreadcrumbs" class="oj-sm-only-hide">
+            <span data-bind="text: productsToCompareBreadcrumbs"></span>
+            <div class="oj-padding-vertical"></div>
+        </div>
+
+        <a data-bind="click: navigateToProductSearch">Back to Search Results</a>
+
+        <table class="product-compare-table">
+            <tr>
+                <td class="product-detail-name">Product</td>
+                <td>
+                    <img alt="product" data-bind="attr: {
                         id: 'productImage' + productsToCompare()[0].prdUid, 
                         src: getPhoto(productsToCompare()[0]), 
                         height: large() ? '300' : '150',
                         width: large() ? '300' : '150'}"/>
-                <div class="oj-flex-item">
-                    <h3 aria-label="product name" data-bind="text: productsToCompare()[0].prdName" tabindex="0"></h3>
-                    <div class="product-detail-label">List Price:</div>
-                    <div data-bind="text: getPrice(productsToCompare()[0].prdPrice)"></div>
+                    <div class="oj-flex-item">
+                        <h3 aria-label="product name" data-bind="text: productsToCompare()[0].prdName" tabindex="0"></h3>
+                        <div class="product-detail-label">List Price:</div>
+                        <div data-bind="text: getPrice(productsToCompare()[0].prdPrice)"></div>
+
+                        <div class="oj-padding-vertical"></div>
+
+                        <div class="product-detail-label">Discount Price:</div>
+                        <div class="product-detail-price" data-bind="text: getPrice(productsToCompare()[0].prdCntrUnitPrice) + ' (' + productsToCompare()[0].prdCntrDiscount +'%)'"></div>
+                    </div>
 
                     <div class="oj-padding-vertical"></div>
 
-                    <div class="product-detail-label">Discount Price:</div>
-                    <div class="product-detail-price" data-bind="text: getPrice(productsToCompare()[0].prdCntrUnitPrice) + ' (' + productsToCompare()[0].prdCntrDiscount +'%)'"></div>
-                </div>
+                    <div class="oj-flex-item">
+                        <input class="product-quantity" id="quantity" data-bind="value: productsToCompare()[0].quantity" aria-label="quantity" type="number" min="1" max="1000"/>
 
-                <div class="oj-padding-vertical"></div>
-
-                <div class="oj-flex-item">
-                    <input class="product-quantity" id="quantity" data-bind="value: productsToCompare()[0].quantity" aria-label="quantity" type="number" min="1" max="1000"/>
-
-                    <button id= "addToCart" data-bind="click: function(data, event) {addToCart(productsToCompare()[0])}, ojComponent: { component: 'ojButton', label: 'Add to Cart'}"></button> 
-                </div>
-            </td>
-            <td>
-                <img alt="product" data-bind="attr: {
+                        <button id= "addToCart" data-bind="click: function(data, event) {addToCart(productsToCompare()[0])}, ojComponent: { component: 'ojButton', label: 'Add to Cart'}"></button> 
+                    </div>
+                </td>
+                <td>
+                    <img alt="product" data-bind="attr: {
                         id: 'productImage' + productsToCompare()[1].prdUid, 
                         src: getPhoto(productsToCompare()[1]), 
                         height: large() ? '300' : '150',
                         width: large() ? '300' : '150'}"/>
-                <div class="oj-flex-item">
-                    <h3 aria-label="product name" data-bind="text: productsToCompare()[1].prdName" tabindex="0"></h3>
-                    <div class="product-detail-label">List Price:</div>
-                    <div data-bind="text: getPrice(productsToCompare()[1].prdPrice)"></div>
+                    <div class="oj-flex-item">
+                        <h3 aria-label="product name" data-bind="text: productsToCompare()[1].prdName" tabindex="0"></h3>
+                        <div class="product-detail-label">List Price:</div>
+                        <div data-bind="text: getPrice(productsToCompare()[1].prdPrice)"></div>
+
+                        <div class="oj-padding-vertical"></div>
+
+                        <div class="product-detail-label">Discount Price:</div>
+                        <div class="product-detail-price" data-bind="text: getPrice(productsToCompare()[1].prdCntrUnitPrice) + ' (' + productsToCompare()[1].prdCntrDiscount +'%)'"></div>
+
+                    </div>
 
                     <div class="oj-padding-vertical"></div>
 
-                    <div class="product-detail-label">Discount Price:</div>
-                    <div class="product-detail-price" data-bind="text: getPrice(productsToCompare()[1].prdCntrUnitPrice) + ' (' + productsToCompare()[1].prdCntrDiscount +'%)'"></div>
-
-                </div>
-
-                <div class="oj-padding-vertical"></div>
-
-                <div class="oj-flex-item">
-
                     <div class="oj-flex-item">
-                        <input class="product-quantity" id="quantity" data-bind="value: productsToCompare()[1].quantity" aria-label="quantity" type="number" min="1" max="1000"/>
 
-                        <button id= "addToCart" data-bind="click: function(data, event) {addToCart(productsToCompare()[1])}, ojComponent: { component: 'ojButton', label: 'Add to Cart'}"></button> 
+                        <div class="oj-flex-item">
+                            <input class="product-quantity" id="quantity" data-bind="value: productsToCompare()[1].quantity" aria-label="quantity" type="number" min="1" max="1000"/>
+
+                            <button id= "addToCart" data-bind="click: function(data, event) {addToCart(productsToCompare()[1])}, ojComponent: { component: 'ojButton', label: 'Add to Cart'}"></button> 
+                        </div>
+
+                </td>
+            </tr>
+            <tr>
+                <td class="product-detail-name">Description</td>
+                <td>
+                    <div class="oj-flex-item ">
+                        <div class="product-detail-label">Product Description</div>
+                        <div class="product-detail-value" data-bind="foreach: productsToCompare()[0].prdLongDescLines">
+                            <p data-bind="text: $data"></p>
+                        </div>
                     </div>
 
-            </td>
-        </tr>
-        <tr>
-            <td class="product-detail-name">Description</td>
-            <td>
-                <div class="oj-flex-item ">
-                    <div class="product-detail-label">Product Description</div>
-                    <div class="product-detail-value" data-bind="foreach: productsToCompare()[0].prdLongDescLines">
-                        <p data-bind="text: $data"></p>
+                </td>
+                <td>
+                    <div class="oj-flex-item ">
+                        <div class="product-detail-label">Product Description</div>
+                        <div class="product-detail-value" data-bind="foreach: productsToCompare()[1].prdLongDescLines">
+                            <p data-bind="text: $data"></p>
+                        </div>
                     </div>
-                </div>
-
-            </td>
-            <td>
-                <div class="oj-flex-item ">
-                    <div class="product-detail-label">Product Description</div>
-                    <div class="product-detail-value" data-bind="foreach: productsToCompare()[1].prdLongDescLines">
-                        <p data-bind="text: $data"></p>
-                    </div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td class="product-detail-name">Vendor</td>
-            <td>
-                <div data-bind="text: productsToCompare()[0].vndUidFk.vndName"></div>
-            </td>
-            <td>
-                <div data-bind="text: productsToCompare()[1].vndUidFk.vndName"></div>
-            </td>
-        </tr>
-        <tr>
-            <td class="product-detail-name">SKU</td>
-            <td>
-                <div data-bind="text: productsToCompare()[0].prdSku"></div>
-            </td>
-            <td>
-                <div data-bind="text: productsToCompare()[1].prdSku"></div>
-            </td>
-        </tr>
-        <tr>
-            <td class="product-detail-name">Contract Line Item</td>
-            <td>
-                <div data-bind="text: productsToCompare()[0].prdCntrLnItm"></div>
-            </td>
-            <td>
-                <div data-bind="text: productsToCompare()[1].prdCntrLnItm"></div>
-            </td>
-        </tr>
-        <tr>
-            <td class="product-detail-name">Manufacturer</td>
-            <td>
-                <div data-bind="text: productsToCompare()[0].prdOemName"></div>
-            </td>
-            <td>
-                <div data-bind="text: productsToCompare()[1].prdOemName"></div>
-            </td>
-        </tr>
-        <tr>
-            <td class="product-detail-name">Manufacturer Part Number</td>
-            <td>
-                <div data-bind="text: productsToCompare()[0].prdOemPartNum"></div>
-            </td>
-            <td>
-                <div data-bind="text: productsToCompare()[1].prdOemPartNum"></div>
-            </td>
-        </tr>
-        <tr>
-            <td class="product-detail-name">Product Unit</td>
-            <td>
-                <div data-bind="text: productsToCompare()[0].prdUnitCd.longDesc"></div>
-            </td>
-            <td>
-                <div data-bind="text: productsToCompare()[1].prdUnitCd.longDesc"></div>
-            </td>
-        </tr>
-        <tr>
-            <td class="product-detail-name">Category</td>
-            <td>
-                <div data-bind="text: productsToCompare()[0].prdCategoryCd.longDesc"></div>
-            </td>
-            <td>
-                <div data-bind="text: productsToCompare()[1].prdCategoryCd.longDesc"></div>
-            </td>
-        </tr>
-    </table>
+                </td>
+            </tr>
+            <tr>
+                <td class="product-detail-name">Vendor</td>
+                <td>
+                    <div data-bind="text: productsToCompare()[0].vndUidFk.vndName"></div>
+                </td>
+                <td>
+                    <div data-bind="text: productsToCompare()[1].vndUidFk.vndName"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="product-detail-name">SKU</td>
+                <td>
+                    <div data-bind="text: productsToCompare()[0].prdSku"></div>
+                </td>
+                <td>
+                    <div data-bind="text: productsToCompare()[1].prdSku"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="product-detail-name">Contract Line Item</td>
+                <td>
+                    <div data-bind="text: productsToCompare()[0].prdCntrLnItm"></div>
+                </td>
+                <td>
+                    <div data-bind="text: productsToCompare()[1].prdCntrLnItm"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="product-detail-name">Manufacturer</td>
+                <td>
+                    <div data-bind="text: productsToCompare()[0].prdOemName"></div>
+                </td>
+                <td>
+                    <div data-bind="text: productsToCompare()[1].prdOemName"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="product-detail-name">Manufacturer Part Number</td>
+                <td>
+                    <div data-bind="text: productsToCompare()[0].prdOemPartNum"></div>
+                </td>
+                <td>
+                    <div data-bind="text: productsToCompare()[1].prdOemPartNum"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="product-detail-name">Product Unit</td>
+                <td>
+                    <div data-bind="text: productsToCompare()[0].prdUnitCd.longDesc"></div>
+                </td>
+                <td>
+                    <div data-bind="text: productsToCompare()[1].prdUnitCd.longDesc"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="product-detail-name">Category</td>
+                <td>
+                    <div data-bind="text: productsToCompare()[0].prdCategoryCd.longDesc"></div>
+                </td>
+                <td>
+                    <div data-bind="text: productsToCompare()[1].prdCategoryCd.longDesc"></div>
+                </td>
+            </tr>
+        </table>
+    </div>
 </div>
 
 <!-- start add cart dialog box -->
