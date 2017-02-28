@@ -64,7 +64,7 @@ DevOps Engineer | [Suganya Ravikumar](https://github.com/OncoreLLC/CalOrders/wik
 
 ## [User Centric Design](https://github.com/OncoreLLC/CalOrders/wiki/User-Centric-Design) - Understanding what people need  
 
-The first step of a  [User-Centered-Design](https://github.com/OncoreLLC/CalOrders/wiki/User-Centric-Designn (UCD) process is to formulate a plan.  Our plan, framed by our [statement of work](https://github.com/OncoreLLC/CalOrders/wiki/Statement-of-Work), identified the project objectives, requirements, user community, constraints, schedule, and deliverables.
+The first step of a  [User-Centered-Design](https://github.com/OncoreLLC/CalOrders/wiki/User-Centric-Design) (UCD) process is to formulate a plan.  Our plan, framed by our [statement of work](https://github.com/OncoreLLC/CalOrders/wiki/Statement-of-Work), identified the project objectives, requirements, user community, constraints, schedule, and deliverables.
 
 Our plan combines our UCD and Agile processes into a cohesive and flexible workflow.  It was this combination that we were able to identify the features that the users valued the most, and were able to focus our story and build activities to deliver working functionality after each sprint.  This allowed for feedback and changes to the design and resulted in a product that reflected what the end users were really asking for.
 
