@@ -162,10 +162,18 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'moment', 'common/S
                     });
 
                     var model = new CancelOrderModel();
-                    model.save({
+                    model.save({}, {
 
                         success: function (myModel, response, options) {
-                            return false;
+                            $("#cancelOrderConfirmationDialog").ojDialog("close");
+                            if (sessionStorage.admin === 'true')
+                            {
+                                return self.router.go("orderHistoryAdmin");
+                            } else
+                            {
+                                return self.router.go("orderHistory");
+                            }
+
                         },
                         error: function (jqXHR, textStatus, errorThrown) {
                             self.errorMessage("There was an error cancelling the order");
@@ -173,14 +181,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'moment', 'common/S
                         }
                     });
 
-                    $("#cancelOrderConfirmationDialog").ojDialog("close");
-                    if (sessionStorage.admin === 'true')
-                    {
-                        self.router.go("orderHistoryAdmin");
-                    } else
-                    {
-                        self.router.go("orderHistory");
-                    }
+
 
                 };
             }

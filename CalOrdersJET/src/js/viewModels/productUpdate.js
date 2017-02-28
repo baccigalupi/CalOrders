@@ -457,11 +457,20 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'accounting', 'common/SecurityUtils'
 
                         parseProduct = function (response)
                         {
-                            if (response != undefined && response.length > 0 && response.prdUid !== self.getPrdUid())
+                            if (response != undefined && response.length > 0)
                             {
-                                var errorMsg = new oj.Message("That product name is already taken.", "", oj.Message.SEVERITY_TYPE.ERROR);
-                                self.productNameMessage([errorMsg]);
-                                return false;
+                                var isDuplicate = true;
+                                for (var i = 0; i < response.length; i++) {
+                                    if (response[i].prdUid === self.getPrdUid()) {
+                                        isDuplicate = false;
+                                    }
+                                }
+                                if (isDuplicate === true) {
+                                    var errorMsg = new oj.Message("That product name is already taken.", "", oj.Message.SEVERITY_TYPE.ERROR);
+                                    self.productNameMessage([errorMsg]);
+                                    return false;
+                                }
+
                             }
                         };
                         var ProductService = oj.Model.extend({
