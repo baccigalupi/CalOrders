@@ -323,6 +323,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'libs/accounting/accounting', 'commo
 
                         productService.save(
                                 {
+                                    
                                     //Product Info
                                     "productUid": this.getPrdUid(),
                                     "productSKU": self.productSKU(),
