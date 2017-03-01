@@ -13,3 +13,6 @@ RUN /bin/chmod +x /start_httpd.sh
 
 # web content into container
 COPY CalOrdersJET/web /usr/local/apache2/htdocs/
+
+# override default entry point
+CMD ["/start_httpd.sh"]
