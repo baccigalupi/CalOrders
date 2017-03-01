@@ -192,7 +192,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'libs/moment/min/moment.min', 'libs/
                 };
 
                 self.currentRowListener = function (event, ui) {
-                    var orderHistoryId = self.datasource._latestValue.dataSource.data.models[ui.currentRow.rowIndex].attributes.orderHistoryId;
+                    var orderHistoryId = ui.currentRow.rowKey;
                     self.navigateToOrderDetail(orderHistoryId);
                 };
 

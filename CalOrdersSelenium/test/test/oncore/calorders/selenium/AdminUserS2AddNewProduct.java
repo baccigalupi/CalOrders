@@ -20,19 +20,18 @@ public class AdminUserS2AddNewProduct {
   public void setUp() throws Exception {
     System.setProperty("webdriver.chrome.driver","/home/oncore/workspaces/CalOrders/libs/selenium-java-3.0.1/chromedriver");
     driver = new ChromeDriver();
-    baseUrl = "http://localhost:8000/";
+    baseUrl = "http://calorderstest.oncorellc.com:8080/";
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
   }
 
   @Test
   public void testAdminUserS2AddNewProduct() throws Exception {
-    driver.get("http://localhost:8000/");
+    driver.get(baseUrl + "/");
     driver.findElement(By.id("login")).click();
     driver.findElement(By.id("userName")).clear();
     driver.findElement(By.id("userName")).sendKeys("joeadmin");
     driver.findElement(By.id("continue")).click();
-    driver.findElement(By.cssSelector("#ui-id-19 > a.oj-navigationlist-focused-element.oj-navigationlist-item-content > span.oj-navigationlist-item-label")).click();
-    driver.findElement(By.id("addProductsButton")).click();
+
   }
 
   @After

@@ -10,7 +10,7 @@ OnCore’s primary focus is on delivering what the end user needs. Agile user s
 These tight cycles between ideas and testing allowed us to respond quickly to change and focused on solutions not features.
 In addition to the Agile Team, we had support from the client executive team that enabled the end users we were working with to have the power to make decisions and own the product. This ensured that we would be building and delivering a product that end user wanted and needed with this collaboration. 
 
-With this level of collaboration, we defined our strategy as 'try, fail fast, learn, and then try again."  
+With this level of collaboration, we defined our strategy as "try, fail fast, learn, and then try again."  
 
 The following documentation represents our demonstration in designing under a User Centered Design methodology, building with modern technologies in an Agile methodology with adherence to the US Digital Playbook.
 
@@ -18,7 +18,7 @@ The following documentation represents our demonstration in designing under a Us
 ##Project Requirements
 The following table presents each of the project requirements, with links to the corresponding artifacts and evidence of meeting or exceeding it. 
 
-Reqirement | How it was met
+Requirement | How it was met
 --- | ---
 a. Assigned one (1) leader and gave that person authority and responsibility and held that person accountable for the quality of the prototype submitted | Mike Tsay
 b. Assembled a multidisciplinary and collaborative team that includes, at a minimum, five (5) of the labor categories as identified in Attachment B: PQVP DS-AD Labor Category Descriptions | [Our Team](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Team-Bios)
@@ -30,7 +30,7 @@ g. Complied with Section 508 of the Americans with Disabilities Act and WCAG 2.0
 h. Created or used a design style guide and/or a pattern library | [Style Guide](https://github.com/OncoreLLC/CalOrders/wiki/Style-Guide)
 i. Performed usability tests with people | [Usability Testing](https://github.com/OncoreLLC/CalOrders/wiki/Usability-Testing)
 j. Used an iterative approach, where feedback informed subsequent work or versions of the prototype; | [OnCore's Agile Methodology](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Methodolgy)
-k. Created a prototype that works on multiple devices, and presents a responsive design |[Responsive Application Design](https://github.com/OncoreLLC/CalOrders/wiki/Responsive-Application-Design)<br>[Architecture Overview](https://github.com/OncoreLLC/CalOrders/wiki/Architecture)<br>[Application Overview](https://github.com/OncoreLLC/CalOrders/wiki/Application-Overview)
+k. Created a prototype that works on multiple devices, and presents a responsive design |[Responsive Application Design](https://github.com/OncoreLLC/CalOrders/wiki/Responsive-Application-Design)
 l. Used at least five (5) modern and open-source technologies, regardless of architectural layer (frontend, backend, etc.) | [Technologies](https://github.com/OncoreLLC/CalOrders/wiki/Modern-and-Open-Source-Technologies)
 m. Deployed the prototype on an Infrastructure as a Service (IaaS) or Platform as Service(PaaS) provider, and indicated which provider they used | [Application Service Deployment](https://github.com/OncoreLLC/CalOrders/wiki/Application-Service-Deployment)
 n. Developed automated unit tests for their code |[Automated Testing](https://github.com/OncoreLLC/CalOrders/wiki/Automated-Testing) 
@@ -75,7 +75,7 @@ The table below summarizes how we incorporated the UCD practices of Plan, Analyz
 
 Plan | Analyze| Design | Implement | Test & Measure  
 --- | --- | --- | --- | ----
-[Kickoff Meeting](https://github.com/OncoreLLC/CalOrders/wiki/Hold-Kick-Off-Meeting) | [Research Domain](https://github.com/OncoreLLC/CalOrders/wiki/Domain-Research)    |[Scenarios](https://github.com/OncoreLLC/CalOrders/wiki/Scenarios) | [Style Guide](http://www.oracle.com/webfolder/technetwork/jet/jetCookbook.html)    |[Usability Test](https://github.com/OncoreLLC/CalOrders/wiki/Usability-Testing)
+Kickoff Meeting | [Research Domain](https://github.com/OncoreLLC/CalOrders/wiki/Domain-Research)    |[Scenarios](https://github.com/OncoreLLC/CalOrders/wiki/Scenarios) | [Style Guide](http://www.oracle.com/webfolder/technetwork/jet/jetCookbook.html)    |[Usability Test](https://github.com/OncoreLLC/CalOrders/wiki/Usability-Testing)
 [Statement of Work](https://github.com/OncoreLLC/CalOrders/wiki/Statement-of-Work)   |[Focus Groups](https://github.com/OncoreLLC/CalOrders/wiki/Focus-Group)|[Story Boarding](https://github.com/OncoreLLC/CalOrders/wiki/Story-Boards)     |[Wireframe Walkthrough](https://github.com/OncoreLLC/CalOrders/wiki/Wireframe-Walkthrough) | Refine Application            
 [Develop a Plan](https://github.com/OncoreLLC/CalOrders/wiki/User-Centric-Design)   | [Personas](https://github.com/OncoreLLC/CalOrders/wiki/Develop-Personas)||                       | Retest
 ||[Interviews](https://github.com/OncoreLLC/CalOrders/wiki/Interviews) ||
@@ -318,7 +318,7 @@ Technology | Requirement
 [Knockout JS](http://knockoutjs.com/) | Front-end Javascript library  
 [Require JS](http://requirejs.org/) | Front-end Javascript library  
 [jQuery](https://jquery.com/) | Front-end Javascript library  
-[Swagger](http://swagger.io/) | Automated Documentation of RESTful services   
+[Swagger](http://swagger.io/) | [Our Swagger WebApp is here](http://calorderstest.oncorellc.com:9081/)   
 [NVDA](https://www.paciellogroup.com/blog/2008/01/nvda-a-free-and-open-source-screen-reader-for-windows/) | Screen Reader
 [WAVE](https://chrome.google.com/webstore/detail/wave-evaluation-tool/jbbplnpkjmmeebjpijfedlgcdilocofh?hl=en-US) | ADA Browser testing plugin
 
