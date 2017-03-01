@@ -159,54 +159,54 @@
                                    type="number" min="1" max="10000" />
                         </div>
                     </div>
-                </div>
 
-                <div class="oj-padding-vertical"></div>
-
-                <div class="oj-flex">
-                    <div class="oj-flex-item">
-                        <span style="font-weight: bold">Price: </span>
-                        <span data-bind="text: $parent.getPrice($data['prdCntrUnitPrice']) + '/ea'"/>
+                    <div class="oj-padding-vertical"></div>
+                    <div class="oj-flex">
+                        <div class="oj-flex-item">
+                            <span style="font-weight: bold">Price: </span>
+                            <span data-bind="text: $parent.getPrice($data['prdCntrUnitPrice']) + '/ea'"/>
+                        </div>
                     </div>
-                </div>
 
-                <div class="oj-flex">
-                    <div class="oj-flex-item">
-                        <span style="font-weight: bold">Total: </span><span data-bind="text: $parent.getPrice($data['totalItemPrice']())"/>
+                    <div class="oj-padding-vertical"></div>
+                    <div class="oj-flex">
+                        <div class="oj-flex-item">
+                            <span style="font-weight: bold">Total: </span><span data-bind="text: $parent.getPrice($data['totalItemPrice']())"/>
+                        </div>
                     </div>
+
                 </div>
             </div>
-        </div>  
 
-        <!-- ko if: $data['relatedServices']().length > 0 -->
+            <!-- ko if: $data['relatedServices']().length > 0 -->
 
-        <div class="oj-padding-vertical"></div>
+            <div class="oj-padding-vertical"></div>
 
-        <div class="oj-flex">
-            <div class="oj-flex-item">
-                <label data-bind="attr: {for: relatedServices + $data['prdUid']}">Available Services:</label>
-                <select 
-                    data-bind="ojComponent: {
+            <div class="oj-flex">
+                <div class="oj-flex-item">
+                    <label data-bind="attr: {for: relatedServices + $data['prdUid']}">Available Services:</label>
+                    <select 
+                        data-bind="ojComponent: {
                                     component: 'ojSelect', value: $data['selectedRelatedService'], required: false,
                                     options: $data['relatedServices'],
                                 rootAttributes: {style:'max-width:20em'}},attr: {id: relatedServices + $data['prdUid']}">
-                </select> 
-                <button class="oj-button oj-enabled oj-default oj-button-full-chrome oj-button-text-only" id= "addRelatedService" 
-                        data-bind="click: $parent.addRelatedService">
-                    <div class="oj-button-label"><span class="oj-button-text">Add Related Service</span></div>
-                </button> 
+                    </select> 
+                    <button class="oj-button oj-enabled oj-default oj-button-full-chrome oj-button-text-only" id= "addRelatedService" 
+                            data-bind="click: $parent.addRelatedService">
+                        <div class="oj-button-label"><span class="oj-button-text">Add Related Service</span></div>
+                    </button> 
+                </div>
             </div>
-        </div>
-        <!-- /ko -->
-        <div id="removeProductWrapper">
-            <span class="oj-choice-row">
-                <input data-bind="checked: removeProduct, attr: {id: 'removeProduct' + $data['prdUid']}" type="checkbox" value="true">
-                <label data-bind="attr: {for: 'removeProduct' + $data['prdUid']}">Remove</label>
-            </span>
-        </div>
-    </div>
+            <!-- /ko -->
+            <div id="removeProductWrapper">
+                <span class="oj-choice-row">
+                    <input data-bind="checked: removeProduct, attr: {id: 'removeProduct' + $data['prdUid']}" type="checkbox" value="true">
+                    <label style="padding-left: 5px" data-bind="attr: {for: 'removeProduct' + $data['prdUid']}">Remove</label>
+                </span>
+            </div>
 
-    <div class="oj-padding-vertical"></div>
+        </div>  
+    </div>
 
 </div>
 </li>
@@ -287,7 +287,7 @@
                                 </div>
                                 <div class="oj-flex">
                                     <div class="oj-flex-item oj-sm-8">
-                                        <select style="margin-right: 20px"
+                                        <select style="margin-right: 20px; padding-top: 5px;padding-bottom: 5px;background-color: #fcfdfe;border-color: #dfe4e7;"
                                                 data-bind="options:  $data['relatedServices'],
                                                             optionsText: 'label',
                                                             optionsValue: 'value',
@@ -308,7 +308,7 @@
                         <div id="removeProductWrapper">
                             <span class="oj-choice-row">
                                 <input data-bind="checked: removeProduct, attr: {id: 'removeProduct' + $data['prdUid']}" type="checkbox" value="true">
-                                <label data-bind="attr: {for: 'removeProduct' + $data['prdUid']}">Remove</label>
+                                <label style="padding-left: 5px" data-bind="attr: {for: 'removeProduct' + $data['prdUid']}">Remove</label>
                             </span>
                         </div>
                     </div>
