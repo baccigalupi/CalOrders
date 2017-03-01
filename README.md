@@ -50,11 +50,11 @@ Our team followed the US Digital Services Playbook, covering each of the 13 play
 
 ## [Development Team](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Team-Bios)
 
-OnCore asked Mike Tsay to be the Team Leader/Project Manager. Mike was given authority over and was responsible and accountable for the quality of the prototype submitted. The following table presents the balance of the OnCore team, a multidisciplinary and collaborative group, covering the eight labor categories listed below. 
+OnCore asked Mike Tsay to be the Team Leader/Project Manager. Mike was given authority over and was responsible and accountable for the quality of the prototype submitted. The following table presents the balance of the OnCore team, a multidisciplinary and collaborative group, covering the seven labor categories listed below. 
 
-**We selected a multidisciplinary and collaborative team that fulfilled the following 8 labor categories:**  
+**We selected a multidisciplinary and collaborative team that fulfilled the following seven labor categories:**  
 
-Role | Team Member  
+Role(Labor Category) | Team Member 
 --- | ---  
 Product Manager	| [Mike Tsay](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Team-Bios)
 Agile Coach/Technical Architect | [Royce Owens, CSM](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Team-Bios)  
