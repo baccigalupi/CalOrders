@@ -94,7 +94,6 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'libs/accounting/accounting', 'co
                  */
                 self.navigateToProductSearch = function () {
                     sessionStorage.keepSearchResults = true;
-                    console.log("continue shopping");
                     $("#addToCartConfirmationDialog").ojDialog("close");
                     return self.router.go("productSearch");
                 };

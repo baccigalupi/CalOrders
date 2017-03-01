@@ -87,7 +87,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'libs/accounting/accounting', 'co
                             }
 
                             if (self.cart()[i].prdCategoryCd.code == productType1 ||
-                                 self.cart()[i].prdCategoryCd.code == productType2   )
+                                    self.cart()[i].prdCategoryCd.code == productType2)
                             {
 
                                 var containsRelatedService = false;
@@ -217,7 +217,6 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'libs/accounting/accounting', 'co
 
                                 collection.fetch({
                                     success: function (myModel, response, options) {
-                                        console.log("Search success");
                                         return false;
                                     },
                                     error: function (jqXHR, textStatus, errorThrown) {
@@ -441,12 +440,9 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'libs/accounting/accounting', 'co
 
                     for (var val = self.cart().length - 1; val >= 0; val--)
                     {
-                        console.log("remove:" + self.cart()[val].removeProduct());
-
                         if (self.cart()[val].removeProduct() !== undefined
                                 && self.cart()[val].removeProduct())
                         {
-                            console.log("adding item to remove list");
                             productsToRemove.push(self.cart()[val].prdUid);
                             self.cart.remove(self.cart()[val]);
                         }
@@ -522,7 +518,6 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'libs/accounting/accounting', 'co
                             && sessionStorage.authenticated !== "false" && savingData == false)
                     {
                         savingData = true;
-                        console.log("inside placeOrderClick!!!!");
 
                         var partyUid = sessionStorage.partyUid;
 
@@ -597,8 +592,6 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'libs/accounting/accounting', 'co
                     var pm = new ProductModel();
                     pm.fetch({
                         success: function (myModel, response, options) {
-                            console.log("Found related product");
-
                             // If the product already exists in the cart, then just change the quantity
                             var result = $.grep(self.cart(), function (item) {
                                 return item.prdUid === response.prdUid;
