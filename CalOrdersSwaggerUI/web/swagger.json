@@ -23,6 +23,20 @@
   "produces": [
     "application/json"
   ],
+  "tags": [
+    {
+      "name": "product",
+      "description": "All services related to Products"
+    },
+    {
+      "name": "orderHistory",
+      "description": "All services related to Orders"
+    },
+    {
+      "name": "party",
+      "description": "All services related to Party"
+    }
+  ],
   "paths": {
     "/com.oncore.calorders.rest.product/findActiveProductsByProductType/{productTypeCode}": {
       "get": {
