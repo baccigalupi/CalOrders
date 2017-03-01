@@ -220,7 +220,7 @@ The following code snippet is taken from a CalOrders JET view showing Knockout d
 In this example, "productName" is a Knockout variable defined in the view model.  As the user
 types in the input field, Knockout binds the user input to the view model.  This greatly simplifies
 development of the page and also allows for useful features like realtime updates on the page
-as the input changes without refreshing the content.  For more information about Knockout visit (here)[http://knockoutjs.com]. To
+as the input changes without refreshing the content.  For more information about Knockout visit [here](http://knockoutjs.com). To
 learn more about how JET incorporates Knockout, see [here](http://docs.oracle.com/middleware/jet230/jet/developer/GUID-808434E0-CA80-405C-9450-59E0BF525700.htm#JETDG334).
 
 #### View Models
