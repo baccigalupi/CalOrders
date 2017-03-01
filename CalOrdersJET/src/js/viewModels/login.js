@@ -47,7 +47,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'ojs/ojarray
                 self.doShowErrorMessage = ko.observable(false);
                 self.router = oj.Router.rootInstance;
                 self.isSuccess = false;
-                self.tracker = ko.observable();
+                self.tracker = null;
 
                 self.userNameMessages = ko.observableArray([]);
                 self.passwordMessages = ko.observableArray([]);
@@ -73,6 +73,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'ojs/ojarray
                  * the promise is resolved
                  */
                 self.handleActivated = function (info) {
+                    self.tracker = ko.observable();
                     self.username = ko.observable();
                     self.doShowErrorMessage = ko.observable(false);
                     SecurityUtils.clearSessionStorage();
@@ -118,7 +119,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'ojs/ojarray
                     self.username = null;
                     self.doShowErrorMessage = false;
                     self.isSuccess = false;
-                    self.tracker = null;
 
                     self.userNameMessages = null;
                     self.passwordMessages = null;
