@@ -243,7 +243,7 @@
         "tags": [
           "orderHistory"
         ],
-        "summary": "gets all orders for a department by quarter .",
+        "summary": "Gets all orders for a department by quarter.",
         "description": "",
         "operationId": "fetchOrdersByQuarter",
         "parameters": [
@@ -317,7 +317,7 @@
         "tags": [
           "orderHistory"
         ],
-        "summary": "gets all orders by party uid.",
+        "summary": "Gets all orders by party Id.",
         "description": "",
         "operationId": "findAllOrderHistoryByPartyUid",
         "parameters": [
