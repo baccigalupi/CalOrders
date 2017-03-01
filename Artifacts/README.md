@@ -318,7 +318,7 @@ Technology | Requirement
 [Knockout JS](http://knockoutjs.com/) | Front-end Javascript library  
 [Require JS](http://requirejs.org/) | Front-end Javascript library  
 [jQuery](https://jquery.com/) | Front-end Javascript library  
-[Swagger](http://swagger.io/) | Automated Documentation of RESTful services   
+[Swagger](http://swagger.io/) | Our Swagger WebApp is [here](http://calorderstest.oncorellc.com:9081/)   
 [NVDA](https://www.paciellogroup.com/blog/2008/01/nvda-a-free-and-open-source-screen-reader-for-windows/) | Screen Reader
 [WAVE](https://chrome.google.com/webstore/detail/wave-evaluation-tool/jbbplnpkjmmeebjpijfedlgcdilocofh?hl=en-US) | ADA Browser testing plugin
 
