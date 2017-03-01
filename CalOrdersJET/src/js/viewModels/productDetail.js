@@ -77,7 +77,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'libs/accounting/accounting', 'co
 
                 self.getPrdUid = function ()
                 {
-                    return self.product().prdUid;
+                    return self.prdUid();
                 };
 
                 /**
