@@ -52,6 +52,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'libs/moment/min/moment.min', 'libs/
                  * the promise is resolved
                  */
                 self.handleActivated = function (info) {
+                    $('globalBody').focus();
+                    window.location.hash = 'globalBody';
                     if (!SecurityUtils.isAuthenticated()) {
                         return self.router.go('welcome');
                     }

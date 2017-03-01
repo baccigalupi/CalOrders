@@ -53,7 +53,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils'],
                 self.handleActivated = function (info) {
                     // Implement if needed
                     // initialize session storage
-
+                    $('globalBody').focus();
+                    window.location.hash = 'globalBody';
                     var lgQuery = oj.ResponsiveUtils.getFrameworkQuery(
                             oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.LG_UP);
 

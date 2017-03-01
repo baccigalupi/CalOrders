@@ -97,13 +97,13 @@ define(['ojs/ojcore', 'knockout', 'common/SecurityUtils', 'ojs/ojknockout-model'
                 SecurityUtils.initializeSessionStorage();
 
                 self.launch = function (data, event) {
-
                     if (this.id === 'logout') {
                         SecurityUtils.clearSessionStorage();
                         navBarDataSource(new oj.ArrayTableDataSource(navBarData, {idAttribute: 'id'}));
                         SecurityUtils.getNavBarItems(navBarDataSource);
                         SecurityUtils.getNavMenuItems(navMenuDataSource);
                         userLogin("Options");
+
                         return self.router.go('welcome');
                     }
 
@@ -127,7 +127,7 @@ define(['ojs/ojcore', 'knockout', 'common/SecurityUtils', 'ojs/ojknockout-model'
                                     if (rowObj.data.name === navBarDesc) {
                                         return self.router.go(rowObj.data.id);
                                     }
-                                   
+
                                 });
                     }
                 };

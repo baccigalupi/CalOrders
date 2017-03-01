@@ -48,6 +48,8 @@ define(['ojs/ojcore', 'knockout', 'jquery'],
                  * the promise is resolved
                  */
                 self.handleActivated = function (info) {
+                    $('globalBody').focus();
+                    window.location.hash = 'globalBody';
                     var lgQuery = oj.ResponsiveUtils.getFrameworkQuery(
                             oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.LG_UP);
 

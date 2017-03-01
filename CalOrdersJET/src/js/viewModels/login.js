@@ -73,6 +73,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'ojs/ojarray
                  * the promise is resolved
                  */
                 self.handleActivated = function (info) {
+                    $('globalBody').focus();
+                    window.location.hash = 'globalBody';
                     self.tracker = ko.observable();
                     self.username = ko.observable();
                     self.doShowErrorMessage = ko.observable(false);
@@ -154,7 +156,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'ojs/ojarray
                     }
 
 
-
+                    self.username(self.username().trim());
                     var serviceEndPoints = new ServiceEndPoints();
                     var serviceURL = serviceEndPoints.getEndPoint('findPartyByUserIdAndPassword');
                     serviceURL += "/" + self.username() + "/" + self.password();

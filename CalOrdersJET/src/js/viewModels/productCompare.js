@@ -50,7 +50,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'libs/accounting/accounting', 'co
                 self.getPhoto = function (product) {
                     return ProductHelper.getPhoto(product);
                 };
-                
+
                 /**
                  * Get the photo for the product
                  * 
@@ -124,6 +124,8 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'libs/accounting/accounting', 'co
                  * the promise is resolved
                  */
                 self.handleActivated = function (info) {
+                    $('globalBody').focus();
+                    window.location.hash = 'globalBody';
                     if (!SecurityUtils.isAuthenticated()) {
                         return self.router.go('welcome');
                     }

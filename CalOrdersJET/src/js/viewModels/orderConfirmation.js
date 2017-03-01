@@ -66,6 +66,8 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'libs/accounting/accounting', 'co
                  * the promise is resolved
                  */
                 self.handleActivated = function (info) {
+                    $('globalBody').focus();
+                    window.location.hash = 'globalBody';
                     if (!SecurityUtils.isAuthenticated()) {
                         return self.router.go('welcome');
                     }
@@ -83,8 +85,8 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'libs/accounting/accounting', 'co
                         if (sessionStorage.cartProducts !== "")
                         {
                             var sessionCart = JSON.parse(sessionStorage.cartProducts);
- 
- 
+
+
                             for (i = 0; i < sessionCart.length; i++)
                             {
                                 var cartProduct = sessionCart[i];
@@ -110,8 +112,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'libs/accounting/accounting', 'co
                             sessionStorage.itemQuantityTotal = 0;
                             sessionStorage.itemTotalPrice = 0;
 
-                        }
-                        else
+                        } else
                         {
                             return self.router.go("productSearch");
                         }
@@ -172,7 +173,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'libs/accounting/accounting', 'co
 
 
                 self.continueShoppingClick = function (data, event)
-                { 
+                {
                     return self.router.go("productSearch");
                 };
 

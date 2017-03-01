@@ -129,7 +129,8 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'libs/accounting/accounting', 'co
                  * the promise is resolved
                  */
                 self.handleActivated = function (info) {
-
+                    $('globalBody').focus();
+                    window.location.hash = 'globalBody';
                     if (sessionStorage.authenticated === "false")
                     {
                         return self.router.go('welcome');

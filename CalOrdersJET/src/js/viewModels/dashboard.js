@@ -98,7 +98,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils'],
                  * the promise is resolved
                  */
                 self.handleActivated = function (info) {
-
+                    $('globalBody').focus();
+                    window.location.hash = 'globalBody';
+                    
                     if (!SecurityUtils.isAuthenticated()) {
                         return self.router.go('welcome');
                     }
@@ -121,7 +123,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils'],
                     var serviceEndPoints = new ServiceEndPoints();
                     var serviceURL = serviceEndPoints.getEndPoint('fetchOrdersByQuarter');
                     serviceURL += "/" + sessionStorage.departmentUid;
-                    
+
                     self.ordersByQuarterCollection = new oj.Collection();
 
                     var dashModel = oj.Model.extend({
@@ -270,7 +272,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils'],
                     self.barSeriesValue(seriesInfo);
                     return true;
                 };
-                
+
                 /**
                  * Adjusts the icon, text, value, labels etc. for the
                  * for the bar chart when in stacked view

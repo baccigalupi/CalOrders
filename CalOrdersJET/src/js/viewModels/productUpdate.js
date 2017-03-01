@@ -112,6 +112,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'libs/accounting/accounting', 'commo
                  * the promise is resolved
                  */
                 self.handleActivated = function (info) {
+                    $('globalBody').focus();
+                    window.location.hash = 'globalBody';
                     if (!SecurityUtils.isAuthenticated()) {
                         return self.router.go('welcome');
                     }
