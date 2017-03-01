@@ -11,7 +11,7 @@ We use agile user stories that incrementally build up functionality over a serie
 
 These quick cycles between ideas and testing allowed us to respond quickly to change and focused on solutions not features. Up front we gained support from the client executive team, enabling the end users we were working with to have the power to make decisions and own the product.   
 
-This approach, combined with close collaboration with end users, fueled our strategy as 'try, fail fast, learn, and then try again."
+This approach, combined with close collaboration with end users, fueled our strategy as "try, fail fast, learn, and then try again."
 The sections that follow present our experience, methods and approach in response to the ADPQ Vendor Refresh.  We start by listing the requirements from the RFI, with links to how each of them are addressed.  We then confirm our adherence to the US Digital Services Playbook, introduce our development team, and our approach to user centered design and agile development.  The balance of the document is our Technical Approach, where we present our solution, including the overall Architecture, our DevOps approach, the User Interface, and a detailing of the Modern and Open Source Technologies we employed.   
 
 Thank you for the opportunity to participate, we hope you enjoy reviewing our experience as much as we did preparing it. 
