@@ -203,7 +203,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'accounting', 'common/SecurityUtils'
                 self.calculateContractPrice = function (price, percent) {
 
                     var discount = 0;
-                    if (percent !== NaN && percent != undefined && percent !== 0) {
+                    if (percent !== NaN && percent != undefined && percent !== 0 && percent !== "0") {
                         discount = ((percent / 100) * price);
                     }
                     if (discount == NaN || discount == undefined || discount === 0) {

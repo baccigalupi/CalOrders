@@ -30,6 +30,7 @@ import com.oncore.calorders.rest.service.PrdCategoryCdFacadeREST;
 import com.oncore.calorders.rest.service.PrdImgTypeCdFacadeREST;
 import com.oncore.calorders.rest.service.PrdUnitCdFacadeREST;
 import com.oncore.calorders.rest.service.VendorFacadeREST;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
@@ -95,7 +96,42 @@ public class ProductFacadeRESTExtension extends ProductFacadeREST {
                 .setParameter("categoryCode", productTypeCode)
                 .getResultList();
 
-        return results;
+        List<Product> products = new ArrayList<Product>();
+
+        if (results != null && results.size() > 0) {
+            for (Product p : results) {
+                Product product = new Product();
+                product.setPrdUid(p.getPrdUid());
+                product.setCreateTs(p.getCreateTs());
+                product.setCreateUserId(p.getCreateUserId());
+                product.setPrdActiveInd(p.getPrdActiveInd());
+                product.setPrdCategoryCd(p.getPrdCategoryCd());
+                product.setPrdCntrDiscount(p.getPrdCntrDiscount());
+                product.setPrdCntrLnItm(p.getPrdCntrLnItm());
+                product.setPrdCntrUnitPrice(p.getPrdCntrUnitPrice());
+                product.setPrdImgImage(null);
+                product.setPrdImgTypeCd(p.getPrdImgTypeCd());
+                product.setPrdImgKey(p.getPrdImgKey());
+                product.setPrdImgName(p.getPrdImgName());
+                product.setPrdImgOrigin(p.getPrdImgOrigin());
+                product.setPrdImgSize(p.getPrdImgSize());
+                product.setPrdLongDesc(p.getPrdLongDesc());
+                product.setPrdName(p.getPrdName());
+                product.setPrdOemName(p.getPrdOemName());
+                product.setPrdOemPartNum(p.getPrdOemPartNum());
+                product.setPrdPrice(p.getPrdPrice());
+                product.setPrdShortDesc(p.getPrdShortDesc());
+                product.setPrdSku(p.getPrdSku());
+                product.setPrdUnitCd(p.getPrdUnitCd());
+                product.setUpdateTs(p.getUpdateTs());
+                product.setUpdateUserId(p.getUpdateUserId());
+                product.setVndUidFk(p.getVndUidFk());
+
+                products.add(product);
+            }
+        }
+
+        return products;
     }
 
     @GET
@@ -112,7 +148,42 @@ public class ProductFacadeRESTExtension extends ProductFacadeREST {
                 .setParameter("categoryCode", productTypeCode)
                 .getResultList();
 
-        return results;
+        List<Product> products = new ArrayList<Product>();
+
+        if (results != null && results.size() > 0) {
+            for (Product p : results) {
+                Product product = new Product();
+                product.setPrdUid(p.getPrdUid());
+                product.setCreateTs(p.getCreateTs());
+                product.setCreateUserId(p.getCreateUserId());
+                product.setPrdActiveInd(p.getPrdActiveInd());
+                product.setPrdCategoryCd(p.getPrdCategoryCd());
+                product.setPrdCntrDiscount(p.getPrdCntrDiscount());
+                product.setPrdCntrLnItm(p.getPrdCntrLnItm());
+                product.setPrdCntrUnitPrice(p.getPrdCntrUnitPrice());
+                product.setPrdImgImage(null);
+                product.setPrdImgTypeCd(p.getPrdImgTypeCd());
+                product.setPrdImgKey(p.getPrdImgKey());
+                product.setPrdImgName(p.getPrdImgName());
+                product.setPrdImgOrigin(p.getPrdImgOrigin());
+                product.setPrdImgSize(p.getPrdImgSize());
+                product.setPrdLongDesc(p.getPrdLongDesc());
+                product.setPrdName(p.getPrdName());
+                product.setPrdOemName(p.getPrdOemName());
+                product.setPrdOemPartNum(p.getPrdOemPartNum());
+                product.setPrdPrice(p.getPrdPrice());
+                product.setPrdShortDesc(p.getPrdShortDesc());
+                product.setPrdSku(p.getPrdSku());
+                product.setPrdUnitCd(p.getPrdUnitCd());
+                product.setUpdateTs(p.getUpdateTs());
+                product.setUpdateUserId(p.getUpdateUserId());
+                product.setVndUidFk(p.getVndUidFk());
+
+                products.add(product);
+            }
+        }
+
+        return products;
     }
 
     @GET

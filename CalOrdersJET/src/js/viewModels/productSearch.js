@@ -276,6 +276,16 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                 self.getPhoto = function (product) {
                     return ProductHelper.getPhoto(product);
                 };
+                
+                /**
+                 * Get the photo for the product
+                 * 
+                 * @param {type} product
+                 * @returns {undefined}
+                 */
+                self.getPhotoAsync = function (product) {
+                    return ProductHelper.getPhotoAsync(product);
+                };
 
                 self.cardLayoutHandler = function () {
                     self.productLayoutType('productCardLayout');

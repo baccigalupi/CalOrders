@@ -188,7 +188,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'accounting', 'common/SecurityUtils'
                     self.productUnitCode(response.prdUnitCd.code);
                     self.productContractLineItem(response.prdCntrLnItm);
                     self.productContractDiscount(response.prdCntrDiscount);
-                    self.productContractUnitPriceDisplay = ko.observable(self.calculateContractPrice(response.prdPrice, response.prdCntrDiscount));
+                    self.productContractUnitPriceDisplay(self.calculateContractPriceInitialize(response.prdPrice, response.prdCntrDiscount));
                     self.productActiveStatus(self.getActiveInd(response.prdActiveInd));
                     self.productImage(response.prdImgImage);
                     self.productImageBytes(response.prdImgImage);
@@ -272,7 +272,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'accounting', 'common/SecurityUtils'
                 self.calculateContractPrice = function (price, percent) {
 
                     var discount = 0;
-                    if (percent !== NaN && percent != undefined && percent !== 0) {
+                    if (percent !== NaN && percent != undefined && percent !== 0 && percent !== "0") {
                         discount = ((percent / 100) * price);
                     }
                     if (discount == NaN || discount == undefined || discount === 0) {
@@ -281,6 +281,20 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'accounting', 'common/SecurityUtils'
                     } else {
                         self.productContractUnitPrice(price - discount);
                         self.productContractUnitPriceDisplay(accounting.formatMoney(price - discount))
+                    }
+                };
+
+                self.calculateContractPriceInitialize = function (price, percent) {
+
+                    var discount = 0;
+                    if (percent !== NaN && percent != undefined && percent !== 0 && percent !== "0") {
+                        discount = ((percent / 100) * price);
+                    }
+                    if (discount == NaN || discount == undefined || discount === 0) {
+
+                        return accounting.formatMoney(price);
+                    } else {
+                        return accounting.formatMoney(price - discount);
                     }
                 };
 

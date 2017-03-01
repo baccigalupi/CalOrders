@@ -119,14 +119,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'moment', 'accounting', 'common/Secu
                 };
                 self.parseOrderHistory = function (response) {
                     var orderPoNumber = "";
-                    var totalPrice = null
 
                     if (response.orderPoNumber !== undefined)
                     {
                         orderPoNumber = response.orderPoNumber;
-                    }
-                    if (response.orderPrice !== undefined) {
-                        totalPrice = accounting.formatNumber(response.orderPrice, 2);
                     }
 
                     var result = {'orderHistoryId': response['orderHistoryId'],
@@ -134,7 +130,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'moment', 'accounting', 'common/Secu
                         'orderStatus': response['orderStatus'],
                         'orderPoNumber': orderPoNumber,
                         'orderAgency': response['orderAgency'],
-                        'orderPrice': totalPrice,
+                        'orderPrice': response['orderPrice'],
                         'orderDescription': response['orderDescription']};
                     return result;
                 };
