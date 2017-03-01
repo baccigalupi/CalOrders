@@ -105,12 +105,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils'],
                 self.router = oj.Router.rootInstance;
 
                 self.onClickLoadLogin = function (data, event) {
-                    console.log("login button clicked");
                     return self.router.go('login');
                 };
 
                 self.onClickLoadRegistration = function (data, event) {
-                    console.log("registration button clicked");
                     // Clear out old session data
                     sessionStorage.registration = "";
 

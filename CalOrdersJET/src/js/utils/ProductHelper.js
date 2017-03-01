@@ -196,14 +196,10 @@ var ProductHelper = new function ()
         {
             tempItemTotalPrice += (cartProducts[i].prdCntrUnitPrice * cartProducts[i].quantity);
 
-            console.log("Quantity: " + cartProducts[i].quantity);
             tempItemQuantityTotal += Number(cartProducts[i].quantity);
         }
         sessionStorage.itemTotalPrice = tempItemTotalPrice;
         sessionStorage.itemQuantityTotal = tempItemQuantityTotal;
-
-        console.log("Cart Price: " + sessionStorage.itemTotalPrice);
-
 
         // Save cart back into session
         sessionStorage.cartProducts = JSON.stringify(cartProducts);
