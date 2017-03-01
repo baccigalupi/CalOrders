@@ -34,7 +34,7 @@ node {
             test"
     }
 
-    stage('Dockerize JS Tier') {
+    stage('Dockerize JS App') {
         sh 'docker build \
             --rm=true \
             -t kpoland/calorders-jet:$BUILD_ID \
@@ -42,7 +42,7 @@ node {
             .'
     }
 
-    stage('Dockerize REST Services Tier') {
+    stage('Dockerize REST App') {
         sh 'docker build \
             --rm=true \
             -t kpoland/calorders-rest:$BUILD_ID \
@@ -57,7 +57,7 @@ node {
         sh "mysql -uroot -pPassw0rd -h 172.17.0.2 -P 3306 --database calordersdb < DB_Scripts/testdata/TestData_Inserts.sql"
     }
 
-    stage('Start JS Tier Container') {
+    stage('Start JS App Test Container') {
         sh 'docker stop calorders-jet || echo "docker container calorders-rest is not currently running, no need to stop it"'
         sh 'docker rm calorders-jet || echo "docker image calorders-rest is not present, no need to remove it"'
         sh 'docker run \
@@ -69,7 +69,7 @@ node {
         sh 'docker ps --latest'
     }
 
-    stage('Start REST Services Tier Container') {
+    stage('Start REST App Test Container') {
         sh 'docker stop calorders-rest || echo "docker container calorders-rest is not currently running, no need to stop it"'
         sh 'docker rm calorders-rest || echo "docker image calorders-rest is not present, no need to remove it"'
         sh 'docker run \
@@ -102,7 +102,7 @@ node {
         sh 'docker tag kpoland/calorders-rest:$BUILD_ID kpoland/calorders-rest:latest'
         sh 'docker push kpoland/calorders-rest:latest'
         sh 'docker push kpoland/calorders-jet:$BUILD_ID'
-        sh 'docker tag kpoland/calorders-jet:$BUILD_ID kpoland/calorders-rest:latest'
+        sh 'docker tag kpoland/calorders-jet:$BUILD_ID kpoland/calorders-jet:latest'
         sh 'docker push kpoland/calorders-jet:latest'
     }
 }
