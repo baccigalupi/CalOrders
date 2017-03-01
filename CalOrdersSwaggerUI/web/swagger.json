@@ -204,6 +204,9 @@
     },
     "/com.oncore.calorders.rest.product/updateProduct": {
       "post": {
+        "tags": [
+          "product"
+        ],
         "summary": "Update a product.",
         "description": "",
         "operationId": "updateProduct",
