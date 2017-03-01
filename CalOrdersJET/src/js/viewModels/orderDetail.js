@@ -108,6 +108,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'libs/accounting/accounting', 'li
                  * the promise is resolved
                  */
                 self.handleActivated = function (info) {
+                    self.ready(false);
                     $('globalBody').focus();
                     window.location.hash = 'globalBody';
                     if (!SecurityUtils.isAuthenticated()) {
@@ -139,17 +140,13 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'libs/accounting/accounting', 'li
                     orderDetail.fetch({
                         success: function (myModel, response, options) {
 
-                            document.getElementById('pageTitleContainer').style = 'display: none';
-                            document.getElementById('pageTitleContainer2').style = 'display: visible';
                             self.ready(true);
 
                             return false;
                         },
                         error: function (jqXHR, textStatus, errorThrown) {
                             self.errorMessage("There was an error loading the order detail");
-
-                            document.getElementById('pageTitleContainer').style = 'display: none';
-                            document.getElementById('pageTitleContainer2').style = 'display: visible';
+                            self.ready(true);
                             return false;
                         }
                     });

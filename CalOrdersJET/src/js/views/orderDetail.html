@@ -26,11 +26,7 @@
 
     <!-- Page Title -->
     <div id="pageTitleContainer" class="oj-flex-item oj-sm-6">
-        <h2 style="margin-bottom:0">Order Detail<span class="fa fa-spinner fa-spin" style="margin-left: 0.5em"/></h2>
-    </div>
-
-    <div id="pageTitleContainer2" class="oj-flex-item oj-sm-6" style="display: none;">
-        <h2 style="margin-bottom:0">Order Detail</h2>
+        <h2 style="margin-bottom:0">Order Detail<!-- ko if: !ready()  --><span class="fa fa-spinner fa-spin" style="margin-left: 0.5em"/> <!-- /ko --></h2>
     </div>
 
     <!-- global error messages -->
@@ -51,6 +47,7 @@
 
     <!-- Page Content -->
     <div class="oj-panel oj-sm-flex-wrap-nowrap oj-panel-shadow-md">
+        <!-- ko if: ready -->
         <div class="oj-flex ">
             <div class="oj-flex-item">
                 <a data-bind="click: navigateToOrderHistory">Back to Order History</a>
@@ -85,7 +82,6 @@
         </div>
 
 
-        <!-- ko if: ready -->
         <div class="oj-flex oj-sm-12">
             <div id="cartWrapperDiv" class="oj-panel oj-flex-item oj-sm-flex-wrap-nowrap">
                 <div id="productlistview" >
@@ -93,8 +89,7 @@
                 </div>
             </div>
         </div>
-        <!-- /ko -->
-
+        
         <div class="oj-padding-vertical"></div>
 
         <div class="oj-flex oj-sm-12">
@@ -127,6 +122,8 @@
             </div>
         </div>
         <div class="oj-padding-vertical"></div>
+        <!-- /ko -->
+
     </div>
 </div>
 
