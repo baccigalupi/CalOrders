@@ -42,6 +42,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'moment', 'common/S
                 self.orderProducts = ko.observableArray([]);
                 self.ready = ko.observable(false);
                 self.showCancelButton = ko.observable(false);
+                self.user = ko.observable(false);
 
                 self.listViewDataSource = null;
                 self.cardViewDataSource = null;
@@ -107,6 +108,14 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'moment', 'common/S
                 self.handleActivated = function (info) {
                     if (!SecurityUtils.isAuthenticated()) {
                         return self.router.go('welcome');
+                    }
+
+                    if (sessionStorage.admin === 'true')
+                    {
+                        self.user(false);
+                    } else
+                    {
+                        self.user(true);
                     }
 
                     // Init
@@ -180,9 +189,17 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'moment', 'common/S
                             return false;
                         }
                     });
+                };
 
+                self.navigateToOrderHistory = function () {
 
-
+                    if (self.user())
+                    {
+                        return self.router.go("orderHistory");
+                    } else
+                    {
+                        return self.router.go("orderHistoryAdmin");
+                    }
                 };
             }
 

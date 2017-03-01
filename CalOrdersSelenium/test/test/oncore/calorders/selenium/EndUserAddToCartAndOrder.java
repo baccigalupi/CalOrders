@@ -20,7 +20,7 @@ public class EndUserAddToCartAndOrder {
   public void setUp() throws Exception {
     System.setProperty("webdriver.chrome.driver","/home/oncore/workspaces/CalOrders/libs/selenium-java-3.0.1/chromedriver");
     driver = new ChromeDriver();
-    baseUrl = "http://localhost:8000/";
+    baseUrl = "http://calorderstest.oncorellc.com:8080/";
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
   }
 
