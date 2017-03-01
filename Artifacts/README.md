@@ -10,7 +10,7 @@ OnCore’s primary focus is on delivering what the end user needs. Agile user s
 These tight cycles between ideas and testing allowed us to respond quickly to change and focused on solutions not features.
 In addition to the Agile Team, we had support from the client executive team that enabled the end users we were working with to have the power to make decisions and own the product. This ensured that we would be building and delivering a product that end user wanted and needed with this collaboration. 
 
-With this level of collaboration, we defined our strategy as 'try, fail fast, learn, and then try again."  
+With this level of collaboration, we defined our strategy as "try, fail fast, learn, and then try again."  
 
 The following documentation represents our demonstration in designing under a User Centered Design methodology, building with modern technologies in an Agile methodology with adherence to the US Digital Playbook.
 
@@ -18,7 +18,7 @@ The following documentation represents our demonstration in designing under a Us
 ##Project Requirements
 The following table presents each of the project requirements, with links to the corresponding artifacts and evidence of meeting or exceeding it. 
 
-Reqirement | How it was met
+Requirement | How it was met
 --- | ---
 a. Assigned one (1) leader and gave that person authority and responsibility and held that person accountable for the quality of the prototype submitted | Mike Tsay
 b. Assembled a multidisciplinary and collaborative team that includes, at a minimum, five (5) of the labor categories as identified in Attachment B: PQVP DS-AD Labor Category Descriptions | [Our Team](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Team-Bios)
