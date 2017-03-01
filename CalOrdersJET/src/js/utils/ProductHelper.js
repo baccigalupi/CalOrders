@@ -78,9 +78,9 @@ var ProductHelper = new function ()
     /**
      * Gets the photo for a product asyncroniously and sets it on the product image
      */
-    this.getPhotoAsync = function (prdUid)
+    this.getPhotoAsync = function (product)
     {
-        if (prdUid === undefined || prdUid === null || prdUid.length === 0)
+        if (product.prdUid === undefined || product.prdUid === null || product.prdUid.length === 0)
         {
             var src = '../../css/images/unknown_product.jpg';
             return src;
@@ -92,7 +92,7 @@ var ProductHelper = new function ()
             var findProdutService = serviceEndPoints.getEndPoint("findProductById");
 
             var ProductModel = oj.Model.extend({
-                urlRoot: findProdutService + "/" + prdUid,
+                urlRoot: findProdutService + "/" + product.prdUid,
                 attributeId: 'prdUid'
 
             });
@@ -100,19 +100,20 @@ var ProductHelper = new function ()
             var pm = new ProductModel();
             pm.fetch({
                 success: function (myModel, response, options) {
-                    var product = pm;
-                    if (product === undefined || product === null || product.attributes === undefined || product.attributes.prdImgImage === null
-                            || product.attributes.prdImgImage === undefined || product.attributes.prdImgImage.length === 0)
+                    var productMod = pm;
+                    product.prdImgImage = productMod.attributes.prdImgImage;
+                    if (productMod === undefined || productMod === null || productMod.attributes === undefined || productMod.attributes.prdImgImage === null
+                            || productMod.attributes.prdImgImage === undefined || productMod.attributes.prdImgImage.length === 0)
                     {
                         var src = '../../css/images/unknown_product.jpg';
-                        var preview = document.getElementById('productImage' + product.attributes.prdUid);
+                        var preview = document.getElementById('productImage' + productMod.attributes.prdUid);
                         preview.src = src;
                     } else
                     {
-                        var file = product.attributes.prdImgImage;
+                        var file = productMod.attributes.prdImgImage;
 
-                        var imageSize = product.attributes.prdImgImage.length;
-                        var imageType = product.attributes.prdImgTypeCd.longDesc;
+                        var imageSize = productMod.attributes.prdImgImage.length;
+                        var imageType = productMod.attributes.prdImgTypeCd.longDesc;
 
                         var reader = new FileReader();
 
@@ -125,7 +126,7 @@ var ProductHelper = new function ()
                         var blob = new Blob([arr.buffer], {size: imageSize, type: imageType});
 
                         reader.addEventListener("load", function (event) {
-                            var preview = document.getElementById('productImage' + product.attributes.prdUid);
+                            var preview = document.getElementById('productImage' + productMod.attributes.prdUid);
 
                             if (preview !== null)
                             {

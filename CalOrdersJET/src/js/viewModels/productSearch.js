@@ -283,8 +283,8 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                  * @param {type} product
                  * @returns {undefined}
                  */
-                self.getPhotoAsync = function (productUid) {
-                    return ProductHelper.getPhotoAsync(productUid);
+                self.getPhotoAsync = function (product) {
+                    return ProductHelper.getPhotoAsync(product);
                 };
 
                 self.cardLayoutHandler = function () {
