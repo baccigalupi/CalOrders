@@ -20,8 +20,8 @@ The following table presents each of the project requirements, with links to the
 
 Reqirement | How it was met
 --- | ---
-a. Assigned one (1) leader and gave that person authority and responsibility and held that person accountable for the quality of the prototype submitted | [Michael Tsay](#calorder-development-team)
-b. Assembled a multidisciplinary and collaborative team that includes, at a minimum, five (5) of the labor categories as identified in Attachment B: PQVP DS-AD Labor Category Descriptions | [Our Team](#calorder-development-team)
+a. Assigned one (1) leader and gave that person authority and responsibility and held that person accountable for the quality of the prototype submitted | Mike Tsay
+b. Assembled a multidisciplinary and collaborative team that includes, at a minimum, five (5) of the labor categories as identified in Attachment B: PQVP DS-AD Labor Category Descriptions | [Our Team](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Team-Bios)
 c. Understood what people needed, by including people in the prototype development and design process |[User Centric Design](https://github.com/OncoreLLC/CalOrders/wiki/User-Centric-Design)<br> [Focus Group](https://github.com/OncoreLLC/CalOrders/wiki/Focus-Group)<br> [Interview](https://github.com/OncoreLLC/CalOrders/wiki/Interviews)<br> [Sprint Review/Product Demo](https://github.com/OncoreLLC/CalOrders/wiki/Sprint-Reviews)
 d. Used at least a minimum of three (3) “user-centric design” techniques and/or tools | [Focus Group](https://github.com/OncoreLLC/CalOrders/wiki/Focus-Group)<br> [Interview](https://github.com/OncoreLLC/CalOrders/wiki/Interviews)<br> [Personas](https://github.com/OncoreLLC/CalOrders/wiki/Develop-Personas)<br>[Scenarios](https://github.com/OncoreLLC/CalOrders/wiki/Scenarios)<br>[Storyboards](https://github.com/OncoreLLC/CalOrders/wiki/Story-Boards)<br>[Wireframes](https://github.com/OncoreLLC/CalOrders/wiki/Wire-Frames)<br>[Wireframe Walkthrough](https://github.com/OncoreLLC/CalOrders/wiki/Wireframe-Walkthrough)<br>[Usability Testing](https://github.com/OncoreLLC/CalOrders/wiki/Usability-Testing)
 e. Used GitHub to document code commits | [Github Contributions](https://github.com/OncoreLLC/CalOrders/graphs/commit-activity)
@@ -220,8 +220,8 @@ The following code snippet is taken from a CalOrders JET view showing Knockout d
 In this example, "productName" is a Knockout variable defined in the view model.  As the user
 types in the input field, Knockout binds the user input to the view model.  This greatly simplifies
 development of the page and also allows for useful features like realtime updates on the page
-as the input changes without refreshing the content.  For more information about Knockout visit (here)[http://knockoutjs.com]. To
-learn more about how JET incorporates Knockout, see (here)[http://docs.oracle.com/middleware/jet230/jet/developer/GUID-808434E0-CA80-405C-9450-59E0BF525700.htm#JETDG334].
+as the input changes without refreshing the content.  For more information about Knockout visit [here](http://knockoutjs.com). To
+learn more about how JET incorporates Knockout, see [here](http://docs.oracle.com/middleware/jet230/jet/developer/GUID-808434E0-CA80-405C-9450-59E0BF525700.htm#JETDG334).
 
 #### View Models
 
@@ -315,8 +315,8 @@ Technology | Requirement
 [Jenkins](https://jenkins.io/) | Continuous Integration  
 [JUnit](http://junit.org/junit4/) | [automated unit test cases are here in the repository]  (https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersRest/test/com/oncore/calorders/rest/service/extension)
 [Selenium](http://www.seleniumhq.org/) | [automated regression test cases are here in the repository](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersSelenium/test/test/oncore/calorders/selenium)  
-[Knockout Js](http://knockoutjs.com/) | Front-end Javascript library  
-[Require Js](http://requirejs.org/) | Front-end Javascript library  
+[Knockout JS](http://knockoutjs.com/) | Front-end Javascript library  
+[Require JS](http://requirejs.org/) | Front-end Javascript library  
 [jQuery](https://jquery.com/) | Front-end Javascript library  
 [Swagger](http://swagger.io/) | Automated Documentation of RESTful services   
 [NVDA](https://www.paciellogroup.com/blog/2008/01/nvda-a-free-and-open-source-screen-reader-for-windows/) | Screen Reader
@@ -330,4 +330,4 @@ As part of the CalOrders quality control process, the OnCore team validated Amer
 * Component roles and names are assigned appropriately for each component
 * Correct color contrast via the Alta theme which supports luminosity contrast ratio of at least 4.5:1
 
-During testing, the JET framework proved its worth in reducing the ADA work load on the development team by allowing the team to focus more on building the screen content and less time worrying about ADA compliance issues.  Testing CalOrders with WAVE revealed no major errors and only a handful of warnings, which required resolution.  Likewise, tests with NVDA with FireFox showed excellent results.  It must be noted, JET requires the use of the F2 key when navigating components inside a table row or list row, which is not immediately evident.  
+During testing, the JET framework proved its worth in reducing the ADA work load on the development team by allowing the team to focus more on building the screen content and less time worrying about ADA compliance issues.  Testing CalOrders with WAVE revealed no major errors and only a handful of warnings, which required resolution.  Likewise, tests with NVDA with FireFox showed excellent results with the only significant bug involving [dialog boxes](https://www.pivotaltracker.com/story/show/140812285).  It must be noted, JET requires the use of the F2 key when navigating components inside a table or list row, which is not immediately evident and could impact testing with a screen reader.   

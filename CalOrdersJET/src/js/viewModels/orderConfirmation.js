@@ -111,9 +111,10 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                             sessionStorage.itemTotalPrice = 0;
 
                         }
-
-
-
+                        else
+                        {
+                            return self.router.go("productSearch");
+                        }
 
                     } catch (err)
                     {
