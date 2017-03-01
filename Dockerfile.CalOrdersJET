@@ -1,0 +1,8 @@
+FROM httpd
+LABEL maintainer "kyle.poland@oncorellc.com"
+
+# set timezone
+RUN echo "US/Pacific-New" > /etc/timezone && /usr/sbin/dpkg-reconfigure --frontend noninteractive tzdata
+
+# web content into container
+COPY CalOrdersJET/web /usr/local/apache2/htdocs/
