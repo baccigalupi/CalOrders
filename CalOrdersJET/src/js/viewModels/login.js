@@ -73,8 +73,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'ojs/ojarray
                  * the promise is resolved
                  */
                 self.handleActivated = function (info) {
-
-                    console.log("login self.handleActivated called!");
                     self.username = ko.observable();
                     self.doShowErrorMessage = ko.observable(false);
                     SecurityUtils.clearSessionStorage();
@@ -113,7 +111,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'ojs/ojarray
                  * @param {Array} info.cachedNodes - An Array containing cached nodes for the View if the cache is enabled.
                  */
                 self.handleDetached = function (info) {
-                    console.log("login handleDetached!");
                 };
 
 
@@ -140,7 +137,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'ojs/ojarray
                     if (oj.StringUtils.isEmptyOrUndefined(self.username()) || oj.StringUtils.isEmptyOrUndefined(self.password()))
                     {
                         self.doShowErrorMessage = true;
-                        console.log(self.username());
 
                         document.getElementById('loginError').hidden = false;
 
@@ -163,10 +159,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'ojs/ojarray
                     var serviceURL = serviceEndPoints.getEndPoint('findPartyByUserIdAndPassword');
                     serviceURL += "/" + self.username() + "/" + self.password();
 
-                    console.log("serviceURL is :" + serviceURL);
-
-
-
                     var PartyModel = oj.Model.extend({
                         urlRoot: serviceURL,
                         idAttribute: 'ptyUid'
@@ -176,7 +168,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'common/SecurityUtils', 'ojs/ojarray
 
                     party.fetch({
                         success: function () {
-                            console.log("Party: ", party.attributes);
 
                             document.getElementById('loginError').hidden = true;
 

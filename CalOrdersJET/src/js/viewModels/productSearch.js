@@ -180,8 +180,6 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'libs/accounting/accounting', 'co
                         document.getElementById('pageErrorContainer').hidden = true;
                     }
 
-                    console.log("Search products by " + productType);
-
                     // Remove previous search results
                     self.allProduct([]);
 
@@ -202,7 +200,6 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'libs/accounting/accounting', 'co
 
                     self.collection.fetch({
                         success: function (myModel, response, options) {
-                            console.log("Search success");
                             return false;
                         },
                         error: function (jqXHR, textStatus, errorThrown) {
@@ -358,12 +355,10 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'libs/accounting/accounting', 'co
 
                     for (val in self.filteredAllProduct())
                     {
-                        console.log("compare:" + self.filteredAllProduct()[val].compareProduct());
 
                         if (self.filteredAllProduct()[val].compareProduct() !== undefined
                                 && self.filteredAllProduct()[val].compareProduct())
                         {
-                            console.log("adding item to compare list");
                             productsToCompare.push(self.filteredAllProduct()[val]);
                         }
                     }
