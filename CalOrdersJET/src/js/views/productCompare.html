@@ -24,7 +24,7 @@
 <div id="productCompareWrapperDiv" class="oj-hybrid-padding">
 
     <!-- Page Title -->
-    <div id="pageTitleContainer" class="oj-flex-item oj-sm-6">
+    <div id="pageTitleContainer" class="oj-flex-item oj-sm-12">
         <h2 style="margin-bottom:0">Product Compare</h2>
     </div>
 
@@ -55,13 +55,16 @@
 
         <table class="product-compare-table">
             <tr>
-                <td class="product-detail-name">Product</td>
+                <td colspan="2" class="product-detail-name">Product</td>
+            </tr>
+            <tr>
+
                 <td>
                     <img alt="product" data-bind="attr: {
                         id: 'productImage' + productsToCompare()[0].prdUid, 
                         src: getPhotoAsync(productsToCompare()[0]), 
-                        height: large() ? '300' : '150',
-                        width: large() ? '300' : '150'}"/>
+                        height: large() ? '300' : '100',
+                        width: large() ? '300' : '100'}"/>
                     <div class="oj-flex-item">
                         <h3 aria-label="product name" data-bind="text: productsToCompare()[0].prdName" tabindex="0"></h3>
                         <div class="product-detail-label">List Price:</div>
@@ -85,8 +88,8 @@
                     <img alt="product" data-bind="attr: {
                         id: 'productImage' + productsToCompare()[1].prdUid, 
                         src: getPhotoAsync(productsToCompare()[1]), 
-                        height: large() ? '300' : '150',
-                        width: large() ? '300' : '150'}"/>
+                        height: large() ? '300' : '100',
+                        width: large() ? '300' : '100'}"/>
                     <div class="oj-flex-item">
                         <h3 aria-label="product name" data-bind="text: productsToCompare()[1].prdName" tabindex="0"></h3>
                         <div class="product-detail-label">List Price:</div>
@@ -112,11 +115,12 @@
                 </td>
             </tr>
             <tr>
-                <td class="product-detail-name">Description</td>
+                <td  colspan="2" class="product-detail-name">Description</td>
+            </tr>
+            <tr>
                 <td>
                     <div class="oj-flex-item ">
-                        <div class="product-detail-label">Product Description</div>
-                        <div class="product-detail-value" data-bind="foreach: productsToCompare()[0].prdLongDescLines">
+                        <div data-bind="foreach: productsToCompare()[0].prdLongDescLines">
                             <p data-bind="text: $data"></p>
                         </div>
                     </div>
@@ -124,15 +128,16 @@
                 </td>
                 <td>
                     <div class="oj-flex-item ">
-                        <div class="product-detail-label">Product Description</div>
-                        <div class="product-detail-value" data-bind="foreach: productsToCompare()[1].prdLongDescLines">
+                        <div data-bind="foreach: productsToCompare()[1].prdLongDescLines">
                             <p data-bind="text: $data"></p>
                         </div>
                     </div>
                 </td>
             </tr>
             <tr>
-                <td class="product-detail-name">Vendor</td>
+                <td  colspan="2" class="product-detail-name">Vendor</td>
+            </tr>
+            <tr>
                 <td>
                     <div data-bind="text: productsToCompare()[0].vndUidFk.vndName"></div>
                 </td>
@@ -141,7 +146,9 @@
                 </td>
             </tr>
             <tr>
-                <td class="product-detail-name">SKU</td>
+                <td  colspan="2" class="product-detail-name">SKU</td>
+            </tr>
+            <tr>
                 <td>
                     <div data-bind="text: productsToCompare()[0].prdSku"></div>
                 </td>
@@ -150,7 +157,9 @@
                 </td>
             </tr>
             <tr>
-                <td class="product-detail-name">Contract Line Item</td>
+                <td  colspan="2" class="product-detail-name">Contract Line Item</td>
+            </tr>
+            <tr>
                 <td>
                     <div data-bind="text: productsToCompare()[0].prdCntrLnItm"></div>
                 </td>
@@ -159,7 +168,9 @@
                 </td>
             </tr>
             <tr>
-                <td class="product-detail-name">Manufacturer</td>
+                <td  colspan="2" class="product-detail-name">Manufacturer</td>
+            </tr>
+            <tr>
                 <td>
                     <div data-bind="text: productsToCompare()[0].prdOemName"></div>
                 </td>
@@ -168,7 +179,9 @@
                 </td>
             </tr>
             <tr>
-                <td class="product-detail-name">Manufacturer Part Number</td>
+                <td  colspan="2" class="product-detail-name">Manufacturer Part Number</td>
+            </tr>
+            <tr>
                 <td>
                     <div data-bind="text: productsToCompare()[0].prdOemPartNum"></div>
                 </td>
@@ -177,7 +190,9 @@
                 </td>
             </tr>
             <tr>
-                <td class="product-detail-name">Product Unit</td>
+                <td  colspan="2" class="product-detail-name">Product Unit</td>
+            </tr>
+            <tr>
                 <td>
                     <div data-bind="text: productsToCompare()[0].prdUnitCd.longDesc"></div>
                 </td>
@@ -186,7 +201,9 @@
                 </td>
             </tr>
             <tr>
-                <td class="product-detail-name">Category</td>
+                <td  colspan="2" class="product-detail-name">Category</td>
+            </tr>
+            <tr>
                 <td>
                     <div data-bind="text: productsToCompare()[0].prdCategoryCd.longDesc"></div>
                 </td>
