@@ -19,13 +19,13 @@ public class EndUserS2RegressionTest {
   public void setUp() throws Exception {
     System.setProperty("webdriver.chrome.driver","/home/oncore/workspaces/	CalOrders/libs/selenium-java-3.0.1/chromedriver");
     driver = new ChromeDriver();
-    baseUrl = "http://localhost:8000/";
+    baseUrl = "http://calorderstest.oncorellc.com:8080/";
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
   }
 
   @Test
   public void testEndUserS2Regression() throws Exception {
-    driver.get(baseUrl + "/");
+    driver.get("http://calorderstest.oncorellc.com:8080/");
     driver.findElement(By.id("login")).click();
     driver.findElement(By.id("userName")).clear();
     driver.findElement(By.id("userName")).sendKeys("rickybobby");
