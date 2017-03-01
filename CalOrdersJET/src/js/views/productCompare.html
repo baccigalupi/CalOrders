@@ -59,7 +59,7 @@
                 <td>
                     <img alt="product" data-bind="attr: {
                         id: 'productImage' + productsToCompare()[0].prdUid, 
-                        src: getPhoto(productsToCompare()[0]), 
+                        src: getPhotoAsync(productsToCompare()[0]), 
                         height: large() ? '300' : '150',
                         width: large() ? '300' : '150'}"/>
                     <div class="oj-flex-item">
@@ -84,7 +84,7 @@
                 <td>
                     <img alt="product" data-bind="attr: {
                         id: 'productImage' + productsToCompare()[1].prdUid, 
-                        src: getPhoto(productsToCompare()[1]), 
+                        src: getPhotoAsync(productsToCompare()[1]), 
                         height: large() ? '300' : '150',
                         width: large() ? '300' : '150'}"/>
                     <div class="oj-flex-item">

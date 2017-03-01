@@ -188,7 +188,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'accounting', 'common/SecurityUtils'
                     self.productUnitCode(response.prdUnitCd.code);
                     self.productContractLineItem(response.prdCntrLnItm);
                     self.productContractDiscount(response.prdCntrDiscount);
-                    self.productContractUnitPriceDisplay(self.calculateContractPriceInitialize(response.prdPrice, response.prdCntrDiscount));
+                    self.productContractUnitPrice(response.prdCntrUnitPrice);
+                    self.productContractUnitPriceDisplay(accounting.formatMoney(self.calculateContractPriceInitialize(response.prdPrice, response.prdCntrDiscount)));
                     self.productActiveStatus(self.getActiveInd(response.prdActiveInd));
                     self.productImage(response.prdImgImage);
                     self.productImageBytes(response.prdImgImage);
@@ -292,9 +293,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'accounting', 'common/SecurityUtils'
                     }
                     if (discount == NaN || discount == undefined || discount === 0) {
 
-                        return accounting.formatMoney(price);
+                        return price;
                     } else {
-                        return accounting.formatMoney(price - discount);
+                        return (price - discount);
                     }
                 };
 
