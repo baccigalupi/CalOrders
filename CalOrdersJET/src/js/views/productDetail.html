@@ -28,7 +28,7 @@
         <h2 style="margin-bottom:0">Product Detail</h2>
     </div>
 
-        <!-- global error messages -->
+    <!-- global error messages -->
     <div class="oj-flex-item oj-messaging-inline-container" id="pageErrorContainer" aria-live="polite" hidden>
         <div class="oj-padding-vertical"></div>
         <div class="oj-message oj-message-error">
@@ -42,7 +42,7 @@
         </div>
     </div>
     <!-- end global error message -->
-    
+
     <!-- Page Content -->
 
     <div class="oj-panel oj-flex-item oj-panel-shadow-md">
@@ -57,11 +57,15 @@
             <div class="oj-flex-item">
                 <a data-bind="click: navigateToProductSearch">Back to Search Results</a>
             </div>
+             <!-- ko if: admin -->
             <div class="oj-flex-item">
-                <!-- ko if: admin -->
+               
+                <!-- ko if: ready -->
                 <button id= "productUpdate" style="float: right" data-bind="click: navigateToProductUpdate, ojComponent: { component: 'ojButton', label: 'Update Product'}"></button>
                 <!-- /ko -->
+                
             </div>
+             <!-- /ko -->
         </div>
 
         <div class="oj-padding-vertical"></div>
@@ -103,7 +107,7 @@
 
                 <div class="oj-flex">
                     <div class="oj-flex-item">
-                         <input class="product-quantity" id="quantity" data-bind="value: product().quantity" aria-label="quantity" type="number" min="1" max="10000"/>
+                        <input class="product-quantity" id="quantity" data-bind="value: product().quantity" aria-label="quantity" type="number" min="1" max="10000"/>
 
 
                         <button id= "addToCart" data-bind="click: addToCart, ojComponent: { component: 'ojButton', label: 'Add to Cart'}"></button>

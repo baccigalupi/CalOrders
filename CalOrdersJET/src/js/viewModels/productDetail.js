@@ -43,6 +43,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'libs/accounting/accounting', 'co
                 self.admin = ko.observable(false);
                 self.user = ko.observable(false);
                 self.errorMessage = ko.observable();
+                self.ready = ko.observable(false);
 
 
                 var lgQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.LG_UP);
@@ -66,7 +67,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'libs/accounting/accounting', 'co
                     response.vndName = ko.observable(response.vndUidFk.vndName);
                     response.categoryLongDesc = ko.observable(response.prdCategoryCd.longDesc);
                     response.unitLongDesc = ko.observable(response.prdUnitCd.longDesc);
-
+                    self.ready(true);
                     self.product(response);
                 };
 
