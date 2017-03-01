@@ -1,0 +1,18 @@
+FROM httpd
+LABEL maintainer "kyle.poland@oncorellc.com"
+
+# set timezone
+RUN echo "US/Pacific-New" > /etc/timezone && /usr/sbin/dpkg-reconfigure --frontend noninteractive tzdata
+
+# placeholder ENV variables for database connections to override at runtime
+ENV SERVICESHOSTNAME somehostname
+
+# copy start script into the container
+COPY docker/start_httpd.sh /
+RUN /bin/chmod +x /start_httpd.sh
+
+# web content into container
+COPY CalOrdersJET/web /usr/local/apache2/htdocs/
+
+# override default entry point
+CMD ["/start_httpd.sh"]

@@ -31,6 +31,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'libs/accounting/accounting', 'commo
 
             function ProductUpdateViewModel() {
                 var self = this;
+                self.ready = ko.observable(false);
                 self.applicationVersion = ko.observable("1.0");
                 var serviceEndPoints = new ServiceEndPoints();
                 self.serviceURL = serviceEndPoints.getEndPoint('updateProduct');
@@ -198,6 +199,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'libs/accounting/accounting', 'commo
                     self.productImageOrigin(response.prdImgOrigin);
                     self.productImageSize(response.prdImgSize);
                     self.productImageType(response.prdImgTypeCd.code);
+                    self.ready(true);
                 };
 
                 /**
@@ -246,7 +248,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'libs/accounting/accounting', 'commo
 
                 self.getPrdUid = function ()
                 {
-                    return self.product().prdUid;
+                    return self.prdUid();
                 };
 
                 self.getActiveInd = function (activeInd) {
@@ -501,6 +503,43 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'libs/accounting/accounting', 'commo
                         return true;
                     }
                 };
+
+                self.isValidProductName = function ()
+                {
+
+                    parseProduct = function (response)
+                    {
+                        if (response != undefined && response.length > 0)
+                        {
+                            var isDuplicate = true;
+                            for (var i = 0; i < response.length; i++) {
+                                if (response[i].prdUid === self.getPrdUid()) {
+                                    isDuplicate = false;
+                                }
+                            }
+                            if (isDuplicate === true) {
+                                var errorMsg = new oj.Message("That product name is already taken.", "", oj.Message.SEVERITY_TYPE.ERROR);
+                                self.productNameMessage([errorMsg]);
+                                return false;
+                            }
+
+                        }
+                    };
+                    if (typeof self.productName() === "undefined"
+                            || self.productName() === "") {
+                        return true;
+                    } else {
+                        var ProductService = oj.Model.extend({
+                            urlRoot: self.productNameServiceURL + "/" + self.productName(),
+                            parse: parseProduct,
+                            idAttribute: 'prdUid'});
+                        var productService = new ProductService();
+                        productService.fetch();
+                        return true;
+                    }
+
+                };
+
                 /*
                  * Perform form level validation
                  * 
@@ -510,7 +549,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'libs/accounting/accounting', 'commo
                 self.showComponentValidationErrors = function (trackerObj)
                 {
                     trackerObj.showMessages();
-                    if (!self.isValidDropDowns()
+                    if (!self.isValidDropDowns() || !self.isValidProductName()
                             || trackerObj.focusOnFirstInvalid())
                         return false;
                     return true;

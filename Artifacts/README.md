@@ -1,18 +1,21 @@
-#California Department of Technology - OnCore Consulting ADPQ Vendor Pool Refresh Prototype - 
+#California Department of Technology - OnCore Consulting ADPQ Vendor Pool Refresh Prototype - CalOrders
 ###[Prototype URL](Prototype URL)
 
 ## Introduction
 
-Agile methodology and User Centered Design combine to form an ideal vehicle to quickly understand what users want and delivering functioning, high value features for the business.  
+Agile Methods and User Centered Design combine to form an ideal vehicle to quickly understand what users want and deliver functioning, high value business solutions.  
 
-OnCore’s primary focus is on delivering what the end user needs. Agile user stories that incrementally build up functionality over the sprints allowed the development team to adjust quickly to the needs of the business as they were able to immediately see the application and the requirements they were providing. 
+OnCore’s primary focus is on delivering what the end user needs.   
 
-These tight cycles between ideas and testing allowed us to respond quickly to change and focused on solutions not features.
-In addition to the Agile Team, we had support from the client executive team that enabled the end users we were working with to have the power to make decisions and own the product. This ensured that we would be building and delivering a product that end user wanted and needed with this collaboration. 
+We use agile user stories that incrementally build up functionality over a series of sprints.  With each sprint, the business is able to see an early realization of their requirements, allowing them to provide meaningful feedback early enough in the process to be incorporated into future sprints.  The development team collaborates closely with the business enhancing their understanding of the users’ needs, allowing them to more closely align their focus.   
 
-With this level of collaboration, we defined our strategy as "try, fail fast, learn, and then try again."  
+These quick cycles between ideas and testing allowed us to respond quickly to change and focused on solutions not features. Up front we gained support from the client executive team, enabling the end users we were working with to have the power to make decisions and own the product.   
 
-The following documentation represents our demonstration in designing under a User Centered Design methodology, building with modern technologies in an Agile methodology with adherence to the US Digital Playbook.
+This approach, combined with close collaboration with end users, fueled our strategy as 'try, fail fast, learn, and then try again."
+The sections that follow present our experience, methods and approach in response to the ADPQ Vendor Refresh.  We start by listing the requirements from the RFI, with links to how each of them are addressed.  We then confirm our adherence to the US Digital Services Playbook, introduce our development team, and our approach to user centered design and agile development.  The balance of the document is our Technical Approach, where we present our solution, including the overall Architecture, our DevOps approach, the User Interface, and a detailing of the Modern and Open Source Technologies we employed.   
+
+Thank you for the opportunity to participate, we hope you enjoy reviewing our experience as much as we did preparing it. 
+
 
 
 ##Project Requirements
@@ -47,7 +50,7 @@ Our team followed the US Digital Services Playbook, covering each of the 13 play
 
 ## [Development Team](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Team-Bios)
 
-OnCore asked Mike Tsay to be the Team Leader/Project Manager.  Mike was given authority over and was responsible and accountable for the quality of the prototype submitted.  The following table presents the balance of the OnCore team. 
+OnCore asked Mike Tsay to be the Team Leader/Project Manager. Mike was given authority over and was responsible and accountable for the quality of the prototype submitted. The following table presents the balance of the OnCore team, a multidisciplinary and collaborative group, covering the eight labor categories listed below. 
 
 **We selected a multidisciplinary and collaborative team that fulfilled the following 8 labor categories:**  
 
@@ -67,11 +70,12 @@ DevOps Engineer | [Suganya Ravikumar](https://github.com/OncoreLLC/CalOrders/wik
 
 The first step of a  [User-Centered-Design](https://github.com/OncoreLLC/CalOrders/wiki/User-Centric-Design) (UCD) process is to formulate a plan.  Our plan, framed by our [statement of work](https://github.com/OncoreLLC/CalOrders/wiki/Statement-of-Work), identified the project objectives, requirements, user community, constraints, schedule, and deliverables.
 
-Our plan combines our UCD and Agile processes into a cohesive and flexible workflow.  It was this combination that we were able to identify the features that the users valued the most, and were able to focus our story and build activities to deliver working functionality after each sprint.  This allowed for feedback and changes to the design and resulted in a product that reflected what the end users were really asking for.
+Our plan combines our UCD and Agile processes into a cohesive and flexible workflow. It was with this combination that we were able to identify the features that the users valued the most, and were able to focus our story and build activities to deliver working functionality after each sprint. This allowed for feedback and subsequent changes to the design, resulting in a product that reflected what the end users were really asking for.  
 
-The team utilized User-Centered-Design (UCD) and Agile development techniques to formulate the product backlog.  All team members participated in the initial meetings with the users which was a natural hook into our Agile methodolgy and gave everyone the opportunity to understand the scope of the project and understand how each of them would contribute to the project's success.  
+The team utilized User-Centered-Design (UCD) and Agile development techniques to formulate the product backlog. All team members participated in the initial meetings with the users.  This was a  natural lead into our Agile methodology, allowing the whole team the opportunity to understand the scope of the project and understand how each of them would contribute to the project's success.  
 
 The table below summarizes how we incorporated the UCD practices of Plan, Analyze, Design, Implement and Test & Measure in the development of CalOrders.  Each section includes a link to another page that provides detail on the subject.
+
 
 Plan | Analyze| Design | Implement | Test & Measure  
 --- | --- | --- | --- | ----
@@ -84,9 +88,9 @@ Kickoff Meeting | [Research Domain](https://github.com/OncoreLLC/CalOrders/wiki/
 
 The team's principle focus during development of CalOrders is summarized best by Jeff Sutherland.
  
-“[Value] people over processes; products that actually work over documenting what that product is supposed to do; collaborating with customers over negotiating with them; and responding to change over following a plan.” (Scrum: The Art of Doing Twice the Work in Half the Time)
+“[Value] people over processes; products that actually work over documenting what that product is supposed to do; collaborating with customers over negotiating with them; and responding to change over following a plan.” (From 'Scrum: The Art of Doing Twice the Work in Half the Time')
 
-[Oncore's Agile methodology](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Methodolgy) provided the team with an iterative approach, where fast feedback informed subsequent work or versions of the prototype, each time making it better.
+[Oncore's Agile methodology](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Methodolgy) provided an iterative approach, where fast feedback informed subsequent work or versions of the prototype, each time making it better.  
 
 For example, during the early focus group sessions the users described the need for improvement of the add product business process as being an important feature for the new application.  This allowed us to deliver in Sprint 1 a simplified add product page that got the core functionality quickly to the users.  In Sprint 2, we enhanced, adding the ability to upload images, and integrated it to the navigation bar but the users still remarked at how they were pleased that they received the core feature early.
 
@@ -94,7 +98,7 @@ Another time where UCD and Agile combined was during the walkthrough of the Spri
 
 ### Principles
 
-There are many different specific project development methodologies within agile. but they all center around a core set of principles:
+There are many different project development methodologies within agile. but they all center around a core set of principles:
 
 1. Define a measurable goal.
 2. Everyone owns the problem.
@@ -105,7 +109,7 @@ There are many different specific project development methodologies within agile
 
 ### Process   
 
-Our [Agile](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Methodolgy) process allowed us to rapidly deliver a working product to maintain the momentum from the User Centered Design Sessions, allowing us to show the end user the system we were building. Combined with sprint cycles we were able to add new stories; existing stories in the backlog and icebox were continually evolving and reprioritized with continued meetings outside of the development cycle. These meeting took place between the product owner, business analysts and end users. Focusing on keeping things simple and evolving fostered the environment of rapid delivery and allowed for face to face interactions with the end users on how the system was evolving.  More importantly, it allowed for failure, and with the quick adjustments yielded a system that worked for the end users.
+Our [Agile](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Methodolgy) process allowed us to rapidly deliver a working product to maintain the momentum from the User Centered Design Sessions, allowing us to show the end user the system we were building. Combined with sprint cycles we were able to add new stories; existing stories in the backlog and icebox were continually evolving and reprioritized with continued meetings outside of the development cycle. These meetings took place between the product owner, business analysts and end users. Focusing on keeping things simple and continually evolving fostered an environment of rapid delivery and allowed for face to face interactions with the end users on how the system was evolving. More importantly, it allowed for failure, and with the quick adjustments yielded a system that worked for the end users.
 
 ###  Practices
 The list below provides links to additional artifacts and other important information about each agile practice that was utilized for this project.<br>
@@ -120,19 +124,16 @@ The list below provides links to additional artifacts and other important inform
 
 
 ## Technical Approach
-Our Technical Approach centers on user centered design, agile methods, using modern technology.  Our goal is to build what the user really needs, and as such, we structure our methods, tooling and architecture around iterative, collaborative activities, that allow development staff to integrate and iterate quickly with end users.  Our goal is to realize the agile potential of developing twice the functionality, in half the time.  
 
-The following sections describe our technical approach to building the CalOrders application. They describe our approach to DevOps, our Architecture, our Development Environment, and our Responsive User Interface and Application Design. Finally, they conclude with our approach to using shared architectural components, use of modern and open source technologies, and our accessible user interface.
+Our Technical Approach centers on user centered design and agile methods using modern technology. Our goal is to build what the user really needs, and as such, we structure our methods, tooling and architecture around iterative, collaborative activities, that allow development staff to integrate and iterate quickly with end users. 
 
-### DevOps
+The following sections describe our technical approach to building the CalOrders application. They describe our approach to DevOps, our Architecture, our Development Environment, and our Responsive User Interface and Application Design. They conclude with our approach to using shared architectural components, use of modern and open source technologies, and our accessible user interface.
 
-DevOps the convergence of application development and operations.  It is prevalent through the entire lifecycle, starting with design and continuing through production deployment. 
-
-[Our DevOps Approach](https://github.com/OncoreLLC/CalOrders/wiki/Environments) is centered on continuous integration, including regular builds, automated testing, and efficient environment buildout and maintenance.  It leverages Docker images for container based deployments, and Status Cake for monitoring.  
 
 ### Architecture
 
-CalOrders core principles:
+Our CalOrders architecture is centered on the following core principles:
+
 
 * Open Source architecture built on the latest JavaScript, HTML5, CSS, and Java technologies
 * Supports latest architectural concepts of speed, replace-ability, and continuous delivery
@@ -151,9 +152,10 @@ CalOrders by default uses the open source NetBeans IDE for development.  NetBean
 However, NetBeans is not required and Eclipse or IntelliJ can be used to work on the backend JEE components and any editor can be used to edit the user interface code as it is just standard JavaScript, HTML, and CSS. For more information about setting up a local development environment, see the [CalOrders Help](https://github.com/OncoreLLC/CalOrders/wiki/Help) wiki page.
 
 
-### Projects
+### CalOrders Deployment Structure - Projects
 
-The CalOrders application is separated by area of concern into separate NetBeans projects. Separating the user interface from the backend services makes it easier to allocate the layers to user interface or service development specialists.
+The CalOrders application is organized into individual NetBeans projects, separated by area of concern.  Separating the user interface from the backend services makes it easier to allocate the layers to user interface or service development specialists.
+
  
 * CalOrdersJET - [(CDT–ADPQ–0117-2-Technical Approach: Client UI)](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersJET)  JET JavaScript, HTML5, CSS project providing the front end for the CalOrders application
 * JavaScript Library - [(CDT–ADPQ–0117-2-Technical Approach: JavaScript Library)](http://www.oracle.com/webfolder/technetwork/jet/index.html) Orcle JET is an open source JavaScript framework proving a rich set of ADA compliant components. See User Interface section below for more details about Oracle JET
@@ -188,7 +190,7 @@ Due to these features and its extensive component library, JET provides an excel
 
 #### SPA (Single Page Application)
 
-CalOrders is a Single Page Application, having a single entry point, [index.html](https://github.com/OncoreLLC/CalOrders/blob/master/CalOrdersJET/src/index.html).  Each screen in the application is a distinct HTML fragment substituted by the JET routing framework, however, they are not full HTML pages.  
+CalOrders is a Single Page Application, having a single entry point.  Each screen in the application is a distinct HTML fragment substituted by the JET routing framework, however, they are not full HTML pages.  
 
 #### Views
 
@@ -294,7 +296,7 @@ CalOrders places common architectural components in the shared CalOrdersCore pro
 
 ### Databases
 
-The CalOrders application currently uses the MySQL [database](https://github.com/OncoreLLC/CalOrders/tree/master/DB_Scripts) for back-end storage. MySQL is one of the most popular open source databases available, with years of proven implementations.  Further, MySQL has a rich library of information available for support, whether in the form of online discussions or in actual documentation from MySQL. The MySQL supporting libraries and tools are also multi-platform, stable, and provide all the functionality a development team needs to build applications.
+The CalOrders application currently uses the MySQL [database](https://github.com/OncoreLLC/CalOrders/tree/master/DB_Scripts) for back-end storage. MySQL is one of the most popular open source databases available, with years of proven implementations. MySQL has a rich library of information available for support, whether in the form of online discussions or in actual documentation from MySQL. The MySQL supporting libraries and tools are also multi-platform, stable, and provide all the functionality a development team needs to build applications.
 
 CalOrders uses JPA as an abstraction layer, there is nothing preventing migrating the database to a different provider such as Oracle or SQL Server. JPA provides CalOrders impressive flexibility and upgradability in this regard.
 
@@ -331,3 +333,9 @@ As part of the CalOrders quality control process, the OnCore team validated Amer
 * Correct color contrast via the Alta theme which supports luminosity contrast ratio of at least 4.5:1
 
 During testing, the JET framework proved its worth in reducing the ADA work load on the development team by allowing the team to focus more on building the screen content and less time worrying about ADA compliance issues.  Testing CalOrders with WAVE revealed no major errors and only a handful of warnings, which required resolution.  Likewise, tests with NVDA with FireFox showed excellent results with the only significant bug involving [dialog boxes](https://www.pivotaltracker.com/story/show/140812285).  It must be noted, JET requires the use of the F2 key when navigating components inside a table or list row, which is not immediately evident and could impact testing with a screen reader.   
+
+### DevOps
+
+DevOps the convergence of application development and operations.  It is prevalent through the entire lifecycle, starting with design and continuing through production deployment. 
+
+[Our DevOps Approach](https://github.com/OncoreLLC/CalOrders/wiki/Environments) is centered on continuous integration, including regular builds, automated testing, and efficient environment buildout and maintenance.  It leverages Docker images for container based deployments, and Status Cake for monitoring.  

@@ -57,11 +57,15 @@
             <div class="oj-flex-item">
                 <a data-bind="click: navigateToProductSearch">Back to Search Results</a>
             </div>
+             <!-- ko if: admin -->
             <div class="oj-flex-item">
-                <!-- ko if: admin -->
+               
+                <!-- ko if: ready -->
                 <button id= "productUpdate" style="float: right" data-bind="click: navigateToProductUpdate, ojComponent: { component: 'ojButton', label: 'Update Product'}"></button>
                 <!-- /ko -->
+                
             </div>
+             <!-- /ko -->
         </div>
 
         <div class="oj-padding-vertical"></div>
