@@ -1,5 +1,5 @@
 #California Department of Technology - OnCore Consulting ADPQ Vendor Pool Refresh Prototype - CalOrders
-###[Prototype URL](Prototype URL)
+###[Prototype URL](http://calorders.oncorellc.com)
 
 ## Introduction
 
@@ -50,11 +50,11 @@ Our team followed the US Digital Services Playbook, covering each of the 13 play
 
 ## [Development Team](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Team-Bios)
 
-OnCore asked Mike Tsay to be the Team Leader/Project Manager. Mike was given authority over and was responsible and accountable for the quality of the prototype submitted. The following table presents the balance of the OnCore team, a multidisciplinary and collaborative group, covering the eight labor categories listed below. 
+OnCore asked Mike Tsay to be the Team Leader/Project Manager. Mike was given authority over and was responsible and accountable for the quality of the prototype submitted. The following table presents the balance of the OnCore team, a multidisciplinary and collaborative group, covering the seven labor categories listed below. 
 
-**We selected a multidisciplinary and collaborative team that fulfilled the following 8 labor categories:**  
+**We selected a multidisciplinary and collaborative team that fulfilled the following seven labor categories:**  
 
-Role | Team Member  
+Role(Labor Category) | Team Member 
 --- | ---  
 Product Manager	| [Mike Tsay](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Team-Bios)
 Agile Coach/Technical Architect | [Royce Owens, CSM](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Team-Bios)  
@@ -81,7 +81,7 @@ Plan | Analyze| Design | Implement | Test & Measure
 --- | --- | --- | --- | ----
 Kickoff Meeting | [Research Domain](https://github.com/OncoreLLC/CalOrders/wiki/Domain-Research)    |[Scenarios](https://github.com/OncoreLLC/CalOrders/wiki/Scenarios) | [Style Guide](http://www.oracle.com/webfolder/technetwork/jet/jetCookbook.html)    |[Usability Test](https://github.com/OncoreLLC/CalOrders/wiki/Usability-Testing)
 [Statement of Work](https://github.com/OncoreLLC/CalOrders/wiki/Statement-of-Work)   |[Focus Groups](https://github.com/OncoreLLC/CalOrders/wiki/Focus-Group)|[Story Boarding](https://github.com/OncoreLLC/CalOrders/wiki/Story-Boards)     |[Wireframe Walkthrough](https://github.com/OncoreLLC/CalOrders/wiki/Wireframe-Walkthrough) | Refine Application            
-[Develop a Plan](https://github.com/OncoreLLC/CalOrders/wiki/User-Centric-Design)   | [Personas](https://github.com/OncoreLLC/CalOrders/wiki/Develop-Personas)||                       | Retest
+[Develop a Plan](https://github.com/OncoreLLC/CalOrders/wiki/User-Centric-Design)   | [Personas](https://github.com/OncoreLLC/CalOrders/wiki/Develop-Personas)||                       | [Retest](https://github.com/OncoreLLC/CalOrders/wiki/Usability-Test-Final)
 ||[Interviews](https://github.com/OncoreLLC/CalOrders/wiki/Interviews) ||
 
 ## [Agile Development](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Methodolgy)   
