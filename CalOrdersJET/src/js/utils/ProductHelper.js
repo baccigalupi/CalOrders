@@ -28,6 +28,8 @@ var ProductHelper = new function ()
 {
     /**
      * Gets the photo for a product and sets it on the product image
+     * @param {type} product
+     * @returns {ProductHelper.ProductHelperProductHelper.getPhoto.src|String}
      */
     this.getPhoto = function (product)
     {
@@ -77,12 +79,15 @@ var ProductHelper = new function ()
 
     /**
      * Gets the photo for a product asyncroniously and sets it on the product image
+     * @param {type} product
+     * @returns {ProductHelper.ProductHelperProductHelper.getPhotoAsync.src|String}
      */
     this.getPhotoAsync = function (product)
     {
-        if (product.prdUid === undefined || product.prdUid === null || product.prdUid.length === 0)
+        var src = '../../css/images/unknown_product.jpg';
+        if (typeof product === undefined || product === null
+                || product.prdUid === undefined || product.prdUid === null || product.prdUid.length === 0)
         {
-            var src = '../../css/images/unknown_product.jpg';
             return src;
         } else
         {
@@ -94,20 +99,22 @@ var ProductHelper = new function ()
             var ProductModel = oj.Model.extend({
                 urlRoot: findProdutService + "/" + product.prdUid,
                 attributeId: 'prdUid'
-
             });
 
             var pm = new ProductModel();
             pm.fetch({
                 success: function (myModel, response, options) {
+                    var src = '../../css/images/unknown_product.jpg';
                     var productMod = pm;
                     product.prdImgImage = productMod.attributes.prdImgImage;
                     if (productMod === undefined || productMod === null || productMod.attributes === undefined || productMod.attributes.prdImgImage === null
                             || productMod.attributes.prdImgImage === undefined || productMod.attributes.prdImgImage.length === 0)
                     {
-                        var src = '../../css/images/unknown_product.jpg';
                         var preview = document.getElementById('productImage' + productMod.attributes.prdUid);
-                        preview.src = src;
+                        if (typeof preview !== undefined && preview !== null)
+                        {
+                            preview.src = src;
+                        }
                     } else
                     {
                         var file = productMod.attributes.prdImgImage;
@@ -125,14 +132,14 @@ var ProductHelper = new function ()
 
                         var blob = new Blob([arr.buffer], {size: imageSize, type: imageType});
 
-                        reader.addEventListener("load", function (event) {
+                        reader.onloadend = function () {
                             var preview = document.getElementById('productImage' + productMod.attributes.prdUid);
 
-                            if (preview !== null)
+                            if (typeof preview !== undefined && preview !== null)
                             {
                                 preview.src = reader.result;
                             }
-                        }, false);
+                        }, false;
 
                         if (blob) {
 
@@ -153,7 +160,6 @@ var ProductHelper = new function ()
                 }
             });
 
-            var src = '../../css/images/unknown_product.jpg';
             return src;
         }
     };

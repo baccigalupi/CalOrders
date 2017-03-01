@@ -63,6 +63,8 @@ THE SOFTWARE.
         </div>
         <!-- end global error message -->
         <div class='oj-panel oj-form-layout'>
+
+            <!-- ko if: ready -->
             <div id="productUpdateContent" class="oj-flex">
 
 
@@ -83,8 +85,8 @@ THE SOFTWARE.
                                                 value:productName, required: true,
                                                 validators: [{type: 'regExp', options: {
                                                     pattern: '[:\\-!/@#$%^&*,?.;:()+={}<>®\'\&quot\\w\\s]{1,128}',
-                                                    hint: 'Enter a product name that is less than 128 alphanumeric characters (including the following characters :-!@#$%^&*();?+={}<>,\'\&quot',
-                                                    messageDetail: 'The product name must be less than 128 alphanumeric characters (including the following characters :-!@#$%^&*();?+={}<>,\'\&quot'} },
+                                                    hint: 'Enter a product name that is less than 128 alphanumeric characters (including the following characters :-!@#$$%^&*();?+={}<>,\'\&quot',
+                                                    messageDetail: 'The product name must be less than 128 alphanumeric characters (including the following characters :-!@#$$%^&*();?+={}<>,\'\&quot'} },
                                                     validateProductName],
                                                         messagesCustom: productNameMessage,
                                                    invalidComponentTracker: tracker}">
@@ -125,8 +127,8 @@ THE SOFTWARE.
                                                 value:productOEMName, required: true,
                                                 validators: [{type: 'regExp', options: {
                                                     pattern: '[:\\-!@#$%^&*/,?.;:()+={}<>\'\&quot\\w\\s]{1,45}',
-                                                    hint: 'Enter a product OEM name that is less than 45 alphanumeric characters (including the following characters :-!@#$%^&*/();?+={}<>,\'\&quot',
-                                                    messageDetail: 'The product OEM name must be less than 45 alphanumeric characters (including the following characters :-!@#$%^&*/();?+={}<>,\'\&quot'} }
+                                                    hint: 'Enter a product OEM name that is less than 45 alphanumeric characters (including the following characters :-!@#$$%^&*/();?+={}<>,\'\&quot',
+                                                    messageDetail: 'The product OEM name must be less than 45 alphanumeric characters (including the following characters :-!@#$$%^&*/();?+={}<>,\'\&quot'} }
                                                     ],
                                                    invalidComponentTracker: tracker}">
                             </div>
@@ -142,8 +144,8 @@ THE SOFTWARE.
                                                 value:productOEMPartNumber, required: true,
                                                 validators: [{type: 'regExp', options: {
                                                     pattern: '[:\\-!@#$%^&*/,?.;:()+={}<>\'\&quot\\w\\s]{1,45}',
-                                                    hint: 'Enter a product OEM part number that is less than 45 alphanumeric characters (including the following characters :-!@#$%^&*/();?+={}<>,\'\&quot',
-                                                    messageDetail: 'The product OEM part number must be less than 45 alphanumeric characters (including the following characters :-!@#$%^&*/();?+={}<>,\'\&quot'} }
+                                                    hint: 'Enter a product OEM part number that is less than 45 alphanumeric characters (including the following characters :-!@#$$%^&*/();?+={}<>,\'\&quot',
+                                                    messageDetail: 'The product OEM part number must be less than 45 alphanumeric characters (including the following characters :-!@#$$%^&*/();?+={}<>,\'\&quot'} }
                                                     ],
                                                    invalidComponentTracker: tracker}">
                             </div>
@@ -159,8 +161,8 @@ THE SOFTWARE.
                                                 value:productSKU, required: true,
                                                 validators: [{type: 'regExp', options: {
                                                     pattern: '[:\\-!@#$%^&*/,?.;:()+={}<>\'\&quot\\w\\s]{1,45}',
-                                                    hint: 'Enter a product SKU that is less than 45 alphanumeric characters (including the following characters :-!@#$%^&*/();?+={}<>,\'\&quot',
-                                                    messageDetail: 'The product SKU must be less than 45 alphanumeric characters (including the following characters :-!@#$%^&*/();?+={}<>,\'\&quot'} }
+                                                    hint: 'Enter a product SKU that is less than 45 alphanumeric characters (including the following characters :-!@#$$%^&*/();?+={}<>,\'\&quot',
+                                                    messageDetail: 'The product SKU must be less than 45 alphanumeric characters (including the following characters :-!@#$$%^&*/();?+={}<>,\'\&quot'} }
                                                     ],
                                                    invalidComponentTracker: tracker}">
                             </div>
@@ -176,8 +178,8 @@ THE SOFTWARE.
                                                 value:productContractLineItem, 
                                                 validators: [{type: 'regExp', options: {
                                                     pattern: '[:\\-!@#$%^&*/,?.;:()+={}<>\'\&quot\\w\\s]{1,45}',
-                                                    hint: 'Enter a product contract line item that is less than 45 alphanumeric characters (including the following characters :-!@#$%^&*/();?+={}<>,\'\&quot',
-                                                    messageDetail: 'The product contract line item must be less than 45 alphanumeric characters (including the following characters :-!@#$%^&*/();?+={}<>,\'\&quot'} }
+                                                    hint: 'Enter a product contract line item that is less than 45 alphanumeric characters (including the following characters :-!@#$$%^&*/();?+={}<>,\'\&quot',
+                                                    messageDetail: 'The product contract line item must be less than 45 alphanumeric characters (including the following characters :-!@#$$%^&*/();?+={}<>,\'\&quot'} }
                                                     ],
                                                    invalidComponentTracker: tracker}">
                             </div>
@@ -284,8 +286,8 @@ THE SOFTWARE.
                                     required: true,  
                                     validators: [{type: 'regExp', options: {
                                                  pattern: '[:\\-!@#$%^&*/,?.;:()+={}<>\'\&quot\\w\\s]{1,128}',
-                                                 hint: 'Enter a brief product description that is less than 128 alphanumeric characters (including the following characters :-!@#$%^&*/();?+={}<>,\'\&quot',
-                                                 messageDetail: 'The brief product description must be less than 128 alphanumeric characters (including the following characters :-!@#$%^&*/();?+={}<>,\'\&quot'} }],
+                                                 hint: 'Enter a brief product description that is less than 128 alphanumeric characters (including the following characters :-!@#$$%^&*/();?+={}<>,\'\&quot',
+                                                 messageDetail: 'The brief product description must be less than 128 alphanumeric characters (including the following characters :-!@#$$%^&*/();?+={}<>,\'\&quot'} }],
                                     invalidComponentTracker: tracker}"></textarea>
                             </div>
                         </div>
@@ -302,8 +304,8 @@ THE SOFTWARE.
                                     required: true,  
                                     validators: [{type: 'regExp', options: {
                                                  pattern: '[:\\-!@#$%^&*/,?.;:()+={}<>\'\&quot\\w\\s]{1,2048}',
-                                                 hint: 'Enter a full product description that is less than 2048 alphanumeric characters (including the following characters :-!@#$%^&*/();?+={}<>,\'\&quot',
-                                                 messageDetail: 'The full product description must be less than 2048 alphanumeric characters (including the following characters :-!@#$%^&*/();?+={}<>,\'\&quot'} }],
+                                                 hint: 'Enter a full product description that is less than 2048 alphanumeric characters (including the following characters :-!@#$$%^&*/();?+={}<>,\'\&quot',
+                                                 messageDetail: 'The full product description must be less than 2048 alphanumeric characters (including the following characters :-!@#$$%^&*/();?+={}<>,\'\&quot'} }],
                                     invalidComponentTracker: tracker}"></textarea>
                             </div>
                         </div>
@@ -375,6 +377,7 @@ THE SOFTWARE.
                     </div>
                 </div>
             </div>
+            <!-- /ko -->
         </div>
     </div>
 
