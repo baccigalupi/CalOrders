@@ -148,19 +148,19 @@ var SecurityUtils = new function ()
 
                         if ('productSearch' === data[i].pageId)
                         {
-                            iconStyle = 'demo-catalog-icon-24';
+                            iconStyle = 'fa fa-search fa-2x';
                         } else if ('orderHistory' === data[i].pageId)
                         {
-                            iconStyle = 'demo-library-icon-24';
+                            iconStyle = 'fa fa-list-alt fa-2x';
                         } else if ('cart' === data[i].pageId)
                         {
-                            iconStyle = 'demo-download-icon-24';
+                            iconStyle = 'fa fa-shopping-cart fa-2x';
                         } else if ('dashboard' === data[i].pageId)
                         {
-                            iconStyle = 'demo-chart-icon-24';
+                            iconStyle = 'fa fa-dashboard fa-2x';
                         } else
                         {
-                            iconStyle = 'demo-info-icon-24';
+                            iconStyle = 'fa fa-list-alt fa-2x';
                         }
 
                         koTableBar().add(

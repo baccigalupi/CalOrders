@@ -70,24 +70,22 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'libs/accounting/accounting', 'co
 
                     for (i = 0; i < self.cart().length; i++)
                     {
-                        if (self.cart()[i].vndUid == response.vndUid &&
-                                !self.cart()[i].prdCategoryCd.code.startsWith("DS") &&
-                                !self.cart()[i].prdCategoryCd.code.startsWith("LS"))
+                        if (self.cart()[i].vndUid == response.vndUid)
                         {
                             var productType1 = "";
                             var productType2 = "";
 
-                            if (response.prdCategoryCd.code.startsWith('DS'))
+                            if (response.prdCategoryCd.code.indexOf('DS') == 0)
                             {
                                 productType1 = 'DH' + response.prdCategoryCd.code.substring(2);
                                 productType2 = 'DM' + response.prdCategoryCd.code.substring(2);
-                            } else if (response.prdCategoryCd.code.startsWith('LS'))
+                            } else if (response.prdCategoryCd.code.indexOf('LS') == 0)
                             {
                                 productType1 = 'LH' + response.prdCategoryCd.code.substring(2);
                             }
 
-                            if (self.cart()[i].prdCategoryCd.code == productType1 ||
-                                    self.cart()[i].prdCategoryCd.code == productType2)
+                            if (productType1 != "" && (self.cart()[i].prdCategoryCd.code == productType1 ||
+                                    self.cart()[i].prdCategoryCd.code == productType2))
                             {
 
                                 var containsRelatedService = false;
@@ -188,13 +186,13 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'libs/accounting/accounting', 'co
 
                             var productType = "";
 
-                            if (cartProduct.prdCategoryCd.code.startsWith('DH'))
+                            if (cartProduct.prdCategoryCd.code.indexOf('DH') == 0)
                             {
                                 productType = 'DS' + cartProduct.prdCategoryCd.code.substring(2);
-                            } else if (cartProduct.prdCategoryCd.code.startsWith('LH'))
+                            } else if (cartProduct.prdCategoryCd.code.indexOf('LH') == 0)
                             {
                                 productType = 'LS' + cartProduct.prdCategoryCd.code.substring(2);
-                            } else if (cartProduct.prdCategoryCd.code.startsWith('DM'))
+                            } else if (cartProduct.prdCategoryCd.code.indexOf('DM') == 0)
                             {
                                 productType = 'DS' + cartProduct.prdCategoryCd.code.substring(2);
                             }
