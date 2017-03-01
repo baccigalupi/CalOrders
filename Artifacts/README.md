@@ -324,4 +324,9 @@ Technology | Requirement
 
 ### Accessibility
 
-Please see the [Accessibility](http://docs.oracle.com/middleware/jet220/jet/developer/GUID-A8970DC0-7935-46B8-9A55-BCF4380B2CFC.htm#JETDG253) section of the Oracle JET Development Guide. As part of the CalOrders quality control process, ADA testing was conducted using the WAVE plugin for Chrome and the NVDA screen reader with FireFox to ensure pages are accessible.
+As part of the CalOrders quality control process, the OnCore team validated Americans with Disabilities Act (ADA) compliance, using the WAVE plugin for Chrome and the NVDA screen reader.  Oracle JET supports Web Content Accessibility Guidelines version 2.0 at the AA level (WCAG 2.0 AA), developed by the World Wide Web Consortium (W3C).  JET provided the CalOrders development team the following features out of the box:
+•	Mouse, keyboard, and touch navigation compliance
+•	Screen reader and screen magnification compliance
+•	Component roles and names are assigned appropriately for each component
+•	Correct color contrast via the Alta theme which supports luminosity contrast ratio of at least 4.5:1
+During testing, the JET framework proved its worth in reducing the ADA work load on the development team by allowing the team to focus more on building the screen content and less time worrying about ADA compliance issues.  Testing CalOrders with WAVE revealed no major errors and only a handful of warnings, which required resolution.  Likewise, tests with NVDA with FireFox showed excellent results.  It must be noted, JET requires the use of the F2 key when navigating components inside a table row or list row, which is not immediately evident.  
