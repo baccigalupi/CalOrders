@@ -24,7 +24,7 @@
 /*
  * Your customer ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'moment', 'accounting', 'common/SecurityUtils'],
+define(['ojs/ojcore', 'knockout', 'jquery', 'libs/moment/min/moment.min', 'libs/accounting/accounting', 'common/SecurityUtils'],
         function (oj, ko, $, moment, accounting) {
 
             function OrdersViewModel() {

@@ -26,7 +26,7 @@
 /*
  * Your about ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'accounting', 'common/SecurityUtils', 'reference/ReferenceData', 'utils/ProductHelper'],
+define(['ojs/ojcore', 'knockout', 'jquery', 'libs/accounting/accounting', 'common/SecurityUtils', 'reference/ReferenceData', 'utils/ProductHelper'],
         function (oj, ko, $, accounting) {
 
             function ProductUpdateViewModel() {
@@ -423,14 +423,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'accounting', 'common/SecurityUtils'
                 self.uploadImageClick = function (data, event)
                 {
 
-                    if (self.uploadFile._latestValue !== null && self.uploadFile._latestValue.name !== "")
+                    if (self.uploadFile() !== null && self.uploadFile().name !== "")
                     {
-                        self.productImage(self.uploadFile._latestValue);
-                        self.productImageName(self.uploadFile._latestValue.name);
-                        self.productImageSize(self.uploadFile._latestValue.size);
+                        self.productImage(self.uploadFile());
+                        self.productImageName(self.uploadFile().name);
+                        self.productImageSize(self.uploadFile().size);
 
                         var fileTypeUtils = new FileTypeUtils();
-                        var imageType = fileTypeUtils.determineTypeCode(self.uploadFile._latestValue.type)
+                        var imageType = fileTypeUtils.determineTypeCode(self.uploadFile().type)
                         self.productImageType(imageType);
                         if (self.productImageType === "unknown")
                         {
@@ -458,7 +458,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'accounting', 'common/SecurityUtils'
 
                             // load the file
                             try {
-                                reader.readAsDataURL(self.productImage._latestValue);
+                                reader.readAsDataURL(self.productImage());
 
                             } catch (err)
                             {

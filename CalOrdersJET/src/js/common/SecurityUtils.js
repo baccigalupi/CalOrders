@@ -24,9 +24,10 @@
  * THE SOFTWARE.
  */
 
+
 var SecurityUtils = new function ()
 {
-
+    require(['common/ServiceEndPoints']);
 
     this.serviceEndPoints = new ServiceEndPoints();
     this.serviceURL;

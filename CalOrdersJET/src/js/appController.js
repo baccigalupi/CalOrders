@@ -113,20 +113,27 @@ define(['ojs/ojcore', 'knockout', 'common/SecurityUtils', 'ojs/ojknockout-model'
 
                 self.navBarEventClick = function (data, event) {
                     var navBarDesc = event.target.innerText;
-                    navBarDesc = navBarDesc.replace(/[^a-z0-9+]+/gi, '');
-                    if (navBarDesc === "") {
-                        navBarDesc = event.target.nextSibling.innerText;
-                        navBarDesc = navBarDesc.replace(/[^a-z0-9+]+/gi, '');
+                    
+                    if ( navBarDesc === "About")
+                    {
+                        return self.router.go("about");
                     }
-
-                    for (var i = 0; i < navBarDataSource._latestValue._rows.data.length; i++) {
-                        if (navBarDataSource._latestValue._rows.data[i].name === navBarDesc) {
-                            return self.router.go(navBarDataSource._latestValue._rows.data[i].id);
-                        }
+                    else if ( navBarDesc === "Welcome")
+                    {
+                        return self.router.go("welcome");
                     }
-
-                    //var test2 =event.target.nextSibling.innerText;
-                    //return self.router.go(self.routerId());
+                    else if ( navBarDesc === "Products")
+                    {
+                        return self.router.go("productSearch");
+                    }
+                    else if ( navBarDesc === "Orders")
+                    {
+                        return self.router.go("orderHistory");
+                    }
+                    else if ( navBarDesc === "Dashboard")
+                    {
+                        return self.router.go("dashboard");
+                    }
                 };
 
                 self.aboutClick = function (data, event) {

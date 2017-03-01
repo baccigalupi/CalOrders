@@ -24,7 +24,7 @@
 /*
  * Your about ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUtils', 'ojs/ojrouter',
+define(['ojs/ojcore', 'knockout', 'data/data', 'libs/accounting/accounting', 'common/SecurityUtils', 'ojs/ojrouter',
     'ojs/ojknockout', 'promise', 'ojs/ojlistview', 'ojs/ojmodel', 'ojs/ojpagingcontrol',
     'ojs/ojpagingcontrol-model', 'utils/ProductHelper', 'ojs/ojtabs'],
         function (oj, ko, data, accounting) {
