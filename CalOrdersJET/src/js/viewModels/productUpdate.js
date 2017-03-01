@@ -32,6 +32,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'libs/accounting/accounting', 'commo
             function ProductUpdateViewModel() {
                 var self = this;
                 self.ready = ko.observable(false);
+                self.disableButtons = ko.observable(false);
                 self.applicationVersion = ko.observable("1.0");
                 var serviceEndPoints = new ServiceEndPoints();
                 self.serviceURL = serviceEndPoints.getEndPoint('updateProduct');
@@ -115,6 +116,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'libs/accounting/accounting', 'commo
                     $('globalBody').focus();
                     window.location.hash = 'globalBody';
                     self.ready(false);
+                    self.disableButtons(false);
                     if (!SecurityUtils.isAuthenticated()) {
                         return self.router.go('welcome');
                     }
@@ -307,6 +309,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'libs/accounting/accounting', 'commo
                 self.buttonClick = function (data, event) {
                     if (event.currentTarget.id === 'save')
                     {
+                        self.disableButtons(true);
                         var trackerObj = ko.utils.unwrapObservable(self.tracker);
                         // Perform form level validation
                         if (!this.showComponentValidationErrors(trackerObj))
@@ -324,7 +327,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'libs/accounting/accounting', 'commo
 
                         productService.save(
                                 {
-                                    
+
                                     //Product Info
                                     "productUid": this.getPrdUid(),
                                     "productSKU": self.productSKU(),
@@ -374,6 +377,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'libs/accounting/accounting', 'commo
                  */
                 self.showSuccessMessage = function ()
                 {
+
                     $("#modalDialog1").ojDialog("open");
                 };
                 /**
@@ -385,6 +389,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'libs/accounting/accounting', 'commo
                  * @returns {unresolved}
                  */
                 self.closeClickEvent = function (data, event) {
+                    self.disableButtons(false);
                     $("#modalDialog1").ojDialog("close");
                     return self.navigateToProductDetail();
                 };
