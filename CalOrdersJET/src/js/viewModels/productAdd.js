@@ -402,6 +402,34 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'libs/accounting/accounting', 'commo
                         return true;
                     }
                 };
+
+                self.isValidProductName = function ()
+                {
+
+                    parseProduct = function (response)
+                    {
+                        if (response != undefined && response.length > 0)
+                        {
+                            var errorMsg = new oj.Message("That product name is already taken.", "", oj.Message.SEVERITY_TYPE.ERROR);
+                            self.productNameMessage([errorMsg]);
+                            return false;
+                        }
+                    };
+                    if (typeof self.productName() === "undefined"
+                            || self.productName() === "") {
+                        return true;
+                    } else {
+                        var ProductService = oj.Model.extend({
+                            urlRoot: self.productNameServiceURL + "/" + self.productName(),
+                            parse: parseProduct,
+                            idAttribute: 'prdUid'});
+                        var productService = new ProductService();
+                        productService.fetch();
+                    }
+                    return true;
+
+                };
+
                 /*
                  * Perform form level validation
                  * 
@@ -411,9 +439,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'libs/accounting/accounting', 'commo
                 self.showComponentValidationErrors = function (trackerObj)
                 {
                     trackerObj.showMessages();
-                    if (!self.isValidDropDowns()
-                            || trackerObj.focusOnFirstInvalid())
+                    if (!self.isValidDropDowns() || !self.isValidProductName()
+                            || trackerObj.focusOnFirstInvalid()) {
                         return false;
+                    }
                     return true;
                 };
                 self.isValidDropDowns = function ()
