@@ -98,8 +98,7 @@ public class Product implements Serializable {
     @Column(name = "PRD_NAME")
     private String prdName;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 128)
+    @Size(max = 128)
     @Column(name = "PRD_SHORT_DESC")
     private String prdShortDesc;
     @Basic(optional = false)
