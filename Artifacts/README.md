@@ -1,18 +1,21 @@
-#California Department of Technology - OnCore Consulting ADPQ Vendor Pool Refresh Prototype - 
+#California Department of Technology - OnCore Consulting ADPQ Vendor Pool Refresh Prototype - CalOrders
 ###[Prototype URL](Prototype URL)
 
 ## Introduction
 
-Agile methodology and User Centered Design combine to form an ideal vehicle to quickly understand what users want and delivering functioning, high value features for the business.  
+Agile Methods and User Centered Design combine to form an ideal vehicle to quickly understand what users want and deliver functioning, high value business solutions.  
 
-OnCore’s primary focus is on delivering what the end user needs. Agile user stories that incrementally build up functionality over the sprints allowed the development team to adjust quickly to the needs of the business as they were able to immediately see the application and the requirements they were providing. 
+OnCore’s primary focus is on delivering what the end user needs.   
 
-These tight cycles between ideas and testing allowed us to respond quickly to change and focused on solutions not features.
-In addition to the Agile Team, we had support from the client executive team that enabled the end users we were working with to have the power to make decisions and own the product. This ensured that we would be building and delivering a product that end user wanted and needed with this collaboration. 
+We use agile user stories that incrementally build up functionality over a series of sprints.  With each sprint, the business is able to see an early realization of their requirements, allowing them to provide meaningful feedback early enough in the process to be incorporated into future sprints.  The development team collaborates closely with the business enhancing their understanding of the users’ needs, allowing them to more closely align their focus.   
 
-With this level of collaboration, we defined our strategy as "try, fail fast, learn, and then try again."  
+These quick cycles between ideas and testing allowed us to respond quickly to change and focused on solutions not features. Up front we gained support from the client executive team, enabling the end users we were working with to have the power to make decisions and own the product.   
 
-The following documentation represents our demonstration in designing under a User Centered Design methodology, building with modern technologies in an Agile methodology with adherence to the US Digital Playbook.
+This approach, combined with close collaboration with end users, fueled our strategy as 'try, fail fast, learn, and then try again."
+The sections that follow present our experience, methods and approach in response to the ADPQ Vendor Refresh.  We start by listing the requirements from the RFI, with links to how each of them are addressed.  We then confirm our adherence to the US Digital Services Playbook, introduce our development team, and our approach to user centered design and agile development.  The balance of the document is our Technical Approach, where we present our solution, including the overall Architecture, our DevOps approach, the User Interface, and a detailing of the Modern and Open Source Technologies we employed.   
+
+Thank you for the opportunity to participate, we hope you enjoy reviewing our experience as much as we did preparing it. 
+
 
 
 ##Project Requirements
@@ -47,7 +50,7 @@ Our team followed the US Digital Services Playbook, covering each of the 13 play
 
 ## [Development Team](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Team-Bios)
 
-OnCore asked Mike Tsay to be the Team Leader/Project Manager.  Mike was given authority over and was responsible and accountable for the quality of the prototype submitted.  The following table presents the balance of the OnCore team. 
+OnCore asked Mike Tsay to be the Team Leader/Project Manager. Mike was given authority over and was responsible and accountable for the quality of the prototype submitted. The following table presents the balance of the OnCore team, a multidisciplinary and collaborative group, covering the eight labor categories listed below. 
 
 **We selected a multidisciplinary and collaborative team that fulfilled the following 8 labor categories:**  
 
@@ -67,11 +70,12 @@ DevOps Engineer | [Suganya Ravikumar](https://github.com/OncoreLLC/CalOrders/wik
 
 The first step of a  [User-Centered-Design](https://github.com/OncoreLLC/CalOrders/wiki/User-Centric-Design) (UCD) process is to formulate a plan.  Our plan, framed by our [statement of work](https://github.com/OncoreLLC/CalOrders/wiki/Statement-of-Work), identified the project objectives, requirements, user community, constraints, schedule, and deliverables.
 
-Our plan combines our UCD and Agile processes into a cohesive and flexible workflow.  It was this combination that we were able to identify the features that the users valued the most, and were able to focus our story and build activities to deliver working functionality after each sprint.  This allowed for feedback and changes to the design and resulted in a product that reflected what the end users were really asking for.
+Our plan combines our UCD and Agile processes into a cohesive and flexible workflow. It was with this combination that we were able to identify the features that the users valued the most, and were able to focus our story and build activities to deliver working functionality after each sprint. This allowed for feedback and subsequent changes to the design, resulting in a product that reflected what the end users were really asking for.  
 
-The team utilized User-Centered-Design (UCD) and Agile development techniques to formulate the product backlog.  All team members participated in the initial meetings with the users which was a natural hook into our Agile methodolgy and gave everyone the opportunity to understand the scope of the project and understand how each of them would contribute to the project's success.  
+The team utilized User-Centered-Design (UCD) and Agile development techniques to formulate the product backlog. All team members participated in the initial meetings with the users.  This was a  natural lead into our Agile methodology, allowing the whole team the opportunity to understand the scope of the project and understand how each of them would contribute to the project's success.  
 
 The table below summarizes how we incorporated the UCD practices of Plan, Analyze, Design, Implement and Test & Measure in the development of CalOrders.  Each section includes a link to another page that provides detail on the subject.
+
 
 Plan | Analyze| Design | Implement | Test & Measure  
 --- | --- | --- | --- | ----
@@ -84,9 +88,9 @@ Kickoff Meeting | [Research Domain](https://github.com/OncoreLLC/CalOrders/wiki/
 
 The team's principle focus during development of CalOrders is summarized best by Jeff Sutherland.
  
-“[Value] people over processes; products that actually work over documenting what that product is supposed to do; collaborating with customers over negotiating with them; and responding to change over following a plan.” (Scrum: The Art of Doing Twice the Work in Half the Time)
+“[Value] people over processes; products that actually work over documenting what that product is supposed to do; collaborating with customers over negotiating with them; and responding to change over following a plan.” (From 'Scrum: The Art of Doing Twice the Work in Half the Time')
 
-[Oncore's Agile methodology](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Methodolgy) provided the team with an iterative approach, where fast feedback informed subsequent work or versions of the prototype, each time making it better.
+[Oncore's Agile methodology](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Methodolgy) provided an iterative approach, where fast feedback informed subsequent work or versions of the prototype, each time making it better.  
 
 For example, during the early focus group sessions the users described the need for improvement of the add product business process as being an important feature for the new application.  This allowed us to deliver in Sprint 1 a simplified add product page that got the core functionality quickly to the users.  In Sprint 2, we enhanced, adding the ability to upload images, and integrated it to the navigation bar but the users still remarked at how they were pleased that they received the core feature early.
 
@@ -94,7 +98,7 @@ Another time where UCD and Agile combined was during the walkthrough of the Spri
 
 ### Principles
 
-There are many different specific project development methodologies within agile. but they all center around a core set of principles:
+There are many different project development methodologies within agile. but they all center around a core set of principles:
 
 1. Define a measurable goal.
 2. Everyone owns the problem.
@@ -105,7 +109,7 @@ There are many different specific project development methodologies within agile
 
 ### Process   
 
-Our [Agile](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Methodolgy) process allowed us to rapidly deliver a working product to maintain the momentum from the User Centered Design Sessions, allowing us to show the end user the system we were building. Combined with sprint cycles we were able to add new stories; existing stories in the backlog and icebox were continually evolving and reprioritized with continued meetings outside of the development cycle. These meeting took place between the product owner, business analysts and end users. Focusing on keeping things simple and evolving fostered the environment of rapid delivery and allowed for face to face interactions with the end users on how the system was evolving.  More importantly, it allowed for failure, and with the quick adjustments yielded a system that worked for the end users.
+Our [Agile](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Methodolgy) process allowed us to rapidly deliver a working product to maintain the momentum from the User Centered Design Sessions, allowing us to show the end user the system we were building. Combined with sprint cycles we were able to add new stories; existing stories in the backlog and icebox were continually evolving and reprioritized with continued meetings outside of the development cycle. These meetings took place between the product owner, business analysts and end users. Focusing on keeping things simple and continually evolving fostered an environment of rapid delivery and allowed for face to face interactions with the end users on how the system was evolving. More importantly, it allowed for failure, and with the quick adjustments yielded a system that worked for the end users.
 
 ###  Practices
 The list below provides links to additional artifacts and other important information about each agile practice that was utilized for this project.<br>
