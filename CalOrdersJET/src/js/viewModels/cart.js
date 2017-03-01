@@ -74,24 +74,41 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'accounting', 'common/SecurityUti
                                 !self.cart()[i].prdCategoryCd.code.startsWith("DS") &&
                                 !self.cart()[i].prdCategoryCd.code.startsWith("LS"))
                         {
-                            var containsRelatedService = false;
-                            for (j = 0; j < self.cart()[i].relatedServices().length; j++)
+                            var productType1 = "";
+                            var productType2 = "";
+
+                            if (response.prdCategoryCd.code.startsWith('DS'))
                             {
-                                var relatedService = self.cart()[i].relatedServices()[j];
-                                if (relatedService.value === response.prdUid)
-                                {
-                                    containsRelatedService = true;
-                                    break;
-                                }
+                                productType1 = 'DH' + response.prdCategoryCd.code.substring(2);
+                                productType2 = 'DM' + response.prdCategoryCd.code.substring(2);
+                            } else if (response.prdCategoryCd.code.startsWith('LS'))
+                            {
+                                productType1 = 'LH' + response.prdCategoryCd.code.substring(2);
                             }
 
-                            if (!containsRelatedService)
+                            if (self.cart()[i].prdCategoryCd.code == productType1 ||
+                                 self.cart()[i].prdCategoryCd.code == productType2   )
                             {
-                                self.cart()[i].relatedServices.push({label: response.prdName, value: response.prdUid});
 
-                                if (self.cart()[i].relatedServices().length == 1)
+                                var containsRelatedService = false;
+                                for (j = 0; j < self.cart()[i].relatedServices().length; j++)
                                 {
-                                    self.cart()[i].selectedRelatedService(response.prdUid);
+                                    var relatedService = self.cart()[i].relatedServices()[j];
+                                    if (relatedService.value === response.prdUid)
+                                    {
+                                        containsRelatedService = true;
+                                        break;
+                                    }
+                                }
+
+                                if (!containsRelatedService)
+                                {
+                                    self.cart()[i].relatedServices.push({label: response.prdName, value: response.prdUid});
+
+                                    if (self.cart()[i].relatedServices().length == 1)
+                                    {
+                                        self.cart()[i].selectedRelatedService(response.prdUid);
+                                    }
                                 }
                             }
 
