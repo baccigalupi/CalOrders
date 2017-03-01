@@ -494,7 +494,7 @@
             <div data-bind="click: $parent.navigateToProductDetail">
 
                 <div class="oj-flex-item oj-sm-4">
-                    <img data-bind="attr: {alt: $data['prdName'],  id: 'productImage' + $data['prdUid'], src: $parent.getPhotoAsync($data['prdUid'])}" height="100" width="100"/>
+                    <img data-bind="attr: {alt: $data['prdName'],  id: 'productImage' + $data['prdUid'], src: $parent.getPhotoAsync($data)}" height="100" width="100"/>
                 </div>
                 <div class="oj-flex-item">
                     <h3 aria-label="product description" data-bind="text: $data['prdName']" tabindex="0"></h3>
