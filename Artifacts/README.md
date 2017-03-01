@@ -5,12 +5,13 @@
 
 Agile methodology and User Centered Design combine to form an ideal vehicle to quickly understand what users want and delivering functioning, high value features for the business.  
 
-OnCore’s primary focus [Statement of Work](https://github.com/OncoreLLC/CalOrders/wiki/Statement-of-Work) is on delivering what the end user needs. Agile user stories that incrementally build up functionality over the sprints allowed the development team to adjust quickly to the needs of the business as they were able to immediately see the application and the requirements they were providing. 
+OnCore’s primary focus is on delivering what the end user needs. Agile user stories that incrementally build up functionality over the sprints allowed the development team to adjust quickly to the needs of the business as they were able to immediately see the application and the requirements they were providing. 
 
 These tight cycles between ideas and testing allowed us to respond quickly to change and focused on solutions not features.
 In addition to the Agile Team, we had support from the client executive team that enabled the end users we were working with to have the power to make decisions and own the product. This ensured that we would be building and delivering a product that end user wanted and needed with this collaboration. 
 
-With this level of collaboration, we defined our strategy as 'try, fail fast, learn, and then try again."
+With this level of collaboration, we defined our strategy as 'try, fail fast, learn, and then try again."  
+
 The following documentation represents our demonstration in designing under a User Centered Design methodology, building with modern technologies in an Agile methodology with adherence to the US Digital Playbook.
 
 
@@ -20,7 +21,7 @@ The following table presents each of the project requirements, with links to the
 Reqirement | How it was met
 --- | ---
 a. Assigned one (1) leader and gave that person authority and responsibility and held that person accountable for the quality of the prototype submitted | [Michael Tsay](#calorder-development-team)
-b. Assembled a multidisciplinary and collaborative team that includes, at a minimum, five (5) of the labor categories as identified in Attachment B: PQVP DS-AD Labor Category Descriptions | [Our team](#calorder-development-team)
+b. Assembled a multidisciplinary and collaborative team that includes, at a minimum, five (5) of the labor categories as identified in Attachment B: PQVP DS-AD Labor Category Descriptions | [Our Team](#calorder-development-team)
 c. Understood what people needed, by including people in the prototype development and design process |[User Centric Design](https://github.com/OncoreLLC/CalOrders/wiki/User-Centric-Design)<br> [Focus Group](https://github.com/OncoreLLC/CalOrders/wiki/Focus-Group)<br> [Interview](https://github.com/OncoreLLC/CalOrders/wiki/Interviews)<br> [Sprint Review/Product Demo](https://github.com/OncoreLLC/CalOrders/wiki/Sprint-Reviews)
 d. Used at least a minimum of three (3) “user-centric design” techniques and/or tools | [Focus Group](https://github.com/OncoreLLC/CalOrders/wiki/Focus-Group)<br> [Interview](https://github.com/OncoreLLC/CalOrders/wiki/Interviews)<br> [Personas](https://github.com/OncoreLLC/CalOrders/wiki/Develop-Personas)<br>[Scenarios](https://github.com/OncoreLLC/CalOrders/wiki/Scenarios)<br>[Storyboards](https://github.com/OncoreLLC/CalOrders/wiki/Story-Boards)<br>[Wireframes](https://github.com/OncoreLLC/CalOrders/wiki/Wire-Frames)<br>[Wireframe Walkthrough](https://github.com/OncoreLLC/CalOrders/wiki/Wireframe-Walkthrough)<br>[Usability Testing](https://github.com/OncoreLLC/CalOrders/wiki/Usability-Testing)
 e. Used GitHub to document code commits | [Github Contributions](https://github.com/OncoreLLC/CalOrders/graphs/commit-activity)
