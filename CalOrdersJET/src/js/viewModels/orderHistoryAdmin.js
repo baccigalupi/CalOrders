@@ -118,17 +118,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'libs/moment/min/moment.min', 'libs/
                     });
                 };
                 self.parseOrderHistory = function (response) {
-                    var orderPoNumber = "";
-
-                    if (response.orderPoNumber !== undefined)
-                    {
-                        orderPoNumber = response.orderPoNumber;
-                    }
 
                     var result = {'orderHistoryId': response['orderHistoryId'],
                         'orderDate': response['orderDate'],
                         'orderStatus': response['orderStatus'],
-                        'orderPoNumber': orderPoNumber,
                         'orderAgency': response['orderAgency'],
                         'orderPrice': response['orderPrice'],
                         'orderDescription': response['orderDescription']};
