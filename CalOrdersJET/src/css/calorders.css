@@ -119,6 +119,10 @@
 
 .product-detail-name {
     font-weight: bold;
+}
+
+.product-compare-attribute {
+    font-weight: bold;
     background: #cccccc
 }
 
