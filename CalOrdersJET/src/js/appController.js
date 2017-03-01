@@ -112,34 +112,23 @@ define(['ojs/ojcore', 'knockout', 'common/SecurityUtils', 'ojs/ojknockout-model'
                 };
 
                 self.navBarEventClick = function (data, event) {
+
                     var navBarDesc = event.target.innerText;
-                    
-                    if ( navBarDesc === "About")
-                    {
-                        return self.router.go("about");
+                    navBarDesc = navBarDesc.replace(/[^a-z0-9+]+/gi, '');
+                    if (navBarDesc === "") {
+                        navBarDesc = event.target.nextSibling.innerText;
+                        navBarDesc = navBarDesc.replace(/[^a-z0-9+]+/gi, '');
                     }
-                    else if ( navBarDesc === "Welcome")
-                    {
-                        return self.router.go("welcome");
-                    }
-                    else if ( navBarDesc === "Products")
-                    {
-                        return self.router.go("productSearch");
-                    }
-                    else if ( navBarDesc === "Orders")
-                    {
-                        if (sessionStorage.admin === 'true')
-                        {
-                            return self.router.go("orderHistoryAdmin");
-                        }
-                        else
-                        {
-                            return self.router.go("orderHistory");
-                        }
-                    }
-                    else if ( navBarDesc === "Dashboard")
-                    {
-                        return self.router.go("dashboard");
+
+                    for (var i = 0; i < navBarDataSource().totalSize(); i++) {
+                        navBarDataSource().at(i).then(
+                                function (rowObj)
+                                {
+                                    if (rowObj.data.name === navBarDesc) {
+                                        return self.router.go(rowObj.data.id);
+                                    }
+                                   
+                                });
                     }
                 };
 
