@@ -26,7 +26,11 @@
   "paths": {
     "/com.oncore.calorders.rest.product/findActiveProductsByProductType/{productTypeCode}": {
       "get": {
-        "description": "Gets Active products by product type.",
+        "tags": [
+          "product"
+        ],
+        "summary": "Gets Active products by product type.",
+        "description": "",
         "operationId": "findActiveProductsByProductType",
         "parameters": [
           {
@@ -59,7 +63,11 @@
     },
     "/com.oncore.calorders.rest.product/findActiveProductsByProductTypeAndVendor/{productTypeCode}/{vendorUid}": {
       "get": {
-        "description": "Gets Active products by product type and vendor.",
+        "tags": [
+          "product"
+        ],
+        "summary": "Gets Active products by product type and vendor.",
+        "description": "",
         "operationId": "findActiveProductsByProductTypeAndVendor",
         "parameters": [
           {
@@ -100,7 +108,11 @@
     },
     "/com.oncore.calorders.rest.product/findProductsByProductType/{productTypeCode}": {
       "get": {
-        "description": "Gets products by product type.",
+        "tags": [
+          "product"
+        ],
+        "summary": "Gets products by product type.",
+        "description": "",
         "operationId": "findProductsByProductType",
         "parameters": [
           {
@@ -133,7 +145,11 @@
     },
     "/com.oncore.calorders.rest.product/doesProductNameExist/{productName}": {
       "get": {
-        "description": "Gets products by the product name.",
+        "tags": [
+          "product"
+        ],
+        "summary": "Gets products by the product name.",
+        "description": "",
         "operationId": "doesProductNameExist",
         "parameters": [
           {
@@ -166,7 +182,11 @@
     },
     "/com.oncore.calorders.rest.product/createProduct": {
       "post": {
-        "description": "Creates a new prodcuct.",
+        "tags": [
+          "product"
+        ],
+        "summary": "Creates a new prodcuct.",
+        "description": "",
         "operationId": "createProduct",
         "consumes": [
           "application/json",
@@ -184,7 +204,11 @@
     },
     "/com.oncore.calorders.rest.product/updateProduct": {
       "post": {
-        "description": "Update a product.",
+        "tags": [
+          "product"
+        ],
+        "summary": "Update a product.",
+        "description": "",
         "operationId": "updateProduct",
         "consumes": [
           "application/json",
@@ -202,7 +226,11 @@
     },
     "/com.oncore.calorders.rest.orderHistory/fetchOrdersByQuarter/{departmentId}": {
       "get": {
-        "description": "gets all orders for a department by quarter .",
+        "tags": [
+          "orderHistory"
+        ],
+        "summary": "gets all orders for a department by quarter .",
+        "description": "",
         "operationId": "fetchOrdersByQuarter",
         "parameters": [
           {
@@ -235,7 +263,11 @@
     },
     "/com.oncore.calorders.rest.orderHistory/fetchOrderStatusSummary/{departmentId}": {
       "get": {
-        "description": "Get orders with status for a department.",
+        "tags": [
+          "orderHistory"
+        ],
+        "summary": "Get orders with status for a department.",
+        "description": "",
         "operationId": "fetchOrderStatusSummary",
         "parameters": [
           {
@@ -268,7 +300,11 @@
     },
     "/com.oncore.calorders.rest.orderHistory/findAllOrderHistoryByPartyUid/{partyUid}": {
       "get": {
-        "description": "gets all orders by party uid.",
+        "tags": [
+          "orderHistory"
+        ],
+        "summary": "gets all orders by party uid.",
+        "description": "",
         "operationId": "findAllOrderHistoryByPartyUid",
         "parameters": [
           {
@@ -301,7 +337,11 @@
     },
     "/com.oncore.calorders.rest.orderHistory/findAllOrderHistory": {
       "get": {
-        "description": "Get all orders.",
+        "tags": [
+          "orderHistory"
+        ],
+        "summary": "Get all orders.",
+        "description": "",
         "operationId": "findAllOrderHistory",
         "parameters": [
 
@@ -327,7 +367,11 @@
     },
     "/com.oncore.calorders.rest.orderHistory/findOrderDetailById/{orderUid}": {
       "get": {
-        "description": "Get order detail by order Id.",
+        "tags": [
+          "orderHistory"
+        ],
+        "summary": "Get order detail by order Id.",
+        "description": "",
         "operationId": "findOrderDetailById",
         "parameters": [
           {
@@ -357,7 +401,11 @@
     },
     "/com.oncore.calorders.rest.orderHistory/createOrder": {
       "post": {
-        "description": "Creates new Order.",
+        "tags": [
+          "orderHistory"
+        ],
+        "summary": "Creates new Order.",
+        "description": "",
         "operationId": "createOrder",
         "consumes": [
           "application/json",
@@ -375,7 +423,11 @@
     },
     "/com.oncore.calorders.rest.orderHistory/cancelOrder/{orderUid}": {
       "post": {
-        "description": "Cancel an order.",
+        "tags": [
+          "orderHistory"
+        ],
+        "summary": "Cancel an order.",
+        "description": "",
         "operationId": "cancelOrder",
         "consumes": [
           "application/json",
@@ -400,7 +452,11 @@
     },
     "/com.oncore.calorders.rest.party/findPartyByUserIdAndPassword/{userId}/{password}": {
       "get": {
-        "description": "Get the party by userId and password.",
+        "tags": [
+          "party"
+        ],
+        "summary": "Get the party by userId and password.",
+        "description": "",
         "operationId": "findPartyByUserIdAndPassword",
         "parameters": [
           {
@@ -438,7 +494,11 @@
     },
     "/com.oncore.calorders.rest.party/findAllGroupsByPartyId/{partyId}": {
       "get": {
-        "description": "Gets all groups by party.",
+        "tags": [
+          "party"
+        ],
+        "summary": "Gets all groups by party.",
+        "description": "",
         "operationId": "findAllGroupsByPartyId",
         "parameters": [
           {
@@ -471,7 +531,11 @@
     },
     "/com.oncore.calorders.rest.party/findAllPrivilegesByPartyId/{partyId}": {
       "get": {
-        "description": "Get all privileges by party.",
+        "tags": [
+          "party"
+        ],
+        "summary": "Get all privileges by party.",
+        "description": "",
         "operationId": "findAllPrivilegesByPartyId",
         "parameters": [
           {
@@ -504,7 +568,11 @@
     },
     "/com.oncore.calorders.rest.party/findNavBarPrivilegesByPartyId/{partyId}": {
       "get": {
-        "description": "Gets privileges for the nav bar by party.",
+        "tags": [
+          "party"
+        ],
+        "summary": "Gets privileges for the nav bar by party.",
+        "description": "",
         "operationId": "findNavBarPrivilegesByPartyId",
         "parameters": [
           {
@@ -537,7 +605,11 @@
     },
     "/com.oncore.calorders.rest.party/findNavMenuPrivilegesByPartyId/{partyId}": {
       "get": {
-        "description": "Gets privileges for the nav menu by party.",
+        "tags": [
+          "party"
+        ],
+        "summary": "Gets privileges for the nav menu by party.",
+        "description": "",
         "operationId": "findNavMenuPrivilegesByPartyId",
         "parameters": [
           {
