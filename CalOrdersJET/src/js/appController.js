@@ -128,7 +128,14 @@ define(['ojs/ojcore', 'knockout', 'common/SecurityUtils', 'ojs/ojknockout-model'
                     }
                     else if ( navBarDesc === "Orders")
                     {
-                        return self.router.go("orderHistory");
+                        if (sessionStorage.admin === 'true')
+                        {
+                            return self.router.go("orderHistoryAdmin");
+                        }
+                        else
+                        {
+                            return self.router.go("orderHistory");
+                        }
                     }
                     else if ( navBarDesc === "Dashboard")
                     {
