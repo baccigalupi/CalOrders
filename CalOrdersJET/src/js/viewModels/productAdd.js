@@ -33,6 +33,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'libs/accounting/accounting', 'commo
                 var self = this;
                 self.applicationVersion = ko.observable("1.0");
                 var serviceEndPoints = new ServiceEndPoints();
+                self.disableButtons = ko.observable(false);
                 self.serviceURL = serviceEndPoints.getEndPoint('createProduct');
                 self.productNameServiceURL = serviceEndPoints.getEndPoint('doesProductNameExist');
                 self.router = oj.Router.rootInstance;
@@ -110,6 +111,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'libs/accounting/accounting', 'commo
                 self.handleActivated = function (info) {
                     $('globalBody').focus();
                     window.location.hash = 'globalBody';
+                    self.disableButtons(false);
                     if (!SecurityUtils.isAuthenticated()) {
                         return self.router.go('welcome');
                     }
@@ -220,6 +222,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'libs/accounting/accounting', 'commo
                 self.buttonClick = function (data, event) {
                     if (event.currentTarget.id === 'save')
                     {
+                        self.disableButtons(true);
                         var trackerObj = ko.utils.unwrapObservable(self.tracker);
                         // Perform form level validation
                         if (!this.showComponentValidationErrors(trackerObj))
@@ -296,6 +299,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'libs/accounting/accounting', 'commo
                  * @returns {unresolved}
                  */
                 self.closeClickEvent = function (data, event) {
+                    self.disableButtons(false);
                     $("#modalDialog1").ojDialog("close");
                     return self.router.go('productSearch');
                 };

@@ -1,5 +1,5 @@
 #California Department of Technology - OnCore Consulting ADPQ Vendor Pool Refresh Prototype - CalOrders
-###[Prototype URL](Prototype URL)
+###[Prototype URL](http://calorders.oncorellc.com)
 
 ## Introduction
 
@@ -50,11 +50,11 @@ Our team followed the US Digital Services Playbook, covering each of the 13 play
 
 ## [Development Team](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Team-Bios)
 
-OnCore asked Mike Tsay to be the Team Leader/Project Manager. Mike was given authority over and was responsible and accountable for the quality of the prototype submitted. The following table presents the balance of the OnCore team, a multidisciplinary and collaborative group, covering the eight labor categories listed below. 
+OnCore asked Mike Tsay to be the Team Leader/Project Manager. Mike was given authority over and was responsible and accountable for the quality of the prototype submitted. The following table presents the balance of the OnCore team, a multidisciplinary and collaborative group, covering the seven labor categories listed below. 
 
-**We selected a multidisciplinary and collaborative team that fulfilled the following 8 labor categories:**  
+**We selected a multidisciplinary and collaborative team that fulfilled the following seven labor categories:**  
 
-Role | Team Member  
+Role(Labor Category) | Team Member 
 --- | ---  
 Product Manager	| [Mike Tsay](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Team-Bios)
 Agile Coach/Technical Architect | [Royce Owens, CSM](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Team-Bios)  
@@ -81,7 +81,7 @@ Plan | Analyze| Design | Implement | Test & Measure
 --- | --- | --- | --- | ----
 Kickoff Meeting | [Research Domain](https://github.com/OncoreLLC/CalOrders/wiki/Domain-Research)    |[Scenarios](https://github.com/OncoreLLC/CalOrders/wiki/Scenarios) | [Style Guide](http://www.oracle.com/webfolder/technetwork/jet/jetCookbook.html)    |[Usability Test](https://github.com/OncoreLLC/CalOrders/wiki/Usability-Testing)
 [Statement of Work](https://github.com/OncoreLLC/CalOrders/wiki/Statement-of-Work)   |[Focus Groups](https://github.com/OncoreLLC/CalOrders/wiki/Focus-Group)|[Story Boarding](https://github.com/OncoreLLC/CalOrders/wiki/Story-Boards)     |[Wireframe Walkthrough](https://github.com/OncoreLLC/CalOrders/wiki/Wireframe-Walkthrough) | Refine Application            
-[Develop a Plan](https://github.com/OncoreLLC/CalOrders/wiki/User-Centric-Design)   | [Personas](https://github.com/OncoreLLC/CalOrders/wiki/Develop-Personas)||                       | Retest
+[Develop a Plan](https://github.com/OncoreLLC/CalOrders/wiki/User-Centric-Design)   | [Personas](https://github.com/OncoreLLC/CalOrders/wiki/Develop-Personas)||                       | [Retest](https://github.com/OncoreLLC/CalOrders/wiki/Usability-Test-Final)
 ||[Interviews](https://github.com/OncoreLLC/CalOrders/wiki/Interviews) ||
 
 ## [Agile Development](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Methodolgy)   
@@ -92,13 +92,13 @@ The team's principle focus during development of CalOrders is summarized best by
 
 [Oncore's Agile methodology](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Methodolgy) provided an iterative approach, where fast feedback informed subsequent work or versions of the prototype, each time making it better.  
 
-For example, during the early focus group sessions the users described the need for improvement of the add product business process as being an important feature for the new application.  This allowed us to deliver in Sprint 1 a simplified add product page that got the core functionality quickly to the users.  In Sprint 2, we enhanced, adding the ability to upload images, and integrated it to the navigation bar but the users still remarked at how they were pleased that they received the core feature early.
+For example, during the early focus group sessions the users described the need for improvement of the add product business process as being an important feature for the new application.  This allowed us to deliver in Sprint 1 a simplified Add Product page that got the core functionality quickly to the users.  In Sprint 2, we enhanced, adding the ability to upload images, and integrated it to the navigation bar but the users still remarked at how they were pleased that they received the core feature early.
 
 Another time where UCD and Agile combined was during the walkthrough of the Sprint 1 pages.  The end users noticed that the product search tree did not include Services.  This kicked off an impromptu design session to better understand the concept, which resulted in data model changes and application changes that were quickly incorporated.  Had the interaction with the end users not been part of the methodology thus change would have been more complicated in the future.
 
 ### Principles
 
-There are many different project development methodologies within agile. but they all center around a core set of principles:
+There are many different project development methodologies within agile, but they all center around a core set of principles:
 
 1. Define a measurable goal.
 2. Everyone owns the problem.
