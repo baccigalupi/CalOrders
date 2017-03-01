@@ -97,14 +97,17 @@ define(['ojs/ojcore', 'knockout', 'common/SecurityUtils', 'ojs/ojknockout-model'
                 SecurityUtils.initializeSessionStorage();
 
                 self.launch = function (data, event) {
-                    if (this.id === 'logout') {
-                        SecurityUtils.clearSessionStorage();
-                        navBarDataSource(new oj.ArrayTableDataSource(navBarData, {idAttribute: 'id'}));
-                        SecurityUtils.getNavBarItems(navBarDataSource);
-                        SecurityUtils.getNavMenuItems(navMenuDataSource);
-                        userLogin("Options");
-
-                        return self.router.go('welcome');
+                    try {
+                        if (this.id === 'logout') {
+                            SecurityUtils.clearSessionStorage();
+                            navBarDataSource(new oj.ArrayTableDataSource(navBarData, {idAttribute: 'id'}));
+                            SecurityUtils.getNavBarItems(navBarDataSource);
+                            SecurityUtils.getNavMenuItems(navMenuDataSource);
+                            userLogin("Options");
+                            return self.router.go('welcome');
+                        }
+                    } catch (err) {
+                        return;
                     }
 
                     return self.router.go(this.id);
