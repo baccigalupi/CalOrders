@@ -114,6 +114,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'libs/accounting/accounting', 'commo
                 self.handleActivated = function (info) {
                     $('globalBody').focus();
                     window.location.hash = 'globalBody';
+                    self.ready(false);
                     if (!SecurityUtils.isAuthenticated()) {
                         return self.router.go('welcome');
                     }

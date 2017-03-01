@@ -128,6 +128,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'libs/accounting/accounting', 'co
                     $('globalBody').focus();
                     window.location.hash = 'globalBody';
                     
+                    self.ready(false);
                     if (!SecurityUtils.isAuthenticated()) {
                         return self.router.go('welcome');
                     }
