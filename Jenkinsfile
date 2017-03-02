@@ -11,7 +11,6 @@ node {
         // before running grunt, change localhost reference in ServiceEndPoints.js to a placeholder for the services hostname
         sh "sed -i.bak 's/localhost/myserviceshostname/' CalOrdersJET/src/js/common/ServiceEndPoints.js"
         // build the JET tier with grunt
-        // TODO switch back to build if build:release isn't working
         sh "cd CalOrdersJET;grunt build:release"
     }
 
@@ -20,7 +19,6 @@ node {
             -buildfile CalOrdersRest/build.xml \
             -Duser.properties.file=/home/oncore/build.properties \
             clean"
-        // TODO get javadoc working and then can use default target instead of dist
         sh "ant \
             -buildfile CalOrdersRest/build.xml \
             -Duser.properties.file=/home/oncore/build.properties \
@@ -105,4 +103,14 @@ node {
         sh 'docker tag kpoland/calorders-jet:$BUILD_ID kpoland/calorders-jet:latest'
         sh 'docker push kpoland/calorders-jet:latest'
     }
+
+   stage('Pause for Approval') {
+        input 'The build, unit tests, and regression tests have all passed. Ready to deploy to production on your mark.'
+   }
+
+   stage('Deploy to Prod') {
+        sshagent(['kyle-ssh-key']) {
+        sh 'ssh -o StrictHostKeyChecking=no -l kyle calorders.westus.cloudapp.azure.com docker pull kpoland/oncorechhsapp:latest'
+   } 
+   }
 }
