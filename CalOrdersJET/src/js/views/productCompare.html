@@ -61,7 +61,7 @@
             </tr>
             <tr>
 
-                <td>
+                <td valign="top">
                     <img alt="product" data-bind="attr: {
                         id: 'productImage' + productsToCompare()[0].prdUid, 
                         src: getPhotoAsync(productsToCompare()[0]), 
@@ -83,10 +83,12 @@
                     <div class="oj-flex-item">
                         <input class="product-quantity" id="quantity" data-bind="value: productsToCompare()[0].quantity" aria-label="quantity" type="number" min="1" max="10000"/>
 
+                        <div class="oj-padding-vertical"></div>
+
                         <button id= "addToCart" data-bind="click: function(data, event) {addToCart(productsToCompare()[0])}, ojComponent: { component: 'ojButton', label: 'Add to Cart'}"></button> 
                     </div>
                 </td>
-                <td>
+                <td valign="top">
                     <img alt="product" data-bind="attr: {
                         id: 'productImage' + productsToCompare()[1].prdUid, 
                         src: getPhotoAsync(productsToCompare()[1]), 
@@ -111,6 +113,8 @@
                         <div class="oj-flex-item">
                             <input class="product-quantity" id="quantity" data-bind="value: productsToCompare()[1].quantity" aria-label="quantity" type="number" min="1" max="10000"/>
 
+                            <div class="oj-padding-vertical"></div>
+
                             <button id= "addToCart" data-bind="click: function(data, event) {addToCart(productsToCompare()[1])}, ojComponent: { component: 'ojButton', label: 'Add to Cart'}"></button> 
                         </div>
 
@@ -120,7 +124,7 @@
                 <td  colspan="2" class="product-compare-attribute">Description</td>
             </tr>
             <tr>
-                <td>
+                <td valign="top">
                     <div class="oj-flex-item ">
                         <div data-bind="foreach: productsToCompare()[0].prdLongDescLines">
                             <p data-bind="text: $data"></p>
@@ -128,7 +132,7 @@
                     </div>
 
                 </td>
-                <td>
+                <td valign="top">
                     <div class="oj-flex-item ">
                         <div data-bind="foreach: productsToCompare()[1].prdLongDescLines">
                             <p data-bind="text: $data"></p>

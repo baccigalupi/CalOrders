@@ -95,7 +95,6 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'libs/accounting/accounting', 'co
                     {code: "LSPO", level1: "Laptop Systems", level2: "Laptop Services", level3: "Power"},
                     {code: "LSUL", level1: "Laptop Systems", level2: "Laptop Services", level3: "Ultralight"},
                     {code: "LSST", level1: "Laptop Systems", level2: "Laptop Services", level3: "Standard"},
-                    {code: "LSAL", level1: "Laptop Systems", level2: "Laptop Services", level3: "All"},
                     {code: "LAAL", level1: "Independent Services", level2: "Laptop Services", level3: ""},
                     {code: "DUOT", level1: "Desktop Systems", level2: "Desktop Upgrades", level3: "Other"},
 
