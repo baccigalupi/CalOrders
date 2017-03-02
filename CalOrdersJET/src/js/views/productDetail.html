@@ -25,7 +25,7 @@
 
     <!-- Page Title -->
     <div id="pageTitleContainer" class="oj-flex-item oj-sm-12">
-        <h2 style="margin-bottom:0">Product Detail</h2>
+        <h2 style="margin-bottom:0">Product Detail<!-- ko if: !ready()  --><span class="fa fa-spinner fa-spin" style="margin-left: 0.5em"/> <!-- /ko --></h2>
     </div>
 
     <!-- global error messages -->
@@ -46,7 +46,7 @@
     <!-- Page Content -->
 
     <div class="oj-panel oj-flex-item oj-panel-shadow-md">
-
+        <!-- ko if: ready -->
         <!-- Bread crumbs -->
         <div id="productSearchBreadcrumbs" class="oj-sm-only-hide">
             <span data-bind="text: productsToCompareBreadcrumbs"></span>
@@ -57,15 +57,15 @@
             <div class="oj-flex-item">
                 <a data-bind="click: navigateToProductSearch">Back to Search Results</a>
             </div>
-             <!-- ko if: admin -->
+            <!-- ko if: admin -->
             <div class="oj-flex-item">
-               
-                <!-- ko if: ready -->
+
+
                 <button id= "productUpdate" style="float: right" data-bind="click: navigateToProductUpdate, ojComponent: { component: 'ojButton', label: 'Update Product'}"></button>
-                <!-- /ko -->
-                
+
+
             </div>
-             <!-- /ko -->
+            <!-- /ko -->
         </div>
 
         <div class="oj-padding-vertical"></div>
@@ -181,6 +181,7 @@
                 </div>
             </div>
         </div>
+        <!-- /ko -->
     </div>
 </div>
 
