@@ -59,10 +59,17 @@ public class PartyFacadeRESTExtension extends PartyFacadeREST {
 
     private static final String DEFAULT_PASSWORD = "Passw0rd*";
 
+    /**
+     *
+     */
     public PartyFacadeRESTExtension() {
         super();
     }
 
+    /**
+     *
+     * @param em
+     */
     public PartyFacadeRESTExtension(EntityManager em) {
         super(em);
     }
@@ -167,7 +174,7 @@ public class PartyFacadeRESTExtension extends PartyFacadeREST {
     /**
      * Finds an employee by user id and password
      *
-     * @param partyId
+     * @param partyId a valid party id
      * @return an List of GroupData if found
      * @throws com.oncore.calorders.core.exceptions.DataAccessException
      */
@@ -241,7 +248,7 @@ public class PartyFacadeRESTExtension extends PartyFacadeREST {
     /**
      * Finds a party's privileges by party id
      *
-     * @param partyId
+     * @param partyId a valid party id
      * @return an List of Privilege Data if found
      * @throws com.oncore.calorders.core.exceptions.DataAccessException
      */
@@ -300,7 +307,7 @@ public class PartyFacadeRESTExtension extends PartyFacadeREST {
     /**
      * Finds an party navbar privileges by party id
      *
-     * @param partyId
+     * @param partyId a valid party id
      * @return an List of Privilege Data if found
      * @throws com.oncore.calorders.core.exceptions.DataAccessException
      */
@@ -358,7 +365,7 @@ public class PartyFacadeRESTExtension extends PartyFacadeREST {
     /**
      * Finds an party navigation menu privileges by party id
      *
-     * @param partyId
+     * @param partyId a valid party id
      * @return an List of Privilege Data if found
      * @throws com.oncore.calorders.core.exceptions.DataAccessException
      */

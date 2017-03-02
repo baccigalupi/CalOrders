@@ -92,10 +92,17 @@ public class OrderHistoryFacadeRESTExtension extends OrderHistoryFacadeREST {
 
     private static final BigDecimal SHIPPING_PRICE = new BigDecimal(25.00);
 
+    /**
+     *
+     */
     public OrderHistoryFacadeRESTExtension() {
         super();
     }
 
+    /**
+     *
+     * @param em
+     */
     public OrderHistoryFacadeRESTExtension(EntityManager em) {
         super(em);
     }
@@ -176,6 +183,7 @@ public class OrderHistoryFacadeRESTExtension extends OrderHistoryFacadeREST {
      * iteration the orders are pulled for the last four years (including the
      * current year), which are 2017,16,15,14
      *
+     * @param departmentId
      * @return a structure of order totals grouped by quarter
      *
      * @throws com.oncore.calorders.core.exceptions.DataAccessException
@@ -285,6 +293,7 @@ public class OrderHistoryFacadeRESTExtension extends OrderHistoryFacadeREST {
     /**
      * Fetch all orders grouped by status
      *
+     * @param departmentId a valid department id
      * @return a structure of order totals grouped by status
      *
      * @throws com.oncore.calorders.core.exceptions.DataAccessException
@@ -368,6 +377,7 @@ public class OrderHistoryFacadeRESTExtension extends OrderHistoryFacadeREST {
     /**
      * Fetch all orders by PartyUid and ordered by Date ascending
      *
+     * @param partyUid a valid party id
      * @return a structure of orders history ordered by Date
      *
      * @throws com.oncore.calorders.core.exceptions.DataAccessException
@@ -446,6 +456,7 @@ public class OrderHistoryFacadeRESTExtension extends OrderHistoryFacadeREST {
     /**
      * Fetch all orders by DepartmentUid and ordered by Date ascending
      *
+     * @param departmentId a valid department id
      * @return a structure of orders history ordered by Date
      *
      * @throws com.oncore.calorders.core.exceptions.DataAccessException
@@ -521,6 +532,13 @@ public class OrderHistoryFacadeRESTExtension extends OrderHistoryFacadeREST {
         return orderHistoryDatas;
     }
 
+    /**
+     * findOrderDetailById returns an order detail record for a 
+     * particular order
+     * 
+     * @param orderUid a valid order id
+     * @return a populated OrderDetailData if data is found
+     */
     @GET
     @Path("findOrderDetailById/{orderUid}")
     @Produces({MediaType.APPLICATION_JSON})
@@ -575,6 +593,11 @@ public class OrderHistoryFacadeRESTExtension extends OrderHistoryFacadeREST {
         return order;
     }
     
+    /**
+     * cancelOrder cancels an order in submitted status
+     * 
+     * @param orderUid a valid order id
+     */
     @POST
     @Path("cancelOrder/{orderUid}")
     @Produces({MediaType.APPLICATION_JSON})

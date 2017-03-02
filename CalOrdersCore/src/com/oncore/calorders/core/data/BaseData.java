@@ -31,7 +31,7 @@ import java.io.Serializable;
  * 
  * @author OnCore Consulting LLC
  * 
- * @param <T>
+ * @param <T> type
  */
 public class BaseData<T> implements Serializable{
 
