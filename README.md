@@ -11,6 +11,7 @@ Agile Methods and User Centered Design combine to form an ideal vehicle to quick
 Utilizing short cycles between ideas and testing allowed us to respond quickly to change while maintaining an emphasis on solutions over features. Early on we gained support from the client executive team who empowered the end users we were working with to make decisions and own the product. This approach fueled our strategy of, "try, fail fast, learn, and then try again." 
 
 The sections that follow present our experience, methods, and approach in response to the ADPQ Vendor Refresh. We start by listing the requirements from the RFI with links to how each are addressed. We then confirm our adherence to the US Digital Services Playbook, introduce our development team, and describe our approach to user centered design and agile development. The balance of the document defines our Technical Approach where we present our solution including the overall Architecture, our DevOps approach, the User Interface, and a description of the Modern and Open Source Technologies we employed. 
+
 We thank you very much for the opportunity to participate and hope you enjoy reviewing our experience as much as we did preparing it. 
 
 ##Project Requirements
