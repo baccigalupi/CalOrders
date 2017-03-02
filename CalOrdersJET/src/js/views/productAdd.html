@@ -321,13 +321,13 @@ THE SOFTWARE.
 
                     <div class="oj-flex-item">
                         <label for="uploadFile">Product Image:</label>
-                        <input id="uploadFile" type="file" class="oj-form-control oj-inputtext-nocomp" data-bind="fileUpload: uploadFile, disable: disableButtons">
+                        <input id="uploadFile" type="file" class="oj-form-control oj-inputtext-nocomp" data-bind="disable: disableButtons, fileUpload: uploadFile">
 
                         <button id= "clearImage" 
-                                data-bind="click: resetClickEvent, ojComponent: { component: 'ojButton', label: 'Reset' ,disabled: disableButtons() }">
+                                data-bind="click: resetClickEvent, ojComponent: { component: 'ojButton', label: 'Reset' ,disabled: disableButtons()}">
                         </button> 
                         <button id= "uploadImage"  
-                                data-bind="click: uploadImageClick, ojComponent: { component: 'ojButton', label: 'Upload' ,disabled: disableButtons() }">
+                                data-bind="click: uploadImageClick, ojComponent: { component: 'ojButton', label: 'Upload',disabled: disableButtons() }">
                         </button> 
 
                     </div>
@@ -347,13 +347,13 @@ THE SOFTWARE.
                 <div class="oj-panel oj-flex-item">   
                     <div class="oj-flex">
                         <button id= "cancel"
-                                data-bind="click: buttonClick, ojComponent: { component: 'ojButton', label: 'Cancel' ,disabled: disableButtons() }">
+                                data-bind="click: buttonClick, ojComponent: { component: 'ojButton', label: 'Cancel',disabled: disableButtons() }">
                         </button>
 
                         <div class="oj-padding-horizontal"></div>
 
                         <button id= "save"
-                                data-bind="click: buttonClick, ojComponent: { component: 'ojButton', label: 'Save' ,disabled: disableButtons() }">
+                                data-bind="click: buttonClick, ojComponent: { component: 'ojButton', label: 'Save',disabled: disableButtons() }">
                         </button> 
                     </div>
                 </div>

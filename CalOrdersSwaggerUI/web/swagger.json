@@ -349,7 +349,7 @@
         }
       }
     },
-    "/com.oncore.calorders.rest.orderHistory/findAllOrderHistory": {
+    "/com.oncore.calorders.rest.orderHistory/findAllOrderHistory/{departmentId}": {
       "get": {
         "tags": [
           "orderHistory"
@@ -358,7 +358,14 @@
         "description": "",
         "operationId": "findAllOrderHistory",
         "parameters": [
-
+          {
+            "name": "departmentId",
+            "in": "path",
+            "description": "department id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
         ],
         "responses": {
           "200": {

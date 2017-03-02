@@ -444,20 +444,20 @@ public class OrderHistoryFacadeRESTExtension extends OrderHistoryFacadeREST {
     }
 
     /**
-     * Fetch all orders by PartyUid and ordered by Date ascending
+     * Fetch all orders by DepartmentUid and ordered by Date ascending
      *
      * @return a structure of orders history ordered by Date
      *
      * @throws com.oncore.calorders.core.exceptions.DataAccessException
      */
     @GET
-    @Path("findAllOrderHistory")
+    @Path("findAllOrderHistory/{departmentId}")
     @Produces({MediaType.APPLICATION_JSON})
-    public List<OrderHistoryData> findAllOrderHistory() throws DataAccessException {
+    public List<OrderHistoryData> findAllOrderHistory(@PathParam("departmentId") Integer departmentId) throws DataAccessException {
         List<OrderHistoryData> orderHistoryDatas = new ArrayList<OrderHistoryData>();
         List<OrderHistory> orderHistorys = new ArrayList<OrderHistory>();
 
-        orderHistorys = getEntityManager().createQuery("SELECT oh FROM OrderHistory oh join oh.ordStatusCd os join oh.ptyUidFk pt join pt.groupPartyAssocCollection gpa join gpa.grpUidFk g join g.depUidFk d join oh.orderProductAssocCollection opa ORDER BY oh.createTs DESC", OrderHistory.class).getResultList();
+        orderHistorys = getEntityManager().createQuery("SELECT oh FROM OrderHistory oh join oh.ordStatusCd os join oh.ptyUidFk pt join pt.groupPartyAssocCollection gpa join gpa.grpUidFk g join g.depUidFk d join oh.orderProductAssocCollection opa where d.depUid = :depUid ORDER BY oh.createTs DESC", OrderHistory.class).setParameter("depUid", departmentId).getResultList();
         if (orderHistorys != null && orderHistorys.size() > 0) {
             for (OrderHistory orderHistory : orderHistorys) {
                 OrderHistoryData data = new OrderHistoryData();

@@ -238,14 +238,20 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-   /com.oncore.calorders.rest.orderHistory/findAllOrderHistory:
+   /com.oncore.calorders.rest.orderHistory/findAllOrderHistory/{departmentId}:
     get:
       tags:
         - orderHistory
       summary: Get all orders.
       description: ""
       operationId: findAllOrderHistory
-      parameters: []
+      parameters:
+        - name: departmentId
+          in: path
+          description: department id
+          required: true
+          type: integer
+          format: int32
       responses:
         200:
           description: All orders
