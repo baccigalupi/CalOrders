@@ -62,13 +62,13 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'libs/moment/min/moment.min', 'libs/
                     self.datasource = ko.observable();
                     self.serviceURL = serviceEndPoints.getEndPoint('findAllOrderHistory');
                     var OrderHistoryModel = oj.Model.extend({
-                        urlRoot: self.serviceURL,
+                        urlRoot: self.serviceURL + "/" + sessionStorage.departmentUid,
                         parse: self.parseOrderHistory,
                         idAttribute: 'orderHistoryId'
                     });
                     var orderHistory = new OrderHistoryModel();
                     var OrderHistoryCollection = oj.Collection.extend({
-                        url: self.serviceURL,
+                        url: self.serviceURL + "/" + sessionStorage.departmentUid,
                         model: orderHistory,
                         comparator: 'orderDate',
                         sortDirection: -1
