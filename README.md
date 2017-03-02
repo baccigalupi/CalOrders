@@ -48,7 +48,7 @@ Our team followed the US Digital Services Playbook, covering each of the 13 play
 
 ## [Development Team](https://github.com/OncoreLLC/CalOrders/wiki/Agile-Team-Bios)
 
-OnCore selected Mike Tsay, our Chief Technical Architect, to be the Team Leader/Project Manager. In that role, Mike was responsible and accountable for the quality of the prototype submitted. The following table presents the remainder of OnCore’s multidisciplinary and collaborative team that fulfilled the seven labor categories listed below. 
+OnCore selected Mike Tsay, our Chief Technology Architect, to be the Team Leader/Project Manager. In that role, Mike was responsible and accountable for the quality of the prototype submitted. The following table presents the remainder of OnCore’s multidisciplinary and collaborative team that fulfilled the seven labor categories listed below. 
 
 **We selected a multidisciplinary and collaborative team that fulfilled the following seven labor categories:**  
 
