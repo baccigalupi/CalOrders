@@ -81,6 +81,11 @@ public class ProductFacadeRESTExtension extends ProductFacadeREST {
         super(em);
     }
 
+    /**
+     *
+     * @param productTypeCode
+     * @return
+     */
     @GET
     @Path("findActiveProductsByProductType/{productTypeCode}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -134,6 +139,11 @@ public class ProductFacadeRESTExtension extends ProductFacadeREST {
         return products;
     }
 
+    /**
+     *
+     * @param productTypeCode
+     * @return
+     */
     @GET
     @Path("findProductsByProductType/{productTypeCode}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -186,6 +196,12 @@ public class ProductFacadeRESTExtension extends ProductFacadeREST {
         return products;
     }
 
+    /**
+     *
+     * @param productTypeCode
+     * @param vendorUid
+     * @return
+     */
     @GET
     @Path("findActiveProductsByProductTypeAndVendor/{productTypeCode}/{vendorUid}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -212,7 +228,7 @@ public class ProductFacadeRESTExtension extends ProductFacadeREST {
     /**
      * Determines if a user id exists
      *
-     * @param userId a valid userid
+     * @param productName
      * @return an true if the user id is already used.
      */
     @GET
@@ -237,6 +253,7 @@ public class ProductFacadeRESTExtension extends ProductFacadeREST {
      * Creates the product
      *
      * @param productData text containing product information in JSON.
+     * @throws java.lang.Exception
      */
     @POST
     @Path("createProduct")
@@ -287,6 +304,7 @@ public class ProductFacadeRESTExtension extends ProductFacadeREST {
      * Updated the product
      *
      * @param productData text containing product information in JSON.
+     * @throws java.lang.Exception
      */
     @POST
     @Path("updateProduct")

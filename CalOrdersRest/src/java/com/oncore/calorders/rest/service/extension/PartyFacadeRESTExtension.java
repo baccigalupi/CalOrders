@@ -59,10 +59,17 @@ public class PartyFacadeRESTExtension extends PartyFacadeREST {
 
     private static final String DEFAULT_PASSWORD = "Passw0rd*";
 
+    /**
+     *
+     */
     public PartyFacadeRESTExtension() {
         super();
     }
 
+    /**
+     *
+     * @param em
+     */
     public PartyFacadeRESTExtension(EntityManager em) {
         super(em);
     }

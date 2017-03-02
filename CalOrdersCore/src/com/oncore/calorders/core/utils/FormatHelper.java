@@ -261,7 +261,7 @@ public final class FormatHelper {
      * <ul>
      * <li>All letters (uppercase and lower case)</li>
      * <li>All digits</li>
-     * <li>period(.), comma(,), apostrophe('), ampersand(&), and hyphen(-)</li>
+     * <li>period(.), comma(,), apostrophe('), ampersand, and hyphen(-)</li>
      * <li>Spaces can appear in between letters and symbols</li>
      * <li>A single symbol can appear only between letters, spaces, or at the
      * end</li>
