@@ -2,7 +2,7 @@
 ###[http://calorders.oncorellc.com](http://calorders.oncorellc.com)
 
     Please note, for this application to function correctly your network will need to allow HTTP traffic 
-    on port 80 and 9080 for the User Interface (UI) and RESTfull service calls.
+    on port 80 and 9080 for the User Interface (UI) and RESTful service calls.
 
 ## Introduction
 
@@ -161,7 +161,7 @@ The CalOrders application is organized into individual NetBeans projects, separa
 
  
 * CalOrdersJET - [(CDT–ADPQ–0117-2-Technical Approach: Client UI)](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersJET)  JET JavaScript, HTML5, CSS project providing the front end for the CalOrders application
-* JavaScript Library - [(CDT–ADPQ–0117-2-Technical Approach: JavaScript Library)](http://www.oracle.com/webfolder/technetwork/jet/index.html) Orcle JET is an open source JavaScript framework proving a rich set of ADA compliant components. See User Interface section below for more details about Oracle JET
+* JavaScript Library - [(CDT–ADPQ–0117-2-Technical Approach: JavaScript Library)](http://www.oracle.com/webfolder/technetwork/jet/index.html) Oracle JET is an open source JavaScript framework proving a rich set of ADA compliant components. See User Interface section below for more details about Oracle JET
 * CalOrdersREST - [(CDT–ADPQ–0117-2-Technical Approach: REST Service)](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersRest) Java dynamic web project providing support for REST services and the data access layer via Java JEE (Java Enterprise Edition) and JPA (Java Persistence API)
 * CalOrdersCore - Java API project holding shared utility classes, interfaces, and base classes designed to support the other CalOrders Java projects
 * CalOrders Database = [(CDT–ADPQ–0117-2-Technical Approach: Database)](https://github.com/OncoreLLC/CalOrders/tree/master/DB_Scripts) MySQL database model, DDL, and reference data scripts
