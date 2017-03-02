@@ -64,7 +64,6 @@ THE SOFTWARE.
         <!-- end global error message -->
         <div class='oj-panel oj-form-layout'>
 
-            <!-- ko if: ready -->
             <div id="productUpdateContent" class="oj-flex">
 
 
@@ -191,8 +190,7 @@ THE SOFTWARE.
                                 <label for="productCategory">Product Category:</label>
                                 <select id="productCategory" title="Select a category from the list" 
                                         data-bind="ojComponent: {
-                                    component: 'ojSelect',
-                                  
+                                    component: 'ojSelect',                                  
                                     value: productCategory, required: true,
                                     options: categories,
                                     validators: [validateProductCategory],
@@ -360,7 +358,7 @@ THE SOFTWARE.
                     </div>
                 </div>
             </div>
-            <!-- /ko -->
+ 
         </div>
     </div>
 
