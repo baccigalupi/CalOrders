@@ -17,7 +17,7 @@ public class EndUserS2RegressionTest {
 
   @Before
   public void setUp() throws Exception {
-    System.setProperty("webdriver.chrome.driver","/home/oncore/workspaces/	CalOrders/libs/selenium-java-3.0.1/chromedriver");
+    System.setProperty("webdriver.chrome.driver","/usr/local/bin/chromedriver");
     driver = new ChromeDriver();
     baseUrl = "http://calorderstest.oncorellc.com:8080/";
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
