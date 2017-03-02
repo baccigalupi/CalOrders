@@ -67,7 +67,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'libs/accounting/accounting', 'co
                     response.vndName = ko.observable(response.vndUidFk.vndName);
                     response.categoryLongDesc = ko.observable(response.prdCategoryCd.longDesc);
                     response.unitLongDesc = ko.observable(response.prdUnitCd.longDesc);
-                    setTimeout(function() {self.ready(true)}, 3000);
+                    self.ready(true);
                     self.product(response);
                 };
 
