@@ -76,62 +76,6 @@ public class OrderHistoryFacadeRESTExtensionTest {
      * @throws Exception
      */
     @Test
-    public void testCreateOrder() throws Exception {
-        OrderHistory orderHistory = new OrderHistory();
-        orderHistory.setOrdStatusCd(new OrdStatusCd("PND"));
-        orderHistory.setOrdUid(2222);
-
-        Product product = new Product();
-        product.setPrdActiveInd(1);
-        product.setPrdName("Laptop");
-        product.setPrdSku("LT1234");
-
-        OrderProductAssoc orderProductAssoc = new OrderProductAssoc();
-        orderProductAssoc.setOrdUidFk(orderHistory);
-        orderProductAssoc.setPrdUidFk(product);
-
-        orderHistory.setOrderProductAssocCollection(new ArrayList<>());
-        orderHistory.getOrderProductAssocCollection().add(orderProductAssoc);
-
-        Party party = new Party();
-        party.setPtyFirstNm("John");
-        party.setPtyLastNm("Wick");
-        orderHistory.setPtyUidFk(party);
-
-        OrderHistoryFacadeRESTExtension instance = spy(new OrderHistoryFacadeRESTExtension());
-
-        ArgumentCaptor<OrderHistory> orderHistoryCaptor = ArgumentCaptor.forClass(OrderHistory.class);
-
-        doNothing().when((OrderHistoryFacadeREST) instance).create(orderHistory);
-
-        OrdStatusCdFacadeREST ordStatusCdFacadeRESTMocked = mock(OrdStatusCdFacadeREST.class);
-        when(ordStatusCdFacadeRESTMocked.find("PEN")).thenReturn(null);
-
-        PartyFacadeRESTExtension partyFacadeRESTExtensionMocked = mock(PartyFacadeRESTExtension.class);
-        when(partyFacadeRESTExtensionMocked.find(1111)).thenReturn(null);
-
-        ProductFacadeRESTExtension productFacadeRESTExtensionMocked = mock(ProductFacadeRESTExtension.class);
-        when(productFacadeRESTExtensionMocked.find(111)).thenReturn(null);
-
-        instance.create(orderHistory);
-
-        verify(instance).create(orderHistoryCaptor.capture());
-
-        OrderHistory actual = orderHistoryCaptor.getValue();
-
-        Assert.assertEquals(2222, actual.getOrdUid().intValue());
-        Assert.assertEquals("PND", actual.getOrdStatusCd().getCode());
-        Assert.assertEquals("John", actual.getPtyUidFk().getPtyFirstNm());
-        Assert.assertEquals("Wick", actual.getPtyUidFk().getPtyLastNm());
-        Assert.assertEquals("Laptop", actual.getOrderProductAssocCollection().iterator().next().getPrdUidFk().getPrdName());
-        Assert.assertEquals("LT1234", actual.getOrderProductAssocCollection().iterator().next().getPrdUidFk().getPrdSku());
-    }
-
-    /**
-     *
-     * @throws Exception
-     */
-    @Test
     public void testFetchOrdersByQuarter() throws Exception {
         List<OrderHistory> orderHistoryList = new ArrayList<OrderHistory>();
         orderHistoryList.add(new OrderHistory(1, "1", formatter.parse("01/01/2015"), "1", new Date()));
@@ -272,19 +216,20 @@ public class OrderHistoryFacadeRESTExtensionTest {
         EntityManager mockedEm = mock(EntityManager.class);
         TypedQuery mockedTypedQuery = mock(TypedQuery.class);
 
-        given(mockedEm.createQuery("SELECT oh FROM OrderHistory oh join oh.ordStatusCd os join oh.ptyUidFk pt join pt.groupPartyAssocCollection gpa join gpa.grpUidFk g join g.depUidFk d join oh.orderProductAssocCollection opa ORDER BY oh.createTs DESC", OrderHistory.class))
+        given(mockedEm.createQuery("SELECT oh FROM OrderHistory oh join oh.ordStatusCd os join oh.ptyUidFk pt join pt.groupPartyAssocCollection gpa join gpa.grpUidFk g join g.depUidFk d join oh.orderProductAssocCollection opa where d.depUid = :depUid ORDER BY oh.createTs DESC", OrderHistory.class))
                 .willReturn(mockedTypedQuery);
+        given(mockedTypedQuery.setParameter("depUid", new Integer(1))).willReturn(mockedTypedQuery);
         given(mockedTypedQuery.getResultList()).willReturn(orderHistoryList);
 
         OrderHistoryFacadeRESTExtension orderHistoryFacadeRESTExtension = new OrderHistoryFacadeRESTExtension(mockedEm);
 
         List<OrderHistoryData> expectedData
-                = orderHistoryFacadeRESTExtension.findAllOrderHistory();
+                = orderHistoryFacadeRESTExtension.findAllOrderHistory(1);
 
         Assert.assertTrue(expectedData.size() == 4);
         Assert.assertEquals("Depart Name", expectedData.get(2).getOrderAgency());
 
-        verify(mockedEm, times(1)).createQuery("SELECT oh FROM OrderHistory oh join oh.ordStatusCd os join oh.ptyUidFk pt join pt.groupPartyAssocCollection gpa join gpa.grpUidFk g join g.depUidFk d join oh.orderProductAssocCollection opa ORDER BY oh.createTs DESC", OrderHistory.class);
+        verify(mockedEm, times(1)).createQuery("SELECT oh FROM OrderHistory oh join oh.ordStatusCd os join oh.ptyUidFk pt join pt.groupPartyAssocCollection gpa join gpa.grpUidFk g join g.depUidFk d join oh.orderProductAssocCollection opa where d.depUid = :depUid ORDER BY oh.createTs DESC", OrderHistory.class);
     }
 
     /**
@@ -335,6 +280,62 @@ public class OrderHistoryFacadeRESTExtensionTest {
         Assert.assertEquals("1 s st", orderDetailData.getShippingAddressLine1());
 
         verify(mockedEm, times(1)).find(OrderHistory.class, 1);
+    }
+
+    /**
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testCreateOrder() throws Exception {
+        OrderHistory orderHistory = new OrderHistory();
+        orderHistory.setOrdStatusCd(new OrdStatusCd("PND"));
+        orderHistory.setOrdUid(2222);
+
+        Product product = new Product();
+        product.setPrdActiveInd(1);
+        product.setPrdName("Laptop");
+        product.setPrdSku("LT1234");
+
+        OrderProductAssoc orderProductAssoc = new OrderProductAssoc();
+        orderProductAssoc.setOrdUidFk(orderHistory);
+        orderProductAssoc.setPrdUidFk(product);
+
+        orderHistory.setOrderProductAssocCollection(new ArrayList<>());
+        orderHistory.getOrderProductAssocCollection().add(orderProductAssoc);
+
+        Party party = new Party();
+        party.setPtyFirstNm("John");
+        party.setPtyLastNm("Wick");
+        orderHistory.setPtyUidFk(party);
+
+        OrderHistoryFacadeRESTExtension instance = spy(new OrderHistoryFacadeRESTExtension());
+
+        ArgumentCaptor<OrderHistory> orderHistoryCaptor = ArgumentCaptor.forClass(OrderHistory.class);
+
+        doNothing().when((OrderHistoryFacadeREST) instance).create(orderHistory);
+
+        OrdStatusCdFacadeREST ordStatusCdFacadeRESTMocked = mock(OrdStatusCdFacadeREST.class);
+        when(ordStatusCdFacadeRESTMocked.find("PEN")).thenReturn(null);
+
+        PartyFacadeRESTExtension partyFacadeRESTExtensionMocked = mock(PartyFacadeRESTExtension.class);
+        when(partyFacadeRESTExtensionMocked.find(1111)).thenReturn(null);
+
+        ProductFacadeRESTExtension productFacadeRESTExtensionMocked = mock(ProductFacadeRESTExtension.class);
+        when(productFacadeRESTExtensionMocked.find(111)).thenReturn(null);
+
+        instance.create(orderHistory);
+
+        verify(instance).create(orderHistoryCaptor.capture());
+
+        OrderHistory actual = orderHistoryCaptor.getValue();
+
+        Assert.assertEquals(2222, actual.getOrdUid().intValue());
+        Assert.assertEquals("PND", actual.getOrdStatusCd().getCode());
+        Assert.assertEquals("John", actual.getPtyUidFk().getPtyFirstNm());
+        Assert.assertEquals("Wick", actual.getPtyUidFk().getPtyLastNm());
+        Assert.assertEquals("Laptop", actual.getOrderProductAssocCollection().iterator().next().getPrdUidFk().getPrdName());
+        Assert.assertEquals("LT1234", actual.getOrderProductAssocCollection().iterator().next().getPrdUidFk().getPrdSku());
     }
 
     /**
