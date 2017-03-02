@@ -1,8 +1,8 @@
 #California Department of Technology - OnCore Consulting ADPQ Vendor Pool Refresh Prototype - CalOrders
 ###[http://calorders.oncorellc.com](http://calorders.oncorellc.com)
 
-    <strong>Please note, for this application to function correctly your network will need to allow HTTP traffic 
-    on port 80 and 9080 for the User Interface (UI) and RESTful service calls.</strong>
+    <b>Please note, for this application to function correctly your network will need to allow HTTP traffic 
+    on port 80 and 9080 for the User Interface (UI) and RESTful service calls.</b>
 
 ## Introduction
 
