@@ -128,9 +128,10 @@ The list below provides links to additional artifacts and other important inform
 
 ## Technical Approach
 
-Our Technical Approach centers on user centered design and agile methods using modern technology. Our goal is to build what the user really needs, and as such, we structure our methods, tooling and architecture around iterative, collaborative activities, that allow development staff to integrate and iterate quickly with end users. 
+Our Technical Approach relied on user centered design and agile methods underpinned by modern technology. Our goal was to build what the user really needed, and as such, we structured our methods, tooling and architecture around iterative, collaborative activities that allowed development staff to iterate quickly with end users. 
 
-The following sections describe our technical approach to building the CalOrders application. They describe our approach to DevOps, our Architecture, our Development Environment, and our Responsive User Interface and Application Design. They conclude with our approach to using shared architectural components, use of modern and open source technologies, and our accessible user interface.
+The following sections describe our technical approach to building the CalOrders application. They describe our approach to DevOps, our Architecture, our Development Environment, and our Responsive User Interface and Application Design. We conclude with a description of our approach to using shared architectural components, use of modern and open source technologies, and our accessible user interface.
+
 
 
 ### Architecture
@@ -150,14 +151,12 @@ Figure 1: CalOrders Architecture
 
 ### Development Environment
 
-CalOrders by default uses the open source NetBeans IDE for development.  NetBeans provides excellent Java and JavaScript support as well as an integrated Oracle JET plugin providing command line completion and other useful features when working with Oracle JET. 
-
-However, NetBeans is not required and Eclipse or IntelliJ can be used to work on the backend JEE components and any editor can be used to edit the user interface code as it is just standard JavaScript, HTML, and CSS. For more information about setting up a local development environment, see the [CalOrders Help](https://github.com/OncoreLLC/CalOrders/wiki/Help) wiki page.
+CalOrders by default uses the open source NetBeans IDE for development.  NetBeans provides excellent Java and JavaScript support as well as an integrated Oracle JET plugin providing command line completion and other useful features when working with Oracle JET. For more information about setting up a local development environment, see the [CalOrders Help](https://github.com/OncoreLLC/CalOrders/wiki/Help) wiki page.
 
 
 ### CalOrders Deployment Structure - Projects
 
-The CalOrders application is organized into individual NetBeans projects, separated by area of concern.  Separating the user interface from the backend services makes it easier to allocate the layers to user interface or service development specialists.
+The CalOrders application is organized into individual NetBeans projects separated by area of concern.  Separating the user interface from the backend services makes it easier to allocate the layers to user interface or service development specialists.
 
  
 * CalOrdersJET - [(CDT–ADPQ–0117-2-Technical Approach: Client UI)](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersJET)  JET JavaScript, HTML5, CSS project providing the front end for the CalOrders application
@@ -193,15 +192,13 @@ Due to these features and its extensive component library, JET provides an excel
 
 #### SPA (Single Page Application)
 
-CalOrders is a Single Page Application, having a single entry point.  Each screen in the application is a distinct HTML fragment substituted by the JET routing framework, however, they are not full HTML pages.  
+CalOrders is a Single Page Application with a single entry point. Each screen in the application is a distinct HTML fragment substituted by the JET routing framework; however, they are not full HTML pages.  
 
 #### Views
 
 A [view](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersJET/src/js/views) in CalOrders is a distinct SPA HTML fragment, which holds the front end static and 
 dynamic content for the view. JET uses Knockout for data binding, which binds the view model 
-to the view.   In JET the view must match its supporting view model by name.  So a view named
-"about.html" will have a corresponding view model named "about.js".   Views are composed of HTML,
-CSS, and JavaScript tags and are editable in any editor. 
+to the view.   In JET the view must match its supporting view model by name.  Accordingly,  a view named "about.html" will have a corresponding view model named "about.js". Views are composed of HTML, CSS, and JavaScript tags and are editable in any editor. 
 
 The following code snippet is taken from a CalOrders JET view showing Knockout data binding in action.
 
@@ -224,7 +221,7 @@ The following code snippet is taken from a CalOrders JET view showing Knockout d
 
 In this example, "productName" is a Knockout variable defined in the view model.  As the user
 types in the input field, Knockout binds the user input to the view model.  This greatly simplifies
-development of the page and also allows for useful features like realtime updates on the page
+development of the page and also allows for useful features like real-time updates on the page
 as the input changes without refreshing the content.  For more information about Knockout visit [here](http://knockoutjs.com). To
 learn more about how JET incorporates Knockout, see [here](http://docs.oracle.com/middleware/jet230/jet/developer/GUID-808434E0-CA80-405C-9450-59E0BF525700.htm#JETDG334).
 
@@ -279,7 +276,7 @@ REST calls are managed via the view model as well using the JET oj Model.
                     
 ```
 
-The views and view models combine to form the most common pattern when building CalOrders, however, 
+The views and view models combine to form the most common pattern when building CalOrders. However, 
 JET provides many additional features not covered in this overview.  For more information, visit the 
 Oracle JET [resource](http://www.oracle.com/webfolder/technetwork/jet/globalResources.html)
 and [support](http://www.oracle.com/webfolder/technetwork/jet/globalSupport.html) pages.
@@ -295,17 +292,18 @@ CalOrders uses [REST services](https://github.com/OncoreLLC/CalOrders/tree/maste
 
 ### Shared Architectural Components
 
-CalOrders places common architectural components in the shared CalOrdersCore project. CalOrdersCore only contains base classes and interfaces, and shared utility classes.  NetBeans simplifies compilation and deployment by allowing other NetBeans projects such as CalOrdersREST to reference core in the editor. The option is also available to compile and bundle the CalOrdersCore project into an independent JAR, which can then be referenced by other projects. 
+CalOrders places common architectural components in the shared CalOrdersCore project. CalOrdersCore only contains base classes and interfaces along with shared utility classes. NetBeans simplifies compilation and deployment by allowing other NetBeans projects such as CalOrdersREST to reference core in the editor. Also available is the option to compile and bundle the CalOrdersCore project into an independent JAR, which can then be referenced by other projects. 
+
 
 ### Databases
 
-The CalOrders application currently uses the MySQL [database](https://github.com/OncoreLLC/CalOrders/tree/master/DB_Scripts) for back-end storage. MySQL is one of the most popular open source databases available, with years of proven implementations. MySQL has a rich library of information available for support, whether in the form of online discussions or in actual documentation from MySQL. The MySQL supporting libraries and tools are also multi-platform, stable, and provide all the functionality a development team needs to build applications.
+The CalOrders application currently uses the MySQL [database](https://github.com/OncoreLLC/CalOrders/tree/master/DB_Scripts) for back-end storage. MySQL is one of the most popular open source databases available backed by years of proven implementations. MySQL has a rich library of information available for support, whether in the form of online discussions or in actual documentation from MySQL. The MySQL supporting libraries and tools are also multi-platform, stable, and provide all the functionality a development team needs to build applications.
 
-CalOrders uses JPA as an abstraction layer, there is nothing preventing migrating the database to a different provider such as Oracle or SQL Server. JPA provides CalOrders impressive flexibility and upgradability in this regard.
+CalOrders uses JPA as an abstraction layer so nothing prevents migrating the database to a different provider such as Oracle or SQL Server. In this regard, JPA provides CalOrders impressive flexibility and upgradability.
 
-The CalOrdersREST project contains a dedicated folder to hold the MySQL DDL, [database model](https://github.com/OncoreLLC/CalOrders/blob/master/Artifacts/images/Architecture_files/database.png), reference, and test data insert scripts as seen in Figure 7.
+The CalOrdersREST project contains a dedicated folder to hold the MySQL DDL, [database model](https://github.com/OncoreLLC/CalOrders/blob/master/Artifacts/images/Architecture_files/database.png), and the reference/test data insert scripts.
 
-The [database model](https://github.com/OncoreLLC/CalOrders/blob/master/Artifacts/images/Architecture_files/database.png) can be viewed and updated by using the MySQL Workbench tool.  Please see the [MySQL](http://www.mysql.com) website for more information about MySQL and to obtain the database and WorkBench tools for your operating system.
+The [database model](https://github.com/OncoreLLC/CalOrders/blob/master/Artifacts/images/Architecture_files/database.png) can be viewed and updated by using the MySQL Workbench tool.  Please see the [MySQL](http://www.mysql.com) website for more information about MySQL and to obtain the database and WorkBench tools for a particular operating system.
 
 ### Modern and Open Source Technologies
 
@@ -335,7 +333,7 @@ As part of the CalOrders quality control process, the OnCore team validated Amer
 * Component roles and names are assigned appropriately for each component
 * Correct color contrast via the Alta theme which supports luminosity contrast ratio of at least 4.5:1
 
-During testing, the JET framework proved its worth in reducing the ADA work load on the development team by allowing the team to focus more on building the screen content and less time worrying about ADA compliance issues.  Testing CalOrders with WAVE revealed no major errors and only a handful of warnings, which required resolution.  Likewise, tests with NVDA with FireFox showed excellent results with the only significant bug involving [dialog boxes](https://www.pivotaltracker.com/story/show/140812285).  It must be noted, JET requires the use of the F2 key when navigating components inside a table or list row, which is not immediately evident and could impact testing with a screen reader.   
+During testing, the JET framework proved its worth in reducing the ADA work load by allowing the team to focus on building screen content with less time worrying about ADA compliance issues. Testing CalOrders with WAVE revealed no major errors and only a handful of warnings that required resolution. Likewise, tests with NVDA with FireFox showed excellent results with the only significant bug involving [dialog boxes](https://www.pivotaltracker.com/story/show/140812285).  It must be noted, JET requires the use of the F2 key when navigating components inside a table or list row, which is not immediately evident and could impact testing with a screen reader.   
 
 ### DevOps
 
