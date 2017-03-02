@@ -15,7 +15,8 @@ The sections that follow present our experience, methods, and approach in respon
 We thank you very much for the opportunity to participate and hope you enjoy reviewing our experience as much as we did preparing it. 
 
 ##Project Requirements
-The following table presents each of the project requirements, with links to the corresponding artifacts and evidence of meeting or exceeding it. 
+
+The following table lists each project requirement and how they were met or exceeded using easy to follow links to corresponding artifacts.
 
 Requirement | How it was met
 --- | ---
