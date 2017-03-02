@@ -194,7 +194,7 @@ CalOrders is a Single Page Application, having a single entry point.  Each scree
 
 #### Views
 
-A view in CalOrders is a distinct SPA HTML fragment, which holds the front end static and 
+A [view](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersJET/src/js/views) in CalOrders is a distinct SPA HTML fragment, which holds the front end static and 
 dynamic content for the view. JET uses Knockout for data binding, which binds the view model 
 to the view.   In JET the view must match its supporting view model by name.  So a view named
 "about.html" will have a corresponding view model named "about.js".   Views are composed of HTML,
@@ -227,7 +227,7 @@ learn more about how JET incorporates Knockout, see [here](http://docs.oracle.co
 
 #### View Models
 
-A view model holds the business logic for the view and also manages the REST operations for the view. 
+A [view model](https://github.com/OncoreLLC/CalOrders/tree/master/CalOrdersJET/src/js/viewModels) holds the business logic for the view and also manages the REST operations for the view. 
 The view model uses a consistent pattern defined by JET, which helps to ensure consistency across models and simplifies coding. In the view model,
 variables can be defined as Knockout observables.  Using the view example from above, the productName is defined as a Knockout variable in the view
 model and any input provided by the user on the page is accessible via the variable as shown below.
