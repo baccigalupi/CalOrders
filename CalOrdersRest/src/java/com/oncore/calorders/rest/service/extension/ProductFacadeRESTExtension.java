@@ -82,9 +82,12 @@ public class ProductFacadeRESTExtension extends ProductFacadeREST {
     }
 
     /**
-     *
-     * @param productTypeCode
-     * @return
+     * findActiveProductsByProductType returns all active products by 
+     * product type code
+     * 
+     * @param productTypeCode a valid product type code
+     * 
+     * @return a list of <code>Product</code> items
      */
     @GET
     @Path("findActiveProductsByProductType/{productTypeCode}")
@@ -140,9 +143,11 @@ public class ProductFacadeRESTExtension extends ProductFacadeREST {
     }
 
     /**
-     *
-     * @param productTypeCode
-     * @return
+     * findProductsByProductType returns all products by product type
+     * code
+     * 
+     * @param productTypeCode a valid product type code
+     * @return a list of <code>Product</code> items
      */
     @GET
     @Path("findProductsByProductType/{productTypeCode}")
@@ -197,10 +202,12 @@ public class ProductFacadeRESTExtension extends ProductFacadeREST {
     }
 
     /**
-     *
-     * @param productTypeCode
-     * @param vendorUid
-     * @return
+     * findActiveProductsByProductTypeAndVendor returns all active products
+     * by product type code for a particular vendor
+     * 
+     * @param productTypeCode a valid product type code
+     * @param vendorUid a valid unique vendor id
+     * @return a list of <code>Product</code> items
      */
     @GET
     @Path("findActiveProductsByProductTypeAndVendor/{productTypeCode}/{vendorUid}")
@@ -228,7 +235,7 @@ public class ProductFacadeRESTExtension extends ProductFacadeREST {
     /**
      * Determines if a user id exists
      *
-     * @param productName
+     * @param productName a product name to examine
      * @return an true if the user id is already used.
      */
     @GET

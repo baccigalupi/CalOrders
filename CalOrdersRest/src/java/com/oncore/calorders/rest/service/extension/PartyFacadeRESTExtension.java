@@ -174,7 +174,7 @@ public class PartyFacadeRESTExtension extends PartyFacadeREST {
     /**
      * Finds an employee by user id and password
      *
-     * @param partyId
+     * @param partyId a valid party id
      * @return an List of GroupData if found
      * @throws com.oncore.calorders.core.exceptions.DataAccessException
      */
@@ -248,7 +248,7 @@ public class PartyFacadeRESTExtension extends PartyFacadeREST {
     /**
      * Finds a party's privileges by party id
      *
-     * @param partyId
+     * @param partyId a valid party id
      * @return an List of Privilege Data if found
      * @throws com.oncore.calorders.core.exceptions.DataAccessException
      */
@@ -307,7 +307,7 @@ public class PartyFacadeRESTExtension extends PartyFacadeREST {
     /**
      * Finds an party navbar privileges by party id
      *
-     * @param partyId
+     * @param partyId a valid party id
      * @return an List of Privilege Data if found
      * @throws com.oncore.calorders.core.exceptions.DataAccessException
      */
@@ -365,7 +365,7 @@ public class PartyFacadeRESTExtension extends PartyFacadeREST {
     /**
      * Finds an party navigation menu privileges by party id
      *
-     * @param partyId
+     * @param partyId a valid party id
      * @return an List of Privilege Data if found
      * @throws com.oncore.calorders.core.exceptions.DataAccessException
      */

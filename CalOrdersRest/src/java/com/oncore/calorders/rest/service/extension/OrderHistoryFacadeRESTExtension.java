@@ -293,7 +293,7 @@ public class OrderHistoryFacadeRESTExtension extends OrderHistoryFacadeREST {
     /**
      * Fetch all orders grouped by status
      *
-     * @param departmentId
+     * @param departmentId a valid department id
      * @return a structure of order totals grouped by status
      *
      * @throws com.oncore.calorders.core.exceptions.DataAccessException
@@ -377,7 +377,7 @@ public class OrderHistoryFacadeRESTExtension extends OrderHistoryFacadeREST {
     /**
      * Fetch all orders by PartyUid and ordered by Date ascending
      *
-     * @param partyUid
+     * @param partyUid a valid party id
      * @return a structure of orders history ordered by Date
      *
      * @throws com.oncore.calorders.core.exceptions.DataAccessException
@@ -456,7 +456,7 @@ public class OrderHistoryFacadeRESTExtension extends OrderHistoryFacadeREST {
     /**
      * Fetch all orders by DepartmentUid and ordered by Date ascending
      *
-     * @param departmentId
+     * @param departmentId a valid department id
      * @return a structure of orders history ordered by Date
      *
      * @throws com.oncore.calorders.core.exceptions.DataAccessException
@@ -533,9 +533,11 @@ public class OrderHistoryFacadeRESTExtension extends OrderHistoryFacadeREST {
     }
 
     /**
-     *
-     * @param orderUid
-     * @return
+     * findOrderDetailById returns an order detail record for a 
+     * particular order
+     * 
+     * @param orderUid a valid order id
+     * @return a populated OrderDetailData if data is found
      */
     @GET
     @Path("findOrderDetailById/{orderUid}")
@@ -592,8 +594,9 @@ public class OrderHistoryFacadeRESTExtension extends OrderHistoryFacadeREST {
     }
     
     /**
-     *
-     * @param orderUid
+     * cancelOrder cancels an order in submitted status
+     * 
+     * @param orderUid a valid order id
      */
     @POST
     @Path("cancelOrder/{orderUid}")
