@@ -228,9 +228,9 @@ self.productName = ko.observable();
 
 self.somefunction = function()
 {
-	 if(StringUtils.isEmptyOrUndefined(self.productName))
+	 if(StringUtils.isEmptyOrUndefined(self.productName()))
      {
-        console.log("Hey the user provided product name : " + self.productName);
+        console.log("Hey the user provided product name : " + self.productName());
      }
      
 	....
