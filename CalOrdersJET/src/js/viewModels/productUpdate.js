@@ -32,6 +32,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'libs/accounting/accounting', 'commo
             function ProductUpdateViewModel() {
                 var self = this;
                 self.ready = ko.observable(false);
+                self.disableButtons = ko.observable(false);
                 self.applicationVersion = ko.observable("1.0");
                 var serviceEndPoints = new ServiceEndPoints();
                 self.serviceURL = serviceEndPoints.getEndPoint('updateProduct');
@@ -115,6 +116,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'libs/accounting/accounting', 'commo
                     $('globalBody').focus();
                     window.location.hash = 'globalBody';
                     self.ready(false);
+                    self.disableButtons(false);
                     if (!SecurityUtils.isAuthenticated()) {
                         return self.router.go('welcome');
                     }
@@ -201,7 +203,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'libs/accounting/accounting', 'commo
                     self.productImageName(response.prdImgName);
                     self.productImageOrigin(response.prdImgOrigin);
                     self.productImageSize(response.prdImgSize);
-                    self.productImageType(response.prdImgTypeCd.code);
+                    if (response.prdImgTypeCd !== undefined && response.prdImgTypeCd.code !== undefined) {
+                        self.productImageType(response.prdImgTypeCd.code);
+                    }
                     self.ready(true);
                 };
 
@@ -307,59 +311,63 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'libs/accounting/accounting', 'commo
                 self.buttonClick = function (data, event) {
                     if (event.currentTarget.id === 'save')
                     {
+
                         var trackerObj = ko.utils.unwrapObservable(self.tracker);
                         // Perform form level validation
                         if (!this.showComponentValidationErrors(trackerObj))
                         {
+                            self.disableButtons(false);
                             return;
                         }
 
                         // Perform app level validation
-                        if (!this.run)
+                        if (!this.run) {
+                            self.disableButtons(true);
                             var ProductService = oj.Model.extend({
                                 urlRoot: self.serviceURL,
                                 idAttribute: 'prdUid'
                             });
-                        var productService = new ProductService();
+                            var productService = new ProductService();
 
-                        productService.save(
-                                {
-                                    
-                                    //Product Info
-                                    "productUid": this.getPrdUid(),
-                                    "productSKU": self.productSKU(),
-                                    "productOEMPartNumber": self.productOEMPartNumber(),
-                                    "productOEMName": self.productOEMName(),
-                                    "productContractUnitPrice": self.productContractUnitPrice(),
-                                    "productContractDiscount": self.productContractDiscount(),
-                                    "productUnitCode": self.productUnitCode(),
-                                    "productContractLineItem": self.productContractLineItem(),
-                                    "productName": self.productName(),
-                                    "productCategory": self.productCategory(),
-                                    "vendor": self.vendor(),
-                                    "productPrice": self.productPrice(),
-                                    "productDescription": self.productDescription(),
-                                    "productFullDesc": self.productFullDesc(),
-                                    "productActivationStatus": self.productActiveStatus(),
-                                    "productImage": self.productImageBytes(),
-                                    "productImageName": self.productImageName(),
-                                    "imgOrigin": self.productImageOrigin(),
-                                    "productImageSize": self.productImageSize(),
-                                    "productImageType": self.productImageType(),
-                                    "partyUserId": sessionStorage.userName
+                            productService.save(
+                                    {
 
-                                },
-                                {
-                                    success: function (myModel, response, options) {
-                                        self.showSuccessMessage();
-                                        return false;
+                                        //Product Info
+                                        "productUid": this.getPrdUid(),
+                                        "productSKU": self.productSKU(),
+                                        "productOEMPartNumber": self.productOEMPartNumber(),
+                                        "productOEMName": self.productOEMName(),
+                                        "productContractUnitPrice": self.productContractUnitPrice(),
+                                        "productContractDiscount": self.productContractDiscount(),
+                                        "productUnitCode": self.productUnitCode(),
+                                        "productContractLineItem": self.productContractLineItem(),
+                                        "productName": self.productName(),
+                                        "productCategory": self.productCategory(),
+                                        "vendor": self.vendor(),
+                                        "productPrice": self.productPrice(),
+                                        "productDescription": self.productDescription(),
+                                        "productFullDesc": self.productFullDesc(),
+                                        "productActivationStatus": self.productActiveStatus(),
+                                        "productImage": self.productImageBytes(),
+                                        "productImageName": self.productImageName(),
+                                        "imgOrigin": self.productImageOrigin(),
+                                        "productImageSize": self.productImageSize(),
+                                        "productImageType": self.productImageType(),
+                                        "partyUserId": sessionStorage.userName
+
                                     },
-                                    error: function (jqXHR, textStatus, errorThrown) {
-                                        document.getElementById('pageError').hidden = false;
-                                        document.getElementById('pageErrorDetail').innerHTML = "There was an error updating the product";
-                                        return false;
-                                    }
-                                });
+                                    {
+                                        success: function (myModel, response, options) {
+                                            self.showSuccessMessage();
+                                            return false;
+                                        },
+                                        error: function (jqXHR, textStatus, errorThrown) {
+                                            document.getElementById('pageError').hidden = false;
+                                            document.getElementById('pageErrorDetail').innerHTML = "There was an error updating the product";
+                                            return false;
+                                        }
+                                    });
+                        }
                     } else if (event.currentTarget.id === 'cancel')
                     {
                         // Do nothing and go back to product detail page
@@ -374,6 +382,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'libs/accounting/accounting', 'commo
                  */
                 self.showSuccessMessage = function ()
                 {
+
                     $("#modalDialog1").ojDialog("open");
                 };
                 /**
@@ -385,6 +394,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'libs/accounting/accounting', 'commo
                  * @returns {unresolved}
                  */
                 self.closeClickEvent = function (data, event) {
+                    self.disableButtons(false);
                     $("#modalDialog1").ojDialog("close");
                     return self.navigateToProductDetail();
                 };
@@ -663,8 +673,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'libs/accounting/accounting', 'commo
                 self.isValidProductUnitCode = function ()
                 {
                     var validProductUnitCode = true;
-                    if (typeof self.productCategory() === "undefined"
-                            || self.productCategory() === "")
+                    if (typeof self.productUnitCode() === "undefined"
+                            || self.productUnitCode() === "")
                     {
                         this.productUnitCodeMessages([
                             new oj.Message(

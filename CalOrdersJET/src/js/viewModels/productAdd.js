@@ -33,6 +33,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'libs/accounting/accounting', 'commo
                 var self = this;
                 self.applicationVersion = ko.observable("1.0");
                 var serviceEndPoints = new ServiceEndPoints();
+                self.disableButtons = ko.observable(false);
                 self.serviceURL = serviceEndPoints.getEndPoint('createProduct');
                 self.productNameServiceURL = serviceEndPoints.getEndPoint('doesProductNameExist');
                 self.router = oj.Router.rootInstance;
@@ -110,6 +111,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'libs/accounting/accounting', 'commo
                 self.handleActivated = function (info) {
                     $('globalBody').focus();
                     window.location.hash = 'globalBody';
+                    self.disableButtons(false);
                     if (!SecurityUtils.isAuthenticated()) {
                         return self.router.go('welcome');
                     }
@@ -220,57 +222,61 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'libs/accounting/accounting', 'commo
                 self.buttonClick = function (data, event) {
                     if (event.currentTarget.id === 'save')
                     {
+
                         var trackerObj = ko.utils.unwrapObservable(self.tracker);
                         // Perform form level validation
                         if (!this.showComponentValidationErrors(trackerObj))
                         {
+                            self.disableButtons(false);
                             return;
                         }
 
                         // Perform app level validation
-                        if (!this.run)
+                        if (!this.run) {
+                            self.disableButtons(true);
                             var ProductService = oj.Model.extend({
                                 urlRoot: self.serviceURL,
                                 idAttribute: 'prdUid'
                             });
-                        var productService = new ProductService();
+                            var productService = new ProductService();
 
-                        productService.save(
-                                {
-                                    //Product Info
-                                    "productSKU": self.productSKU(),
-                                    "productOEMPartNumber": self.productOEMPartNumber(),
-                                    "productOEMName": self.productOEMName(),
-                                    "productContractUnitPrice": self.productContractUnitPrice(),
-                                    "productContractDiscount": self.productContractDiscount(),
-                                    "productUnitCode": self.productUnitCode(),
-                                    "productContractLineItem": self.productContractLineItem(),
-                                    "productName": self.productName(),
-                                    "productCategory": self.productCategory(),
-                                    "vendor": self.vendor(),
-                                    "productPrice": self.productPrice(),
-                                    "productDescription": self.productDescription(),
-                                    "productFullDesc": self.productFullDesc(),
-                                    "productActivationStatus": self.productActiveStatus(),
-                                    "productImage": self.productImageBytes(),
-                                    "productImageName": self.productImageName(),
-                                    "imgOrigin": "tbd",
-                                    "productImageSize": self.productImageSize(),
-                                    "productImageType": self.productImageType(),
-                                    "partyUserId": sessionStorage.userName
+                            productService.save(
+                                    {
+                                        //Product Info
+                                        "productSKU": self.productSKU(),
+                                        "productOEMPartNumber": self.productOEMPartNumber(),
+                                        "productOEMName": self.productOEMName(),
+                                        "productContractUnitPrice": self.productContractUnitPrice(),
+                                        "productContractDiscount": self.productContractDiscount(),
+                                        "productUnitCode": self.productUnitCode(),
+                                        "productContractLineItem": self.productContractLineItem(),
+                                        "productName": self.productName(),
+                                        "productCategory": self.productCategory(),
+                                        "vendor": self.vendor(),
+                                        "productPrice": self.productPrice(),
+                                        "productDescription": self.productDescription(),
+                                        "productFullDesc": self.productFullDesc(),
+                                        "productActivationStatus": self.productActiveStatus(),
+                                        "productImage": self.productImageBytes(),
+                                        "productImageName": self.productImageName(),
+                                        "imgOrigin": "tbd",
+                                        "productImageSize": self.productImageSize(),
+                                        "productImageType": self.productImageType(),
+                                        "partyUserId": sessionStorage.userName
 
-                                },
-                                {
-                                    success: function (myModel, response, options) {
-                                        self.showSuccessMessage();
-                                        return false;
                                     },
-                                    error: function (jqXHR, textStatus, errorThrown) {
-                                        document.getElementById('pageError').hidden = false;
-                                        document.getElementById('pageErrorDetail').innerHTML = "There was an error creating the product";
-                                        return false;
-                                    }
-                                });
+                                    {
+                                        success: function (myModel, response, options) {
+                                            self.showSuccessMessage();
+                                            return false;
+                                        },
+                                        error: function (jqXHR, textStatus, errorThrown) {
+                                            document.getElementById('pageError').hidden = false;
+                                            document.getElementById('pageErrorDetail').innerHTML = "There was an error creating the product";
+                                            return false;
+                                        }
+                                    });
+                        }
                     } else if (event.currentTarget.id === 'cancel')
                     {
                         // Do nothing and go back to search page
@@ -296,6 +302,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'libs/accounting/accounting', 'commo
                  * @returns {unresolved}
                  */
                 self.closeClickEvent = function (data, event) {
+                    self.disableButtons(false);
                     $("#modalDialog1").ojDialog("close");
                     return self.router.go('productSearch');
                 };
@@ -552,8 +559,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'libs/accounting/accounting', 'commo
                 self.isValidProductUnitCode = function ()
                 {
                     var validProductUnitCode = true;
-                    if (typeof self.productCategory() === "undefined"
-                            || self.productCategory() === "")
+                    if (typeof self.productUnitCode() === "undefined"
+                            || self.productUnitCode() === "")
                     {
                         this.productUnitCodeMessages([
                             new oj.Message(

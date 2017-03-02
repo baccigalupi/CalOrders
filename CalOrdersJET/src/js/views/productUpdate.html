@@ -64,7 +64,6 @@ THE SOFTWARE.
         <!-- end global error message -->
         <div class='oj-panel oj-form-layout'>
 
-            <!-- ko if: ready -->
             <div id="productUpdateContent" class="oj-flex">
 
 
@@ -274,7 +273,7 @@ THE SOFTWARE.
                             </div>
                         </div>
                         <br>
-                        
+
                         <!-- Full Product Description -->
                         <div class="oj-flex"> 
                             <div class="oj-flex-item">
@@ -323,13 +322,13 @@ THE SOFTWARE.
 
                     <div class="oj-flex-item">
                         <label for="uploadFile">Product Image:</label>
-                        <input id="uploadFile" type="file" class="oj-form-control oj-inputtext-nocomp" data-bind="fileUpload: uploadFile">
+                        <input id="uploadFile" type="file" class="oj-form-control oj-inputtext-nocomp" data-bind="disable: disableButtons,fileUpload: uploadFile">
 
                         <button id= "clearImage" 
-                                data-bind="click: resetClickEvent, ojComponent: { component: 'ojButton', label: 'Reset' }">
+                                data-bind="click: resetClickEvent, ojComponent: { component: 'ojButton', label: 'Reset',disabled: disableButtons() }">
                         </button> 
                         <button id= "uploadImage"  
-                                data-bind="click: uploadImageClick, ojComponent: { component: 'ojButton', label: 'Upload' }">
+                                data-bind="click: uploadImageClick, ojComponent: { component: 'ojButton', label: 'Upload' ,disabled: disableButtons()}">
                         </button> 
 
                     </div>
@@ -349,18 +348,18 @@ THE SOFTWARE.
                 <div class="oj-panel oj-flex-item">   
                     <div class="oj-flex">
                         <button id= "cancel"
-                                data-bind="click: buttonClick, ojComponent: { component: 'ojButton', label: 'Cancel' }">
+                                data-bind="click: buttonClick, ojComponent: { component: 'ojButton', label: 'Cancel',disabled: disableButtons() }">
                         </button>
 
                         <div class="oj-padding-horizontal"></div>
 
                         <button id= "save"
-                                data-bind="click: buttonClick, ojComponent: { component: 'ojButton', label: 'Save' }">
+                                data-bind="click: buttonClick, ojComponent: { component: 'ojButton', label: 'Save',disabled: disableButtons() }">
                         </button> 
                     </div>
                 </div>
             </div>
-            <!-- /ko -->
+
         </div>
     </div>
 
