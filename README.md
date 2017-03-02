@@ -1,6 +1,9 @@
 #California Department of Technology - OnCore Consulting ADPQ Vendor Pool Refresh Prototype - CalOrders
 ###[http://calorders.oncorellc.com](http://calorders.oncorellc.com)
 
+    Please note, for this application to function correctly your network will need to allow HTTP traffic 
+    on port 80 and 9080 for the User Interface (UI) and RESTfull service calls.
+
 ## Introduction
 
 Agile Methods and User Centered Design combine to form an ideal vehicle to quickly understand what users want and deliver functioning, high value business solutions.  
