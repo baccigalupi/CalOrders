@@ -7,7 +7,9 @@
 ## Introduction
 
 Agile Methods and User Centered Design combine to form an ideal vehicle to quickly understand what users want and deliver on point business solutions.  OnCore closely adhered to these key principles to develop our CalOrders prototype for your review. We used agile user stories that incrementally added functionality over a series of sprints. With each sprint, the business was able to see an early realization of their requirements, which allowed them to provide meaningful feedback early enough to be incorporated into future sprints. Key to this effort was the close collaboration between our development team and the business users. Consistent communication promoted a clear understanding of the users’ needs that in turn helped align the focus of the development team.
+
 Utilizing short cycles between ideas and testing allowed us to respond quickly to change while maintaining an emphasis on solutions over features. Early on we gained support from the client executive team who empowered the end users we were working with to make decisions and own the product. This approach fueled our strategy of, "try, fail fast, learn, and then try again." 
+
 The sections that follow present our experience, methods, and approach in response to the ADPQ Vendor Refresh. We start by listing the requirements from the RFI with links to how each are addressed. We then confirm our adherence to the US Digital Services Playbook, introduce our development team, and describe our approach to user centered design and agile development. The balance of the document defines our Technical Approach where we present our solution including the overall Architecture, our DevOps approach, the User Interface, and a description of the Modern and Open Source Technologies we employed. 
 We thank you very much for the opportunity to participate and hope you enjoy reviewing our experience as much as we did preparing it. 
 
