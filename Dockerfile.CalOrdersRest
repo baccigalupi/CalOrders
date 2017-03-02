@@ -34,12 +34,14 @@ COPY docker/start_payara.sh /opt/payara41/
 RUN /bin/chown payara:payara /opt/payara41/start_payara.sh && \
     /bin/chmod +x /opt/payara41/start_payara.sh
 
+# copy AppDynamics monitoring agent into the container and install it
+RUN /bin/mkdir /opt/appdynamics
+COPY docker/AppServerAgent-4.2.12.1.zip /opt/appdynamics
+RUN cd /opt/appdynamics && /usr/bin/unzip /opt/appdynamics/AppServerAgent-*.zip
+
 # copy built WAR into the container
 COPY CalOrdersRest/dist/CalOrdersRest.war /
 RUN /bin/chown payara:payara /CalOrdersRest.war
-
-# TODO what is this for?
-#RUN /bin/mkdir /home/oncore && /bin/ln -s /opt/payara41/ /home/oncore/payara41
 
 USER payara
 

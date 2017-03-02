@@ -420,6 +420,8 @@
         <jvm-options>-Djdk.tls.rejectClientInitiatedRenegotiation=true</jvm-options>
         <jvm-options>-Dorg.jboss.weld.serialization.beanIdentifierIndexOptimization=false</jvm-options>
         <jvm-options>-Dorg.glassfish.grizzly.DEFAULT_MEMORY_MANAGER=org.glassfish.grizzly.memory.HeapMemoryManager</jvm-options>
+        <jvm-options>-javaagent:/opt/appdynamics/javaagent.jar</jvm-options>
+        <jvm-options>-Dappdynamics.agent.uniqueHostId=calorders-rest</jvm-options>
       </java-config>
       <network-config>
         <protocols>
