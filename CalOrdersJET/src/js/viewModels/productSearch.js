@@ -153,6 +153,7 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'libs/accounting/accounting', 'co
                     } else
                     {
                         sessionStorage.keepSearchResults = false;
+                        self.ready(true);
                     }
 
                     self.cartTotalPrice(self.getPrice(sessionStorage.itemTotalPrice));

@@ -88,9 +88,6 @@ define(['ojs/ojcore', 'knockout', 'data/data', 'libs/accounting/accounting', 'li
                         self.showCancelButton(true);
                     }
 
-                    console.log("Finishing parsing order: " + self.orderProducts().length);
-
-
                 };
 
                 // Below are a subset of the ViewModel methods invoked by the ojModule binding

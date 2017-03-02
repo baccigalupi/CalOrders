@@ -119,6 +119,10 @@
 
 .product-detail-name {
     font-weight: bold;
+}
+
+.product-compare-attribute {
+    font-weight: bold;
     background: #cccccc
 }
 
@@ -155,4 +159,5 @@
     padding-bottom: 5px; 
     margin-right: 5px; 
     text-indent: 5px;
+    max-width: 80px;
 }
