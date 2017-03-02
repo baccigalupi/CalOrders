@@ -22,8 +22,7 @@ node {
             clean"
         sh "ant \
             -buildfile CalOrdersRest/build.xml \
-            -Duser.properties.file=/home/oncore/build.properties \
-            dist"
+            -Duser.properties.file=/home/oncore/build.properties "
     }
 
     stage('Unit Test REST Services Tier') {
