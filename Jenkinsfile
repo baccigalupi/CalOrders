@@ -47,7 +47,6 @@ node {
 
     stage('Build Test Database') {
         // calorders-mysql container is already running at this IP:port with the given username/password
-        // TODO run docker inspect calorders-mysql to determine the IP dynamically
         // TODO remove usernames and passwords from command line and Jenkinsfile
         sh "mysql -uroot -pPassw0rd -h \$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' calorders-mysql) -P 3306 --database calordersdb < DB_Scripts/CalOrders_DDL.sql"
         sh "mysql -uroot -pPassw0rd -h \$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' calorders-mysql) -P 3306 --database calordersdb < DB_Scripts/referencedata/Reference_Data_Inserts.sql"
@@ -55,7 +54,8 @@ node {
     }
 
     stage('Start JS App Test Container') {
-        sh 'docker rm $(docker stop calorders-jet) || echo "docker container calorders-rest is not currently running or present"'
+        sh 'docker stop calorders-jet || echo "docker container calorders-rest is not currently running"'
+        sh 'docker rm  calorders-jet || echo "docker container calorders-rest is not currently present"'
         // env variablel SERVICESHOSTNAME is used by startup script to customize the service endpoint in the main.js file
         // run on port 8080 on the test server, jenkins is already on port 80
         sh 'docker run \
@@ -69,7 +69,8 @@ node {
     }
 
     stage('Start REST App Test Container') {
-        sh 'docker rm $(docker stop calorders-rest) || echo "docker container calorders-rest is not currently running or present"'
+        sh 'docker stop calorders-rest || echo "docker container calorders-rest is not currently running"'
+        sh 'docker rm calorders-rest || echo "docker container calorders-rest is not currently present"'
         // link database container host as "mysqlserver" in this container
         // env variables the container needs are in the .env file
         // expose services on the test box on 9080
@@ -94,7 +95,8 @@ node {
     }
 
     stage('Publish SwaggerUI') {
-        sh 'docker rm $(docker stop calorders-swaggerui) || echo "docker container calorders-swaggerui is not currently running or present"'
+        sh 'docker stop calorders-swaggerui || echo "docker container calorders-swaggerui is not currently running"'
+        sh 'docker rm calorders-swaggerui || echo "docker container calorders-swaggerui is not currently present"'
         // run a small httpd container and map the SwaggerUI source in to the apache document root
         sh 'docker run \
             -it \
@@ -123,7 +125,8 @@ node {
         // 1. JS front end to calorders.oncorellc.com
         // pull, stop, remove, then run the javascript app container on the prod server
         sh 'ssh kyle@calorders.oncorellc.com docker pull kpoland/calorders-jet:latest'
-        sh 'ssh kyle@calorders.oncorellc.com docker rm $(docker stop calorders-jet) || echo "docker container calorders-jet is not currently running or present"'
+        sh 'ssh kyle@calorders.oncorellc.com docker stop calorders-jet || echo "docker container calorders-jet is not currently running"'
+        sh 'ssh kyle@calorders.oncorellc.com docker rm calorders-jet || echo "docker container calorders-jet is not currently present"'
         // set the env variables for the prod REST services URL and PORT, and run the JS app on port 80
         sh 'ssh kyle@calorders.oncorellc.com docker run \
             --name=calorders-jet \
@@ -143,7 +146,8 @@ node {
         // get the prod environment file to the prod server
         sh 'scp docker/calorders.env kyle@calorders-services.oncorellc.com:docker/'
         // pull, stop, remove, then run the REST services app container on the prod server
-        sh 'ssh kyle@calorders-services.oncorellc.com docker rm $(docker stop calorders-rest) || echo "docker container calorders-rest is not currently running or present"'
+        sh 'ssh kyle@calorders-services.oncorellc.com docker stop calorders-rest || echo "docker container calorders-rest is not currently running"'
+        sh 'ssh kyle@calorders-services.oncorellc.com docker rm calorders-rest || echo "docker container calorders-rest is not currently present"'
         // link the rest container to the mysql db container, load the prod env vars, and run services on 80
         sh 'ssh kyle@calorders-services.oncorellc.com docker run \
             --name=calorders-rest \
