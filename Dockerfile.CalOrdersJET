@@ -6,6 +6,7 @@ RUN echo "US/Pacific-New" > /etc/timezone && /usr/sbin/dpkg-reconfigure --fronte
 
 # placeholder ENV variables for database connections to override at runtime
 ENV SERVICESHOSTNAME somehostname
+ENV SERVICESPORT someport
 
 # copy start script into the container
 COPY docker/start_httpd.sh /
