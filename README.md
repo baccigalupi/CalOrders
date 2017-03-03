@@ -1,5 +1,5 @@
 #California Department of Technology - OnCore Consulting ADPQ Vendor Pool Refresh Prototype - CalOrders
-###[http://calorders.oncorellc.com](http://calorders.oncorellc.com) 
+###[http://calorders.oncorellc.com](http://calorders.oncorellc.com)
 
 ## Introduction
 
