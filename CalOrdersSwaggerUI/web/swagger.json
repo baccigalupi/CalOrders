@@ -12,7 +12,7 @@
       "name": "CalOrders REST services provided under the MIT License."
     }
   },
-  "host": "calorders.oncorellc.com:9080",
+  "host": "calorders-services.oncorellc.com",
   "basePath": "/CalOrdersRest/webresources",
   "schemes": [
     "http"
