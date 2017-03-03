@@ -89,6 +89,14 @@ node {
         sleep 30
     }
 
+    stage('Selenium Regression Tests') {
+        sh "export DISPLAY=:0 && \
+            ant \
+            -buildfile CalOrdersSelenium/build.xml \
+            -Duser.properties.file=/home/oncore/build.properties \
+            test"
+    }
+
     stage('Publish SwaggerUI') {
         sh 'docker stop calorders-swaggerui || echo "docker container calorders-swaggerui is not currently running, no need to stop it"'
         sh 'docker rm calorders-swaggerui || echo "docker image calorders-swaggerui is not present, no need to remove it"'
