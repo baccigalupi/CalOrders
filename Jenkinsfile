@@ -48,7 +48,7 @@ node {
     stage('Build Test Database') {
         // calorders-mysql container is already running at this IP:port with the given username/password
         // TODO remove usernames and passwords from command line and Jenkinsfile
-        sh "mysql -uroot -pPassw0rd -h \$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' calorders-mysql) -P 3306 --database calordersdb < DB_Scripts/CalOrders_DDL.sql"
+        sh "mysql -uroot -pPassw0rd -h \$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' calorders-mysql) -P 3306 < DB_Scripts/CalOrders_DDL.sql"
         sh "mysql -uroot -pPassw0rd -h \$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' calorders-mysql) -P 3306 --database calordersdb < DB_Scripts/referencedata/Reference_Data_Inserts.sql"
         sh "mysql -uroot -pPassw0rd -h \$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' calorders-mysql) -P 3306 --database calordersdb < DB_Scripts/testdata/TestData_Inserts.sql"
     }
@@ -138,7 +138,7 @@ node {
 
         // 2. database refresh to calorders-services.oncorellc.com
         // TODO turn this off once database stabilizes otherwise it will clear out prod data at deploy time
-        sh "mysql -uroot -pPassw0rd -h calorders-services.oncorellc.com -P 3306 --database calordersdb < DB_Scripts/CalOrders_DDL.sql"
+        sh "mysql -uroot -pPassw0rd -h calorders-services.oncorellc.com -P 3306 < DB_Scripts/CalOrders_DDL.sql"
         sh "mysql -uroot -pPassw0rd -h calorders-services.oncorellc.com -P 3306 --database calordersdb < DB_Scripts/referencedata/Reference_Data_Inserts.sql"
         sh "mysql -uroot -pPassw0rd -h calorders-services.oncorellc.com -P 3306 --database calordersdb < DB_Scripts/testdata/TestData_Inserts.sql"
 
