@@ -36,7 +36,7 @@ m. Deployed the prototype on an Infrastructure as a Service (IaaS) or Platform a
 n. Developed automated unit tests for their code |[Automated Testing](https://github.com/OncoreLLC/CalOrders/wiki/Automated-Testing) 
 o. Setup or used a continuous integration system to automate the running of tests and continuously deployed their code to their IaaS or PaaS provider | We used [Jenkins](http://calorderstest.oncorellc.com/jenkins/) for CI and automated testing, please see section 1 on the [DevOps Wiki] (https://github.com/OncoreLLC/CalOrders/wiki/Environments) on the Jenkins Pipeline
 p. Setup or used configuration management | All code, configuration and documentation artifacts were managed in our [GitHub Repository](https://github.com/OncoreLLC/CalOrders)
-q. Setup or used continuous monitoring | We used AppDynamics SaaS for monitoring [Continuous Monitoring](https://paid127.saas.appdynamics.com)
+q. Setup or used continuous monitoring | We use the ELK stack and Nagios for log and OS monitoring
 r. Deployed their software in an open source container, such as Docker (i.e., utilized operating-system-level virtualization) | We are using Docker, please see section 2 on the [DevOps Wiki] (https://github.com/OncoreLLC/CalOrders/wiki/Environments)
 s. Provided sufficient documentation to install and run their prototype on another machine | please see section 6 on the [DevOps Wiki] (https://github.com/OncoreLLC/CalOrders/wiki/Environments)
 t. Prototype and underlying platforms used to create and run the prototype are openly licensed and free of charge | [Software Licensing](https://github.com/OncoreLLC/CalOrders/wiki/Software-Licensing)
