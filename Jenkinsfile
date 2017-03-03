@@ -144,7 +144,7 @@ node {
 
         // REST services back end to calorders-services.oncorellc.com
         // get the prod environment file to the prod server
-        sh 'scp docker/calorders.env kyle@calorders-services.oncorellc.com:docker/'
+        sh 'ssh kyle@calorders-services.oncorellc.com mkdir -p docker && scp -r docker/calorders.env kyle@calorders-services.oncorellc.com:docker/'
         // pull, stop, remove, then run the REST services app container on the prod server
         sh 'ssh kyle@calorders-services.oncorellc.com docker stop calorders-rest || echo "docker container calorders-rest is not currently running"'
         sh 'ssh kyle@calorders-services.oncorellc.com docker rm calorders-rest || echo "docker container calorders-rest is not currently present"'
