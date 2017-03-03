@@ -1,9 +1,6 @@
 #California Department of Technology - OnCore Consulting ADPQ Vendor Pool Refresh Prototype - CalOrders
 ###[http://calorders.oncorellc.com](http://calorders.oncorellc.com)
 
-    Please note, for this application to function correctly your network will need to allow HTTP traffic 
-    on port 80 and 9080 for the User Interface (UI) and RESTful service calls.
-
 ## Introduction
 
 Agile Methods and User Centered Design combine to form an ideal vehicle to quickly understand what users want and deliver on point business solutions.  OnCore closely adhered to these key principles to develop our CalOrders prototype for your review. We used agile user stories that incrementally added functionality over a series of sprints. With each sprint, the business was able to see an early realization of their requirements, which allowed them to provide meaningful feedback early enough to be incorporated into future sprints. Key to this effort was the close collaboration between our development team and the business users. Consistent communication promoted a clear understanding of the users’ needs that in turn helped align the focus of the development team.
