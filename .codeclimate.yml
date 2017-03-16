@@ -10,8 +10,13 @@ engines:
   csslint:
     enabled: true
 
+ratings:
+  paths:
+  - "**/*.java"
+  - "**/*.js"
+  - "**/*.css"
+
 exclude_paths:
   - "**/node_modules/**/*"
   - "CalOrdersJET/bower_components/**/*"
   - "CalOrdersJET/src/js/libs/**/*"
-  - "libs/**/*"
