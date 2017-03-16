@@ -4,6 +4,8 @@ engines:
     channel: "beta"
   duplication:
     enabled: true
+    config:
+      - javascript:
   csslint:
     enabled: true
 
