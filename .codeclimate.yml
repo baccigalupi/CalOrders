@@ -20,3 +20,5 @@ exclude_paths:
   - "**/node_modules/**/*"
   - "CalOrdersJET/bower_components/**/*"
   - "CalOrdersJET/src/js/libs/**/*"
+  - "CalOrdersJET/src/themes/**/*"
+  - "CalOrdersSwaggerUI/**/*"
