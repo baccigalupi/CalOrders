@@ -2,15 +2,13 @@ engines:
   checkstyle:
     enabled: true
     channel: "beta"
+  duplication:
+    enabled: true
+  csslint:
+    enabled: true
 
-ratings:
-  paths:
-  - "**.java"
-  - "CalOrdersJET/src/js/common/*.js"
-  - "CalOrdersJET/src/js/data/*.js"
-  - "CalOrdersJET/src/js/reference/*.js"
-  - "CalOrdersJET/src/js/utils/*.js"
-  - "CalOrdersJET/src/js/viewModels/*.js"
-  - "CalOrdersJET/src/js/viewModels/*.js"
-  - "CalOrdersJET/src/js/appController.js"
-  - "CalOrdersJET/src/js/main.js"
+exclude_paths:
+  - "**/node_modules/**/*"
+  - "CalOrdersJET/bower_components/**/*"
+  - "CalOrdersJET/src/js/libs/**/*"
+  - "libs/**/*"
